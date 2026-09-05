@@ -1,0 +1,48 @@
+{
+  "schema": {
+    "name": "skyrim-render-map.submission",
+    "major": 1,
+    "minor": 0
+  },
+  "submissionId": "sub-csx-contested-family-ordinals-9935c-v1",
+  "submissionClass": "assertion",
+  "namespace": "csx",
+  "createdAt": "2026-09-05T23:37:30+01:00",
+  "status": "candidate-unreviewed",
+  "contributor": {
+    "displayName": "Treatid2",
+    "github": "Treatid2",
+    "standing": "ordinary-contributor"
+  },
+  "provenance": {
+    "sourceRepository": "https://github.com/Treatid2/skyrim-render-map",
+    "sourceCommit": "b0811cbfe2d8a5cb182ef75b9d6f6bc4f5b9406d",
+    "sourceParentCommit": "78254a22ba3144c4fc63864dd4de2efc098053df",
+    "sourceRef": "main",
+    "sourceState": "merged",
+    "sourcePubliclyReachable": true,
+    "sourceDirty": false,
+    "importedAt": "2026-09-05T23:37:30+01:00",
+    "sourceContentTreeSha256": "75CCEF0F7235EAA198222E3E27C2908A943FE256AD7A44C392BA4BE59C9879EF",
+    "transformations": [
+      "Normalized three legacy engine-map family-to-compile-unit relations and three manifest-derived alternatives as six atomic claims without adjudicating between them."
+    ],
+    "relatedUrls": [
+      "https://github.com/ParticleTroned/skyrim-community-shaders/pull/55",
+      "https://github.com/Treatid2/skyrim-render-map/tree/bbb16c86963baaba41514285364031645d93d905/submissions/2026/08/sub-csx-full-render-exploration-9935c5210",
+      "https://github.com/Treatid2/skyrim-render-map/tree/b0811cbfe2d8a5cb182ef75b9d6f6bc4f5b9406d/submissions/2026/09/sub-skyrim-vr-csx-foundation-9935c-v1"
+    ]
+  },
+  "licensing": {
+    "content": "CC-BY-SA-4.0",
+    "schemas": "CC0-1.0",
+    "dcoAcknowledged": true
+  },
+  "content": {
+    "root": "content",
+    "fileCount": 1,
+    "totalBytes": 8796,
+    "treeSha256": "650ED813E42281D45020EFE77E20661122A21F71612EBFEA9939E1212718423A"
+  },
+  "notes": "This contribution deliberately creates three open conflicts: Lighting, Effect, and Utility each have one legacy engine-map compile-unit claim and one manifest-derived alternative under identical applicability. Resolution requires additional evidence and is not implied by normalization."
+}
