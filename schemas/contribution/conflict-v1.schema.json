@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:skyrim-render-map:schema:conflict:1",
+  "title": "Generated Skyrim render-map conflict",
+  "type": "object",
+  "required": [
+    "conflictId",
+    "kind",
+    "topicKey",
+    "assertionKeys",
+    "participants",
+    "applicabilityIntersection",
+    "state",
+    "resolutionRefs"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "conflictId": {
+      "type": "string",
+      "pattern": "^conflict-[a-f0-9]{64}$"
+    },
+    "kind": { "const": "incompatible-value" },
+    "topicKey": {
+      "type": "string",
+      "pattern": "^topic-key-[a-f0-9]{64}$"
+    },
+    "assertionKeys": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "string",
+        "pattern": "^assertion-key-[a-f0-9]{64}$"
+      }
+    },
+    "participants": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "applicabilityIntersection": { "type": "object" },
+    "state": { "enum": ["open", "resolved"] },
+    "resolutionRefs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  }
+}

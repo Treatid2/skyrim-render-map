@@ -50,6 +50,7 @@ SUBMISSION_PATTERN = re.compile(r"^sub-[a-z0-9][a-z0-9.-]{7,127}$")
 NAMESPACE_PATTERN = re.compile(r"^[a-z0-9][a-z0-9.-]{1,63}$")
 SHA256_PATTERN = re.compile(r"^[A-Fa-f0-9]{64}$")
 COMMIT_PATTERN = re.compile(r"^[A-Fa-f0-9]{40}$")
+RECORD_ID_PATTERN = re.compile(r"^[a-z][a-z0-9.-]{2,127}$")
 WINDOWS_USER_PATH = re.compile(rb"[A-Za-z]:[\\/]+Users[\\/]+[^\\/\s<>]+", re.I)
 WINDOWS_ABSOLUTE_PATH = re.compile(rb"(?<![A-Za-z0-9])(?:[A-Za-z]:[\\/])")
 UNIX_HOME_PATH = re.compile(rb"/home/[^/\s<>]+", re.I)
@@ -57,6 +58,60 @@ SECRET_MARKERS = (b"github_pat_", b"ghp_", b"-----BEGIN PRIVATE KEY-----")
 MAX_FILES = 256
 MAX_FILE_BYTES = 8 * 1024 * 1024
 MAX_TOTAL_BYTES = 32 * 1024 * 1024
+
+ASSERTION_KEYS = {
+    "schema",
+    "assertionId",
+    "subject",
+    "predicate",
+    "value",
+    "conflictPolicy",
+    "applicability",
+    "evidence",
+    "notes",
+}
+APPLICABILITY_KEYS = {
+    "engine",
+    "extension",
+    "configurationSha256",
+    "scenarioSha256",
+}
+ENGINE_APPLICABILITY_KEYS = {"runtime", "executableSha256", "moduleSha256"}
+EXTENSION_APPLICABILITY_KEYS = {
+    "namespace",
+    "sourceCommit",
+    "buildId",
+    "artifactSha256",
+}
+EVIDENCE_KEYS = {"class", "confidence", "refs"}
+EVIDENCE_CLASSES = {
+    "runtime-capture",
+    "static-analysis",
+    "reverse-engineering",
+    "source-analysis",
+    "documentation",
+    "correlation",
+    "manual-observation",
+    "derived",
+}
+CONFIDENCE_LEVELS = {"high", "medium", "low", "unknown"}
+RESOLUTION_KEYS = {
+    "schema",
+    "resolutionId",
+    "conflictId",
+    "participantRefs",
+    "outcome",
+    "effectiveAssertionRefs",
+    "evidenceRefs",
+    "rationale",
+}
+RESOLUTION_OUTCOMES = {
+    "narrowed-applicability",
+    "supersedes",
+    "unsupported",
+    "aliases",
+    "unresolved",
+}
 
 
 class ValidationError(RuntimeError):
@@ -68,6 +123,40 @@ class TreeSummary:
     file_count: int
     total_bytes: int
     sha256: str
+
+
+def _reject_json_constant(value: str) -> None:
+    raise ValidationError(f"non-finite JSON number is not permitted: {value}")
+
+
+def _reject_duplicate_keys(pairs: list[tuple[str, object]]) -> dict:
+    result: dict = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValidationError(f"duplicate JSON object key: {key}")
+        result[key] = value
+    return result
+
+
+def parse_json(text: str, context: str) -> object:
+    try:
+        value = json.loads(
+            text,
+            parse_constant=_reject_json_constant,
+            object_pairs_hook=_reject_duplicate_keys,
+        )
+        json.dumps(value, ensure_ascii=False, allow_nan=False).encode("utf-8")
+        return value
+    except (json.JSONDecodeError, UnicodeEncodeError, ValueError) as error:
+        raise ValidationError(f"invalid JSON document: {context}") from error
+
+
+def load_json_document(path: pathlib.Path) -> object:
+    try:
+        text = path.read_text(encoding="utf-8")
+    except UnicodeDecodeError as error:
+        raise ValidationError(f"JSON is not UTF-8: {path}") from error
+    return parse_json(text, str(path))
 
 
 def _regular_files(root: pathlib.Path) -> list[pathlib.Path]:
@@ -145,15 +234,187 @@ def _scan_public_content(path: pathlib.Path, data: bytes) -> None:
         raise ValidationError(f"credential-like material detected: {path}")
 
 
+def _require_optional_string(value: object, context: str) -> None:
+    if value is not None and (not isinstance(value, str) or not value):
+        raise ValidationError(f"{context} must be null or a non-empty string")
+
+
+def _require_optional_digest(value: object, pattern: re.Pattern[str], context: str) -> None:
+    if value is not None and (not isinstance(value, str) or not pattern.fullmatch(value)):
+        raise ValidationError(f"{context} must be null or a valid digest")
+
+
+def _require_unique_strings(value: object, context: str, *, minimum: int = 0) -> None:
+    if not isinstance(value, list) or len(value) < minimum:
+        raise ValidationError(f"{context} must be an array with at least {minimum} item(s)")
+    if any(not isinstance(item, str) or not item for item in value):
+        raise ValidationError(f"{context} must contain non-empty strings")
+    if len(set(value)) != len(value):
+        raise ValidationError(f"{context} must not contain duplicates")
+
+
+def load_jsonl(path: pathlib.Path) -> list[dict]:
+    """Load canonical JSON objects from a UTF-8 JSONL ledger file."""
+    try:
+        data = path.read_bytes()
+        text = data.decode("utf-8")
+    except UnicodeDecodeError as error:
+        raise ValidationError(f"JSONL is not UTF-8: {path}") from error
+    if b"\r" in data:
+        raise ValidationError(f"JSONL must use LF line endings: {path}")
+    if not text or not text.endswith("\n"):
+        raise ValidationError(f"JSONL must be non-empty and end with a newline: {path}")
+    records: list[dict] = []
+    for line_number, line in enumerate(text.splitlines(), start=1):
+        if not line:
+            raise ValidationError(f"blank JSONL line at {path}:{line_number}")
+        value = parse_json(line, f"{path}:{line_number}")
+        if not isinstance(value, dict):
+            raise ValidationError(f"JSONL record must be an object at {path}:{line_number}")
+        canonical = json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+        if line != canonical:
+            raise ValidationError(f"JSONL record is not canonical at {path}:{line_number}")
+        records.append(value)
+    return records
+
+
+def validate_assertion(record: dict, context: str) -> None:
+    _require_keys(record, ASSERTION_KEYS, context)
+    if record["schema"] != {
+        "name": "skyrim-render-map.assertion",
+        "major": 1,
+        "minor": 0,
+    }:
+        raise ValidationError(f"unsupported assertion schema at {context}")
+    assertion_id = record["assertionId"]
+    if not isinstance(assertion_id, str) or not RECORD_ID_PATTERN.fullmatch(assertion_id):
+        raise ValidationError(f"invalid assertionId at {context}")
+    for field in ("subject", "predicate"):
+        if not isinstance(record[field], str) or not record[field]:
+            raise ValidationError(f"{context}.{field} must be a non-empty string")
+    if record["conflictPolicy"] not in {"single-valued", "multi-valued"}:
+        raise ValidationError(f"invalid conflictPolicy at {context}")
+
+    applicability = record["applicability"]
+    if not isinstance(applicability, dict):
+        raise ValidationError(f"{context}.applicability must be an object")
+    _require_keys(applicability, APPLICABILITY_KEYS, f"{context}.applicability")
+    engine = applicability["engine"]
+    extension = applicability["extension"]
+    if not isinstance(engine, dict) or not isinstance(extension, dict):
+        raise ValidationError(f"{context}.applicability identities must be objects")
+    _require_keys(engine, ENGINE_APPLICABILITY_KEYS, f"{context}.applicability.engine")
+    _require_keys(
+        extension,
+        EXTENSION_APPLICABILITY_KEYS,
+        f"{context}.applicability.extension",
+    )
+    _require_optional_string(engine["runtime"], f"{context}.applicability.engine.runtime")
+    _require_optional_digest(
+        engine["executableSha256"], SHA256_PATTERN,
+        f"{context}.applicability.engine.executableSha256",
+    )
+    _require_optional_digest(
+        engine["moduleSha256"], SHA256_PATTERN,
+        f"{context}.applicability.engine.moduleSha256",
+    )
+    _require_optional_string(
+        extension["namespace"], f"{context}.applicability.extension.namespace"
+    )
+    if extension["namespace"] is not None and not NAMESPACE_PATTERN.fullmatch(
+        extension["namespace"]
+    ):
+        raise ValidationError(f"invalid extension namespace at {context}")
+    _require_optional_digest(
+        extension["sourceCommit"], COMMIT_PATTERN,
+        f"{context}.applicability.extension.sourceCommit",
+    )
+    _require_optional_string(
+        extension["buildId"], f"{context}.applicability.extension.buildId"
+    )
+    _require_optional_digest(
+        extension["artifactSha256"], SHA256_PATTERN,
+        f"{context}.applicability.extension.artifactSha256",
+    )
+    for field in ("configurationSha256", "scenarioSha256"):
+        _require_optional_digest(
+            applicability[field], SHA256_PATTERN, f"{context}.applicability.{field}"
+        )
+
+    evidence = record["evidence"]
+    if not isinstance(evidence, dict):
+        raise ValidationError(f"{context}.evidence must be an object")
+    _require_keys(evidence, EVIDENCE_KEYS, f"{context}.evidence")
+    if evidence["class"] not in EVIDENCE_CLASSES:
+        raise ValidationError(f"invalid evidence class at {context}")
+    if evidence["confidence"] not in CONFIDENCE_LEVELS:
+        raise ValidationError(f"invalid confidence at {context}")
+    _require_unique_strings(evidence["refs"], f"{context}.evidence.refs", minimum=1)
+    if not isinstance(record["notes"], str):
+        raise ValidationError(f"{context}.notes must be a string")
+
+
+def validate_resolution(record: dict, context: str) -> None:
+    _require_keys(record, RESOLUTION_KEYS, context)
+    if record["schema"] != {
+        "name": "skyrim-render-map.resolution",
+        "major": 1,
+        "minor": 0,
+    }:
+        raise ValidationError(f"unsupported resolution schema at {context}")
+    resolution_id = record["resolutionId"]
+    if not isinstance(resolution_id, str) or not RECORD_ID_PATTERN.fullmatch(resolution_id):
+        raise ValidationError(f"invalid resolutionId at {context}")
+    conflict_id = record["conflictId"]
+    if not isinstance(conflict_id, str) or not re.fullmatch(r"conflict-[a-f0-9]{64}", conflict_id):
+        raise ValidationError(f"invalid conflictId at {context}")
+    _require_unique_strings(record["participantRefs"], f"{context}.participantRefs", minimum=2)
+    if record["outcome"] not in RESOLUTION_OUTCOMES:
+        raise ValidationError(f"invalid resolution outcome at {context}")
+    _require_unique_strings(record["effectiveAssertionRefs"], f"{context}.effectiveAssertionRefs")
+    _require_unique_strings(record["evidenceRefs"], f"{context}.evidenceRefs", minimum=1)
+    if not isinstance(record["rationale"], str) or not record["rationale"]:
+        raise ValidationError(f"{context}.rationale must be a non-empty string")
+
+
+def load_submission_records(
+    directory: pathlib.Path, submission_class: str
+) -> tuple[list[dict], list[dict]]:
+    assertions_path = directory / "content" / "assertions.jsonl"
+    resolutions_path = directory / "content" / "resolutions.jsonl"
+    assertions = load_jsonl(assertions_path) if assertions_path.is_file() else []
+    resolutions = load_jsonl(resolutions_path) if resolutions_path.is_file() else []
+
+    if submission_class in {"assertion", "amendment"} and not assertions:
+        raise ValidationError(f"{submission_class} submissions require assertions.jsonl")
+    if submission_class == "resolution" and not resolutions:
+        raise ValidationError("resolution submissions require resolutions.jsonl")
+    if assertions and submission_class not in {"legacy-import", "assertion", "amendment"}:
+        raise ValidationError("assertions.jsonl is not valid for this submission class")
+    if resolutions and submission_class != "resolution":
+        raise ValidationError("resolutions.jsonl requires a resolution submission")
+
+    assertion_ids: set[str] = set()
+    for index, assertion in enumerate(assertions, start=1):
+        validate_assertion(assertion, f"{assertions_path}:{index}")
+        if assertion["assertionId"] in assertion_ids:
+            raise ValidationError(f"duplicate assertionId: {assertion['assertionId']}")
+        assertion_ids.add(assertion["assertionId"])
+    resolution_ids: set[str] = set()
+    for index, resolution in enumerate(resolutions, start=1):
+        validate_resolution(resolution, f"{resolutions_path}:{index}")
+        if resolution["resolutionId"] in resolution_ids:
+            raise ValidationError(f"duplicate resolutionId: {resolution['resolutionId']}")
+        resolution_ids.add(resolution["resolutionId"])
+    return assertions, resolutions
+
+
 def validate_submission(directory: pathlib.Path) -> TreeSummary:
     manifest_path = directory / "submission.json"
     content_root = directory / "content"
     if not manifest_path.is_file():
         raise ValidationError(f"missing submission.json: {directory}")
-    try:
-        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-    except (UnicodeDecodeError, json.JSONDecodeError) as error:
-        raise ValidationError(f"invalid submission manifest: {manifest_path}") from error
+    manifest = load_json_document(manifest_path)
     if not isinstance(manifest, dict):
         raise ValidationError(f"submission manifest must be an object: {manifest_path}")
     _require_keys(manifest, SUBMISSION_KEYS, "submission")
@@ -229,6 +490,8 @@ def validate_submission(directory: pathlib.Path) -> TreeSummary:
     for path in files:
         _scan_public_content(path, path.read_bytes())
 
+    load_submission_records(directory, manifest["submissionClass"])
+
     summary = summarize_tree(content_root)
     if summary.total_bytes > MAX_TOTAL_BYTES:
         raise ValidationError(f"submission exceeds {MAX_TOTAL_BYTES} total bytes")
@@ -270,10 +533,7 @@ def validate_repository(repository: pathlib.Path) -> None:
     for json_path in sorted(repository.rglob("*.json")):
         if ".git" in json_path.parts:
             continue
-        try:
-            json.loads(json_path.read_text(encoding="utf-8"))
-        except (UnicodeDecodeError, json.JSONDecodeError) as error:
-            raise ValidationError(f"invalid JSON document: {json_path}") from error
+        load_json_document(json_path)
 
 
 def _tree_inventory(root: pathlib.Path) -> dict[str, tuple[int, str]]:

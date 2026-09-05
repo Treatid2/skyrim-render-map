@@ -34,6 +34,17 @@ jobs:
           --base-tree trusted
           --candidate-tree candidate
 
+      - name: Compile pull request dataset reproducibly
+        if: github.event_name == 'pull_request'
+        run: |
+          if [[ -f trusted/tools/compile_dataset.py ]]; then
+            python3 trusted/tools/compile_dataset.py --repository candidate --output "$RUNNER_TEMP/snapshot-a.json"
+            python3 trusted/tools/compile_dataset.py --repository candidate --output "$RUNNER_TEMP/snapshot-b.json"
+            cmp "$RUNNER_TEMP/snapshot-a.json" "$RUNNER_TEMP/snapshot-b.json"
+          else
+            echo "Trusted base predates the semantic compiler; push validation will bootstrap it."
+          fi
+
       - name: Check out repository
         if: github.event_name == 'push'
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
@@ -41,6 +52,13 @@ jobs:
       - name: Validate canonical repository
         if: github.event_name == 'push'
         run: python3 tools/validate_repository.py --repository .
+
+      - name: Compile canonical dataset reproducibly
+        if: github.event_name == 'push'
+        run: |
+          python3 tools/compile_dataset.py --repository . --output "$RUNNER_TEMP/snapshot-a.json"
+          python3 tools/compile_dataset.py --repository . --output "$RUNNER_TEMP/snapshot-b.json"
+          cmp "$RUNNER_TEMP/snapshot-a.json" "$RUNNER_TEMP/snapshot-b.json"
 
       - name: Run validator tests
         if: github.event_name == 'push'
