@@ -1,0 +1,47 @@
+{
+  "schema": {
+    "name": "skyrim-render-map.submission",
+    "major": 1,
+    "minor": 0
+  },
+  "submissionId": "sub-skyrim-vr-csx-foundation-9935c-v1",
+  "submissionClass": "assertion",
+  "namespace": "skyrim-vr",
+  "createdAt": "2026-09-05T23:06:56+01:00",
+  "status": "candidate-unreviewed",
+  "contributor": {
+    "displayName": "Treatid2",
+    "github": "Treatid2",
+    "standing": "ordinary-contributor"
+  },
+  "provenance": {
+    "sourceRepository": "https://github.com/Treatid2/skyrim-render-map",
+    "sourceCommit": "bbb16c86963baaba41514285364031645d93d905",
+    "sourceParentCommit": "e476b8cf78a87ba914963fedeb7b84dce70bff4b",
+    "sourceRef": "main",
+    "sourceState": "merged",
+    "sourcePubliclyReachable": true,
+    "sourceDirty": false,
+    "importedAt": "2026-09-05T23:06:56+01:00",
+    "sourceContentTreeSha256": "75CCEF0F7235EAA198222E3E27C2908A943FE256AD7A44C392BA4BE59C9879EF",
+    "transformations": [
+      "Manually normalized twelve atomic claims from the preserved engine map and deterministic shader manifest without promoting submission-local entities into the stable catalog."
+    ],
+    "relatedUrls": [
+      "https://github.com/ParticleTroned/skyrim-community-shaders/pull/55",
+      "https://github.com/Treatid2/skyrim-render-map/tree/bbb16c86963baaba41514285364031645d93d905/submissions/2026/08/sub-csx-full-render-exploration-9935c5210"
+    ]
+  },
+  "licensing": {
+    "content": "CC-BY-SA-4.0",
+    "schemas": "CC0-1.0",
+    "dcoAcknowledged": true
+  },
+  "content": {
+    "root": "content",
+    "fileCount": 2,
+    "totalBytes": 22314,
+    "treeSha256": "D26A1060228152D0B8C40CB92192D24851596491D8DA31E357824DAECECABB36"
+  },
+  "notes": "First real-data exercise of semantic-ledger v1. The tranche includes exact Skyrim VR shader-family numeric identities, exact function RVAs, and direct compile-unit source identities. It deliberately excludes the imported engine-map relations that map Lighting, Effect, and Utility to compile units 0115, 0074, and 0120 because those relations conflict with the imported shader manifest at its recorded digest."
+}
