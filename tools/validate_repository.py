@@ -51,6 +51,10 @@ NAMESPACE_PATTERN = re.compile(r"^[a-z0-9][a-z0-9.-]{1,63}$")
 SHA256_PATTERN = re.compile(r"^[A-Fa-f0-9]{64}$")
 COMMIT_PATTERN = re.compile(r"^[A-Fa-f0-9]{40}$")
 RECORD_ID_PATTERN = re.compile(r"^[a-z][a-z0-9.-]{2,127}$")
+ENTITY_REFERENCE_PATTERN = re.compile(
+    r"^urn:skyrim-render-map:submission:"
+    r"sub-[a-z0-9][a-z0-9.-]{7,127}#[a-z][a-z0-9.-]{2,127}$"
+)
 WINDOWS_USER_PATH = re.compile(rb"[A-Za-z]:[\\/]+Users[\\/]+[^\\/\s<>]+", re.I)
 WINDOWS_ABSOLUTE_PATH = re.compile(rb"(?<![A-Za-z0-9])(?:[A-Za-z]:[\\/])")
 UNIX_HOME_PATH = re.compile(rb"/home/[^/\s<>]+", re.I)
@@ -293,6 +297,7 @@ def validate_assertion(record: dict, context: str) -> None:
     for field in ("subject", "predicate"):
         if not isinstance(record[field], str) or not record[field]:
             raise ValidationError(f"{context}.{field} must be a non-empty string")
+    assertion_value_entity_reference(record["value"], f"{context}.value")
     if record["conflictPolicy"] not in {"single-valued", "multi-valued"}:
         raise ValidationError(f"invalid conflictPolicy at {context}")
 
@@ -353,6 +358,19 @@ def validate_assertion(record: dict, context: str) -> None:
     _require_unique_strings(evidence["refs"], f"{context}.evidence.refs", minimum=1)
     if not isinstance(record["notes"], str):
         raise ValidationError(f"{context}.notes must be a string")
+
+
+def assertion_value_entity_reference(value: object, context: str) -> str | None:
+    """Return a validated entity target for the reserved reference value form."""
+    if not isinstance(value, dict) or "entityRef" not in value:
+        return None
+    _require_keys(value, {"entityRef"}, context)
+    reference = value["entityRef"]
+    if not isinstance(reference, str) or not ENTITY_REFERENCE_PATTERN.fullmatch(
+        reference
+    ):
+        raise ValidationError(f"invalid entityRef at {context}")
+    return reference
 
 
 def validate_entity(record: dict, context: str) -> None:

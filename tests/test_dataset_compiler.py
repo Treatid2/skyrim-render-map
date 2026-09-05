@@ -328,6 +328,48 @@ class DatasetCompilerTest(unittest.TestCase):
         with self.assertRaises(COMPILER.CompileError):
             COMPILER.compile_repository(self.repository)
 
+    def test_assertion_value_entity_reference_resolves(self) -> None:
+        target = (
+            "urn:skyrim-render-map:submission:"
+            "sub-fixture-legacy#render-target"
+        )
+        assertion = self._assertion("a-1", {"entityRef": target})
+        self._add_assertions("sub-fixture-first", [assertion])
+        snapshot = COMPILER.compile_repository(self.repository)
+        self.assertEqual(
+            snapshot["assertions"][0]["record"]["value"],
+            {"entityRef": target},
+        )
+
+    def test_unknown_assertion_value_entity_reference_fails_closed(self) -> None:
+        assertion = self._assertion(
+            "a-1",
+            {
+                "entityRef": (
+                    "urn:skyrim-render-map:submission:"
+                    "sub-fixture-missing#render-target"
+                )
+            },
+        )
+        self._add_assertions("sub-fixture-first", [assertion])
+        with self.assertRaises(COMPILER.CompileError):
+            COMPILER.compile_repository(self.repository)
+
+    def test_entity_reference_value_rejects_extra_fields(self) -> None:
+        assertion = self._assertion(
+            "a-1",
+            {
+                "entityRef": (
+                    "urn:skyrim-render-map:submission:"
+                    "sub-fixture-legacy#render-target"
+                ),
+                "label": "ambiguous duplicate identity",
+            },
+        )
+        self._add_assertions("sub-fixture-first", [assertion])
+        with self.assertRaises(VALIDATOR.ValidationError):
+            COMPILER.compile_repository(self.repository)
+
 
 if __name__ == "__main__":
     unittest.main()

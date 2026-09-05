@@ -30,6 +30,18 @@ kind, human-readable label, and one or more source references. This prevents a
 misspelled subject from silently creating a disconnected identity. Stable
 catalog promotion remains a separate reviewed operation.
 
+An assertion that points to another entity encodes its value with the reserved
+reference form:
+
+```json
+{"entityRef":"urn:skyrim-render-map:submission:<submission-id>#<entity-id>"}
+```
+
+The object must contain only `entityRef`, and the target must resolve to an
+entity in the accepted ledger or candidate submission. Plain JSON strings are
+literal values, not references. This distinction keeps scalar identifiers and
+graph edges unambiguous while leaving other JSON assertion values compatible.
+
 `null` applicability values mean that the record does not establish a more
 specific boundary. They are not wildcards chosen by the compiler and they are
 not evidence that all versions behave identically.
