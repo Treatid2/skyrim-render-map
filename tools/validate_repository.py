@@ -70,6 +70,7 @@ ASSERTION_KEYS = {
     "evidence",
     "notes",
 }
+ENTITY_KEYS = {"schema", "entityId", "kind", "label", "sourceRefs", "notes"}
 APPLICABILITY_KEYS = {
     "engine",
     "extension",
@@ -354,6 +355,28 @@ def validate_assertion(record: dict, context: str) -> None:
         raise ValidationError(f"{context}.notes must be a string")
 
 
+def validate_entity(record: dict, context: str) -> None:
+    _require_keys(record, ENTITY_KEYS, context)
+    if record["schema"] != {
+        "name": "skyrim-render-map.entity",
+        "major": 1,
+        "minor": 0,
+    }:
+        raise ValidationError(f"unsupported entity schema at {context}")
+    entity_id = record["entityId"]
+    if not isinstance(entity_id, str) or not RECORD_ID_PATTERN.fullmatch(entity_id):
+        raise ValidationError(f"invalid entityId at {context}")
+    if not isinstance(record["kind"], str) or not NAMESPACE_PATTERN.fullmatch(
+        record["kind"]
+    ):
+        raise ValidationError(f"invalid entity kind at {context}")
+    if not isinstance(record["label"], str) or not record["label"]:
+        raise ValidationError(f"{context}.label must be a non-empty string")
+    _require_unique_strings(record["sourceRefs"], f"{context}.sourceRefs", minimum=1)
+    if not isinstance(record["notes"], str):
+        raise ValidationError(f"{context}.notes must be a string")
+
+
 def validate_resolution(record: dict, context: str) -> None:
     _require_keys(record, RESOLUTION_KEYS, context)
     if record["schema"] != {
@@ -379,9 +402,11 @@ def validate_resolution(record: dict, context: str) -> None:
 
 def load_submission_records(
     directory: pathlib.Path, submission_class: str
-) -> tuple[list[dict], list[dict]]:
+) -> tuple[list[dict], list[dict], list[dict]]:
+    entities_path = directory / "content" / "entities.jsonl"
     assertions_path = directory / "content" / "assertions.jsonl"
     resolutions_path = directory / "content" / "resolutions.jsonl"
+    entities = load_jsonl(entities_path) if entities_path.is_file() else []
     assertions = load_jsonl(assertions_path) if assertions_path.is_file() else []
     resolutions = load_jsonl(resolutions_path) if resolutions_path.is_file() else []
 
@@ -393,7 +418,15 @@ def load_submission_records(
         raise ValidationError("assertions.jsonl is not valid for this submission class")
     if resolutions and submission_class != "resolution":
         raise ValidationError("resolutions.jsonl requires a resolution submission")
+    if entities and submission_class == "resolution":
+        raise ValidationError("resolution submissions must not declare entities")
 
+    entity_ids: set[str] = set()
+    for index, entity in enumerate(entities, start=1):
+        validate_entity(entity, f"{entities_path}:{index}")
+        if entity["entityId"] in entity_ids:
+            raise ValidationError(f"duplicate entityId: {entity['entityId']}")
+        entity_ids.add(entity["entityId"])
     assertion_ids: set[str] = set()
     for index, assertion in enumerate(assertions, start=1):
         validate_assertion(assertion, f"{assertions_path}:{index}")
@@ -406,7 +439,10 @@ def load_submission_records(
         if resolution["resolutionId"] in resolution_ids:
             raise ValidationError(f"duplicate resolutionId: {resolution['resolutionId']}")
         resolution_ids.add(resolution["resolutionId"])
-    return assertions, resolutions
+    record_ids = list(entity_ids) + list(assertion_ids) + list(resolution_ids)
+    if len(record_ids) != len(set(record_ids)):
+        raise ValidationError("submission-local record IDs must be unique across record types")
+    return entities, assertions, resolutions
 
 
 def validate_submission(directory: pathlib.Path) -> TreeSummary:

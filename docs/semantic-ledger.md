@@ -7,7 +7,8 @@ an authority and without editing accepted evidence.
 ## Structured records
 
 An `assertion` or `amendment` submission contains a canonical
-`content/assertions.jsonl`. A `resolution` submission contains a canonical
+`content/assertions.jsonl` and may declare its subjects in
+`content/entities.jsonl`. A `resolution` submission contains a canonical
 `content/resolutions.jsonl`. Canonical JSONL means one compact JSON object per
 line, keys sorted lexically, UTF-8 encoding, and a final newline.
 
@@ -23,13 +24,19 @@ Each assertion declares:
 - exact or unknown engine, extension, configuration, and scenario identity;
 - evidence class, confidence, and evidence references.
 
+Every assertion subject must resolve to an entity declaration in the accepted
+ledger or the same candidate submission. An entity has a submission-local ID,
+kind, human-readable label, and one or more source references. This prevents a
+misspelled subject from silently creating a disconnected identity. Stable
+catalog promotion remains a separate reviewed operation.
+
 `null` applicability values mean that the record does not establish a more
 specific boundary. They are not wildcards chosen by the compiler and they are
 not evidence that all versions behave identically.
 
 ## Stable identities
 
-The globally stable record reference is:
+The globally stable entity, assertion, or resolution reference is:
 
 ```text
 urn:skyrim-render-map:submission:<submission-id>#<record-id>
@@ -101,6 +108,7 @@ and do not replace the append-only ledger.
 ## Deliberate v1 limits
 
 This slice does not infer structured claims from imported Markdown or JSON,
-express version ranges, detect ordering or identity-alias contradictions,
-rank evidence, or decide which contested value is correct. Those extensions
-must preserve the v1 identities or publish explicit migration relations.
+resolve arbitrary objects embedded in legacy files, express version ranges,
+detect ordering or identity-alias contradictions, rank evidence, or decide
+which contested value is correct. Those extensions must preserve the v1
+identities or publish explicit migration relations.
