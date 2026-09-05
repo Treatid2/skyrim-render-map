@@ -1,0 +1,49 @@
+{
+  "schema": {
+    "name": "skyrim-render-map.submission",
+    "major": 1,
+    "minor": 0
+  },
+  "submissionId": "sub-skyrim-vr-render-pass-lifecycle-9935c-v1",
+  "submissionClass": "assertion",
+  "namespace": "skyrim-vr",
+  "createdAt": "2026-09-06T00:50:58+01:00",
+  "status": "candidate-unreviewed",
+  "contributor": {
+    "displayName": "Treatid2",
+    "github": "Treatid2",
+    "standing": "ordinary-contributor"
+  },
+  "provenance": {
+    "sourceRepository": "https://github.com/Treatid2/skyrim-render-map",
+    "sourceCommit": "bbb16c86963baaba41514285364031645d93d905",
+    "sourceParentCommit": "e476b8cf78a87ba914963fedeb7b84dce70bff4b",
+    "sourceRef": "main",
+    "sourceState": "merged",
+    "sourcePubliclyReachable": true,
+    "sourceDirty": false,
+    "importedAt": "2026-09-06T00:50:58+01:00",
+    "sourceContentTreeSha256": "75CCEF0F7235EAA198222E3E27C2908A943FE256AD7A44C392BA4BE59C9879EF",
+    "transformations": [
+      "Normalized the bounded BSShader-to-BSRenderPass creation path and the BSBatchRenderer registration/draw identities, addresses, relocation identities, vtable slots, class layout claims, and direct graph edges from the preserved Skyrim VR engine map."
+    ],
+    "relatedUrls": [
+      "https://github.com/ParticleTroned/skyrim-community-shaders/pull/55",
+      "https://github.com/Treatid2/skyrim-render-map/tree/bbb16c86963baaba41514285364031645d93d905/submissions/2026/08/sub-csx-full-render-exploration-9935c5210",
+      "https://github.com/Treatid2/skyrim-render-map/pull/8",
+      "https://github.com/Treatid2/skyrim-render-map/pull/11"
+    ]
+  },
+  "licensing": {
+    "content": "CC-BY-SA-4.0",
+    "schemas": "CC0-1.0",
+    "dcoAcknowledged": true
+  },
+  "content": {
+    "root": "content",
+    "fileCount": 2,
+    "totalBytes": 49262,
+    "treeSha256": "A5D9F7827E3CD86896085F2ED5541F0BC90B114DCF3F3B9DAA4E9794EFF70BB0"
+  },
+  "notes": "This tranche establishes the reusable non-culling render-pass lifecycle: pooled pass creation and initialization, verified BSRenderPass layout, batch registration, technique-to-pass-slot resolution, and final pass consumption. Relation attributes that v1 cannot type separately remain preserved in assertion notes and pinned source relations. Accumulator-stage dispatch and resource-flow normalization are deliberately left for following tranches."
+}
