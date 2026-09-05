@@ -26,6 +26,18 @@ Passing structural validation does not mean that a conclusion has been
 accepted. Maintainers review provenance, applicability, evidence quality, and
 conflicts separately.
 
+Assertion and amendment submissions place canonical records in
+`content/assertions.jsonl`. Resolution submissions use
+`content/resolutions.jsonl`. See [docs/semantic-ledger.md](docs/semantic-ledger.md)
+and the schemas under `schemas/contribution/`. Before opening a PR, also run:
+
+```console
+python tools/compile_dataset.py --repository . --output .validation-output/snapshot.json
+```
+
+Do not commit generated snapshots; they are deterministic projections used
+for review and publication.
+
 ## Corrections and disagreement
 
 Do not edit or remove accepted information. Submit a new amendment, dispute,

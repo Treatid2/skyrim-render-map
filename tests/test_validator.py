@@ -142,6 +142,55 @@ class ValidatorTest(unittest.TestCase):
         with self.assertRaises(VALIDATOR.ValidationError):
             VALIDATOR.validate_candidate(self.base, self.candidate)
 
+    def test_rejects_noncanonical_assertion_jsonl(self) -> None:
+        directory = self._add_submission()
+        manifest = json.loads((directory / "submission.json").read_text(encoding="utf-8"))
+        manifest["submissionClass"] = "assertion"
+        (directory / "content" / "assertions.jsonl").write_text(
+            '{"schema": {"name": "skyrim-render-map.assertion"}}\n',
+            encoding="utf-8",
+        )
+        self._write_manifest(directory, directory.name)
+        manifest = json.loads((directory / "submission.json").read_text(encoding="utf-8"))
+        manifest["submissionClass"] = "assertion"
+        (directory / "submission.json").write_text(
+            json.dumps(manifest, indent=2) + "\n", encoding="utf-8"
+        )
+        with self.assertRaises(VALIDATOR.ValidationError):
+            VALIDATOR.validate_candidate(self.base, self.candidate)
+
+    def test_rejects_assertion_class_without_ledger(self) -> None:
+        directory = self._add_submission()
+        manifest = json.loads((directory / "submission.json").read_text(encoding="utf-8"))
+        manifest["submissionClass"] = "assertion"
+        (directory / "submission.json").write_text(
+            json.dumps(manifest, indent=2) + "\n", encoding="utf-8"
+        )
+        with self.assertRaises(VALIDATOR.ValidationError):
+            VALIDATOR.validate_candidate(self.base, self.candidate)
+
+    def test_rejects_duplicate_json_keys(self) -> None:
+        directory = self._add_submission()
+        path = directory / "content" / "observation.json"
+        path.write_text('{"value":1,"value":2}\n', encoding="utf-8")
+        self._write_manifest(directory, directory.name)
+        with self.assertRaises(VALIDATOR.ValidationError):
+            VALIDATOR.validate_candidate(self.base, self.candidate)
+
+    def test_rejects_nonfinite_json_numbers(self) -> None:
+        directory = self._add_submission()
+        path = directory / "content" / "observation.json"
+        path.write_text('{"value":NaN}\n', encoding="utf-8")
+        self._write_manifest(directory, directory.name)
+        with self.assertRaises(VALIDATOR.ValidationError):
+            VALIDATOR.validate_candidate(self.base, self.candidate)
+
+    def test_rejects_crlf_jsonl(self) -> None:
+        path = self.root / "records.jsonl"
+        path.write_bytes(b'{"value":1}\r\n')
+        with self.assertRaises(VALIDATOR.ValidationError):
+            VALIDATOR.load_jsonl(path)
+
 
 if __name__ == "__main__":
     unittest.main()

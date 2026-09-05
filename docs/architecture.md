@@ -1,6 +1,6 @@
 # Public Skyrim render-map repository architecture
 
-Status: design proposal v1
+Status: bootstrap implementation v1
 Intended repository: `Treatid2/skyrim-render-map`
 
 ## 1. Purpose
@@ -320,7 +320,8 @@ Two assertions are contested when their applicability overlaps and their
 objects are defined as mutually incompatible. Missing evidence is not a
 conflict under the open-world model.
 
-Conflict types include:
+The initial compiler implements `incompatible-value`. Planned conflict types
+include:
 
 - `incompatible-value`
 - `overlapping-applicability`
@@ -416,23 +417,18 @@ publish the material. No game binaries, assets, raw decompilation, private
 paths, credentials, crash dumps, or personal identifiers are accepted through
 the ordinary contribution lane.
 
-## 16. Initial implementation slices
+## 16. Implementation status
 
-1. Create the repository, licenses, contribution guide, security policy, and
-   protected branch.
-2. Freeze contribution-envelope, assertion, observation, artifact-index, and
-   resolution schema v1.
-3. Implement the append-only diff and structure validator with adversarial
-   fixtures.
-4. Import the existing engine-map, shader-manifest, prior-art, and graph
-   contracts with exact source provenance.
-5. Implement deterministic ledger compilation and duplicate detection.
-6. Implement structured conflict signalling without automatic adjudication.
-7. Add the unprivileged PR workflow and required checks.
-8. Add the merge queue and one-review semi-automatic acceptance path.
-9. Publish the first immutable dataset release and GitHub Pages view.
-10. Add the automation export/preview/submission client only after the public
-    ingestion contract is stable.
+Completed bootstrap slices include repository governance, licensing, protected
+branch policy, append-only submission validation, two provenance-preserving
+legacy imports, assertion and resolution schemas, deterministic semantic
+compilation, pairwise incompatible-value conflict signalling, and the
+unprivileged PR workflow.
+
+The next data slice is a bounded normalization of selected legacy engine and
+CSX claims into assertions. Observation, artifact-index, performance, and
+applicability-range schemas; additional conflict classes; signed receipts;
+immutable dataset releases; Pages; and producer export clients remain planned.
 
 This sequence establishes the managed resource before inviting easy player
 submissions and leaves storage, querying, and producer integration replaceable

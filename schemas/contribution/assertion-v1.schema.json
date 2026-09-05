@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:skyrim-render-map:schema:assertion:1",
+  "title": "Skyrim render-map assertion",
+  "type": "object",
+  "required": [
+    "schema",
+    "assertionId",
+    "subject",
+    "predicate",
+    "value",
+    "conflictPolicy",
+    "applicability",
+    "evidence",
+    "notes"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "const": {
+        "name": "skyrim-render-map.assertion",
+        "major": 1,
+        "minor": 0
+      }
+    },
+    "assertionId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9.-]{2,127}$"
+    },
+    "subject": { "type": "string", "minLength": 1 },
+    "predicate": { "type": "string", "minLength": 1 },
+    "value": true,
+    "conflictPolicy": { "enum": ["single-valued", "multi-valued"] },
+    "applicability": {
+      "type": "object",
+      "required": [
+        "engine",
+        "extension",
+        "configurationSha256",
+        "scenarioSha256"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "engine": {
+          "type": "object",
+          "required": ["runtime", "executableSha256", "moduleSha256"],
+          "additionalProperties": false,
+          "properties": {
+            "runtime": { "type": ["string", "null"], "minLength": 1 },
+            "executableSha256": { "$ref": "#/$defs/nullableSha256" },
+            "moduleSha256": { "$ref": "#/$defs/nullableSha256" }
+          }
+        },
+        "extension": {
+          "type": "object",
+          "required": [
+            "namespace",
+            "sourceCommit",
+            "buildId",
+            "artifactSha256"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "namespace": { "type": ["string", "null"], "minLength": 1 },
+            "sourceCommit": {
+              "type": ["string", "null"],
+              "pattern": "^[A-Fa-f0-9]{40}$"
+            },
+            "buildId": { "type": ["string", "null"], "minLength": 1 },
+            "artifactSha256": { "$ref": "#/$defs/nullableSha256" }
+          }
+        },
+        "configurationSha256": { "$ref": "#/$defs/nullableSha256" },
+        "scenarioSha256": { "$ref": "#/$defs/nullableSha256" }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "required": ["class", "confidence", "refs"],
+      "additionalProperties": false,
+      "properties": {
+        "class": {
+          "enum": [
+            "runtime-capture",
+            "static-analysis",
+            "reverse-engineering",
+            "source-analysis",
+            "documentation",
+            "correlation",
+            "manual-observation",
+            "derived"
+          ]
+        },
+        "confidence": { "enum": ["high", "medium", "low", "unknown"] },
+        "refs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "notes": { "type": "string" }
+  },
+  "$defs": {
+    "nullableSha256": {
+      "type": ["string", "null"],
+      "pattern": "^[A-Fa-f0-9]{64}$"
+    }
+  }
+}

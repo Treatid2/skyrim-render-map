@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:skyrim-render-map:schema:dataset-snapshot:1",
+  "title": "Generated Skyrim render-map dataset snapshot",
+  "type": "object",
+  "required": [
+    "snapshotId",
+    "schema",
+    "generatedBy",
+    "sourceRevision",
+    "submissions",
+    "assertions",
+    "conflicts",
+    "resolutions",
+    "statistics"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "snapshotId": {
+      "type": "string",
+      "pattern": "^snapshot-[a-f0-9]{64}$"
+    },
+    "schema": {
+      "const": {
+        "name": "skyrim-render-map.dataset-snapshot",
+        "major": 1,
+        "minor": 0
+      }
+    },
+    "generatedBy": {
+      "const": {
+        "name": "skyrim-render-map.compile-dataset",
+        "version": "1.0.0"
+      }
+    },
+    "sourceRevision": { "type": ["string", "null"] },
+    "submissions": { "type": "array", "items": { "type": "object" } },
+    "assertions": { "type": "array", "items": { "type": "object" } },
+    "conflicts": {
+      "type": "array",
+      "items": { "$ref": "conflict-v1.schema.json" }
+    },
+    "resolutions": { "type": "array", "items": { "type": "object" } },
+    "statistics": {
+      "type": "object",
+      "required": [
+        "submissionCount",
+        "assertionCount",
+        "conflictCount",
+        "openConflictCount",
+        "resolutionCount"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "submissionCount": { "type": "integer", "minimum": 0 },
+        "assertionCount": { "type": "integer", "minimum": 0 },
+        "conflictCount": { "type": "integer", "minimum": 0 },
+        "openConflictCount": { "type": "integer", "minimum": 0 },
+        "resolutionCount": { "type": "integer", "minimum": 0 }
+      }
+    }
+  }
+}

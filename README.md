@@ -22,6 +22,12 @@ CSX-assisted research contributions:
 Both are candidate contributions. Importing them preserves work and
 provenance; it does not certify every conclusion.
 
+The v1 [semantic ledger](docs/semantic-ledger.md) validates normalized
+assertions and resolutions, detects overlapping incompatible claims, and
+builds byte-reproducible dataset snapshots. The bootstrap imports have not yet
+been normalized into assertions, so their knowledge remains preserved source
+material rather than compiler-interpreted fact.
+
 The long-term architecture is described in
 [docs/architecture.md](docs/architecture.md).
 
@@ -55,6 +61,7 @@ The validator has no third-party Python dependencies:
 
 ```console
 python tools/validate_repository.py --repository .
+python tools/compile_dataset.py --repository . --output .validation-output/snapshot.json
 python -m unittest discover -s tests -p "test_*.py"
 ```
 
