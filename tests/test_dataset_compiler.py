@@ -66,7 +66,10 @@ class DatasetCompilerTest(unittest.TestCase):
                 "minor": 0,
             },
             "assertionId": assertion_id,
-            "subject": "urn:test:render-target",
+            "subject": (
+                "urn:skyrim-render-map:submission:"
+                "sub-fixture-legacy#render-target"
+            ),
             "predicate": "engine.resource.format",
             "value": value,
             "conflictPolicy": policy,
@@ -137,6 +140,29 @@ class DatasetCompilerTest(unittest.TestCase):
     def _add_legacy_submission(self) -> None:
         directory = self._directory("sub-fixture-legacy")
         (directory / "content" / "note.md").write_text("fixture\n", encoding="utf-8")
+        entity = {
+            "schema": {
+                "name": "skyrim-render-map.entity",
+                "major": 1,
+                "minor": 0,
+            },
+            "entityId": "render-target",
+            "kind": "render-target",
+            "label": "Fixture render target",
+            "sourceRefs": ["evidence://fixture"],
+            "notes": "Fixture entity",
+        }
+        (directory / "content" / "entities.jsonl").write_text(
+            json.dumps(
+                entity,
+                ensure_ascii=False,
+                sort_keys=True,
+                separators=(",", ":"),
+            )
+            + "\n",
+            encoding="utf-8",
+            newline="\n",
+        )
         self._write_manifest(directory, directory.name, "legacy-import")
 
     def _add_assertions(self, submission_id: str, records: list[dict]) -> None:
@@ -294,6 +320,13 @@ class DatasetCompilerTest(unittest.TestCase):
         COMPILER.write_snapshot(snapshot, first)
         COMPILER.write_snapshot(COMPILER.compile_repository(self.repository), second)
         self.assertEqual(first.read_bytes(), second.read_bytes())
+
+    def test_unknown_assertion_subject_fails_closed(self) -> None:
+        assertion = self._assertion("a-1", "RGBA8")
+        assertion["subject"] = "urn:skyrim-render-map:submission:missing#entity"
+        self._add_assertions("sub-fixture-first", [assertion])
+        with self.assertRaises(COMPILER.CompileError):
+            COMPILER.compile_repository(self.repository)
 
 
 if __name__ == "__main__":

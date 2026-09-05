@@ -27,7 +27,8 @@ accepted. Maintainers review provenance, applicability, evidence quality, and
 conflicts separately.
 
 Assertion and amendment submissions place canonical records in
-`content/assertions.jsonl`. Resolution submissions use
+`content/assertions.jsonl` and declare new subjects in
+`content/entities.jsonl`. Resolution submissions use
 `content/resolutions.jsonl`. See [docs/semantic-ledger.md](docs/semantic-ledger.md)
 and the schemas under `schemas/contribution/`. Before opening a PR, also run:
 

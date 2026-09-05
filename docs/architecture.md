@@ -421,9 +421,9 @@ the ordinary contribution lane.
 
 Completed bootstrap slices include repository governance, licensing, protected
 branch policy, append-only submission validation, two provenance-preserving
-legacy imports, assertion and resolution schemas, deterministic semantic
-compilation, pairwise incompatible-value conflict signalling, and the
-unprivileged PR workflow.
+legacy imports, entity/assertion/resolution schemas, deterministic semantic
+compilation with subject resolution, pairwise incompatible-value conflict
+signalling, and the unprivileged PR workflow.
 
 The next data slice is a bounded normalization of selected legacy engine and
 CSX claims into assertions. Observation, artifact-index, performance, and

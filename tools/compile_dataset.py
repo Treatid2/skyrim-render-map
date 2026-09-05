@@ -16,7 +16,7 @@ from typing import Any
 import validate_repository as validator
 
 
-TOOL_VERSION = "1.0.0"
+TOOL_VERSION = "1.1.0"
 
 
 class CompileError(RuntimeError):
@@ -43,6 +43,13 @@ def resolution_ref(submission_id: str, resolution_id: str) -> str:
     return (
         "urn:skyrim-render-map:submission:"
         f"{submission_id}#{resolution_id}"
+    )
+
+
+def entity_ref(submission_id: str, entity_id: str) -> str:
+    return (
+        "urn:skyrim-render-map:submission:"
+        f"{submission_id}#{entity_id}"
     )
 
 
@@ -111,8 +118,11 @@ def applicability_intersection(left: dict, right: dict) -> dict | None:
     return intersection if overlaps else None
 
 
-def _load_ledger(repository: pathlib.Path) -> tuple[list[dict], list[dict], list[dict]]:
+def _load_ledger(
+    repository: pathlib.Path,
+) -> tuple[list[dict], list[dict], list[dict], list[dict]]:
     submissions: list[dict] = []
+    entities: list[dict] = []
     assertions: list[dict] = []
     resolutions: list[dict] = []
     for directory in validator.submission_directories(repository):
@@ -120,8 +130,10 @@ def _load_ledger(repository: pathlib.Path) -> tuple[list[dict], list[dict], list
         if not isinstance(manifest, dict):
             raise CompileError(f"submission manifest is not an object: {directory}")
         submission_id = manifest["submissionId"]
-        assertion_records, resolution_records = validator.load_submission_records(
-            directory, manifest["submissionClass"]
+        entity_records, assertion_records, resolution_records = (
+            validator.load_submission_records(
+                directory, manifest["submissionClass"]
+            )
         )
         submissions.append(
             {
@@ -133,10 +145,19 @@ def _load_ledger(repository: pathlib.Path) -> tuple[list[dict], list[dict], list
                 "sourceRepository": manifest["provenance"]["sourceRepository"],
                 "sourceCommit": manifest["provenance"]["sourceCommit"].lower(),
                 "contentTreeSha256": manifest["content"]["treeSha256"].lower(),
+                "entityCount": len(entity_records),
                 "assertionCount": len(assertion_records),
                 "resolutionCount": len(resolution_records),
             }
         )
+        for record in entity_records:
+            entities.append(
+                {
+                    "ref": entity_ref(submission_id, record["entityId"]),
+                    "submissionId": submission_id,
+                    "record": record,
+                }
+            )
         for record in assertion_records:
             reference = assertion_ref(submission_id, record["assertionId"])
             assertions.append(
@@ -159,7 +180,7 @@ def _load_ledger(repository: pathlib.Path) -> tuple[list[dict], list[dict], list
                     "record": record,
                 }
             )
-    return submissions, assertions, resolutions
+    return submissions, entities, assertions, resolutions
 
 
 def _detect_conflicts(assertions: list[dict]) -> list[dict]:
@@ -236,10 +257,20 @@ def _apply_resolutions(
 
 def compile_repository(repository: pathlib.Path, source_revision: str | None = None) -> dict:
     validator.validate_repository(repository)
-    submissions, assertions, resolutions = _load_ledger(repository)
-    refs = [item["ref"] for item in assertions] + [item["ref"] for item in resolutions]
+    submissions, entities, assertions, resolutions = _load_ledger(repository)
+    refs = (
+        [item["ref"] for item in entities]
+        + [item["ref"] for item in assertions]
+        + [item["ref"] for item in resolutions]
+    )
     if len(refs) != len(set(refs)):
         raise CompileError("ledger record references must be globally unique")
+    entity_refs = {item["ref"] for item in entities}
+    for assertion in assertions:
+        if assertion["record"]["subject"] not in entity_refs:
+            raise CompileError(
+                f"assertion {assertion['ref']} references an unknown subject"
+            )
 
     conflicts = _detect_conflicts(assertions)
     _apply_resolutions(assertions, conflicts, resolutions)
@@ -275,7 +306,7 @@ def compile_repository(repository: pathlib.Path, source_revision: str | None = N
         "schema": {
             "name": "skyrim-render-map.dataset-snapshot",
             "major": 1,
-            "minor": 0,
+            "minor": 1,
         },
         "generatedBy": {
             "name": "skyrim-render-map.compile-dataset",
@@ -283,11 +314,13 @@ def compile_repository(repository: pathlib.Path, source_revision: str | None = N
         },
         "sourceRevision": source_revision,
         "submissions": sorted(submissions, key=lambda item: item["submissionId"]),
+        "entities": sorted(entities, key=lambda item: item["ref"]),
         "assertions": compiled_assertions,
         "conflicts": conflicts,
         "resolutions": compiled_resolutions,
         "statistics": {
             "submissionCount": len(submissions),
+            "entityCount": len(entities),
             "assertionCount": len(assertions),
             "conflictCount": len(conflicts),
             "openConflictCount": sum(item["state"] == "open" for item in conflicts),
