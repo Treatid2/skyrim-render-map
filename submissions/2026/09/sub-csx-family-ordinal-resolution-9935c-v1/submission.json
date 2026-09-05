@@ -1,0 +1,47 @@
+{
+  "schema": {
+    "name": "skyrim-render-map.submission",
+    "major": 1,
+    "minor": 0
+  },
+  "submissionId": "sub-csx-family-ordinal-resolution-9935c-v1",
+  "submissionClass": "resolution",
+  "namespace": "csx",
+  "createdAt": "2026-09-05T23:56:57+01:00",
+  "status": "candidate-unreviewed",
+  "contributor": {
+    "displayName": "Treatid2",
+    "github": "Treatid2",
+    "standing": "ordinary-contributor"
+  },
+  "provenance": {
+    "sourceRepository": "https://github.com/Treatid2/skyrim-render-map",
+    "sourceCommit": "16046e1a4694baf72d40175aed19b85c279ec7db",
+    "sourceParentCommit": "b0811cbfe2d8a5cb182ef75b9d6f6bc4f5b9406d",
+    "sourceRef": "codex/normalize-contested-ordinals-v1",
+    "sourceState": "open-pull-request",
+    "sourcePubliclyReachable": true,
+    "sourceDirty": false,
+    "importedAt": "2026-09-05T23:56:57+01:00",
+    "sourceContentTreeSha256": "650ED813E42281D45020EFE77E20661122A21F71612EBFEA9939E1212718423A",
+    "transformations": [
+      "Compared each legacy relation's named shader source with both its selected compile unit and the manifest unit that directly declares that source, then recorded three exact-participant unsupported resolutions without asserting a cause for the ordinal mismatch."
+    ],
+    "relatedUrls": [
+      "https://github.com/Treatid2/skyrim-render-map/pull/5",
+      "https://github.com/Treatid2/skyrim-render-map/tree/bbb16c86963baaba41514285364031645d93d905/submissions/2026/08/sub-csx-full-render-exploration-9935c5210"
+    ]
+  },
+  "licensing": {
+    "content": "CC-BY-SA-4.0",
+    "schemas": "CC0-1.0",
+    "dcoAcknowledged": true
+  },
+  "content": {
+    "root": "content",
+    "fileCount": 1,
+    "totalBytes": 4841,
+    "treeSha256": "C32A6E589196E13A239B5F1665DA2F4CA2DCDE8831137A4DB2DAA6A5925D250E"
+  },
+  "notes": "Resolves only the three exact compile-unit conflicts introduced by sub-csx-contested-family-ordinals-9935c-v1. The evidence establishes internal source-identity inconsistency in the legacy relation fields; it does not establish why the ordinals diverged or generalize beyond the pinned artifact."
+}
