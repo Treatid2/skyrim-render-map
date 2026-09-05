@@ -16,7 +16,7 @@ from typing import Any
 import validate_repository as validator
 
 
-TOOL_VERSION = "1.1.0"
+TOOL_VERSION = "1.2.0"
 
 
 class CompileError(RuntimeError):
@@ -270,6 +270,14 @@ def compile_repository(repository: pathlib.Path, source_revision: str | None = N
         if assertion["record"]["subject"] not in entity_refs:
             raise CompileError(
                 f"assertion {assertion['ref']} references an unknown subject"
+            )
+        target = validator.assertion_value_entity_reference(
+            assertion["record"]["value"],
+            f"assertion {assertion['ref']}.value",
+        )
+        if target is not None and target not in entity_refs:
+            raise CompileError(
+                f"assertion {assertion['ref']} references an unknown value entity"
             )
 
     conflicts = _detect_conflicts(assertions)
