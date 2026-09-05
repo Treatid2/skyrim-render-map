@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:skyrim-render-map:schema:submission:1",
+  "title": "Skyrim render-map contribution envelope",
+  "type": "object",
+  "required": [
+    "schema",
+    "submissionId",
+    "submissionClass",
+    "namespace",
+    "createdAt",
+    "status",
+    "contributor",
+    "provenance",
+    "licensing",
+    "content",
+    "notes"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "type": "object",
+      "required": ["name", "major", "minor"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "const": "skyrim-render-map.submission" },
+        "major": { "const": 1 },
+        "minor": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "submissionId": {
+      "type": "string",
+      "pattern": "^sub-[a-z0-9][a-z0-9.-]{7,127}$"
+    },
+    "submissionClass": {
+      "enum": [
+        "legacy-import",
+        "observation",
+        "assertion",
+        "amendment",
+        "resolution"
+      ]
+    },
+    "namespace": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9.-]{1,63}$"
+    },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "status": {
+      "enum": [
+        "candidate-unreviewed",
+        "accepted",
+        "contested",
+        "superseded",
+        "retracted"
+      ]
+    },
+    "contributor": {
+      "type": "object",
+      "required": ["displayName", "github", "standing"],
+      "additionalProperties": false,
+      "properties": {
+        "displayName": { "type": "string", "minLength": 1 },
+        "github": { "type": ["string", "null"] },
+        "standing": { "const": "ordinary-contributor" }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": [
+        "sourceRepository",
+        "sourceCommit",
+        "sourceParentCommit",
+        "sourceRef",
+        "sourceState",
+        "sourcePubliclyReachable",
+        "sourceDirty",
+        "importedAt",
+        "sourceContentTreeSha256",
+        "transformations",
+        "relatedUrls"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "sourceRepository": { "type": "string", "format": "uri" },
+        "sourceCommit": {
+          "type": "string",
+          "pattern": "^[A-Fa-f0-9]{40}$"
+        },
+        "sourceParentCommit": {
+          "type": ["string", "null"],
+          "pattern": "^[A-Fa-f0-9]{40}$"
+        },
+        "sourceRef": { "type": ["string", "null"] },
+        "sourceState": {
+          "enum": [
+            "merged",
+            "public-branch",
+            "open-pull-request",
+            "committed-local-preservation"
+          ]
+        },
+        "sourcePubliclyReachable": { "type": "boolean" },
+        "sourceDirty": { "type": "boolean" },
+        "importedAt": { "type": "string", "format": "date-time" },
+        "sourceContentTreeSha256": {
+          "type": "string",
+          "pattern": "^[A-Fa-f0-9]{64}$"
+        },
+        "transformations": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "uniqueItems": true
+        },
+        "relatedUrls": {
+          "type": "array",
+          "items": { "type": "string", "format": "uri" },
+          "uniqueItems": true
+        }
+      }
+    },
+    "licensing": {
+      "type": "object",
+      "required": ["content", "schemas", "dcoAcknowledged"],
+      "additionalProperties": false,
+      "properties": {
+        "content": { "const": "CC-BY-SA-4.0" },
+        "schemas": { "const": "CC0-1.0" },
+        "dcoAcknowledged": { "type": "boolean" }
+      }
+    },
+    "content": {
+      "type": "object",
+      "required": ["root", "fileCount", "totalBytes", "treeSha256"],
+      "additionalProperties": false,
+      "properties": {
+        "root": { "const": "content" },
+        "fileCount": { "type": "integer", "minimum": 1 },
+        "totalBytes": { "type": "integer", "minimum": 1 },
+        "treeSha256": {
+          "type": "string",
+          "pattern": "^[A-Fa-f0-9]{64}$"
+        }
+      }
+    },
+    "notes": { "type": "string" }
+  }
+}

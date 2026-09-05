@@ -1,0 +1,46 @@
+{
+  "schema": {
+    "name": "skyrim-render-map.submission",
+    "major": 1,
+    "minor": 0
+  },
+  "submissionId": "sub-csx-command-provenance-a28e9e9f",
+  "submissionClass": "legacy-import",
+  "namespace": "csx",
+  "createdAt": "2026-09-04T11:22:02+01:00",
+  "status": "candidate-unreviewed",
+  "contributor": {
+    "displayName": "Treatid2",
+    "github": "Treatid2",
+    "standing": "ordinary-contributor"
+  },
+  "provenance": {
+    "sourceRepository": "https://github.com/Treatid2/skyrim-community-shaders",
+    "sourceCommit": "a28e9e9fd837605ce383d28aeef8a725b0680c9b",
+    "sourceParentCommit": "2a781365dd13014b7c2e6d7199512cba4c9d7916",
+    "sourceRef": "codex/recover-render-map-command-lists",
+    "sourceState": "public-branch",
+    "sourcePubliclyReachable": true,
+    "sourceDirty": false,
+    "importedAt": "2026-09-05T22:00:46+01:00",
+    "sourceContentTreeSha256": "1D2409CD812DCC4A4FFB931CADE00231620E63727641833E1F75C1D53B2D3F4B",
+    "transformations": [
+      "Replaced local L-drive evidence roots with non-resolving local-evidence:// references; no map identity, schema, manifest hash, engine address, or finding field was changed."
+    ],
+    "relatedUrls": [
+      "https://github.com/Treatid2/skyrim-community-shaders/tree/codex/recover-render-map-command-lists"
+    ]
+  },
+  "licensing": {
+    "content": "CC-BY-SA-4.0",
+    "schemas": "CC0-1.0",
+    "dcoAcknowledged": true
+  },
+  "content": {
+    "root": "content",
+    "fileCount": 9,
+    "totalBytes": 148969,
+    "treeSha256": "09E739332762610B6263328A92B3C498051CE8160A4DB6317C4BB6E76D52D008"
+  },
+  "notes": "Bootstrap import of the later deferred-context, command-list, and deferred G-buffer provenance slice. It is retained alongside the broader earlier snapshot rather than replacing it. Its assertions remain contributor evidence subject to independent review and conflict signalling."
+}

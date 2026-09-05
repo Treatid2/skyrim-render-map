@@ -1,0 +1,46 @@
+name: submission structure
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out trusted base validator
+        if: github.event_name == 'pull_request'
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: trusted
+
+      - name: Check out candidate tree
+        if: github.event_name == 'pull_request'
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          path: candidate
+
+      - name: Validate pull request as inert data
+        if: github.event_name == 'pull_request'
+        run: >-
+          python3 trusted/tools/validate_repository.py
+          --base-tree trusted
+          --candidate-tree candidate
+
+      - name: Check out repository
+        if: github.event_name == 'push'
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+
+      - name: Validate canonical repository
+        if: github.event_name == 'push'
+        run: python3 tools/validate_repository.py --repository .
+
+      - name: Run validator tests
+        if: github.event_name == 'push'
+        run: python3 -m unittest discover -s tests -p 'test_*.py'

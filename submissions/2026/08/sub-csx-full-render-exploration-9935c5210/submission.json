@@ -1,0 +1,46 @@
+{
+  "schema": {
+    "name": "skyrim-render-map.submission",
+    "major": 1,
+    "minor": 0
+  },
+  "submissionId": "sub-csx-full-render-exploration-9935c5210",
+  "submissionClass": "legacy-import",
+  "namespace": "csx",
+  "createdAt": "2026-08-29T16:10:29+01:00",
+  "status": "candidate-unreviewed",
+  "contributor": {
+    "displayName": "Treatid2",
+    "github": "Treatid2",
+    "standing": "ordinary-contributor"
+  },
+  "provenance": {
+    "sourceRepository": "https://github.com/ParticleTroned/skyrim-community-shaders",
+    "sourceCommit": "9935c52104e1c17b745b07a17e266cb971b4bcda",
+    "sourceParentCommit": "67e08bf393151ba285ef223cad8ca871f5d85848",
+    "sourceRef": "local codex/full-render-map-v1 preservation history",
+    "sourceState": "committed-local-preservation",
+    "sourcePubliclyReachable": false,
+    "sourceDirty": false,
+    "importedAt": "2026-09-05T22:00:46+01:00",
+    "sourceContentTreeSha256": "22B4945F480269481BB404D51653134980A9FA8671254543C435F84D7BD93562",
+    "transformations": [
+      "Replaced local L-drive evidence, log, and artifact roots with non-resolving local-evidence:// references; no map identity, schema, manifest hash, engine address, or finding field was changed."
+    ],
+    "relatedUrls": [
+      "https://github.com/ParticleTroned/skyrim-community-shaders/pull/55"
+    ]
+  },
+  "licensing": {
+    "content": "CC-BY-SA-4.0",
+    "schemas": "CC0-1.0",
+    "dcoAcknowledged": true
+  },
+  "content": {
+    "root": "content",
+    "fileCount": 52,
+    "totalBytes": 2263530,
+    "treeSha256": "75CCEF0F7235EAA198222E3E27C2908A943FE256AD7A44C392BA4BE59C9879EF"
+  },
+  "notes": "Bootstrap import of a committed Full Render Exploration working snapshot. It contains mixed source-derived, reverse-engineered, runtime-observed, correlated, inferred, and generated material whose individual evidence classes remain as originally recorded. The source commit is locally preserved but is not the current public PR 55 head. Import status does not promote its conclusions or give Treatid2 special authority."
+}
