@@ -17,7 +17,7 @@ from typing import Any
 import validate_repository as validator
 
 
-TOOL_VERSION = "1.3.0"
+TOOL_VERSION = "1.4.0"
 
 
 class CompileError(RuntimeError):
@@ -65,6 +65,20 @@ def optimization_ref(submission_id: str, experiment_id: str) -> str:
     return (
         "urn:skyrim-render-map:submission:"
         f"{submission_id}#{experiment_id}"
+    )
+
+
+def visual_rubric_ref(submission_id: str, rubric_id: str) -> str:
+    return (
+        "urn:skyrim-render-map:submission:"
+        f"{submission_id}#{rubric_id}"
+    )
+
+
+def visual_comparison_ref(submission_id: str, comparison_id: str) -> str:
+    return (
+        "urn:skyrim-render-map:submission:"
+        f"{submission_id}#{comparison_id}"
     )
 
 
@@ -326,13 +340,24 @@ def applicability_intersection(left: dict, right: dict) -> dict | None:
 
 def _load_ledger(
     repository: pathlib.Path,
-) -> tuple[list[dict], list[dict], list[dict], list[dict], list[dict], list[dict]]:
+) -> tuple[
+    list[dict],
+    list[dict],
+    list[dict],
+    list[dict],
+    list[dict],
+    list[dict],
+    list[dict],
+    list[dict],
+]:
     submissions: list[dict] = []
     entities: list[dict] = []
     assertions: list[dict] = []
     resolutions: list[dict] = []
     performance_observations: list[dict] = []
     optimization_experiments: list[dict] = []
+    visual_rubrics: list[dict] = []
+    visual_comparisons: list[dict] = []
     for directory in validator.submission_directories(repository):
         manifest = validator.load_json_document(directory / "submission.json")
         if not isinstance(manifest, dict):
@@ -344,6 +369,8 @@ def _load_ledger(
             resolution_records,
             performance_records,
             optimization_records,
+            rubric_records,
+            comparison_records,
         ) = validator.load_submission_records(directory, manifest["submissionClass"])
         submissions.append(
             {
@@ -360,6 +387,8 @@ def _load_ledger(
                 "resolutionCount": len(resolution_records),
                 "performanceObservationCount": len(performance_records),
                 "optimizationExperimentCount": len(optimization_records),
+                "visualRubricCount": len(rubric_records),
+                "visualComparisonCount": len(comparison_records),
             }
         )
         for record in entity_records:
@@ -427,6 +456,24 @@ def _load_ledger(
                     "record": record,
                 }
             )
+        for record in rubric_records:
+            visual_rubrics.append(
+                {
+                    "ref": visual_rubric_ref(submission_id, record["rubricId"]),
+                    "submissionId": submission_id,
+                    "record": record,
+                }
+            )
+        for record in comparison_records:
+            visual_comparisons.append(
+                {
+                    "ref": visual_comparison_ref(
+                        submission_id, record["comparisonId"]
+                    ),
+                    "submissionId": submission_id,
+                    "record": record,
+                }
+            )
     return (
         submissions,
         entities,
@@ -434,6 +481,8 @@ def _load_ledger(
         resolutions,
         performance_observations,
         optimization_experiments,
+        visual_rubrics,
+        visual_comparisons,
     )
 
 
@@ -726,6 +775,87 @@ def compile_optimization_surfaces(
     return compiled_experiments, surfaces
 
 
+def compile_visual_comparison_summaries(
+    rubrics: list[dict], comparisons: list[dict]
+) -> list[dict]:
+    rubric_by_ref = {item["ref"]: item for item in rubrics}
+    summaries: list[dict] = []
+    for comparison in sorted(comparisons, key=lambda item: item["ref"]):
+        record = comparison["record"]
+        rubric = rubric_by_ref.get(record["rubricRef"])
+        if rubric is None:
+            raise CompileError(
+                f"visual comparison {comparison['ref']} references unknown rubric "
+                f"{record['rubricRef']}"
+            )
+        rubric_record = rubric["record"]
+        rubric_nodes = set(rubric_record["mapNodeRefs"])
+        comparison_nodes = set(record["map"]["nodeRefs"])
+        if not rubric_nodes.issubset(comparison_nodes):
+            raise CompileError(
+                f"visual comparison {comparison['ref']} does not cover its rubric nodes"
+            )
+        dimensions = {
+            item["dimensionId"]: item for item in rubric_record["dimensions"]
+        }
+        counts_by_dimension = {
+            dimension_id: {assessment: 0 for assessment in validator.VISUAL_ASSESSMENTS}
+            for dimension_id in dimensions
+        }
+        for trial in record["trials"]:
+            judgment_ids = {item["dimensionId"] for item in trial["judgments"]}
+            if judgment_ids != set(dimensions):
+                raise CompileError(
+                    f"visual comparison {comparison['ref']} trial "
+                    f"{trial['trialId']} must cover every rubric dimension"
+                )
+            for judgment in trial["judgments"]:
+                counts_by_dimension[judgment["dimensionId"]][
+                    judgment["assessment"]
+                ] += 1
+
+        dimension_summaries = []
+        for dimension_id in sorted(dimensions):
+            counts = counts_by_dimension[dimension_id]
+            conclusive = {
+                assessment
+                for assessment, count in counts.items()
+                if count and assessment != "inconclusive"
+            }
+            if not conclusive:
+                state = "insufficient"
+            elif len(conclusive) > 1 or counts["inconclusive"]:
+                state = "contested"
+            else:
+                state = "unanimous-" + next(iter(conclusive))
+            dimension_summaries.append(
+                {
+                    "dimensionId": dimension_id,
+                    "kind": dimensions[dimension_id]["kind"],
+                    "state": state,
+                    "assessmentCounts": {
+                        key: counts[key] for key in sorted(counts)
+                    },
+                }
+            )
+        identity = {
+            "comparisonRef": comparison["ref"],
+            "rubricRef": rubric["ref"],
+            "dimensions": dimension_summaries,
+        }
+        summaries.append(
+            {
+                "summaryId": content_id("visual-summary", identity),
+                "comparisonRef": comparison["ref"],
+                "rubricRef": rubric["ref"],
+                "validityState": record["validity"]["state"],
+                "optimizationEligible": record["validity"]["state"] == "valid",
+                "dimensions": dimension_summaries,
+            }
+        )
+    return summaries
+
+
 def _structural_submission_projection(submission: dict) -> dict:
     fields = (
         "submissionId",
@@ -753,6 +883,8 @@ def compile_repository(repository: pathlib.Path, source_revision: str | None = N
         resolutions,
         performance_observations,
         optimization_experiments,
+        visual_rubrics,
+        visual_comparisons,
     ) = _load_ledger(repository)
     refs = (
         [item["ref"] for item in entities]
@@ -760,6 +892,8 @@ def compile_repository(repository: pathlib.Path, source_revision: str | None = N
         + [item["ref"] for item in resolutions]
         + [item["ref"] for item in performance_observations]
         + [item["ref"] for item in optimization_experiments]
+        + [item["ref"] for item in visual_rubrics]
+        + [item["ref"] for item in visual_comparisons]
     )
     if len(refs) != len(set(refs)):
         raise CompileError("ledger record references must be globally unique")
@@ -791,6 +925,9 @@ def compile_repository(repository: pathlib.Path, source_revision: str | None = N
             )
     compiled_optimization, optimization_surfaces = compile_optimization_surfaces(
         optimization_experiments, performance_by_ref
+    )
+    visual_comparison_summaries = compile_visual_comparison_summaries(
+        visual_rubrics, visual_comparisons
     )
 
     conflicts = _detect_conflicts(assertions)
@@ -853,7 +990,7 @@ def compile_repository(repository: pathlib.Path, source_revision: str | None = N
         "schema": {
             "name": "skyrim-render-map.dataset-snapshot",
             "major": 1,
-            "minor": 3,
+            "minor": 4,
         },
         "generatedBy": {
             "name": "skyrim-render-map.compile-dataset",
@@ -871,6 +1008,11 @@ def compile_repository(repository: pathlib.Path, source_revision: str | None = N
         "performanceSignals": performance_signals,
         "optimizationExperiments": compiled_optimization,
         "optimizationSurfaces": optimization_surfaces,
+        "visualRubrics": sorted(visual_rubrics, key=lambda item: item["ref"]),
+        "visualComparisons": sorted(
+            visual_comparisons, key=lambda item: item["ref"]
+        ),
+        "visualComparisonSummaries": visual_comparison_summaries,
         "statistics": {
             "submissionCount": len(submissions),
             "entityCount": len(entities),
@@ -886,6 +1028,9 @@ def compile_repository(repository: pathlib.Path, source_revision: str | None = N
             "performanceSignalCount": len(performance_signals),
             "optimizationExperimentCount": len(compiled_optimization),
             "optimizationSurfaceCount": len(optimization_surfaces),
+            "visualRubricCount": len(visual_rubrics),
+            "visualComparisonCount": len(visual_comparisons),
+            "visualComparisonSummaryCount": len(visual_comparison_summaries),
         },
     }
     return {"snapshotId": content_id("snapshot", body), **body}

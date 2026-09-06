@@ -165,3 +165,8 @@ The map-side [optimization run exporter](producer-export.md) implements this
 handoff for CSX profiler schema-v3 captures and normalized inline samples. It
 verifies the capture identity and emits reviewable neutral records; it does not
 implement the search or operate the game.
+
+Blinded ordinal judgments use the separate
+[visual evaluation contract](visual-evaluation.md). Visual comparisons do not
+become percentage objectives automatically; any scalar aggregation must be an
+explicit, versioned future policy with the source trials retained.

@@ -27,7 +27,9 @@ CSX total is not whole-frame time and must not be labelled as such.
 `inline-v1` accepts already normalized samples. It is useful for quality
 scores and other producer measurements that do not originate in the CSX
 profiler. The ordinary performance-observation validator remains authoritative
-for the sample shape and validity declaration.
+for the sample shape and validity declaration. Blinded ordinal comparisons are
+not automatically quality scores; see the
+[visual evaluation contract](visual-evaluation.md).
 
 ## Private plan
 

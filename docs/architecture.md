@@ -452,7 +452,10 @@ implemented. The client accepts CSX profiler schema-v3 captures and normalized
 inline measurements; search orchestration and final submission packaging remain
 producer responsibilities. General runtime observation, artifact-index, and
 applicability-range schemas; additional conflict classes; signed receipts;
-immutable dataset releases; and Pages remain planned.
+immutable dataset releases; and Pages remain planned. Versioned visual rubrics,
+blinded pairwise comparison records, and conservative disagreement-preserving
+summaries are implemented. Capture-observation storage and visual-to-Pareto
+aggregation remain planned.
 
 This sequence establishes the managed resource before inviting easy player
 submissions and leaves storage, querying, and producer integration replaceable

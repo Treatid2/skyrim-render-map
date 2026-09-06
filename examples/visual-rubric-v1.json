@@ -1,0 +1,63 @@
+{
+  "schema": {
+    "name": "skyrim-render-map.visual-rubric",
+    "major": 1,
+    "minor": 0
+  },
+  "rubricId": "visual-rubric-example",
+  "version": "1.0.0",
+  "label": "Illustrative common VR comparison",
+  "scope": "common",
+  "mapNodeRefs": [
+    "urn:skyrim-render-map:catalog:engine:frame"
+  ],
+  "dimensions": [
+    {
+      "dimensionId": "temporal-stability",
+      "label": "Temporal stability",
+      "description": "Prefer the stimulus with less shimmer, flicker, ghosting, or unstable detail during motion.",
+      "kind": "correctness",
+      "notes": "Judge repeated motion and disocclusion rather than one still frame."
+    },
+    {
+      "dimensionId": "overall-preference",
+      "label": "Overall preference",
+      "description": "Select the stimulus preferred overall after recording technical dimensions independently.",
+      "kind": "preference",
+      "notes": "This explicitly subjective dimension must not replace correctness judgments."
+    }
+  ],
+  "magnitudes": [
+    {
+      "magnitudeId": "imperceptible",
+      "ordinal": 0,
+      "label": "Imperceptible",
+      "description": "No repeatable visible difference is established."
+    },
+    {
+      "magnitudeId": "slight",
+      "ordinal": 1,
+      "label": "Slight",
+      "description": "A repeatable difference is visible under inspection."
+    },
+    {
+      "magnitudeId": "moderate",
+      "ordinal": 2,
+      "label": "Moderate",
+      "description": "The difference is readily visible during ordinary comparison."
+    },
+    {
+      "magnitudeId": "large",
+      "ordinal": 3,
+      "label": "Large",
+      "description": "The difference materially changes the viewed result."
+    },
+    {
+      "magnitudeId": "severe",
+      "ordinal": 4,
+      "label": "Severe",
+      "description": "The difference includes dominant degradation or failure."
+    }
+  ],
+  "notes": "Illustrative structure only; publish task-specific rubrics as evidence."
+}

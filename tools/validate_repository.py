@@ -262,6 +262,117 @@ OPTIMIZATION_VALUE_TYPES = {"boolean", "integer", "decimal", "categorical"}
 OPTIMIZATION_DIRECTIONS = {"minimize", "maximize"}
 OPTIMIZATION_OPERATORS = {"at-most", "at-least"}
 OPTIMIZATION_OUTCOMES = {"completed", "failed", "incomplete", "rejected"}
+VISUAL_RUBRIC_KEYS = {
+    "schema",
+    "rubricId",
+    "version",
+    "label",
+    "scope",
+    "mapNodeRefs",
+    "dimensions",
+    "magnitudes",
+    "notes",
+}
+VISUAL_DIMENSION_KEYS = {
+    "dimensionId",
+    "label",
+    "description",
+    "kind",
+    "notes",
+}
+VISUAL_MAGNITUDE_KEYS = {
+    "magnitudeId",
+    "ordinal",
+    "label",
+    "description",
+}
+VISUAL_COMPARISON_KEYS = {
+    "schema",
+    "comparisonId",
+    "recordedAt",
+    "map",
+    "runtime",
+    "environment",
+    "scenario",
+    "rubricRef",
+    "stimuli",
+    "protocol",
+    "trials",
+    "validity",
+    "privacy",
+    "notes",
+}
+VISUAL_STIMULI_KEYS = {"a", "b"}
+VISUAL_STIMULUS_KEYS = {
+    "captureSha256",
+    "treatmentSha256",
+    "sourceObservationRef",
+}
+VISUAL_PROTOCOL_KEYS = {
+    "name",
+    "version",
+    "artifactSha256",
+    "evaluationMode",
+    "presentation",
+    "randomized",
+    "mediaKind",
+    "frameCount",
+    "frameRateHz",
+    "viewCount",
+    "preprocessingSha256",
+}
+VISUAL_TRIAL_KEYS = {
+    "trialId",
+    "evaluator",
+    "presentationOrder",
+    "judgments",
+    "notes",
+}
+VISUAL_EVALUATOR_KEYS = {
+    "kind",
+    "name",
+    "version",
+    "artifactSha256",
+    "promptSha256",
+}
+VISUAL_JUDGMENT_KEYS = {
+    "dimensionId",
+    "assessment",
+    "differenceMagnitude",
+    "confidence",
+    "evidence",
+    "notes",
+}
+VISUAL_EVIDENCE_KEYS = {"firstFrame", "lastFrame", "view", "region", "notes"}
+VISUAL_REGION_KEYS = {"x", "y", "width", "height"}
+VISUAL_RUBRIC_SCOPES = {"common", "shader-family", "feature", "pass", "other"}
+VISUAL_DIMENSION_KINDS = {"correctness", "visual-effect", "preference"}
+VISUAL_MAGNITUDES = {
+    "imperceptible": 0,
+    "slight": 1,
+    "moderate": 2,
+    "large": 3,
+    "severe": 4,
+}
+VISUAL_EVALUATOR_KINDS = {"human", "multimodal-model", "algorithm"}
+VISUAL_PRESENTATIONS = {"simultaneous", "sequential"}
+VISUAL_MEDIA_KINDS = {"stereo-sequence", "mono-sequence", "still-pair"}
+VISUAL_PRESENTATION_ORDERS = {"a-b", "b-a", "simultaneous"}
+VISUAL_ASSESSMENTS = {"a-better", "b-better", "equivalent", "inconclusive"}
+VISUAL_VIEWS = {"left", "right", "both", "mono", "mirror"}
+VISUAL_VALIDITY_KEYS = {"state", "contamination", "notes"}
+VISUAL_CONTAMINATION_KEYS = {"kind", "firstTrial", "lastTrial", "notes"}
+VISUAL_CONTAMINATION_KINDS = {
+    "capture-overhead",
+    "driver-reset",
+    "evaluator-failure",
+    "focus-loss",
+    "loading-transition",
+    "media-mismatch",
+    "presentation-order",
+    "shader-compilation",
+    "unknown",
+}
 INSTALLATION_ID_PATTERN = re.compile(r"^inst-[a-f0-9]{32}$")
 MAP_SNAPSHOT_ID_PATTERN = re.compile(r"^map-snapshot-[a-f0-9]{64}$")
 DECIMAL_PATTERN = re.compile(r"^(?:0|[1-9][0-9]{0,17})(?:\.[0-9]{1,9})?$")
@@ -1169,19 +1280,376 @@ def validate_optimization_experiment(record: dict, context: str) -> None:
         raise ValidationError(f"{context}.notes must be a string")
 
 
+def validate_visual_rubric(record: dict, context: str) -> None:
+    if not isinstance(record, dict):
+        raise ValidationError(f"{context} must be an object")
+    _require_keys(record, VISUAL_RUBRIC_KEYS, context)
+    if record["schema"] != {
+        "name": "skyrim-render-map.visual-rubric",
+        "major": 1,
+        "minor": 0,
+    }:
+        raise ValidationError(f"unsupported visual rubric schema at {context}")
+    _require_nonempty_string(record["rubricId"], f"{context}.rubricId")
+    if not RECORD_ID_PATTERN.fullmatch(record["rubricId"]):
+        raise ValidationError(f"{context}.rubricId is invalid")
+    _require_nonempty_string(record["version"], f"{context}.version")
+    _require_nonempty_string(record["label"], f"{context}.label")
+    if record["scope"] not in VISUAL_RUBRIC_SCOPES:
+        raise ValidationError(f"{context}.scope is unsupported")
+    _require_unique_strings(record["mapNodeRefs"], f"{context}.mapNodeRefs")
+
+    dimensions = record["dimensions"]
+    if not isinstance(dimensions, list) or not dimensions:
+        raise ValidationError(f"{context}.dimensions must be a non-empty array")
+    dimension_ids: set[str] = set()
+    for index, dimension in enumerate(dimensions):
+        item_context = f"{context}.dimensions[{index}]"
+        if not isinstance(dimension, dict):
+            raise ValidationError(f"{item_context} must be an object")
+        _require_keys(dimension, VISUAL_DIMENSION_KEYS, item_context)
+        dimension_id = dimension["dimensionId"]
+        _require_nonempty_string(dimension_id, f"{item_context}.dimensionId")
+        if not RECORD_ID_PATTERN.fullmatch(dimension_id):
+            raise ValidationError(f"{item_context}.dimensionId is invalid")
+        if dimension_id in dimension_ids:
+            raise ValidationError(f"duplicate visual dimensionId: {dimension_id}")
+        dimension_ids.add(dimension_id)
+        _require_nonempty_string(dimension["label"], f"{item_context}.label")
+        _require_nonempty_string(
+            dimension["description"], f"{item_context}.description"
+        )
+        if dimension["kind"] not in VISUAL_DIMENSION_KINDS:
+            raise ValidationError(f"{item_context}.kind is unsupported")
+        if not isinstance(dimension["notes"], str):
+            raise ValidationError(f"{item_context}.notes must be a string")
+
+    magnitudes = record["magnitudes"]
+    if not isinstance(magnitudes, list):
+        raise ValidationError(f"{context}.magnitudes must be an array")
+    observed_magnitudes: dict[str, int] = {}
+    for index, magnitude in enumerate(magnitudes):
+        item_context = f"{context}.magnitudes[{index}]"
+        if not isinstance(magnitude, dict):
+            raise ValidationError(f"{item_context} must be an object")
+        _require_keys(magnitude, VISUAL_MAGNITUDE_KEYS, item_context)
+        magnitude_id = magnitude["magnitudeId"]
+        if magnitude_id in observed_magnitudes:
+            raise ValidationError(f"duplicate visual magnitudeId: {magnitude_id}")
+        ordinal = magnitude["ordinal"]
+        if not isinstance(ordinal, int) or isinstance(ordinal, bool):
+            raise ValidationError(f"{item_context}.ordinal must be an integer")
+        observed_magnitudes[magnitude_id] = ordinal
+        _require_nonempty_string(magnitude["label"], f"{item_context}.label")
+        _require_nonempty_string(
+            magnitude["description"], f"{item_context}.description"
+        )
+    if observed_magnitudes != VISUAL_MAGNITUDES:
+        raise ValidationError(
+            f"{context}.magnitudes must define the canonical v1 magnitude scale"
+        )
+    if not isinstance(record["notes"], str):
+        raise ValidationError(f"{context}.notes must be a string")
+
+
+def _validate_visual_region(region: object, context: str) -> None:
+    if region is None:
+        return
+    if not isinstance(region, dict):
+        raise ValidationError(f"{context} must be null or an object")
+    _require_keys(region, VISUAL_REGION_KEYS, context)
+    values: dict[str, decimal.Decimal] = {}
+    for key, value in region.items():
+        _require_canonical_decimal(value, f"{context}.{key}")
+        values[key] = decimal.Decimal(value)
+        if values[key] > 1:
+            raise ValidationError(f"{context}.{key} must not exceed 1")
+    if values["width"] <= 0 or values["height"] <= 0:
+        raise ValidationError(f"{context} width and height must be positive")
+    if values["x"] + values["width"] > 1:
+        raise ValidationError(f"{context} exceeds normalized horizontal bounds")
+    if values["y"] + values["height"] > 1:
+        raise ValidationError(f"{context} exceeds normalized vertical bounds")
+
+
+def _validate_visual_validity(record: dict, context: str) -> None:
+    validity = record["validity"]
+    if not isinstance(validity, dict):
+        raise ValidationError(f"{context}.validity must be an object")
+    _require_keys(validity, VISUAL_VALIDITY_KEYS, f"{context}.validity")
+    if validity["state"] not in PERFORMANCE_VALIDITY_STATES:
+        raise ValidationError(f"invalid validity state at {context}")
+    if not isinstance(validity["notes"], str):
+        raise ValidationError(f"{context}.validity.notes must be a string")
+    contamination = validity["contamination"]
+    if not isinstance(contamination, list):
+        raise ValidationError(f"{context}.validity.contamination must be an array")
+    if validity["state"] == "valid" and contamination:
+        raise ValidationError(f"valid visual comparisons cannot declare contamination")
+    if validity["state"] != "valid" and not validity["notes"].strip():
+        raise ValidationError(f"non-valid visual comparisons require validity notes")
+    trial_count = len(record["trials"])
+    for index, item in enumerate(contamination):
+        item_context = f"{context}.validity.contamination[{index}]"
+        if not isinstance(item, dict):
+            raise ValidationError(f"{item_context} must be an object")
+        _require_keys(item, VISUAL_CONTAMINATION_KEYS, item_context)
+        if item["kind"] not in VISUAL_CONTAMINATION_KINDS:
+            raise ValidationError(f"invalid contamination kind at {item_context}")
+        for field in ("firstTrial", "lastTrial"):
+            _require_nonnegative_integer(item[field], f"{item_context}.{field}")
+        if (
+            item["firstTrial"] > item["lastTrial"]
+            or item["lastTrial"] >= trial_count
+        ):
+            raise ValidationError(f"invalid contamination trial range at {item_context}")
+        _require_nonempty_string(item["notes"], f"{item_context}.notes")
+
+
+def validate_visual_comparison(record: dict, context: str) -> None:
+    if not isinstance(record, dict):
+        raise ValidationError(f"{context} must be an object")
+    _require_keys(record, VISUAL_COMPARISON_KEYS, context)
+    if record["schema"] != {
+        "name": "skyrim-render-map.visual-comparison",
+        "major": 1,
+        "minor": 0,
+    }:
+        raise ValidationError(f"unsupported visual comparison schema at {context}")
+    comparison_id = record["comparisonId"]
+    _require_nonempty_string(comparison_id, f"{context}.comparisonId")
+    if not RECORD_ID_PATTERN.fullmatch(comparison_id):
+        raise ValidationError(f"{context}.comparisonId is invalid")
+    _parse_time(record["recordedAt"], f"{context}.recordedAt")
+    _validate_performance_identity(record, context)
+
+    scenario = record["scenario"]
+    if not isinstance(scenario, dict):
+        raise ValidationError(f"{context}.scenario must be an object")
+    _require_keys(scenario, PERFORMANCE_SCENARIO_KEYS, f"{context}.scenario")
+    _require_nonempty_string(scenario["label"], f"{context}.scenario.label")
+    for key in ("scenarioSha256", "configurationSha256", "cacheSha256"):
+        _require_optional_digest(
+            scenario[key], SHA256_PATTERN, f"{context}.scenario.{key}"
+        )
+    _require_nonempty_string(record["rubricRef"], f"{context}.rubricRef")
+
+    stimuli = record["stimuli"]
+    if not isinstance(stimuli, dict):
+        raise ValidationError(f"{context}.stimuli must be an object")
+    _require_keys(stimuli, VISUAL_STIMULI_KEYS, f"{context}.stimuli")
+    for stimulus_id in ("a", "b"):
+        stimulus = stimuli[stimulus_id]
+        item_context = f"{context}.stimuli.{stimulus_id}"
+        if not isinstance(stimulus, dict):
+            raise ValidationError(f"{item_context} must be an object")
+        _require_keys(stimulus, VISUAL_STIMULUS_KEYS, item_context)
+        for key in ("captureSha256", "treatmentSha256"):
+            _require_optional_digest(
+                stimulus[key], SHA256_PATTERN, f"{item_context}.{key}"
+            )
+            if stimulus[key] is None:
+                raise ValidationError(f"{item_context}.{key} must not be null")
+        _require_optional_string(
+            stimulus["sourceObservationRef"],
+            f"{item_context}.sourceObservationRef",
+        )
+        if stimulus["sourceObservationRef"] is not None:
+            raise ValidationError(
+                f"{item_context}.sourceObservationRef is reserved for a future schema"
+            )
+    if stimuli["a"]["captureSha256"].lower() == stimuli["b"]["captureSha256"].lower():
+        raise ValidationError(f"{context}.stimuli must identify distinct captures")
+
+    protocol = record["protocol"]
+    if not isinstance(protocol, dict):
+        raise ValidationError(f"{context}.protocol must be an object")
+    _require_keys(protocol, VISUAL_PROTOCOL_KEYS, f"{context}.protocol")
+    for key in ("name", "version"):
+        _require_nonempty_string(protocol[key], f"{context}.protocol.{key}")
+    for key in ("artifactSha256", "preprocessingSha256"):
+        _require_optional_digest(
+            protocol[key], SHA256_PATTERN, f"{context}.protocol.{key}"
+        )
+        if protocol[key] is None:
+            raise ValidationError(f"{context}.protocol.{key} must not be null")
+    if protocol["evaluationMode"] != "blinded-pairwise":
+        raise ValidationError(f"{context}.protocol must use blinded-pairwise mode")
+    if protocol["presentation"] not in VISUAL_PRESENTATIONS:
+        raise ValidationError(f"{context}.protocol.presentation is unsupported")
+    if not isinstance(protocol["randomized"], bool):
+        raise ValidationError(f"{context}.protocol.randomized must be boolean")
+    if protocol["mediaKind"] not in VISUAL_MEDIA_KINDS:
+        raise ValidationError(f"{context}.protocol.mediaKind is unsupported")
+    _require_nonnegative_integer(
+        protocol["frameCount"], f"{context}.protocol.frameCount"
+    )
+    if protocol["frameCount"] < 1:
+        raise ValidationError(f"{context}.protocol.frameCount must be positive")
+    if protocol["frameRateHz"] is not None:
+        _require_canonical_decimal(
+            protocol["frameRateHz"], f"{context}.protocol.frameRateHz"
+        )
+        if decimal.Decimal(protocol["frameRateHz"]) <= 0:
+            raise ValidationError(f"{context}.protocol.frameRateHz must be positive")
+    view_count = protocol["viewCount"]
+    if view_count not in {1, 2}:
+        raise ValidationError(f"{context}.protocol.viewCount must be 1 or 2")
+    expected_views = 2 if protocol["mediaKind"] == "stereo-sequence" else 1
+    if view_count != expected_views:
+        raise ValidationError(
+            f"{context}.protocol view count conflicts with media kind"
+        )
+    if protocol["mediaKind"] == "still-pair":
+        if protocol["frameCount"] != 1 or protocol["frameRateHz"] is not None:
+            raise ValidationError(
+                f"{context}.protocol still-pair requires one frame and no frame rate"
+            )
+    elif protocol["frameRateHz"] is None:
+        raise ValidationError(f"{context}.protocol sequence requires a frame rate")
+
+    trials = record["trials"]
+    if not isinstance(trials, list) or not trials:
+        raise ValidationError(f"{context}.trials must be a non-empty array")
+    trial_ids: set[str] = set()
+    for trial_index, trial in enumerate(trials):
+        trial_context = f"{context}.trials[{trial_index}]"
+        if not isinstance(trial, dict):
+            raise ValidationError(f"{trial_context} must be an object")
+        _require_keys(trial, VISUAL_TRIAL_KEYS, trial_context)
+        trial_id = trial["trialId"]
+        _require_nonempty_string(trial_id, f"{trial_context}.trialId")
+        if not RECORD_ID_PATTERN.fullmatch(trial_id) or trial_id in trial_ids:
+            raise ValidationError(f"{trial_context}.trialId is invalid or duplicate")
+        trial_ids.add(trial_id)
+        evaluator = trial["evaluator"]
+        if not isinstance(evaluator, dict):
+            raise ValidationError(f"{trial_context}.evaluator must be an object")
+        _require_keys(evaluator, VISUAL_EVALUATOR_KEYS, f"{trial_context}.evaluator")
+        if evaluator["kind"] not in VISUAL_EVALUATOR_KINDS:
+            raise ValidationError(f"{trial_context}.evaluator.kind is unsupported")
+        _require_nonempty_string(evaluator["name"], f"{trial_context}.evaluator.name")
+        for key in ("version", "artifactSha256", "promptSha256"):
+            if key == "version":
+                _require_optional_string(
+                    evaluator[key], f"{trial_context}.evaluator.{key}"
+                )
+            else:
+                _require_optional_digest(
+                    evaluator[key], SHA256_PATTERN, f"{trial_context}.evaluator.{key}"
+                )
+        if evaluator["kind"] != "human" and any(
+            evaluator[key] is None
+            for key in ("version", "artifactSha256", "promptSha256")
+        ):
+            raise ValidationError(
+                f"{trial_context}.evaluator requires version and artifact provenance"
+            )
+        order = trial["presentationOrder"]
+        if order not in VISUAL_PRESENTATION_ORDERS:
+            raise ValidationError(f"{trial_context}.presentationOrder is unsupported")
+        if protocol["presentation"] == "simultaneous" and order != "simultaneous":
+            raise ValidationError(
+                f"{trial_context} conflicts with simultaneous presentation"
+            )
+        if protocol["presentation"] == "sequential" and order == "simultaneous":
+            raise ValidationError(
+                f"{trial_context} conflicts with sequential presentation"
+            )
+        judgments = trial["judgments"]
+        if not isinstance(judgments, list) or not judgments:
+            raise ValidationError(f"{trial_context}.judgments must be non-empty")
+        judgment_ids: set[str] = set()
+        for judgment_index, judgment in enumerate(judgments):
+            judgment_context = f"{trial_context}.judgments[{judgment_index}]"
+            if not isinstance(judgment, dict):
+                raise ValidationError(f"{judgment_context} must be an object")
+            _require_keys(judgment, VISUAL_JUDGMENT_KEYS, judgment_context)
+            dimension_id = judgment["dimensionId"]
+            _require_nonempty_string(
+                dimension_id, f"{judgment_context}.dimensionId"
+            )
+            if dimension_id in judgment_ids:
+                raise ValidationError(
+                    f"duplicate dimensionId within trial: {dimension_id}"
+                )
+            judgment_ids.add(dimension_id)
+            if judgment["assessment"] not in VISUAL_ASSESSMENTS:
+                raise ValidationError(f"{judgment_context}.assessment is unsupported")
+            if judgment["differenceMagnitude"] not in VISUAL_MAGNITUDES:
+                raise ValidationError(
+                    f"{judgment_context}.differenceMagnitude is unsupported"
+                )
+            _require_canonical_decimal(
+                judgment["confidence"], f"{judgment_context}.confidence"
+            )
+            if decimal.Decimal(judgment["confidence"]) > 1:
+                raise ValidationError(
+                    f"{judgment_context}.confidence must not exceed 1"
+                )
+            evidence = judgment["evidence"]
+            if not isinstance(evidence, list):
+                raise ValidationError(f"{judgment_context}.evidence must be an array")
+            for evidence_index, item in enumerate(evidence):
+                evidence_context = f"{judgment_context}.evidence[{evidence_index}]"
+                if not isinstance(item, dict):
+                    raise ValidationError(f"{evidence_context} must be an object")
+                _require_keys(item, VISUAL_EVIDENCE_KEYS, evidence_context)
+                for key in ("firstFrame", "lastFrame"):
+                    _require_nonnegative_integer(item[key], f"{evidence_context}.{key}")
+                    if item[key] >= protocol["frameCount"]:
+                        raise ValidationError(
+                            f"{evidence_context}.{key} is out of range"
+                        )
+                if item["firstFrame"] > item["lastFrame"]:
+                    raise ValidationError(f"{evidence_context} frame range is reversed")
+                if item["view"] not in VISUAL_VIEWS:
+                    raise ValidationError(f"{evidence_context}.view is unsupported")
+                _validate_visual_region(item["region"], f"{evidence_context}.region")
+                if not isinstance(item["notes"], str):
+                    raise ValidationError(f"{evidence_context}.notes must be a string")
+            if not isinstance(judgment["notes"], str):
+                raise ValidationError(f"{judgment_context}.notes must be a string")
+        if not isinstance(trial["notes"], str):
+            raise ValidationError(f"{trial_context}.notes must be a string")
+    _validate_visual_validity(record, context)
+    privacy = record["privacy"]
+    if not isinstance(privacy, dict):
+        raise ValidationError(f"{context}.privacy must be an object")
+    _require_keys(privacy, PERFORMANCE_PRIVACY_KEYS, f"{context}.privacy")
+    if any(privacy[field] is not True for field in PERFORMANCE_PRIVACY_KEYS):
+        raise ValidationError(
+            f"{context}.privacy requires explicit publication consent"
+        )
+    if not isinstance(record["notes"], str):
+        raise ValidationError(f"{context}.notes must be a string")
+
+
 def load_submission_records(
     directory: pathlib.Path, submission_class: str
-) -> tuple[list[dict], list[dict], list[dict], list[dict], list[dict]]:
+) -> tuple[
+    list[dict],
+    list[dict],
+    list[dict],
+    list[dict],
+    list[dict],
+    list[dict],
+    list[dict],
+]:
     entities_path = directory / "content" / "entities.jsonl"
     assertions_path = directory / "content" / "assertions.jsonl"
     resolutions_path = directory / "content" / "resolutions.jsonl"
     performance_path = directory / "content" / "performance-observations.jsonl"
     optimization_path = directory / "content" / "optimization-experiments.jsonl"
+    rubric_path = directory / "content" / "visual-rubrics.jsonl"
+    comparison_path = directory / "content" / "visual-comparisons.jsonl"
     entities = load_jsonl(entities_path) if entities_path.is_file() else []
     assertions = load_jsonl(assertions_path) if assertions_path.is_file() else []
     resolutions = load_jsonl(resolutions_path) if resolutions_path.is_file() else []
     performance = load_jsonl(performance_path) if performance_path.is_file() else []
     optimization = load_jsonl(optimization_path) if optimization_path.is_file() else []
+    rubrics = load_jsonl(rubric_path) if rubric_path.is_file() else []
+    comparisons = load_jsonl(comparison_path) if comparison_path.is_file() else []
 
     if submission_class in {"assertion", "amendment"} and not assertions:
         raise ValidationError(f"{submission_class} submissions require assertions.jsonl")
@@ -1199,7 +1667,11 @@ def load_submission_records(
         raise ValidationError(
             "optimization-experiments.jsonl requires an observation submission"
         )
-    if (performance or optimization) and entities:
+    if (rubrics or comparisons) and submission_class != "observation":
+        raise ValidationError(
+            "visual evidence files require an observation submission"
+        )
+    if (performance or optimization or rubrics or comparisons) and entities:
         raise ValidationError(
             "measurement submissions must not declare structural entities"
         )
@@ -1240,16 +1712,40 @@ def load_submission_records(
                 f"duplicate optimization experimentId: {experiment['experimentId']}"
             )
         optimization_ids.add(experiment["experimentId"])
+    rubric_ids: set[str] = set()
+    for index, rubric in enumerate(rubrics, start=1):
+        validate_visual_rubric(rubric, f"{rubric_path}:{index}")
+        if rubric["rubricId"] in rubric_ids:
+            raise ValidationError(f"duplicate visual rubricId: {rubric['rubricId']}")
+        rubric_ids.add(rubric["rubricId"])
+    comparison_ids: set[str] = set()
+    for index, comparison in enumerate(comparisons, start=1):
+        validate_visual_comparison(comparison, f"{comparison_path}:{index}")
+        if comparison["comparisonId"] in comparison_ids:
+            raise ValidationError(
+                f"duplicate visual comparisonId: {comparison['comparisonId']}"
+            )
+        comparison_ids.add(comparison["comparisonId"])
     record_ids = (
         list(entity_ids)
         + list(assertion_ids)
         + list(resolution_ids)
         + list(performance_ids)
         + list(optimization_ids)
+        + list(rubric_ids)
+        + list(comparison_ids)
     )
     if len(record_ids) != len(set(record_ids)):
         raise ValidationError("submission-local record IDs must be unique across record types")
-    return entities, assertions, resolutions, performance, optimization
+    return (
+        entities,
+        assertions,
+        resolutions,
+        performance,
+        optimization,
+        rubrics,
+        comparisons,
+    )
 
 
 def validate_submission(directory: pathlib.Path) -> TreeSummary:
