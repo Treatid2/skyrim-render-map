@@ -1,0 +1,234 @@
+{
+  "schema": {
+    "name": "skyrim-render-map.csx-optimization-export-plan",
+    "major": 1,
+    "minor": 0
+  },
+  "submissionId": "sub-example-optimization-export",
+  "map": {
+    "mapSnapshotId": "map-snapshot-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "nodeRefs": [
+      "urn:skyrim-render-map:catalog:engine:frame",
+      "urn:skyrim-render-map:catalog:csx:feature:ssgi"
+    ]
+  },
+  "runtime": {
+    "engine": {
+      "runtime": "skyrim-vr-1.4.15",
+      "executableSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "moduleSha256": null
+    },
+    "extensions": [
+      {
+        "namespace": "csx",
+        "sourceCommit": "cccccccccccccccccccccccccccccccccccccccc",
+        "buildId": "example-build",
+        "artifactSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+      }
+    ],
+    "runtimeRoute": "steamvr-valve-null-hmd"
+  },
+  "environment": {
+    "installationId": "inst-0123456789abcdef0123456789abcdef",
+    "cpuModel": "Example CPU",
+    "gpuModel": "Example GPU",
+    "gpuDriverVersion": "example-driver",
+    "renderContext": {
+      "renderWidth": 2000,
+      "renderHeight": 2200,
+      "viewCount": 2,
+      "refreshRateHz": "72",
+      "renderScale": "0.67",
+      "frameLimiter": "disabled",
+      "targetFrameRate": "72",
+      "reprojectionMode": "disabled"
+    }
+  },
+  "scenario": {
+    "label": "Illustrative fixed-scene capture",
+    "scenarioSha256": "1111111111111111111111111111111111111111111111111111111111111111",
+    "configurationSha256": "2222222222222222222222222222222222222222222222222222222222222222",
+    "cacheSha256": "3333333333333333333333333333333333333333333333333333333333333333"
+  },
+  "privacy": {
+    "publicationOptIn": true,
+    "fieldsPreviewed": true,
+    "installationIdRandom": true,
+    "installationIdResettable": true
+  },
+  "experiment": {
+    "experimentId": "opt-export-example-0001",
+    "recordedAt": "2026-09-06T12:30:00Z",
+    "producer": {
+      "name": "example-preset-search",
+      "version": "1.0.0",
+      "artifactSha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+    },
+    "search": {
+      "algorithm": "bounded-grid",
+      "algorithmVersion": "1.0.0",
+      "randomSeedSha256": null,
+      "requestedCandidateCount": 1
+    },
+    "axes": [
+      {
+        "axisId": "ssgi-slices",
+        "label": "SSGI slices",
+        "mapNodeRef": "urn:skyrim-render-map:catalog:csx:feature:ssgi",
+        "settingPath": "ScreenSpaceGI.Slices",
+        "valueType": "integer",
+        "domain": {
+          "kind": "integer",
+          "minimum": 2,
+          "maximum": 8,
+          "step": 2
+        }
+      }
+    ],
+    "objectives": [
+      {
+        "objectiveId": "frame-time",
+        "label": "GPU frame time",
+        "metric": "gpu-frame-duration",
+        "unit": "milliseconds",
+        "direction": "minimize",
+        "scope": "whole-frame",
+        "scopeRefs": [],
+        "reducer": "median-of-observation-medians",
+        "dominanceEpsilon": "0.05",
+        "collection": {
+          "sourceKind": "inline-v1",
+          "metricSource": null,
+          "timerName": null,
+          "protocol": {
+            "name": "example-gpu-timing",
+            "version": "1.0.0",
+            "artifactSha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+            "tools": [
+              {
+                "name": "example-profiler",
+                "version": "1.0.0",
+                "artifactSha256": "7777777777777777777777777777777777777777777777777777777777777777"
+              }
+            ],
+            "warmupSamples": 60,
+            "requestedSamples": 1,
+            "sampleCadence": {
+              "mode": "frame-stride",
+              "value": 1
+            }
+          }
+        }
+      },
+      {
+        "objectiveId": "visual-quality",
+        "label": "Visual quality score",
+        "metric": "visual-quality-score",
+        "unit": "percent",
+        "direction": "maximize",
+        "scope": "map-node",
+        "scopeRefs": [
+          "urn:skyrim-render-map:catalog:csx:feature:ssgi"
+        ],
+        "reducer": "median-of-observation-medians",
+        "dominanceEpsilon": "0.5",
+        "collection": {
+          "sourceKind": "inline-v1",
+          "metricSource": null,
+          "timerName": null,
+          "protocol": {
+            "name": "example-quality-score",
+            "version": "1.0.0",
+            "artifactSha256": "9999999999999999999999999999999999999999999999999999999999999999",
+            "tools": [
+              {
+                "name": "example-quality-rater",
+                "version": "1.0.0",
+                "artifactSha256": "8888888888888888888888888888888888888888888888888888888888888888"
+              }
+            ],
+            "warmupSamples": 0,
+            "requestedSamples": 1,
+            "sampleCadence": {
+              "mode": "frame-stride",
+              "value": 1
+            }
+          }
+        }
+      }
+    ],
+    "constraints": [],
+    "notes": "Illustrative search definition only."
+  },
+  "candidates": [
+    {
+      "candidateId": "candidate-0001",
+      "label": "Four SSGI slices",
+      "treatmentSha256": "4444444444444444444444444444444444444444444444444444444444444444",
+      "baselineObservationRef": null,
+      "outcome": "completed",
+      "failureKind": null,
+      "parameters": [
+        {
+          "axisId": "ssgi-slices",
+          "value": 4
+        }
+      ],
+      "objectiveRuns": [
+        {
+          "objectiveId": "frame-time",
+          "runs": [
+            {
+              "observationId": "perf-export-frame-0001",
+              "recordedAt": "2026-09-06T12:00:00Z",
+              "source": {
+                "kind": "inline-v1",
+                "samples": [
+                  {
+                    "sequence": 0,
+                    "value": "10.5",
+                    "frame": 1000,
+                    "timestampOffsetMs": "0"
+                  }
+                ]
+              },
+              "validity": {
+                "state": "valid",
+                "contamination": [],
+                "notes": "Illustrative data only."
+              },
+              "notes": "Illustrative timing observation."
+            }
+          ]
+        },
+        {
+          "objectiveId": "visual-quality",
+          "runs": [
+            {
+              "observationId": "perf-export-quality-0001",
+              "recordedAt": "2026-09-06T12:05:00Z",
+              "source": {
+                "kind": "inline-v1",
+                "samples": [
+                  {
+                    "sequence": 0,
+                    "value": "85",
+                    "frame": null,
+                    "timestampOffsetMs": "0"
+                  }
+                ]
+              },
+              "validity": {
+                "state": "valid",
+                "contamination": [],
+                "notes": "Illustrative data only."
+              },
+              "notes": "Illustrative quality observation."
+            }
+          ]
+        }
+      ],
+      "notes": "Illustrative candidate only; values are not evidence."
+    }
+  ]
+}

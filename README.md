@@ -53,6 +53,8 @@ See [CONTRIBUTING.md](CONTRIBUTING.md),
 [performance contribution guide](docs/performance-contributions.md). Automated
 preset searches use the
 [optimization experiment contract](docs/optimization-experiments.md).
+CSX profiler and preset-search artifacts can be normalized with the
+[optimization run exporter](docs/producer-export.md).
 
 ## Repository boundaries
 

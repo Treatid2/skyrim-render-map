@@ -555,7 +555,7 @@ def _dominates(left: dict, right: dict, objectives: dict[str, dict]) -> bool:
     return strictly_better
 
 
-def _compile_optimization_surfaces(
+def compile_optimization_surfaces(
     experiments: list[dict], performance_by_ref: dict[str, dict]
 ) -> tuple[list[dict], list[dict]]:
     compiled_experiments: list[dict] = []
@@ -789,7 +789,7 @@ def compile_repository(repository: pathlib.Path, source_revision: str | None = N
             raise CompileError(
                 f"performance observation {observation['ref']} baseline is not comparable"
             )
-    compiled_optimization, optimization_surfaces = _compile_optimization_surfaces(
+    compiled_optimization, optimization_surfaces = compile_optimization_surfaces(
         optimization_experiments, performance_by_ref
     )
 

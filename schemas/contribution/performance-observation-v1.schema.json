@@ -118,7 +118,7 @@
         "tools",
         "warmupSamples",
         "requestedSamples",
-        "sampleIntervalFrames"
+        "sampleCadence"
       ],
       "additionalProperties": false,
       "properties": {
@@ -132,7 +132,7 @@
         },
         "warmupSamples": { "type": "integer", "minimum": 0 },
         "requestedSamples": { "type": "integer", "minimum": 1 },
-        "sampleIntervalFrames": { "type": "integer", "minimum": 1 }
+        "sampleCadence": { "$ref": "#/$defs/sampleCadence" }
       }
     },
     "scenario": {
@@ -331,6 +331,40 @@
         "version": { "type": "string", "minLength": 1 },
         "artifactSha256": { "$ref": "#/$defs/sha256" }
       }
+    },
+    "sampleCadence": {
+      "type": "object",
+      "required": ["mode", "value"],
+      "additionalProperties": false,
+      "properties": {
+        "mode": { "enum": ["frame-stride", "wall-clock-ms"] },
+        "value": {
+          "oneOf": [
+            { "type": "integer", "minimum": 1 },
+            { "$ref": "#/$defs/decimal" }
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "mode": { "const": "frame-stride" } },
+            "required": ["mode"]
+          },
+          "then": {
+            "properties": { "value": { "type": "integer", "minimum": 1 } }
+          },
+          "else": {
+            "properties": {
+              "value": {
+                "type": "string",
+                "pattern": "^(?:0|[1-9][0-9]{0,17})(?:\\.[0-9]{1,9})?$",
+                "not": { "const": "0" }
+              }
+            }
+          }
+        }
+      ]
     },
     "sample": {
       "type": "object",

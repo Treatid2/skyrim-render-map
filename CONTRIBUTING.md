@@ -58,6 +58,10 @@ contracts in
 Multi-objective preset searches additionally use
 [`content/optimization-experiments.jsonl`](docs/optimization-experiments.md);
 the compiler derives their Pareto surfaces from linked performance evidence.
+The [optimization run exporter](docs/producer-export.md) can convert private
+CSX profiler or inline producer artifacts into both record types for review.
+Its output still needs an ordinary submission manifest before it can be
+proposed as a data PR.
 
 Before opening a PR, also run:
 

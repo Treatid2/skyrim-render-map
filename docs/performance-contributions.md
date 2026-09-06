@@ -66,8 +66,9 @@ start at sequence zero and remain contiguous. A sample may also record its
 source frame and relative timestamp.
 
 Record the requested sample count even when fewer samples survive. Retained
-samples must never exceed it. Warm-up and sample interval are part of protocol
-identity; changing either creates a different comparison group.
+samples must never exceed it. `sampleCadence` distinguishes a requested frame
+stride from a wall-clock interval in milliseconds. Warm-up and cadence are part
+of protocol identity; changing either creates a different comparison group.
 
 Do not replace raw samples with an average. The compiler derives the sample
 count, minimum, maximum, median, and arithmetic mean. The mean is rounded to
