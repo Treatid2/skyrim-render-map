@@ -1,0 +1,49 @@
+{
+  "schema": {
+    "name": "skyrim-render-map.submission",
+    "major": 1,
+    "minor": 0
+  },
+  "submissionId": "sub-skyrim-vr-render-mode-dispatch-9935c-v1",
+  "submissionClass": "assertion",
+  "namespace": "skyrim-vr",
+  "createdAt": "2026-09-06T01:22:29+01:00",
+  "status": "candidate-unreviewed",
+  "contributor": {
+    "displayName": "Treatid2",
+    "github": "Treatid2",
+    "standing": "ordinary-contributor"
+  },
+  "provenance": {
+    "sourceRepository": "https://github.com/Treatid2/skyrim-render-map",
+    "sourceCommit": "bbb16c86963baaba41514285364031645d93d905",
+    "sourceParentCommit": "e476b8cf78a87ba914963fedeb7b84dce70bff4b",
+    "sourceRef": "main",
+    "sourceState": "merged",
+    "sourcePubliclyReachable": true,
+    "sourceDirty": false,
+    "importedAt": "2026-09-06T01:22:29+01:00",
+    "sourceContentTreeSha256": "75CCEF0F7235EAA198222E3E27C2908A943FE256AD7A44C392BA4BE59C9879EF",
+    "transformations": [
+      "Normalized the 31-entry geometry-handler dispatch table, the parallel pre-resolve table, current-handler selection, and nine specialized render-mode handlers with exact Skyrim VR addresses and table indexes."
+    ],
+    "relatedUrls": [
+      "https://github.com/ParticleTroned/skyrim-community-shaders/pull/55",
+      "https://github.com/Treatid2/skyrim-render-map/tree/bbb16c86963baaba41514285364031645d93d905/submissions/2026/08/sub-csx-full-render-exploration-9935c5210",
+      "https://github.com/Treatid2/skyrim-render-map/pull/8",
+      "https://github.com/Treatid2/skyrim-render-map/pull/14"
+    ]
+  },
+  "licensing": {
+    "content": "CC-BY-SA-4.0",
+    "schemas": "CC0-1.0",
+    "dcoAcknowledged": true
+  },
+  "content": {
+    "root": "content",
+    "fileCount": 2,
+    "totalBytes": 70567,
+    "treeSha256": "0C6CAE43DFBE571C97F42FE9FF7DDBE66C892030BFD57BE60B44F7671DAEA16C"
+  },
+  "notes": "This tranche separates ordinary geometry admission from specialized render-mode handlers and records geometry and pre-resolve dispatch as distinct tables. The pinned evidence maps CommonLib's precipitation-occlusion name to mode 28 while the exact specialized occlusion-property handler occupies table index 29; that semantic discrepancy remains explicit and unresolved. Live handler frequency and scene-specific mode use require runtime evidence."
+}
