@@ -50,7 +50,9 @@ resolution interprets it.
 See [CONTRIBUTING.md](CONTRIBUTING.md),
 [the admission and moderation policy](docs/admission-and-moderation.md), and
 [PRIVACY.md](PRIVACY.md). Timing contributors should also read the
-[performance contribution guide](docs/performance-contributions.md).
+[performance contribution guide](docs/performance-contributions.md). Automated
+preset searches use the
+[optimization experiment contract](docs/optimization-experiments.md).
 
 ## Repository boundaries
 

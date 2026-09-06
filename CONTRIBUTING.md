@@ -55,6 +55,9 @@ Performance observations use `content/performance-observations.jsonl` and the
 exact identity, sampling, contamination, privacy, grouping, and outlier
 contracts in
 [the performance contribution guide](docs/performance-contributions.md).
+Multi-objective preset searches additionally use
+[`content/optimization-experiments.jsonl`](docs/optimization-experiments.md);
+the compiler derives their Pareto surfaces from linked performance evidence.
 
 Before opening a PR, also run:
 

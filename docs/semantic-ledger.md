@@ -106,6 +106,11 @@ identity. The full `snapshotId` covers the complete semantic body, including
 performance records and the optional source revision. Running the compiler
 twice over identical repository content must produce byte-identical output.
 
+The structural submission projection is explicit and versioned. Its v1 fields
+are retained for identity compatibility, while new optimization or future
+non-structural counters cannot perturb the map identity without a structural
+fact changing.
+
 Snapshots are generated products. They are not committed by data contributors
 and do not replace the append-only ledger.
 

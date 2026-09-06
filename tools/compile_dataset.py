@@ -17,7 +17,7 @@ from typing import Any
 import validate_repository as validator
 
 
-TOOL_VERSION = "1.2.0"
+TOOL_VERSION = "1.3.0"
 
 
 class CompileError(RuntimeError):
@@ -59,6 +59,17 @@ def performance_ref(submission_id: str, observation_id: str) -> str:
         "urn:skyrim-render-map:submission:"
         f"{submission_id}#{observation_id}"
     )
+
+
+def optimization_ref(submission_id: str, experiment_id: str) -> str:
+    return (
+        "urn:skyrim-render-map:submission:"
+        f"{submission_id}#{experiment_id}"
+    )
+
+
+def candidate_ref(experiment_reference: str, candidate_id: str) -> str:
+    return f"{experiment_reference}/{candidate_id}"
 
 
 def normalize_applicability(applicability: dict) -> dict:
@@ -315,22 +326,25 @@ def applicability_intersection(left: dict, right: dict) -> dict | None:
 
 def _load_ledger(
     repository: pathlib.Path,
-) -> tuple[list[dict], list[dict], list[dict], list[dict], list[dict]]:
+) -> tuple[list[dict], list[dict], list[dict], list[dict], list[dict], list[dict]]:
     submissions: list[dict] = []
     entities: list[dict] = []
     assertions: list[dict] = []
     resolutions: list[dict] = []
     performance_observations: list[dict] = []
+    optimization_experiments: list[dict] = []
     for directory in validator.submission_directories(repository):
         manifest = validator.load_json_document(directory / "submission.json")
         if not isinstance(manifest, dict):
             raise CompileError(f"submission manifest is not an object: {directory}")
         submission_id = manifest["submissionId"]
-        entity_records, assertion_records, resolution_records, performance_records = (
-            validator.load_submission_records(
-                directory, manifest["submissionClass"]
-            )
-        )
+        (
+            entity_records,
+            assertion_records,
+            resolution_records,
+            performance_records,
+            optimization_records,
+        ) = validator.load_submission_records(directory, manifest["submissionClass"])
         submissions.append(
             {
                 "submissionId": submission_id,
@@ -345,6 +359,7 @@ def _load_ledger(
                 "assertionCount": len(assertion_records),
                 "resolutionCount": len(resolution_records),
                 "performanceObservationCount": len(performance_records),
+                "optimizationExperimentCount": len(optimization_records),
             }
         )
         for record in entity_records:
@@ -404,7 +419,22 @@ def _load_ledger(
                     "record": record,
                 }
             )
-    return submissions, entities, assertions, resolutions, performance_observations
+        for record in optimization_records:
+            optimization_experiments.append(
+                {
+                    "ref": optimization_ref(submission_id, record["experimentId"]),
+                    "submissionId": submission_id,
+                    "record": record,
+                }
+            )
+    return (
+        submissions,
+        entities,
+        assertions,
+        resolutions,
+        performance_observations,
+        optimization_experiments,
+    )
 
 
 def _detect_conflicts(assertions: list[dict]) -> list[dict]:
@@ -479,16 +509,257 @@ def _apply_resolutions(
             conflict["state"] = "resolved"
 
 
+def _normalized_parameter_vector(record: dict, candidate: dict) -> list[dict]:
+    axes = {item["axisId"]: item for item in record["axes"]}
+    result = []
+    for parameter in sorted(candidate["parameters"], key=lambda item: item["axisId"]):
+        value = parameter["value"]
+        if axes[parameter["axisId"]]["valueType"] == "decimal":
+            value = _decimal_string(decimal.Decimal(value))
+        result.append({"axisId": parameter["axisId"], "value": value})
+    return result
+
+
+def _observation_matches_objective(observation: dict, objective: dict) -> bool:
+    measurement = observation["record"]["measurement"]
+    return (
+        measurement["metric"] == objective["metric"]
+        and measurement["unit"] == objective["unit"]
+        and measurement["scope"] == objective["scope"]
+        and sorted(measurement["scopeRefs"]) == sorted(objective["scopeRefs"])
+    )
+
+
+def _dominates(left: dict, right: dict, objectives: dict[str, dict]) -> bool:
+    left_values = {
+        item["objectiveId"]: decimal.Decimal(item["value"])
+        for item in left["objectiveValues"]
+    }
+    right_values = {
+        item["objectiveId"]: decimal.Decimal(item["value"])
+        for item in right["objectiveValues"]
+    }
+    strictly_better = False
+    for objective_id, objective in objectives.items():
+        left_value = left_values[objective_id]
+        right_value = right_values[objective_id]
+        epsilon = decimal.Decimal(objective["dominanceEpsilon"])
+        if objective["direction"] == "minimize":
+            if left_value > right_value + epsilon:
+                return False
+            strictly_better = strictly_better or left_value < right_value - epsilon
+        else:
+            if left_value < right_value - epsilon:
+                return False
+            strictly_better = strictly_better or left_value > right_value + epsilon
+    return strictly_better
+
+
+def _compile_optimization_surfaces(
+    experiments: list[dict], performance_by_ref: dict[str, dict]
+) -> tuple[list[dict], list[dict]]:
+    compiled_experiments: list[dict] = []
+    surfaces: list[dict] = []
+    for experiment in sorted(experiments, key=lambda item: item["ref"]):
+        record = experiment["record"]
+        experiment_ref = experiment["ref"]
+        objectives = {
+            item["objectiveId"]: item for item in record["objectives"]
+        }
+        objective_contexts: dict[str, str] = {}
+        used_observations: set[str] = set()
+        compiled_candidates: list[dict] = []
+        for candidate in sorted(
+            record["candidates"], key=lambda item: item["candidateId"]
+        ):
+            reference = candidate_ref(experiment_ref, candidate["candidateId"])
+            parameters = _normalized_parameter_vector(record, candidate)
+            assignments = {
+                item["objectiveId"]: item["observationRefs"]
+                for item in candidate["objectiveObservations"]
+            }
+            objective_values: list[dict] = []
+            exclusion_reasons: list[str] = []
+            if candidate["outcome"] != "completed":
+                exclusion_reasons.append(f"outcome-{candidate['outcome']}")
+            for objective_id, objective in sorted(objectives.items()):
+                observation_refs = assignments.get(objective_id, [])
+                if not observation_refs:
+                    exclusion_reasons.append(f"missing-objective-{objective_id}")
+                    continue
+                linked: list[dict] = []
+                for observation_ref in observation_refs:
+                    if observation_ref in used_observations:
+                        raise CompileError(
+                            f"optimization experiment {experiment_ref} reuses "
+                            f"performance observation {observation_ref}"
+                        )
+                    used_observations.add(observation_ref)
+                    observation = performance_by_ref.get(observation_ref)
+                    if observation is None:
+                        raise CompileError(
+                            f"optimization experiment {experiment_ref} references "
+                            f"unknown performance observation {observation_ref}"
+                        )
+                    observation_record = observation["record"]
+                    if (
+                        observation_record["map"]["mapSnapshotId"]
+                        != record["map"]["mapSnapshotId"]
+                        or not set(observation_record["map"]["nodeRefs"]).issubset(
+                            record["map"]["nodeRefs"]
+                        )
+                    ):
+                        raise CompileError(
+                            f"optimization experiment {experiment_ref} has a map "
+                            f"mismatch at {observation_ref}"
+                        )
+                    if (
+                        observation_record["treatment"]["treatmentSha256"].lower()
+                        != candidate["treatmentSha256"].lower()
+                    ):
+                        raise CompileError(
+                            f"optimization candidate {reference} has a treatment "
+                            f"mismatch at {observation_ref}"
+                        )
+                    if not _observation_matches_objective(observation, objective):
+                        raise CompileError(
+                            f"optimization objective {objective_id} does not match "
+                            f"performance observation {observation_ref}"
+                        )
+                    context_key = observation["comparisonKey"]
+                    prior_context = objective_contexts.setdefault(
+                        objective_id, context_key
+                    )
+                    if prior_context != context_key:
+                        raise CompileError(
+                            f"optimization objective {objective_id} mixes "
+                            "incomparable performance contexts"
+                        )
+                    linked.append(observation)
+                if not all(item["aggregateEligible"] for item in linked):
+                    exclusion_reasons.append(f"non-valid-objective-{objective_id}")
+                    continue
+                objective_value = _median(
+                    [decimal.Decimal(item["summary"]["median"]) for item in linked]
+                )
+                objective_values.append(
+                    {
+                        "objectiveId": objective_id,
+                        "value": _decimal_string(objective_value),
+                        "observationRefs": sorted(observation_refs),
+                    }
+                )
+
+            constraint_violations: list[str] = []
+            feasible: bool | None = None
+            if len(objective_values) == len(objectives):
+                values = {
+                    item["objectiveId"]: decimal.Decimal(item["value"])
+                    for item in objective_values
+                }
+                for constraint in record["constraints"]:
+                    value = values[constraint["objectiveId"]]
+                    threshold = decimal.Decimal(constraint["threshold"])
+                    violated = (
+                        value > threshold
+                        if constraint["operator"] == "at-most"
+                        else value < threshold
+                    )
+                    if violated:
+                        constraint_violations.append(constraint["constraintId"])
+                feasible = not constraint_violations
+            compiled_candidates.append(
+                {
+                    "ref": reference,
+                    "candidateId": candidate["candidateId"],
+                    "treatmentSha256": candidate["treatmentSha256"].lower(),
+                    "parameterVectorSha256": hashlib.sha256(
+                        canonical_json(parameters).encode("utf-8")
+                    ).hexdigest(),
+                    "parameters": parameters,
+                    "objectiveValues": objective_values,
+                    "eligibility": (
+                        "eligible" if not exclusion_reasons else "excluded"
+                    ),
+                    "exclusionReasons": sorted(set(exclusion_reasons)),
+                    "feasible": feasible,
+                    "constraintViolations": sorted(constraint_violations),
+                    "dominatedBy": [],
+                }
+            )
+
+        eligible_candidates = [
+            item
+            for item in compiled_candidates
+            if item["eligibility"] == "eligible"
+        ]
+        pareto_candidates = [
+            item for item in eligible_candidates if item["feasible"] is True
+        ]
+        for candidate in pareto_candidates:
+            candidate["dominatedBy"] = sorted(
+                other["ref"]
+                for other in pareto_candidates
+                if other["ref"] != candidate["ref"]
+                and _dominates(other, candidate, objectives)
+            )
+        frontier = sorted(
+            item["ref"] for item in pareto_candidates if not item["dominatedBy"]
+        )
+        surface_identity = {
+            "experimentRef": experiment_ref,
+            "candidates": compiled_candidates,
+        }
+        surfaces.append(
+            {
+                "surfaceId": content_id("pareto-surface", surface_identity),
+                "experimentRef": experiment_ref,
+                "state": "derived" if frontier else "insufficient-evidence",
+                "candidateCount": len(compiled_candidates),
+                "eligibleCandidateCount": len(eligible_candidates),
+                "feasibleCandidateCount": len(pareto_candidates),
+                "frontierCandidateRefs": frontier,
+                "candidates": compiled_candidates,
+            }
+        )
+        compiled_experiments.append(experiment)
+    return compiled_experiments, surfaces
+
+
+def _structural_submission_projection(submission: dict) -> dict:
+    fields = (
+        "submissionId",
+        "submissionClass",
+        "namespace",
+        "status",
+        "createdAt",
+        "sourceRepository",
+        "sourceCommit",
+        "contentTreeSha256",
+        "entityCount",
+        "assertionCount",
+        "resolutionCount",
+        "performanceObservationCount",
+    )
+    return {field: submission[field] for field in fields}
+
+
 def compile_repository(repository: pathlib.Path, source_revision: str | None = None) -> dict:
     validator.validate_repository(repository)
-    submissions, entities, assertions, resolutions, performance_observations = (
-        _load_ledger(repository)
-    )
+    (
+        submissions,
+        entities,
+        assertions,
+        resolutions,
+        performance_observations,
+        optimization_experiments,
+    ) = _load_ledger(repository)
     refs = (
         [item["ref"] for item in entities]
         + [item["ref"] for item in assertions]
         + [item["ref"] for item in resolutions]
         + [item["ref"] for item in performance_observations]
+        + [item["ref"] for item in optimization_experiments]
     )
     if len(refs) != len(set(refs)):
         raise CompileError("ledger record references must be globally unique")
@@ -518,6 +789,9 @@ def compile_repository(repository: pathlib.Path, source_revision: str | None = N
             raise CompileError(
                 f"performance observation {observation['ref']} baseline is not comparable"
             )
+    compiled_optimization, optimization_surfaces = _compile_optimization_surfaces(
+        optimization_experiments, performance_by_ref
+    )
 
     conflicts = _detect_conflicts(assertions)
     _apply_resolutions(assertions, conflicts, resolutions)
@@ -565,7 +839,7 @@ def compile_repository(repository: pathlib.Path, source_revision: str | None = N
             "minor": 0,
         },
         "submissions": [
-            item
+            _structural_submission_projection(item)
             for item in sorted(submissions, key=lambda item: item["submissionId"])
             if item["submissionId"] in structural_submission_ids
         ],
@@ -579,7 +853,7 @@ def compile_repository(repository: pathlib.Path, source_revision: str | None = N
         "schema": {
             "name": "skyrim-render-map.dataset-snapshot",
             "major": 1,
-            "minor": 2,
+            "minor": 3,
         },
         "generatedBy": {
             "name": "skyrim-render-map.compile-dataset",
@@ -595,6 +869,8 @@ def compile_repository(repository: pathlib.Path, source_revision: str | None = N
         "performanceObservations": compiled_performance,
         "performanceGroups": performance_groups,
         "performanceSignals": performance_signals,
+        "optimizationExperiments": compiled_optimization,
+        "optimizationSurfaces": optimization_surfaces,
         "statistics": {
             "submissionCount": len(submissions),
             "entityCount": len(entities),
@@ -608,6 +884,8 @@ def compile_repository(repository: pathlib.Path, source_revision: str | None = N
             ),
             "performanceGroupCount": len(performance_groups),
             "performanceSignalCount": len(performance_signals),
+            "optimizationExperimentCount": len(compiled_optimization),
+            "optimizationSurfaceCount": len(optimization_surfaces),
         },
     }
     return {"snapshotId": content_id("snapshot", body), **body}

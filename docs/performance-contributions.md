@@ -158,3 +158,8 @@ Small bounded histories belong in Git. If the evidence exceeds the repository
 limits, open a discussion before submitting it. The content-addressed external
 artifact lane described by the architecture is not yet a general public upload
 service.
+
+Multi-objective searches should reference these observations through the
+[optimization experiment contract](optimization-experiments.md). Search
+metadata and derived Pareto membership do not belong in an individual
+performance observation.
