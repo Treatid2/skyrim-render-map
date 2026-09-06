@@ -446,11 +446,13 @@ signalling, and the unprivileged PR workflow.
 
 The next data slice is a bounded normalization of selected legacy engine and
 CSX claims into assertions. Performance observation schema v1, deterministic
-grouping, conservative outlier signalling, optimization experiments, and
-derived Pareto surfaces are implemented. General runtime observation,
-artifact-index, and applicability-range schemas; additional conflict classes;
-signed receipts; immutable dataset releases; Pages; and producer export clients
-remain planned.
+grouping, conservative outlier signalling, optimization experiments, derived
+Pareto surfaces, and the first map-side CSX optimization export client are
+implemented. The client accepts CSX profiler schema-v3 captures and normalized
+inline measurements; search orchestration and final submission packaging remain
+producer responsibilities. General runtime observation, artifact-index, and
+applicability-range schemas; additional conflict classes; signed receipts;
+immutable dataset releases; and Pages remain planned.
 
 This sequence establishes the managed resource before inviting easy player
 submissions and leaves storage, querying, and producer integration replaceable

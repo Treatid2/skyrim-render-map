@@ -145,8 +145,9 @@ PERFORMANCE_PROTOCOL_KEYS = {
     "tools",
     "warmupSamples",
     "requestedSamples",
-    "sampleIntervalFrames",
+    "sampleCadence",
 }
+PERFORMANCE_CADENCE_KEYS = {"mode", "value"}
 PERFORMANCE_SCENARIO_KEYS = {
     "label",
     "scenarioSha256",
@@ -369,7 +370,7 @@ def _parse_time(value: object, context: str) -> None:
         raise ValidationError(f"{context} must include a timezone")
 
 
-def _scan_public_content(path: pathlib.Path, data: bytes) -> None:
+def scan_public_content(path: pathlib.Path, data: bytes) -> None:
     if path.suffix.lower() not in ALLOWED_CONTENT_SUFFIXES:
         raise ValidationError(f"content type is not allowlisted: {path}")
     if len(data) > MAX_FILE_BYTES:
@@ -689,10 +690,28 @@ def _validate_performance_protocol(record: dict, context: str) -> None:
     )
     if protocol["artifactSha256"] is None:
         raise ValidationError(f"{context}.protocol.artifactSha256 is required")
-    for field in ("warmupSamples", "requestedSamples", "sampleIntervalFrames"):
+    for field in ("warmupSamples", "requestedSamples"):
         _require_nonnegative_integer(protocol[field], f"{context}.protocol.{field}")
-    if protocol["requestedSamples"] == 0 or protocol["sampleIntervalFrames"] == 0:
-        raise ValidationError(f"{context}.protocol sample counts must be positive")
+    if protocol["requestedSamples"] == 0:
+        raise ValidationError(f"{context}.protocol requestedSamples must be positive")
+    cadence = protocol["sampleCadence"]
+    if not isinstance(cadence, dict):
+        raise ValidationError(f"{context}.protocol.sampleCadence must be an object")
+    _require_keys(cadence, PERFORMANCE_CADENCE_KEYS, f"{context}.protocol.sampleCadence")
+    if cadence["mode"] == "frame-stride":
+        _require_nonnegative_integer(
+            cadence["value"], f"{context}.protocol.sampleCadence.value"
+        )
+        if cadence["value"] == 0:
+            raise ValidationError(f"{context}.protocol frame stride must be positive")
+    elif cadence["mode"] == "wall-clock-ms":
+        _require_canonical_decimal(
+            cadence["value"], f"{context}.protocol.sampleCadence.value"
+        )
+        if decimal.Decimal(cadence["value"]) == 0:
+            raise ValidationError(f"{context}.protocol wall-clock cadence must be positive")
+    else:
+        raise ValidationError(f"{context}.protocol.sampleCadence mode is unsupported")
     tools = protocol["tools"]
     if not isinstance(tools, list) or not tools:
         raise ValidationError(f"{context}.protocol.tools must be a non-empty array")
@@ -1312,7 +1331,7 @@ def validate_submission(directory: pathlib.Path) -> TreeSummary:
     if len(files) > MAX_FILES:
         raise ValidationError(f"submission exceeds {MAX_FILES} content files")
     for path in files:
-        _scan_public_content(path, path.read_bytes())
+        scan_public_content(path, path.read_bytes())
 
     load_submission_records(directory, manifest["submissionClass"])
 

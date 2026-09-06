@@ -160,3 +160,8 @@ The producer may maintain an internal live frontier to schedule work, but that
 frontier is not authoritative. The public frontier is recomputed from admitted
 evidence so corrections, contamination findings, or added candidates can
 change it without rewriting the source ledger.
+
+The map-side [optimization run exporter](producer-export.md) implements this
+handoff for CSX profiler schema-v3 captures and normalized inline samples. It
+verifies the capture identity and emits reviewable neutral records; it does not
+implement the search or operate the game.

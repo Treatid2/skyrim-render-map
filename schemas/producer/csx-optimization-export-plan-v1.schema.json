@@ -1,0 +1,264 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:skyrim-render-map:schema:csx-optimization-export-plan:1",
+  "title": "CSX optimization producer export plan",
+  "description": "Private producer input. Source paths are never copied to public records.",
+  "type": "object",
+  "required": [
+    "schema",
+    "submissionId",
+    "map",
+    "runtime",
+    "environment",
+    "scenario",
+    "privacy",
+    "experiment",
+    "candidates"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "const": {
+        "name": "skyrim-render-map.csx-optimization-export-plan",
+        "major": 1,
+        "minor": 0
+      }
+    },
+    "submissionId": {
+      "type": "string",
+      "pattern": "^sub-[a-z0-9][a-z0-9-]{2,95}$"
+    },
+    "map": {
+      "$ref": "urn:skyrim-render-map:schema:optimization-experiment:1#/properties/map"
+    },
+    "runtime": {
+      "$ref": "urn:skyrim-render-map:schema:performance-observation:1#/properties/runtime"
+    },
+    "environment": {
+      "$ref": "urn:skyrim-render-map:schema:performance-observation:1#/properties/environment"
+    },
+    "scenario": {
+      "$ref": "urn:skyrim-render-map:schema:performance-observation:1#/properties/scenario"
+    },
+    "privacy": {
+      "$ref": "urn:skyrim-render-map:schema:performance-observation:1#/properties/privacy"
+    },
+    "experiment": { "$ref": "#/$defs/experiment" },
+    "candidates": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/candidate" }
+    }
+  },
+  "$defs": {
+    "recordId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9.-]{2,127}$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[A-Fa-f0-9]{64}$"
+    },
+    "decimal": {
+      "type": "string",
+      "pattern": "^(?:0|[1-9][0-9]{0,17})(?:\\.[0-9]{1,9})?$"
+    },
+    "experiment": {
+      "type": "object",
+      "required": [
+        "experimentId",
+        "recordedAt",
+        "producer",
+        "search",
+        "axes",
+        "objectives",
+        "constraints",
+        "notes"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "experimentId": { "$ref": "#/$defs/recordId" },
+        "recordedAt": { "type": "string", "format": "date-time" },
+        "producer": {
+          "$ref": "urn:skyrim-render-map:schema:optimization-experiment:1#/$defs/tool"
+        },
+        "search": {
+          "$ref": "urn:skyrim-render-map:schema:optimization-experiment:1#/properties/search"
+        },
+        "axes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "urn:skyrim-render-map:schema:optimization-experiment:1#/$defs/axis"
+          }
+        },
+        "objectives": {
+          "type": "array",
+          "minItems": 2,
+          "items": { "$ref": "#/$defs/objective" }
+        },
+        "constraints": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:skyrim-render-map:schema:optimization-experiment:1#/$defs/constraint"
+          }
+        },
+        "notes": { "type": "string" }
+      }
+    },
+    "objective": {
+      "type": "object",
+      "required": [
+        "objectiveId",
+        "label",
+        "metric",
+        "unit",
+        "direction",
+        "scope",
+        "scopeRefs",
+        "reducer",
+        "dominanceEpsilon",
+        "collection"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "objectiveId": { "$ref": "#/$defs/recordId" },
+        "label": { "type": "string", "minLength": 1 },
+        "metric": { "type": "string", "minLength": 1 },
+        "unit": {
+          "enum": [
+            "milliseconds",
+            "microseconds",
+            "frames-per-second",
+            "percent",
+            "count"
+          ]
+        },
+        "direction": { "enum": ["minimize", "maximize"] },
+        "scope": {
+          "enum": ["whole-frame", "map-node", "map-node-set", "process", "other"]
+        },
+        "scopeRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "reducer": { "const": "median-of-observation-medians" },
+        "dominanceEpsilon": { "$ref": "#/$defs/decimal" },
+        "collection": { "$ref": "#/$defs/collection" }
+      }
+    },
+    "collection": {
+      "type": "object",
+      "required": ["sourceKind", "metricSource", "timerName", "protocol"],
+      "additionalProperties": false,
+      "properties": {
+        "sourceKind": { "enum": ["csx-profiler-v3", "inline-v1"] },
+        "metricSource": {
+          "type": ["string", "null"],
+          "enum": [
+            "resolved-gpu-total",
+            "resolved-cpu-total",
+            "timer-gpu",
+            "timer-cpu",
+            "timer-top-level",
+            null
+          ]
+        },
+        "timerName": { "type": ["string", "null"], "minLength": 1 },
+        "protocol": {
+          "$ref": "urn:skyrim-render-map:schema:performance-observation:1#/properties/protocol"
+        }
+      }
+    },
+    "candidate": {
+      "type": "object",
+      "required": [
+        "candidateId",
+        "label",
+        "treatmentSha256",
+        "baselineObservationRef",
+        "outcome",
+        "failureKind",
+        "parameters",
+        "objectiveRuns",
+        "notes"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "candidateId": { "$ref": "#/$defs/recordId" },
+        "label": { "type": "string", "minLength": 1 },
+        "treatmentSha256": { "$ref": "#/$defs/sha256" },
+        "baselineObservationRef": { "type": ["string", "null"], "minLength": 1 },
+        "outcome": { "enum": ["completed", "failed", "incomplete", "rejected"] },
+        "failureKind": { "type": ["string", "null"], "minLength": 1 },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "urn:skyrim-render-map:schema:optimization-experiment:1#/$defs/parameter"
+          }
+        },
+        "objectiveRuns": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/objectiveRuns" }
+        },
+        "notes": { "type": "string" }
+      }
+    },
+    "objectiveRuns": {
+      "type": "object",
+      "required": ["objectiveId", "runs"],
+      "additionalProperties": false,
+      "properties": {
+        "objectiveId": { "$ref": "#/$defs/recordId" },
+        "runs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/run" }
+        }
+      }
+    },
+    "run": {
+      "type": "object",
+      "required": ["observationId", "recordedAt", "source", "validity", "notes"],
+      "additionalProperties": false,
+      "properties": {
+        "observationId": { "$ref": "#/$defs/recordId" },
+        "recordedAt": { "type": ["string", "null"], "format": "date-time" },
+        "source": {
+          "oneOf": [
+            { "$ref": "#/$defs/profilerSource" },
+            { "$ref": "#/$defs/inlineSource" }
+          ]
+        },
+        "validity": {
+          "$ref": "urn:skyrim-render-map:schema:performance-observation:1#/properties/validity"
+        },
+        "notes": { "type": "string" }
+      }
+    },
+    "profilerSource": {
+      "type": "object",
+      "required": ["kind", "rawPath", "summaryPath"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "const": "csx-profiler-v3" },
+        "rawPath": { "type": "string", "minLength": 1 },
+        "summaryPath": { "type": "string", "minLength": 1 }
+      }
+    },
+    "inlineSource": {
+      "type": "object",
+      "required": ["kind", "samples"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "const": "inline-v1" },
+        "samples": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "object" }
+        }
+      }
+    }
+  }
+}

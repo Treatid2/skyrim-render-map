@@ -117,7 +117,7 @@ class OptimizationExperimentTest(unittest.TestCase):
                 ],
                 "warmupSamples": 60,
                 "requestedSamples": 1,
-                "sampleIntervalFrames": 1,
+                "sampleCadence": {"mode": "frame-stride", "value": 1},
             },
             "scenario": {
                 "label": "Fixture scene",
