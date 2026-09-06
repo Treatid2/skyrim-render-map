@@ -1,0 +1,376 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:skyrim-render-map:schema:performance-observation:1",
+  "title": "Skyrim render-map performance observation",
+  "type": "object",
+  "required": [
+    "schema",
+    "observationId",
+    "recordedAt",
+    "map",
+    "runtime",
+    "environment",
+    "protocol",
+    "scenario",
+    "treatment",
+    "measurement",
+    "validity",
+    "privacy",
+    "notes"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "const": {
+        "name": "skyrim-render-map.performance-observation",
+        "major": 1,
+        "minor": 0
+      }
+    },
+    "observationId": { "$ref": "#/$defs/recordId" },
+    "recordedAt": { "type": "string", "format": "date-time" },
+    "map": {
+      "type": "object",
+      "required": ["mapSnapshotId", "nodeRefs"],
+      "additionalProperties": false,
+      "properties": {
+        "mapSnapshotId": {
+          "type": "string",
+          "pattern": "^map-snapshot-[a-f0-9]{64}$"
+        },
+        "nodeRefs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "runtime": {
+      "type": "object",
+      "required": ["engine", "extensions", "runtimeRoute"],
+      "additionalProperties": false,
+      "properties": {
+        "engine": { "$ref": "#/$defs/engine" },
+        "extensions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/extension" }
+        },
+        "runtimeRoute": { "type": "string", "minLength": 1 }
+      }
+    },
+    "environment": {
+      "type": "object",
+      "required": [
+        "installationId",
+        "cpuModel",
+        "gpuModel",
+        "gpuDriverVersion",
+        "renderContext"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "installationId": {
+          "type": "string",
+          "pattern": "^inst-[a-f0-9]{32}$"
+        },
+        "cpuModel": { "type": "string", "minLength": 1 },
+        "gpuModel": { "type": "string", "minLength": 1 },
+        "gpuDriverVersion": { "type": "string", "minLength": 1 },
+        "renderContext": {
+          "type": "object",
+          "required": [
+            "renderWidth",
+            "renderHeight",
+            "viewCount",
+            "refreshRateHz",
+            "renderScale",
+            "frameLimiter",
+            "targetFrameRate",
+            "reprojectionMode"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "renderWidth": { "type": "integer", "minimum": 1 },
+            "renderHeight": { "type": "integer", "minimum": 1 },
+            "viewCount": { "type": "integer", "minimum": 1 },
+            "refreshRateHz": { "$ref": "#/$defs/decimal" },
+            "renderScale": { "$ref": "#/$defs/decimal" },
+            "frameLimiter": { "type": "string", "minLength": 1 },
+            "targetFrameRate": {
+              "oneOf": [
+                { "$ref": "#/$defs/decimal" },
+                { "type": "null" }
+              ]
+            },
+            "reprojectionMode": { "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    },
+    "protocol": {
+      "type": "object",
+      "required": [
+        "name",
+        "version",
+        "artifactSha256",
+        "tools",
+        "warmupSamples",
+        "requestedSamples",
+        "sampleIntervalFrames"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 },
+        "artifactSha256": { "$ref": "#/$defs/sha256" },
+        "tools": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/tool" }
+        },
+        "warmupSamples": { "type": "integer", "minimum": 0 },
+        "requestedSamples": { "type": "integer", "minimum": 1 },
+        "sampleIntervalFrames": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "scenario": {
+      "type": "object",
+      "required": [
+        "label",
+        "scenarioSha256",
+        "configurationSha256",
+        "cacheSha256"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "label": { "type": "string", "minLength": 1 },
+        "scenarioSha256": { "$ref": "#/$defs/sha256" },
+        "configurationSha256": { "$ref": "#/$defs/sha256" },
+        "cacheSha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "treatment": {
+      "type": "object",
+      "required": ["label", "treatmentSha256", "baselineObservationRef"],
+      "additionalProperties": false,
+      "properties": {
+        "label": { "type": "string", "minLength": 1 },
+        "treatmentSha256": { "$ref": "#/$defs/sha256" },
+        "baselineObservationRef": {
+          "oneOf": [
+            { "type": "string", "minLength": 1 },
+            { "type": "null" }
+          ]
+        }
+      }
+    },
+    "measurement": {
+      "type": "object",
+      "required": ["metric", "unit", "scope", "scopeRefs", "samples"],
+      "additionalProperties": false,
+      "properties": {
+        "metric": { "type": "string", "minLength": 1 },
+        "unit": {
+          "enum": [
+            "milliseconds",
+            "microseconds",
+            "frames-per-second",
+            "percent",
+            "count"
+          ]
+        },
+        "scope": {
+          "enum": ["whole-frame", "map-node", "map-node-set", "process", "other"]
+        },
+        "scopeRefs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "samples": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/sample" }
+        }
+      }
+    },
+    "validity": {
+      "type": "object",
+      "required": ["state", "contamination", "notes"],
+      "additionalProperties": false,
+      "properties": {
+        "state": { "enum": ["valid", "contaminated", "inconclusive"] },
+        "contamination": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/contamination" }
+        },
+        "notes": { "type": "string" }
+      }
+    },
+    "privacy": {
+      "type": "object",
+      "required": [
+        "publicationOptIn",
+        "fieldsPreviewed",
+        "installationIdRandom",
+        "installationIdResettable"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "publicationOptIn": { "const": true },
+        "fieldsPreviewed": { "const": true },
+        "installationIdRandom": { "const": true },
+        "installationIdResettable": { "const": true }
+      }
+    },
+    "notes": { "type": "string" }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "measurement": {
+            "properties": {
+              "scope": { "enum": ["map-node", "map-node-set"] }
+            },
+            "required": ["scope"]
+          }
+        },
+        "required": ["measurement"]
+      },
+      "then": {
+        "properties": {
+          "measurement": {
+            "properties": {
+              "scopeRefs": { "minItems": 1 }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "validity": {
+            "properties": { "state": { "const": "valid" } },
+            "required": ["state"]
+          }
+        },
+        "required": ["validity"]
+      },
+      "then": {
+        "properties": {
+          "validity": {
+            "properties": { "contamination": { "maxItems": 0 } }
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "validity": {
+            "properties": { "notes": { "minLength": 1 } }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "recordId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9.-]{2,127}$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[A-Fa-f0-9]{64}$"
+    },
+    "commit": {
+      "type": ["string", "null"],
+      "pattern": "^[A-Fa-f0-9]{40}$"
+    },
+    "decimal": {
+      "type": "string",
+      "pattern": "^(?:0|[1-9][0-9]{0,17})(?:\\.[0-9]{1,9})?$"
+    },
+    "engine": {
+      "type": "object",
+      "required": ["runtime", "executableSha256", "moduleSha256"],
+      "additionalProperties": false,
+      "properties": {
+        "runtime": { "type": "string", "minLength": 1 },
+        "executableSha256": { "$ref": "#/$defs/sha256" },
+        "moduleSha256": {
+          "oneOf": [
+            { "$ref": "#/$defs/sha256" },
+            { "type": "null" }
+          ]
+        }
+      }
+    },
+    "extension": {
+      "type": "object",
+      "required": ["namespace", "sourceCommit", "buildId", "artifactSha256"],
+      "additionalProperties": false,
+      "properties": {
+        "namespace": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9.-]{1,63}$"
+        },
+        "sourceCommit": { "$ref": "#/$defs/commit" },
+        "buildId": { "type": "string", "minLength": 1 },
+        "artifactSha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "tool": {
+      "type": "object",
+      "required": ["name", "version", "artifactSha256"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 },
+        "artifactSha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "sample": {
+      "type": "object",
+      "required": ["sequence", "value", "frame", "timestampOffsetMs"],
+      "additionalProperties": false,
+      "properties": {
+        "sequence": { "type": "integer", "minimum": 0 },
+        "value": { "$ref": "#/$defs/decimal" },
+        "frame": { "type": ["integer", "null"], "minimum": 0 },
+        "timestampOffsetMs": {
+          "oneOf": [
+            { "$ref": "#/$defs/decimal" },
+            { "type": "null" }
+          ]
+        }
+      }
+    },
+    "contamination": {
+      "type": "object",
+      "required": ["kind", "firstSample", "lastSample", "notes"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "background-activity",
+            "capture-overhead",
+            "driver-reset",
+            "focus-loss",
+            "frame-limiter",
+            "loading-transition",
+            "reprojection",
+            "shader-compilation",
+            "thermal-throttling",
+            "unknown"
+          ]
+        },
+        "firstSample": { "type": "integer", "minimum": 0 },
+        "lastSample": { "type": "integer", "minimum": 0 },
+        "notes": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

@@ -6,6 +6,11 @@
 - [ ] Resolution
 - [ ] Governance/tooling
 
+For a performance observation, I followed
+[`docs/performance-contributions.md`](../docs/performance-contributions.md) and
+included the raw bounded sample history and all required identity, validity,
+and privacy fields.
+
 ## Provenance and privacy
 
 - [ ] I ran the repository validator.

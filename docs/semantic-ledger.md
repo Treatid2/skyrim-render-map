@@ -100,9 +100,11 @@ python tools/compile_dataset.py --repository . --output .validation-output/snaps
 ```
 
 The output contains no wall-clock generation time. It sorts all inputs and
-derives `snapshotId` from the complete semantic body, including the optional
-source revision. Running the compiler twice over identical repository content
-must produce byte-identical output.
+derives `mapSnapshotId` from the structural submissions, entities, assertions,
+conflicts, and resolutions. Performance-only submissions do not change that
+identity. The full `snapshotId` covers the complete semantic body, including
+performance records and the optional source revision. Running the compiler
+twice over identical repository content must produce byte-identical output.
 
 Snapshots are generated products. They are not committed by data contributors
 and do not replace the append-only ledger.

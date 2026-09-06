@@ -7,6 +7,7 @@
 from __future__ import annotations
 
 import argparse
+import decimal
 import hashlib
 import json
 import pathlib
@@ -16,7 +17,7 @@ from typing import Any
 import validate_repository as validator
 
 
-TOOL_VERSION = "1.1.0"
+TOOL_VERSION = "1.2.0"
 
 
 class CompileError(RuntimeError):
@@ -53,6 +54,13 @@ def entity_ref(submission_id: str, entity_id: str) -> str:
     )
 
 
+def performance_ref(submission_id: str, observation_id: str) -> str:
+    return (
+        "urn:skyrim-render-map:submission:"
+        f"{submission_id}#{observation_id}"
+    )
+
+
 def normalize_applicability(applicability: dict) -> dict:
     engine = applicability["engine"]
     extension = applicability["extension"]
@@ -75,6 +83,193 @@ def normalize_applicability(applicability: dict) -> dict:
         "configurationSha256": lower(applicability["configurationSha256"]),
         "scenarioSha256": lower(applicability["scenarioSha256"]),
     }
+
+
+def _lower_digest(value: str | None) -> str | None:
+    return value.lower() if value is not None else None
+
+
+def normalize_performance_context(record: dict, *, include_installation: bool) -> dict:
+    environment = record["environment"]
+    render_context = environment["renderContext"]
+    normalized_environment = {
+        "cpuModel": environment["cpuModel"],
+        "gpuModel": environment["gpuModel"],
+        "gpuDriverVersion": environment["gpuDriverVersion"],
+        "renderContext": {
+            **render_context,
+            "refreshRateHz": _decimal_string(
+                decimal.Decimal(render_context["refreshRateHz"])
+            ),
+            "renderScale": _decimal_string(
+                decimal.Decimal(render_context["renderScale"])
+            ),
+            "targetFrameRate": (
+                _decimal_string(decimal.Decimal(render_context["targetFrameRate"]))
+                if render_context["targetFrameRate"] is not None
+                else None
+            ),
+        },
+    }
+    if include_installation:
+        normalized_environment["installationId"] = environment["installationId"]
+    runtime = record["runtime"]
+    return {
+        "map": {
+            "mapSnapshotId": record["map"]["mapSnapshotId"],
+            "nodeRefs": sorted(record["map"]["nodeRefs"]),
+        },
+        "runtime": {
+            "engine": {
+                "runtime": runtime["engine"]["runtime"],
+                "executableSha256": runtime["engine"]["executableSha256"].lower(),
+                "moduleSha256": _lower_digest(runtime["engine"]["moduleSha256"]),
+            },
+            "extensions": sorted(
+                (
+                    {
+                        "namespace": item["namespace"],
+                        "sourceCommit": _lower_digest(item["sourceCommit"]),
+                        "buildId": item["buildId"],
+                        "artifactSha256": item["artifactSha256"].lower(),
+                    }
+                    for item in runtime["extensions"]
+                ),
+                key=lambda item: item["namespace"],
+            ),
+            "runtimeRoute": runtime["runtimeRoute"],
+        },
+        "environment": normalized_environment,
+        "protocol": {
+            **record["protocol"],
+            "artifactSha256": record["protocol"]["artifactSha256"].lower(),
+            "tools": sorted(
+                (
+                    {
+                        **item,
+                        "artifactSha256": item["artifactSha256"].lower(),
+                    }
+                    for item in record["protocol"]["tools"]
+                ),
+                key=lambda item: item["name"],
+            ),
+        },
+        "scenario": {
+            "scenarioSha256": record["scenario"]["scenarioSha256"].lower(),
+            "configurationSha256": record["scenario"]["configurationSha256"].lower(),
+            "cacheSha256": record["scenario"]["cacheSha256"].lower(),
+        },
+        "measurement": {
+            "metric": record["measurement"]["metric"],
+            "unit": record["measurement"]["unit"],
+            "scope": record["measurement"]["scope"],
+            "scopeRefs": sorted(record["measurement"]["scopeRefs"]),
+        },
+    }
+
+
+def _decimal_string(value: decimal.Decimal) -> str:
+    if value == 0:
+        return "0"
+    text = format(value.normalize(), "f")
+    return text.rstrip("0").rstrip(".") if "." in text else text
+
+
+def _median(values: list[decimal.Decimal]) -> decimal.Decimal:
+    ordered = sorted(values)
+    midpoint = len(ordered) // 2
+    if len(ordered) % 2:
+        return ordered[midpoint]
+    return (ordered[midpoint - 1] + ordered[midpoint]) / decimal.Decimal(2)
+
+
+def performance_summary(record: dict) -> dict:
+    values = [decimal.Decimal(item["value"]) for item in record["measurement"]["samples"]]
+    with decimal.localcontext() as context:
+        context.prec = 64
+        mean = sum(values, decimal.Decimal(0)) / decimal.Decimal(len(values))
+        mean = mean.quantize(
+            decimal.Decimal("0.000000001"), rounding=decimal.ROUND_HALF_EVEN
+        )
+    return {
+        "sampleCount": len(values),
+        "minimum": _decimal_string(min(values)),
+        "maximum": _decimal_string(max(values)),
+        "median": _decimal_string(_median(values)),
+        "arithmeticMean": _decimal_string(mean),
+    }
+
+
+def _compile_performance_groups(
+    observations: list[dict],
+) -> tuple[list[dict], list[dict]]:
+    grouped: dict[str, list[dict]] = {}
+    for observation in observations:
+        if observation["aggregateEligible"]:
+            grouped.setdefault(observation["aggregateKey"], []).append(observation)
+
+    groups: list[dict] = []
+    signals: list[dict] = []
+    for aggregate_key, members in sorted(grouped.items()):
+        ordered = sorted(members, key=lambda item: item["ref"])
+        medians = [decimal.Decimal(item["summary"]["median"]) for item in ordered]
+        installations = {
+            item["record"]["environment"]["installationId"] for item in ordered
+        }
+        evaluation = "insufficient-sample"
+        lower_fence: decimal.Decimal | None = None
+        upper_fence: decimal.Decimal | None = None
+        if len(ordered) >= 5 and len(installations) >= 3:
+            sorted_medians = sorted(medians)
+            midpoint = len(sorted_medians) // 2
+            lower_half = sorted_medians[:midpoint]
+            upper_half = sorted_medians[midpoint + (len(sorted_medians) % 2) :]
+            first_quartile = _median(lower_half)
+            third_quartile = _median(upper_half)
+            interquartile_range = third_quartile - first_quartile
+            if interquartile_range == 0:
+                evaluation = "insufficient-dispersion"
+            else:
+                evaluation = "evaluated"
+                lower_fence = max(
+                    decimal.Decimal(0),
+                    first_quartile - decimal.Decimal(3) * interquartile_range,
+                )
+                upper_fence = third_quartile + decimal.Decimal(3) * interquartile_range
+                for observation, observation_median in zip(ordered, medians):
+                    if observation_median < lower_fence or observation_median > upper_fence:
+                        identity = {
+                            "kind": "measurement-outlier",
+                            "aggregateKey": aggregate_key,
+                            "observationRef": observation["ref"],
+                        }
+                        signals.append(
+                            {
+                                "signalId": content_id("signal", identity),
+                                **identity,
+                                "observedMedian": _decimal_string(observation_median),
+                                "lowerFence": _decimal_string(lower_fence),
+                                "upperFence": _decimal_string(upper_fence),
+                                "state": "open",
+                            }
+                        )
+        groups.append(
+            {
+                "aggregateKey": aggregate_key,
+                "observationRefs": [item["ref"] for item in ordered],
+                "observationCount": len(ordered),
+                "installationCount": len(installations),
+                "medianOfObservationMedians": _decimal_string(_median(medians)),
+                "outlierEvaluation": evaluation,
+                "lowerFence": (
+                    _decimal_string(lower_fence) if lower_fence is not None else None
+                ),
+                "upperFence": (
+                    _decimal_string(upper_fence) if upper_fence is not None else None
+                ),
+            }
+        )
+    return groups, sorted(signals, key=lambda item: item["signalId"])
 
 
 def assertion_key(record: dict) -> str:
@@ -120,17 +315,18 @@ def applicability_intersection(left: dict, right: dict) -> dict | None:
 
 def _load_ledger(
     repository: pathlib.Path,
-) -> tuple[list[dict], list[dict], list[dict], list[dict]]:
+) -> tuple[list[dict], list[dict], list[dict], list[dict], list[dict]]:
     submissions: list[dict] = []
     entities: list[dict] = []
     assertions: list[dict] = []
     resolutions: list[dict] = []
+    performance_observations: list[dict] = []
     for directory in validator.submission_directories(repository):
         manifest = validator.load_json_document(directory / "submission.json")
         if not isinstance(manifest, dict):
             raise CompileError(f"submission manifest is not an object: {directory}")
         submission_id = manifest["submissionId"]
-        entity_records, assertion_records, resolution_records = (
+        entity_records, assertion_records, resolution_records, performance_records = (
             validator.load_submission_records(
                 directory, manifest["submissionClass"]
             )
@@ -148,6 +344,7 @@ def _load_ledger(
                 "entityCount": len(entity_records),
                 "assertionCount": len(assertion_records),
                 "resolutionCount": len(resolution_records),
+                "performanceObservationCount": len(performance_records),
             }
         )
         for record in entity_records:
@@ -180,7 +377,34 @@ def _load_ledger(
                     "record": record,
                 }
             )
-    return submissions, entities, assertions, resolutions
+        for record in performance_records:
+            reference = performance_ref(submission_id, record["observationId"])
+            comparison_context = normalize_performance_context(
+                record, include_installation=True
+            )
+            aggregate_context = normalize_performance_context(
+                record, include_installation=False
+            )
+            performance_observations.append(
+                {
+                    "ref": reference,
+                    "submissionId": submission_id,
+                    "comparisonKey": content_id("comparison-key", comparison_context),
+                    "aggregateKey": content_id(
+                        "aggregate-key",
+                        {
+                            **aggregate_context,
+                            "treatmentSha256": record["treatment"][
+                                "treatmentSha256"
+                            ].lower(),
+                        },
+                    ),
+                    "aggregateEligible": record["validity"]["state"] == "valid",
+                    "summary": performance_summary(record),
+                    "record": record,
+                }
+            )
+    return submissions, entities, assertions, resolutions, performance_observations
 
 
 def _detect_conflicts(assertions: list[dict]) -> list[dict]:
@@ -257,11 +481,14 @@ def _apply_resolutions(
 
 def compile_repository(repository: pathlib.Path, source_revision: str | None = None) -> dict:
     validator.validate_repository(repository)
-    submissions, entities, assertions, resolutions = _load_ledger(repository)
+    submissions, entities, assertions, resolutions, performance_observations = (
+        _load_ledger(repository)
+    )
     refs = (
         [item["ref"] for item in entities]
         + [item["ref"] for item in assertions]
         + [item["ref"] for item in resolutions]
+        + [item["ref"] for item in performance_observations]
     )
     if len(refs) != len(set(refs)):
         raise CompileError("ledger record references must be globally unique")
@@ -270,6 +497,26 @@ def compile_repository(repository: pathlib.Path, source_revision: str | None = N
         if assertion["record"]["subject"] not in entity_refs:
             raise CompileError(
                 f"assertion {assertion['ref']} references an unknown subject"
+            )
+    performance_by_ref = {
+        item["ref"]: item for item in performance_observations
+    }
+    for observation in performance_observations:
+        baseline_ref = observation["record"]["treatment"]["baselineObservationRef"]
+        if baseline_ref is None:
+            continue
+        baseline = performance_by_ref.get(baseline_ref)
+        if baseline is None:
+            raise CompileError(
+                f"performance observation {observation['ref']} references an unknown baseline"
+            )
+        if baseline_ref == observation["ref"]:
+            raise CompileError(
+                f"performance observation {observation['ref']} references itself as baseline"
+            )
+        if baseline["comparisonKey"] != observation["comparisonKey"]:
+            raise CompileError(
+                f"performance observation {observation['ref']} baseline is not comparable"
             )
 
     conflicts = _detect_conflicts(assertions)
@@ -302,22 +549,52 @@ def compile_repository(repository: pathlib.Path, source_revision: str | None = N
         )
 
     compiled_resolutions = sorted(resolutions, key=lambda item: item["ref"])
+    compiled_performance = sorted(
+        performance_observations, key=lambda item: item["ref"]
+    )
+    performance_groups, performance_signals = _compile_performance_groups(
+        compiled_performance
+    )
+    structural_submission_ids = {
+        item["submissionId"] for item in entities + assertions + resolutions
+    }
+    map_body = {
+        "schema": {
+            "name": "skyrim-render-map.structural-map-snapshot",
+            "major": 1,
+            "minor": 0,
+        },
+        "submissions": [
+            item
+            for item in sorted(submissions, key=lambda item: item["submissionId"])
+            if item["submissionId"] in structural_submission_ids
+        ],
+        "entities": sorted(entities, key=lambda item: item["ref"]),
+        "assertions": compiled_assertions,
+        "conflicts": conflicts,
+        "resolutions": compiled_resolutions,
+    }
+    map_snapshot_id = content_id("map-snapshot", map_body)
     body = {
         "schema": {
             "name": "skyrim-render-map.dataset-snapshot",
             "major": 1,
-            "minor": 1,
+            "minor": 2,
         },
         "generatedBy": {
             "name": "skyrim-render-map.compile-dataset",
             "version": TOOL_VERSION,
         },
+        "mapSnapshotId": map_snapshot_id,
         "sourceRevision": source_revision,
         "submissions": sorted(submissions, key=lambda item: item["submissionId"]),
         "entities": sorted(entities, key=lambda item: item["ref"]),
         "assertions": compiled_assertions,
         "conflicts": conflicts,
         "resolutions": compiled_resolutions,
+        "performanceObservations": compiled_performance,
+        "performanceGroups": performance_groups,
+        "performanceSignals": performance_signals,
         "statistics": {
             "submissionCount": len(submissions),
             "entityCount": len(entities),
@@ -325,6 +602,12 @@ def compile_repository(repository: pathlib.Path, source_revision: str | None = N
             "conflictCount": len(conflicts),
             "openConflictCount": sum(item["state"] == "open" for item in conflicts),
             "resolutionCount": len(resolutions),
+            "performanceObservationCount": len(performance_observations),
+            "aggregateEligiblePerformanceObservationCount": sum(
+                item["aggregateEligible"] for item in performance_observations
+            ),
+            "performanceGroupCount": len(performance_groups),
+            "performanceSignalCount": len(performance_signals),
         },
     }
     return {"snapshotId": content_id("snapshot", body), **body}

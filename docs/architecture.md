@@ -439,9 +439,11 @@ compilation with subject resolution, pairwise incompatible-value conflict
 signalling, and the unprivileged PR workflow.
 
 The next data slice is a bounded normalization of selected legacy engine and
-CSX claims into assertions. Observation, artifact-index, performance, and
-applicability-range schemas; additional conflict classes; signed receipts;
-immutable dataset releases; Pages; and producer export clients remain planned.
+CSX claims into assertions. Performance observation schema v1, deterministic
+grouping, and conservative outlier signalling are implemented. General runtime
+observation, artifact-index, and applicability-range schemas; additional
+conflict classes; signed receipts; immutable dataset releases; Pages; and
+producer export clients remain planned.
 
 This sequence establishes the managed resource before inviting easy player
 submissions and leaves storage, querying, and producer integration replaceable
