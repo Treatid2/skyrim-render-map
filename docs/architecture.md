@@ -30,10 +30,10 @@ The system distinguishes three decisions which must never be collapsed:
 2. **Semantic state** — a deterministic compiler decides whether the new
    assertions are compatible, duplicate, contested, or unresolved relative to
    the current ledger. It never chooses which conflicting assertion is true.
-3. **Acceptance** — an authorized maintainer decides whether valid evidence is
+3. **Admission** — an authorized maintainer decides whether valid evidence is
    worth admitting. GitHub auto-merge may perform the merge after approval and
    all current-head checks pass, but arbitrary public data is not admitted on
-   schema validity alone.
+   schema validity alone. Admission is not technical endorsement.
 
 A failed structural check returns only a standard rejection message and a link
 to the submission guide. Detailed contributor diagnostics can be added later
@@ -275,7 +275,10 @@ semi-automated protocol is:
 
 1. The PR passes `submission-structure`.
 2. The trusted compiler produces a semantic-impact and conflict report.
-3. An authorized reviewer accepts or rejects the evidence.
+3. An authorized reviewer applies the bounded relevance, provenance, privacy,
+   licensing, scope, and anti-abuse moderation criteria in
+   [the admission policy](admission-and-moderation.md). Reproducing the
+   technical conclusion is not required.
 4. The reviewer enables GitHub auto-merge.
 5. The merge queue reruns all checks against the latest `main`.
 6. The merge occurs only if the exact queued tree still passes.
@@ -290,6 +293,12 @@ PR.
 Later, conflict-free observations from allowlisted signed producer versions may
 be eligible for fully automatic merge. Assertions, amendments, resolutions,
 unknown producers, and performance outliers continue to require review.
+
+Merge admits the exact contribution to the ledger; it does not certify its
+conclusions. Semantic disagreement is retained as evidence and is not an
+automatic merge failure. The authoritative criteria, evidence-state meanings,
+and abuse response are defined in
+[the admission and moderation policy](admission-and-moderation.md).
 
 ## 11. Structural and semantic conflict model
 
@@ -351,8 +360,11 @@ The compiler emits a deterministic conflict record:
 ```
 
 An open conflict is visible in the PR report and published map. The compiler
-does not rank away or delete either participant. Map nodes may therefore be
-`supported`, `contested`, `unresolved`, `superseded`, or `retracted`.
+does not rank away or delete either participant. Map assertions may therefore
+be `provisional`, `supported`, `contested`, `resolved`, `superseded`,
+`retracted`, or `moderation-excluded`, with the meanings defined by the
+admission policy. Compiler v1.1's broader use of `supported` is a documented
+compatibility limitation, not a claim of independent corroboration.
 
 ## 12. Resolution protocol
 

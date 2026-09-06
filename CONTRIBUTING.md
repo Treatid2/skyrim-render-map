@@ -10,7 +10,9 @@ Submit data through a pull request. A data PR must:
    unchanged;
 4. contain only the bounded, declared file formats;
 5. pass the deterministic structure check; and
-6. include a Developer Certificate of Origin sign-off in each commit.
+6. declare `candidate-unreviewed` status and the contributor's GitHub identity;
+   and
+7. include a Developer Certificate of Origin sign-off in each commit.
 
 Use `git commit -s` to add the sign-off.
 
@@ -22,9 +24,10 @@ the package locally.
 python tools/validate_repository.py --repository .
 ```
 
-Passing structural validation does not mean that a conclusion has been
-accepted. Maintainers review provenance, applicability, evidence quality, and
-conflicts separately.
+Passing structural validation makes a submission eligible for admission
+review. Merging admits its immutable evidence to the ledger; it does not
+certify or endorse the conclusion. Maintainers apply the bounded criteria in
+[the admission and moderation policy](docs/admission-and-moderation.md).
 
 Assertion and amendment submissions place canonical records in
 `content/assertions.jsonl` and declare new subjects in
@@ -45,6 +48,28 @@ Do not edit or remove accepted information. Submit a new amendment, dispute,
 or resolution record that identifies the earlier record. Contradictory but
 well-formed evidence can coexist and will be signalled as contested until it
 is resolved.
+
+## Admission review
+
+Before enabling merge, the maintainer records that:
+
+- the trusted structure and deterministic compile checks passed against the
+  current canonical tree;
+- the contribution is relevant, coherent, inspectable, and no broader than its
+  evidence and applicability;
+- provenance, unavailable evidence, transformations, uncertainty, and known
+  conflicts are disclosed;
+- privacy, licensing, artifact, and DCO requirements are satisfied; and
+- the contribution is not obvious fabrication, spam, abusive duplication, or
+  volume abuse.
+
+Technical reproduction is not required for admission. A reviewer must not
+describe admission as proof. A previously unexplored assertion normally enters
+the generated map as provisional; lack of disagreement is not corroboration.
+
+Conflicts are review signals rather than automatic rejection. Reject or hold a
+submission only for a reason enumerated in the admission policy, and record the
+reason in the pull request.
 
 ## Tooling and governance
 

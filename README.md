@@ -42,7 +42,14 @@ It answers only whether the submission obeys the repository contract. Passing
 that check makes a contribution eligible for map review; it does not establish
 that its conclusions are correct.
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) and [PRIVACY.md](PRIVACY.md).
+Merging a data PR means that its evidence has been admitted to the ledger. It
+does not certify or endorse the conclusion. Uncorroborated assertions remain
+provisional, and conflicting evidence remains visible until an immutable
+resolution interprets it.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md),
+[the admission and moderation policy](docs/admission-and-moderation.md), and
+[PRIVACY.md](PRIVACY.md).
 
 ## Repository boundaries
 

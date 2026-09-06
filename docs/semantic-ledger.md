@@ -68,7 +68,9 @@ Two assertions create a pairwise `incompatible-value` conflict only when:
 3. their canonical JSON values differ; and
 4. their applicability domains overlap.
 
-Equal values are independent support, not duplicates to discard.
+Equal values are compatible support, not duplicates to discard. They establish
+independent corroboration only when their evidence lineages are independently
+identified under the admission policy.
 `multi-valued` predicates may contain different values without conflict.
 Pairwise records are intentional: a broad assertion may overlap two mutually
 disjoint version-specific assertions without falsely making those two
@@ -109,6 +111,9 @@ and do not replace the append-only ledger.
 
 This slice does not infer structured claims from imported Markdown or JSON,
 resolve arbitrary objects embedded in legacy files, express version ranges,
-detect ordering or identity-alias contradictions, rank evidence, or decide
-which contested value is correct. Those extensions must preserve the v1
-identities or publish explicit migration relations.
+detect ordering or identity-alias contradictions, represent evidence-lineage
+independence, rank evidence, or decide which contested value is correct. Its
+`supported` output therefore means only "not currently contested" and must be
+treated as provisional under
+[the admission policy](admission-and-moderation.md). Those extensions must
+preserve the v1 identities or publish explicit migration relations.
