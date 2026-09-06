@@ -1,0 +1,166 @@
+{
+  "schema": {
+    "name": "skyrim-render-map.visual-comparison",
+    "major": 1,
+    "minor": 0
+  },
+  "comparisonId": "visual-comparison-example",
+  "recordedAt": "2026-09-06T20:00:00Z",
+  "map": {
+    "mapSnapshotId": "map-snapshot-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "nodeRefs": [
+      "urn:skyrim-render-map:catalog:engine:frame"
+    ]
+  },
+  "runtime": {
+    "engine": {
+      "runtime": "skyrim-vr-1.4.15",
+      "executableSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "moduleSha256": null
+    },
+    "extensions": [
+      {
+        "namespace": "csx",
+        "sourceCommit": "cccccccccccccccccccccccccccccccccccccccc",
+        "buildId": "example-build",
+        "artifactSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+      }
+    ],
+    "runtimeRoute": "steamvr-physical-hmd"
+  },
+  "environment": {
+    "installationId": "inst-0123456789abcdef0123456789abcdef",
+    "cpuModel": "Example CPU",
+    "gpuModel": "Example GPU",
+    "gpuDriverVersion": "example-driver",
+    "renderContext": {
+      "renderWidth": 2000,
+      "renderHeight": 2200,
+      "viewCount": 2,
+      "refreshRateHz": "72",
+      "renderScale": "0.67",
+      "frameLimiter": "disabled",
+      "targetFrameRate": "72",
+      "reprojectionMode": "disabled"
+    }
+  },
+  "scenario": {
+    "label": "Illustrative synchronized stereo sequence",
+    "scenarioSha256": "1111111111111111111111111111111111111111111111111111111111111111",
+    "configurationSha256": "2222222222222222222222222222222222222222222222222222222222222222",
+    "cacheSha256": "3333333333333333333333333333333333333333333333333333333333333333"
+  },
+  "rubricRef": "urn:skyrim-render-map:submission:sub-example-visual#visual-rubric-example",
+  "stimuli": {
+    "a": {
+      "captureSha256": "4444444444444444444444444444444444444444444444444444444444444444",
+      "treatmentSha256": "5555555555555555555555555555555555555555555555555555555555555555",
+      "sourceObservationRef": null
+    },
+    "b": {
+      "captureSha256": "6666666666666666666666666666666666666666666666666666666666666666",
+      "treatmentSha256": "7777777777777777777777777777777777777777777777777777777777777777",
+      "sourceObservationRef": null
+    }
+  },
+  "protocol": {
+    "name": "illustrative-blinded-stereo-comparison",
+    "version": "1.0.0",
+    "artifactSha256": "8888888888888888888888888888888888888888888888888888888888888888",
+    "evaluationMode": "blinded-pairwise",
+    "presentation": "sequential",
+    "randomized": true,
+    "mediaKind": "stereo-sequence",
+    "frameCount": 3,
+    "frameRateHz": "72",
+    "viewCount": 2,
+    "preprocessingSha256": "9999999999999999999999999999999999999999999999999999999999999999"
+  },
+  "trials": [
+    {
+      "trialId": "trial-a-b",
+      "evaluator": {
+        "kind": "multimodal-model",
+        "name": "example-evaluator",
+        "version": "example-version",
+        "artifactSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "promptSha256": "abababababababababababababababababababababababababababababababab"
+      },
+      "presentationOrder": "a-b",
+      "judgments": [
+        {
+          "dimensionId": "temporal-stability",
+          "assessment": "a-better",
+          "differenceMagnitude": "moderate",
+          "confidence": "0.8",
+          "evidence": [
+            {
+              "firstFrame": 1,
+              "lastFrame": 2,
+              "view": "both",
+              "region": {
+                "x": "0.1",
+                "y": "0.1",
+                "width": "0.4",
+                "height": "0.5"
+              },
+              "notes": "Illustrative motion region."
+            }
+          ],
+          "notes": "Illustrative judgment only."
+        },
+        {
+          "dimensionId": "overall-preference",
+          "assessment": "a-better",
+          "differenceMagnitude": "slight",
+          "confidence": "0.6",
+          "evidence": [],
+          "notes": "Illustrative subjective preference."
+        }
+      ],
+      "notes": "First presentation order."
+    },
+    {
+      "trialId": "trial-b-a",
+      "evaluator": {
+        "kind": "multimodal-model",
+        "name": "example-evaluator",
+        "version": "example-version",
+        "artifactSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "promptSha256": "abababababababababababababababababababababababababababababababab"
+      },
+      "presentationOrder": "b-a",
+      "judgments": [
+        {
+          "dimensionId": "temporal-stability",
+          "assessment": "a-better",
+          "differenceMagnitude": "moderate",
+          "confidence": "0.75",
+          "evidence": [],
+          "notes": "The reversed order retained the same technical assessment."
+        },
+        {
+          "dimensionId": "overall-preference",
+          "assessment": "b-better",
+          "differenceMagnitude": "slight",
+          "confidence": "0.55",
+          "evidence": [],
+          "notes": "The subjective preference did not survive order reversal."
+        }
+      ],
+      "notes": "Reversed presentation order."
+    }
+  ],
+  "validity": {
+    "state": "valid",
+    "contamination": [],
+    "notes": "Illustrative evidence only; no known protocol contamination."
+  },
+  "privacy": {
+    "publicationOptIn": true,
+    "fieldsPreviewed": true,
+    "installationIdRandom": true,
+    "installationIdResettable": true
+  },
+  "notes": "Illustrative structure only; hashes and judgments are not evidence."
+}

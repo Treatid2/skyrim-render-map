@@ -19,6 +19,9 @@
     "performanceSignals",
     "optimizationExperiments",
     "optimizationSurfaces",
+    "visualRubrics",
+    "visualComparisons",
+    "visualComparisonSummaries",
     "statistics"
   ],
   "additionalProperties": false,
@@ -35,13 +38,13 @@
       "const": {
         "name": "skyrim-render-map.dataset-snapshot",
         "major": 1,
-        "minor": 3
+        "minor": 4
       }
     },
     "generatedBy": {
       "const": {
         "name": "skyrim-render-map.compile-dataset",
-        "version": "1.3.0"
+        "version": "1.4.0"
       }
     },
     "sourceRevision": { "type": ["string", "null"] },
@@ -73,6 +76,18 @@
       "type": "array",
       "items": { "type": "object" }
     },
+    "visualRubrics": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "visualComparisons": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "visualComparisonSummaries": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
     "statistics": {
       "type": "object",
       "required": [
@@ -87,7 +102,10 @@
         "performanceGroupCount",
         "performanceSignalCount",
         "optimizationExperimentCount",
-        "optimizationSurfaceCount"
+        "optimizationSurfaceCount",
+        "visualRubricCount",
+        "visualComparisonCount",
+        "visualComparisonSummaryCount"
       ],
       "additionalProperties": false,
       "properties": {
@@ -105,7 +123,10 @@
         "performanceGroupCount": { "type": "integer", "minimum": 0 },
         "performanceSignalCount": { "type": "integer", "minimum": 0 },
         "optimizationExperimentCount": { "type": "integer", "minimum": 0 },
-        "optimizationSurfaceCount": { "type": "integer", "minimum": 0 }
+        "optimizationSurfaceCount": { "type": "integer", "minimum": 0 },
+        "visualRubricCount": { "type": "integer", "minimum": 0 },
+        "visualComparisonCount": { "type": "integer", "minimum": 0 },
+        "visualComparisonSummaryCount": { "type": "integer", "minimum": 0 }
       }
     }
   }

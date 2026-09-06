@@ -55,6 +55,8 @@ preset searches use the
 [optimization experiment contract](docs/optimization-experiments.md).
 CSX profiler and preset-search artifacts can be normalized with the
 [optimization run exporter](docs/producer-export.md).
+Blinded human and multimodal-model assessments use the
+[visual evaluation contract](docs/visual-evaluation.md).
 
 ## Repository boundaries
 

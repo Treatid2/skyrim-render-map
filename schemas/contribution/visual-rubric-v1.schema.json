@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:skyrim-render-map:schema:visual-rubric:1",
+  "title": "Skyrim render-map visual evaluation rubric",
+  "type": "object",
+  "required": [
+    "schema",
+    "rubricId",
+    "version",
+    "label",
+    "scope",
+    "mapNodeRefs",
+    "dimensions",
+    "magnitudes",
+    "notes"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "const": {
+        "name": "skyrim-render-map.visual-rubric",
+        "major": 1,
+        "minor": 0
+      }
+    },
+    "rubricId": { "$ref": "#/$defs/recordId" },
+    "version": { "type": "string", "minLength": 1 },
+    "label": { "type": "string", "minLength": 1 },
+    "scope": {
+      "enum": ["common", "shader-family", "feature", "pass", "other"]
+    },
+    "mapNodeRefs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "dimensions": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/dimension" }
+    },
+    "magnitudes": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": { "$ref": "#/$defs/magnitude" }
+    },
+    "notes": { "type": "string" }
+  },
+  "$defs": {
+    "recordId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9.-]{2,127}$"
+    },
+    "dimension": {
+      "type": "object",
+      "required": ["dimensionId", "label", "description", "kind", "notes"],
+      "additionalProperties": false,
+      "properties": {
+        "dimensionId": { "$ref": "#/$defs/recordId" },
+        "label": { "type": "string", "minLength": 1 },
+        "description": { "type": "string", "minLength": 1 },
+        "kind": {
+          "enum": ["correctness", "visual-effect", "preference"]
+        },
+        "notes": { "type": "string" }
+      }
+    },
+    "magnitude": {
+      "type": "object",
+      "required": ["magnitudeId", "ordinal", "label", "description"],
+      "additionalProperties": false,
+      "properties": {
+        "magnitudeId": {
+          "enum": ["imperceptible", "slight", "moderate", "large", "severe"]
+        },
+        "ordinal": { "type": "integer", "minimum": 0, "maximum": 4 },
+        "label": { "type": "string", "minLength": 1 },
+        "description": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

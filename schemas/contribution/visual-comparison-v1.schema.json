@@ -1,0 +1,330 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:skyrim-render-map:schema:visual-comparison:1",
+  "title": "Skyrim render-map blinded visual comparison",
+  "type": "object",
+  "required": [
+    "schema",
+    "comparisonId",
+    "recordedAt",
+    "map",
+    "runtime",
+    "environment",
+    "scenario",
+    "rubricRef",
+    "stimuli",
+    "protocol",
+    "trials",
+    "validity",
+    "privacy",
+    "notes"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "const": {
+        "name": "skyrim-render-map.visual-comparison",
+        "major": 1,
+        "minor": 0
+      }
+    },
+    "comparisonId": { "$ref": "#/$defs/recordId" },
+    "recordedAt": { "type": "string", "format": "date-time" },
+    "map": {
+      "$ref": "urn:skyrim-render-map:schema:performance-observation:1#/properties/map"
+    },
+    "runtime": {
+      "$ref": "urn:skyrim-render-map:schema:performance-observation:1#/properties/runtime"
+    },
+    "environment": {
+      "$ref": "urn:skyrim-render-map:schema:performance-observation:1#/properties/environment"
+    },
+    "scenario": {
+      "$ref": "urn:skyrim-render-map:schema:performance-observation:1#/properties/scenario"
+    },
+    "rubricRef": { "type": "string", "minLength": 1 },
+    "stimuli": { "$ref": "#/$defs/stimuli" },
+    "protocol": { "$ref": "#/$defs/protocol" },
+    "trials": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/trial" }
+    },
+    "validity": { "$ref": "#/$defs/validity" },
+    "privacy": {
+      "$ref": "urn:skyrim-render-map:schema:performance-observation:1#/properties/privacy"
+    },
+    "notes": { "type": "string" }
+  },
+  "$defs": {
+    "recordId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9.-]{2,127}$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[A-Fa-f0-9]{64}$"
+    },
+    "decimal": {
+      "type": "string",
+      "pattern": "^(?:0|[1-9][0-9]{0,17})(?:\\.[0-9]{1,9})?$"
+    },
+    "stimuli": {
+      "type": "object",
+      "required": ["a", "b"],
+      "additionalProperties": false,
+      "properties": {
+        "a": { "$ref": "#/$defs/stimulus" },
+        "b": { "$ref": "#/$defs/stimulus" }
+      }
+    },
+    "stimulus": {
+      "type": "object",
+      "required": [
+        "captureSha256",
+        "treatmentSha256",
+        "sourceObservationRef"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "captureSha256": { "$ref": "#/$defs/sha256" },
+        "treatmentSha256": { "$ref": "#/$defs/sha256" },
+        "sourceObservationRef": { "type": "null" }
+      }
+    },
+    "protocol": {
+      "type": "object",
+      "required": [
+        "name",
+        "version",
+        "artifactSha256",
+        "evaluationMode",
+        "presentation",
+        "randomized",
+        "mediaKind",
+        "frameCount",
+        "frameRateHz",
+        "viewCount",
+        "preprocessingSha256"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 },
+        "artifactSha256": { "$ref": "#/$defs/sha256" },
+        "evaluationMode": { "const": "blinded-pairwise" },
+        "presentation": { "enum": ["simultaneous", "sequential"] },
+        "randomized": { "type": "boolean" },
+        "mediaKind": {
+          "enum": ["stereo-sequence", "mono-sequence", "still-pair"]
+        },
+        "frameCount": { "type": "integer", "minimum": 1 },
+        "frameRateHz": {
+          "anyOf": [
+            { "$ref": "#/$defs/positiveDecimal" },
+            { "type": "null" }
+          ]
+        },
+        "viewCount": { "enum": [1, 2] },
+        "preprocessingSha256": { "$ref": "#/$defs/sha256" }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "mediaKind": { "const": "stereo-sequence" } },
+            "required": ["mediaKind"]
+          },
+          "then": {
+            "properties": {
+              "viewCount": { "const": 2 },
+              "frameRateHz": { "$ref": "#/$defs/positiveDecimal" }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "mediaKind": { "const": "mono-sequence" } },
+            "required": ["mediaKind"]
+          },
+          "then": {
+            "properties": {
+              "viewCount": { "const": 1 },
+              "frameRateHz": { "$ref": "#/$defs/positiveDecimal" }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "mediaKind": { "const": "still-pair" } },
+            "required": ["mediaKind"]
+          },
+          "then": {
+            "properties": {
+              "viewCount": { "const": 1 },
+              "frameCount": { "const": 1 },
+              "frameRateHz": { "type": "null" }
+            }
+          }
+        }
+      ]
+    },
+    "positiveDecimal": {
+      "allOf": [
+        { "$ref": "#/$defs/decimal" },
+        { "not": { "const": "0" } }
+      ]
+    },
+    "trial": {
+      "type": "object",
+      "required": [
+        "trialId",
+        "evaluator",
+        "presentationOrder",
+        "judgments",
+        "notes"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "trialId": { "$ref": "#/$defs/recordId" },
+        "evaluator": { "$ref": "#/$defs/evaluator" },
+        "presentationOrder": { "enum": ["a-b", "b-a", "simultaneous"] },
+        "judgments": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/judgment" }
+        },
+        "notes": { "type": "string" }
+      }
+    },
+    "evaluator": {
+      "type": "object",
+      "required": [
+        "kind",
+        "name",
+        "version",
+        "artifactSha256",
+        "promptSha256"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "enum": ["human", "multimodal-model", "algorithm"] },
+        "name": { "type": "string", "minLength": 1 },
+        "version": { "type": ["string", "null"], "minLength": 1 },
+        "artifactSha256": {
+          "anyOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }]
+        },
+        "promptSha256": {
+          "anyOf": [{ "$ref": "#/$defs/sha256" }, { "type": "null" }]
+        }
+      }
+    },
+    "judgment": {
+      "type": "object",
+      "required": [
+        "dimensionId",
+        "assessment",
+        "differenceMagnitude",
+        "confidence",
+        "evidence",
+        "notes"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "dimensionId": { "$ref": "#/$defs/recordId" },
+        "assessment": {
+          "enum": ["a-better", "b-better", "equivalent", "inconclusive"]
+        },
+        "differenceMagnitude": {
+          "enum": ["imperceptible", "slight", "moderate", "large", "severe"]
+        },
+        "confidence": {
+          "allOf": [
+            { "$ref": "#/$defs/decimal" },
+            { "pattern": "^(?:0(?:\\.[0-9]{1,9})?|1(?:\\.0{1,9})?)$" }
+          ]
+        },
+        "evidence": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/evidence" }
+        },
+        "notes": { "type": "string" }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "required": ["firstFrame", "lastFrame", "view", "region", "notes"],
+      "additionalProperties": false,
+      "properties": {
+        "firstFrame": { "type": "integer", "minimum": 0 },
+        "lastFrame": { "type": "integer", "minimum": 0 },
+        "view": { "enum": ["left", "right", "both", "mono", "mirror"] },
+        "region": {
+          "anyOf": [
+            { "$ref": "#/$defs/region" },
+            { "type": "null" }
+          ]
+        },
+        "notes": { "type": "string" }
+      }
+    },
+    "region": {
+      "type": "object",
+      "required": ["x", "y", "width", "height"],
+      "additionalProperties": false,
+      "properties": {
+        "x": { "$ref": "#/$defs/unitDecimal" },
+        "y": { "$ref": "#/$defs/unitDecimal" },
+        "width": { "$ref": "#/$defs/positiveUnitDecimal" },
+        "height": { "$ref": "#/$defs/positiveUnitDecimal" }
+      }
+    },
+    "unitDecimal": {
+      "allOf": [
+        { "$ref": "#/$defs/decimal" },
+        { "pattern": "^(?:0(?:\\.[0-9]{1,9})?|1(?:\\.0{1,9})?)$" }
+      ]
+    },
+    "positiveUnitDecimal": {
+      "allOf": [
+        { "$ref": "#/$defs/unitDecimal" },
+        { "not": { "const": "0" } }
+      ]
+    },
+    "validity": {
+      "type": "object",
+      "required": ["state", "contamination", "notes"],
+      "additionalProperties": false,
+      "properties": {
+        "state": { "enum": ["valid", "contaminated", "inconclusive"] },
+        "contamination": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/contamination" }
+        },
+        "notes": { "type": "string" }
+      }
+    },
+    "contamination": {
+      "type": "object",
+      "required": ["kind", "firstTrial", "lastTrial", "notes"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "capture-overhead",
+            "driver-reset",
+            "evaluator-failure",
+            "focus-loss",
+            "loading-transition",
+            "media-mismatch",
+            "presentation-order",
+            "shader-compilation",
+            "unknown"
+          ]
+        },
+        "firstTrial": { "type": "integer", "minimum": 0 },
+        "lastTrial": { "type": "integer", "minimum": 0 },
+        "notes": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

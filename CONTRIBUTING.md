@@ -63,6 +63,11 @@ CSX profiler or inline producer artifacts into both record types for review.
 Its output still needs an ordinary submission manifest before it can be
 proposed as a data PR.
 
+Blinded visual evidence uses `content/visual-rubrics.jsonl` and
+`content/visual-comparisons.jsonl`. Keep correctness, visual effect, and
+preference distinct; retain every trial and disagreement; and follow the
+[visual evaluation guide](docs/visual-evaluation.md).
+
 Before opening a PR, also run:
 
 ```console
