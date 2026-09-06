@@ -1,0 +1,49 @@
+{
+  "schema": {
+    "name": "skyrim-render-map.submission",
+    "major": 1,
+    "minor": 0
+  },
+  "submissionId": "sub-skyrim-vr-accumulator-lifecycle-9935c-v1",
+  "submissionClass": "assertion",
+  "namespace": "skyrim-vr",
+  "createdAt": "2026-09-06T01:05:51+01:00",
+  "status": "candidate-unreviewed",
+  "contributor": {
+    "displayName": "Treatid2",
+    "github": "Treatid2",
+    "standing": "ordinary-contributor"
+  },
+  "provenance": {
+    "sourceRepository": "https://github.com/Treatid2/skyrim-render-map",
+    "sourceCommit": "bbb16c86963baaba41514285364031645d93d905",
+    "sourceParentCommit": "e476b8cf78a87ba914963fedeb7b84dce70bff4b",
+    "sourceRef": "main",
+    "sourceState": "merged",
+    "sourcePubliclyReachable": true,
+    "sourceDirty": false,
+    "importedAt": "2026-09-06T01:05:51+01:00",
+    "sourceContentTreeSha256": "75CCEF0F7235EAA198222E3E27C2908A943FE256AD7A44C392BA4BE59C9879EF",
+    "transformations": [
+      "Normalized the bounded BSShaderAccumulator class, three concrete accumulated-pass render entry points, the FinishAccumulating orchestration and its pre/post-resolve virtual stages, plus their addresses, relocation identities, vtable slots, ownership, calls, and confirmed stage order."
+    ],
+    "relatedUrls": [
+      "https://github.com/ParticleTroned/skyrim-community-shaders/pull/55",
+      "https://github.com/Treatid2/skyrim-render-map/tree/bbb16c86963baaba41514285364031645d93d905/submissions/2026/08/sub-csx-full-render-exploration-9935c5210",
+      "https://github.com/Treatid2/skyrim-render-map/pull/8",
+      "https://github.com/Treatid2/skyrim-render-map/pull/12"
+    ]
+  },
+  "licensing": {
+    "content": "CC-BY-SA-4.0",
+    "schemas": "CC0-1.0",
+    "dcoAcknowledged": true
+  },
+  "content": {
+    "root": "content",
+    "fileCount": 2,
+    "totalBytes": 32100,
+    "treeSha256": "6810FA60CE2B1A46FD6F7DFD1DB050401BC22E7236520A9CB1E0935D804E5F2D"
+  },
+  "notes": "This tranche fixes the accumulator-stage lifecycle without inferring an unrecorded direct call from accumulated batches into the BSBatchRenderer pass lifecycle. The pre-resolve stage is dispatched first and the post-resolve stage follows as a tail-call. Render-mode table selection, geometry admission, concrete resource flow, and performance timing remain separate append-only tranches."
+}
