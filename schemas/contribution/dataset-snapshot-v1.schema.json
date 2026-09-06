@@ -5,6 +5,7 @@
   "type": "object",
   "required": [
     "snapshotId",
+    "mapSnapshotId",
     "schema",
     "generatedBy",
     "sourceRevision",
@@ -13,6 +14,9 @@
     "assertions",
     "conflicts",
     "resolutions",
+    "performanceObservations",
+    "performanceGroups",
+    "performanceSignals",
     "statistics"
   ],
   "additionalProperties": false,
@@ -21,17 +25,21 @@
       "type": "string",
       "pattern": "^snapshot-[a-f0-9]{64}$"
     },
+    "mapSnapshotId": {
+      "type": "string",
+      "pattern": "^map-snapshot-[a-f0-9]{64}$"
+    },
     "schema": {
       "const": {
         "name": "skyrim-render-map.dataset-snapshot",
         "major": 1,
-        "minor": 1
+        "minor": 2
       }
     },
     "generatedBy": {
       "const": {
         "name": "skyrim-render-map.compile-dataset",
-        "version": "1.1.0"
+        "version": "1.2.0"
       }
     },
     "sourceRevision": { "type": ["string", "null"] },
@@ -43,6 +51,18 @@
       "items": { "$ref": "conflict-v1.schema.json" }
     },
     "resolutions": { "type": "array", "items": { "type": "object" } },
+    "performanceObservations": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "performanceGroups": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "performanceSignals": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
     "statistics": {
       "type": "object",
       "required": [
@@ -51,7 +71,11 @@
         "assertionCount",
         "conflictCount",
         "openConflictCount",
-        "resolutionCount"
+        "resolutionCount",
+        "performanceObservationCount",
+        "aggregateEligiblePerformanceObservationCount",
+        "performanceGroupCount",
+        "performanceSignalCount"
       ],
       "additionalProperties": false,
       "properties": {
@@ -60,7 +84,14 @@
         "assertionCount": { "type": "integer", "minimum": 0 },
         "conflictCount": { "type": "integer", "minimum": 0 },
         "openConflictCount": { "type": "integer", "minimum": 0 },
-        "resolutionCount": { "type": "integer", "minimum": 0 }
+        "resolutionCount": { "type": "integer", "minimum": 0 },
+        "performanceObservationCount": { "type": "integer", "minimum": 0 },
+        "aggregateEligiblePerformanceObservationCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "performanceGroupCount": { "type": "integer", "minimum": 0 },
+        "performanceSignalCount": { "type": "integer", "minimum": 0 }
       }
     }
   }

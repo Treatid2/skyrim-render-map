@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import decimal
 import hashlib
 import json
 import os
@@ -113,6 +114,95 @@ RESOLUTION_OUTCOMES = {
     "aliases",
     "unresolved",
 }
+PERFORMANCE_KEYS = {
+    "schema",
+    "observationId",
+    "recordedAt",
+    "map",
+    "runtime",
+    "environment",
+    "protocol",
+    "scenario",
+    "treatment",
+    "measurement",
+    "validity",
+    "privacy",
+    "notes",
+}
+PERFORMANCE_MAP_KEYS = {"mapSnapshotId", "nodeRefs"}
+PERFORMANCE_RUNTIME_KEYS = {"engine", "extensions", "runtimeRoute"}
+PERFORMANCE_ENVIRONMENT_KEYS = {
+    "installationId",
+    "cpuModel",
+    "gpuModel",
+    "gpuDriverVersion",
+    "renderContext",
+}
+PERFORMANCE_PROTOCOL_KEYS = {
+    "name",
+    "version",
+    "artifactSha256",
+    "tools",
+    "warmupSamples",
+    "requestedSamples",
+    "sampleIntervalFrames",
+}
+PERFORMANCE_SCENARIO_KEYS = {
+    "label",
+    "scenarioSha256",
+    "configurationSha256",
+    "cacheSha256",
+}
+PERFORMANCE_TREATMENT_KEYS = {
+    "label",
+    "treatmentSha256",
+    "baselineObservationRef",
+}
+PERFORMANCE_MEASUREMENT_KEYS = {"metric", "unit", "scope", "scopeRefs", "samples"}
+PERFORMANCE_VALIDITY_KEYS = {"state", "contamination", "notes"}
+PERFORMANCE_PRIVACY_KEYS = {
+    "publicationOptIn",
+    "fieldsPreviewed",
+    "installationIdRandom",
+    "installationIdResettable",
+}
+PERFORMANCE_RENDER_CONTEXT_KEYS = {
+    "renderWidth",
+    "renderHeight",
+    "viewCount",
+    "refreshRateHz",
+    "renderScale",
+    "frameLimiter",
+    "targetFrameRate",
+    "reprojectionMode",
+}
+PERFORMANCE_SAMPLE_KEYS = {"sequence", "value", "frame", "timestampOffsetMs"}
+PERFORMANCE_CONTAMINATION_KEYS = {"kind", "firstSample", "lastSample", "notes"}
+PERFORMANCE_TOOL_KEYS = {"name", "version", "artifactSha256"}
+PERFORMANCE_UNITS = {
+    "milliseconds",
+    "microseconds",
+    "frames-per-second",
+    "percent",
+    "count",
+}
+PERFORMANCE_SCOPES = {"whole-frame", "map-node", "map-node-set", "process", "other"}
+PERFORMANCE_VALIDITY_STATES = {"valid", "contaminated", "inconclusive"}
+PERFORMANCE_CONTAMINATION_KINDS = {
+    "background-activity",
+    "capture-overhead",
+    "driver-reset",
+    "focus-loss",
+    "frame-limiter",
+    "loading-transition",
+    "reprojection",
+    "shader-compilation",
+    "thermal-throttling",
+    "unknown",
+}
+INSTALLATION_ID_PATTERN = re.compile(r"^inst-[a-f0-9]{32}$")
+MAP_SNAPSHOT_ID_PATTERN = re.compile(r"^map-snapshot-[a-f0-9]{64}$")
+DECIMAL_PATTERN = re.compile(r"^(?:0|[1-9][0-9]{0,17})(?:\.[0-9]{1,9})?$")
 
 
 class ValidationError(RuntimeError):
@@ -400,15 +490,313 @@ def validate_resolution(record: dict, context: str) -> None:
         raise ValidationError(f"{context}.rationale must be a non-empty string")
 
 
+def _require_nonempty_string(value: object, context: str) -> None:
+    if not isinstance(value, str) or not value.strip():
+        raise ValidationError(f"{context} must be a non-empty string")
+
+
+def _require_nonnegative_integer(value: object, context: str) -> None:
+    if not isinstance(value, int) or isinstance(value, bool) or value < 0:
+        raise ValidationError(f"{context} must be a non-negative integer")
+
+
+def _require_canonical_decimal(value: object, context: str) -> None:
+    if not isinstance(value, str) or not DECIMAL_PATTERN.fullmatch(value):
+        raise ValidationError(f"{context} must be a canonical non-negative decimal string")
+    try:
+        parsed = decimal.Decimal(value)
+    except decimal.InvalidOperation as error:
+        raise ValidationError(f"invalid decimal at {context}") from error
+    if not parsed.is_finite() or parsed < 0:
+        raise ValidationError(f"invalid decimal at {context}")
+
+
+def _validate_performance_identity(record: dict, context: str) -> None:
+    map_identity = record["map"]
+    if not isinstance(map_identity, dict):
+        raise ValidationError(f"{context}.map must be an object")
+    _require_keys(map_identity, PERFORMANCE_MAP_KEYS, f"{context}.map")
+    if not isinstance(
+        map_identity["mapSnapshotId"], str
+    ) or not MAP_SNAPSHOT_ID_PATTERN.fullmatch(
+        map_identity["mapSnapshotId"]
+    ):
+        raise ValidationError(f"invalid mapSnapshotId at {context}")
+    _require_unique_strings(map_identity["nodeRefs"], f"{context}.map.nodeRefs", minimum=1)
+
+    runtime = record["runtime"]
+    if not isinstance(runtime, dict):
+        raise ValidationError(f"{context}.runtime must be an object")
+    _require_keys(runtime, PERFORMANCE_RUNTIME_KEYS, f"{context}.runtime")
+    engine = runtime["engine"]
+    if not isinstance(engine, dict):
+        raise ValidationError(f"{context}.runtime.engine must be an object")
+    _require_keys(engine, ENGINE_APPLICABILITY_KEYS, f"{context}.runtime.engine")
+    _require_nonempty_string(engine["runtime"], f"{context}.runtime.engine.runtime")
+    _require_optional_digest(
+        engine["executableSha256"], SHA256_PATTERN,
+        f"{context}.runtime.engine.executableSha256",
+    )
+    if engine["executableSha256"] is None:
+        raise ValidationError(f"{context}.runtime.engine.executableSha256 is required")
+    _require_optional_digest(
+        engine["moduleSha256"], SHA256_PATTERN,
+        f"{context}.runtime.engine.moduleSha256",
+    )
+    _require_nonempty_string(runtime["runtimeRoute"], f"{context}.runtime.runtimeRoute")
+    extensions = runtime["extensions"]
+    if not isinstance(extensions, list):
+        raise ValidationError(f"{context}.runtime.extensions must be an array")
+    extension_names: set[str] = set()
+    for index, extension in enumerate(extensions):
+        item_context = f"{context}.runtime.extensions[{index}]"
+        if not isinstance(extension, dict):
+            raise ValidationError(f"{item_context} must be an object")
+        _require_keys(extension, EXTENSION_APPLICABILITY_KEYS, item_context)
+        namespace = extension["namespace"]
+        if not isinstance(namespace, str) or not NAMESPACE_PATTERN.fullmatch(namespace):
+            raise ValidationError(f"invalid extension namespace at {item_context}")
+        if namespace in extension_names:
+            raise ValidationError(f"duplicate extension namespace at {context}")
+        extension_names.add(namespace)
+        _require_optional_digest(
+            extension["sourceCommit"], COMMIT_PATTERN,
+            f"{item_context}.sourceCommit",
+        )
+        _require_nonempty_string(extension["buildId"], f"{item_context}.buildId")
+        _require_optional_digest(
+            extension["artifactSha256"], SHA256_PATTERN,
+            f"{item_context}.artifactSha256",
+        )
+        if extension["artifactSha256"] is None:
+            raise ValidationError(f"{item_context}.artifactSha256 is required")
+
+
+def _validate_performance_environment(record: dict, context: str) -> None:
+    environment = record["environment"]
+    if not isinstance(environment, dict):
+        raise ValidationError(f"{context}.environment must be an object")
+    _require_keys(environment, PERFORMANCE_ENVIRONMENT_KEYS, f"{context}.environment")
+    installation_id = environment["installationId"]
+    if not isinstance(installation_id, str) or not INSTALLATION_ID_PATTERN.fullmatch(
+        installation_id
+    ):
+        raise ValidationError(f"invalid installationId at {context}")
+    for field in ("cpuModel", "gpuModel", "gpuDriverVersion"):
+        _require_nonempty_string(environment[field], f"{context}.environment.{field}")
+    render_context = environment["renderContext"]
+    if not isinstance(render_context, dict):
+        raise ValidationError(f"{context}.environment.renderContext must be an object")
+    _require_keys(
+        render_context,
+        PERFORMANCE_RENDER_CONTEXT_KEYS,
+        f"{context}.environment.renderContext",
+    )
+    for field in ("renderWidth", "renderHeight", "viewCount"):
+        _require_nonnegative_integer(
+            render_context[field], f"{context}.environment.renderContext.{field}"
+        )
+        if render_context[field] == 0:
+            raise ValidationError(
+                f"{context}.environment.renderContext.{field} must be positive"
+            )
+    for field in ("refreshRateHz", "renderScale"):
+        _require_canonical_decimal(
+            render_context[field], f"{context}.environment.renderContext.{field}"
+        )
+    for field in ("frameLimiter", "reprojectionMode"):
+        _require_nonempty_string(
+            render_context[field], f"{context}.environment.renderContext.{field}"
+        )
+    if render_context["targetFrameRate"] is not None:
+        _require_canonical_decimal(
+            render_context["targetFrameRate"],
+            f"{context}.environment.renderContext.targetFrameRate",
+        )
+
+
+def _validate_performance_protocol(record: dict, context: str) -> None:
+    protocol = record["protocol"]
+    if not isinstance(protocol, dict):
+        raise ValidationError(f"{context}.protocol must be an object")
+    _require_keys(protocol, PERFORMANCE_PROTOCOL_KEYS, f"{context}.protocol")
+    for field in ("name", "version"):
+        _require_nonempty_string(protocol[field], f"{context}.protocol.{field}")
+    _require_optional_digest(
+        protocol["artifactSha256"], SHA256_PATTERN,
+        f"{context}.protocol.artifactSha256",
+    )
+    if protocol["artifactSha256"] is None:
+        raise ValidationError(f"{context}.protocol.artifactSha256 is required")
+    for field in ("warmupSamples", "requestedSamples", "sampleIntervalFrames"):
+        _require_nonnegative_integer(protocol[field], f"{context}.protocol.{field}")
+    if protocol["requestedSamples"] == 0 or protocol["sampleIntervalFrames"] == 0:
+        raise ValidationError(f"{context}.protocol sample counts must be positive")
+    tools = protocol["tools"]
+    if not isinstance(tools, list) or not tools:
+        raise ValidationError(f"{context}.protocol.tools must be a non-empty array")
+    tool_names: set[str] = set()
+    for index, tool in enumerate(tools):
+        item_context = f"{context}.protocol.tools[{index}]"
+        if not isinstance(tool, dict):
+            raise ValidationError(f"{item_context} must be an object")
+        _require_keys(tool, PERFORMANCE_TOOL_KEYS, item_context)
+        for field in ("name", "version"):
+            _require_nonempty_string(tool[field], f"{item_context}.{field}")
+        if tool["name"] in tool_names:
+            raise ValidationError(f"duplicate protocol tool name at {context}")
+        tool_names.add(tool["name"])
+        _require_optional_digest(
+            tool["artifactSha256"], SHA256_PATTERN,
+            f"{item_context}.artifactSha256",
+        )
+        if tool["artifactSha256"] is None:
+            raise ValidationError(f"{item_context}.artifactSha256 is required")
+
+
+def _validate_performance_measurement(record: dict, context: str) -> None:
+    measurement = record["measurement"]
+    if not isinstance(measurement, dict):
+        raise ValidationError(f"{context}.measurement must be an object")
+    _require_keys(measurement, PERFORMANCE_MEASUREMENT_KEYS, f"{context}.measurement")
+    _require_nonempty_string(measurement["metric"], f"{context}.measurement.metric")
+    if measurement["unit"] not in PERFORMANCE_UNITS:
+        raise ValidationError(f"invalid performance unit at {context}")
+    if measurement["scope"] not in PERFORMANCE_SCOPES:
+        raise ValidationError(f"invalid performance scope at {context}")
+    _require_unique_strings(
+        measurement["scopeRefs"], f"{context}.measurement.scopeRefs",
+        minimum=1 if measurement["scope"] in {"map-node", "map-node-set"} else 0,
+    )
+    if measurement["scope"] in {"map-node", "map-node-set"} and not set(
+        measurement["scopeRefs"]
+    ).issubset(record["map"]["nodeRefs"]):
+        raise ValidationError(
+            f"map-node scopeRefs must also appear in map.nodeRefs at {context}"
+        )
+    samples = measurement["samples"]
+    if not isinstance(samples, list) or not samples:
+        raise ValidationError(f"{context}.measurement.samples must be a non-empty array")
+    if len(samples) > record["protocol"]["requestedSamples"]:
+        raise ValidationError(f"retained samples exceed requestedSamples at {context}")
+    for index, sample in enumerate(samples):
+        item_context = f"{context}.measurement.samples[{index}]"
+        if not isinstance(sample, dict):
+            raise ValidationError(f"{item_context} must be an object")
+        _require_keys(sample, PERFORMANCE_SAMPLE_KEYS, item_context)
+        if sample["sequence"] != index:
+            raise ValidationError(f"sample sequence must be contiguous at {item_context}")
+        _require_canonical_decimal(sample["value"], f"{item_context}.value")
+        if sample["frame"] is not None:
+            _require_nonnegative_integer(sample["frame"], f"{item_context}.frame")
+        if sample["timestampOffsetMs"] is not None:
+            _require_canonical_decimal(
+                sample["timestampOffsetMs"], f"{item_context}.timestampOffsetMs"
+            )
+
+
+def _validate_performance_validity(record: dict, context: str) -> None:
+    validity = record["validity"]
+    if not isinstance(validity, dict):
+        raise ValidationError(f"{context}.validity must be an object")
+    _require_keys(validity, PERFORMANCE_VALIDITY_KEYS, f"{context}.validity")
+    if validity["state"] not in PERFORMANCE_VALIDITY_STATES:
+        raise ValidationError(f"invalid validity state at {context}")
+    if not isinstance(validity["notes"], str):
+        raise ValidationError(f"{context}.validity.notes must be a string")
+    contamination = validity["contamination"]
+    if not isinstance(contamination, list):
+        raise ValidationError(f"{context}.validity.contamination must be an array")
+    if validity["state"] == "valid" and contamination:
+        raise ValidationError(f"valid performance observations cannot declare contamination")
+    if validity["state"] != "valid" and not validity["notes"].strip():
+        raise ValidationError(f"non-valid performance observations require validity notes")
+    sample_count = len(record["measurement"]["samples"])
+    for index, item in enumerate(contamination):
+        item_context = f"{context}.validity.contamination[{index}]"
+        if not isinstance(item, dict):
+            raise ValidationError(f"{item_context} must be an object")
+        _require_keys(item, PERFORMANCE_CONTAMINATION_KEYS, item_context)
+        if item["kind"] not in PERFORMANCE_CONTAMINATION_KINDS:
+            raise ValidationError(f"invalid contamination kind at {item_context}")
+        for field in ("firstSample", "lastSample"):
+            _require_nonnegative_integer(item[field], f"{item_context}.{field}")
+        if item["firstSample"] > item["lastSample"] or item["lastSample"] >= sample_count:
+            raise ValidationError(f"invalid contamination sample range at {item_context}")
+        _require_nonempty_string(item["notes"], f"{item_context}.notes")
+
+
+def validate_performance_observation(record: dict, context: str) -> None:
+    if not isinstance(record, dict):
+        raise ValidationError(f"{context} must be an object")
+    _require_keys(record, PERFORMANCE_KEYS, context)
+    if record["schema"] != {
+        "name": "skyrim-render-map.performance-observation",
+        "major": 1,
+        "minor": 0,
+    }:
+        raise ValidationError(f"unsupported performance observation schema at {context}")
+    observation_id = record["observationId"]
+    if not isinstance(observation_id, str) or not RECORD_ID_PATTERN.fullmatch(observation_id):
+        raise ValidationError(f"invalid observationId at {context}")
+    _parse_time(record["recordedAt"], f"{context}.recordedAt")
+    _validate_performance_identity(record, context)
+    _validate_performance_environment(record, context)
+    _validate_performance_protocol(record, context)
+
+    scenario = record["scenario"]
+    if not isinstance(scenario, dict):
+        raise ValidationError(f"{context}.scenario must be an object")
+    _require_keys(scenario, PERFORMANCE_SCENARIO_KEYS, f"{context}.scenario")
+    _require_nonempty_string(scenario["label"], f"{context}.scenario.label")
+    for field in ("scenarioSha256", "configurationSha256", "cacheSha256"):
+        _require_optional_digest(
+            scenario[field], SHA256_PATTERN, f"{context}.scenario.{field}"
+        )
+        if scenario[field] is None:
+            raise ValidationError(f"{context}.scenario.{field} is required")
+
+    treatment = record["treatment"]
+    if not isinstance(treatment, dict):
+        raise ValidationError(f"{context}.treatment must be an object")
+    _require_keys(treatment, PERFORMANCE_TREATMENT_KEYS, f"{context}.treatment")
+    _require_nonempty_string(treatment["label"], f"{context}.treatment.label")
+    _require_optional_digest(
+        treatment["treatmentSha256"], SHA256_PATTERN,
+        f"{context}.treatment.treatmentSha256",
+    )
+    if treatment["treatmentSha256"] is None:
+        raise ValidationError(f"{context}.treatment.treatmentSha256 is required")
+    if treatment["baselineObservationRef"] is not None:
+        _require_nonempty_string(
+            treatment["baselineObservationRef"],
+            f"{context}.treatment.baselineObservationRef",
+        )
+
+    _validate_performance_measurement(record, context)
+    _validate_performance_validity(record, context)
+
+    privacy = record["privacy"]
+    if not isinstance(privacy, dict):
+        raise ValidationError(f"{context}.privacy must be an object")
+    _require_keys(privacy, PERFORMANCE_PRIVACY_KEYS, f"{context}.privacy")
+    if any(privacy[field] is not True for field in PERFORMANCE_PRIVACY_KEYS):
+        raise ValidationError(f"performance privacy declarations must all be true at {context}")
+    if not isinstance(record["notes"], str):
+        raise ValidationError(f"{context}.notes must be a string")
+
+
 def load_submission_records(
     directory: pathlib.Path, submission_class: str
-) -> tuple[list[dict], list[dict], list[dict]]:
+) -> tuple[list[dict], list[dict], list[dict], list[dict]]:
     entities_path = directory / "content" / "entities.jsonl"
     assertions_path = directory / "content" / "assertions.jsonl"
     resolutions_path = directory / "content" / "resolutions.jsonl"
+    performance_path = directory / "content" / "performance-observations.jsonl"
     entities = load_jsonl(entities_path) if entities_path.is_file() else []
     assertions = load_jsonl(assertions_path) if assertions_path.is_file() else []
     resolutions = load_jsonl(resolutions_path) if resolutions_path.is_file() else []
+    performance = load_jsonl(performance_path) if performance_path.is_file() else []
 
     if submission_class in {"assertion", "amendment"} and not assertions:
         raise ValidationError(f"{submission_class} submissions require assertions.jsonl")
@@ -418,6 +806,14 @@ def load_submission_records(
         raise ValidationError("assertions.jsonl is not valid for this submission class")
     if resolutions and submission_class != "resolution":
         raise ValidationError("resolutions.jsonl requires a resolution submission")
+    if performance and submission_class != "observation":
+        raise ValidationError(
+            "performance-observations.jsonl requires an observation submission"
+        )
+    if performance and entities:
+        raise ValidationError(
+            "performance observation submissions must not declare structural entities"
+        )
     if entities and submission_class == "resolution":
         raise ValidationError("resolution submissions must not declare entities")
 
@@ -439,10 +835,23 @@ def load_submission_records(
         if resolution["resolutionId"] in resolution_ids:
             raise ValidationError(f"duplicate resolutionId: {resolution['resolutionId']}")
         resolution_ids.add(resolution["resolutionId"])
-    record_ids = list(entity_ids) + list(assertion_ids) + list(resolution_ids)
+    performance_ids: set[str] = set()
+    for index, observation in enumerate(performance, start=1):
+        validate_performance_observation(observation, f"{performance_path}:{index}")
+        if observation["observationId"] in performance_ids:
+            raise ValidationError(
+                f"duplicate performance observationId: {observation['observationId']}"
+            )
+        performance_ids.add(observation["observationId"])
+    record_ids = (
+        list(entity_ids)
+        + list(assertion_ids)
+        + list(resolution_ids)
+        + list(performance_ids)
+    )
     if len(record_ids) != len(set(record_ids)):
         raise ValidationError("submission-local record IDs must be unique across record types")
-    return entities, assertions, resolutions
+    return entities, assertions, resolutions, performance
 
 
 def validate_submission(directory: pathlib.Path) -> TreeSummary:

@@ -49,7 +49,14 @@ Assertion and amendment submissions place canonical records in
 `content/assertions.jsonl` and declare new subjects in
 `content/entities.jsonl`. Resolution submissions use
 `content/resolutions.jsonl`. See [docs/semantic-ledger.md](docs/semantic-ledger.md)
-and the schemas under `schemas/contribution/`. Before opening a PR, also run:
+and the schemas under `schemas/contribution/`.
+
+Performance observations use `content/performance-observations.jsonl` and the
+exact identity, sampling, contamination, privacy, grouping, and outlier
+contracts in
+[the performance contribution guide](docs/performance-contributions.md).
+
+Before opening a PR, also run:
 
 ```console
 python tools/compile_dataset.py --repository . --output .validation-output/snapshot.json
