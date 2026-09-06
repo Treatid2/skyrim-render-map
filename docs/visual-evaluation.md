@@ -18,6 +18,8 @@ submissions/YYYY/MM/<submission-id>/
   submission.json
   content/
     visual-rubrics.jsonl
+    artifacts.jsonl
+    visual-captures.jsonl
     visual-comparisons.jsonl
     method.md                    # optional
 ```
@@ -26,6 +28,8 @@ Rubrics and comparisons may be submitted together. A comparison may also
 reference a rubric from an earlier accepted submission. The schemas are:
 
 - [`visual-rubric-v1`](../schemas/contribution/visual-rubric-v1.schema.json);
+- [`artifact-v1`](../schemas/contribution/artifact-v1.schema.json);
+- [`visual-capture-v1`](../schemas/contribution/visual-capture-v1.schema.json);
 - [`visual-comparison-v1`](../schemas/contribution/visual-comparison-v1.schema.json).
 
 The [rubric](../examples/visual-rubric-v1.json) and
@@ -64,9 +68,10 @@ frame count and rate, and the exact preprocessing digest. Each sequential trial
 records `a-b` or `b-a` presentation order. Reversing order is strongly
 recommended because order-sensitive answers remain visible as disagreement.
 
-`sourceObservationRef` is reserved and must be `null` in v1. A later capture
-observation contract will provide a resolvable source record without weakening
-the current no-dangling-reference rule.
+`sourceObservationRef` resolves each stimulus to an immutable capture
+observation. The compiler verifies the capture and treatment digests, comparable
+runtime context, media geometry and timing, capture validity, and the linked
+artifact. See the [capture evidence contract](capture-evidence.md).
 
 ## Evaluators
 

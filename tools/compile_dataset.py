@@ -17,7 +17,7 @@ from typing import Any
 import validate_repository as validator
 
 
-TOOL_VERSION = "1.4.0"
+TOOL_VERSION = "1.5.0"
 
 
 class CompileError(RuntimeError):
@@ -80,6 +80,14 @@ def visual_comparison_ref(submission_id: str, comparison_id: str) -> str:
         "urn:skyrim-render-map:submission:"
         f"{submission_id}#{comparison_id}"
     )
+
+
+def artifact_ref(submission_id: str, artifact_id: str) -> str:
+    return f"urn:skyrim-render-map:submission:{submission_id}#{artifact_id}"
+
+
+def visual_capture_ref(submission_id: str, capture_id: str) -> str:
+    return f"urn:skyrim-render-map:submission:{submission_id}#{capture_id}"
 
 
 def candidate_ref(experiment_reference: str, candidate_id: str) -> str:
@@ -349,6 +357,8 @@ def _load_ledger(
     list[dict],
     list[dict],
     list[dict],
+    list[dict],
+    list[dict],
 ]:
     submissions: list[dict] = []
     entities: list[dict] = []
@@ -358,6 +368,8 @@ def _load_ledger(
     optimization_experiments: list[dict] = []
     visual_rubrics: list[dict] = []
     visual_comparisons: list[dict] = []
+    artifacts: list[dict] = []
+    visual_captures: list[dict] = []
     for directory in validator.submission_directories(repository):
         manifest = validator.load_json_document(directory / "submission.json")
         if not isinstance(manifest, dict):
@@ -371,6 +383,8 @@ def _load_ledger(
             optimization_records,
             rubric_records,
             comparison_records,
+            artifact_records,
+            capture_records,
         ) = validator.load_submission_records(directory, manifest["submissionClass"])
         submissions.append(
             {
@@ -389,6 +403,8 @@ def _load_ledger(
                 "optimizationExperimentCount": len(optimization_records),
                 "visualRubricCount": len(rubric_records),
                 "visualComparisonCount": len(comparison_records),
+                "artifactCount": len(artifact_records),
+                "visualCaptureCount": len(capture_records),
             }
         )
         for record in entity_records:
@@ -474,6 +490,22 @@ def _load_ledger(
                     "record": record,
                 }
             )
+        for record in artifact_records:
+            artifacts.append(
+                {
+                    "ref": artifact_ref(submission_id, record["artifactId"]),
+                    "submissionId": submission_id,
+                    "record": record,
+                }
+            )
+        for record in capture_records:
+            visual_captures.append(
+                {
+                    "ref": visual_capture_ref(submission_id, record["captureId"]),
+                    "submissionId": submission_id,
+                    "record": record,
+                }
+            )
     return (
         submissions,
         entities,
@@ -483,6 +515,8 @@ def _load_ledger(
         optimization_experiments,
         visual_rubrics,
         visual_comparisons,
+        artifacts,
+        visual_captures,
     )
 
 
@@ -775,10 +809,115 @@ def compile_optimization_surfaces(
     return compiled_experiments, surfaces
 
 
+def validate_visual_capture_links(
+    artifacts: list[dict], captures: list[dict]
+) -> None:
+    artifacts_by_ref = {item["ref"]: item for item in artifacts}
+    captures_by_ref = {item["ref"]: item for item in captures}
+    for capture in captures:
+        record = capture["record"]
+        artifact = artifacts_by_ref.get(record["artifactRef"])
+        if artifact is None:
+            raise CompileError(
+                f"visual capture {capture['ref']} references unknown artifact "
+                f"{record['artifactRef']}"
+            )
+        artifact_record = artifact["record"]
+        if artifact_record["artifactSha256"].lower() != record["captureSha256"].lower():
+            raise CompileError(
+                f"visual capture {capture['ref']} digest does not match its artifact"
+            )
+        if artifact_record["contentKind"] != record["protocol"]["mediaKind"]:
+            raise CompileError(
+                f"visual capture {capture['ref']} media kind does not match its artifact"
+            )
+        baseline_ref = record["treatment"]["baselineObservationRef"]
+        if baseline_ref is None:
+            continue
+        baseline = captures_by_ref.get(baseline_ref)
+        if baseline is None:
+            raise CompileError(
+                f"visual capture {capture['ref']} references unknown capture baseline"
+            )
+        if baseline_ref == capture["ref"]:
+            raise CompileError(f"visual capture {capture['ref']} references itself as baseline")
+        if canonical_json(_capture_comparison_context(baseline["record"])) != canonical_json(
+            _capture_comparison_context(record)
+        ):
+            raise CompileError(
+                f"visual capture {capture['ref']} baseline is not comparable"
+            )
+
+
+def compile_artifact_index(artifacts: list[dict]) -> list[dict]:
+    groups: dict[str, list[dict]] = {}
+    for artifact in artifacts:
+        digest = artifact["record"]["artifactSha256"].lower()
+        groups.setdefault(digest, []).append(artifact)
+    index: list[dict] = []
+    metadata_fields = (
+        "mediaType",
+        "contentKind",
+        "encoding",
+        "byteLength",
+        "expandedByteLength",
+    )
+    for digest in sorted(groups):
+        records = groups[digest]
+        metadata = {
+            field: sorted(
+                {item["record"][field] for item in records}, key=lambda value: str(value)
+            )
+            for field in metadata_fields
+        }
+        metadata_state = (
+            "consistent"
+            if all(len(values) == 1 for values in metadata.values())
+            else "contested"
+        )
+        index.append(
+            {
+                "artifactSha256": digest,
+                "recordRefs": sorted(item["ref"] for item in records),
+                "locations": sorted(
+                    {
+                        location
+                        for item in records
+                        for location in item["record"]["locations"]
+                    }
+                ),
+                "licenses": sorted({item["record"]["license"] for item in records}),
+                "retentionClasses": sorted(
+                    {item["record"]["retentionClass"] for item in records}
+                ),
+                "metadataState": metadata_state,
+                "metadata": metadata,
+            }
+        )
+    return index
+
+
+def _capture_comparison_context(record: dict) -> dict:
+    protocol = record["protocol"]
+    return {
+        "map": record["map"],
+        "runtime": record["runtime"],
+        "environment": record["environment"],
+        "scenario": record["scenario"],
+        "media": {
+            "mediaKind": protocol["mediaKind"],
+            "frameCount": protocol["frameCount"],
+            "frameRateHz": protocol["frameRateHz"],
+            "viewCount": protocol["viewCount"],
+        },
+    }
+
+
 def compile_visual_comparison_summaries(
-    rubrics: list[dict], comparisons: list[dict]
+    rubrics: list[dict], comparisons: list[dict], captures: list[dict]
 ) -> list[dict]:
     rubric_by_ref = {item["ref"]: item for item in rubrics}
+    capture_by_ref = {item["ref"]: item for item in captures}
     summaries: list[dict] = []
     for comparison in sorted(comparisons, key=lambda item: item["ref"]):
         record = comparison["record"]
@@ -795,6 +934,58 @@ def compile_visual_comparison_summaries(
             raise CompileError(
                 f"visual comparison {comparison['ref']} does not cover its rubric nodes"
             )
+        expected_context = {
+            "map": record["map"],
+            "runtime": record["runtime"],
+            "environment": record["environment"],
+            "scenario": record["scenario"],
+            "media": {
+                key: record["protocol"][key]
+                for key in ("mediaKind", "frameCount", "frameRateHz", "viewCount")
+            },
+        }
+        capture_protocol: dict | None = None
+        for stimulus_id in ("a", "b"):
+            stimulus = record["stimuli"][stimulus_id]
+            capture = capture_by_ref.get(stimulus["sourceObservationRef"])
+            if capture is None:
+                raise CompileError(
+                    f"visual comparison {comparison['ref']} stimulus {stimulus_id} "
+                    "references unknown visual capture"
+                )
+            capture_record = capture["record"]
+            if capture_record["captureSha256"].lower() != stimulus["captureSha256"].lower():
+                raise CompileError(
+                    f"visual comparison {comparison['ref']} stimulus {stimulus_id} "
+                    "capture digest mismatch"
+                )
+            if capture_record["treatment"]["treatmentSha256"].lower() != stimulus[
+                "treatmentSha256"
+            ].lower():
+                raise CompileError(
+                    f"visual comparison {comparison['ref']} stimulus {stimulus_id} "
+                    "treatment digest mismatch"
+                )
+            if canonical_json(_capture_comparison_context(capture_record)) != canonical_json(
+                expected_context
+            ):
+                raise CompileError(
+                    f"visual comparison {comparison['ref']} stimulus {stimulus_id} "
+                    "capture context is not comparable"
+                )
+            if capture_record["validity"]["state"] != "valid":
+                raise CompileError(
+                    f"visual comparison {comparison['ref']} stimulus {stimulus_id} "
+                    "does not reference a valid capture"
+                )
+            if capture_protocol is None:
+                capture_protocol = capture_record["protocol"]
+            elif canonical_json(capture_protocol) != canonical_json(
+                capture_record["protocol"]
+            ):
+                raise CompileError(
+                    f"visual comparison {comparison['ref']} capture protocols differ"
+                )
         dimensions = {
             item["dimensionId"]: item for item in rubric_record["dimensions"]
         }
@@ -885,6 +1076,8 @@ def compile_repository(repository: pathlib.Path, source_revision: str | None = N
         optimization_experiments,
         visual_rubrics,
         visual_comparisons,
+        artifacts,
+        visual_captures,
     ) = _load_ledger(repository)
     refs = (
         [item["ref"] for item in entities]
@@ -894,6 +1087,8 @@ def compile_repository(repository: pathlib.Path, source_revision: str | None = N
         + [item["ref"] for item in optimization_experiments]
         + [item["ref"] for item in visual_rubrics]
         + [item["ref"] for item in visual_comparisons]
+        + [item["ref"] for item in artifacts]
+        + [item["ref"] for item in visual_captures]
     )
     if len(refs) != len(set(refs)):
         raise CompileError("ledger record references must be globally unique")
@@ -926,8 +1121,10 @@ def compile_repository(repository: pathlib.Path, source_revision: str | None = N
     compiled_optimization, optimization_surfaces = compile_optimization_surfaces(
         optimization_experiments, performance_by_ref
     )
+    validate_visual_capture_links(artifacts, visual_captures)
+    artifact_index = compile_artifact_index(artifacts)
     visual_comparison_summaries = compile_visual_comparison_summaries(
-        visual_rubrics, visual_comparisons
+        visual_rubrics, visual_comparisons, visual_captures
     )
 
     conflicts = _detect_conflicts(assertions)
@@ -990,7 +1187,7 @@ def compile_repository(repository: pathlib.Path, source_revision: str | None = N
         "schema": {
             "name": "skyrim-render-map.dataset-snapshot",
             "major": 1,
-            "minor": 4,
+            "minor": 5,
         },
         "generatedBy": {
             "name": "skyrim-render-map.compile-dataset",
@@ -1009,6 +1206,9 @@ def compile_repository(repository: pathlib.Path, source_revision: str | None = N
         "optimizationExperiments": compiled_optimization,
         "optimizationSurfaces": optimization_surfaces,
         "visualRubrics": sorted(visual_rubrics, key=lambda item: item["ref"]),
+        "artifacts": sorted(artifacts, key=lambda item: item["ref"]),
+        "artifactIndex": artifact_index,
+        "visualCaptures": sorted(visual_captures, key=lambda item: item["ref"]),
         "visualComparisons": sorted(
             visual_comparisons, key=lambda item: item["ref"]
         ),
@@ -1031,6 +1231,9 @@ def compile_repository(repository: pathlib.Path, source_revision: str | None = N
             "visualRubricCount": len(visual_rubrics),
             "visualComparisonCount": len(visual_comparisons),
             "visualComparisonSummaryCount": len(visual_comparison_summaries),
+            "artifactCount": len(artifacts),
+            "artifactIdentityCount": len(artifact_index),
+            "visualCaptureCount": len(visual_captures),
         },
     }
     return {"snapshotId": content_id("snapshot", body), **body}

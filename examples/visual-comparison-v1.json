@@ -55,12 +55,12 @@
     "a": {
       "captureSha256": "4444444444444444444444444444444444444444444444444444444444444444",
       "treatmentSha256": "5555555555555555555555555555555555555555555555555555555555555555",
-      "sourceObservationRef": null
+      "sourceObservationRef": "urn:skyrim-render-map:submission:sub-example-visual#visual-capture-a"
     },
     "b": {
       "captureSha256": "6666666666666666666666666666666666666666666666666666666666666666",
       "treatmentSha256": "7777777777777777777777777777777777777777777777777777777777777777",
-      "sourceObservationRef": null
+      "sourceObservationRef": "urn:skyrim-render-map:submission:sub-example-visual#visual-capture-b"
     }
   },
   "protocol": {

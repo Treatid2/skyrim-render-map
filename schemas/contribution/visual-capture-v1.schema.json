@@ -1,0 +1,190 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:skyrim-render-map:schema:visual-capture-observation:1",
+  "title": "Immutable visual capture observation",
+  "type": "object",
+  "required": [
+    "schema", "captureId", "recordedAt", "map", "runtime", "environment",
+    "scenario", "treatment", "protocol", "captureSha256", "artifactRef",
+    "validity", "privacy", "notes"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "const": {
+        "name": "skyrim-render-map.visual-capture-observation",
+        "major": 1,
+        "minor": 0
+      }
+    },
+    "captureId": { "$ref": "visual-comparison-v1.schema.json#/$defs/recordId" },
+    "recordedAt": { "type": "string", "format": "date-time" },
+    "map": { "$ref": "performance-observation-v1.schema.json#/properties/map" },
+    "runtime": { "$ref": "performance-observation-v1.schema.json#/properties/runtime" },
+    "environment": { "$ref": "performance-observation-v1.schema.json#/properties/environment" },
+    "scenario": { "$ref": "performance-observation-v1.schema.json#/properties/scenario" },
+    "treatment": { "$ref": "performance-observation-v1.schema.json#/properties/treatment" },
+    "protocol": { "$ref": "#/$defs/protocol" },
+    "captureSha256": { "$ref": "visual-comparison-v1.schema.json#/$defs/sha256" },
+    "artifactRef": { "type": "string", "minLength": 1 },
+    "validity": { "$ref": "#/$defs/validity" },
+    "privacy": { "$ref": "performance-observation-v1.schema.json#/properties/privacy" },
+    "notes": { "type": "string" }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "protocol": {
+            "properties": { "mediaKind": { "const": "stereo-sequence" } },
+            "required": ["mediaKind"]
+          }
+        },
+        "required": ["protocol"]
+      },
+      "then": {
+        "properties": {
+          "protocol": {
+            "properties": {
+              "viewCount": { "const": 2 },
+              "frameRateHz": { "$ref": "visual-comparison-v1.schema.json#/$defs/positiveDecimal" }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "protocol": {
+            "properties": { "mediaKind": { "const": "mono-sequence" } },
+            "required": ["mediaKind"]
+          }
+        },
+        "required": ["protocol"]
+      },
+      "then": {
+        "properties": {
+          "protocol": {
+            "properties": {
+              "viewCount": { "const": 1 },
+              "frameRateHz": { "$ref": "visual-comparison-v1.schema.json#/$defs/positiveDecimal" }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "protocol": {
+            "properties": { "mediaKind": { "const": "still-pair" } },
+            "required": ["mediaKind"]
+          }
+        },
+        "required": ["protocol"]
+      },
+      "then": {
+        "properties": {
+          "protocol": {
+            "properties": {
+              "viewCount": { "const": 1 },
+              "frameCount": { "const": 1 },
+              "frameRateHz": { "type": "null" }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "validity": {
+            "properties": { "state": { "const": "valid" } },
+            "required": ["state"]
+          }
+        },
+        "required": ["validity"]
+      },
+      "then": {
+        "properties": {
+          "validity": {
+            "properties": { "contamination": { "maxItems": 0 } }
+          },
+          "protocol": {
+            "properties": {
+              "droppedFrames": { "const": 0 },
+              "duplicatedFrames": { "const": 0 }
+            }
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "validity": { "properties": { "notes": { "minLength": 1 } } }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "protocol": {
+      "type": "object",
+      "required": [
+        "name", "version", "artifactSha256", "captureApi", "mediaKind",
+        "frameCount", "frameRateHz", "viewCount", "width", "height",
+        "colorSpace", "pixelFormat", "timingMode", "droppedFrames",
+        "duplicatedFrames"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 },
+        "artifactSha256": { "$ref": "visual-comparison-v1.schema.json#/$defs/sha256" },
+        "captureApi": { "$ref": "performance-observation-v1.schema.json#/$defs/tool" },
+        "mediaKind": { "enum": ["stereo-sequence", "mono-sequence", "still-pair"] },
+        "frameCount": { "type": "integer", "minimum": 1 },
+        "frameRateHz": {
+          "oneOf": [
+            { "$ref": "visual-comparison-v1.schema.json#/$defs/positiveDecimal" },
+            { "type": "null" }
+          ]
+        },
+        "viewCount": { "enum": [1, 2] },
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 },
+        "colorSpace": { "type": "string", "minLength": 1 },
+        "pixelFormat": { "type": "string", "minLength": 1 },
+        "timingMode": { "enum": ["fixed-step", "wall-clock", "unknown"] },
+        "droppedFrames": { "type": "integer", "minimum": 0 },
+        "duplicatedFrames": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "validity": {
+      "type": "object",
+      "required": ["state", "contamination", "notes"],
+      "additionalProperties": false,
+      "properties": {
+        "state": { "enum": ["valid", "contaminated", "inconclusive"] },
+        "contamination": { "type": "array", "items": { "$ref": "#/$defs/contamination" } },
+        "notes": { "type": "string" }
+      }
+    },
+    "contamination": {
+      "type": "object",
+      "required": ["kind", "firstFrame", "lastFrame", "notes"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "capture-overhead", "driver-reset", "dropped-frame",
+            "duplicated-frame", "focus-loss", "loading-transition",
+            "shader-compilation", "timing-discontinuity", "unknown"
+          ]
+        },
+        "firstFrame": { "type": "integer", "minimum": 0 },
+        "lastFrame": { "type": "integer", "minimum": 0 },
+        "notes": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

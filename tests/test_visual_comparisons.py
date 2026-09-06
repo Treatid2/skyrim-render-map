@@ -41,6 +41,26 @@ class VisualComparisonTest(unittest.TestCase):
                 encoding="utf-8"
             )
         )
+        self.artifact_a = json.loads(
+            (ROOT / "examples" / "artifact-v1.json").read_text(encoding="utf-8")
+        )
+        self.capture_a = json.loads(
+            (ROOT / "examples" / "visual-capture-v1.json").read_text(encoding="utf-8")
+        )
+        self.artifact_b = copy.deepcopy(self.artifact_a)
+        self.artifact_b["artifactId"] = "visual-artifact-b"
+        self.artifact_b["artifactSha256"] = "6" * 64
+        self.artifact_b["locations"] = [
+            "https://example.invalid/artifacts/" + "6" * 64 + ".zip"
+        ]
+        self.capture_b = copy.deepcopy(self.capture_a)
+        self.capture_b["captureId"] = "visual-capture-b"
+        self.capture_b["captureSha256"] = "6" * 64
+        self.capture_b["artifactRef"] = (
+            "urn:skyrim-render-map:submission:sub-example-visual#visual-artifact-b"
+        )
+        self.capture_b["treatment"]["label"] = "Illustrative treatment B"
+        self.capture_b["treatment"]["treatmentSha256"] = "7" * 64
 
     def tearDown(self) -> None:
         self.temporary.cleanup()
@@ -49,6 +69,8 @@ class VisualComparisonTest(unittest.TestCase):
         self,
         rubrics: list[dict],
         comparisons: list[dict],
+        artifacts: list[dict] | None = None,
+        captures: list[dict] | None = None,
     ) -> None:
         directory = (
             self.repository
@@ -60,6 +82,8 @@ class VisualComparisonTest(unittest.TestCase):
         content = directory / "content"
         content.mkdir(parents=True)
         for name, records in (
+            ("artifacts.jsonl", artifacts or [self.artifact_a, self.artifact_b]),
+            ("visual-captures.jsonl", captures or [self.capture_a, self.capture_b]),
             ("visual-rubrics.jsonl", rubrics),
             ("visual-comparisons.jsonl", comparisons),
         ):
@@ -125,6 +149,8 @@ class VisualComparisonTest(unittest.TestCase):
 
     def test_published_examples_validate(self) -> None:
         VALIDATOR.validate_visual_rubric(self.rubric, "rubric example")
+        VALIDATOR.validate_artifact(self.artifact_a, "artifact example")
+        VALIDATOR.validate_visual_capture(self.capture_a, "capture example")
         VALIDATOR.validate_visual_comparison(self.comparison, "comparison example")
 
     def test_compiler_preserves_unanimity_and_disagreement(self) -> None:
@@ -132,6 +158,9 @@ class VisualComparisonTest(unittest.TestCase):
         snapshot = COMPILER.compile_repository(self.repository)
         self.assertEqual(snapshot["statistics"]["visualRubricCount"], 1)
         self.assertEqual(snapshot["statistics"]["visualComparisonCount"], 1)
+        self.assertEqual(snapshot["statistics"]["artifactCount"], 2)
+        self.assertEqual(snapshot["statistics"]["artifactIdentityCount"], 2)
+        self.assertEqual(snapshot["statistics"]["visualCaptureCount"], 2)
         summary = snapshot["visualComparisonSummaries"][0]
         states = {
             item["dimensionId"]: item["state"] for item in summary["dimensions"]
@@ -183,11 +212,87 @@ class VisualComparisonTest(unittest.TestCase):
         with self.assertRaisesRegex(VALIDATOR.ValidationError, "still-pair"):
             VALIDATOR.validate_visual_comparison(comparison, "comparison")
 
-    def test_source_observation_reference_is_reserved(self) -> None:
+    def test_source_observation_reference_must_resolve(self) -> None:
         comparison = copy.deepcopy(self.comparison)
         comparison["stimuli"]["a"]["sourceObservationRef"] = "urn:future"
-        with self.assertRaisesRegex(VALIDATOR.ValidationError, "reserved"):
-            VALIDATOR.validate_visual_comparison(comparison, "comparison")
+        self._write_records([self.rubric], [comparison])
+        with self.assertRaisesRegex(COMPILER.CompileError, "unknown visual capture"):
+            COMPILER.compile_repository(self.repository)
+
+    def test_capture_digest_must_match_artifact(self) -> None:
+        capture = copy.deepcopy(self.capture_a)
+        capture["captureSha256"] = "0" * 64
+        self._write_records(
+            [self.rubric], [self.comparison], captures=[capture, self.capture_b]
+        )
+        with self.assertRaisesRegex(COMPILER.CompileError, "digest does not match"):
+            COMPILER.compile_repository(self.repository)
+
+    def test_capture_artifact_reference_must_resolve(self) -> None:
+        capture = copy.deepcopy(self.capture_a)
+        capture["artifactRef"] = "urn:skyrim-render-map:submission:missing#artifact"
+        self._write_records(
+            [self.rubric], [self.comparison], captures=[capture, self.capture_b]
+        )
+        with self.assertRaisesRegex(COMPILER.CompileError, "unknown artifact"):
+            COMPILER.compile_repository(self.repository)
+
+    def test_artifact_locations_are_https_without_credentials(self) -> None:
+        artifact = copy.deepcopy(self.artifact_a)
+        artifact["locations"] = ["https://user:secret@example.invalid/capture.zip"]
+        with self.assertRaisesRegex(VALIDATOR.ValidationError, "credentials"):
+            VALIDATOR.validate_artifact(artifact, "artifact")
+
+    def test_artifact_index_unions_mirrors_and_signals_metadata_conflict(self) -> None:
+        mirror = copy.deepcopy(self.artifact_a)
+        mirror["artifactId"] = "visual-artifact-a-mirror"
+        mirror["mediaType"] = "application/octet-stream"
+        mirror["locations"] = ["https://mirror.example.invalid/capture-a.zip"]
+        self._write_records(
+            [self.rubric],
+            [self.comparison],
+            artifacts=[self.artifact_a, mirror, self.artifact_b],
+        )
+        snapshot = COMPILER.compile_repository(self.repository)
+        item = next(
+            entry
+            for entry in snapshot["artifactIndex"]
+            if entry["artifactSha256"] == "4" * 64
+        )
+        self.assertEqual(item["metadataState"], "contested")
+        self.assertEqual(len(item["recordRefs"]), 2)
+        self.assertEqual(len(item["locations"]), 2)
+
+    def test_stimulus_treatment_must_match_capture(self) -> None:
+        comparison = copy.deepcopy(self.comparison)
+        comparison["stimuli"]["a"]["treatmentSha256"] = "0" * 64
+        self._write_records([self.rubric], [comparison])
+        with self.assertRaisesRegex(COMPILER.CompileError, "treatment digest mismatch"):
+            COMPILER.compile_repository(self.repository)
+
+    def test_capture_protocols_must_match(self) -> None:
+        capture_b = copy.deepcopy(self.capture_b)
+        capture_b["protocol"]["width"] = 1920
+        self._write_records(
+            [self.rubric], [self.comparison], captures=[self.capture_a, capture_b]
+        )
+        with self.assertRaisesRegex(COMPILER.CompileError, "capture protocols differ"):
+            COMPILER.compile_repository(self.repository)
+
+    def test_capture_context_must_match_comparison(self) -> None:
+        capture = copy.deepcopy(self.capture_a)
+        capture["environment"]["gpuDriverVersion"] = "different-driver"
+        self._write_records(
+            [self.rubric], [self.comparison], captures=[capture, self.capture_b]
+        )
+        with self.assertRaisesRegex(COMPILER.CompileError, "not comparable"):
+            COMPILER.compile_repository(self.repository)
+
+    def test_valid_capture_rejects_dropped_frames(self) -> None:
+        capture = copy.deepcopy(self.capture_a)
+        capture["protocol"]["droppedFrames"] = 1
+        with self.assertRaisesRegex(VALIDATOR.ValidationError, "complete and uncontaminated"):
+            VALIDATOR.validate_visual_capture(capture, "capture")
 
     def test_rubric_requires_canonical_magnitude_scale(self) -> None:
         rubric = copy.deepcopy(self.rubric)

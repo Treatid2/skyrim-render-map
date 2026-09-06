@@ -16,6 +16,7 @@ import pathlib
 import re
 import stat
 import sys
+import urllib.parse
 from dataclasses import dataclass
 
 
@@ -371,6 +372,88 @@ VISUAL_CONTAMINATION_KINDS = {
     "media-mismatch",
     "presentation-order",
     "shader-compilation",
+    "unknown",
+}
+ARTIFACT_KEYS = {
+    "schema",
+    "artifactId",
+    "artifactSha256",
+    "mediaType",
+    "contentKind",
+    "encoding",
+    "byteLength",
+    "expandedByteLength",
+    "license",
+    "retentionClass",
+    "locations",
+    "notes",
+}
+ARTIFACT_CONTENT_KINDS = {
+    "stereo-sequence",
+    "mono-sequence",
+    "still-pair",
+    "capture-manifest",
+    "other",
+}
+ARTIFACT_ENCODINGS = {"identity", "zip", "zstd"}
+ARTIFACT_LICENSES = {"CC-BY-SA-4.0", "CC0-1.0"}
+ARTIFACT_RETENTION_CLASSES = {
+    "release-asset",
+    "oci-artifact",
+    "object-storage",
+    "repository-inline",
+    "external",
+}
+VISUAL_CAPTURE_KEYS = {
+    "schema",
+    "captureId",
+    "recordedAt",
+    "map",
+    "runtime",
+    "environment",
+    "scenario",
+    "treatment",
+    "protocol",
+    "captureSha256",
+    "artifactRef",
+    "validity",
+    "privacy",
+    "notes",
+}
+VISUAL_CAPTURE_PROTOCOL_KEYS = {
+    "name",
+    "version",
+    "artifactSha256",
+    "captureApi",
+    "mediaKind",
+    "frameCount",
+    "frameRateHz",
+    "viewCount",
+    "width",
+    "height",
+    "colorSpace",
+    "pixelFormat",
+    "timingMode",
+    "droppedFrames",
+    "duplicatedFrames",
+}
+VISUAL_CAPTURE_TIMING_MODES = {"fixed-step", "wall-clock", "unknown"}
+VISUAL_CAPTURE_VALIDITY_KEYS = {"state", "contamination", "notes"}
+VISUAL_CAPTURE_CONTAMINATION_KEYS = {
+    "kind",
+    "firstFrame",
+    "lastFrame",
+    "notes",
+}
+VISUAL_CAPTURE_CONTAMINATION_KINDS = {
+    "capture-overhead",
+    "driver-reset",
+    "dropped-frame",
+    "duplicated-frame",
+    "focus-loss",
+    "loading-transition",
+    "shader-compilation",
+    "timing-discontinuity",
     "unknown",
 }
 INSTALLATION_ID_PATTERN = re.compile(r"^inst-[a-f0-9]{32}$")
@@ -1406,6 +1489,191 @@ def _validate_visual_validity(record: dict, context: str) -> None:
         _require_nonempty_string(item["notes"], f"{item_context}.notes")
 
 
+def validate_artifact(record: dict, context: str) -> None:
+    if not isinstance(record, dict):
+        raise ValidationError(f"{context} must be an object")
+    _require_keys(record, ARTIFACT_KEYS, context)
+    if record["schema"] != {
+        "name": "skyrim-render-map.artifact",
+        "major": 1,
+        "minor": 0,
+    }:
+        raise ValidationError(f"unsupported artifact schema at {context}")
+    artifact_id = record["artifactId"]
+    if not isinstance(artifact_id, str) or not RECORD_ID_PATTERN.fullmatch(artifact_id):
+        raise ValidationError(f"invalid artifactId at {context}")
+    _require_optional_digest(
+        record["artifactSha256"], SHA256_PATTERN, f"{context}.artifactSha256"
+    )
+    if record["artifactSha256"] is None:
+        raise ValidationError(f"{context}.artifactSha256 is required")
+    _require_nonempty_string(record["mediaType"], f"{context}.mediaType")
+    if record["contentKind"] not in ARTIFACT_CONTENT_KINDS:
+        raise ValidationError(f"unsupported contentKind at {context}")
+    if record["encoding"] not in ARTIFACT_ENCODINGS:
+        raise ValidationError(f"unsupported encoding at {context}")
+    if record["license"] not in ARTIFACT_LICENSES:
+        raise ValidationError(f"unsupported artifact license at {context}")
+    if record["retentionClass"] not in ARTIFACT_RETENTION_CLASSES:
+        raise ValidationError(f"unsupported retentionClass at {context}")
+    for field in ("byteLength", "expandedByteLength"):
+        _require_nonnegative_integer(record[field], f"{context}.{field}")
+        if record[field] == 0:
+            raise ValidationError(f"{context}.{field} must be positive")
+    locations = record["locations"]
+    if not isinstance(locations, list) or not locations:
+        raise ValidationError(f"{context}.locations must be a non-empty array")
+    if not all(isinstance(location, str) for location in locations):
+        raise ValidationError(f"{context}.locations must contain strings")
+    if len(locations) != len(set(locations)):
+        raise ValidationError(f"{context}.locations contains duplicates")
+    for index, location in enumerate(locations):
+        parsed = urllib.parse.urlsplit(location) if isinstance(location, str) else None
+        if parsed is None or parsed.scheme != "https" or not parsed.netloc:
+            raise ValidationError(
+                f"{context}.locations[{index}] must be an absolute HTTPS URL"
+            )
+        if parsed.username or parsed.password:
+            raise ValidationError(f"{context}.locations[{index}] must not contain credentials")
+        if parsed.query or parsed.fragment:
+            raise ValidationError(
+                f"{context}.locations[{index}] must be a stable credential-free URL"
+            )
+    if not isinstance(record["notes"], str):
+        raise ValidationError(f"{context}.notes must be a string")
+
+
+def validate_visual_capture(record: dict, context: str) -> None:
+    if not isinstance(record, dict):
+        raise ValidationError(f"{context} must be an object")
+    _require_keys(record, VISUAL_CAPTURE_KEYS, context)
+    if record["schema"] != {
+        "name": "skyrim-render-map.visual-capture-observation",
+        "major": 1,
+        "minor": 0,
+    }:
+        raise ValidationError(f"unsupported visual capture schema at {context}")
+    capture_id = record["captureId"]
+    if not isinstance(capture_id, str) or not RECORD_ID_PATTERN.fullmatch(capture_id):
+        raise ValidationError(f"invalid captureId at {context}")
+    _parse_time(record["recordedAt"], f"{context}.recordedAt")
+    _validate_performance_identity(record, context)
+    _validate_performance_environment(record, context)
+
+    scenario = record["scenario"]
+    if not isinstance(scenario, dict):
+        raise ValidationError(f"{context}.scenario must be an object")
+    _require_keys(scenario, PERFORMANCE_SCENARIO_KEYS, f"{context}.scenario")
+    _require_nonempty_string(scenario["label"], f"{context}.scenario.label")
+    for field in ("scenarioSha256", "configurationSha256", "cacheSha256"):
+        _require_optional_digest(scenario[field], SHA256_PATTERN, f"{context}.scenario.{field}")
+        if scenario[field] is None:
+            raise ValidationError(f"{context}.scenario.{field} is required")
+
+    treatment = record["treatment"]
+    if not isinstance(treatment, dict):
+        raise ValidationError(f"{context}.treatment must be an object")
+    _require_keys(treatment, PERFORMANCE_TREATMENT_KEYS, f"{context}.treatment")
+    _require_nonempty_string(treatment["label"], f"{context}.treatment.label")
+    _require_optional_digest(
+        treatment["treatmentSha256"], SHA256_PATTERN,
+        f"{context}.treatment.treatmentSha256",
+    )
+    if treatment["treatmentSha256"] is None:
+        raise ValidationError(f"{context}.treatment.treatmentSha256 is required")
+    if treatment["baselineObservationRef"] is not None:
+        _require_nonempty_string(
+            treatment["baselineObservationRef"],
+            f"{context}.treatment.baselineObservationRef",
+        )
+
+    protocol = record["protocol"]
+    if not isinstance(protocol, dict):
+        raise ValidationError(f"{context}.protocol must be an object")
+    _require_keys(protocol, VISUAL_CAPTURE_PROTOCOL_KEYS, f"{context}.protocol")
+    for field in ("name", "version", "colorSpace", "pixelFormat"):
+        _require_nonempty_string(protocol[field], f"{context}.protocol.{field}")
+    _require_optional_digest(
+        protocol["artifactSha256"], SHA256_PATTERN,
+        f"{context}.protocol.artifactSha256",
+    )
+    if protocol["artifactSha256"] is None:
+        raise ValidationError(f"{context}.protocol.artifactSha256 is required")
+    capture_api = protocol["captureApi"]
+    if not isinstance(capture_api, dict):
+        raise ValidationError(f"{context}.protocol.captureApi must be an object")
+    _require_keys(capture_api, PERFORMANCE_TOOL_KEYS, f"{context}.protocol.captureApi")
+    for field in ("name", "version"):
+        _require_nonempty_string(capture_api[field], f"{context}.protocol.captureApi.{field}")
+    _require_optional_digest(
+        capture_api["artifactSha256"], SHA256_PATTERN,
+        f"{context}.protocol.captureApi.artifactSha256",
+    )
+    if capture_api["artifactSha256"] is None:
+        raise ValidationError(f"{context}.protocol.captureApi.artifactSha256 is required")
+    if protocol["mediaKind"] not in VISUAL_MEDIA_KINDS:
+        raise ValidationError(f"unsupported capture mediaKind at {context}")
+    for field in ("frameCount", "viewCount", "width", "height"):
+        _require_nonnegative_integer(protocol[field], f"{context}.protocol.{field}")
+        if protocol[field] == 0:
+            raise ValidationError(f"{context}.protocol.{field} must be positive")
+    for field in ("droppedFrames", "duplicatedFrames"):
+        _require_nonnegative_integer(protocol[field], f"{context}.protocol.{field}")
+    if protocol["timingMode"] not in VISUAL_CAPTURE_TIMING_MODES:
+        raise ValidationError(f"unsupported capture timingMode at {context}")
+    expected_views = 2 if protocol["mediaKind"] == "stereo-sequence" else 1
+    if protocol["viewCount"] != expected_views:
+        raise ValidationError(f"capture view count conflicts with media kind at {context}")
+    if protocol["mediaKind"] == "still-pair":
+        if protocol["frameCount"] != 1 or protocol["frameRateHz"] is not None:
+            raise ValidationError(f"still-pair capture requires one frame and no rate at {context}")
+    else:
+        _require_canonical_decimal(protocol["frameRateHz"], f"{context}.protocol.frameRateHz")
+        if decimal.Decimal(protocol["frameRateHz"]) == 0:
+            raise ValidationError(f"capture frameRateHz must be positive at {context}")
+
+    _require_optional_digest(record["captureSha256"], SHA256_PATTERN, f"{context}.captureSha256")
+    if record["captureSha256"] is None:
+        raise ValidationError(f"{context}.captureSha256 is required")
+    _require_nonempty_string(record["artifactRef"], f"{context}.artifactRef")
+    validity = record["validity"]
+    if not isinstance(validity, dict):
+        raise ValidationError(f"{context}.validity must be an object")
+    _require_keys(validity, VISUAL_CAPTURE_VALIDITY_KEYS, f"{context}.validity")
+    if validity["state"] not in PERFORMANCE_VALIDITY_STATES:
+        raise ValidationError(f"invalid visual capture validity state at {context}")
+    if not isinstance(validity["notes"], str):
+        raise ValidationError(f"{context}.validity.notes must be a string")
+    contamination = validity["contamination"]
+    if not isinstance(contamination, list):
+        raise ValidationError(f"{context}.validity.contamination must be an array")
+    if validity["state"] == "valid":
+        if contamination or protocol["droppedFrames"] or protocol["duplicatedFrames"]:
+            raise ValidationError("valid visual captures must be complete and uncontaminated")
+    elif not validity["notes"].strip():
+        raise ValidationError(f"non-valid visual captures require validity notes at {context}")
+    for index, item in enumerate(contamination):
+        item_context = f"{context}.validity.contamination[{index}]"
+        if not isinstance(item, dict):
+            raise ValidationError(f"{item_context} must be an object")
+        _require_keys(item, VISUAL_CAPTURE_CONTAMINATION_KEYS, item_context)
+        if item["kind"] not in VISUAL_CAPTURE_CONTAMINATION_KINDS:
+            raise ValidationError(f"unsupported contamination kind at {item_context}")
+        for field in ("firstFrame", "lastFrame"):
+            _require_nonnegative_integer(item[field], f"{item_context}.{field}")
+        if item["firstFrame"] > item["lastFrame"] or item["lastFrame"] >= protocol["frameCount"]:
+            raise ValidationError(f"invalid contamination frame range at {item_context}")
+        _require_nonempty_string(item["notes"], f"{item_context}.notes")
+    privacy = record["privacy"]
+    if not isinstance(privacy, dict):
+        raise ValidationError(f"{context}.privacy must be an object")
+    _require_keys(privacy, PERFORMANCE_PRIVACY_KEYS, f"{context}.privacy")
+    if any(privacy[field] is not True for field in PERFORMANCE_PRIVACY_KEYS):
+        raise ValidationError(f"visual capture privacy declarations must all be true at {context}")
+    if not isinstance(record["notes"], str):
+        raise ValidationError(f"{context}.notes must be a string")
+
+
 def validate_visual_comparison(record: dict, context: str) -> None:
     if not isinstance(record, dict):
         raise ValidationError(f"{context} must be an object")
@@ -1422,6 +1690,7 @@ def validate_visual_comparison(record: dict, context: str) -> None:
         raise ValidationError(f"{context}.comparisonId is invalid")
     _parse_time(record["recordedAt"], f"{context}.recordedAt")
     _validate_performance_identity(record, context)
+    _validate_performance_environment(record, context)
 
     scenario = record["scenario"]
     if not isinstance(scenario, dict):
@@ -1450,14 +1719,10 @@ def validate_visual_comparison(record: dict, context: str) -> None:
             )
             if stimulus[key] is None:
                 raise ValidationError(f"{item_context}.{key} must not be null")
-        _require_optional_string(
+        _require_nonempty_string(
             stimulus["sourceObservationRef"],
             f"{item_context}.sourceObservationRef",
         )
-        if stimulus["sourceObservationRef"] is not None:
-            raise ValidationError(
-                f"{item_context}.sourceObservationRef is reserved for a future schema"
-            )
     if stimuli["a"]["captureSha256"].lower() == stimuli["b"]["captureSha256"].lower():
         raise ValidationError(f"{context}.stimuli must identify distinct captures")
 
@@ -1635,6 +1900,8 @@ def load_submission_records(
     list[dict],
     list[dict],
     list[dict],
+    list[dict],
+    list[dict],
 ]:
     entities_path = directory / "content" / "entities.jsonl"
     assertions_path = directory / "content" / "assertions.jsonl"
@@ -1643,6 +1910,8 @@ def load_submission_records(
     optimization_path = directory / "content" / "optimization-experiments.jsonl"
     rubric_path = directory / "content" / "visual-rubrics.jsonl"
     comparison_path = directory / "content" / "visual-comparisons.jsonl"
+    artifact_path = directory / "content" / "artifacts.jsonl"
+    capture_path = directory / "content" / "visual-captures.jsonl"
     entities = load_jsonl(entities_path) if entities_path.is_file() else []
     assertions = load_jsonl(assertions_path) if assertions_path.is_file() else []
     resolutions = load_jsonl(resolutions_path) if resolutions_path.is_file() else []
@@ -1650,6 +1919,8 @@ def load_submission_records(
     optimization = load_jsonl(optimization_path) if optimization_path.is_file() else []
     rubrics = load_jsonl(rubric_path) if rubric_path.is_file() else []
     comparisons = load_jsonl(comparison_path) if comparison_path.is_file() else []
+    artifacts = load_jsonl(artifact_path) if artifact_path.is_file() else []
+    captures = load_jsonl(capture_path) if capture_path.is_file() else []
 
     if submission_class in {"assertion", "amendment"} and not assertions:
         raise ValidationError(f"{submission_class} submissions require assertions.jsonl")
@@ -1667,11 +1938,11 @@ def load_submission_records(
         raise ValidationError(
             "optimization-experiments.jsonl requires an observation submission"
         )
-    if (rubrics or comparisons) and submission_class != "observation":
+    if (rubrics or comparisons or artifacts or captures) and submission_class != "observation":
         raise ValidationError(
             "visual evidence files require an observation submission"
         )
-    if (performance or optimization or rubrics or comparisons) and entities:
+    if (performance or optimization or rubrics or comparisons or artifacts or captures) and entities:
         raise ValidationError(
             "measurement submissions must not declare structural entities"
         )
@@ -1726,6 +1997,18 @@ def load_submission_records(
                 f"duplicate visual comparisonId: {comparison['comparisonId']}"
             )
         comparison_ids.add(comparison["comparisonId"])
+    artifact_ids: set[str] = set()
+    for index, artifact in enumerate(artifacts, start=1):
+        validate_artifact(artifact, f"{artifact_path}:{index}")
+        if artifact["artifactId"] in artifact_ids:
+            raise ValidationError(f"duplicate artifactId: {artifact['artifactId']}")
+        artifact_ids.add(artifact["artifactId"])
+    capture_ids: set[str] = set()
+    for index, capture in enumerate(captures, start=1):
+        validate_visual_capture(capture, f"{capture_path}:{index}")
+        if capture["captureId"] in capture_ids:
+            raise ValidationError(f"duplicate visual captureId: {capture['captureId']}")
+        capture_ids.add(capture["captureId"])
     record_ids = (
         list(entity_ids)
         + list(assertion_ids)
@@ -1734,6 +2017,8 @@ def load_submission_records(
         + list(optimization_ids)
         + list(rubric_ids)
         + list(comparison_ids)
+        + list(artifact_ids)
+        + list(capture_ids)
     )
     if len(record_ids) != len(set(record_ids)):
         raise ValidationError("submission-local record IDs must be unique across record types")
@@ -1745,6 +2030,8 @@ def load_submission_records(
         optimization,
         rubrics,
         comparisons,
+        artifacts,
+        captures,
     )
 
 

@@ -57,6 +57,8 @@ CSX profiler and preset-search artifacts can be normalized with the
 [optimization run exporter](docs/producer-export.md).
 Blinded human and multimodal-model assessments use the
 [visual evaluation contract](docs/visual-evaluation.md).
+Large frame sequences use the content-addressed
+[capture evidence contract](docs/capture-evidence.md).
 
 ## Repository boundaries
 

@@ -64,9 +64,12 @@ Its output still needs an ordinary submission manifest before it can be
 proposed as a data PR.
 
 Blinded visual evidence uses `content/visual-rubrics.jsonl` and
-`content/visual-comparisons.jsonl`. Keep correctness, visual effect, and
-preference distinct; retain every trial and disagreement; and follow the
-[visual evaluation guide](docs/visual-evaluation.md).
+`content/visual-comparisons.jsonl`. Source sequences are indexed through
+`content/artifacts.jsonl` and `content/visual-captures.jsonl`; the large bytes
+remain outside Git. Keep correctness, visual effect, and preference distinct;
+retain every trial and disagreement; and follow the
+[visual evaluation](docs/visual-evaluation.md) and
+[capture evidence](docs/capture-evidence.md) guides.
 
 Before opening a PR, also run:
 

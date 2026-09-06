@@ -19,6 +19,9 @@
     "performanceSignals",
     "optimizationExperiments",
     "optimizationSurfaces",
+    "artifacts",
+    "artifactIndex",
+    "visualCaptures",
     "visualRubrics",
     "visualComparisons",
     "visualComparisonSummaries",
@@ -38,13 +41,13 @@
       "const": {
         "name": "skyrim-render-map.dataset-snapshot",
         "major": 1,
-        "minor": 4
+        "minor": 5
       }
     },
     "generatedBy": {
       "const": {
         "name": "skyrim-render-map.compile-dataset",
-        "version": "1.4.0"
+        "version": "1.5.0"
       }
     },
     "sourceRevision": { "type": ["string", "null"] },
@@ -73,6 +76,18 @@
       "items": { "type": "object" }
     },
     "optimizationSurfaces": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "artifacts": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "artifactIndex": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "visualCaptures": {
       "type": "array",
       "items": { "type": "object" }
     },
@@ -105,7 +120,10 @@
         "optimizationSurfaceCount",
         "visualRubricCount",
         "visualComparisonCount",
-        "visualComparisonSummaryCount"
+        "visualComparisonSummaryCount",
+        "artifactCount",
+        "artifactIdentityCount",
+        "visualCaptureCount"
       ],
       "additionalProperties": false,
       "properties": {
@@ -126,7 +144,10 @@
         "optimizationSurfaceCount": { "type": "integer", "minimum": 0 },
         "visualRubricCount": { "type": "integer", "minimum": 0 },
         "visualComparisonCount": { "type": "integer", "minimum": 0 },
-        "visualComparisonSummaryCount": { "type": "integer", "minimum": 0 }
+        "visualComparisonSummaryCount": { "type": "integer", "minimum": 0 },
+        "artifactCount": { "type": "integer", "minimum": 0 },
+        "artifactIdentityCount": { "type": "integer", "minimum": 0 },
+        "visualCaptureCount": { "type": "integer", "minimum": 0 }
       }
     }
   }
