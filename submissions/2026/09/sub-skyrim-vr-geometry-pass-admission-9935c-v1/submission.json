@@ -1,0 +1,49 @@
+{
+  "schema": {
+    "name": "skyrim-render-map.submission",
+    "major": 1,
+    "minor": 0
+  },
+  "submissionId": "sub-skyrim-vr-geometry-pass-admission-9935c-v1",
+  "submissionClass": "assertion",
+  "namespace": "skyrim-vr",
+  "createdAt": "2026-09-06T01:18:07+01:00",
+  "status": "candidate-unreviewed",
+  "contributor": {
+    "displayName": "Treatid2",
+    "github": "Treatid2",
+    "standing": "ordinary-contributor"
+  },
+  "provenance": {
+    "sourceRepository": "https://github.com/Treatid2/skyrim-render-map",
+    "sourceCommit": "bbb16c86963baaba41514285364031645d93d905",
+    "sourceParentCommit": "e476b8cf78a87ba914963fedeb7b84dce70bff4b",
+    "sourceRef": "main",
+    "sourceState": "merged",
+    "sourcePubliclyReachable": true,
+    "sourceDirty": false,
+    "importedAt": "2026-09-06T01:18:07+01:00",
+    "sourceContentTreeSha256": "75CCEF0F7235EAA198222E3E27C2908A943FE256AD7A44C392BA4BE59C9879EF",
+    "transformations": [
+      "Normalized the bounded BSLightingShaderProperty render-pass construction path and the accumulator-to-BSBatchRenderer geometry-group admission path, retaining callsites and accessed fields in assertion notes."
+    ],
+    "relatedUrls": [
+      "https://github.com/ParticleTroned/skyrim-community-shaders/pull/55",
+      "https://github.com/Treatid2/skyrim-render-map/tree/bbb16c86963baaba41514285364031645d93d905/submissions/2026/08/sub-csx-full-render-exploration-9935c5210",
+      "https://github.com/Treatid2/skyrim-render-map/pull/8",
+      "https://github.com/Treatid2/skyrim-render-map/pull/13"
+    ]
+  },
+  "licensing": {
+    "content": "CC-BY-SA-4.0",
+    "schemas": "CC0-1.0",
+    "dcoAcknowledged": true
+  },
+  "content": {
+    "root": "content",
+    "fileCount": 2,
+    "totalBytes": 26332,
+    "treeSha256": "2716FF42645A7E2EAF4528A2C42857FF2F961B1003429B1589E56F70B4213998"
+  },
+  "notes": "This tranche normalizes property/geometry-to-pass creation and batch-group admission without assigning semantic names to pass values or inferring live frequency. Edge attributes remain in notes because the v1 assertion schema has no edge-attribute envelope. Render-mode dispatch remains the next append-only tranche."
+}
