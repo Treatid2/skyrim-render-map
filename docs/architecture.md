@@ -427,7 +427,8 @@ Use SPDX declarations and REUSE-compatible metadata. Each submission explicitly
 acknowledges the applicable data license and certifies that the contributor may
 publish the material. No game binaries, assets, raw decompilation, private
 paths, credentials, crash dumps, or personal identifiers are accepted through
-the ordinary contribution lane.
+the ordinary contribution lane, apart from the contributor-chosen public
+GitHub identity required by the submission manifest.
 
 ## 16. Implementation status
 

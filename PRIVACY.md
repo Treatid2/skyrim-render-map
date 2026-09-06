@@ -15,7 +15,8 @@ separate submission confirmation after collection.
 Ordinary submissions must not contain:
 
 - absolute filesystem paths;
-- personal or account identifiers;
+- personal or account identifiers, except for the contributor-chosen public
+  GitHub identity required in `submission.json`;
 - process environment dumps or unrestricted command lines;
 - network identifiers;
 - credentials or authentication material;

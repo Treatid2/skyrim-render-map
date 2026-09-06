@@ -24,6 +24,22 @@ the package locally.
 python tools/validate_repository.py --repository .
 ```
 
+Repository mode validates the complete tree, including historical submissions.
+It does not compare a proposed contribution with `main` and therefore does not
+exercise the candidate-only status and GitHub-attribution checks.
+
+To reproduce the pull-request admission check, prepare separate clean checkouts
+of current `main` and the candidate tree, then run the validator from the
+trusted `main` checkout:
+
+```console
+python <main-tree>/tools/validate_repository.py --base-tree <main-tree> --candidate-tree <candidate-tree>
+```
+
+`<main-tree>` is the clean current canonical tree and `<candidate-tree>` is the
+complete proposed tree. Always execute the validator supplied by `<main-tree>`;
+candidate files are inert input and must not supply executable validation code.
+
 Passing structural validation makes a submission eligible for admission
 review. Merging admits its immutable evidence to the ledger; it does not
 certify or endorse the conclusion. Maintainers apply the bounded criteria in
@@ -84,7 +100,8 @@ Do not submit:
 - Skyrim executables, assets, shader binaries, or substantial decompilation;
 - crash or memory dumps through the ordinary contribution lane;
 - usernames, machine names, account identifiers, serial numbers, IP or MAC
-  addresses;
+  addresses, except for the contributor-chosen public GitHub identity required
+  in `submission.json`;
 - credentials, tokens, private keys, or complete environment dumps;
 - absolute local paths;
 - executable files, symlinks, submodules, or nested archives.
