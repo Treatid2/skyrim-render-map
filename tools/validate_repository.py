@@ -200,6 +200,67 @@ PERFORMANCE_CONTAMINATION_KINDS = {
     "thermal-throttling",
     "unknown",
 }
+OPTIMIZATION_KEYS = {
+    "schema",
+    "experimentId",
+    "recordedAt",
+    "map",
+    "producer",
+    "search",
+    "axes",
+    "objectives",
+    "constraints",
+    "candidates",
+    "notes",
+}
+OPTIMIZATION_PRODUCER_KEYS = {"name", "version", "artifactSha256"}
+OPTIMIZATION_SEARCH_KEYS = {
+    "algorithm",
+    "algorithmVersion",
+    "randomSeedSha256",
+    "requestedCandidateCount",
+}
+OPTIMIZATION_AXIS_KEYS = {
+    "axisId",
+    "label",
+    "mapNodeRef",
+    "settingPath",
+    "valueType",
+    "domain",
+}
+OPTIMIZATION_OBJECTIVE_KEYS = {
+    "objectiveId",
+    "label",
+    "metric",
+    "unit",
+    "direction",
+    "scope",
+    "scopeRefs",
+    "reducer",
+    "dominanceEpsilon",
+}
+OPTIMIZATION_CONSTRAINT_KEYS = {
+    "constraintId",
+    "objectiveId",
+    "operator",
+    "threshold",
+}
+OPTIMIZATION_CANDIDATE_KEYS = {
+    "candidateId",
+    "label",
+    "treatmentSha256",
+    "outcome",
+    "failureKind",
+    "parameters",
+    "objectiveObservations",
+    "notes",
+}
+OPTIMIZATION_PARAMETER_KEYS = {"axisId", "value"}
+OPTIMIZATION_OBJECTIVE_OBSERVATION_KEYS = {"objectiveId", "observationRefs"}
+OPTIMIZATION_VALUE_TYPES = {"boolean", "integer", "decimal", "categorical"}
+OPTIMIZATION_DIRECTIONS = {"minimize", "maximize"}
+OPTIMIZATION_OPERATORS = {"at-most", "at-least"}
+OPTIMIZATION_OUTCOMES = {"completed", "failed", "incomplete", "rejected"}
 INSTALLATION_ID_PATTERN = re.compile(r"^inst-[a-f0-9]{32}$")
 MAP_SNAPSHOT_ID_PATTERN = re.compile(r"^map-snapshot-[a-f0-9]{64}$")
 DECIMAL_PATTERN = re.compile(r"^(?:0|[1-9][0-9]{0,17})(?:\.[0-9]{1,9})?$")
@@ -786,17 +847,322 @@ def validate_performance_observation(record: dict, context: str) -> None:
         raise ValidationError(f"{context}.notes must be a string")
 
 
+def _validate_optimization_axis(axis: dict, context: str, map_nodes: set[str]) -> None:
+    _require_keys(axis, OPTIMIZATION_AXIS_KEYS, context)
+    axis_id = axis["axisId"]
+    if not isinstance(axis_id, str) or not RECORD_ID_PATTERN.fullmatch(axis_id):
+        raise ValidationError(f"invalid axisId at {context}")
+    for field in ("label", "settingPath"):
+        _require_nonempty_string(axis[field], f"{context}.{field}")
+    if axis["mapNodeRef"] not in map_nodes:
+        raise ValidationError(f"{context}.mapNodeRef is not declared by the experiment")
+    value_type = axis["valueType"]
+    if value_type not in OPTIMIZATION_VALUE_TYPES:
+        raise ValidationError(f"invalid valueType at {context}")
+    domain = axis["domain"]
+    if not isinstance(domain, dict) or domain.get("kind") != value_type:
+        raise ValidationError(f"{context}.domain must match valueType")
+    if value_type == "boolean":
+        _require_keys(domain, {"kind"}, f"{context}.domain")
+        return
+    if value_type == "categorical":
+        _require_keys(domain, {"kind", "values"}, f"{context}.domain")
+        _require_unique_strings(domain["values"], f"{context}.domain.values", minimum=2)
+        return
+    _require_keys(
+        domain,
+        {"kind", "minimum", "maximum", "step"},
+        f"{context}.domain",
+    )
+    if value_type == "integer":
+        for field in ("minimum", "maximum", "step"):
+            _require_nonnegative_integer(domain[field], f"{context}.domain.{field}")
+        if domain["step"] == 0 or domain["maximum"] < domain["minimum"]:
+            raise ValidationError(f"invalid integer domain at {context}")
+        if (domain["maximum"] - domain["minimum"]) % domain["step"]:
+            raise ValidationError(f"integer domain does not end on a step at {context}")
+        return
+    for field in ("minimum", "maximum", "step"):
+        _require_canonical_decimal(domain[field], f"{context}.domain.{field}")
+    minimum = decimal.Decimal(domain["minimum"])
+    maximum = decimal.Decimal(domain["maximum"])
+    step = decimal.Decimal(domain["step"])
+    if step == 0 or maximum < minimum or (maximum - minimum) % step:
+        raise ValidationError(f"invalid decimal domain at {context}")
+
+
+def _validate_optimization_value(value: object, axis: dict, context: str) -> None:
+    value_type = axis["valueType"]
+    domain = axis["domain"]
+    if value_type == "boolean":
+        if not isinstance(value, bool):
+            raise ValidationError(f"{context} must be boolean")
+        return
+    if value_type == "integer":
+        if not isinstance(value, int) or isinstance(value, bool):
+            raise ValidationError(f"{context} must be an integer")
+        if value < domain["minimum"] or value > domain["maximum"]:
+            raise ValidationError(f"{context} is outside the axis domain")
+        if (value - domain["minimum"]) % domain["step"]:
+            raise ValidationError(f"{context} is not on an axis step")
+        return
+    if value_type == "decimal":
+        _require_canonical_decimal(value, context)
+        parsed = decimal.Decimal(value)
+        minimum = decimal.Decimal(domain["minimum"])
+        maximum = decimal.Decimal(domain["maximum"])
+        step = decimal.Decimal(domain["step"])
+        if parsed < minimum or parsed > maximum or (parsed - minimum) % step:
+            raise ValidationError(f"{context} is outside the decimal axis domain")
+        return
+    if not isinstance(value, str) or value not in domain["values"]:
+        raise ValidationError(f"{context} is not an allowed categorical value")
+
+
+def validate_optimization_experiment(record: dict, context: str) -> None:
+    if not isinstance(record, dict):
+        raise ValidationError(f"{context} must be an object")
+    _require_keys(record, OPTIMIZATION_KEYS, context)
+    if record["schema"] != {
+        "name": "skyrim-render-map.optimization-experiment",
+        "major": 1,
+        "minor": 0,
+    }:
+        raise ValidationError(f"unsupported optimization experiment schema at {context}")
+    experiment_id = record["experimentId"]
+    if not isinstance(experiment_id, str) or not RECORD_ID_PATTERN.fullmatch(
+        experiment_id
+    ):
+        raise ValidationError(f"invalid experimentId at {context}")
+    _parse_time(record["recordedAt"], f"{context}.recordedAt")
+
+    map_identity = record["map"]
+    if not isinstance(map_identity, dict):
+        raise ValidationError(f"{context}.map must be an object")
+    _require_keys(map_identity, PERFORMANCE_MAP_KEYS, f"{context}.map")
+    if not isinstance(
+        map_identity["mapSnapshotId"], str
+    ) or not MAP_SNAPSHOT_ID_PATTERN.fullmatch(map_identity["mapSnapshotId"]):
+        raise ValidationError(f"invalid mapSnapshotId at {context}")
+    _require_unique_strings(map_identity["nodeRefs"], f"{context}.map.nodeRefs", minimum=1)
+    map_nodes = set(map_identity["nodeRefs"])
+
+    producer = record["producer"]
+    if not isinstance(producer, dict):
+        raise ValidationError(f"{context}.producer must be an object")
+    _require_keys(producer, OPTIMIZATION_PRODUCER_KEYS, f"{context}.producer")
+    for field in ("name", "version"):
+        _require_nonempty_string(producer[field], f"{context}.producer.{field}")
+    _require_optional_digest(
+        producer["artifactSha256"], SHA256_PATTERN,
+        f"{context}.producer.artifactSha256",
+    )
+    if producer["artifactSha256"] is None:
+        raise ValidationError(f"{context}.producer.artifactSha256 is required")
+
+    search = record["search"]
+    if not isinstance(search, dict):
+        raise ValidationError(f"{context}.search must be an object")
+    _require_keys(search, OPTIMIZATION_SEARCH_KEYS, f"{context}.search")
+    for field in ("algorithm", "algorithmVersion"):
+        _require_nonempty_string(search[field], f"{context}.search.{field}")
+    _require_optional_digest(
+        search["randomSeedSha256"], SHA256_PATTERN,
+        f"{context}.search.randomSeedSha256",
+    )
+    _require_nonnegative_integer(
+        search["requestedCandidateCount"],
+        f"{context}.search.requestedCandidateCount",
+    )
+    if search["requestedCandidateCount"] == 0:
+        raise ValidationError(f"{context}.search.requestedCandidateCount must be positive")
+
+    axes = record["axes"]
+    if not isinstance(axes, list) or not axes:
+        raise ValidationError(f"{context}.axes must be a non-empty array")
+    axes_by_id: dict[str, dict] = {}
+    for index, axis in enumerate(axes):
+        item_context = f"{context}.axes[{index}]"
+        if not isinstance(axis, dict):
+            raise ValidationError(f"{item_context} must be an object")
+        _validate_optimization_axis(axis, item_context, map_nodes)
+        if axis["axisId"] in axes_by_id:
+            raise ValidationError(f"duplicate axisId at {context}")
+        axes_by_id[axis["axisId"]] = axis
+
+    objectives = record["objectives"]
+    if not isinstance(objectives, list) or len(objectives) < 2:
+        raise ValidationError(f"{context}.objectives must contain at least two objectives")
+    objectives_by_id: dict[str, dict] = {}
+    for index, objective in enumerate(objectives):
+        item_context = f"{context}.objectives[{index}]"
+        if not isinstance(objective, dict):
+            raise ValidationError(f"{item_context} must be an object")
+        _require_keys(objective, OPTIMIZATION_OBJECTIVE_KEYS, item_context)
+        objective_id = objective["objectiveId"]
+        if not isinstance(objective_id, str) or not RECORD_ID_PATTERN.fullmatch(
+            objective_id
+        ):
+            raise ValidationError(f"invalid objectiveId at {item_context}")
+        if objective_id in objectives_by_id:
+            raise ValidationError(f"duplicate objectiveId at {context}")
+        objectives_by_id[objective_id] = objective
+        for field in ("label", "metric"):
+            _require_nonempty_string(objective[field], f"{item_context}.{field}")
+        if objective["unit"] not in PERFORMANCE_UNITS:
+            raise ValidationError(f"invalid objective unit at {item_context}")
+        if objective["direction"] not in OPTIMIZATION_DIRECTIONS:
+            raise ValidationError(f"invalid objective direction at {item_context}")
+        if objective["scope"] not in PERFORMANCE_SCOPES:
+            raise ValidationError(f"invalid objective scope at {item_context}")
+        minimum_scope_refs = (
+            1 if objective["scope"] in {"map-node", "map-node-set"} else 0
+        )
+        _require_unique_strings(
+            objective["scopeRefs"],
+            f"{item_context}.scopeRefs",
+            minimum=minimum_scope_refs,
+        )
+        if not set(objective["scopeRefs"]).issubset(map_nodes):
+            raise ValidationError(f"{item_context}.scopeRefs are not declared map nodes")
+        if objective["reducer"] != "median-of-observation-medians":
+            raise ValidationError(f"unsupported objective reducer at {item_context}")
+        _require_canonical_decimal(
+            objective["dominanceEpsilon"], f"{item_context}.dominanceEpsilon"
+        )
+
+    constraints = record["constraints"]
+    if not isinstance(constraints, list):
+        raise ValidationError(f"{context}.constraints must be an array")
+    constraint_ids: set[str] = set()
+    for index, constraint in enumerate(constraints):
+        item_context = f"{context}.constraints[{index}]"
+        if not isinstance(constraint, dict):
+            raise ValidationError(f"{item_context} must be an object")
+        _require_keys(constraint, OPTIMIZATION_CONSTRAINT_KEYS, item_context)
+        constraint_id = constraint["constraintId"]
+        if not isinstance(constraint_id, str) or not RECORD_ID_PATTERN.fullmatch(
+            constraint_id
+        ):
+            raise ValidationError(f"invalid constraintId at {item_context}")
+        if constraint_id in constraint_ids:
+            raise ValidationError(f"duplicate constraintId at {context}")
+        constraint_ids.add(constraint_id)
+        if constraint["objectiveId"] not in objectives_by_id:
+            raise ValidationError(f"unknown constraint objective at {item_context}")
+        if constraint["operator"] not in OPTIMIZATION_OPERATORS:
+            raise ValidationError(f"invalid constraint operator at {item_context}")
+        _require_canonical_decimal(constraint["threshold"], f"{item_context}.threshold")
+
+    candidates = record["candidates"]
+    if not isinstance(candidates, list) or not candidates:
+        raise ValidationError(f"{context}.candidates must be a non-empty array")
+    if len(candidates) > search["requestedCandidateCount"]:
+        raise ValidationError(f"candidate count exceeds requestedCandidateCount at {context}")
+    candidate_ids: set[str] = set()
+    for index, candidate in enumerate(candidates):
+        item_context = f"{context}.candidates[{index}]"
+        if not isinstance(candidate, dict):
+            raise ValidationError(f"{item_context} must be an object")
+        _require_keys(candidate, OPTIMIZATION_CANDIDATE_KEYS, item_context)
+        candidate_id = candidate["candidateId"]
+        if not isinstance(candidate_id, str) or not RECORD_ID_PATTERN.fullmatch(
+            candidate_id
+        ):
+            raise ValidationError(f"invalid candidateId at {item_context}")
+        if candidate_id in candidate_ids:
+            raise ValidationError(f"duplicate candidateId at {context}")
+        candidate_ids.add(candidate_id)
+        _require_nonempty_string(candidate["label"], f"{item_context}.label")
+        _require_optional_digest(
+            candidate["treatmentSha256"], SHA256_PATTERN,
+            f"{item_context}.treatmentSha256",
+        )
+        if candidate["treatmentSha256"] is None:
+            raise ValidationError(f"{item_context}.treatmentSha256 is required")
+        if candidate["outcome"] not in OPTIMIZATION_OUTCOMES:
+            raise ValidationError(f"invalid candidate outcome at {item_context}")
+        if candidate["outcome"] == "completed":
+            if candidate["failureKind"] is not None:
+                raise ValidationError(f"completed candidate has failureKind at {item_context}")
+        else:
+            _require_nonempty_string(
+                candidate["failureKind"], f"{item_context}.failureKind"
+            )
+        if not isinstance(candidate["notes"], str):
+            raise ValidationError(f"{item_context}.notes must be a string")
+
+        parameters = candidate["parameters"]
+        if not isinstance(parameters, list):
+            raise ValidationError(f"{item_context}.parameters must be an array")
+        parameter_ids: set[str] = set()
+        for parameter_index, parameter in enumerate(parameters):
+            parameter_context = f"{item_context}.parameters[{parameter_index}]"
+            if not isinstance(parameter, dict):
+                raise ValidationError(f"{parameter_context} must be an object")
+            _require_keys(parameter, OPTIMIZATION_PARAMETER_KEYS, parameter_context)
+            axis = axes_by_id.get(parameter["axisId"])
+            if axis is None or parameter["axisId"] in parameter_ids:
+                raise ValidationError(
+                    f"invalid or duplicate parameter axis at {parameter_context}"
+                )
+            parameter_ids.add(parameter["axisId"])
+            _validate_optimization_value(
+                parameter["value"], axis, f"{parameter_context}.value"
+            )
+        if parameter_ids != set(axes_by_id):
+            raise ValidationError(
+                f"candidate parameters do not cover every axis at {item_context}"
+            )
+
+        assignments = candidate["objectiveObservations"]
+        if not isinstance(assignments, list):
+            raise ValidationError(f"{item_context}.objectiveObservations must be an array")
+        assignment_ids: set[str] = set()
+        for assignment_index, assignment in enumerate(assignments):
+            assignment_context = (
+                f"{item_context}.objectiveObservations[{assignment_index}]"
+            )
+            if not isinstance(assignment, dict):
+                raise ValidationError(f"{assignment_context} must be an object")
+            _require_keys(
+                assignment, OPTIMIZATION_OBJECTIVE_OBSERVATION_KEYS,
+                assignment_context,
+            )
+            objective_id = assignment["objectiveId"]
+            if objective_id not in objectives_by_id or objective_id in assignment_ids:
+                raise ValidationError(
+                    f"invalid or duplicate objective assignment at {assignment_context}"
+                )
+            assignment_ids.add(objective_id)
+            _require_unique_strings(
+                assignment["observationRefs"],
+                f"{assignment_context}.observationRefs",
+                minimum=1,
+            )
+        if candidate["outcome"] == "completed" and assignment_ids != set(
+            objectives_by_id
+        ):
+            raise ValidationError(
+                f"completed candidate must cover every objective at {item_context}"
+            )
+    if not isinstance(record["notes"], str):
+        raise ValidationError(f"{context}.notes must be a string")
+
+
 def load_submission_records(
     directory: pathlib.Path, submission_class: str
-) -> tuple[list[dict], list[dict], list[dict], list[dict]]:
+) -> tuple[list[dict], list[dict], list[dict], list[dict], list[dict]]:
     entities_path = directory / "content" / "entities.jsonl"
     assertions_path = directory / "content" / "assertions.jsonl"
     resolutions_path = directory / "content" / "resolutions.jsonl"
     performance_path = directory / "content" / "performance-observations.jsonl"
+    optimization_path = directory / "content" / "optimization-experiments.jsonl"
     entities = load_jsonl(entities_path) if entities_path.is_file() else []
     assertions = load_jsonl(assertions_path) if assertions_path.is_file() else []
     resolutions = load_jsonl(resolutions_path) if resolutions_path.is_file() else []
     performance = load_jsonl(performance_path) if performance_path.is_file() else []
+    optimization = load_jsonl(optimization_path) if optimization_path.is_file() else []
 
     if submission_class in {"assertion", "amendment"} and not assertions:
         raise ValidationError(f"{submission_class} submissions require assertions.jsonl")
@@ -810,9 +1176,13 @@ def load_submission_records(
         raise ValidationError(
             "performance-observations.jsonl requires an observation submission"
         )
-    if performance and entities:
+    if optimization and submission_class != "observation":
         raise ValidationError(
-            "performance observation submissions must not declare structural entities"
+            "optimization-experiments.jsonl requires an observation submission"
+        )
+    if (performance or optimization) and entities:
+        raise ValidationError(
+            "measurement submissions must not declare structural entities"
         )
     if entities and submission_class == "resolution":
         raise ValidationError("resolution submissions must not declare entities")
@@ -843,15 +1213,24 @@ def load_submission_records(
                 f"duplicate performance observationId: {observation['observationId']}"
             )
         performance_ids.add(observation["observationId"])
+    optimization_ids: set[str] = set()
+    for index, experiment in enumerate(optimization, start=1):
+        validate_optimization_experiment(experiment, f"{optimization_path}:{index}")
+        if experiment["experimentId"] in optimization_ids:
+            raise ValidationError(
+                f"duplicate optimization experimentId: {experiment['experimentId']}"
+            )
+        optimization_ids.add(experiment["experimentId"])
     record_ids = (
         list(entity_ids)
         + list(assertion_ids)
         + list(resolution_ids)
         + list(performance_ids)
+        + list(optimization_ids)
     )
     if len(record_ids) != len(set(record_ids)):
         raise ValidationError("submission-local record IDs must be unique across record types")
-    return entities, assertions, resolutions, performance
+    return entities, assertions, resolutions, performance, optimization
 
 
 def validate_submission(directory: pathlib.Path) -> TreeSummary:

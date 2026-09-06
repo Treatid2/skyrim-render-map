@@ -398,6 +398,12 @@ Aggregates are projections grouped by compatible identities. A new CSX map
 does not rewrite old timing data; it either preserves stable node references or
 publishes explicit alias/migration relations.
 
+Optimization experiments index those observations against declared setting
+axes, objectives, and constraints. The compiler checks comparison contexts and
+derives the Pareto surface while retaining failed, infeasible, contaminated,
+and dominated candidates. This projection is separate from both the immutable
+observations and the structural map.
+
 ## 14. Evidence storage
 
 The initial repository stores small manifests and normalized records in Git.
@@ -440,10 +446,11 @@ signalling, and the unprivileged PR workflow.
 
 The next data slice is a bounded normalization of selected legacy engine and
 CSX claims into assertions. Performance observation schema v1, deterministic
-grouping, and conservative outlier signalling are implemented. General runtime
-observation, artifact-index, and applicability-range schemas; additional
-conflict classes; signed receipts; immutable dataset releases; Pages; and
-producer export clients remain planned.
+grouping, conservative outlier signalling, optimization experiments, and
+derived Pareto surfaces are implemented. General runtime observation,
+artifact-index, and applicability-range schemas; additional conflict classes;
+signed receipts; immutable dataset releases; Pages; and producer export clients
+remain planned.
 
 This sequence establishes the managed resource before inviting easy player
 submissions and leaves storage, querying, and producer integration replaceable

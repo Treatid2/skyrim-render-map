@@ -11,6 +11,10 @@ For a performance observation, I followed
 included the raw bounded sample history and all required identity, validity,
 and privacy fields.
 
+For an optimization experiment, I followed
+[`docs/optimization-experiments.md`](../docs/optimization-experiments.md),
+retained every candidate outcome, and linked objectives to raw observations.
+
 ## Provenance and privacy
 
 - [ ] I ran the repository validator.

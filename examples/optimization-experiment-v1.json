@@ -1,0 +1,124 @@
+{
+  "schema": {
+    "name": "skyrim-render-map.optimization-experiment",
+    "major": 1,
+    "minor": 0
+  },
+  "experimentId": "opt-example-0001",
+  "recordedAt": "2026-09-06T12:30:00Z",
+  "map": {
+    "mapSnapshotId": "map-snapshot-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "nodeRefs": [
+      "urn:skyrim-render-map:catalog:engine:frame",
+      "urn:skyrim-render-map:catalog:csx:feature:ssgi"
+    ]
+  },
+  "producer": {
+    "name": "example-preset-search",
+    "version": "1.0.0",
+    "artifactSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  "search": {
+    "algorithm": "bounded-grid",
+    "algorithmVersion": "1.0.0",
+    "randomSeedSha256": null,
+    "requestedCandidateCount": 1
+  },
+  "axes": [
+    {
+      "axisId": "ssgi-slices",
+      "label": "SSGI slices",
+      "mapNodeRef": "urn:skyrim-render-map:catalog:csx:feature:ssgi",
+      "settingPath": "ScreenSpaceGI.Slices",
+      "valueType": "integer",
+      "domain": {
+        "kind": "integer",
+        "minimum": 2,
+        "maximum": 8,
+        "step": 2
+      }
+    },
+    {
+      "axisId": "ssgi-steps",
+      "label": "SSGI steps",
+      "mapNodeRef": "urn:skyrim-render-map:catalog:csx:feature:ssgi",
+      "settingPath": "ScreenSpaceGI.Steps",
+      "valueType": "integer",
+      "domain": {
+        "kind": "integer",
+        "minimum": 8,
+        "maximum": 32,
+        "step": 8
+      }
+    }
+  ],
+  "objectives": [
+    {
+      "objectiveId": "frame-time",
+      "label": "GPU frame time",
+      "metric": "gpu-frame-duration",
+      "unit": "milliseconds",
+      "direction": "minimize",
+      "scope": "whole-frame",
+      "scopeRefs": [],
+      "reducer": "median-of-observation-medians",
+      "dominanceEpsilon": "0.05"
+    },
+    {
+      "objectiveId": "visual-quality",
+      "label": "Visual quality score",
+      "metric": "visual-quality-score",
+      "unit": "percent",
+      "direction": "maximize",
+      "scope": "map-node",
+      "scopeRefs": [
+        "urn:skyrim-render-map:catalog:csx:feature:ssgi"
+      ],
+      "reducer": "median-of-observation-medians",
+      "dominanceEpsilon": "0.5"
+    }
+  ],
+  "constraints": [
+    {
+      "constraintId": "frame-budget",
+      "objectiveId": "frame-time",
+      "operator": "at-most",
+      "threshold": "13.8"
+    }
+  ],
+  "candidates": [
+    {
+      "candidateId": "candidate-0001",
+      "label": "Four slices, sixteen steps",
+      "treatmentSha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "outcome": "completed",
+      "failureKind": null,
+      "parameters": [
+        {
+          "axisId": "ssgi-slices",
+          "value": 4
+        },
+        {
+          "axisId": "ssgi-steps",
+          "value": 16
+        }
+      ],
+      "objectiveObservations": [
+        {
+          "objectiveId": "frame-time",
+          "observationRefs": [
+            "urn:skyrim-render-map:submission:sub-example-performance#perf-frame-0001"
+          ]
+        },
+        {
+          "objectiveId": "visual-quality",
+          "observationRefs": [
+            "urn:skyrim-render-map:submission:sub-example-performance#perf-quality-0001"
+          ]
+        }
+      ],
+      "notes": "Illustrative candidate only; references are not published evidence."
+    }
+  ],
+  "notes": "Illustrative structure only; hashes, references, and values are not evidence."
+}
