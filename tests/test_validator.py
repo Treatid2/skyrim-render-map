@@ -60,7 +60,7 @@ class ValidatorTest(unittest.TestCase):
             "status": "candidate-unreviewed",
             "contributor": {
                 "displayName": "Example",
-                "github": None,
+                "github": "example-contributor",
                 "standing": "ordinary-contributor",
             },
             "provenance": {
@@ -109,6 +109,32 @@ class ValidatorTest(unittest.TestCase):
             VALIDATOR.validate_candidate(self.base, self.candidate),
             "Accepted for map review",
         )
+
+    def test_rejects_self_declared_accepted_submission(self) -> None:
+        directory = self._add_submission()
+        manifest_path = directory / "submission.json"
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        manifest["status"] = "accepted"
+        manifest_path.write_text(
+            json.dumps(manifest, indent=2) + "\n", encoding="utf-8"
+        )
+        with self.assertRaisesRegex(
+            VALIDATOR.ValidationError, "candidate-unreviewed"
+        ):
+            VALIDATOR.validate_candidate(self.base, self.candidate)
+
+    def test_rejects_missing_github_contributor(self) -> None:
+        directory = self._add_submission()
+        manifest_path = directory / "submission.json"
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        manifest["contributor"]["github"] = None
+        manifest_path.write_text(
+            json.dumps(manifest, indent=2) + "\n", encoding="utf-8"
+        )
+        with self.assertRaisesRegex(
+            VALIDATOR.ValidationError, "GitHub contributor"
+        ):
+            VALIDATOR.validate_candidate(self.base, self.candidate)
 
     def test_rejects_existing_submission_change(self) -> None:
         existing = next(self.candidate.glob("submissions/*/*/*/content/*.json"))

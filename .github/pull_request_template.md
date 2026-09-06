@@ -14,6 +14,17 @@
 - [ ] Data and documentation may be published under CC-BY-SA-4.0.
 - [ ] Commits include a DCO sign-off.
 
+## Admission review (maintainer)
+
+- [ ] Trusted structure and deterministic compile checks pass against current
+      `main`.
+- [ ] Scope, applicability, provenance, transformations, limitations, and known
+      conflicts are adequately disclosed.
+- [ ] The submission is relevant and inspectable, and is not obvious
+      fabrication, spam, abusive duplication, or volume abuse.
+- [ ] I understand that merging admits evidence; it does not certify or endorse
+      the conclusion.
+
 ## Summary
 
 Describe what is being contributed, its applicability, and any known

@@ -618,7 +618,18 @@ def validate_candidate(base: pathlib.Path, candidate: pathlib.Path) -> str:
         if path.startswith("submissions/")
     }:
         raise ValidationError("a data PR must create a new submission directory")
-    validate_submission(candidate / pathlib.PurePosixPath(root))
+    submission_directory = candidate / pathlib.PurePosixPath(root)
+    validate_submission(submission_directory)
+    manifest = load_json_document(submission_directory / "submission.json")
+    if manifest["status"] != "candidate-unreviewed":
+        raise ValidationError(
+            "a new data submission must declare candidate-unreviewed status"
+        )
+    github = manifest["contributor"]["github"]
+    if not isinstance(github, str) or not github.strip():
+        raise ValidationError(
+            "a new public data submission must identify its GitHub contributor"
+        )
     validate_repository(candidate)
     return "Accepted for map review"
 

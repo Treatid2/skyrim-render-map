@@ -10,7 +10,9 @@ Submit data through a pull request. A data PR must:
    unchanged;
 4. contain only the bounded, declared file formats;
 5. pass the deterministic structure check; and
-6. include a Developer Certificate of Origin sign-off in each commit.
+6. declare `candidate-unreviewed` status and the contributor's GitHub identity;
+   and
+7. include a Developer Certificate of Origin sign-off in each commit.
 
 Use `git commit -s` to add the sign-off.
 
@@ -22,9 +24,26 @@ the package locally.
 python tools/validate_repository.py --repository .
 ```
 
-Passing structural validation does not mean that a conclusion has been
-accepted. Maintainers review provenance, applicability, evidence quality, and
-conflicts separately.
+Repository mode validates the complete tree, including historical submissions.
+It does not compare a proposed contribution with `main` and therefore does not
+exercise the candidate-only status and GitHub-attribution checks.
+
+To reproduce the pull-request admission check, prepare separate clean checkouts
+of current `main` and the candidate tree, then run the validator from the
+trusted `main` checkout:
+
+```console
+python <main-tree>/tools/validate_repository.py --base-tree <main-tree> --candidate-tree <candidate-tree>
+```
+
+`<main-tree>` is the clean current canonical tree and `<candidate-tree>` is the
+complete proposed tree. Always execute the validator supplied by `<main-tree>`;
+candidate files are inert input and must not supply executable validation code.
+
+Passing structural validation makes a submission eligible for admission
+review. Merging admits its immutable evidence to the ledger; it does not
+certify or endorse the conclusion. Maintainers apply the bounded criteria in
+[the admission and moderation policy](docs/admission-and-moderation.md).
 
 Assertion and amendment submissions place canonical records in
 `content/assertions.jsonl` and declare new subjects in
@@ -46,6 +65,28 @@ or resolution record that identifies the earlier record. Contradictory but
 well-formed evidence can coexist and will be signalled as contested until it
 is resolved.
 
+## Admission review
+
+Before enabling merge, the maintainer records that:
+
+- the trusted structure and deterministic compile checks passed against the
+  current canonical tree;
+- the contribution is relevant, coherent, inspectable, and no broader than its
+  evidence and applicability;
+- provenance, unavailable evidence, transformations, uncertainty, and known
+  conflicts are disclosed;
+- privacy, licensing, artifact, and DCO requirements are satisfied; and
+- the contribution is not obvious fabrication, spam, abusive duplication, or
+  volume abuse.
+
+Technical reproduction is not required for admission. A reviewer must not
+describe admission as proof. A previously unexplored assertion normally enters
+the generated map as provisional; lack of disagreement is not corroboration.
+
+Conflicts are review signals rather than automatic rejection. Reject or hold a
+submission only for a reason enumerated in the admission policy, and record the
+reason in the pull request.
+
 ## Tooling and governance
 
 Changes to schemas, validators, CI, policy, or publishing tools are normal code
@@ -59,7 +100,8 @@ Do not submit:
 - Skyrim executables, assets, shader binaries, or substantial decompilation;
 - crash or memory dumps through the ordinary contribution lane;
 - usernames, machine names, account identifiers, serial numbers, IP or MAC
-  addresses;
+  addresses, except for the contributor-chosen public GitHub identity required
+  in `submission.json`;
 - credentials, tokens, private keys, or complete environment dumps;
 - absolute local paths;
 - executable files, symlinks, submodules, or nested archives.
