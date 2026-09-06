@@ -1,0 +1,48 @@
+{
+  "schema": {
+    "name": "skyrim-render-map.submission",
+    "major": 1,
+    "minor": 0
+  },
+  "submissionId": "sub-skyrim-vr-shader-family-call-topology-9935c-v1",
+  "submissionClass": "assertion",
+  "namespace": "skyrim-vr",
+  "createdAt": "2026-09-06T00:02:01+01:00",
+  "status": "candidate-unreviewed",
+  "contributor": {
+    "displayName": "Treatid2",
+    "github": "Treatid2",
+    "standing": "ordinary-contributor"
+  },
+  "provenance": {
+    "sourceRepository": "https://github.com/Treatid2/skyrim-render-map",
+    "sourceCommit": "bbb16c86963baaba41514285364031645d93d905",
+    "sourceParentCommit": "e476b8cf78a87ba914963fedeb7b84dce70bff4b",
+    "sourceRef": "main",
+    "sourceState": "merged",
+    "sourcePubliclyReachable": true,
+    "sourceDirty": false,
+    "importedAt": "2026-09-06T00:02:01+01:00",
+    "sourceContentTreeSha256": "75CCEF0F7235EAA198222E3E27C2908A943FE256AD7A44C392BA4BE59C9879EF",
+    "transformations": [
+      "Normalized the four confirmed SetupTechnique-to-shader-family implementation relations and four confirmed SetupTechnique-to-BSShader::BeginTechnique call relations from the preserved Skyrim VR engine map."
+    ],
+    "relatedUrls": [
+      "https://github.com/ParticleTroned/skyrim-community-shaders/pull/55",
+      "https://github.com/Treatid2/skyrim-render-map/tree/bbb16c86963baaba41514285364031645d93d905/submissions/2026/08/sub-csx-full-render-exploration-9935c5210",
+      "https://github.com/Treatid2/skyrim-render-map/tree/b0811cbfe2d8a5cb182ef75b9d6f6bc4f5b9406d/submissions/2026/09/sub-skyrim-vr-csx-foundation-9935c-v1"
+    ]
+  },
+  "licensing": {
+    "content": "CC-BY-SA-4.0",
+    "schemas": "CC0-1.0",
+    "dcoAcknowledged": true
+  },
+  "content": {
+    "root": "content",
+    "fileCount": 1,
+    "totalBytes": 12776,
+    "treeSha256": "0559FDE12DE055B180400D5EBD37766A184A748815D4EA71AB1D8A1E493D3167"
+  },
+  "notes": "Adds only the first reusable engine call-topology spine. Implementation relations are single-valued; call relations are multi-valued so later confirmed callees can coexist without a false conflict. Return-address RVAs remain preserved in the source relation evidence rather than being folded into the target identity."
+}
