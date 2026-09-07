@@ -1,0 +1,16 @@
+{
+  "schema": { "name": "skyrim-render-map.artifact", "major": 1, "minor": 0 },
+  "artifactId": "visual-artifact-a",
+  "artifactSha256": "4444444444444444444444444444444444444444444444444444444444444444",
+  "mediaType": "application/zip",
+  "contentKind": "stereo-sequence",
+  "encoding": "zip",
+  "byteLength": 1048576,
+  "expandedByteLength": 4194304,
+  "license": "CC-BY-SA-4.0",
+  "retentionClass": "release-asset",
+  "locations": [
+    "https://example.invalid/artifacts/4444444444444444444444444444444444444444444444444444444444444444.zip"
+  ],
+  "notes": "Illustrative external artifact; the URL is not live evidence."
+}

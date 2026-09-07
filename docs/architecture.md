@@ -149,7 +149,9 @@ submissions/2026/09/sub-0199.../
   submission.json
   assertions.jsonl       # optional by declared class
   observations.jsonl     # optional by declared class
-  artifacts.json         # content-addressed external/raw evidence index
+  content/
+    artifacts.jsonl      # content-addressed external/raw evidence index
+    visual-captures.jsonl
 ```
 
 Contributors use submission-local identifiers such as `claim-0001`. They do

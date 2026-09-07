@@ -89,7 +89,7 @@
       "properties": {
         "captureSha256": { "$ref": "#/$defs/sha256" },
         "treatmentSha256": { "$ref": "#/$defs/sha256" },
-        "sourceObservationRef": { "type": "null" }
+        "sourceObservationRef": { "type": "string", "minLength": 1 }
       }
     },
     "protocol": {

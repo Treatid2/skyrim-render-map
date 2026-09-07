@@ -1,0 +1,87 @@
+{
+  "schema": {
+    "name": "skyrim-render-map.visual-capture-observation",
+    "major": 1,
+    "minor": 0
+  },
+  "captureId": "visual-capture-a",
+  "recordedAt": "2026-09-06T19:59:00Z",
+  "map": {
+    "mapSnapshotId": "map-snapshot-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "nodeRefs": ["urn:skyrim-render-map:catalog:engine:frame"]
+  },
+  "runtime": {
+    "engine": {
+      "runtime": "skyrim-vr-1.4.15",
+      "executableSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "moduleSha256": null
+    },
+    "extensions": [{
+      "namespace": "csx",
+      "sourceCommit": "cccccccccccccccccccccccccccccccccccccccc",
+      "buildId": "example-build",
+      "artifactSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+    }],
+    "runtimeRoute": "steamvr-physical-hmd"
+  },
+  "environment": {
+    "installationId": "inst-0123456789abcdef0123456789abcdef",
+    "cpuModel": "Example CPU",
+    "gpuModel": "Example GPU",
+    "gpuDriverVersion": "example-driver",
+    "renderContext": {
+      "renderWidth": 2000,
+      "renderHeight": 2200,
+      "viewCount": 2,
+      "refreshRateHz": "72",
+      "renderScale": "0.67",
+      "frameLimiter": "disabled",
+      "targetFrameRate": "72",
+      "reprojectionMode": "disabled"
+    }
+  },
+  "scenario": {
+    "label": "Illustrative synchronized stereo sequence",
+    "scenarioSha256": "1111111111111111111111111111111111111111111111111111111111111111",
+    "configurationSha256": "2222222222222222222222222222222222222222222222222222222222222222",
+    "cacheSha256": "3333333333333333333333333333333333333333333333333333333333333333"
+  },
+  "treatment": {
+    "label": "Illustrative treatment A",
+    "treatmentSha256": "5555555555555555555555555555555555555555555555555555555555555555",
+    "baselineObservationRef": null
+  },
+  "protocol": {
+    "name": "illustrative-capture-protocol",
+    "version": "1.0.0",
+    "artifactSha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "captureApi": {
+      "name": "csx-screenshot",
+      "version": "1.0.0",
+      "artifactSha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    },
+    "sourceKind": "hmd_submission",
+    "sourceFallbackApplied": false,
+    "mediaKind": "stereo-sequence",
+    "frameCount": 3,
+    "frameRateHz": "72",
+    "viewCount": 2,
+    "width": 2000,
+    "height": 2200,
+    "colorSpace": "srgb",
+    "pixelFormat": "rgba8-unorm",
+    "timingMode": "fixed-step",
+    "droppedFrames": 0,
+    "duplicatedFrames": 0
+  },
+  "captureSha256": "4444444444444444444444444444444444444444444444444444444444444444",
+  "artifactRef": "urn:skyrim-render-map:submission:sub-example-visual#visual-artifact-a",
+  "validity": { "state": "valid", "contamination": [], "notes": "" },
+  "privacy": {
+    "publicationOptIn": true,
+    "fieldsPreviewed": true,
+    "installationIdRandom": true,
+    "installationIdResettable": true
+  },
+  "notes": "Illustrative structure only; hashes and capture are not evidence."
+}
