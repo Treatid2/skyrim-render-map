@@ -20,6 +20,8 @@ revision 1 or later. The exporter rejects rather than guesses when:
 - terminal child and summary counts do not reconcile;
 - a retained artifact is absent, uncommitted, truncated, or has an invalid
   SHA-256;
+- a PNG is structurally invalid, undecodable, interlaced, contains an unknown
+  ancillary chunk, or declares an unsupported output view;
 - source, eye layout, dimensions, format, or colour metadata are ambiguous or
   inconsistent;
 - the sequence contains no completed frame; or
@@ -53,15 +55,20 @@ review-bundle/
 
 The ZIP uses stored entries, fixed timestamps and permissions, canonical JSON,
 and stable frame names. Equal source bytes and manifests therefore produce
-equal bundle bytes. `bundle-manifest.json` preserves the source-manifest digest,
-source contract, original ordinals, engine-frame identifiers, timestamps,
-per-file identities, and terminal omissions. It deliberately omits local paths,
-request identifiers, session identifiers, capture tags, and other private
-manifest fields.
+equal bundle bytes. The exporter reads each source once into private staging,
+validates its declared size and digest, verifies every PNG chunk, decodes its
+image-data stream, and writes the bundle from those owned bytes. Text, EXIF,
+and embedded-profile chunks are removed at that boundary; safe colour and
+geometry chunks are retained. `bundle-manifest.json` preserves both source and
+published frame identities, the source-manifest digest, source contract,
+original ordinals, engine-frame identifiers, timestamps, and terminal
+omissions. It deliberately omits local paths, request identifiers, session
+identifiers, capture tags, and other private manifest fields.
 
-The adapter writes atomically through a sibling staging directory. Any rejected
-or interrupted export removes that staging directory and leaves no claimed
-output.
+The adapter writes atomically through a sibling staging directory and uses an
+operating-system no-replace rename for publication. A concurrent creator of the
+destination wins without being overwritten. Any rejected or interrupted export
+removes its staging directory; a cleanup failure is reported explicitly.
 
 ## Actual capture semantics
 
@@ -75,6 +82,11 @@ retained in the bundle manifest and make the visual-capture record
 `contaminated`. Such evidence can still be admitted and inspected, but the
 visual comparison contract will not accept it as a valid comparison stimulus.
 Unscheduled requested slots are not called dropped frames.
+
+Only terminal error codes reserved by the CSX screenshot 1.0 contract are
+copied. Unknown strings become `unspecified`, even when they happen to look like
+opaque identifiers. A `completed_with_warnings` state contaminates the evidence
+even if a malformed producer omitted the warning-detail array.
 
 The producer supplies the orchestration protocol identity and intended frame
 rate. The adapter derives the CSX capture API version from the source contract
@@ -91,6 +103,11 @@ before proposing a data PR.
 Only publish media for which the declared license can be granted. The generated
 `content/` files still require an ordinary append-only submission manifest and
 the normal admission checks described in [CONTRIBUTING](../CONTRIBUTING.md).
+That submission manifest must use exactly the `submissionId` declared in the
+private plan. Artifact and capture identifiers must be distinct because all
+submission-local record types share one identifier namespace.
 
-This v1 adapter supports PNG mono or synchronized left/right sequences. It does
-not transcode, resize, compress, repair, interpolate, or score frames.
+This v1 adapter supports non-interlaced PNG mono or synchronized left/right
+sequences. A lone left or right eye is rejected rather than relabelled as mono.
+The adapter does not transcode, resize, compress, repair, interpolate, or score
+frames.

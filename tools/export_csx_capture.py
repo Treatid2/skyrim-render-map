@@ -8,10 +8,13 @@ from __future__ import annotations
 
 import argparse
 import binascii
+import ctypes
 import datetime as dt
 import decimal
+import errno
 import hashlib
 import json
+import os
 import pathlib
 import re
 import shutil
@@ -19,13 +22,14 @@ import struct
 import sys
 import tempfile
 import zipfile
+import zlib
 from typing import Any
 
 import compile_dataset as compiler
 import validate_repository as validator
 
 
-TOOL_VERSION = "1.0.0"
+TOOL_VERSION = "1.0.1"
 PLAN_SCHEMA = {
     "name": "skyrim-render-map.csx-capture-export-plan",
     "major": 1,
@@ -62,7 +66,35 @@ DROPPED_STATES = {"dropped"}
 FAILED_STATES = {"failed", "failed_partial"}
 CANCELLED_STATES = {"cancelled", "cancelled_partial"}
 SHA256_PATTERN = re.compile(r"^[A-Fa-f0-9]{64}$")
-TERMINAL_CODE_PATTERN = re.compile(r"^[a-z][a-z0-9_.-]{0,63}$")
+TERMINAL_CODES = {
+    "cancelled",
+    "capacity_exhausted",
+    "composition_failed",
+    "cursor_expired",
+    "device_changed",
+    "encode_failed",
+    "encoder_backpressure",
+    "feature_disabled",
+    "feature_unavailable",
+    "gpu_stage_failed",
+    "idempotency_conflict",
+    "internal_error",
+    "invalid_option",
+    "invalid_request",
+    "manifest_failed",
+    "packager_unavailable",
+    "packaging_failed",
+    "readback_timeout",
+    "request_not_found",
+    "source_busy",
+    "source_timeout",
+    "source_unavailable",
+    "unsafe_output_collision",
+    "unsafe_path",
+    "unsupported_capability",
+    "unsupported_contract_version",
+    "write_failed",
+}
 VIEW_ALIASES = {
     "left": "left",
     "left_eye": "left",
@@ -87,6 +119,20 @@ PNG_BIT_DEPTHS = {
     4: {8, 16},
     6: {8, 16},
 }
+PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
+PNG_SAFE_ANCILLARY = {
+    b"bKGD",
+    b"cHRM",
+    b"gAMA",
+    b"hIST",
+    b"pHYs",
+    b"sBIT",
+    b"sRGB",
+    b"tRNS",
+}
+PNG_PRIVATE_ANCILLARY = {b"eXIf", b"iCCP", b"iTXt", b"tEXt", b"zTXt"}
+MAX_PNG_FILE_BYTES = 512 * 1024 * 1024
+MAX_PNG_DECOMPRESSED_BYTES = 512 * 1024 * 1024
 
 
 class ExportError(RuntimeError):
@@ -105,10 +151,11 @@ def _strict_keys(value: Any, expected: set[str], context: str) -> dict:
     return value
 
 
-def _load_json(path: pathlib.Path, context: str) -> Any:
+def _load_json_document(path: pathlib.Path, context: str) -> tuple[Any, str]:
     try:
-        text = path.read_text(encoding="utf-8")
-        return validator.parse_json(text, context)
+        data = path.read_bytes()
+        text = data.decode("utf-8")
+        return validator.parse_json(text, context), hashlib.sha256(data).hexdigest()
     except (OSError, UnicodeError, validator.ValidationError) as error:
         raise ExportError(f"cannot read {context}: {error}") from error
 
@@ -174,36 +221,218 @@ def _resolve_frame_path(manifest_path: pathlib.Path, value: Any) -> pathlib.Path
     raise ExportError(f"frame artifact is unavailable: {declared.name!r}")
 
 
-def _png_identity(path: pathlib.Path) -> tuple[int, int, str]:
+def _png_chunk(kind: bytes, data: bytes) -> bytes:
+    return (
+        struct.pack(">I", len(data))
+        + kind
+        + data
+        + struct.pack(">I", binascii.crc32(kind + data) & 0xFFFFFFFF)
+    )
+
+
+def _sanitize_png(data: bytes, filename: str) -> tuple[bytes, int, int, str]:
+    if not data.startswith(PNG_SIGNATURE):
+        raise ExportError(f"{filename!r} is not a PNG")
+    position = len(PNG_SIGNATURE)
+    chunks: list[tuple[bytes, bytes]] = []
+    idat = bytearray()
+    seen_ihdr = False
+    seen_plte = False
+    seen_idat = False
+    ended_idat = False
+    seen_iend = False
+    seen_ancillary: set[bytes] = set()
+    palette_entries = 0
+    width = height = bit_depth = colour_type = 0
+
+    while position < len(data):
+        if len(data) - position < 12:
+            raise ExportError(f"{filename!r} has a truncated PNG chunk")
+        length = struct.unpack(">I", data[position : position + 4])[0]
+        end = position + 12 + length
+        if end > len(data):
+            raise ExportError(f"{filename!r} has a truncated PNG chunk")
+        kind = data[position + 4 : position + 8]
+        payload = data[position + 8 : position + 8 + length]
+        expected_crc = struct.unpack(">I", data[position + 8 + length : end])[0]
+        if not all(65 <= byte <= 90 or 97 <= byte <= 122 for byte in kind):
+            raise ExportError(f"{filename!r} has an invalid PNG chunk type")
+        if kind[2] & 0x20:
+            raise ExportError(f"{filename!r} uses a reserved PNG chunk type")
+        if (binascii.crc32(kind + payload) & 0xFFFFFFFF) != expected_crc:
+            raise ExportError(f"{filename!r} has an invalid {kind!r} checksum")
+        if seen_iend:
+            raise ExportError(f"{filename!r} contains data after PNG IEND")
+
+        if not seen_ihdr:
+            if kind != b"IHDR" or length != 13:
+                raise ExportError(f"{filename!r} has no canonical PNG IHDR")
+            width, height, bit_depth, colour_type, compression, filtering, interlace = (
+                struct.unpack(">IIBBBBB", payload)
+            )
+            colour_name = PNG_COLOUR_TYPES.get(colour_type)
+            if (
+                width == 0
+                or height == 0
+                or colour_name is None
+                or bit_depth not in PNG_BIT_DEPTHS[colour_type]
+                or compression != 0
+                or filtering != 0
+                or interlace != 0
+            ):
+                raise ExportError(f"{filename!r} has unsupported PNG geometry")
+            seen_ihdr = True
+            chunks.append((kind, payload))
+        elif kind == b"IHDR":
+            raise ExportError(f"{filename!r} repeats PNG IHDR")
+        elif kind == b"PLTE":
+            if (
+                seen_plte
+                or seen_idat
+                or colour_type in {0, 4}
+                or length == 0
+                or length % 3
+                or length > 768
+            ):
+                raise ExportError(f"{filename!r} has an invalid PNG palette")
+            seen_plte = True
+            palette_entries = length // 3
+            chunks.append((kind, payload))
+        elif kind == b"IDAT":
+            if ended_idat:
+                raise ExportError(f"{filename!r} has non-consecutive PNG IDAT chunks")
+            seen_idat = True
+            idat.extend(payload)
+            chunks.append((kind, payload))
+        elif kind == b"IEND":
+            if length != 0 or not seen_idat:
+                raise ExportError(f"{filename!r} has an invalid PNG IEND")
+            seen_iend = True
+            chunks.append((kind, payload))
+        else:
+            if seen_idat:
+                ended_idat = True
+            if kind in PNG_PRIVATE_ANCILLARY:
+                pass
+            elif kind in PNG_SAFE_ANCILLARY:
+                if kind in seen_ancillary:
+                    raise ExportError(f"{filename!r} repeats PNG chunk {kind!r}")
+                seen_ancillary.add(kind)
+                if kind in {b"tRNS", b"hIST"} and not seen_plte and colour_type == 3:
+                    raise ExportError(f"{filename!r} has invalid PNG chunk ordering")
+                if kind in {b"tRNS", b"bKGD", b"hIST", b"pHYs"} and seen_idat:
+                    raise ExportError(f"{filename!r} has invalid PNG chunk ordering")
+                if kind in {b"cHRM", b"gAMA", b"sBIT", b"sRGB"} and (
+                    seen_plte or seen_idat
+                ):
+                    raise ExportError(f"{filename!r} has invalid PNG chunk ordering")
+                expected_lengths = {
+                    b"cHRM": 32,
+                    b"gAMA": 4,
+                    b"pHYs": 9,
+                    b"sRGB": 1,
+                }
+                if kind in expected_lengths and length != expected_lengths[kind]:
+                    raise ExportError(f"{filename!r} has an invalid PNG {kind!r} chunk")
+                if kind == b"hIST" and length != 2 * palette_entries:
+                    raise ExportError(f"{filename!r} has an invalid PNG histogram")
+                if kind == b"hIST" and colour_type != 3:
+                    raise ExportError(f"{filename!r} has an invalid PNG histogram")
+                if kind == b"tRNS" and colour_type not in {0, 2, 3}:
+                    raise ExportError(f"{filename!r} has an invalid PNG transparency chunk")
+                transparency_lengths = {0: 2, 2: 6}
+                if kind == b"tRNS":
+                    if (
+                        colour_type in transparency_lengths
+                        and length != transparency_lengths[colour_type]
+                    ) or (
+                        colour_type == 3 and not 1 <= length <= palette_entries
+                    ):
+                        raise ExportError(
+                            f"{filename!r} has an invalid PNG transparency chunk"
+                        )
+                if kind == b"sBIT" and length != {0: 1, 2: 3, 3: 3, 4: 2, 6: 4}[
+                    colour_type
+                ]:
+                    raise ExportError(f"{filename!r} has an invalid PNG significant-bits chunk")
+                if kind == b"bKGD" and length != {0: 2, 2: 6, 3: 1, 4: 2, 6: 6}[
+                    colour_type
+                ]:
+                    raise ExportError(f"{filename!r} has an invalid PNG background chunk")
+                if kind == b"gAMA" and payload == b"\0\0\0\0":
+                    raise ExportError(f"{filename!r} has an invalid PNG gamma chunk")
+                if kind == b"sRGB" and payload[0] > 3:
+                    raise ExportError(f"{filename!r} has an invalid PNG rendering intent")
+                if kind == b"pHYs" and payload[-1] > 1:
+                    raise ExportError(f"{filename!r} has an invalid PNG physical-unit value")
+                chunks.append((kind, payload))
+            else:
+                category = "critical" if not kind[0] & 0x20 else "ancillary"
+                raise ExportError(f"{filename!r} has unsupported PNG {category} chunk {kind!r}")
+        position = end
+
+    if not seen_iend:
+        raise ExportError(f"{filename!r} has no PNG IEND")
+    if colour_type == 3 and not seen_plte:
+        raise ExportError(f"{filename!r} has no PNG palette")
+
+    channels = {0: 1, 2: 3, 3: 1, 4: 2, 6: 4}[colour_type]
+    row_bytes = (width * channels * bit_depth + 7) // 8
+    expected_bytes = height * (row_bytes + 1)
+    if expected_bytes > MAX_PNG_DECOMPRESSED_BYTES:
+        raise ExportError(f"{filename!r} exceeds the decoded PNG safety limit")
     try:
-        with path.open("rb") as stream:
-            header = stream.read(33)
-    except OSError as error:
-        raise ExportError(f"cannot inspect {path.name!r}: {error}") from error
-    if len(header) < 29 or header[:8] != b"\x89PNG\r\n\x1a\n":
-        raise ExportError(f"{path.name!r} is not a PNG")
-    length = struct.unpack(">I", header[8:12])[0]
-    if length != 13 or header[12:16] != b"IHDR":
-        raise ExportError(f"{path.name!r} has no canonical PNG IHDR")
-    width, height = struct.unpack(">II", header[16:24])
-    bit_depth, colour_type = header[24], header[25]
-    colour_name = PNG_COLOUR_TYPES.get(colour_type)
-    expected_crc = struct.unpack(">I", header[29:33])[0]
-    actual_crc = binascii.crc32(header[12:29]) & 0xFFFFFFFF
-    if expected_crc != actual_crc:
-        raise ExportError(f"{path.name!r} has an invalid PNG IHDR checksum")
+        decoder = zlib.decompressobj()
+        pixels = decoder.decompress(bytes(idat), expected_bytes + 1)
+        pixels += decoder.flush(expected_bytes + 1 - len(pixels))
+    except (zlib.error, ValueError) as error:
+        raise ExportError(f"{filename!r} has invalid PNG image data") from error
     if (
-        width == 0
-        or height == 0
-        or colour_name is None
-        or bit_depth not in PNG_BIT_DEPTHS[colour_type]
+        not decoder.eof
+        or decoder.unused_data
+        or decoder.unconsumed_tail
+        or len(pixels) != expected_bytes
     ):
-        raise ExportError(f"{path.name!r} has unsupported PNG geometry")
-    return width, height, f"png-{colour_name}-{bit_depth}bit"
+        raise ExportError(f"{filename!r} has invalid PNG image data length")
+    for row in range(height):
+        if pixels[row * (row_bytes + 1)] > 4:
+            raise ExportError(f"{filename!r} has an invalid PNG row filter")
+
+    sanitized = PNG_SIGNATURE + b"".join(_png_chunk(kind, payload) for kind, payload in chunks)
+    colour_name = PNG_COLOUR_TYPES[colour_type]
+    return sanitized, width, height, f"png-{colour_name}-{bit_depth}bit"
+
+
+def _copy_and_inspect_png(
+    source: pathlib.Path, destination: pathlib.Path, context: str, declared_digest: str
+) -> tuple[int, str, int, int, str]:
+    source_digest = hashlib.sha256()
+    size = 0
+    try:
+        with source.open("rb") as input_stream, destination.open("xb") as output_stream:
+            for block in iter(lambda: input_stream.read(1024 * 1024), b""):
+                output_stream.write(block)
+                source_digest.update(block)
+                size += len(block)
+                if size > MAX_PNG_FILE_BYTES:
+                    raise ExportError(f"{context} exceeds the encoded PNG safety limit")
+        copied = destination.read_bytes()
+        sanitized, width, height, pixel_format = _sanitize_png(copied, source.name)
+        destination.write_bytes(sanitized)
+    except ExportError:
+        raise
+    except OSError as error:
+        raise ExportError(f"cannot stage {context}: {error}") from error
+    digest = source_digest.hexdigest()
+    if digest != declared_digest.lower():
+        raise ExportError(f"{context} SHA-256 differs from the file")
+    return size, digest, width, height, pixel_format
 
 
 def _normalize_view(value: Any, filename: str) -> str:
-    if isinstance(value, str) and value.lower() in VIEW_ALIASES:
+    if value is not None:
+        if not isinstance(value, str) or value.lower() not in VIEW_ALIASES:
+            raise ExportError(f"unsupported view for frame artifact {filename!r}")
         return VIEW_ALIASES[value.lower()]
     stem = pathlib.Path(filename).stem.lower()
     for suffix, view in (("_left", "left"), ("_right", "right"), ("_combined", "mono")):
@@ -220,42 +449,43 @@ def _declared_output(capture: dict, filename: str, view: str) -> dict:
     matches = []
     for output in outputs:
         if not isinstance(output, dict):
-            continue
+            raise ExportError("manifest capture.outputs entries must be objects")
         raw_view = output.get("view")
-        output_view = VIEW_ALIASES.get(raw_view.lower()) if isinstance(raw_view, str) else None
+        if not isinstance(raw_view, str) or raw_view.lower() not in VIEW_ALIASES:
+            raise ExportError("manifest capture.outputs contains an unsupported view")
+        output_view = VIEW_ALIASES[raw_view.lower()]
         suffix = output.get("nameSuffix")
         if output_view == view or (
             isinstance(suffix, str) and stem.endswith("_" + suffix.lower())
         ):
             matches.append(output)
-    if len(matches) > 1:
-        exact = [
-            item
-            for item in matches
-            if isinstance(item.get("view"), str)
-            and VIEW_ALIASES.get(item["view"].lower()) == view
-        ]
-        matches = exact
-    return matches[0] if len(matches) == 1 else {}
+    if len(matches) != 1:
+        if outputs:
+            raise ExportError(f"manifest capture.outputs is ambiguous for {filename!r}")
+        return {}
+    return matches[0]
 
 
 def _artifact_metadata(
-    manifest_path: pathlib.Path, capture: dict, artifact: dict, context: str
+    manifest_path: pathlib.Path,
+    capture: dict,
+    artifact: dict,
+    context: str,
+    spool_path: pathlib.Path,
 ) -> tuple[pathlib.Path, dict]:
     if not isinstance(artifact, dict):
         raise ExportError(f"{context} must be an object")
     path = _resolve_frame_path(manifest_path, artifact.get("path"))
-    size = path.stat().st_size
     if artifact.get("committed") is not True:
         raise ExportError(f"{context} is not committed")
-    if artifact.get("bytes") != size:
-        raise ExportError(f"{context} byte count differs from the file")
-    digest = _sha256_file(path)
     declared_digest = artifact.get("sha256")
     if not isinstance(declared_digest, str) or not SHA256_PATTERN.fullmatch(declared_digest):
         raise ExportError(f"{context}.sha256 must be a complete SHA-256")
-    if declared_digest.lower() != digest:
-        raise ExportError(f"{context} SHA-256 differs from the file")
+    source_size, source_digest, width, height, pixel_format = _copy_and_inspect_png(
+        path, spool_path, context, declared_digest
+    )
+    if artifact.get("bytes") != source_size:
+        raise ExportError(f"{context} byte count differs from the file")
     actual = artifact.get("actual") if isinstance(artifact.get("actual"), dict) else {}
     view = _normalize_view(actual.get("view", artifact.get("view")), path.name)
     output = _declared_output(capture, path.name, view)
@@ -266,16 +496,18 @@ def _artifact_metadata(
     format_name = format_name.lower()
     if format_name != "png":
         raise ExportError(f"{context} uses unsupported format {format_name!r}")
-    width, height, pixel_format = _png_identity(path)
     if actual.get("width", width) != width or actual.get("height", height) != height:
         raise ExportError(f"{context} PNG dimensions differ from manifest metadata")
     colour = actual.get("colourContract", encoding.get("colourContract"))
     if not isinstance(colour, str) or not colour:
         raise ExportError(f"{context} has no colour contract")
-    return path, {
+    digest = _sha256_file(spool_path)
+    return spool_path, {
         "view": view,
-        "bytes": size,
+        "bytes": spool_path.stat().st_size,
         "sha256": digest,
+        "sourceBytes": source_size,
+        "sourceSha256": source_digest,
         "width": width,
         "height": height,
         "format": "png",
@@ -319,34 +551,8 @@ def _inspect_completed_child(
     capture: dict,
     child: dict,
     context: str,
+    spool_directory: pathlib.Path,
 ) -> tuple[dict, str, bool, int]:
-    artifacts = child.get("artifacts")
-    if not isinstance(artifacts, list) or not artifacts:
-        raise ExportError(f"{context} has no committed artifacts")
-    frame_artifacts = []
-    source_paths = []
-    for artifact_index, artifact in enumerate(artifacts):
-        path, metadata = _artifact_metadata(
-            manifest_path,
-            capture,
-            artifact,
-            f"{context}.artifacts[{artifact_index}]",
-        )
-        source_paths.append(path)
-        frame_artifacts.append(metadata)
-    views = [item["view"] for item in frame_artifacts]
-    if len(views) != len(set(views)):
-        raise ExportError(f"{context} repeats an output view")
-    engine_frame = child.get("scheduledEngineFrame")
-    timestamp_us = child.get("scheduledTimestampUs")
-    scheduled_values = (
-        (engine_frame, "scheduledEngineFrame"),
-        (timestamp_us, "scheduledTimestampUs"),
-    )
-    for value, name in scheduled_values:
-        if not isinstance(value, int) or isinstance(value, bool) or value < 0:
-            raise ExportError(f"{context}.{name} must be non-negative")
-
     actual = child.get("actual") if isinstance(child.get("actual"), dict) else {}
     actual_source = actual.get("source") if isinstance(actual.get("source"), dict) else {}
     requested = child.get("requested") if isinstance(child.get("requested"), dict) else {}
@@ -369,6 +575,40 @@ def _inspect_completed_child(
         and not fallback_value
     ):
         raise ExportError(f"{context} changed capture source without declaring fallback")
+
+    declared_capture = capture
+    if isinstance(effective.get("outputs"), list):
+        declared_capture = {"outputs": effective["outputs"]}
+    if fallback_value and actual_source.get("kind") != requested_source.get("kind"):
+        declared_capture = {}
+    artifacts = child.get("artifacts")
+    if not isinstance(artifacts, list) or not artifacts:
+        raise ExportError(f"{context} has no committed artifacts")
+    frame_artifacts = []
+    source_paths = []
+    for artifact_index, artifact in enumerate(artifacts):
+        path, metadata = _artifact_metadata(
+            manifest_path,
+            declared_capture,
+            artifact,
+            f"{context}.artifacts[{artifact_index}]",
+            spool_directory / f"{child.get('ordinal', 0):08d}-{artifact_index:04d}.png",
+        )
+        source_paths.append(path)
+        frame_artifacts.append(metadata)
+    views = [item["view"] for item in frame_artifacts]
+    if len(views) != len(set(views)):
+        raise ExportError(f"{context} repeats an output view")
+    engine_frame = child.get("scheduledEngineFrame")
+    timestamp_us = child.get("scheduledTimestampUs")
+    scheduled_values = (
+        (engine_frame, "scheduledEngineFrame"),
+        (timestamp_us, "scheduledTimestampUs"),
+    )
+    for value, name in scheduled_values:
+        if not isinstance(value, int) or isinstance(value, bool) or value < 0:
+            raise ExportError(f"{context}.{name} must be non-negative")
+
     warnings = child.get("warnings", [])
     if warnings is not None and not isinstance(warnings, list):
         raise ExportError(f"{context}.warnings must be an array")
@@ -381,12 +621,14 @@ def _inspect_completed_child(
         },
         source_kind,
         fallback_value,
-        len(warnings or []),
+        max(len(warnings or []), int(child.get("state") == "completed_with_warnings")),
     )
 
 
-def _inspect_manifest(manifest_path: pathlib.Path) -> dict:
-    manifest = _load_json(manifest_path, "CSX sequence manifest")
+def _inspect_manifest(manifest_path: pathlib.Path, spool_directory: pathlib.Path) -> dict:
+    manifest, manifest_sha256 = _load_json_document(
+        manifest_path, "CSX sequence manifest"
+    )
     if not isinstance(manifest, dict):
         raise ExportError("CSX sequence manifest must be an object")
     contract = manifest.get("contract")
@@ -435,16 +677,15 @@ def _inspect_manifest(manifest_path: pathlib.Path) -> dict:
                     "sourceOrdinal": ordinal,
                     "state": state,
                     "terminalCode": (
-                        child["error"]
-                        if isinstance(child.get("error"), str)
-                        and TERMINAL_CODE_PATTERN.fullmatch(child["error"])
-                        else "unspecified"
+                        child["error"] if child.get("error") in TERMINAL_CODES else "unspecified"
                     ),
                 }
             )
             continue
         frame, source_kind, child_fallback, child_warning_count = (
-            _inspect_completed_child(manifest_path, capture, child, context)
+            _inspect_completed_child(
+                manifest_path, capture, child, context, spool_directory
+            )
         )
         engine_frame = frame["scheduledEngineFrame"]
         if engine_frame in seen_engine_frames:
@@ -478,8 +719,11 @@ def _inspect_manifest(manifest_path: pathlib.Path) -> dict:
     if len(view_sets) != 1:
         raise ExportError("manifest frames do not have a consistent view set")
     views = next(iter(view_sets))
-    media_kind = "stereo-sequence" if views == ("left", "right") else "mono-sequence"
-    if media_kind == "mono-sequence" and len(views) != 1:
+    if views == ("left", "right"):
+        media_kind = "stereo-sequence"
+    elif views == ("mono",):
+        media_kind = "mono-sequence"
+    else:
         raise ExportError(f"unsupported capture view set: {views!r}")
     geometry = {
         (item["width"], item["height"], item["pixelFormat"], item["colourContract"])
@@ -491,7 +735,7 @@ def _inspect_manifest(manifest_path: pathlib.Path) -> dict:
     width, height, pixel_format, colour_contract = next(iter(geometry))
     return {
         "manifest": manifest,
-        "manifestSha256": _sha256_file(manifest_path),
+        "manifestSha256": manifest_sha256,
         "contract": {
             "name": "csx.screenshot",
             "major": 1,
@@ -573,23 +817,63 @@ def _write_bundle(path: pathlib.Path, inspected: dict) -> tuple[int, int]:
         validator.scan_public_content(pathlib.Path("bundle-manifest.json"), manifest_bytes)
     except validator.ValidationError as error:
         raise ExportError(f"capture bundle manifest is not publication-safe: {error}") from error
-    expanded_bytes = len(manifest_bytes) + sum(source.stat().st_size for _, source in entries)
+    expanded_bytes = len(manifest_bytes) + sum(
+        metadata["bytes"]
+        for frame in inspected["frames"]
+        for metadata in frame["artifacts"]
+    )
     try:
         with zipfile.ZipFile(path, "w", allowZip64=True) as archive:
             archive.writestr(_zip_info("bundle-manifest.json"), manifest_bytes)
+            metadata_by_path = {
+                artifact["path"]: artifact
+                for frame in public_frames
+                for artifact in frame["artifacts"]
+            }
             for archive_path, source in entries:
+                digest = hashlib.sha256()
+                written = 0
                 with archive.open(_zip_info(archive_path), "w", force_zip64=True) as target:
                     with source.open("rb") as stream:
-                        shutil.copyfileobj(stream, target, length=1024 * 1024)
-    except OSError as error:
+                        for block in iter(lambda: stream.read(1024 * 1024), b""):
+                            target.write(block)
+                            digest.update(block)
+                            written += len(block)
+                expected = metadata_by_path[archive_path]
+                if written != expected["bytes"] or digest.hexdigest() != expected["sha256"]:
+                    raise ExportError("staged frame changed while the bundle was written")
+        with zipfile.ZipFile(path) as archive:
+            for archive_path, _ in entries:
+                digest = hashlib.sha256(archive.read(archive_path)).hexdigest()
+                expected = metadata_by_path[archive_path]
+                if digest != expected["sha256"]:
+                    raise ExportError("capture bundle entry digest verification failed")
+    except ExportError:
+        raise
+    except (OSError, zipfile.BadZipFile, KeyError) as error:
         raise ExportError(f"cannot write capture bundle: {error}") from error
-    return path.stat().st_size, expanded_bytes
+    try:
+        return path.stat().st_size, expanded_bytes
+    except OSError as error:
+        raise ExportError(f"cannot inspect capture bundle: {error}") from error
 
 
 def _validate_plan(plan: Any) -> dict:
     plan = _strict_keys(plan, PLAN_KEYS, "plan")
     if plan["schema"] != PLAN_SCHEMA:
         raise ExportError("unsupported capture export plan schema")
+    if (
+        not isinstance(plan["submissionId"], str)
+        or not validator.SUBMISSION_PATTERN.fullmatch(plan["submissionId"])
+    ):
+        raise ExportError("plan.submissionId is invalid")
+    for key in ("artifactId", "captureId"):
+        if not isinstance(plan[key], str) or not validator.RECORD_ID_PATTERN.fullmatch(
+            plan[key]
+        ):
+            raise ExportError(f"plan.{key} is invalid")
+    if plan["artifactId"] == plan["captureId"]:
+        raise ExportError("plan artifactId and captureId must be distinct")
     _strict_keys(plan["source"], SOURCE_KEYS, "plan.source")
     if plan["source"]["kind"] != "csx-screenshot-sequence-v1":
         raise ExportError("unsupported capture source kind")
@@ -597,6 +881,10 @@ def _validate_plan(plan: Any) -> dict:
     template = artifact["locationTemplate"]
     if not isinstance(template, str) or template.count("{sha256}") != 1:
         raise ExportError("artifact.locationTemplate requires one {sha256} placeholder")
+    if artifact["license"] not in validator.ARTIFACT_LICENSES:
+        raise ExportError("plan.artifact.license is unsupported")
+    if artifact["retentionClass"] not in validator.ARTIFACT_RETENTION_CLASSES:
+        raise ExportError("plan.artifact.retentionClass is unsupported")
     protocol = _strict_keys(plan["protocol"], PROTOCOL_PLAN_KEYS, "plan.protocol")
     if protocol["timingMode"] not in validator.VISUAL_CAPTURE_TIMING_MODES:
         raise ExportError("plan.protocol.timingMode is unsupported")
@@ -609,15 +897,25 @@ def _validate_plan(plan: Any) -> dict:
         raise ExportError("plan.protocol.frameRateHz must be a canonical decimal") from error
     if not parsed_frame_rate.is_finite() or parsed_frame_rate <= 0:
         raise ExportError("plan.protocol.frameRateHz must be positive")
+    if not isinstance(plan["runtime"], dict) or not isinstance(
+        plan["runtime"].get("extensions"), list
+    ):
+        raise ExportError("plan.runtime.extensions must be an array")
+    if not isinstance(plan["privacy"], dict):
+        raise ExportError("plan.privacy must be an object")
     _parse_time(plan["recordedAt"], "plan.recordedAt")
     return plan
 
 
 def _build_records(
-    plan_path: pathlib.Path, plan: dict, bundle_path: pathlib.Path
+    plan_path: pathlib.Path,
+    plan: dict,
+    plan_sha256: str,
+    bundle_path: pathlib.Path,
+    spool_directory: pathlib.Path,
 ) -> tuple[dict, dict, dict]:
     manifest_path = _resolve_plan_path(plan_path, plan["source"]["manifestPath"])
-    inspected = _inspect_manifest(manifest_path)
+    inspected = _inspect_manifest(manifest_path, spool_directory)
     byte_length, expanded_length = _write_bundle(bundle_path, inspected)
     bundle_sha = _sha256_file(bundle_path)
     location = plan["artifact"]["locationTemplate"].replace("{sha256}", bundle_sha)
@@ -749,7 +1047,7 @@ def _build_records(
             "name": "skyrim-render-map.export-csx-capture",
             "version": TOOL_VERSION,
         },
-        "planSha256": _sha256_file(plan_path),
+        "planSha256": plan_sha256,
         "sourceManifestSha256": inspected["manifestSha256"],
         "artifactSha256": bundle_sha,
         "artifactFile": f"artifacts/{bundle_sha}.zip",
@@ -773,17 +1071,91 @@ def _write_jsonl(path: pathlib.Path, records: list[dict]) -> None:
     )
 
 
-def export_plan(plan_path: pathlib.Path, output: pathlib.Path) -> dict:
-    plan_path = plan_path.resolve()
-    plan = _validate_plan(_load_json(plan_path, "capture export plan"))
-    output = output.resolve()
-    if output.exists():
-        raise ExportError(f"output already exists: {output}")
-    output.parent.mkdir(parents=True, exist_ok=True)
-    staging = pathlib.Path(tempfile.mkdtemp(prefix=f".{output.name}.staging-", dir=output.parent))
+def _publish_no_clobber(staging: pathlib.Path, output: pathlib.Path) -> None:
+    """Atomically publish a directory while refusing an existing destination."""
     try:
+        if os.name == "nt":
+            os.rename(staging, output)
+            return
+        if sys.platform.startswith("linux"):
+            library = ctypes.CDLL(None, use_errno=True)
+            renameat2 = getattr(library, "renameat2", None)
+            if renameat2 is None:
+                raise ExportError("atomic no-clobber publication is unavailable")
+            renameat2.argtypes = [
+                ctypes.c_int,
+                ctypes.c_char_p,
+                ctypes.c_int,
+                ctypes.c_char_p,
+                ctypes.c_uint,
+            ]
+            renameat2.restype = ctypes.c_int
+            result = renameat2(
+                -100,
+                os.fsencode(staging),
+                -100,
+                os.fsencode(output),
+                1,
+            )
+            if result == 0:
+                return
+            error_number = ctypes.get_errno()
+            if error_number in {errno.ENOSYS, errno.EINVAL}:
+                raise ExportError("atomic no-clobber publication is unavailable")
+            raise OSError(error_number, os.strerror(error_number), str(output))
+        if sys.platform == "darwin":
+            library = ctypes.CDLL(None, use_errno=True)
+            renamex_np = getattr(library, "renamex_np", None)
+            if renamex_np is None:
+                raise ExportError("atomic no-clobber publication is unavailable")
+            renamex_np.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_uint]
+            renamex_np.restype = ctypes.c_int
+            if renamex_np(os.fsencode(staging), os.fsencode(output), 0x00000004) == 0:
+                return
+            error_number = ctypes.get_errno()
+            raise OSError(error_number, os.strerror(error_number), str(output))
+        raise ExportError("atomic no-clobber publication is unavailable")
+    except FileExistsError as error:
+        raise ExportError(f"output already exists: {output}") from error
+    except OSError as error:
+        if error.errno in {errno.EEXIST, errno.ENOTEMPTY, errno.EACCES} and output.exists():
+            raise ExportError(f"output already exists: {output}") from error
+        raise ExportError(f"cannot publish export: {error}") from error
+
+
+def _remove_private_staging(path: pathlib.Path, context: str) -> None:
+    try:
+        shutil.rmtree(path)
+    except FileNotFoundError:
+        return
+    except OSError as error:
+        raise ExportError(f"cannot remove {context}: {error}") from error
+    if path.exists():
+        raise ExportError(f"cannot remove {context}")
+
+
+def export_plan(plan_path: pathlib.Path, output: pathlib.Path) -> dict:
+    staging: pathlib.Path | None = None
+    try:
+        plan_path = plan_path.resolve()
+        plan_document, plan_sha256 = _load_json_document(
+            plan_path, "capture export plan"
+        )
+        plan = _validate_plan(plan_document)
+        output = output.resolve()
+        if output.exists():
+            raise ExportError(f"output already exists: {output}")
+        output.parent.mkdir(parents=True, exist_ok=True)
+        staging = pathlib.Path(
+            tempfile.mkdtemp(prefix=f".{output.name}.staging-", dir=output.parent)
+        )
+        spool_directory = staging / ".private-source"
+        spool_directory.mkdir()
         temporary_bundle = staging / "capture-bundle.zip"
-        artifact, capture, receipt = _build_records(plan_path, plan, temporary_bundle)
+        artifact, capture, receipt = _build_records(
+            plan_path, plan, plan_sha256, temporary_bundle, spool_directory
+        )
+        _remove_private_staging(spool_directory, "private source staging")
         artifact_directory = staging / "artifacts"
         artifact_directory.mkdir()
         final_bundle = artifact_directory / f"{artifact['artifactSha256']}.zip"
@@ -803,14 +1175,24 @@ def export_plan(plan_path: pathlib.Path, output: pathlib.Path) -> dict:
             if item.is_file() and item.suffix != ".zip"
         )
         for path in sorted(public_files):
-            validator.scan_public_content(path, path.read_bytes())
-        staging.replace(output)
-    except OSError as error:
-        shutil.rmtree(staging, ignore_errors=True)
-        raise ExportError(f"cannot write export: {error}") from error
-    except BaseException:
-        shutil.rmtree(staging, ignore_errors=True)
-        raise
+            try:
+                validator.scan_public_content(path, path.read_bytes())
+            except (OSError, validator.ValidationError) as error:
+                raise ExportError(f"public export validation failed: {error}") from error
+        _publish_no_clobber(staging, output)
+        staging = None
+    except BaseException as error:
+        cleanup_error = None
+        if staging is not None and staging.exists():
+            try:
+                _remove_private_staging(staging, "export staging")
+            except ExportError as caught:
+                cleanup_error = caught
+        if cleanup_error is not None:
+            raise ExportError(f"{error}; cleanup failed: {cleanup_error}") from error
+        if isinstance(error, (ExportError, KeyboardInterrupt, SystemExit)):
+            raise
+        raise ExportError(f"capture export failed: {error}") from error
     return receipt
 
 

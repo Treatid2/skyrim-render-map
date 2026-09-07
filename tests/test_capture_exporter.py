@@ -15,6 +15,7 @@ import tempfile
 import unittest
 import zipfile
 import zlib
+from unittest import mock
 
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -218,6 +219,12 @@ class CaptureExporterTest(unittest.TestCase):
         )
         self.plan_path.write_text(json.dumps(plan or self._plan()), encoding="utf-8")
 
+    def _replace_artifact_bytes(self, artifact: dict, data: bytes) -> None:
+        name = pathlib.Path(artifact["path"]).name
+        (self.source / name).write_bytes(data)
+        artifact["bytes"] = len(data)
+        artifact["sha256"] = hashlib.sha256(data).hexdigest()
+
     @staticmethod
     def _read_jsonl(path: pathlib.Path) -> dict:
         return json.loads(path.read_text(encoding="utf-8").strip())
@@ -337,6 +344,163 @@ class CaptureExporterTest(unittest.TestCase):
         self._write_inputs(self._manifest(), plan)
         with self.assertRaisesRegex(EXPORTER.ExportError, "positive"):
             EXPORTER.export_plan(self.plan_path, self.root / "zero")
+
+    def test_png_structure_is_validated_and_private_chunks_are_removed(self) -> None:
+        manifest = self._manifest()
+        artifact = manifest["children"][0]["artifacts"][0]
+        png = _png(value=7)
+        private_chunk = _png_chunk(b"tEXt", b"private-path\x00C:/Users/Example")
+        png = png[:33] + private_chunk + png[33:]
+        self._replace_artifact_bytes(artifact, png)
+        self._write_inputs(manifest)
+        output = self.root / "sanitized"
+        receipt = EXPORTER.export_plan(self.plan_path, output)
+        with zipfile.ZipFile(output / receipt["artifactFile"]) as archive:
+            exported = archive.read("frames/000000/left.png")
+            bundle = json.loads(archive.read("bundle-manifest.json"))
+        self.assertNotIn(b"private-path", exported)
+        metadata = bundle["frames"][0]["artifacts"][0]
+        self.assertEqual(metadata["sourceSha256"], hashlib.sha256(png).hexdigest())
+        self.assertEqual(metadata["sha256"], hashlib.sha256(exported).hexdigest())
+
+        for label, invalid in {
+            "truncated": _png()[:-8],
+            "bad-crc": _png()[:-1] + bytes((_png()[-1] ^ 1,)),
+            "unknown-ancillary": _png()[:33]
+            + _png_chunk(b"vpAg", b"opaque")
+            + _png()[33:],
+        }.items():
+            manifest = self._manifest()
+            self._replace_artifact_bytes(
+                manifest["children"][0]["artifacts"][0], invalid
+            )
+            self._write_inputs(manifest)
+            with self.subTest(label=label), self.assertRaises(EXPORTER.ExportError):
+                EXPORTER.export_plan(self.plan_path, self.root / f"invalid-{label}")
+
+    def test_single_eye_and_invalid_or_ambiguous_views_are_rejected(self) -> None:
+        manifest = self._manifest()
+        for child in manifest["children"]:
+            child["artifacts"] = child["artifacts"][:1]
+        self._write_inputs(manifest)
+        with self.assertRaisesRegex(EXPORTER.ExportError, "unsupported capture view set"):
+            EXPORTER.export_plan(self.plan_path, self.root / "single-eye")
+
+        manifest = self._manifest()
+        manifest["children"][0]["artifacts"][0]["view"] = "future-eye"
+        self._write_inputs(manifest)
+        with self.assertRaisesRegex(EXPORTER.ExportError, "unsupported view"):
+            EXPORTER.export_plan(self.plan_path, self.root / "invalid-view")
+
+        manifest = self._manifest()
+        manifest["capture"]["outputs"].append(
+            copy.deepcopy(manifest["capture"]["outputs"][0])
+        )
+        self._write_inputs(manifest)
+        with self.assertRaisesRegex(EXPORTER.ExportError, "ambiguous"):
+            EXPORTER.export_plan(self.plan_path, self.root / "ambiguous-view")
+
+    def test_warning_state_and_terminal_code_allowlist_contaminate_safely(self) -> None:
+        manifest = self._manifest()
+        manifest["children"][0]["state"] = "completed_with_warnings"
+        manifest["children"][0]["warnings"] = []
+        child = manifest["children"][1]
+        child["state"] = "dropped"
+        child["artifacts"] = []
+        child["error"] = "opaque-but-syntactically-valid"
+        manifest["counts"]["written"] = 1
+        manifest["counts"]["dropped"] = 1
+        self._write_inputs(manifest)
+        output = self.root / "warning-state"
+        receipt = EXPORTER.export_plan(self.plan_path, output)
+        capture = self._read_jsonl(output / "content" / "visual-captures.jsonl")
+        self.assertEqual(capture["validity"]["state"], "contaminated")
+        self.assertIn("child warnings", capture["validity"]["notes"])
+        with zipfile.ZipFile(output / receipt["artifactFile"]) as archive:
+            bundle = json.loads(archive.read("bundle-manifest.json"))
+        self.assertEqual(bundle["omissions"][0]["terminalCode"], "unspecified")
+
+    def test_plan_identity_is_validated_before_source_media(self) -> None:
+        for label, mutate in {
+            "submission": lambda plan: plan.update(submissionId="sub-short"),
+            "collision": lambda plan: plan.update(captureId=plan["artifactId"]),
+        }.items():
+            plan = self._plan()
+            mutate(plan)
+            plan["source"]["manifestPath"] = str(self.root / "does-not-exist.json")
+            self.plan_path.write_text(json.dumps(plan), encoding="utf-8")
+            with self.subTest(label=label), self.assertRaises(EXPORTER.ExportError):
+                EXPORTER.export_plan(self.plan_path, self.root / f"identity-{label}")
+
+    def test_staged_frame_mutation_is_detected_before_publication(self) -> None:
+        self._write_inputs()
+        original = EXPORTER._write_bundle
+
+        def mutate_then_write(path: pathlib.Path, inspected: dict) -> tuple[int, int]:
+            inspected["frames"][0]["_sourcePaths"][0].write_bytes(_png(value=99))
+            return original(path, inspected)
+
+        with mock.patch.object(EXPORTER, "_write_bundle", side_effect=mutate_then_write):
+            with self.assertRaisesRegex(EXPORTER.ExportError, "staged frame changed"):
+                EXPORTER.export_plan(self.plan_path, self.root / "mutated-stage")
+
+    def test_manifest_bytes_and_digest_are_bound_to_one_read(self) -> None:
+        manifest = self._manifest()
+        self._write_inputs(manifest)
+        expected_digest = hashlib.sha256(self.manifest_path.read_bytes()).hexdigest()
+        original = EXPORTER._load_json_document
+
+        def load_then_replace(path: pathlib.Path, context: str) -> tuple[dict, str]:
+            value, digest = original(path, context)
+            if context == "CSX sequence manifest":
+                path.write_text('{"state":"replaced"}', encoding="utf-8")
+            return value, digest
+
+        output = self.root / "manifest-bound"
+        with mock.patch.object(
+            EXPORTER, "_load_json_document", side_effect=load_then_replace
+        ):
+            receipt = EXPORTER.export_plan(self.plan_path, output)
+        self.assertEqual(receipt["sourceManifestSha256"], expected_digest)
+        with zipfile.ZipFile(output / receipt["artifactFile"]) as archive:
+            bundle = json.loads(archive.read("bundle-manifest.json"))
+        self.assertEqual(bundle["source"]["manifestSha256"], expected_digest)
+        self.assertEqual(len(bundle["frames"]), 2)
+
+    def test_concurrent_destination_is_not_replaced(self) -> None:
+        self._write_inputs()
+        output = self.root / "raced-output"
+        original = EXPORTER._publish_no_clobber
+
+        def create_destination(staging: pathlib.Path, destination: pathlib.Path) -> None:
+            destination.mkdir()
+            (destination / "owner.txt").write_text("other producer", encoding="utf-8")
+            original(staging, destination)
+
+        with mock.patch.object(
+            EXPORTER, "_publish_no_clobber", side_effect=create_destination
+        ):
+            with self.assertRaisesRegex(EXPORTER.ExportError, "already exists"):
+                EXPORTER.export_plan(self.plan_path, output)
+        self.assertEqual((output / "owner.txt").read_text(), "other producer")
+
+    def test_unexpected_and_cleanup_errors_are_normalized(self) -> None:
+        self._write_inputs()
+        with mock.patch.object(
+            EXPORTER, "_build_records", side_effect=AttributeError("fixture")
+        ):
+            with self.assertRaisesRegex(EXPORTER.ExportError, "capture export failed"):
+                EXPORTER.export_plan(self.plan_path, self.root / "normalized")
+
+        with mock.patch.object(
+            EXPORTER, "_build_records", side_effect=AttributeError("fixture")
+        ), mock.patch.object(
+            EXPORTER,
+            "_remove_private_staging",
+            side_effect=EXPORTER.ExportError("fixture cleanup"),
+        ):
+            with self.assertRaisesRegex(EXPORTER.ExportError, "cleanup failed"):
+                EXPORTER.export_plan(self.plan_path, self.root / "cleanup")
 
 
 if __name__ == "__main__":
