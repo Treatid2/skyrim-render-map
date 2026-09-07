@@ -130,7 +130,8 @@
     "protocol": {
       "type": "object",
       "required": [
-        "name", "version", "artifactSha256", "captureApi", "mediaKind",
+        "name", "version", "artifactSha256", "captureApi", "sourceKind",
+        "sourceFallbackApplied", "mediaKind",
         "frameCount", "frameRateHz", "viewCount", "width", "height",
         "colorSpace", "pixelFormat", "timingMode", "droppedFrames",
         "duplicatedFrames"
@@ -141,6 +142,8 @@
         "version": { "type": "string", "minLength": 1 },
         "artifactSha256": { "$ref": "visual-comparison-v1.schema.json#/$defs/sha256" },
         "captureApi": { "$ref": "performance-observation-v1.schema.json#/$defs/tool" },
+        "sourceKind": { "type": "string", "minLength": 1 },
+        "sourceFallbackApplied": { "type": "boolean" },
         "mediaKind": { "enum": ["stereo-sequence", "mono-sequence", "still-pair"] },
         "frameCount": { "type": "integer", "minimum": 1 },
         "frameRateHz": {
