@@ -60,6 +60,8 @@
       "version": "1.0.0",
       "artifactSha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
     },
+    "sourceKind": "hmd_submission",
+    "sourceFallbackApplied": false,
     "mediaKind": "stereo-sequence",
     "frameCount": 3,
     "frameRateHz": "72",

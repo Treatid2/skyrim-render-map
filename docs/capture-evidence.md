@@ -43,8 +43,9 @@ contributor cannot grant the declared license.
 
 ## Capture validity
 
-A capture records retained frame count and rate, view count, dimensions,
-colour space, pixel format, timing mode, and exact capture API provenance.
+A capture records retained frame count and rate, actual source and fallback,
+view count, dimensions, colour space, pixel format, timing mode, and exact
+capture API provenance.
 Dropped and duplicated frames are always declared. A capture may be `valid`
 only when both counts are zero and no contamination is recorded. Contaminated
 or inconclusive captures remain useful evidence but cannot serve as stimuli in

@@ -425,6 +425,8 @@ VISUAL_CAPTURE_PROTOCOL_KEYS = {
     "version",
     "artifactSha256",
     "captureApi",
+    "sourceKind",
+    "sourceFallbackApplied",
     "mediaKind",
     "frameCount",
     "frameRateHz",
@@ -1613,6 +1615,9 @@ def validate_visual_capture(record: dict, context: str) -> None:
         raise ValidationError(f"{context}.protocol.captureApi.artifactSha256 is required")
     if protocol["mediaKind"] not in VISUAL_MEDIA_KINDS:
         raise ValidationError(f"unsupported capture mediaKind at {context}")
+    _require_nonempty_string(protocol["sourceKind"], f"{context}.protocol.sourceKind")
+    if not isinstance(protocol["sourceFallbackApplied"], bool):
+        raise ValidationError(f"{context}.protocol.sourceFallbackApplied must be boolean")
     for field in ("frameCount", "viewCount", "width", "height"):
         _require_nonnegative_integer(protocol[field], f"{context}.protocol.{field}")
         if protocol[field] == 0:
