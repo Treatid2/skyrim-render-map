@@ -54,6 +54,19 @@ def _png(width: int = 2, height: int = 1, value: int = 0) -> bytes:
     )
 
 
+def _indexed_png(bit_depth: int = 1) -> bytes:
+    rows = b"\x00\x00"
+    return (
+        b"\x89PNG\r\n\x1a\n"
+        + _png_chunk(
+            b"IHDR", struct.pack(">IIBBBBB", 1, 1, bit_depth, 3, 0, 0, 0)
+        )
+        + _png_chunk(b"PLTE", b"\x00\x00\x00\xff\xff\xff")
+        + _png_chunk(b"IDAT", zlib.compress(rows))
+        + _png_chunk(b"IEND", b"")
+    )
+
+
 class CaptureExporterTest(unittest.TestCase):
     def setUp(self) -> None:
         self.temporary = tempfile.TemporaryDirectory()
@@ -278,6 +291,10 @@ class CaptureExporterTest(unittest.TestCase):
         for child in manifest["children"]:
             child["artifacts"] = child["artifacts"][:1]
             artifact = child["artifacts"][0]
+            original_name = pathlib.Path(artifact["path"]).name
+            combined_name = original_name.replace("_left.png", "_combined.png")
+            (self.source / original_name).replace(self.source / combined_name)
+            artifact["path"] = f"D:/expired/capture/{combined_name}"
             artifact["actual"] = {
                 "view": "source_native",
                 "width": 2,
@@ -301,6 +318,14 @@ class CaptureExporterTest(unittest.TestCase):
         self.assertEqual(capture["protocol"]["sourceKind"], "desktop_mirror")
         self.assertTrue(capture["protocol"]["sourceFallbackApplied"])
         self.assertEqual(capture["validity"]["state"], "contaminated")
+
+    def test_fallback_requires_an_explicit_actual_source(self) -> None:
+        manifest = self._manifest()
+        for child in manifest["children"]:
+            child["actual"] = {"source": {"fallbackApplied": True}}
+        self._write_inputs(manifest)
+        with self.assertRaisesRegex(EXPORTER.ExportError, "fallback without an actual"):
+            EXPORTER.export_plan(self.plan_path, self.root / "unknown-fallback")
 
     def test_dropped_frame_is_retained_as_contaminated_evidence(self) -> None:
         manifest = self._manifest()
@@ -369,6 +394,10 @@ class CaptureExporterTest(unittest.TestCase):
             "unknown-ancillary": _png()[:33]
             + _png_chunk(b"vpAg", b"opaque")
             + _png()[33:],
+            "indexed": _indexed_png(),
+            "invalid-sbit": _png()[:33]
+            + _png_chunk(b"sBIT", b"\x00\x08\x08\x08")
+            + _png()[33:],
         }.items():
             manifest = self._manifest()
             self._replace_artifact_bytes(
@@ -383,7 +412,7 @@ class CaptureExporterTest(unittest.TestCase):
         for child in manifest["children"]:
             child["artifacts"] = child["artifacts"][:1]
         self._write_inputs(manifest)
-        with self.assertRaisesRegex(EXPORTER.ExportError, "unsupported capture view set"):
+        with self.assertRaisesRegex(EXPORTER.ExportError, "complete output declaration"):
             EXPORTER.export_plan(self.plan_path, self.root / "single-eye")
 
         manifest = self._manifest()
@@ -397,8 +426,53 @@ class CaptureExporterTest(unittest.TestCase):
             copy.deepcopy(manifest["capture"]["outputs"][0])
         )
         self._write_inputs(manifest)
-        with self.assertRaisesRegex(EXPORTER.ExportError, "ambiguous"):
+        with self.assertRaisesRegex(EXPORTER.ExportError, "repeats an output view"):
             EXPORTER.export_plan(self.plan_path, self.root / "ambiguous-view")
+
+    def test_output_declarations_must_agree_and_be_complete(self) -> None:
+        manifest = self._manifest()
+        manifest["capture"]["outputs"][0]["nameSuffix"] = "combined"
+        self._write_inputs(manifest)
+        with self.assertRaisesRegex(EXPORTER.ExportError, "conflicting view and suffix"):
+            EXPORTER.export_plan(self.plan_path, self.root / "conflicting-output")
+
+        manifest = self._manifest()
+        manifest["capture"]["outputs"].append(
+            {
+                "view": "combined",
+                "nameSuffix": "combined",
+                "encoding": {"format": "png", "colourContract": "sdr_srgb"},
+            }
+        )
+        self._write_inputs(manifest)
+        with self.assertRaisesRegex(EXPORTER.ExportError, "complete output declaration"):
+            EXPORTER.export_plan(self.plan_path, self.root / "missing-output")
+
+        manifest = self._manifest()
+        manifest["children"][0]["artifacts"][0]["actual"] = {
+            "format": "jpeg",
+            "colourContract": "display-p3",
+        }
+        self._write_inputs(manifest)
+        with self.assertRaisesRegex(EXPORTER.ExportError, "conflicting format"):
+            EXPORTER.export_plan(self.plan_path, self.root / "conflicting-encoding")
+
+        manifest = self._manifest()
+        manifest["children"][0]["artifacts"][0]["actual"] = {
+            "format": "png",
+            "colourContract": "display-p3",
+        }
+        self._write_inputs(manifest)
+        with self.assertRaisesRegex(EXPORTER.ExportError, "conflicting colour"):
+            EXPORTER.export_plan(self.plan_path, self.root / "conflicting-colour")
+
+        manifest = self._manifest()
+        manifest["children"][0]["artifacts"][0]["actual"] = {
+            "view": "right_eye"
+        }
+        self._write_inputs(manifest)
+        with self.assertRaisesRegex(EXPORTER.ExportError, "conflicting view"):
+            EXPORTER.export_plan(self.plan_path, self.root / "conflicting-artifact-view")
 
     def test_warning_state_and_terminal_code_allowlist_contaminate_safely(self) -> None:
         manifest = self._manifest()
@@ -432,11 +506,20 @@ class CaptureExporterTest(unittest.TestCase):
             with self.subTest(label=label), self.assertRaises(EXPORTER.ExportError):
                 EXPORTER.export_plan(self.plan_path, self.root / f"identity-{label}")
 
+        plan = self._plan()
+        plan["treatment"]["baselineObservationRef"] = EXPORTER.compiler.visual_capture_ref(
+            plan["submissionId"], plan["captureId"]
+        )
+        plan["source"]["manifestPath"] = str(self.root / "does-not-exist.json")
+        self.plan_path.write_text(json.dumps(plan), encoding="utf-8")
+        with self.assertRaisesRegex(EXPORTER.ExportError, "generated capture as its baseline"):
+            EXPORTER.export_plan(self.plan_path, self.root / "identity-self-baseline")
+
     def test_staged_frame_mutation_is_detected_before_publication(self) -> None:
         self._write_inputs()
         original = EXPORTER._write_bundle
 
-        def mutate_then_write(path: pathlib.Path, inspected: dict) -> tuple[int, int]:
+        def mutate_then_write(path: pathlib.Path, inspected: dict) -> tuple[int, int, dict]:
             inspected["frames"][0]["_sourcePaths"][0].write_bytes(_png(value=99))
             return original(path, inspected)
 
@@ -472,10 +555,12 @@ class CaptureExporterTest(unittest.TestCase):
         output = self.root / "raced-output"
         original = EXPORTER._publish_no_clobber
 
-        def create_destination(staging: pathlib.Path, destination: pathlib.Path) -> None:
+        def create_destination(
+            staging: pathlib.Path, destination: pathlib.Path, expected: dict
+        ) -> None:
             destination.mkdir()
             (destination / "owner.txt").write_text("other producer", encoding="utf-8")
-            original(staging, destination)
+            original(staging, destination, expected)
 
         with mock.patch.object(
             EXPORTER, "_publish_no_clobber", side_effect=create_destination
@@ -483,6 +568,50 @@ class CaptureExporterTest(unittest.TestCase):
             with self.assertRaisesRegex(EXPORTER.ExportError, "already exists"):
                 EXPORTER.export_plan(self.plan_path, output)
         self.assertEqual((output / "owner.txt").read_text(), "other producer")
+
+    def test_bundle_and_stage_identity_are_bound_through_publication(self) -> None:
+        self._write_inputs()
+        original_build = EXPORTER._build_records
+
+        def replace_bundle(*args):
+            result = original_build(*args)
+            pathlib.Path(args[3]).write_bytes(b"replacement")
+            return result
+
+        with mock.patch.object(EXPORTER, "_build_records", side_effect=replace_bundle):
+            with self.assertRaisesRegex(EXPORTER.ExportError, "bundle identity changed"):
+                EXPORTER.export_plan(self.plan_path, self.root / "replaced-bundle")
+
+        original_publish = EXPORTER._publish_no_clobber
+
+        def add_member(staging: pathlib.Path, destination: pathlib.Path, expected: dict):
+            (staging / "unlisted.json").write_text("{}", encoding="utf-8")
+            original_publish(staging, destination, expected)
+
+        with mock.patch.object(EXPORTER, "_publish_no_clobber", side_effect=add_member):
+            with self.assertRaisesRegex(EXPORTER.ExportError, "changed after validation"):
+                EXPORTER.export_plan(self.plan_path, self.root / "mutated-public-stage")
+        self.assertFalse((self.root / "mutated-public-stage").exists())
+
+        def mutate_after_publish(
+            staging: pathlib.Path, destination: pathlib.Path, expected: dict
+        ):
+            original_snapshot = EXPORTER._snapshot_stage
+
+            def snapshot(root: pathlib.Path, scan_public: bool = False):
+                if root == destination and destination.exists():
+                    (destination / "late-member.json").write_text("{}", encoding="utf-8")
+                return original_snapshot(root, scan_public=scan_public)
+
+            with mock.patch.object(EXPORTER, "_snapshot_stage", side_effect=snapshot):
+                original_publish(staging, destination, expected)
+
+        with mock.patch.object(
+            EXPORTER, "_publish_no_clobber", side_effect=mutate_after_publish
+        ):
+            with self.assertRaisesRegex(EXPORTER.ExportError, "published output differs"):
+                EXPORTER.export_plan(self.plan_path, self.root / "mutated-after-publish")
+        self.assertFalse((self.root / "mutated-after-publish").exists())
 
     def test_unexpected_and_cleanup_errors_are_normalized(self) -> None:
         self._write_inputs()

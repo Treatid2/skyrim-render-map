@@ -29,7 +29,7 @@ import compile_dataset as compiler
 import validate_repository as validator
 
 
-TOOL_VERSION = "1.0.1"
+TOOL_VERSION = "1.0.2"
 PLAN_SCHEMA = {
     "name": "skyrim-render-map.csx-capture-export-plan",
     "major": 1,
@@ -108,14 +108,12 @@ VIEW_ALIASES = {
 PNG_COLOUR_TYPES = {
     0: "grayscale",
     2: "rgb",
-    3: "indexed",
     4: "grayscale-alpha",
     6: "rgba",
 }
 PNG_BIT_DEPTHS = {
     0: {1, 2, 4, 8, 16},
     2: {8, 16},
-    3: {1, 2, 4, 8},
     4: {8, 16},
     6: {8, 16},
 }
@@ -166,15 +164,81 @@ def _canonical_json_bytes(value: Any) -> bytes:
     ).encode("utf-8")
 
 
-def _sha256_file(path: pathlib.Path) -> str:
-    digest = hashlib.sha256()
+def _file_identity(value: os.stat_result) -> tuple[int, int]:
+    identity = (value.st_dev, value.st_ino)
+    if value.st_ino == 0:
+        raise ExportError("filesystem does not expose stable file identities")
+    return identity
+
+
+def _read_sealed_file(path: pathlib.Path, retain_bytes: bool = False) -> tuple[bytes, dict]:
     try:
+        if path.is_symlink():
+            raise ExportError(f"publication stage contains a symbolic link: {path.name!r}")
         with path.open("rb") as stream:
+            before = os.fstat(stream.fileno())
+            digest = hashlib.sha256()
+            retained = bytearray()
+            byte_length = 0
             for block in iter(lambda: stream.read(1024 * 1024), b""):
                 digest.update(block)
+                byte_length += len(block)
+                if retain_bytes:
+                    retained.extend(block)
+            after = os.fstat(stream.fileno())
+    except ExportError:
+        raise
     except OSError as error:
-        raise ExportError(f"cannot hash {path.name!r}: {error}") from error
-    return digest.hexdigest()
+        raise ExportError(f"cannot seal staged file {path.name!r}: {error}") from error
+    before_identity = _file_identity(before)
+    if (
+        before_identity != _file_identity(after)
+        or before.st_size != after.st_size
+        or before.st_mtime_ns != after.st_mtime_ns
+        or byte_length != before.st_size
+    ):
+        raise ExportError(f"staged file changed while it was sealed: {path.name!r}")
+    return bytes(retained), {
+        "identity": before_identity,
+        "bytes": byte_length,
+        "sha256": digest.hexdigest(),
+    }
+
+
+def _snapshot_stage(root: pathlib.Path, scan_public: bool = False) -> dict:
+    try:
+        root_stat = root.stat(follow_symlinks=False)
+    except OSError as error:
+        raise ExportError(f"cannot inspect publication stage: {error}") from error
+    if not root.is_dir() or root.is_symlink():
+        raise ExportError("publication stage is not an owned directory")
+    directories: dict[str, tuple[int, int]] = {".": _file_identity(root_stat)}
+    files: dict[str, dict] = {}
+    for current, names, filenames in os.walk(root, followlinks=False):
+        current_path = pathlib.Path(current)
+        for name in sorted(names):
+            directory = current_path / name
+            if directory.is_symlink():
+                raise ExportError("publication stage contains a symbolic-link directory")
+            relative = directory.relative_to(root).as_posix()
+            directories[relative] = _file_identity(directory.stat(follow_symlinks=False))
+        for name in sorted(filenames):
+            path = current_path / name
+            relative = path.relative_to(root).as_posix()
+            retain_bytes = scan_public and path.suffix != ".zip"
+            data, seal = _read_sealed_file(path, retain_bytes=retain_bytes)
+            if retain_bytes:
+                try:
+                    validator.scan_public_content(pathlib.Path(relative), data)
+                except validator.ValidationError as error:
+                    raise ExportError(f"public export validation failed: {error}") from error
+            files[relative] = seal
+    return {"directories": directories, "files": files}
+
+
+def _require_stage_snapshot(root: pathlib.Path, expected: dict) -> None:
+    if _snapshot_stage(root) != expected:
+        raise ExportError("publication stage changed after validation")
 
 
 def _parse_time(value: Any, context: str) -> str:
@@ -318,8 +382,6 @@ def _sanitize_png(data: bytes, filename: str) -> tuple[bytes, int, int, str]:
                 if kind in seen_ancillary:
                     raise ExportError(f"{filename!r} repeats PNG chunk {kind!r}")
                 seen_ancillary.add(kind)
-                if kind in {b"tRNS", b"hIST"} and not seen_plte and colour_type == 3:
-                    raise ExportError(f"{filename!r} has invalid PNG chunk ordering")
                 if kind in {b"tRNS", b"bKGD", b"hIST", b"pHYs"} and seen_idat:
                     raise ExportError(f"{filename!r} has invalid PNG chunk ordering")
                 if kind in {b"cHRM", b"gAMA", b"sBIT", b"sRGB"} and (
@@ -365,6 +427,20 @@ def _sanitize_png(data: bytes, filename: str) -> tuple[bytes, int, int, str]:
                     raise ExportError(f"{filename!r} has an invalid PNG rendering intent")
                 if kind == b"pHYs" and payload[-1] > 1:
                     raise ExportError(f"{filename!r} has an invalid PNG physical-unit value")
+                if kind == b"sBIT" and any(
+                    value == 0 or value > bit_depth for value in payload
+                ):
+                    raise ExportError(f"{filename!r} has an invalid PNG significant-bits value")
+                sample_limit = (1 << bit_depth) - 1
+                if kind in {b"bKGD", b"tRNS"} and colour_type in {0, 4}:
+                    if struct.unpack(">H", payload[:2])[0] > sample_limit:
+                        raise ExportError(f"{filename!r} has an invalid PNG sample value")
+                if kind in {b"bKGD", b"tRNS"} and colour_type in {2, 6}:
+                    if any(
+                        struct.unpack(">H", payload[index : index + 2])[0] > sample_limit
+                        for index in range(0, len(payload), 2)
+                    ):
+                        raise ExportError(f"{filename!r} has an invalid PNG sample value")
                 chunks.append((kind, payload))
             else:
                 category = "critical" if not kind[0] & 0x20 else "ancillary"
@@ -373,9 +449,6 @@ def _sanitize_png(data: bytes, filename: str) -> tuple[bytes, int, int, str]:
 
     if not seen_iend:
         raise ExportError(f"{filename!r} has no PNG IEND")
-    if colour_type == 3 and not seen_plte:
-        raise ExportError(f"{filename!r} has no PNG palette")
-
     channels = {0: 1, 2: 3, 3: 1, 4: 2, 6: 4}[colour_type]
     row_bytes = (width * channels * bit_depth + 7) // 8
     expected_bytes = height * (row_bytes + 1)
@@ -405,20 +478,23 @@ def _sanitize_png(data: bytes, filename: str) -> tuple[bytes, int, int, str]:
 
 def _copy_and_inspect_png(
     source: pathlib.Path, destination: pathlib.Path, context: str, declared_digest: str
-) -> tuple[int, str, int, int, str]:
+) -> tuple[int, str, int, str, int, int, str]:
     source_digest = hashlib.sha256()
     size = 0
+    copied = bytearray()
     try:
-        with source.open("rb") as input_stream, destination.open("xb") as output_stream:
+        with source.open("rb") as input_stream:
             for block in iter(lambda: input_stream.read(1024 * 1024), b""):
-                output_stream.write(block)
+                copied.extend(block)
                 source_digest.update(block)
                 size += len(block)
                 if size > MAX_PNG_FILE_BYTES:
                     raise ExportError(f"{context} exceeds the encoded PNG safety limit")
-        copied = destination.read_bytes()
-        sanitized, width, height, pixel_format = _sanitize_png(copied, source.name)
-        destination.write_bytes(sanitized)
+        sanitized, width, height, pixel_format = _sanitize_png(bytes(copied), source.name)
+        with destination.open("xb") as output_stream:
+            output_stream.write(sanitized)
+            output_stream.flush()
+            os.fsync(output_stream.fileno())
     except ExportError:
         raise
     except OSError as error:
@@ -426,7 +502,15 @@ def _copy_and_inspect_png(
     digest = source_digest.hexdigest()
     if digest != declared_digest.lower():
         raise ExportError(f"{context} SHA-256 differs from the file")
-    return size, digest, width, height, pixel_format
+    return (
+        size,
+        digest,
+        len(sanitized),
+        hashlib.sha256(sanitized).hexdigest(),
+        width,
+        height,
+        pixel_format,
+    )
 
 
 def _normalize_view(value: Any, filename: str) -> str:
@@ -441,12 +525,25 @@ def _normalize_view(value: Any, filename: str) -> str:
     raise ExportError(f"cannot identify view for frame artifact {filename!r}")
 
 
-def _declared_output(capture: dict, filename: str, view: str) -> dict:
+def _filename_view(filename: str) -> str:
+    return _normalize_view(None, filename)
+
+
+def _resolve_artifact_view(artifact: dict, actual: dict, filename: str) -> str:
+    authorities = [_filename_view(filename)]
+    for value in (artifact.get("view"), actual.get("view")):
+        if value is not None:
+            authorities.append(_normalize_view(value, filename))
+    if len(set(authorities)) != 1:
+        raise ExportError(f"conflicting view declarations for frame artifact {filename!r}")
+    return authorities[0]
+
+
+def _declared_outputs(capture: dict) -> dict[str, dict]:
     outputs = capture.get("outputs", [])
     if not isinstance(outputs, list):
         raise ExportError("manifest capture.outputs must be an array")
-    stem = pathlib.Path(filename).stem.lower()
-    matches = []
+    declared = {}
     for output in outputs:
         if not isinstance(output, dict):
             raise ExportError("manifest capture.outputs entries must be objects")
@@ -455,15 +552,28 @@ def _declared_output(capture: dict, filename: str, view: str) -> dict:
             raise ExportError("manifest capture.outputs contains an unsupported view")
         output_view = VIEW_ALIASES[raw_view.lower()]
         suffix = output.get("nameSuffix")
-        if output_view == view or (
-            isinstance(suffix, str) and stem.endswith("_" + suffix.lower())
-        ):
-            matches.append(output)
-    if len(matches) != 1:
-        if outputs:
-            raise ExportError(f"manifest capture.outputs is ambiguous for {filename!r}")
+        if not isinstance(suffix, str) or not suffix:
+            raise ExportError("manifest capture.outputs contains no valid nameSuffix")
+        suffix_view = VIEW_ALIASES.get(suffix.lower())
+        if suffix_view != output_view:
+            raise ExportError("manifest capture.outputs has conflicting view and suffix")
+        if output_view in declared:
+            raise ExportError("manifest capture.outputs repeats an output view")
+        declared[output_view] = output
+    return declared
+
+
+def _declared_output(capture: dict, filename: str, view: str) -> dict:
+    outputs = _declared_outputs(capture)
+    if not outputs:
         return {}
-    return matches[0]
+    output = outputs.get(view)
+    if output is None:
+        raise ExportError(f"manifest capture.outputs has no declaration for {filename!r}")
+    suffix = output["nameSuffix"].lower()
+    if not pathlib.Path(filename).stem.lower().endswith("_" + suffix):
+        raise ExportError(f"manifest capture.outputs disagrees with {filename!r}")
+    return output
 
 
 def _artifact_metadata(
@@ -481,31 +591,56 @@ def _artifact_metadata(
     declared_digest = artifact.get("sha256")
     if not isinstance(declared_digest, str) or not SHA256_PATTERN.fullmatch(declared_digest):
         raise ExportError(f"{context}.sha256 must be a complete SHA-256")
-    source_size, source_digest, width, height, pixel_format = _copy_and_inspect_png(
-        path, spool_path, context, declared_digest
-    )
+    (
+        source_size,
+        source_digest,
+        sanitized_size,
+        sanitized_digest,
+        width,
+        height,
+        pixel_format,
+    ) = _copy_and_inspect_png(path, spool_path, context, declared_digest)
     if artifact.get("bytes") != source_size:
         raise ExportError(f"{context} byte count differs from the file")
-    actual = artifact.get("actual") if isinstance(artifact.get("actual"), dict) else {}
-    view = _normalize_view(actual.get("view", artifact.get("view")), path.name)
+    raw_actual = artifact.get("actual")
+    if raw_actual is not None and not isinstance(raw_actual, dict):
+        raise ExportError(f"{context}.actual must be an object")
+    actual = raw_actual or {}
+    view = _resolve_artifact_view(artifact, actual, path.name)
     output = _declared_output(capture, path.name, view)
-    encoding = output.get("encoding") if isinstance(output.get("encoding"), dict) else {}
-    format_name = actual.get("format", encoding.get("format", path.suffix.lstrip(".")))
-    if not isinstance(format_name, str):
+    raw_encoding = output.get("encoding")
+    if raw_encoding is not None and not isinstance(raw_encoding, dict):
+        raise ExportError(f"{context} has an invalid encoding declaration")
+    encoding = raw_encoding or {}
+    formats = [path.suffix.lstrip(".").lower()]
+    for value in (encoding.get("format"), actual.get("format")):
+        if value is not None:
+            if not isinstance(value, str):
+                raise ExportError(f"{context} has no valid format declaration")
+            formats.append(value.lower())
+    if len(set(formats)) != 1:
+        raise ExportError(f"{context} has conflicting format declarations")
+    format_name = formats[0]
+    if not format_name:
         raise ExportError(f"{context} has no valid format declaration")
-    format_name = format_name.lower()
     if format_name != "png":
         raise ExportError(f"{context} uses unsupported format {format_name!r}")
     if actual.get("width", width) != width or actual.get("height", height) != height:
         raise ExportError(f"{context} PNG dimensions differ from manifest metadata")
-    colour = actual.get("colourContract", encoding.get("colourContract"))
-    if not isinstance(colour, str) or not colour:
+    colours = [
+        value
+        for value in (encoding.get("colourContract"), actual.get("colourContract"))
+        if value is not None
+    ]
+    if not colours or any(not isinstance(value, str) or not value for value in colours):
         raise ExportError(f"{context} has no colour contract")
-    digest = _sha256_file(spool_path)
+    if len(set(colours)) != 1:
+        raise ExportError(f"{context} has conflicting colour declarations")
+    colour = colours[0]
     return spool_path, {
         "view": view,
-        "bytes": spool_path.stat().st_size,
-        "sha256": digest,
+        "bytes": sanitized_size,
+        "sha256": sanitized_digest,
         "sourceBytes": source_size,
         "sourceSha256": source_digest,
         "width": width,
@@ -553,8 +688,14 @@ def _inspect_completed_child(
     context: str,
     spool_directory: pathlib.Path,
 ) -> tuple[dict, str, bool, int]:
-    actual = child.get("actual") if isinstance(child.get("actual"), dict) else {}
-    actual_source = actual.get("source") if isinstance(actual.get("source"), dict) else {}
+    raw_actual = child.get("actual")
+    if raw_actual is not None and not isinstance(raw_actual, dict):
+        raise ExportError(f"{context}.actual must be an object")
+    actual = raw_actual or {}
+    raw_actual_source = actual.get("source")
+    if raw_actual_source is not None and not isinstance(raw_actual_source, dict):
+        raise ExportError(f"{context}.actual.source must be an object")
+    actual_source = raw_actual_source or {}
     requested = child.get("requested") if isinstance(child.get("requested"), dict) else {}
     effective = child.get("effective") if isinstance(child.get("effective"), dict) else {}
     requested_source = capture.get("source") if isinstance(capture.get("source"), dict) else {}
@@ -568,6 +709,10 @@ def _inspect_completed_child(
     fallback_value = actual_source.get("fallbackApplied", False)
     if not isinstance(fallback_value, bool):
         raise ExportError(f"{context} has a non-boolean fallback declaration")
+    if fallback_value and (
+        not isinstance(actual_source.get("kind"), str) or not actual_source["kind"]
+    ):
+        raise ExportError(f"{context} declares fallback without an actual capture source")
     if (
         actual_source.get("kind") is not None
         and requested_source.get("kind") is not None
@@ -599,6 +744,9 @@ def _inspect_completed_child(
     views = [item["view"] for item in frame_artifacts]
     if len(views) != len(set(views)):
         raise ExportError(f"{context} repeats an output view")
+    declared_views = set(_declared_outputs(declared_capture))
+    if declared_views and set(views) != declared_views:
+        raise ExportError(f"{context} artifacts do not match the complete output declaration")
     engine_frame = child.get("scheduledEngineFrame")
     timestamp_us = child.get("scheduledTimestampUs")
     scheduled_values = (
@@ -776,7 +924,7 @@ def _zip_info(name: str) -> zipfile.ZipInfo:
     return info
 
 
-def _write_bundle(path: pathlib.Path, inspected: dict) -> tuple[int, int]:
+def _write_bundle(path: pathlib.Path, inspected: dict) -> tuple[int, int, dict]:
     public_frames = []
     entries: list[tuple[str, pathlib.Path]] = []
     for index, frame in enumerate(inspected["frames"]):
@@ -823,39 +971,56 @@ def _write_bundle(path: pathlib.Path, inspected: dict) -> tuple[int, int]:
         for metadata in frame["artifacts"]
     )
     try:
-        with zipfile.ZipFile(path, "w", allowZip64=True) as archive:
-            archive.writestr(_zip_info("bundle-manifest.json"), manifest_bytes)
-            metadata_by_path = {
-                artifact["path"]: artifact
-                for frame in public_frames
-                for artifact in frame["artifacts"]
+        with path.open("xb+") as bundle_stream:
+            with zipfile.ZipFile(bundle_stream, "w", allowZip64=True) as archive:
+                archive.writestr(_zip_info("bundle-manifest.json"), manifest_bytes)
+                metadata_by_path = {
+                    artifact["path"]: artifact
+                    for frame in public_frames
+                    for artifact in frame["artifacts"]
+                }
+                for archive_path, source in entries:
+                    digest = hashlib.sha256()
+                    written = 0
+                    with archive.open(_zip_info(archive_path), "w", force_zip64=True) as target:
+                        with source.open("rb") as stream:
+                            for block in iter(lambda: stream.read(1024 * 1024), b""):
+                                target.write(block)
+                                digest.update(block)
+                                written += len(block)
+                    expected = metadata_by_path[archive_path]
+                    if written != expected["bytes"] or digest.hexdigest() != expected["sha256"]:
+                        raise ExportError("staged frame changed while the bundle was written")
+            bundle_stream.flush()
+            os.fsync(bundle_stream.fileno())
+            bundle_stream.seek(0)
+            with zipfile.ZipFile(bundle_stream) as archive:
+                if archive.read("bundle-manifest.json") != manifest_bytes:
+                    raise ExportError("capture bundle manifest verification failed")
+                for archive_path, _ in entries:
+                    digest = hashlib.sha256(archive.read(archive_path)).hexdigest()
+                    expected = metadata_by_path[archive_path]
+                    if digest != expected["sha256"]:
+                        raise ExportError("capture bundle entry digest verification failed")
+            bundle_stream.seek(0)
+            bundle_digest = hashlib.sha256()
+            byte_length = 0
+            for block in iter(lambda: bundle_stream.read(1024 * 1024), b""):
+                bundle_digest.update(block)
+                byte_length += len(block)
+            bundle_stat = os.fstat(bundle_stream.fileno())
+            if byte_length != bundle_stat.st_size:
+                raise ExportError("capture bundle changed while it was sealed")
+            bundle_seal = {
+                "identity": _file_identity(bundle_stat),
+                "bytes": byte_length,
+                "sha256": bundle_digest.hexdigest(),
             }
-            for archive_path, source in entries:
-                digest = hashlib.sha256()
-                written = 0
-                with archive.open(_zip_info(archive_path), "w", force_zip64=True) as target:
-                    with source.open("rb") as stream:
-                        for block in iter(lambda: stream.read(1024 * 1024), b""):
-                            target.write(block)
-                            digest.update(block)
-                            written += len(block)
-                expected = metadata_by_path[archive_path]
-                if written != expected["bytes"] or digest.hexdigest() != expected["sha256"]:
-                    raise ExportError("staged frame changed while the bundle was written")
-        with zipfile.ZipFile(path) as archive:
-            for archive_path, _ in entries:
-                digest = hashlib.sha256(archive.read(archive_path)).hexdigest()
-                expected = metadata_by_path[archive_path]
-                if digest != expected["sha256"]:
-                    raise ExportError("capture bundle entry digest verification failed")
     except ExportError:
         raise
     except (OSError, zipfile.BadZipFile, KeyError) as error:
         raise ExportError(f"cannot write capture bundle: {error}") from error
-    try:
-        return path.stat().st_size, expanded_bytes
-    except OSError as error:
-        raise ExportError(f"cannot inspect capture bundle: {error}") from error
+    return byte_length, expanded_bytes, bundle_seal
 
 
 def _validate_plan(plan: Any) -> dict:
@@ -903,6 +1068,14 @@ def _validate_plan(plan: Any) -> dict:
         raise ExportError("plan.runtime.extensions must be an array")
     if not isinstance(plan["privacy"], dict):
         raise ExportError("plan.privacy must be an object")
+    treatment = plan["treatment"]
+    if not isinstance(treatment, dict):
+        raise ExportError("plan.treatment must be an object")
+    generated_capture_ref = compiler.visual_capture_ref(
+        plan["submissionId"], plan["captureId"]
+    )
+    if treatment.get("baselineObservationRef") == generated_capture_ref:
+        raise ExportError("plan treatment cannot use the generated capture as its baseline")
     _parse_time(plan["recordedAt"], "plan.recordedAt")
     return plan
 
@@ -913,11 +1086,11 @@ def _build_records(
     plan_sha256: str,
     bundle_path: pathlib.Path,
     spool_directory: pathlib.Path,
-) -> tuple[dict, dict, dict]:
+) -> tuple[dict, dict, dict, dict]:
     manifest_path = _resolve_plan_path(plan_path, plan["source"]["manifestPath"])
     inspected = _inspect_manifest(manifest_path, spool_directory)
-    byte_length, expanded_length = _write_bundle(bundle_path, inspected)
-    bundle_sha = _sha256_file(bundle_path)
+    byte_length, expanded_length, bundle_seal = _write_bundle(bundle_path, inspected)
+    bundle_sha = bundle_seal["sha256"]
     location = plan["artifact"]["locationTemplate"].replace("{sha256}", bundle_sha)
     csx_extensions = [
         item
@@ -1056,7 +1229,7 @@ def _build_records(
         "validityState": validity_state,
         "containsSourcePaths": False,
     }
-    return artifact, capture, receipt
+    return artifact, capture, receipt, bundle_seal
 
 
 def _write_json(path: pathlib.Path, value: Any) -> None:
@@ -1071,13 +1244,35 @@ def _write_jsonl(path: pathlib.Path, records: list[dict]) -> None:
     )
 
 
-def _publish_no_clobber(staging: pathlib.Path, output: pathlib.Path) -> None:
+def _seal_public_stage(
+    staging: pathlib.Path, artifact_sha256: str, bundle_seal: dict
+) -> dict:
+    expected_paths = {
+        f"artifacts/{artifact_sha256}.zip",
+        "content/artifacts.jsonl",
+        "content/visual-captures.jsonl",
+        "export-receipt.json",
+        "public-preview.json",
+    }
+    snapshot = _snapshot_stage(staging, scan_public=True)
+    if set(snapshot["files"]) != expected_paths:
+        raise ExportError("publication stage has an unexpected member set")
+    artifact_path = f"artifacts/{artifact_sha256}.zip"
+    if snapshot["files"][artifact_path] != bundle_seal:
+        raise ExportError("capture bundle identity changed before publication")
+    return snapshot
+
+
+def _publish_no_clobber(
+    staging: pathlib.Path, output: pathlib.Path, expected_snapshot: dict
+) -> None:
     """Atomically publish a directory while refusing an existing destination."""
+    _require_stage_snapshot(staging, expected_snapshot)
+    staging_identity = expected_snapshot["directories"]["."]
     try:
         if os.name == "nt":
             os.rename(staging, output)
-            return
-        if sys.platform.startswith("linux"):
+        elif sys.platform.startswith("linux"):
             library = ctypes.CDLL(None, use_errno=True)
             renameat2 = getattr(library, "renameat2", None)
             if renameat2 is None:
@@ -1097,30 +1292,40 @@ def _publish_no_clobber(staging: pathlib.Path, output: pathlib.Path) -> None:
                 os.fsencode(output),
                 1,
             )
-            if result == 0:
-                return
-            error_number = ctypes.get_errno()
-            if error_number in {errno.ENOSYS, errno.EINVAL}:
-                raise ExportError("atomic no-clobber publication is unavailable")
-            raise OSError(error_number, os.strerror(error_number), str(output))
-        if sys.platform == "darwin":
+            if result != 0:
+                error_number = ctypes.get_errno()
+                if error_number in {errno.ENOSYS, errno.EINVAL}:
+                    raise ExportError("atomic no-clobber publication is unavailable")
+                raise OSError(error_number, os.strerror(error_number), str(output))
+        elif sys.platform == "darwin":
             library = ctypes.CDLL(None, use_errno=True)
             renamex_np = getattr(library, "renamex_np", None)
             if renamex_np is None:
                 raise ExportError("atomic no-clobber publication is unavailable")
             renamex_np.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_uint]
             renamex_np.restype = ctypes.c_int
-            if renamex_np(os.fsencode(staging), os.fsencode(output), 0x00000004) == 0:
-                return
-            error_number = ctypes.get_errno()
-            raise OSError(error_number, os.strerror(error_number), str(output))
-        raise ExportError("atomic no-clobber publication is unavailable")
+            if renamex_np(os.fsencode(staging), os.fsencode(output), 0x00000004) != 0:
+                error_number = ctypes.get_errno()
+                raise OSError(error_number, os.strerror(error_number), str(output))
+        else:
+            raise ExportError("atomic no-clobber publication is unavailable")
     except FileExistsError as error:
         raise ExportError(f"output already exists: {output}") from error
     except OSError as error:
         if error.errno in {errno.EEXIST, errno.ENOTEMPTY, errno.EACCES} and output.exists():
             raise ExportError(f"output already exists: {output}") from error
         raise ExportError(f"cannot publish export: {error}") from error
+    published = _snapshot_stage(output)
+    if published["directories"]["."] != staging_identity or published != expected_snapshot:
+        if published["directories"]["."] == staging_identity:
+            try:
+                os.rename(output, staging)
+            except OSError as error:
+                raise ExportError(
+                    "published output differs from the validated stage and "
+                    f"could not be withdrawn: {error}"
+                ) from error
+        raise ExportError("published output differs from the validated stage")
 
 
 def _remove_private_staging(path: pathlib.Path, context: str) -> None:
@@ -1152,7 +1357,7 @@ def export_plan(plan_path: pathlib.Path, output: pathlib.Path) -> dict:
         spool_directory = staging / ".private-source"
         spool_directory.mkdir()
         temporary_bundle = staging / "capture-bundle.zip"
-        artifact, capture, receipt = _build_records(
+        artifact, capture, receipt, bundle_seal = _build_records(
             plan_path, plan, plan_sha256, temporary_bundle, spool_directory
         )
         _remove_private_staging(spool_directory, "private source staging")
@@ -1160,6 +1365,9 @@ def export_plan(plan_path: pathlib.Path, output: pathlib.Path) -> dict:
         artifact_directory.mkdir()
         final_bundle = artifact_directory / f"{artifact['artifactSha256']}.zip"
         temporary_bundle.replace(final_bundle)
+        _, relocated_bundle_seal = _read_sealed_file(final_bundle)
+        if relocated_bundle_seal != bundle_seal:
+            raise ExportError("capture bundle identity changed during staging")
         content = staging / "content"
         content.mkdir()
         _write_jsonl(content / "artifacts.jsonl", [artifact])
@@ -1169,17 +1377,10 @@ def export_plan(plan_path: pathlib.Path, output: pathlib.Path) -> dict:
             {"artifacts": [artifact], "visualCaptures": [capture]},
         )
         _write_json(staging / "export-receipt.json", receipt)
-        public_files = (
-            item
-            for item in staging.rglob("*")
-            if item.is_file() and item.suffix != ".zip"
+        stage_snapshot = _seal_public_stage(
+            staging, artifact["artifactSha256"], bundle_seal
         )
-        for path in sorted(public_files):
-            try:
-                validator.scan_public_content(path, path.read_bytes())
-            except (OSError, validator.ValidationError) as error:
-                raise ExportError(f"public export validation failed: {error}") from error
-        _publish_no_clobber(staging, output)
+        _publish_no_clobber(staging, output, stage_snapshot)
         staging = None
     except BaseException as error:
         cleanup_error = None

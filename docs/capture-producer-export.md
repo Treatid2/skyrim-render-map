@@ -20,8 +20,8 @@ revision 1 or later. The exporter rejects rather than guesses when:
 - terminal child and summary counts do not reconcile;
 - a retained artifact is absent, uncommitted, truncated, or has an invalid
   SHA-256;
-- a PNG is structurally invalid, undecodable, interlaced, contains an unknown
-  ancillary chunk, or declares an unsupported output view;
+- a PNG is structurally invalid, undecodable, interlaced, indexed-colour,
+  contains an unknown ancillary chunk, or declares an unsupported output view;
 - source, eye layout, dimensions, format, or colour metadata are ambiguous or
   inconsistent;
 - the sequence contains no completed frame; or
@@ -55,9 +55,10 @@ review-bundle/
 
 The ZIP uses stored entries, fixed timestamps and permissions, canonical JSON,
 and stable frame names. Equal source bytes and manifests therefore produce
-equal bundle bytes. The exporter reads each source once into private staging,
-validates its declared size and digest, verifies every PNG chunk, decodes its
-image-data stream, and writes the bundle from those owned bytes. Text, EXIF,
+equal bundle bytes. The exporter reads each source once, validates its declared
+size and digest, sanitizes that exact byte observation into private staging,
+verifies every PNG chunk, decodes its image-data stream, and writes the bundle
+from the corresponding sealed bytes. Text, EXIF,
 and embedded-profile chunks are removed at that boundary; safe colour and
 geometry chunks are retained. `bundle-manifest.json` preserves both source and
 published frame identities, the source-manifest digest, source contract,
@@ -65,10 +66,12 @@ original ordinals, engine-frame identifiers, timestamps, and terminal
 omissions. It deliberately omits local paths, request identifiers, session
 identifiers, capture tags, and other private manifest fields.
 
-The adapter writes atomically through a sibling staging directory and uses an
-operating-system no-replace rename for publication. A concurrent creator of the
-destination wins without being overwritten. Any rejected or interrupted export
-removes its staging directory; a cleanup failure is reported explicitly.
+The adapter seals the complete expected member set, public-file scans, file
+identities, lengths, and digests before publication. It verifies the same tree
+after an operating-system no-replace rename of the sibling staging directory. A
+concurrent creator of the destination wins without being overwritten. Any
+rejected or interrupted export removes its staging directory; a cleanup failure
+is reported explicitly.
 
 ## Actual capture semantics
 
@@ -107,7 +110,8 @@ That submission manifest must use exactly the `submissionId` declared in the
 private plan. Artifact and capture identifiers must be distinct because all
 submission-local record types share one identifier namespace.
 
-This v1 adapter supports non-interlaced PNG mono or synchronized left/right
-sequences. A lone left or right eye is rejected rather than relabelled as mono.
-The adapter does not transcode, resize, compress, repair, interpolate, or score
-frames.
+This v1 adapter supports non-interlaced grayscale, true-colour, grayscale-alpha,
+and true-colour-alpha PNG mono or synchronized left/right sequences. Indexed
+PNG is rejected rather than partially validated. A lone left or right eye is
+rejected rather than relabelled as mono. The adapter does not transcode, resize,
+compress, repair, interpolate, or score frames.
