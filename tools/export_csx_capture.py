@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import argparse
 import binascii
+import contextlib
 import ctypes
 import datetime as dt
 import decimal
@@ -21,6 +22,7 @@ import shutil
 import struct
 import sys
 import tempfile
+import uuid
 import zipfile
 import zlib
 from typing import Any
@@ -29,7 +31,7 @@ import compile_dataset as compiler
 import validate_repository as validator
 
 
-TOOL_VERSION = "1.0.2"
+TOOL_VERSION = "1.0.3"
 PLAN_SCHEMA = {
     "name": "skyrim-render-map.csx-capture-export-plan",
     "major": 1,
@@ -54,6 +56,12 @@ PLAN_KEYS = {
 }
 SOURCE_KEYS = {"kind", "manifestPath"}
 ARTIFACT_PLAN_KEYS = {"locationTemplate", "license", "retentionClass"}
+PRODUCER_RETENTION_CLASSES = {
+    "release-asset",
+    "oci-artifact",
+    "object-storage",
+    "external",
+}
 PROTOCOL_PLAN_KEYS = {
     "name",
     "version",
@@ -171,25 +179,119 @@ def _file_identity(value: os.stat_result) -> tuple[int, int]:
     return identity
 
 
-def _read_sealed_file(path: pathlib.Path, retain_bytes: bool = False) -> tuple[bytes, dict]:
+def _directory_identity(path: pathlib.Path, context: str) -> tuple[int, int]:
     try:
-        if path.is_symlink():
-            raise ExportError(f"publication stage contains a symbolic link: {path.name!r}")
-        with path.open("rb") as stream:
-            before = os.fstat(stream.fileno())
-            digest = hashlib.sha256()
-            retained = bytearray()
-            byte_length = 0
-            for block in iter(lambda: stream.read(1024 * 1024), b""):
-                digest.update(block)
-                byte_length += len(block)
-                if retain_bytes:
-                    retained.extend(block)
-            after = os.fstat(stream.fileno())
-    except ExportError:
-        raise
+        value = path.stat(follow_symlinks=False)
+    except FileNotFoundError as error:
+        raise ExportError(
+            f"{context} custody is uncertain: owned directory is absent"
+        ) from error
     except OSError as error:
-        raise ExportError(f"cannot seal staged file {path.name!r}: {error}") from error
+        raise ExportError(f"cannot inspect {context}: {error}") from error
+    if not path.is_dir() or path.is_symlink():
+        raise ExportError(f"{context} custody is uncertain: path is not an owned directory")
+    return _file_identity(value)
+
+
+@contextlib.contextmanager
+def _exclusive_stream_lock(stream):
+    """Exclude cooperative writers while one accepted byte version is observed."""
+    if os.name == "nt":
+        import msvcrt
+
+        class Overlapped(ctypes.Structure):
+            _fields_ = [
+                ("Internal", ctypes.c_void_p),
+                ("InternalHigh", ctypes.c_void_p),
+                ("Offset", ctypes.c_uint32),
+                ("OffsetHigh", ctypes.c_uint32),
+                ("hEvent", ctypes.c_void_p),
+            ]
+
+        kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+        lock_file = kernel32.LockFileEx
+        lock_file.argtypes = [
+            ctypes.c_void_p,
+            ctypes.c_uint32,
+            ctypes.c_uint32,
+            ctypes.c_uint32,
+            ctypes.c_uint32,
+            ctypes.POINTER(Overlapped),
+        ]
+        lock_file.restype = ctypes.c_int
+        unlock_file = kernel32.UnlockFileEx
+        unlock_file.argtypes = [
+            ctypes.c_void_p,
+            ctypes.c_uint32,
+            ctypes.c_uint32,
+            ctypes.c_uint32,
+            ctypes.POINTER(Overlapped),
+        ]
+        unlock_file.restype = ctypes.c_int
+        handle = ctypes.c_void_p(msvcrt.get_osfhandle(stream.fileno()))
+        overlapped = Overlapped()
+        if not lock_file(
+            handle,
+            0x00000002 | 0x00000001,
+            0,
+            0xFFFFFFFF,
+            0xFFFFFFFF,
+            ctypes.byref(overlapped),
+        ):
+            raise ExportError(
+                f"cannot lock staged file: Windows error {ctypes.get_last_error()}"
+            )
+        try:
+            yield
+        finally:
+            if not unlock_file(
+                handle, 0, 0xFFFFFFFF, 0xFFFFFFFF, ctypes.byref(overlapped)
+            ):
+                message = (
+                    "cannot unlock staged file: Windows error "
+                    f"{ctypes.get_last_error()}"
+                )
+                active_error = sys.exception()
+                if active_error is None:
+                    raise ExportError(message)
+                active_error.add_note(message)
+    else:
+        import fcntl
+
+        try:
+            fcntl.flock(stream.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except OSError as error:
+            raise ExportError(f"cannot lock staged file: {error}") from error
+        try:
+            yield
+        finally:
+            fcntl.flock(stream.fileno(), fcntl.LOCK_UN)
+
+
+def _hash_stream(stream) -> tuple[int, str]:
+    stream.seek(0)
+    digest = hashlib.sha256()
+    byte_length = 0
+    for block in iter(lambda: stream.read(1024 * 1024), b""):
+        digest.update(block)
+        byte_length += len(block)
+    return byte_length, digest.hexdigest()
+
+
+def _read_sealed_stream(
+    stream, path: pathlib.Path, retain_bytes: bool = False
+) -> tuple[bytes, dict]:
+    before = os.fstat(stream.fileno())
+    stream.seek(0)
+    digest = hashlib.sha256()
+    retained = bytearray()
+    byte_length = 0
+    for block in iter(lambda: stream.read(1024 * 1024), b""):
+        digest.update(block)
+        byte_length += len(block)
+        if retain_bytes:
+            retained.extend(block)
+    after = os.fstat(stream.fileno())
     before_identity = _file_identity(before)
     if (
         before_identity != _file_identity(after)
@@ -202,10 +304,23 @@ def _read_sealed_file(path: pathlib.Path, retain_bytes: bool = False) -> tuple[b
         "identity": before_identity,
         "bytes": byte_length,
         "sha256": digest.hexdigest(),
+        "mtimeNs": before.st_mtime_ns,
     }
 
 
-def _snapshot_stage(root: pathlib.Path, scan_public: bool = False) -> dict:
+def _read_sealed_file(path: pathlib.Path, retain_bytes: bool = False) -> tuple[bytes, dict]:
+    try:
+        if path.is_symlink():
+            raise ExportError(f"publication stage contains a symbolic link: {path.name!r}")
+        with path.open("r+b") as stream, _exclusive_stream_lock(stream):
+            return _read_sealed_stream(stream, path, retain_bytes=retain_bytes)
+    except ExportError:
+        raise
+    except OSError as error:
+        raise ExportError(f"cannot seal staged file {path.name!r}: {error}") from error
+
+
+def _inventory_stage(root: pathlib.Path) -> tuple[dict[str, tuple[int, int]], list[str]]:
     try:
         root_stat = root.stat(follow_symlinks=False)
     except OSError as error:
@@ -213,7 +328,7 @@ def _snapshot_stage(root: pathlib.Path, scan_public: bool = False) -> dict:
     if not root.is_dir() or root.is_symlink():
         raise ExportError("publication stage is not an owned directory")
     directories: dict[str, tuple[int, int]] = {".": _file_identity(root_stat)}
-    files: dict[str, dict] = {}
+    files: list[str] = []
     for current, names, filenames in os.walk(root, followlinks=False):
         current_path = pathlib.Path(current)
         for name in sorted(names):
@@ -224,15 +339,52 @@ def _snapshot_stage(root: pathlib.Path, scan_public: bool = False) -> dict:
             directories[relative] = _file_identity(directory.stat(follow_symlinks=False))
         for name in sorted(filenames):
             path = current_path / name
-            relative = path.relative_to(root).as_posix()
+            if path.is_symlink():
+                raise ExportError("publication stage contains a symbolic-link file")
+            files.append(path.relative_to(root).as_posix())
+    return directories, sorted(files)
+
+
+def _snapshot_stage(root: pathlib.Path, scan_public: bool = False) -> dict:
+    directories, filenames = _inventory_stage(root)
+    files: dict[str, dict] = {}
+    with contextlib.ExitStack() as stack:
+        streams = {}
+        for relative in filenames:
+            path = root / relative
+            try:
+                stream = stack.enter_context(path.open("r+b"))
+                stack.enter_context(_exclusive_stream_lock(stream))
+            except OSError as error:
+                raise ExportError(f"cannot seal staged file {relative!r}: {error}") from error
+            streams[relative] = stream
+        locked_directories, locked_filenames = _inventory_stage(root)
+        if locked_directories != directories or locked_filenames != filenames:
+            raise ExportError("publication stage changed while files were locked")
+        for relative in filenames:
+            path = root / relative
             retain_bytes = scan_public and path.suffix != ".zip"
-            data, seal = _read_sealed_file(path, retain_bytes=retain_bytes)
+            data, seal = _read_sealed_stream(
+                streams[relative], path, retain_bytes=retain_bytes
+            )
             if retain_bytes:
                 try:
                     validator.scan_public_content(pathlib.Path(relative), data)
                 except validator.ValidationError as error:
                     raise ExportError(f"public export validation failed: {error}") from error
             files[relative] = seal
+        for relative, stream in streams.items():
+            current = os.fstat(stream.fileno())
+            seal = files[relative]
+            if (
+                _file_identity(current) != seal["identity"]
+                or current.st_size != seal["bytes"]
+                or current.st_mtime_ns != seal["mtimeNs"]
+            ):
+                raise ExportError("publication stage changed during coherent verification")
+        final_directories, final_filenames = _inventory_stage(root)
+        if final_directories != directories or final_filenames != filenames:
+            raise ExportError("publication stage changed during coherent verification")
     return {"directories": directories, "files": files}
 
 
@@ -519,8 +671,10 @@ def _normalize_view(value: Any, filename: str) -> str:
             raise ExportError(f"unsupported view for frame artifact {filename!r}")
         return VIEW_ALIASES[value.lower()]
     stem = pathlib.Path(filename).stem.lower()
-    for suffix, view in (("_left", "left"), ("_right", "right"), ("_combined", "mono")):
-        if stem.endswith(suffix):
+    for suffix, view in sorted(
+        VIEW_ALIASES.items(), key=lambda item: len(item[0]), reverse=True
+    ):
+        if stem.endswith("_" + suffix):
             return view
     raise ExportError(f"cannot identify view for frame artifact {filename!r}")
 
@@ -530,10 +684,18 @@ def _filename_view(filename: str) -> str:
 
 
 def _resolve_artifact_view(artifact: dict, actual: dict, filename: str) -> str:
-    authorities = [_filename_view(filename)]
+    authorities = []
     for value in (artifact.get("view"), actual.get("view")):
         if value is not None:
             authorities.append(_normalize_view(value, filename))
+    try:
+        filename_view = _filename_view(filename)
+    except ExportError:
+        filename_view = None
+    if filename_view is not None:
+        authorities.append(filename_view)
+    if not authorities:
+        raise ExportError(f"cannot identify view for frame artifact {filename!r}")
     if len(set(authorities)) != 1:
         raise ExportError(f"conflicting view declarations for frame artifact {filename!r}")
     return authorities[0]
@@ -993,29 +1155,35 @@ def _write_bundle(path: pathlib.Path, inspected: dict) -> tuple[int, int, dict]:
                         raise ExportError("staged frame changed while the bundle was written")
             bundle_stream.flush()
             os.fsync(bundle_stream.fileno())
-            bundle_stream.seek(0)
-            with zipfile.ZipFile(bundle_stream) as archive:
-                if archive.read("bundle-manifest.json") != manifest_bytes:
-                    raise ExportError("capture bundle manifest verification failed")
-                for archive_path, _ in entries:
-                    digest = hashlib.sha256(archive.read(archive_path)).hexdigest()
-                    expected = metadata_by_path[archive_path]
-                    if digest != expected["sha256"]:
-                        raise ExportError("capture bundle entry digest verification failed")
-            bundle_stream.seek(0)
-            bundle_digest = hashlib.sha256()
-            byte_length = 0
-            for block in iter(lambda: bundle_stream.read(1024 * 1024), b""):
-                bundle_digest.update(block)
-                byte_length += len(block)
-            bundle_stat = os.fstat(bundle_stream.fileno())
-            if byte_length != bundle_stat.st_size:
-                raise ExportError("capture bundle changed while it was sealed")
-            bundle_seal = {
-                "identity": _file_identity(bundle_stat),
-                "bytes": byte_length,
-                "sha256": bundle_digest.hexdigest(),
-            }
+            with _exclusive_stream_lock(bundle_stream):
+                before = os.fstat(bundle_stream.fileno())
+                byte_length, digest_before = _hash_stream(bundle_stream)
+                bundle_stream.seek(0)
+                with zipfile.ZipFile(bundle_stream) as archive:
+                    if archive.read("bundle-manifest.json") != manifest_bytes:
+                        raise ExportError("capture bundle manifest verification failed")
+                    for archive_path, _ in entries:
+                        digest = hashlib.sha256(archive.read(archive_path)).hexdigest()
+                        expected = metadata_by_path[archive_path]
+                        if digest != expected["sha256"]:
+                            raise ExportError("capture bundle entry digest verification failed")
+                verified_length, digest_after = _hash_stream(bundle_stream)
+                after = os.fstat(bundle_stream.fileno())
+                if (
+                    _file_identity(before) != _file_identity(after)
+                    or before.st_size != after.st_size
+                    or before.st_mtime_ns != after.st_mtime_ns
+                    or byte_length != before.st_size
+                    or verified_length != byte_length
+                    or digest_after != digest_before
+                ):
+                    raise ExportError("capture bundle changed during coherent verification")
+                bundle_seal = {
+                    "identity": _file_identity(after),
+                    "bytes": byte_length,
+                    "sha256": digest_after,
+                    "mtimeNs": after.st_mtime_ns,
+                }
     except ExportError:
         raise
     except (OSError, zipfile.BadZipFile, KeyError) as error:
@@ -1048,7 +1216,7 @@ def _validate_plan(plan: Any) -> dict:
         raise ExportError("artifact.locationTemplate requires one {sha256} placeholder")
     if artifact["license"] not in validator.ARTIFACT_LICENSES:
         raise ExportError("plan.artifact.license is unsupported")
-    if artifact["retentionClass"] not in validator.ARTIFACT_RETENTION_CLASSES:
+    if artifact["retentionClass"] not in PRODUCER_RETENTION_CLASSES:
         raise ExportError("plan.artifact.retentionClass is unsupported")
     protocol = _strict_keys(plan["protocol"], PROTOCOL_PLAN_KEYS, "plan.protocol")
     if protocol["timingMode"] not in validator.VISUAL_CAPTURE_TIMING_MODES:
@@ -1074,8 +1242,16 @@ def _validate_plan(plan: Any) -> dict:
     generated_capture_ref = compiler.visual_capture_ref(
         plan["submissionId"], plan["captureId"]
     )
-    if treatment.get("baselineObservationRef") == generated_capture_ref:
-        raise ExportError("plan treatment cannot use the generated capture as its baseline")
+    generated_artifact_ref = compiler.artifact_ref(
+        plan["submissionId"], plan["artifactId"]
+    )
+    if treatment.get("baselineObservationRef") in {
+        generated_capture_ref,
+        generated_artifact_ref,
+    }:
+        raise ExportError(
+            "plan treatment cannot use its generated capture or artifact as its baseline"
+        )
     _parse_time(plan["recordedAt"], "plan.recordedAt")
     return plan
 
@@ -1232,20 +1408,17 @@ def _build_records(
     return artifact, capture, receipt, bundle_seal
 
 
-def _write_json(path: pathlib.Path, value: Any) -> None:
-    path.write_bytes(_canonical_json_bytes(value))
-
-
-def _write_jsonl(path: pathlib.Path, records: list[dict]) -> None:
-    path.write_text(
-        "".join(compiler.canonical_json(record) + "\n" for record in records),
-        encoding="utf-8",
-        newline="\n",
+def _jsonl_bytes(records: list[dict]) -> bytes:
+    return "".join(compiler.canonical_json(record) + "\n" for record in records).encode(
+        "utf-8"
     )
 
 
 def _seal_public_stage(
-    staging: pathlib.Path, artifact_sha256: str, bundle_seal: dict
+    staging: pathlib.Path,
+    artifact_sha256: str,
+    bundle_seal: dict,
+    expected_public_bytes: dict[str, bytes],
 ) -> dict:
     expected_paths = {
         f"artifacts/{artifact_sha256}.zip",
@@ -1255,12 +1428,48 @@ def _seal_public_stage(
         "public-preview.json",
     }
     snapshot = _snapshot_stage(staging, scan_public=True)
+    if set(snapshot["directories"]) != {".", "artifacts", "content"}:
+        raise ExportError("publication stage has an unexpected directory set")
     if set(snapshot["files"]) != expected_paths:
         raise ExportError("publication stage has an unexpected member set")
     artifact_path = f"artifacts/{artifact_sha256}.zip"
     if snapshot["files"][artifact_path] != bundle_seal:
         raise ExportError("capture bundle identity changed before publication")
+    for relative, expected in expected_public_bytes.items():
+        seal = snapshot["files"][relative]
+        if (
+            seal["bytes"] != len(expected)
+            or seal["sha256"] != hashlib.sha256(expected).hexdigest()
+        ):
+            raise ExportError(
+                f"generated public record changed before publication: {relative}"
+            )
     return snapshot
+
+
+def _withdraw_owned_publication(
+    output: pathlib.Path,
+    staging: pathlib.Path,
+    expected_identity: tuple[int, int],
+) -> None:
+    if _directory_identity(output, "published output") != expected_identity:
+        raise ExportError("published output custody is uncertain; root identity changed")
+    if staging.exists():
+        raise ExportError("published output cannot be withdrawn; staging path is occupied")
+    try:
+        os.rename(output, staging)
+    except OSError as error:
+        raise ExportError(f"published output could not be withdrawn: {error}") from error
+    if _directory_identity(staging, "withdrawn publication") != expected_identity:
+        try:
+            if not output.exists():
+                os.rename(staging, output)
+        except OSError as restore_error:
+            raise ExportError(
+                "published output custody changed during withdrawal and restoration failed: "
+                f"{restore_error}"
+            ) from restore_error
+        raise ExportError("published output custody changed during withdrawal")
 
 
 def _publish_no_clobber(
@@ -1269,6 +1478,7 @@ def _publish_no_clobber(
     """Atomically publish a directory while refusing an existing destination."""
     _require_stage_snapshot(staging, expected_snapshot)
     staging_identity = expected_snapshot["directories"]["."]
+    published = False
     try:
         if os.name == "nt":
             os.rename(staging, output)
@@ -1309,38 +1519,74 @@ def _publish_no_clobber(
                 raise OSError(error_number, os.strerror(error_number), str(output))
         else:
             raise ExportError("atomic no-clobber publication is unavailable")
+        published = True
     except FileExistsError as error:
         raise ExportError(f"output already exists: {output}") from error
     except OSError as error:
         if error.errno in {errno.EEXIST, errno.ENOTEMPTY, errno.EACCES} and output.exists():
             raise ExportError(f"output already exists: {output}") from error
         raise ExportError(f"cannot publish export: {error}") from error
-    published = _snapshot_stage(output)
-    if published["directories"]["."] != staging_identity or published != expected_snapshot:
-        if published["directories"]["."] == staging_identity:
-            try:
-                os.rename(output, staging)
-            except OSError as error:
-                raise ExportError(
-                    "published output differs from the validated stage and "
-                    f"could not be withdrawn: {error}"
-                ) from error
-        raise ExportError("published output differs from the validated stage")
-
-
-def _remove_private_staging(path: pathlib.Path, context: str) -> None:
     try:
-        shutil.rmtree(path)
-    except FileNotFoundError:
-        return
+        published_snapshot = _snapshot_stage(output)
+        if (
+            published_snapshot["directories"]["."] != staging_identity
+            or published_snapshot != expected_snapshot
+        ):
+            raise ExportError("published output differs from the validated stage")
+    except BaseException as error:
+        if not published:
+            raise
+        try:
+            _withdraw_owned_publication(output, staging, staging_identity)
+        except ExportError as withdrawal_error:
+            raise ExportError(
+                f"post-publication verification failed: {error}; "
+                f"withdrawal failed: {withdrawal_error}"
+            ) from error
+        raise
+
+
+def _remove_private_staging(
+    path: pathlib.Path,
+    context: str,
+    expected_identity: tuple[int, int],
+    owned_children: dict[pathlib.Path, tuple[int, int]] | None = None,
+) -> None:
+    for child, child_identity in (owned_children or {}).items():
+        if _directory_identity(child, f"{context} child") != child_identity:
+            raise ExportError(f"cannot remove {context}: child custody is uncertain")
+    quarantine = path.parent / f".{path.name}.cleanup-{uuid.uuid4().hex}"
+    if quarantine.exists():
+        raise ExportError(f"cannot remove {context}: cleanup path already exists")
+    try:
+        os.rename(path, quarantine)
+    except FileNotFoundError as error:
+        raise ExportError(f"cannot remove {context}: owned directory is absent") from error
     except OSError as error:
         raise ExportError(f"cannot remove {context}: {error}") from error
-    if path.exists():
+    actual_identity = _directory_identity(quarantine, context)
+    if actual_identity != expected_identity:
+        try:
+            if not path.exists():
+                os.rename(quarantine, path)
+        except OSError as restore_error:
+            raise ExportError(
+                f"cannot remove {context}: ownership changed and restoration failed: "
+                f"{restore_error}"
+            ) from restore_error
+        raise ExportError(f"cannot remove {context}: pathname identified another directory")
+    try:
+        shutil.rmtree(quarantine)
+    except OSError as error:
+        raise ExportError(f"cannot remove {context}: {error}") from error
+    if quarantine.exists():
         raise ExportError(f"cannot remove {context}")
 
 
 def export_plan(plan_path: pathlib.Path, output: pathlib.Path) -> dict:
     staging: pathlib.Path | None = None
+    staging_identity: tuple[int, int] | None = None
+    owned_children: dict[pathlib.Path, tuple[int, int]] = {}
     try:
         plan_path = plan_path.resolve()
         plan_document, plan_sha256 = _load_json_document(
@@ -1354,13 +1600,19 @@ def export_plan(plan_path: pathlib.Path, output: pathlib.Path) -> dict:
         staging = pathlib.Path(
             tempfile.mkdtemp(prefix=f".{output.name}.staging-", dir=output.parent)
         )
+        staging_identity = _directory_identity(staging, "export staging")
         spool_directory = staging / ".private-source"
         spool_directory.mkdir()
+        spool_identity = _directory_identity(spool_directory, "private source staging")
+        owned_children[spool_directory] = spool_identity
         temporary_bundle = staging / "capture-bundle.zip"
         artifact, capture, receipt, bundle_seal = _build_records(
             plan_path, plan, plan_sha256, temporary_bundle, spool_directory
         )
-        _remove_private_staging(spool_directory, "private source staging")
+        _remove_private_staging(
+            spool_directory, "private source staging", spool_identity
+        )
+        owned_children.pop(spool_directory)
         artifact_directory = staging / "artifacts"
         artifact_directory.mkdir()
         final_bundle = artifact_directory / f"{artifact['artifactSha256']}.zip"
@@ -1370,23 +1622,35 @@ def export_plan(plan_path: pathlib.Path, output: pathlib.Path) -> dict:
             raise ExportError("capture bundle identity changed during staging")
         content = staging / "content"
         content.mkdir()
-        _write_jsonl(content / "artifacts.jsonl", [artifact])
-        _write_jsonl(content / "visual-captures.jsonl", [capture])
-        _write_json(
-            staging / "public-preview.json",
-            {"artifacts": [artifact], "visualCaptures": [capture]},
-        )
-        _write_json(staging / "export-receipt.json", receipt)
+        expected_public_bytes = {
+            "content/artifacts.jsonl": _jsonl_bytes([artifact]),
+            "content/visual-captures.jsonl": _jsonl_bytes([capture]),
+            "public-preview.json": _canonical_json_bytes(
+                {"artifacts": [artifact], "visualCaptures": [capture]}
+            ),
+            "export-receipt.json": _canonical_json_bytes(receipt),
+        }
+        for relative, data in expected_public_bytes.items():
+            (staging / relative).write_bytes(data)
         stage_snapshot = _seal_public_stage(
-            staging, artifact["artifactSha256"], bundle_seal
+            staging,
+            artifact["artifactSha256"],
+            bundle_seal,
+            expected_public_bytes,
         )
         _publish_no_clobber(staging, output, stage_snapshot)
         staging = None
+        staging_identity = None
     except BaseException as error:
         cleanup_error = None
-        if staging is not None and staging.exists():
+        if staging is not None and staging_identity is not None:
             try:
-                _remove_private_staging(staging, "export staging")
+                _remove_private_staging(
+                    staging,
+                    "export staging",
+                    staging_identity,
+                    owned_children=owned_children,
+                )
             except ExportError as caught:
                 cleanup_error = caught
         if cleanup_error is not None:

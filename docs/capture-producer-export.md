@@ -66,12 +66,21 @@ original ordinals, engine-frame identifiers, timestamps, and terminal
 omissions. It deliberately omits local paths, request identifiers, session
 identifiers, capture tags, and other private manifest fields.
 
-The adapter seals the complete expected member set, public-file scans, file
-identities, lengths, and digests before publication. It verifies the same tree
-after an operating-system no-replace rename of the sibling staging directory. A
-concurrent creator of the destination wins without being overwritten. Any
-rejected or interrupted export removes its staging directory; a cleanup failure
-is reported explicitly.
+The adapter admits only the exact generated public-record bytes and the expected
+root, `artifacts`, and `content` directory layout. It holds exclusive file locks
+while it validates and seals the complete member set, public-file scans, file
+identities, modification times, lengths, and digests. ZIP structure, entries,
+and the whole-file digest are therefore observations of one locked byte version.
+It verifies the same coherent tree after an operating-system no-replace rename
+of the sibling staging directory.
+
+A concurrent creator of the destination wins without being overwritten. If
+required verification fails or is interrupted after the rename, the exporter
+withdraws the output only while its original directory identity remains proven;
+otherwise it reports the publication and custody uncertainty. Cleanup similarly
+removes only the originally created stage and active private spool identities.
+A substituted or missing pathname is preserved and reported as uncertain rather
+than being treated as successful cleanup.
 
 ## Actual capture semantics
 
@@ -109,6 +118,10 @@ the normal admission checks described in [CONTRIBUTING](../CONTRIBUTING.md).
 That submission manifest must use exactly the `submissionId` declared in the
 private plan. Artifact and capture identifiers must be distinct because all
 submission-local record types share one identifier namespace.
+
+Producer plans may select `release-asset`, `oci-artifact`, `object-storage`, or
+`external` retention. Repository-inline evidence is a later submission and
+admission decision, not a producer-export retention class.
 
 This v1 adapter supports non-interlaced grayscale, true-colour, grayscale-alpha,
 and true-colour-alpha PNG mono or synchronized left/right sequences. Indexed

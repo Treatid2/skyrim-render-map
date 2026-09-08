@@ -8,6 +8,7 @@ import copy
 import hashlib
 import importlib.util
 import json
+import os
 import pathlib
 import struct
 import sys
@@ -237,6 +238,11 @@ class CaptureExporterTest(unittest.TestCase):
         (self.source / name).write_bytes(data)
         artifact["bytes"] = len(data)
         artifact["sha256"] = hashlib.sha256(data).hexdigest()
+
+    def _rename_artifact(self, artifact: dict, new_name: str) -> None:
+        old_name = pathlib.Path(artifact["path"]).name
+        (self.source / old_name).replace(self.source / new_name)
+        artifact["path"] = f"D:/expired/capture/{new_name}"
 
     @staticmethod
     def _read_jsonl(path: pathlib.Path) -> dict:
@@ -474,6 +480,57 @@ class CaptureExporterTest(unittest.TestCase):
         with self.assertRaisesRegex(EXPORTER.ExportError, "conflicting view"):
             EXPORTER.export_plan(self.plan_path, self.root / "conflicting-artifact-view")
 
+    def test_explicit_views_do_not_require_filename_inference(self) -> None:
+        manifest = self._manifest()
+        manifest["capture"]["outputs"] = []
+        for child in manifest["children"]:
+            for index, artifact in enumerate(child["artifacts"]):
+                artifact["actual"] = {
+                    "view": "left_eye" if index == 0 else "right_eye",
+                    "format": "png",
+                    "colourContract": "sdr_srgb",
+                }
+                self._rename_artifact(
+                    artifact, f"frame_{child['ordinal']:06d}_camera{index}.png"
+                )
+        self._write_inputs(manifest)
+        receipt = EXPORTER.export_plan(self.plan_path, self.root / "explicit-view")
+        self.assertEqual(receipt["retainedFrameCount"], 2)
+
+        manifest = self._manifest()
+        for output in manifest["capture"]["outputs"]:
+            output["nameSuffix"] = output["view"]
+        for child in manifest["children"]:
+            for artifact, suffix in zip(child["artifacts"], ("left_eye", "right_eye")):
+                old_name = pathlib.Path(artifact["path"]).name
+                base = old_name.rsplit("_", 1)[0]
+                self._rename_artifact(artifact, f"{base}_{suffix}.png")
+        self._write_inputs(manifest)
+        receipt = EXPORTER.export_plan(self.plan_path, self.root / "alias-view")
+        self.assertEqual(receipt["retainedFrameCount"], 2)
+
+        manifest = self._manifest()
+        manifest["capture"] = None
+        for child in manifest["children"]:
+            child["artifacts"] = child["artifacts"][:1]
+            artifact = child["artifacts"][0]
+            artifact["actual"] = {
+                "view": "source_native",
+                "format": "png",
+                "colourContract": "sdr_srgb",
+            }
+            self._rename_artifact(
+                artifact, f"frame_{child['ordinal']:06d}_camera.png"
+            )
+            child["requested"] = {"source": {"kind": "desktop_mirror"}}
+            child["effective"] = {"source": {"kind": "desktop_mirror"}}
+            child["actual"] = {
+                "source": {"kind": "desktop_mirror", "fallbackApplied": False}
+            }
+        self._write_inputs(manifest)
+        receipt = EXPORTER.export_plan(self.plan_path, self.root / "explicit-mono")
+        self.assertEqual(receipt["retainedFrameCount"], 2)
+
     def test_warning_state_and_terminal_code_allowlist_contaminate_safely(self) -> None:
         manifest = self._manifest()
         manifest["children"][0]["state"] = "completed_with_warnings"
@@ -512,8 +569,35 @@ class CaptureExporterTest(unittest.TestCase):
         )
         plan["source"]["manifestPath"] = str(self.root / "does-not-exist.json")
         self.plan_path.write_text(json.dumps(plan), encoding="utf-8")
-        with self.assertRaisesRegex(EXPORTER.ExportError, "generated capture as its baseline"):
+        with self.assertRaisesRegex(EXPORTER.ExportError, "generated capture or artifact"):
             EXPORTER.export_plan(self.plan_path, self.root / "identity-self-baseline")
+
+        plan = self._plan()
+        plan["treatment"]["baselineObservationRef"] = EXPORTER.compiler.artifact_ref(
+            plan["submissionId"], plan["artifactId"]
+        )
+        plan["source"]["manifestPath"] = str(self.root / "does-not-exist.json")
+        self.plan_path.write_text(json.dumps(plan), encoding="utf-8")
+        with self.assertRaisesRegex(EXPORTER.ExportError, "generated capture or artifact"):
+            EXPORTER.export_plan(self.plan_path, self.root / "identity-artifact-baseline")
+
+    def test_producer_retention_classes_match_the_plan_schema(self) -> None:
+        for retention in sorted(EXPORTER.PRODUCER_RETENTION_CLASSES):
+            with self.subTest(retention=retention):
+                plan = self._plan()
+                plan["artifact"]["retentionClass"] = retention
+                self._write_inputs(self._manifest(), plan)
+                receipt = EXPORTER.export_plan(
+                    self.plan_path, self.root / f"retention-{retention}"
+                )
+                self.assertEqual(receipt["retainedFrameCount"], 2)
+
+        plan = self._plan()
+        plan["artifact"]["retentionClass"] = "repository-inline"
+        plan["source"]["manifestPath"] = str(self.root / "does-not-exist.json")
+        self.plan_path.write_text(json.dumps(plan), encoding="utf-8")
+        with self.assertRaisesRegex(EXPORTER.ExportError, "retentionClass is unsupported"):
+            EXPORTER.export_plan(self.plan_path, self.root / "retention-neutral-only")
 
     def test_staged_frame_mutation_is_detected_before_publication(self) -> None:
         self._write_inputs()
@@ -582,6 +666,28 @@ class CaptureExporterTest(unittest.TestCase):
             with self.assertRaisesRegex(EXPORTER.ExportError, "bundle identity changed"):
                 EXPORTER.export_plan(self.plan_path, self.root / "replaced-bundle")
 
+        self._write_inputs()
+        original_hash = EXPORTER._hash_stream
+        hash_calls = 0
+
+        def mutate_before_second_hash(stream) -> tuple[int, str]:
+            nonlocal hash_calls
+            hash_calls += 1
+            if hash_calls == 2:
+                stream.seek(0)
+                first = stream.read(1)
+                stream.seek(0)
+                stream.write(bytes((first[0] ^ 1,)))
+                stream.flush()
+                os.fsync(stream.fileno())
+            return original_hash(stream)
+
+        with mock.patch.object(
+            EXPORTER, "_hash_stream", side_effect=mutate_before_second_hash
+        ):
+            with self.assertRaisesRegex(EXPORTER.ExportError, "coherent verification"):
+                EXPORTER.export_plan(self.plan_path, self.root / "changed-during-verify")
+
         original_publish = EXPORTER._publish_no_clobber
 
         def add_member(staging: pathlib.Path, destination: pathlib.Path, expected: dict):
@@ -612,6 +718,198 @@ class CaptureExporterTest(unittest.TestCase):
             with self.assertRaisesRegex(EXPORTER.ExportError, "published output differs"):
                 EXPORTER.export_plan(self.plan_path, self.root / "mutated-after-publish")
         self.assertFalse((self.root / "mutated-after-publish").exists())
+
+    def test_first_stage_seal_binds_generated_bytes_and_directories(self) -> None:
+        original = EXPORTER._seal_public_stage
+
+        for index, relative_path in enumerate(
+            (
+                "content/artifacts.jsonl",
+                "content/visual-captures.jsonl",
+                "public-preview.json",
+                "export-receipt.json",
+            )
+        ):
+            self._write_inputs()
+
+            def replace_record(staging: pathlib.Path, *args, target=relative_path):
+                path = staging / target
+                path.write_bytes(path.read_bytes() + b" ")
+                return original(staging, *args)
+
+            with self.subTest(relative_path=relative_path), mock.patch.object(
+                EXPORTER, "_seal_public_stage", side_effect=replace_record
+            ):
+                with self.assertRaisesRegex(
+                    EXPORTER.ExportError, "generated public record"
+                ):
+                    EXPORTER.export_plan(
+                        self.plan_path, self.root / f"changed-public-record-{index}"
+                    )
+
+        self._write_inputs()
+
+        def replace_with_valid_record(staging: pathlib.Path, *args):
+            path = staging / "content" / "artifacts.jsonl"
+            artifact = json.loads(path.read_text(encoding="utf-8"))
+            artifact["notes"] = "Individually valid but unrelated producer output."
+            EXPORTER.validator.validate_artifact(artifact, "fixture replacement")
+            path.write_bytes(EXPORTER._jsonl_bytes([artifact]))
+            return original(staging, *args)
+
+        with mock.patch.object(
+            EXPORTER, "_seal_public_stage", side_effect=replace_with_valid_record
+        ):
+            with self.assertRaisesRegex(EXPORTER.ExportError, "generated public record"):
+                EXPORTER.export_plan(
+                    self.plan_path, self.root / "valid-but-wrong-public-record"
+                )
+
+        self._write_inputs()
+
+        def add_directory(staging: pathlib.Path, *args):
+            (staging / "unexpected-empty-directory").mkdir()
+            return original(staging, *args)
+
+        with mock.patch.object(EXPORTER, "_seal_public_stage", side_effect=add_directory):
+            with self.assertRaisesRegex(EXPORTER.ExportError, "unexpected directory set"):
+                EXPORTER.export_plan(self.plan_path, self.root / "extra-directory")
+
+    def test_stage_snapshot_detects_change_to_an_already_read_member(self) -> None:
+        stage = self.root / "coherent-stage"
+        stage.mkdir()
+        (stage / "a.txt").write_text("first", encoding="utf-8")
+        (stage / "b.txt").write_text("second", encoding="utf-8")
+        original = EXPORTER._read_sealed_stream
+        changed = False
+
+        def mutate_after_read(stream, path: pathlib.Path, retain_bytes: bool = False):
+            nonlocal changed
+            result = original(stream, path, retain_bytes=retain_bytes)
+            if not changed:
+                changed = True
+                stream.seek(0, os.SEEK_END)
+                stream.write(b"!")
+                stream.flush()
+                os.fsync(stream.fileno())
+            return result
+
+        with mock.patch.object(
+            EXPORTER, "_read_sealed_stream", side_effect=mutate_after_read
+        ):
+            with self.assertRaisesRegex(EXPORTER.ExportError, "coherent verification"):
+                EXPORTER._snapshot_stage(stage)
+
+    def test_post_publication_verification_failure_withdraws_owned_output(self) -> None:
+        self._write_inputs()
+        output = self.root / "verification-error"
+        original = EXPORTER._snapshot_stage
+
+        def fail_published(root: pathlib.Path, scan_public: bool = False):
+            if root == output:
+                raise EXPORTER.ExportError("fixture final verification")
+            return original(root, scan_public=scan_public)
+
+        with mock.patch.object(EXPORTER, "_snapshot_stage", side_effect=fail_published):
+            with self.assertRaisesRegex(EXPORTER.ExportError, "fixture final verification"):
+                EXPORTER.export_plan(self.plan_path, output)
+        self.assertFalse(output.exists())
+
+        self._write_inputs()
+        interrupted_output = self.root / "verification-interrupted"
+
+        def interrupt_published(root: pathlib.Path, scan_public: bool = False):
+            if root == interrupted_output:
+                raise KeyboardInterrupt("fixture interruption")
+            return original(root, scan_public=scan_public)
+
+        with mock.patch.object(
+            EXPORTER, "_snapshot_stage", side_effect=interrupt_published
+        ):
+            with self.assertRaisesRegex(KeyboardInterrupt, "fixture interruption"):
+                EXPORTER.export_plan(self.plan_path, interrupted_output)
+        self.assertFalse(interrupted_output.exists())
+
+        self._write_inputs()
+        uncertain_output = self.root / "verification-uncertain"
+
+        def fail_uncertain(root: pathlib.Path, scan_public: bool = False):
+            if root == uncertain_output:
+                raise EXPORTER.ExportError("fixture final verification")
+            return original(root, scan_public=scan_public)
+
+        with mock.patch.object(
+            EXPORTER, "_snapshot_stage", side_effect=fail_uncertain
+        ), mock.patch.object(
+            EXPORTER,
+            "_withdraw_owned_publication",
+            side_effect=EXPORTER.ExportError("fixture withdrawal uncertainty"),
+        ):
+            with self.assertRaisesRegex(EXPORTER.ExportError, "withdrawal failed"):
+                EXPORTER.export_plan(self.plan_path, uncertain_output)
+        self.assertTrue(uncertain_output.exists())
+
+    def test_cleanup_preserves_substituted_or_lost_owned_directories(self) -> None:
+        self._write_inputs()
+        moved_stage = self.root / "moved-owned-stage"
+        foreign_stage = None
+
+        def substitute_stage(
+            staging: pathlib.Path, destination: pathlib.Path, expected: dict
+        ):
+            nonlocal foreign_stage
+            os.rename(staging, moved_stage)
+            staging.mkdir()
+            foreign_stage = staging
+            (staging / "owner.txt").write_text("foreign", encoding="utf-8")
+            raise EXPORTER.ExportError("fixture stage substitution")
+
+        with mock.patch.object(
+            EXPORTER, "_publish_no_clobber", side_effect=substitute_stage
+        ):
+            with self.assertRaisesRegex(EXPORTER.ExportError, "cleanup failed"):
+                EXPORTER.export_plan(self.plan_path, self.root / "substituted-stage")
+        self.assertIsNotNone(foreign_stage)
+        self.assertEqual((foreign_stage / "owner.txt").read_text(), "foreign")
+        self.assertTrue(moved_stage.exists())
+
+        self._write_inputs()
+        missing_stage = self.root / "missing-owned-stage"
+
+        def remove_stage(
+            staging: pathlib.Path, destination: pathlib.Path, expected: dict
+        ):
+            os.rename(staging, missing_stage)
+            raise EXPORTER.ExportError("fixture stage disappearance")
+
+        with mock.patch.object(
+            EXPORTER, "_publish_no_clobber", side_effect=remove_stage
+        ):
+            with self.assertRaisesRegex(EXPORTER.ExportError, "cleanup failed"):
+                EXPORTER.export_plan(self.plan_path, self.root / "absent-stage")
+        self.assertTrue(missing_stage.exists())
+
+        self._write_inputs()
+        moved_spool = self.root / "moved-owned-spool"
+        foreign_spool = None
+        original_build = EXPORTER._build_records
+
+        def substitute_spool(*args):
+            nonlocal foreign_spool
+            result = original_build(*args)
+            spool = pathlib.Path(args[4])
+            os.rename(spool, moved_spool)
+            spool.mkdir()
+            foreign_spool = spool
+            (spool / "owner.txt").write_text("foreign", encoding="utf-8")
+            return result
+
+        with mock.patch.object(EXPORTER, "_build_records", side_effect=substitute_spool):
+            with self.assertRaisesRegex(EXPORTER.ExportError, "cleanup failed"):
+                EXPORTER.export_plan(self.plan_path, self.root / "substituted-spool")
+        self.assertIsNotNone(foreign_spool)
+        self.assertEqual((foreign_spool / "owner.txt").read_text(), "foreign")
+        self.assertTrue(moved_spool.exists())
 
     def test_unexpected_and_cleanup_errors_are_normalized(self) -> None:
         self._write_inputs()
