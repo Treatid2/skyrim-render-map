@@ -18,7 +18,6 @@ import json
 import os
 import pathlib
 import re
-import shutil
 import stat
 import struct
 import sys
@@ -32,7 +31,7 @@ import compile_dataset as compiler
 import validate_repository as validator
 
 
-TOOL_VERSION = "1.0.4"
+TOOL_VERSION = "1.0.5"
 PLAN_SCHEMA = {
     "name": "skyrim-render-map.csx-capture-export-plan",
     "major": 1,
@@ -274,6 +273,161 @@ def _windows_close_handle(handle: int) -> None:
         )
 
 
+class _WindowsDirectoryChangeWatch:
+    class Overlapped(ctypes.Structure):
+        _fields_ = [
+            ("Internal", ctypes.c_void_p),
+            ("InternalHigh", ctypes.c_void_p),
+            ("Offset", ctypes.c_uint32),
+            ("OffsetHigh", ctypes.c_uint32),
+            ("hEvent", ctypes.c_void_p),
+        ]
+
+    def __init__(self, root: pathlib.Path):
+        kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+        create_file = kernel32.CreateFileW
+        create_file.argtypes = [
+            ctypes.c_wchar_p,
+            ctypes.c_uint32,
+            ctypes.c_uint32,
+            ctypes.c_void_p,
+            ctypes.c_uint32,
+            ctypes.c_uint32,
+            ctypes.c_void_p,
+        ]
+        create_file.restype = ctypes.c_void_p
+        self.handle = create_file(
+            str(root),
+            0x00000001,
+            0x00000001 | 0x00000002 | 0x00000004,
+            None,
+            3,
+            0x02000000 | 0x00200000 | 0x40000000,
+            None,
+        )
+        if self.handle == ctypes.c_void_p(-1).value:
+            raise ExportError(
+                "cannot watch publication membership: Windows error "
+                f"{ctypes.get_last_error()}"
+            )
+        create_event = kernel32.CreateEventW
+        create_event.argtypes = [
+            ctypes.c_void_p,
+            ctypes.c_int,
+            ctypes.c_int,
+            ctypes.c_wchar_p,
+        ]
+        create_event.restype = ctypes.c_void_p
+        self.event = create_event(None, True, False, None)
+        if not self.event:
+            error_number = ctypes.get_last_error()
+            _windows_close_handle(int(self.handle))
+            raise ExportError(
+                "cannot watch publication membership: Windows error "
+                f"{error_number}"
+            )
+        self.overlapped = self.Overlapped()
+        self.overlapped.hEvent = self.event
+        self.buffer = ctypes.create_string_buffer(64 * 1024)
+        read_changes = kernel32.ReadDirectoryChangesW
+        read_changes.argtypes = [
+            ctypes.c_void_p,
+            ctypes.c_void_p,
+            ctypes.c_uint32,
+            ctypes.c_int,
+            ctypes.c_uint32,
+            ctypes.c_void_p,
+            ctypes.POINTER(self.Overlapped),
+            ctypes.c_void_p,
+        ]
+        read_changes.restype = ctypes.c_int
+        if not read_changes(
+            self.handle,
+            self.buffer,
+            len(self.buffer),
+            True,
+            0x00000001 | 0x00000002,
+            None,
+            ctypes.byref(self.overlapped),
+            None,
+        ) and ctypes.get_last_error() != 997:
+            error_number = ctypes.get_last_error()
+            _windows_close_handle(int(self.event))
+            _windows_close_handle(int(self.handle))
+            raise ExportError(
+                "cannot watch publication membership: Windows error "
+                f"{error_number}"
+            )
+
+    def finish(self) -> bool:
+        kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+        wait = kernel32.WaitForSingleObject
+        wait.argtypes = [ctypes.c_void_p, ctypes.c_uint32]
+        wait.restype = ctypes.c_uint32
+        cancel = kernel32.CancelIoEx
+        cancel.argtypes = [ctypes.c_void_p, ctypes.POINTER(self.Overlapped)]
+        cancel.restype = ctypes.c_int
+        get_result = kernel32.GetOverlappedResult
+        get_result.argtypes = [
+            ctypes.c_void_p,
+            ctypes.POINTER(self.Overlapped),
+            ctypes.POINTER(ctypes.c_uint32),
+            ctypes.c_int,
+        ]
+        get_result.restype = ctypes.c_int
+        changed = wait(self.event, 0) == 0
+        errors = []
+        if not changed and not cancel(self.handle, ctypes.byref(self.overlapped)):
+            error_number = ctypes.get_last_error()
+            if error_number != 1168:
+                errors.append(f"cancel failed with Windows error {error_number}")
+        if wait(self.event, 5000) != 0:
+            errors.append("change-watch cancellation did not complete")
+        transferred = ctypes.c_uint32()
+        if get_result(
+            self.handle,
+            ctypes.byref(self.overlapped),
+            ctypes.byref(transferred),
+            False,
+        ):
+            changed = changed or transferred.value > 0
+        else:
+            error_number = ctypes.get_last_error()
+            if error_number != 995:
+                errors.append(f"change-watch result failed with Windows error {error_number}")
+        for handle in (self.event, self.handle):
+            try:
+                _windows_close_handle(int(handle))
+            except ExportError as error:
+                errors.append(str(error))
+        if errors:
+            raise ExportError("cannot finish publication membership watch: " + "; ".join(errors))
+        return changed
+
+
+@contextlib.contextmanager
+def _directory_membership_guard(root: pathlib.Path):
+    if os.name != "nt":
+        yield
+        return
+    watch = _WindowsDirectoryChangeWatch(root)
+    try:
+        yield
+    except BaseException as error:
+        try:
+            if watch.finish():
+                error.add_note(
+                    "publication stage membership changed during enumeration"
+                )
+        except ExportError as watch_error:
+            error.add_note(str(watch_error))
+        raise
+    else:
+        if watch.finish():
+            message = "publication stage membership changed during enumeration"
+            raise ExportError(message)
+
+
 def _windows_path_information(path: pathlib.Path) -> dict:
     handle = _windows_open_path_handle(
         path, delete=False, deny_delete_sharing=False
@@ -475,29 +629,39 @@ def _read_sealed_file(path: pathlib.Path, retain_bytes: bool = False) -> tuple[b
 
 
 def _inventory_stage(root: pathlib.Path) -> tuple[dict[str, dict], list[str]]:
-    directories: dict[str, dict] = {
-        ".": _directory_seal(root, "publication stage")
-    }
-    files: list[str] = []
-    for current, names, filenames in os.walk(root, followlinks=False):
-        current_path = pathlib.Path(current)
-        for name in sorted(names):
-            directory = current_path / name
-            if directory.is_symlink():
-                raise ExportError("publication stage contains a symbolic-link directory")
-            relative = directory.relative_to(root).as_posix()
-            directories[relative] = _directory_seal(
-                directory, f"publication stage directory {relative!r}"
-            )
-        for name in sorted(filenames):
-            path = current_path / name
-            if path.is_symlink():
-                raise ExportError("publication stage contains a symbolic-link file")
-            files.append(path.relative_to(root).as_posix())
-    for relative, seal in directories.items():
-        path = root if relative == "." else root / relative
-        if _directory_seal(path, f"publication stage directory {relative!r}") != seal:
-            raise ExportError("publication stage membership changed during enumeration")
+    with _directory_membership_guard(root):
+        directories: dict[str, dict] = {
+            ".": _directory_seal(root, "publication stage")
+        }
+        files: list[str] = []
+        for current, names, filenames in os.walk(root, followlinks=False):
+            current_path = pathlib.Path(current)
+            for name in sorted(names):
+                directory = current_path / name
+                if directory.is_symlink():
+                    raise ExportError(
+                        "publication stage contains a symbolic-link directory"
+                    )
+                relative = directory.relative_to(root).as_posix()
+                directories[relative] = _directory_seal(
+                    directory, f"publication stage directory {relative!r}"
+                )
+            for name in sorted(filenames):
+                path = current_path / name
+                if path.is_symlink():
+                    raise ExportError("publication stage contains a symbolic-link file")
+                files.append(path.relative_to(root).as_posix())
+        for relative, seal in directories.items():
+            path = root if relative == "." else root / relative
+            if (
+                _directory_seal(
+                    path, f"publication stage directory {relative!r}"
+                )
+                != seal
+            ):
+                raise ExportError(
+                    "publication stage membership changed during enumeration"
+                )
     return directories, sorted(files)
 
 
@@ -1242,17 +1406,23 @@ def _zip_info(name: str) -> zipfile.ZipInfo:
     return info
 
 
-def _zip_info_signature(info: zipfile.ZipInfo) -> tuple:
+def _zip_info_signature(
+    info: zipfile.ZipInfo,
+    *,
+    extra: bytes | None = None,
+    create_version: int | None = None,
+    extract_version: int | None = None,
+) -> tuple:
     return (
         info.filename,
         info.orig_filename,
         info.date_time,
         info.compress_type,
         info.comment,
-        info.extra,
+        info.extra if extra is None else extra,
         info.create_system,
-        info.create_version,
-        info.extract_version,
+        info.create_version if create_version is None else create_version,
+        info.extract_version if extract_version is None else extract_version,
         info.flag_bits,
         info.volume,
         info.internal_attr,
@@ -1261,6 +1431,27 @@ def _zip_info_signature(info: zipfile.ZipInfo) -> tuple:
         info.CRC,
         info.compress_size,
         info.file_size,
+    )
+
+
+def _generated_zip_info_signature(info: zipfile.ZipInfo) -> tuple:
+    zip64_values = []
+    for value in (info.file_size, info.compress_size, info.header_offset):
+        if value > zipfile.ZIP64_LIMIT:
+            zip64_values.append(value)
+    if not zip64_values:
+        return _zip_info_signature(info)
+    zip64_extra = struct.pack(
+        "<HH" + "Q" * len(zip64_values),
+        1,
+        len(zip64_values) * 8,
+        *zip64_values,
+    )
+    return _zip_info_signature(
+        info,
+        extra=info.extra + zip64_extra,
+        create_version=max(info.create_version, 45),
+        extract_version=max(info.extract_version, 45),
     )
 
 
@@ -1360,7 +1551,7 @@ def _write_bundle(path: pathlib.Path, inspected: dict) -> tuple[int, int, dict]:
             if _file_identity(os.fstat(bundle_stream.fileno())) != generated_identity:
                 raise ExportError("capture bundle identity changed during generation")
             expected_info_signatures = [
-                _zip_info_signature(info) for info in generated_infos
+                _generated_zip_info_signature(info) for info in generated_infos
             ]
             expected_names = [info.filename for info in generated_infos]
             if len(expected_names) != len(set(expected_names)):
@@ -1703,6 +1894,16 @@ def _observe_directory(path: pathlib.Path, context: str) -> tuple[str, tuple[int
         raise ExportError(f"{context} custody could not be established: {error}") from error
 
 
+def _publication_snapshot(snapshot: dict) -> dict:
+    return {
+        "directories": {
+            relative: seal["identity"]
+            for relative, seal in snapshot["directories"].items()
+        },
+        "files": snapshot["files"],
+    }
+
+
 def _publish_no_clobber(
     staging: pathlib.Path,
     output: pathlib.Path,
@@ -1714,49 +1915,12 @@ def _publish_no_clobber(
     if expected_snapshot["directories"]["."]["identity"] != expected_identity:
         raise ExportError("validated stage does not have its creation-time identity")
     try:
-        if os.name == "nt":
-            os.rename(staging, output)
-        elif sys.platform.startswith("linux"):
-            library = ctypes.CDLL(None, use_errno=True)
-            renameat2 = getattr(library, "renameat2", None)
-            if renameat2 is None:
-                raise ExportError("atomic no-clobber publication is unavailable")
-            renameat2.argtypes = [
-                ctypes.c_int,
-                ctypes.c_char_p,
-                ctypes.c_int,
-                ctypes.c_char_p,
-                ctypes.c_uint,
-            ]
-            renameat2.restype = ctypes.c_int
-            result = renameat2(
-                -100,
-                os.fsencode(staging),
-                -100,
-                os.fsencode(output),
-                1,
-            )
-            if result != 0:
-                error_number = ctypes.get_errno()
-                if error_number in {errno.ENOSYS, errno.EINVAL}:
-                    raise ExportError("atomic no-clobber publication is unavailable")
-                raise OSError(error_number, os.strerror(error_number), str(output))
-        elif sys.platform == "darwin":
-            library = ctypes.CDLL(None, use_errno=True)
-            renamex_np = getattr(library, "renamex_np", None)
-            if renamex_np is None:
-                raise ExportError("atomic no-clobber publication is unavailable")
-            renamex_np.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_uint]
-            renamex_np.restype = ctypes.c_int
-            if renamex_np(os.fsencode(staging), os.fsencode(output), 0x00000004) != 0:
-                error_number = ctypes.get_errno()
-                raise OSError(error_number, os.strerror(error_number), str(output))
-        else:
-            raise ExportError("atomic no-clobber publication is unavailable")
+        os.rename(staging, output)
         published_snapshot = _snapshot_stage(output)
         if (
             published_snapshot["directories"]["."]["identity"] != expected_identity
-            or published_snapshot != expected_snapshot
+            or _publication_snapshot(published_snapshot)
+            != _publication_snapshot(expected_snapshot)
         ):
             raise ExportError("published output differs from the validated stage")
     except BaseException as error:
@@ -1823,17 +1987,18 @@ def _windows_mark_delete(handle: int) -> None:
 
 
 def _close_windows_handles(handles: dict[str, int]) -> None:
-    first_error = None
+    errors = []
     for relative, handle in list(handles.items()):
         try:
             _windows_close_handle(handle)
         except ExportError as error:
-            if first_error is None:
-                first_error = ExportError(f"cannot close owned path {relative!r}: {error}")
-        finally:
+            errors.append(f"{relative!r}: {error}")
+        else:
             handles.pop(relative, None)
-    if first_error is not None:
-        raise first_error
+    if errors:
+        raise ExportError(
+            "cannot close owned paths; unresolved handles: " + "; ".join(errors)
+        )
 
 
 def _windows_delete_owned_tree(
@@ -1887,23 +2052,25 @@ def _windows_delete_owned_tree(
                 )
 
         for relative in sorted(file_handles):
-            handle = file_handles.pop(relative)
+            handle = file_handles[relative]
             _windows_mark_delete(handle)
             _windows_close_handle(handle)
+            file_handles.pop(relative)
         for relative in sorted(
             directory_handles,
             key=lambda value: (value != ".") + value.count("/"),
             reverse=True,
         ):
-            handle = directory_handles.pop(relative)
+            handle = directory_handles[relative]
             _windows_mark_delete(handle)
             _windows_close_handle(handle)
+            directory_handles.pop(relative)
     except BaseException as error:
-        try:
-            _close_windows_handles(file_handles)
-            _close_windows_handles(directory_handles)
-        except ExportError as close_error:
-            error.add_note(str(close_error))
+        for handles in (file_handles, directory_handles):
+            try:
+                _close_windows_handles(handles)
+            except ExportError as close_error:
+                error.add_note(str(close_error))
         raise
 
 
@@ -1912,20 +2079,9 @@ def _delete_owned_tree(
     expected_identity: tuple[int, int],
     owned_children: dict[str, tuple[int, int]],
 ) -> None:
-    if os.name == "nt":
-        _windows_delete_owned_tree(root, expected_identity, owned_children)
-        return
-    if not shutil.rmtree.avoids_symlink_attacks:
-        raise ExportError("object-bound recursive cleanup is unavailable")
-    if _directory_identity(root, "owned cleanup root") != expected_identity:
-        raise ExportError("owned cleanup root identity changed before deletion")
-    for relative, child_identity in owned_children.items():
-        if _directory_identity(root / relative, "owned cleanup child") != child_identity:
-            raise ExportError(f"owned cleanup child {relative!r} custody is uncertain")
-    try:
-        shutil.rmtree(root)
-    except OSError as error:
-        raise ExportError(f"cannot remove owned cleanup tree: {error}") from error
+    if os.name != "nt":
+        raise ExportError("object-bound recursive cleanup requires Windows")
+    _windows_delete_owned_tree(root, expected_identity, owned_children)
 
 
 def _remove_private_staging(
@@ -1973,6 +2129,10 @@ def export_plan(plan_path: pathlib.Path, output: pathlib.Path) -> dict:
     staging_identity: tuple[int, int] | None = None
     owned_children: dict[pathlib.Path, tuple[int, int]] = {}
     try:
+        if os.name != "nt":
+            raise ExportError(
+                "capture export requires Windows identity-bound cleanup"
+            )
         plan_path = plan_path.resolve()
         plan_document, plan_sha256 = _load_json_document(
             plan_path, "capture export plan"

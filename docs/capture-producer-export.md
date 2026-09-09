@@ -14,6 +14,12 @@ to the plan and is never copied into public output.
 
 ## Preconditions
 
+The v1 producer runs on Windows, where native handles can bind cleanup to the
+stage object through destructive use. Other platforms fail before the plan,
+source media, output parent, or staging directory is read or changed. Portable
+ledger validation and dataset compilation remain cross-platform; this boundary
+applies only to capture production.
+
 The source must be a final `csx.screenshot` 1.0 sequence manifest with schema
 revision 1 or later. The exporter rejects rather than guesses when:
 
@@ -75,7 +81,10 @@ members and archive comments, and covers generation through both whole-file
 hashes with one lock. Directory identity and change metadata are sampled before
 and after enumeration so a membership change during the observation fails. It
 verifies the same coherent tree after an operating-system no-replace rename of
-the sibling staging directory.
+the sibling staging directory. The post-rename comparison retains directory
+identities and complete membership but excludes rename-volatile directory
+timestamps; each pre- and post-rename inventory still checks those timestamps
+internally for concurrent membership changes.
 
 A concurrent creator of the destination wins without being overwritten. If
 required verification fails or is interrupted after the rename, the exporter
@@ -84,8 +93,10 @@ creation-time directory identity remains proven; otherwise it reports the
 publication and custody uncertainty. Cleanup similarly removes only the
 originally created stage and active private spool identities. On Windows it
 retains native deletion handles that exclude ordinary path replacement while
-removal is in progress. A substituted or missing pathname is preserved and
-reported as uncertain rather than being treated as successful cleanup.
+removal is in progress, accounts for each handle until release, and attempts all
+remaining releases after an error. A substituted or missing pathname is
+preserved and reported as uncertain rather than being treated as successful
+cleanup.
 
 ## Actual capture semantics
 

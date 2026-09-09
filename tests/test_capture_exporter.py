@@ -782,6 +782,22 @@ class CaptureExporterTest(unittest.TestCase):
                         )
                 self.assertFalse((self.root / f"unexpected-zip-{case}").exists())
 
+    def test_generated_zip_signature_accepts_large_offset_metadata(self) -> None:
+        path = self.root / "large-offset.zip"
+        with path.open("wb+") as stream:
+            stream.seek(zipfile.ZIP64_LIMIT + 123)
+            generated = EXPORTER._zip_info("entry.txt")
+            with zipfile.ZipFile(stream, "w", allowZip64=True) as archive:
+                archive.writestr(generated, b"x")
+        with zipfile.ZipFile(path) as archive:
+            observed = archive.infolist()[0]
+        self.assertGreater(observed.header_offset, zipfile.ZIP64_LIMIT)
+        self.assertNotEqual(generated.extra, observed.extra)
+        self.assertEqual(
+            EXPORTER._generated_zip_info_signature(generated),
+            EXPORTER._zip_info_signature(observed),
+        )
+
     def test_first_stage_seal_binds_generated_bytes_and_directories(self) -> None:
         original = EXPORTER._seal_public_stage
 
@@ -963,6 +979,29 @@ class CaptureExporterTest(unittest.TestCase):
                 EXPORTER.export_plan(self.plan_path, output)
         self.assertFalse(output.exists())
 
+    def test_publication_ignores_rename_volatile_directory_metadata(self) -> None:
+        self._write_inputs()
+        output = self.root / "rename-metadata"
+        original_snapshot = EXPORTER._snapshot_stage
+
+        def alter_output_directory_metadata(
+            root: pathlib.Path, scan_public: bool = False
+        ):
+            snapshot = original_snapshot(root, scan_public=scan_public)
+            if root == output:
+                snapshot = copy.deepcopy(snapshot)
+                snapshot["directories"]["."]["ctimeNs"] += 1
+                snapshot["directories"]["."]["mtimeNs"] += 1
+            return snapshot
+
+        with mock.patch.object(
+            EXPORTER,
+            "_snapshot_stage",
+            side_effect=alter_output_directory_metadata,
+        ):
+            receipt = EXPORTER.export_plan(self.plan_path, output)
+        self.assertTrue((output / receipt["artifactFile"]).is_file())
+
     def test_first_stage_seal_rejects_replacement_root(self) -> None:
         self._write_inputs()
         moved_original = self.root / "original-stage-owner"
@@ -1124,6 +1163,112 @@ class CaptureExporterTest(unittest.TestCase):
         self.assertTrue(substituted)
         self.assertEqual((child / "foreign.txt").read_text(), "foreign")
         self.assertEqual((moved_child / "owned.txt").read_text(), "owned")
+
+    @unittest.skipUnless(os.name == "nt", "Windows handle-custody behavior")
+    def test_cleanup_releases_all_handles_after_disposition_failure(self) -> None:
+        root = self.root / "disposition-failure"
+        (root / "child").mkdir(parents=True)
+        (root / "child" / "owned.txt").write_text("owned", encoding="utf-8")
+        root_identity = EXPORTER._directory_identity(root, "fixture root")
+        opened = []
+        closed = []
+        original_open = EXPORTER._windows_open_path_handle
+        original_close = EXPORTER._windows_close_handle
+
+        def record_open(*args, **kwargs):
+            handle = original_open(*args, **kwargs)
+            opened.append(handle)
+            return handle
+
+        def record_close(handle):
+            closed.append(handle)
+            return original_close(handle)
+
+        with mock.patch.object(
+            EXPORTER, "_windows_open_path_handle", side_effect=record_open
+        ), mock.patch.object(
+            EXPORTER,
+            "_windows_mark_delete",
+            side_effect=EXPORTER.ExportError("fixture disposition failure"),
+        ), mock.patch.object(
+            EXPORTER, "_windows_close_handle", side_effect=record_close
+        ):
+            with self.assertRaisesRegex(
+                EXPORTER.ExportError, "fixture disposition failure"
+            ):
+                EXPORTER._windows_delete_owned_tree(root, root_identity, {})
+        for handle in opened:
+            self.assertIn(handle, closed)
+
+    def test_handle_release_attempts_every_handle_and_retains_failures(self) -> None:
+        handles = {"first": 101, "second": 202, "third": 303}
+        calls = []
+
+        def close_with_one_failure(handle):
+            calls.append(handle)
+            if handle == 202:
+                raise EXPORTER.ExportError("fixture close failure")
+
+        with mock.patch.object(
+            EXPORTER, "_windows_close_handle", side_effect=close_with_one_failure
+        ):
+            with self.assertRaisesRegex(
+                EXPORTER.ExportError, "unresolved handles"
+            ):
+                EXPORTER._close_windows_handles(handles)
+        self.assertEqual(calls, [101, 202, 303])
+        self.assertEqual(handles, {"second": 202})
+
+    @unittest.skipUnless(os.name == "nt", "Windows handle-custody behavior")
+    def test_cleanup_attempts_both_handle_groups_after_release_failure(self) -> None:
+        root = self.root / "release-groups"
+        root.mkdir()
+        (root / "owned.txt").write_text("owned", encoding="utf-8")
+        root_identity = EXPORTER._directory_identity(root, "fixture root")
+        opened = []
+        original_open = EXPORTER._windows_open_path_handle
+
+        def record_persistent_open(path, *, delete, deny_delete_sharing):
+            handle = original_open(
+                path, delete=delete, deny_delete_sharing=deny_delete_sharing
+            )
+            if delete:
+                opened.append(handle)
+            return handle
+
+        with mock.patch.object(
+            EXPORTER,
+            "_windows_open_path_handle",
+            side_effect=record_persistent_open,
+        ), mock.patch.object(
+            EXPORTER,
+            "_windows_mark_delete",
+            side_effect=EXPORTER.ExportError("fixture disposition failure"),
+        ), mock.patch.object(
+            EXPORTER,
+            "_close_windows_handles",
+            side_effect=(
+                EXPORTER.ExportError("fixture file release"),
+                EXPORTER.ExportError("fixture directory release"),
+            ),
+        ) as close_groups:
+            with self.assertRaisesRegex(
+                EXPORTER.ExportError, "fixture disposition failure"
+            ) as caught:
+                EXPORTER._windows_delete_owned_tree(root, root_identity, {})
+        self.assertEqual(close_groups.call_count, 2)
+        self.assertEqual(len(caught.exception.__notes__), 2)
+        for handle in opened:
+            EXPORTER._windows_close_handle(handle)
+
+    def test_non_windows_export_fails_before_processing(self) -> None:
+        output = self.root / "unsupported-platform"
+        with mock.patch.object(EXPORTER.os, "name", "posix"):
+            with self.assertRaisesRegex(
+                EXPORTER.ExportError, "requires Windows identity-bound cleanup"
+            ):
+                EXPORTER.export_plan(self.plan_path, output)
+        self.assertFalse(output.exists())
 
     def test_unexpected_and_cleanup_errors_are_normalized(self) -> None:
         self._write_inputs()
