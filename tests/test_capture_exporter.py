@@ -10,6 +10,7 @@ import importlib.util
 import json
 import os
 import pathlib
+import shutil
 import struct
 import sys
 import tempfile
@@ -640,11 +641,14 @@ class CaptureExporterTest(unittest.TestCase):
         original = EXPORTER._publish_no_clobber
 
         def create_destination(
-            staging: pathlib.Path, destination: pathlib.Path, expected: dict
+            staging: pathlib.Path,
+            destination: pathlib.Path,
+            expected: dict,
+            expected_identity: tuple[int, int],
         ) -> None:
             destination.mkdir()
             (destination / "owner.txt").write_text("other producer", encoding="utf-8")
-            original(staging, destination, expected)
+            original(staging, destination, expected, expected_identity)
 
         with mock.patch.object(
             EXPORTER, "_publish_no_clobber", side_effect=create_destination
@@ -690,9 +694,14 @@ class CaptureExporterTest(unittest.TestCase):
 
         original_publish = EXPORTER._publish_no_clobber
 
-        def add_member(staging: pathlib.Path, destination: pathlib.Path, expected: dict):
+        def add_member(
+            staging: pathlib.Path,
+            destination: pathlib.Path,
+            expected: dict,
+            expected_identity: tuple[int, int],
+        ):
             (staging / "unlisted.json").write_text("{}", encoding="utf-8")
-            original_publish(staging, destination, expected)
+            original_publish(staging, destination, expected, expected_identity)
 
         with mock.patch.object(EXPORTER, "_publish_no_clobber", side_effect=add_member):
             with self.assertRaisesRegex(EXPORTER.ExportError, "changed after validation"):
@@ -700,7 +709,10 @@ class CaptureExporterTest(unittest.TestCase):
         self.assertFalse((self.root / "mutated-public-stage").exists())
 
         def mutate_after_publish(
-            staging: pathlib.Path, destination: pathlib.Path, expected: dict
+            staging: pathlib.Path,
+            destination: pathlib.Path,
+            expected: dict,
+            expected_identity: tuple[int, int],
         ):
             original_snapshot = EXPORTER._snapshot_stage
 
@@ -710,7 +722,7 @@ class CaptureExporterTest(unittest.TestCase):
                 return original_snapshot(root, scan_public=scan_public)
 
             with mock.patch.object(EXPORTER, "_snapshot_stage", side_effect=snapshot):
-                original_publish(staging, destination, expected)
+                original_publish(staging, destination, expected, expected_identity)
 
         with mock.patch.object(
             EXPORTER, "_publish_no_clobber", side_effect=mutate_after_publish
@@ -718,6 +730,57 @@ class CaptureExporterTest(unittest.TestCase):
             with self.assertRaisesRegex(EXPORTER.ExportError, "published output differs"):
                 EXPORTER.export_plan(self.plan_path, self.root / "mutated-after-publish")
         self.assertFalse((self.root / "mutated-after-publish").exists())
+
+    def test_bundle_rejects_ungenerated_zip_envelope_content(self) -> None:
+        cases = (
+            "extra-entry",
+            "duplicate-entry",
+            "archive-comment",
+            "trailing-data",
+        )
+        for case in cases:
+            with self.subTest(case=case):
+                self._write_inputs()
+                original_hash = EXPORTER._hash_stream
+                injected = False
+
+                def inject_before_first_seal(stream):
+                    nonlocal injected
+                    if not injected:
+                        injected = True
+                        stream.seek(0)
+                        if case == "trailing-data":
+                            stream.seek(0, os.SEEK_END)
+                            stream.write(b"not generated")
+                        else:
+                            with zipfile.ZipFile(stream, "a") as archive:
+                                if case == "extra-entry":
+                                    archive.writestr(
+                                        "unlisted-private.txt", b"not generated"
+                                    )
+                                elif case == "duplicate-entry":
+                                    with self.assertWarns(UserWarning):
+                                        archive.writestr(
+                                            "bundle-manifest.json",
+                                            b'{"replacement":true}',
+                                        )
+                                else:
+                                    archive.comment = b"not generated"
+                        stream.flush()
+                        os.fsync(stream.fileno())
+                    return original_hash(stream)
+
+                with mock.patch.object(
+                    EXPORTER, "_hash_stream", side_effect=inject_before_first_seal
+                ):
+                    with self.assertRaisesRegex(
+                        EXPORTER.ExportError,
+                        "bundle (member|inventory|envelope) verification failed",
+                    ):
+                        EXPORTER.export_plan(
+                            self.plan_path, self.root / f"unexpected-zip-{case}"
+                        )
+                self.assertFalse((self.root / f"unexpected-zip-{case}").exists())
 
     def test_first_stage_seal_binds_generated_bytes_and_directories(self) -> None:
         original = EXPORTER._seal_public_stage
@@ -800,6 +863,37 @@ class CaptureExporterTest(unittest.TestCase):
             with self.assertRaisesRegex(EXPORTER.ExportError, "coherent verification"):
                 EXPORTER._snapshot_stage(stage)
 
+    def test_inventory_detects_members_added_during_its_walk(self) -> None:
+        for member_kind in ("file", "directory"):
+            with self.subTest(member_kind=member_kind):
+                stage = self.root / f"membership-{member_kind}"
+                earlier = stage / "earlier"
+                later = stage / "later"
+                earlier.mkdir(parents=True)
+                later.mkdir()
+                (earlier / "known.txt").write_text("known", encoding="utf-8")
+                original_walk = os.walk
+                changed = False
+
+                def mutating_walk(*args, **kwargs):
+                    nonlocal changed
+                    for current, names, filenames in original_walk(*args, **kwargs):
+                        yield current, names, filenames
+                        if pathlib.Path(current) == earlier and not changed:
+                            changed = True
+                            if member_kind == "file":
+                                (earlier / "late.txt").write_text(
+                                    "late", encoding="utf-8"
+                                )
+                            else:
+                                (earlier / "late-directory").mkdir()
+
+                with mock.patch.object(EXPORTER.os, "walk", side_effect=mutating_walk):
+                    with self.assertRaisesRegex(
+                        EXPORTER.ExportError, "membership changed during enumeration"
+                    ):
+                        EXPORTER._inventory_stage(stage)
+
     def test_post_publication_verification_failure_withdraws_owned_output(self) -> None:
         self._write_inputs()
         output = self.root / "verification-error"
@@ -849,13 +943,62 @@ class CaptureExporterTest(unittest.TestCase):
                 EXPORTER.export_plan(self.plan_path, uncertain_output)
         self.assertTrue(uncertain_output.exists())
 
+    def test_interruption_at_rename_completion_withdraws_owned_output(self) -> None:
+        self._write_inputs()
+        output = self.root / "rename-interrupted"
+        original_rename = os.rename
+        interrupted = False
+
+        def rename_then_interrupt(source, destination):
+            nonlocal interrupted
+            original_rename(source, destination)
+            if pathlib.Path(destination) == output and not interrupted:
+                interrupted = True
+                raise KeyboardInterrupt("fixture rename completion interruption")
+
+        with mock.patch.object(EXPORTER.os, "rename", side_effect=rename_then_interrupt):
+            with self.assertRaisesRegex(
+                KeyboardInterrupt, "fixture rename completion interruption"
+            ):
+                EXPORTER.export_plan(self.plan_path, output)
+        self.assertFalse(output.exists())
+
+    def test_first_stage_seal_rejects_replacement_root(self) -> None:
+        self._write_inputs()
+        moved_original = self.root / "original-stage-owner"
+        replacement_stage = None
+        original_seal = EXPORTER._seal_public_stage
+
+        def replace_root_before_seal(staging: pathlib.Path, *args):
+            nonlocal replacement_stage
+            os.rename(staging, moved_original)
+            staging.mkdir()
+            replacement_stage = staging
+            for name in ("artifacts", "content"):
+                shutil.move(str(moved_original / name), str(staging / name))
+            for name in ("export-receipt.json", "public-preview.json"):
+                shutil.move(str(moved_original / name), str(staging / name))
+            return original_seal(staging, *args)
+
+        with mock.patch.object(
+            EXPORTER, "_seal_public_stage", side_effect=replace_root_before_seal
+        ):
+            with self.assertRaisesRegex(EXPORTER.ExportError, "cleanup failed"):
+                EXPORTER.export_plan(self.plan_path, self.root / "replaced-first-seal")
+        self.assertIsNotNone(replacement_stage)
+        self.assertTrue(replacement_stage.exists())
+        self.assertTrue(moved_original.exists())
+
     def test_cleanup_preserves_substituted_or_lost_owned_directories(self) -> None:
         self._write_inputs()
         moved_stage = self.root / "moved-owned-stage"
         foreign_stage = None
 
         def substitute_stage(
-            staging: pathlib.Path, destination: pathlib.Path, expected: dict
+            staging: pathlib.Path,
+            destination: pathlib.Path,
+            expected: dict,
+            expected_identity: tuple[int, int],
         ):
             nonlocal foreign_stage
             os.rename(staging, moved_stage)
@@ -877,7 +1020,10 @@ class CaptureExporterTest(unittest.TestCase):
         missing_stage = self.root / "missing-owned-stage"
 
         def remove_stage(
-            staging: pathlib.Path, destination: pathlib.Path, expected: dict
+            staging: pathlib.Path,
+            destination: pathlib.Path,
+            expected: dict,
+            expected_identity: tuple[int, int],
         ):
             os.rename(staging, missing_stage)
             raise EXPORTER.ExportError("fixture stage disappearance")
@@ -910,6 +1056,74 @@ class CaptureExporterTest(unittest.TestCase):
         self.assertIsNotNone(foreign_spool)
         self.assertEqual((foreign_spool / "owner.txt").read_text(), "foreign")
         self.assertTrue(moved_spool.exists())
+
+    @unittest.skipUnless(os.name == "nt", "Windows handle-custody behavior")
+    def test_cleanup_holds_root_identity_through_deletion(self) -> None:
+        root = self.root / "owned-root"
+        root.mkdir()
+        (root / "owned.txt").write_text("owned", encoding="utf-8")
+        expected_identity = EXPORTER._directory_identity(root, "fixture root")
+        moved = self.root / "moved-root"
+        original_open = EXPORTER._windows_open_path_handle
+        attempted = False
+
+        def attempt_substitution(path, *, delete, deny_delete_sharing):
+            nonlocal attempted
+            handle = original_open(
+                path, delete=delete, deny_delete_sharing=deny_delete_sharing
+            )
+            if pathlib.Path(path) == root and delete and deny_delete_sharing:
+                attempted = True
+                with self.assertRaises(OSError):
+                    os.rename(root, moved)
+            return handle
+
+        with mock.patch.object(
+            EXPORTER,
+            "_windows_open_path_handle",
+            side_effect=attempt_substitution,
+        ):
+            EXPORTER._windows_delete_owned_tree(root, expected_identity, {})
+        self.assertTrue(attempted)
+        self.assertFalse(root.exists())
+        self.assertFalse(moved.exists())
+
+    @unittest.skipUnless(os.name == "nt", "Windows handle-custody behavior")
+    def test_cleanup_preserves_child_substituted_during_deletion(self) -> None:
+        root = self.root / "owned-parent"
+        child = root / "active-child"
+        child.mkdir(parents=True)
+        (child / "owned.txt").write_text("owned", encoding="utf-8")
+        root_identity = EXPORTER._directory_identity(root, "fixture root")
+        child_identity = EXPORTER._directory_identity(child, "fixture child")
+        moved_child = root / "moved-active-child"
+        original_open = EXPORTER._windows_open_path_handle
+        substituted = False
+
+        def substitute_before_child_handle(path, *, delete, deny_delete_sharing):
+            nonlocal substituted
+            candidate = pathlib.Path(path)
+            if candidate == child and delete and deny_delete_sharing and not substituted:
+                substituted = True
+                os.rename(child, moved_child)
+                child.mkdir()
+                (child / "foreign.txt").write_text("foreign", encoding="utf-8")
+            return original_open(
+                path, delete=delete, deny_delete_sharing=deny_delete_sharing
+            )
+
+        with mock.patch.object(
+            EXPORTER,
+            "_windows_open_path_handle",
+            side_effect=substitute_before_child_handle,
+        ):
+            with self.assertRaisesRegex(EXPORTER.ExportError, "changed before deletion"):
+                EXPORTER._windows_delete_owned_tree(
+                    root, root_identity, {"active-child": child_identity}
+                )
+        self.assertTrue(substituted)
+        self.assertEqual((child / "foreign.txt").read_text(), "foreign")
+        self.assertEqual((moved_child / "owned.txt").read_text(), "owned")
 
     def test_unexpected_and_cleanup_errors_are_normalized(self) -> None:
         self._write_inputs()

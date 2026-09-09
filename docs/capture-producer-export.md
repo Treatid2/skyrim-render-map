@@ -69,18 +69,23 @@ identifiers, capture tags, and other private manifest fields.
 The adapter admits only the exact generated public-record bytes and the expected
 root, `artifacts`, and `content` directory layout. It holds exclusive file locks
 while it validates and seals the complete member set, public-file scans, file
-identities, modification times, lengths, and digests. ZIP structure, entries,
-and the whole-file digest are therefore observations of one locked byte version.
-It verifies the same coherent tree after an operating-system no-replace rename
-of the sibling staging directory.
+identities, modification times, lengths, and digests. ZIP admission also requires
+the exact generated entry order and metadata, rejects duplicate or additional
+members and archive comments, and covers generation through both whole-file
+hashes with one lock. Directory identity and change metadata are sampled before
+and after enumeration so a membership change during the observation fails. It
+verifies the same coherent tree after an operating-system no-replace rename of
+the sibling staging directory.
 
 A concurrent creator of the destination wins without being overwritten. If
 required verification fails or is interrupted after the rename, the exporter
-withdraws the output only while its original directory identity remains proven;
-otherwise it reports the publication and custody uncertainty. Cleanup similarly
-removes only the originally created stage and active private spool identities.
-A substituted or missing pathname is preserved and reported as uncertain rather
-than being treated as successful cleanup.
+reconciles the old and new names, then withdraws the output only while its
+creation-time directory identity remains proven; otherwise it reports the
+publication and custody uncertainty. Cleanup similarly removes only the
+originally created stage and active private spool identities. On Windows it
+retains native deletion handles that exclude ordinary path replacement while
+removal is in progress. A substituted or missing pathname is preserved and
+reported as uncertain rather than being treated as successful cleanup.
 
 ## Actual capture semantics
 

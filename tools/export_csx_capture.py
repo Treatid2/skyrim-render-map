@@ -19,6 +19,7 @@ import os
 import pathlib
 import re
 import shutil
+import stat
 import struct
 import sys
 import tempfile
@@ -31,7 +32,7 @@ import compile_dataset as compiler
 import validate_repository as validator
 
 
-TOOL_VERSION = "1.0.3"
+TOOL_VERSION = "1.0.4"
 PLAN_SCHEMA = {
     "name": "skyrim-render-map.csx-capture-export-plan",
     "major": 1,
@@ -179,7 +180,131 @@ def _file_identity(value: os.stat_result) -> tuple[int, int]:
     return identity
 
 
+def _windows_open_path_handle(
+    path: pathlib.Path, *, delete: bool, deny_delete_sharing: bool
+) -> int:
+    kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+    create_file = kernel32.CreateFileW
+    create_file.argtypes = [
+        ctypes.c_wchar_p,
+        ctypes.c_uint32,
+        ctypes.c_uint32,
+        ctypes.c_void_p,
+        ctypes.c_uint32,
+        ctypes.c_uint32,
+        ctypes.c_void_p,
+    ]
+    create_file.restype = ctypes.c_void_p
+    desired_access = 0x00000080 | (0x00010000 if delete else 0)
+    share_mode = 0x00000001 | 0x00000002
+    if not deny_delete_sharing:
+        share_mode |= 0x00000004
+    handle = create_file(
+        str(path),
+        desired_access,
+        share_mode,
+        None,
+        3,
+        0x02000000 | 0x00200000,
+        None,
+    )
+    if handle == ctypes.c_void_p(-1).value:
+        raise ExportError(
+            f"cannot open owned path {path.name!r}: Windows error "
+            f"{ctypes.get_last_error()}"
+        )
+    return int(handle)
+
+
+def _windows_handle_information(handle: int) -> dict:
+    class ByHandleFileInformation(ctypes.Structure):
+        _fields_ = [
+            ("FileAttributes", ctypes.c_uint32),
+            ("CreationTimeLow", ctypes.c_uint32),
+            ("CreationTimeHigh", ctypes.c_uint32),
+            ("LastAccessTimeLow", ctypes.c_uint32),
+            ("LastAccessTimeHigh", ctypes.c_uint32),
+            ("LastWriteTimeLow", ctypes.c_uint32),
+            ("LastWriteTimeHigh", ctypes.c_uint32),
+            ("VolumeSerialNumber", ctypes.c_uint32),
+            ("FileSizeHigh", ctypes.c_uint32),
+            ("FileSizeLow", ctypes.c_uint32),
+            ("NumberOfLinks", ctypes.c_uint32),
+            ("FileIndexHigh", ctypes.c_uint32),
+            ("FileIndexLow", ctypes.c_uint32),
+        ]
+
+    kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+    get_information = kernel32.GetFileInformationByHandle
+    get_information.argtypes = [ctypes.c_void_p, ctypes.POINTER(ByHandleFileInformation)]
+    get_information.restype = ctypes.c_int
+    information = ByHandleFileInformation()
+    if not get_information(ctypes.c_void_p(handle), ctypes.byref(information)):
+        raise ExportError(
+            "cannot identify owned path handle: Windows error "
+            f"{ctypes.get_last_error()}"
+        )
+    file_index = (information.FileIndexHigh << 32) | information.FileIndexLow
+    if file_index == 0:
+        raise ExportError("filesystem does not expose stable file identities")
+    creation_time = (information.CreationTimeHigh << 32) | information.CreationTimeLow
+    write_time = (information.LastWriteTimeHigh << 32) | information.LastWriteTimeLow
+    return {
+        "identity": (information.VolumeSerialNumber, file_index),
+        "attributes": information.FileAttributes,
+        "ctimeNs": creation_time * 100,
+        "mtimeNs": write_time * 100,
+        "size": (information.FileSizeHigh << 32) | information.FileSizeLow,
+        "links": information.NumberOfLinks,
+    }
+
+
+def _windows_handle_identity(handle: int) -> tuple[int, int]:
+    return _windows_handle_information(handle)["identity"]
+
+
+def _windows_close_handle(handle: int) -> None:
+    kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+    close_handle = kernel32.CloseHandle
+    close_handle.argtypes = [ctypes.c_void_p]
+    close_handle.restype = ctypes.c_int
+    if not close_handle(ctypes.c_void_p(handle)):
+        raise ExportError(
+            f"cannot close owned path handle: Windows error {ctypes.get_last_error()}"
+        )
+
+
+def _windows_path_information(path: pathlib.Path) -> dict:
+    handle = _windows_open_path_handle(
+        path, delete=False, deny_delete_sharing=False
+    )
+    try:
+        return _windows_handle_information(handle)
+    finally:
+        _windows_close_handle(handle)
+
+
+def _windows_path_identity(path: pathlib.Path) -> tuple[int, int]:
+    return _windows_path_information(path)["identity"]
+
+
 def _directory_identity(path: pathlib.Path, context: str) -> tuple[int, int]:
+    if os.name == "nt":
+        try:
+            information = _windows_path_information(path)
+        except ExportError as error:
+            if not os.path.lexists(path):
+                raise ExportError(
+                    f"{context} custody is uncertain: owned directory is absent"
+                ) from error
+            raise ExportError(f"cannot inspect {context}: {error}") from error
+        if not information["attributes"] & 0x00000010 or information[
+            "attributes"
+        ] & 0x00000400:
+            raise ExportError(
+                f"{context} custody is uncertain: path is not an owned directory"
+            )
+        return information["identity"]
     try:
         value = path.stat(follow_symlinks=False)
     except FileNotFoundError as error:
@@ -188,9 +313,38 @@ def _directory_identity(path: pathlib.Path, context: str) -> tuple[int, int]:
         ) from error
     except OSError as error:
         raise ExportError(f"cannot inspect {context}: {error}") from error
-    if not path.is_dir() or path.is_symlink():
+    if not stat.S_ISDIR(value.st_mode) or stat.S_ISLNK(value.st_mode):
         raise ExportError(f"{context} custody is uncertain: path is not an owned directory")
     return _file_identity(value)
+
+
+def _directory_seal(path: pathlib.Path, context: str) -> dict:
+    if os.name == "nt":
+        try:
+            information = _windows_path_information(path)
+        except ExportError as error:
+            raise ExportError(f"cannot inspect {context}: {error}") from error
+        if not information["attributes"] & 0x00000010 or information[
+            "attributes"
+        ] & 0x00000400:
+            raise ExportError(f"{context} is not an ordinary directory")
+        return {
+            key: information[key]
+            for key in ("identity", "mtimeNs", "ctimeNs", "size", "links")
+        }
+    try:
+        value = path.stat(follow_symlinks=False)
+    except OSError as error:
+        raise ExportError(f"cannot inspect {context}: {error}") from error
+    if not stat.S_ISDIR(value.st_mode) or stat.S_ISLNK(value.st_mode):
+        raise ExportError(f"{context} is not an ordinary directory")
+    return {
+        "identity": _file_identity(value),
+        "mtimeNs": value.st_mtime_ns,
+        "ctimeNs": value.st_ctime_ns,
+        "size": value.st_size,
+        "links": value.st_nlink,
+    }
 
 
 @contextlib.contextmanager
@@ -320,14 +474,10 @@ def _read_sealed_file(path: pathlib.Path, retain_bytes: bool = False) -> tuple[b
         raise ExportError(f"cannot seal staged file {path.name!r}: {error}") from error
 
 
-def _inventory_stage(root: pathlib.Path) -> tuple[dict[str, tuple[int, int]], list[str]]:
-    try:
-        root_stat = root.stat(follow_symlinks=False)
-    except OSError as error:
-        raise ExportError(f"cannot inspect publication stage: {error}") from error
-    if not root.is_dir() or root.is_symlink():
-        raise ExportError("publication stage is not an owned directory")
-    directories: dict[str, tuple[int, int]] = {".": _file_identity(root_stat)}
+def _inventory_stage(root: pathlib.Path) -> tuple[dict[str, dict], list[str]]:
+    directories: dict[str, dict] = {
+        ".": _directory_seal(root, "publication stage")
+    }
     files: list[str] = []
     for current, names, filenames in os.walk(root, followlinks=False):
         current_path = pathlib.Path(current)
@@ -336,12 +486,18 @@ def _inventory_stage(root: pathlib.Path) -> tuple[dict[str, tuple[int, int]], li
             if directory.is_symlink():
                 raise ExportError("publication stage contains a symbolic-link directory")
             relative = directory.relative_to(root).as_posix()
-            directories[relative] = _file_identity(directory.stat(follow_symlinks=False))
+            directories[relative] = _directory_seal(
+                directory, f"publication stage directory {relative!r}"
+            )
         for name in sorted(filenames):
             path = current_path / name
             if path.is_symlink():
                 raise ExportError("publication stage contains a symbolic-link file")
             files.append(path.relative_to(root).as_posix())
+    for relative, seal in directories.items():
+        path = root if relative == "." else root / relative
+        if _directory_seal(path, f"publication stage directory {relative!r}") != seal:
+            raise ExportError("publication stage membership changed during enumeration")
     return directories, sorted(files)
 
 
@@ -1086,6 +1242,39 @@ def _zip_info(name: str) -> zipfile.ZipInfo:
     return info
 
 
+def _zip_info_signature(info: zipfile.ZipInfo) -> tuple:
+    return (
+        info.filename,
+        info.orig_filename,
+        info.date_time,
+        info.compress_type,
+        info.comment,
+        info.extra,
+        info.create_system,
+        info.create_version,
+        info.extract_version,
+        info.flag_bits,
+        info.volume,
+        info.internal_attr,
+        info.external_attr,
+        info.header_offset,
+        info.CRC,
+        info.compress_size,
+        info.file_size,
+    )
+
+
+def _zip_has_exact_terminator(stream, byte_length: int) -> bool:
+    end_record_size = 22
+    stream.seek(max(0, byte_length - (65535 + end_record_size)))
+    tail = stream.read()
+    offset = tail.rfind(b"PK\x05\x06")
+    if offset < 0 or len(tail) - offset != end_record_size:
+        return False
+    comment_length = struct.unpack_from("<H", tail, offset + 20)[0]
+    return comment_length == 0
+
+
 def _write_bundle(path: pathlib.Path, inspected: dict) -> tuple[int, int, dict]:
     public_frames = []
     entries: list[tuple[str, pathlib.Path]] = []
@@ -1133,9 +1322,13 @@ def _write_bundle(path: pathlib.Path, inspected: dict) -> tuple[int, int, dict]:
         for metadata in frame["artifacts"]
     )
     try:
-        with path.open("xb+") as bundle_stream:
+        with path.open("xb+") as bundle_stream, _exclusive_stream_lock(bundle_stream):
+            generated_identity = _file_identity(os.fstat(bundle_stream.fileno()))
+            generated_infos = []
             with zipfile.ZipFile(bundle_stream, "w", allowZip64=True) as archive:
-                archive.writestr(_zip_info("bundle-manifest.json"), manifest_bytes)
+                manifest_info = _zip_info("bundle-manifest.json")
+                archive.writestr(manifest_info, manifest_bytes)
+                generated_infos.append(manifest_info)
                 metadata_by_path = {
                     artifact["path"]: artifact
                     for frame in public_frames
@@ -1144,46 +1337,72 @@ def _write_bundle(path: pathlib.Path, inspected: dict) -> tuple[int, int, dict]:
                 for archive_path, source in entries:
                     digest = hashlib.sha256()
                     written = 0
-                    with archive.open(_zip_info(archive_path), "w", force_zip64=True) as target:
+                    frame_info = _zip_info(archive_path)
+                    with archive.open(
+                        frame_info, "w", force_zip64=True
+                    ) as target:
                         with source.open("rb") as stream:
                             for block in iter(lambda: stream.read(1024 * 1024), b""):
                                 target.write(block)
                                 digest.update(block)
                                 written += len(block)
+                    generated_infos.append(frame_info)
                     expected = metadata_by_path[archive_path]
-                    if written != expected["bytes"] or digest.hexdigest() != expected["sha256"]:
-                        raise ExportError("staged frame changed while the bundle was written")
+                    if (
+                        written != expected["bytes"]
+                        or digest.hexdigest() != expected["sha256"]
+                    ):
+                        raise ExportError(
+                            "staged frame changed while the bundle was written"
+                        )
             bundle_stream.flush()
             os.fsync(bundle_stream.fileno())
-            with _exclusive_stream_lock(bundle_stream):
-                before = os.fstat(bundle_stream.fileno())
-                byte_length, digest_before = _hash_stream(bundle_stream)
-                bundle_stream.seek(0)
-                with zipfile.ZipFile(bundle_stream) as archive:
-                    if archive.read("bundle-manifest.json") != manifest_bytes:
-                        raise ExportError("capture bundle manifest verification failed")
-                    for archive_path, _ in entries:
-                        digest = hashlib.sha256(archive.read(archive_path)).hexdigest()
-                        expected = metadata_by_path[archive_path]
-                        if digest != expected["sha256"]:
-                            raise ExportError("capture bundle entry digest verification failed")
-                verified_length, digest_after = _hash_stream(bundle_stream)
-                after = os.fstat(bundle_stream.fileno())
-                if (
-                    _file_identity(before) != _file_identity(after)
-                    or before.st_size != after.st_size
-                    or before.st_mtime_ns != after.st_mtime_ns
-                    or byte_length != before.st_size
-                    or verified_length != byte_length
-                    or digest_after != digest_before
-                ):
-                    raise ExportError("capture bundle changed during coherent verification")
-                bundle_seal = {
-                    "identity": _file_identity(after),
-                    "bytes": byte_length,
-                    "sha256": digest_after,
-                    "mtimeNs": after.st_mtime_ns,
-                }
+            if _file_identity(os.fstat(bundle_stream.fileno())) != generated_identity:
+                raise ExportError("capture bundle identity changed during generation")
+            expected_info_signatures = [
+                _zip_info_signature(info) for info in generated_infos
+            ]
+            expected_names = [info.filename for info in generated_infos]
+            if len(expected_names) != len(set(expected_names)):
+                raise ExportError("capture bundle generation repeated an entry name")
+            before = os.fstat(bundle_stream.fileno())
+            byte_length, digest_before = _hash_stream(bundle_stream)
+            if not _zip_has_exact_terminator(bundle_stream, byte_length):
+                raise ExportError("capture bundle envelope verification failed")
+            bundle_stream.seek(0)
+            with zipfile.ZipFile(bundle_stream) as archive:
+                actual_infos = archive.infolist()
+                if archive.comment or [info.filename for info in actual_infos] != expected_names:
+                    raise ExportError("capture bundle member verification failed")
+                if [
+                    _zip_info_signature(info) for info in actual_infos
+                ] != expected_info_signatures:
+                    raise ExportError("capture bundle envelope verification failed")
+                if archive.read("bundle-manifest.json") != manifest_bytes:
+                    raise ExportError("capture bundle manifest verification failed")
+                for archive_path, _ in entries:
+                    digest = hashlib.sha256(archive.read(archive_path)).hexdigest()
+                    expected = metadata_by_path[archive_path]
+                    if digest != expected["sha256"]:
+                        raise ExportError("capture bundle entry digest verification failed")
+            verified_length, digest_after = _hash_stream(bundle_stream)
+            after = os.fstat(bundle_stream.fileno())
+            if (
+                _file_identity(before) != generated_identity
+                or _file_identity(after) != generated_identity
+                or before.st_size != after.st_size
+                or before.st_mtime_ns != after.st_mtime_ns
+                or byte_length != before.st_size
+                or verified_length != byte_length
+                or digest_after != digest_before
+            ):
+                raise ExportError("capture bundle changed during coherent verification")
+            bundle_seal = {
+                "identity": generated_identity,
+                "bytes": byte_length,
+                "sha256": digest_after,
+                "mtimeNs": after.st_mtime_ns,
+            }
     except ExportError:
         raise
     except (OSError, zipfile.BadZipFile, KeyError) as error:
@@ -1416,6 +1635,7 @@ def _jsonl_bytes(records: list[dict]) -> bytes:
 
 def _seal_public_stage(
     staging: pathlib.Path,
+    expected_root_identity: tuple[int, int],
     artifact_sha256: str,
     bundle_seal: dict,
     expected_public_bytes: dict[str, bytes],
@@ -1428,6 +1648,8 @@ def _seal_public_stage(
         "public-preview.json",
     }
     snapshot = _snapshot_stage(staging, scan_public=True)
+    if snapshot["directories"]["."]["identity"] != expected_root_identity:
+        raise ExportError("publication stage root identity changed before sealing")
     if set(snapshot["directories"]) != {".", "artifacts", "content"}:
         raise ExportError("publication stage has an unexpected directory set")
     if set(snapshot["files"]) != expected_paths:
@@ -1472,13 +1694,25 @@ def _withdraw_owned_publication(
         raise ExportError("published output custody changed during withdrawal")
 
 
+def _observe_directory(path: pathlib.Path, context: str) -> tuple[str, tuple[int, int] | None]:
+    try:
+        return "present", _directory_identity(path, context)
+    except ExportError as error:
+        if not os.path.lexists(path):
+            return "absent", None
+        raise ExportError(f"{context} custody could not be established: {error}") from error
+
+
 def _publish_no_clobber(
-    staging: pathlib.Path, output: pathlib.Path, expected_snapshot: dict
+    staging: pathlib.Path,
+    output: pathlib.Path,
+    expected_snapshot: dict,
+    expected_identity: tuple[int, int],
 ) -> None:
     """Atomically publish a directory while refusing an existing destination."""
     _require_stage_snapshot(staging, expected_snapshot)
-    staging_identity = expected_snapshot["directories"]["."]
-    published = False
+    if expected_snapshot["directories"]["."]["identity"] != expected_identity:
+        raise ExportError("validated stage does not have its creation-time identity")
     try:
         if os.name == "nt":
             os.rename(staging, output)
@@ -1519,31 +1753,179 @@ def _publish_no_clobber(
                 raise OSError(error_number, os.strerror(error_number), str(output))
         else:
             raise ExportError("atomic no-clobber publication is unavailable")
-        published = True
-    except FileExistsError as error:
-        raise ExportError(f"output already exists: {output}") from error
-    except OSError as error:
-        if error.errno in {errno.EEXIST, errno.ENOTEMPTY, errno.EACCES} and output.exists():
-            raise ExportError(f"output already exists: {output}") from error
-        raise ExportError(f"cannot publish export: {error}") from error
-    try:
         published_snapshot = _snapshot_stage(output)
         if (
-            published_snapshot["directories"]["."] != staging_identity
+            published_snapshot["directories"]["."]["identity"] != expected_identity
             or published_snapshot != expected_snapshot
         ):
             raise ExportError("published output differs from the validated stage")
     except BaseException as error:
-        if not published:
-            raise
         try:
-            _withdraw_owned_publication(output, staging, staging_identity)
-        except ExportError as withdrawal_error:
+            stage_state, stage_identity = _observe_directory(
+                staging, "publication staging"
+            )
+            output_state, output_identity = _observe_directory(
+                output, "published output"
+            )
+        except ExportError as custody_error:
             raise ExportError(
-                f"post-publication verification failed: {error}; "
-                f"withdrawal failed: {withdrawal_error}"
+                f"publication transition failed: {error}; {custody_error}"
             ) from error
+        if output_identity == expected_identity and stage_state == "absent":
+            try:
+                _withdraw_owned_publication(output, staging, expected_identity)
+            except ExportError as withdrawal_error:
+                raise ExportError(
+                    f"publication transition failed: {error}; "
+                    f"withdrawal failed: {withdrawal_error}"
+                ) from error
+            raise
+        if stage_identity == expected_identity and output_identity != expected_identity:
+            if isinstance(error, FileExistsError) or (
+                isinstance(error, OSError)
+                and error.errno in {errno.EEXIST, errno.ENOTEMPTY, errno.EACCES}
+                and output.exists()
+            ):
+                raise ExportError(f"output already exists: {output}") from error
+            if isinstance(error, OSError):
+                raise ExportError(f"cannot publish export: {error}") from error
+            raise
+        raise ExportError(
+            "publication transition failed with uncertain stage/output custody: "
+            f"{error}; stage={stage_state}, output={output_state}"
+        ) from error
+
+
+def _windows_mark_delete(handle: int) -> None:
+    class FileDispositionInformation(ctypes.Structure):
+        _fields_ = [("DeleteFile", ctypes.c_int)]
+
+    kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+    set_information = kernel32.SetFileInformationByHandle
+    set_information.argtypes = [
+        ctypes.c_void_p,
+        ctypes.c_int,
+        ctypes.c_void_p,
+        ctypes.c_uint32,
+    ]
+    set_information.restype = ctypes.c_int
+    information = FileDispositionInformation(1)
+    if not set_information(
+        ctypes.c_void_p(handle),
+        4,
+        ctypes.byref(information),
+        ctypes.sizeof(information),
+    ):
+        raise ExportError(
+            "cannot delete owned path by handle: Windows error "
+            f"{ctypes.get_last_error()}"
+        )
+
+
+def _close_windows_handles(handles: dict[str, int]) -> None:
+    first_error = None
+    for relative, handle in list(handles.items()):
+        try:
+            _windows_close_handle(handle)
+        except ExportError as error:
+            if first_error is None:
+                first_error = ExportError(f"cannot close owned path {relative!r}: {error}")
+        finally:
+            handles.pop(relative, None)
+    if first_error is not None:
+        raise first_error
+
+
+def _windows_delete_owned_tree(
+    root: pathlib.Path,
+    expected_identity: tuple[int, int],
+    owned_children: dict[str, tuple[int, int]],
+) -> None:
+    directory_handles: dict[str, int] = {}
+    file_handles: dict[str, int] = {}
+    try:
+        root_handle = _windows_open_path_handle(
+            root, delete=True, deny_delete_sharing=True
+        )
+        directory_handles["."] = root_handle
+        if _windows_handle_identity(root_handle) != expected_identity:
+            raise ExportError("owned cleanup root identity changed before deletion")
+
+        directories, files = _inventory_stage(root)
+        if directories["."]["identity"] != expected_identity:
+            raise ExportError("owned cleanup root identity changed during enumeration")
+        file_identities = {
+            relative: _windows_path_identity(root / relative) for relative in files
+        }
+        for relative in sorted(set(directories) - {"."}):
+            handle = _windows_open_path_handle(
+                root / relative, delete=True, deny_delete_sharing=True
+            )
+            directory_handles[relative] = handle
+            if _windows_handle_identity(handle) != directories[relative]["identity"]:
+                raise ExportError(
+                    f"owned cleanup directory {relative!r} changed before deletion"
+                )
+        for relative in files:
+            handle = _windows_open_path_handle(
+                root / relative, delete=True, deny_delete_sharing=True
+            )
+            file_handles[relative] = handle
+            if _windows_handle_identity(handle) != file_identities[relative]:
+                raise ExportError(
+                    f"owned cleanup file {relative!r} changed before deletion"
+                )
+
+        final_directories, final_files = _inventory_stage(root)
+        if final_directories != directories or final_files != files:
+            raise ExportError("owned cleanup tree changed before deletion")
+        for relative, child_identity in owned_children.items():
+            handle = directory_handles.get(relative)
+            if handle is None or _windows_handle_identity(handle) != child_identity:
+                raise ExportError(
+                    f"owned cleanup child {relative!r} custody is uncertain"
+                )
+
+        for relative in sorted(file_handles):
+            handle = file_handles.pop(relative)
+            _windows_mark_delete(handle)
+            _windows_close_handle(handle)
+        for relative in sorted(
+            directory_handles,
+            key=lambda value: (value != ".") + value.count("/"),
+            reverse=True,
+        ):
+            handle = directory_handles.pop(relative)
+            _windows_mark_delete(handle)
+            _windows_close_handle(handle)
+    except BaseException as error:
+        try:
+            _close_windows_handles(file_handles)
+            _close_windows_handles(directory_handles)
+        except ExportError as close_error:
+            error.add_note(str(close_error))
         raise
+
+
+def _delete_owned_tree(
+    root: pathlib.Path,
+    expected_identity: tuple[int, int],
+    owned_children: dict[str, tuple[int, int]],
+) -> None:
+    if os.name == "nt":
+        _windows_delete_owned_tree(root, expected_identity, owned_children)
+        return
+    if not shutil.rmtree.avoids_symlink_attacks:
+        raise ExportError("object-bound recursive cleanup is unavailable")
+    if _directory_identity(root, "owned cleanup root") != expected_identity:
+        raise ExportError("owned cleanup root identity changed before deletion")
+    for relative, child_identity in owned_children.items():
+        if _directory_identity(root / relative, "owned cleanup child") != child_identity:
+            raise ExportError(f"owned cleanup child {relative!r} custody is uncertain")
+    try:
+        shutil.rmtree(root)
+    except OSError as error:
+        raise ExportError(f"cannot remove owned cleanup tree: {error}") from error
 
 
 def _remove_private_staging(
@@ -1552,9 +1934,15 @@ def _remove_private_staging(
     expected_identity: tuple[int, int],
     owned_children: dict[pathlib.Path, tuple[int, int]] | None = None,
 ) -> None:
+    relative_children = {}
     for child, child_identity in (owned_children or {}).items():
+        try:
+            relative = child.relative_to(path).as_posix()
+        except ValueError as error:
+            raise ExportError(f"cannot remove {context}: child is outside owner") from error
         if _directory_identity(child, f"{context} child") != child_identity:
             raise ExportError(f"cannot remove {context}: child custody is uncertain")
+        relative_children[relative] = child_identity
     quarantine = path.parent / f".{path.name}.cleanup-{uuid.uuid4().hex}"
     if quarantine.exists():
         raise ExportError(f"cannot remove {context}: cleanup path already exists")
@@ -1575,10 +1963,7 @@ def _remove_private_staging(
                 f"{restore_error}"
             ) from restore_error
         raise ExportError(f"cannot remove {context}: pathname identified another directory")
-    try:
-        shutil.rmtree(quarantine)
-    except OSError as error:
-        raise ExportError(f"cannot remove {context}: {error}") from error
+    _delete_owned_tree(quarantine, expected_identity, relative_children)
     if quarantine.exists():
         raise ExportError(f"cannot remove {context}")
 
@@ -1634,11 +2019,14 @@ def export_plan(plan_path: pathlib.Path, output: pathlib.Path) -> dict:
             (staging / relative).write_bytes(data)
         stage_snapshot = _seal_public_stage(
             staging,
+            staging_identity,
             artifact["artifactSha256"],
             bundle_seal,
             expected_public_bytes,
         )
-        _publish_no_clobber(staging, output, stage_snapshot)
+        _publish_no_clobber(
+            staging, output, stage_snapshot, staging_identity
+        )
         staging = None
         staging_identity = None
     except BaseException as error:
