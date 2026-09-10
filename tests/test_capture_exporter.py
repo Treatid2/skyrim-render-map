@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import binascii
 import copy
+import ctypes
 import hashlib
 import importlib.util
 import json
@@ -1218,6 +1219,150 @@ class CaptureExporterTest(unittest.TestCase):
                 EXPORTER._close_windows_handles(handles)
         self.assertEqual(calls, [101, 202, 303])
         self.assertEqual(handles, {"second": 202})
+
+    @unittest.skipUnless(os.name == "nt", "Windows creation-custody behavior")
+    def test_owned_directory_creation_holds_identity_from_creation(self) -> None:
+        owned = self.root / "atomic-owner"
+        moved = self.root / "replacement-window"
+        original_information = EXPORTER._windows_handle_information
+        attempted = False
+
+        def attempt_replacement(handle):
+            nonlocal attempted
+            attempted = True
+            os.rename(owned, moved)
+            owned.mkdir()
+            (owned / "foreign.txt").write_text("foreign", encoding="utf-8")
+            return original_information(handle)
+
+        with mock.patch.object(
+            EXPORTER,
+            "_windows_handle_information",
+            side_effect=attempt_replacement,
+        ):
+            identity = EXPORTER._windows_create_owned_directory(
+                owned, "fixture atomic owner"
+            )
+        self.assertTrue(attempted)
+        self.assertEqual(
+            identity, EXPORTER._directory_identity(moved, "fixture original owner")
+        )
+        self.assertNotEqual(
+            identity, EXPORTER._directory_identity(owned, "fixture replacement")
+        )
+        self.assertEqual((owned / "foreign.txt").read_text(), "foreign")
+        EXPORTER._remove_private_staging(moved, "fixture original owner", identity)
+
+    def test_initial_stage_handoff_preserves_replacement(self) -> None:
+        self._write_inputs()
+        moved = self.root / "initial-stage-owner"
+        replacement = None
+        original_create = EXPORTER._windows_create_unique_owned_directory
+
+        def replace_after_creation(parent, prefix, context):
+            nonlocal replacement
+            path, identity = original_create(parent, prefix, context)
+            os.rename(path, moved)
+            path.mkdir()
+            replacement = path
+            (path / "foreign.txt").write_text("foreign", encoding="utf-8")
+            return path, identity
+
+        with mock.patch.object(
+            EXPORTER,
+            "_windows_create_unique_owned_directory",
+            side_effect=replace_after_creation,
+        ):
+            with self.assertRaisesRegex(EXPORTER.ExportError, "cleanup failed"):
+                EXPORTER.export_plan(self.plan_path, self.root / "initial-stage")
+        self.assertIsNotNone(replacement)
+        self.assertEqual((replacement / "foreign.txt").read_text(), "foreign")
+        self.assertTrue(moved.exists())
+
+    def test_initial_spool_handoff_preserves_replacement(self) -> None:
+        self._write_inputs()
+        moved = self.root / "initial-spool-owner"
+        replacement = None
+        original_create = EXPORTER._windows_create_owned_directory
+
+        def replace_spool_after_creation(path, context):
+            nonlocal replacement
+            identity = original_create(path, context)
+            if context == "private source staging":
+                os.rename(path, moved)
+                path.mkdir()
+                replacement = path
+                (path / "foreign.txt").write_text("foreign", encoding="utf-8")
+            return identity
+
+        with mock.patch.object(
+            EXPORTER,
+            "_windows_create_owned_directory",
+            side_effect=replace_spool_after_creation,
+        ):
+            with self.assertRaisesRegex(EXPORTER.ExportError, "cleanup failed"):
+                EXPORTER.export_plan(self.plan_path, self.root / "initial-spool")
+        self.assertIsNotNone(replacement)
+        self.assertEqual((replacement / "foreign.txt").read_text(), "foreign")
+        self.assertTrue(moved.exists())
+
+    def test_watch_setup_releases_every_acquired_handle(self) -> None:
+        closed = []
+        retained_before = len(EXPORTER._UNRESOLVED_WINDOWS_WATCHES)
+
+        def close_with_event_failure(handle):
+            closed.append(handle)
+            if handle == 202:
+                raise EXPORTER.ExportError("fixture event release failure")
+
+        with mock.patch.object(
+            EXPORTER, "_windows_open_change_watch_handle", return_value=101
+        ), mock.patch.object(
+            EXPORTER, "_windows_create_event_handle", return_value=202
+        ), mock.patch.object(
+            EXPORTER,
+            "_windows_start_directory_change_watch",
+            side_effect=EXPORTER.ExportError("fixture registration failure"),
+        ), mock.patch.object(
+            EXPORTER,
+            "_windows_close_handle",
+            side_effect=close_with_event_failure,
+        ):
+            with self.assertRaisesRegex(
+                EXPORTER.ExportError, "fixture registration failure"
+            ) as caught:
+                EXPORTER._WindowsDirectoryChangeWatch(self.root)
+        self.assertEqual(closed, [202, 101])
+        self.assertEqual(len(caught.exception.__notes__), 1)
+        self.assertIn("event release failure", caught.exception.__notes__[0])
+        self.assertEqual(
+            len(EXPORTER._UNRESOLVED_WINDOWS_WATCHES), retained_before + 1
+        )
+        retained = EXPORTER._UNRESOLVED_WINDOWS_WATCHES.pop()
+        self.assertEqual(retained.event, 202)
+        self.assertIsNone(retained.handle)
+
+    def test_watch_timeout_retains_pending_io_without_closing_handles(self) -> None:
+        kernel32 = mock.MagicMock()
+        kernel32.WaitForSingleObject.side_effect = [258, 258]
+        kernel32.CancelIoEx.return_value = 1
+        watch = object.__new__(EXPORTER._WindowsDirectoryChangeWatch)
+        watch.handle = 101
+        watch.event = 202
+        watch.overlapped = EXPORTER._WindowsDirectoryChangeWatch.Overlapped()
+        watch.buffer = ctypes.create_string_buffer(64 * 1024)
+        watch._retained = False
+
+        with mock.patch.object(
+            EXPORTER.ctypes, "WinDLL", return_value=kernel32
+        ), mock.patch.object(EXPORTER, "_windows_close_handle") as close_handle:
+            with self.assertRaisesRegex(
+                EXPORTER.ExportError, "cancellation did not complete"
+            ):
+                watch.finish()
+        self.assertIn(watch, EXPORTER._UNRESOLVED_WINDOWS_WATCHES)
+        close_handle.assert_not_called()
+        EXPORTER._UNRESOLVED_WINDOWS_WATCHES.remove(watch)
 
     @unittest.skipUnless(os.name == "nt", "Windows handle-custody behavior")
     def test_cleanup_attempts_both_handle_groups_after_release_failure(self) -> None:

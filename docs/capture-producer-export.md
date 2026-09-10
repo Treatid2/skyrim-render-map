@@ -14,11 +14,14 @@ to the plan and is never copied into public output.
 
 ## Preconditions
 
-The v1 producer runs on Windows, where native handles can bind cleanup to the
-stage object through destructive use. Other platforms fail before the plan,
-source media, output parent, or staging directory is read or changed. Portable
-ledger validation and dataset compilation remain cross-platform; this boundary
-applies only to capture production.
+The v1 producer runs on Windows, where each private directory is atomically
+created by the native file API with its original identity returned on the same
+handle. This binds ownership before another process can replace the pathname;
+later publication and cleanup checks continue to compare against that original
+identity. Other platforms fail before the plan, source media, output parent, or
+staging directory is read or changed. Portable ledger validation and dataset
+compilation remain cross-platform; this boundary applies only to capture
+production.
 
 The source must be a final `csx.screenshot` 1.0 sequence manifest with schema
 revision 1 or later. The exporter rejects rather than guesses when:
@@ -79,12 +82,16 @@ identities, modification times, lengths, and digests. ZIP admission also require
 the exact generated entry order and metadata, rejects duplicate or additional
 members and archive comments, and covers generation through both whole-file
 hashes with one lock. Directory identity and change metadata are sampled before
-and after enumeration so a membership change during the observation fails. It
-verifies the same coherent tree after an operating-system no-replace rename of
-the sibling staging directory. The post-rename comparison retains directory
-identities and complete membership but excludes rename-volatile directory
-timestamps; each pre- and post-rename inventory still checks those timestamps
-internally for concurrent membership changes.
+and after enumeration, and a recursive native change watch covers the sampling
+interval, so a membership change during the observation fails. Watch setup and
+shutdown account for every acquired handle independently. If cancellation does
+not complete within the bounded wait, the exporter retains the handle, event,
+overlapped state, and buffer instead of releasing memory still owned by pending
+I/O. It verifies the same coherent tree after an operating-system no-replace
+rename of the sibling staging directory. The post-rename comparison retains
+directory identities and complete membership but excludes rename-volatile
+directory timestamps; each pre- and post-rename inventory still checks those
+timestamps internally for concurrent membership changes.
 
 A concurrent creator of the destination wins without being overwritten. If
 required verification fails or is interrupted after the rename, the exporter

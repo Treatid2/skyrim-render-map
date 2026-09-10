@@ -21,7 +21,6 @@ import re
 import stat
 import struct
 import sys
-import tempfile
 import uuid
 import zipfile
 import zlib
@@ -31,7 +30,7 @@ import compile_dataset as compiler
 import validate_repository as validator
 
 
-TOOL_VERSION = "1.0.5"
+TOOL_VERSION = "1.0.6"
 PLAN_SCHEMA = {
     "name": "skyrim-render-map.csx-capture-export-plan",
     "major": 1,
@@ -273,6 +272,269 @@ def _windows_close_handle(handle: int) -> None:
         )
 
 
+def _windows_nt_status_error(status: int) -> int:
+    ntdll = ctypes.WinDLL("ntdll", use_last_error=True)
+    convert_status = ntdll.RtlNtStatusToDosError
+    convert_status.argtypes = [ctypes.c_long]
+    convert_status.restype = ctypes.c_uint32
+    return int(convert_status(ctypes.c_long(status)))
+
+
+def _windows_create_owned_directory(
+    path: pathlib.Path, context: str
+) -> tuple[int, int]:
+    class UnicodeString(ctypes.Structure):
+        _fields_ = [
+            ("Length", ctypes.c_ushort),
+            ("MaximumLength", ctypes.c_ushort),
+            ("Buffer", ctypes.POINTER(ctypes.c_wchar)),
+        ]
+
+    class ObjectAttributes(ctypes.Structure):
+        _fields_ = [
+            ("Length", ctypes.c_uint32),
+            ("RootDirectory", ctypes.c_void_p),
+            ("ObjectName", ctypes.POINTER(UnicodeString)),
+            ("Attributes", ctypes.c_uint32),
+            ("SecurityDescriptor", ctypes.c_void_p),
+            ("SecurityQualityOfService", ctypes.c_void_p),
+        ]
+
+    class IoStatusBlock(ctypes.Structure):
+        _fields_ = [
+            ("Status", ctypes.c_void_p),
+            ("Information", ctypes.c_size_t),
+        ]
+
+    kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+    create_file = kernel32.CreateFileW
+    create_file.argtypes = [
+        ctypes.c_wchar_p,
+        ctypes.c_uint32,
+        ctypes.c_uint32,
+        ctypes.c_void_p,
+        ctypes.c_uint32,
+        ctypes.c_uint32,
+        ctypes.c_void_p,
+    ]
+    create_file.restype = ctypes.c_void_p
+    parent_handle = create_file(
+        str(path.parent),
+        0x00000020 | 0x00000080,
+        0x00000001 | 0x00000002,
+        None,
+        3,
+        0x02000000,
+        None,
+    )
+    if parent_handle == ctypes.c_void_p(-1).value:
+        raise ExportError(
+            f"cannot create {context} at {path}: cannot hold parent directory: "
+            f"Windows error {ctypes.get_last_error()}"
+        )
+
+    directory_handle: int | None = None
+    identity: tuple[int, int] | None = None
+    primary_error: BaseException | None = None
+    try:
+        name_buffer = ctypes.create_unicode_buffer(path.name)
+        name = UnicodeString(
+            len(path.name.encode("utf-16-le")),
+            ctypes.sizeof(name_buffer),
+            ctypes.cast(name_buffer, ctypes.POINTER(ctypes.c_wchar)),
+        )
+        attributes = ObjectAttributes(
+            ctypes.sizeof(ObjectAttributes),
+            parent_handle,
+            ctypes.pointer(name),
+            0x00000040,
+            None,
+            None,
+        )
+        status_block = IoStatusBlock()
+        returned_handle = ctypes.c_void_p()
+        ntdll = ctypes.WinDLL("ntdll", use_last_error=True)
+        create_directory = ntdll.NtCreateFile
+        create_directory.argtypes = [
+            ctypes.POINTER(ctypes.c_void_p),
+            ctypes.c_uint32,
+            ctypes.POINTER(ObjectAttributes),
+            ctypes.POINTER(IoStatusBlock),
+            ctypes.c_void_p,
+            ctypes.c_uint32,
+            ctypes.c_uint32,
+            ctypes.c_uint32,
+            ctypes.c_uint32,
+            ctypes.c_void_p,
+            ctypes.c_uint32,
+        ]
+        create_directory.restype = ctypes.c_long
+        status = int(
+            create_directory(
+                ctypes.byref(returned_handle),
+                0x00100000 | 0x00000080,
+                ctypes.byref(attributes),
+                ctypes.byref(status_block),
+                None,
+                0x00000010,
+                0x00000001 | 0x00000002,
+                2,
+                0x00000001 | 0x00000020,
+                None,
+                0,
+            )
+        )
+        if status < 0:
+            error_number = _windows_nt_status_error(status)
+            if ctypes.c_uint32(status).value == 0xC0000035:
+                raise FileExistsError(errno.EEXIST, os.strerror(errno.EEXIST), path)
+            raise ExportError(
+                f"cannot create {context} at {path}: Windows error {error_number}"
+            )
+        directory_handle = int(returned_handle.value)
+        if status_block.Information != 2:
+            raise ExportError(
+                f"cannot create {context} at {path}: directory was not newly created"
+            )
+        information = _windows_handle_information(directory_handle)
+        if not information["attributes"] & 0x00000010 or information[
+            "attributes"
+        ] & 0x00000400:
+            raise ExportError(
+                f"cannot create {context} at {path}: created path is not an owned directory"
+            )
+        identity = information["identity"]
+    except BaseException as error:
+        primary_error = error
+
+    close_errors = []
+    for label, handle in (
+        ("created directory", directory_handle),
+        ("parent directory", int(parent_handle)),
+    ):
+        if handle is None:
+            continue
+        try:
+            _windows_close_handle(handle)
+        except ExportError as error:
+            close_errors.append(f"{label}: {error}")
+    if primary_error is not None:
+        for close_error in close_errors:
+            primary_error.add_note(f"cannot release {context} custody: {close_error}")
+        raise primary_error
+    if close_errors:
+        raise ExportError(
+            f"cannot release {context} custody at {path}: " + "; ".join(close_errors)
+        )
+    if identity is None:
+        raise ExportError(
+            f"cannot create {context} at {path}: identity was not established"
+        )
+    return identity
+
+
+def _windows_create_unique_owned_directory(
+    parent: pathlib.Path, prefix: str, context: str
+) -> tuple[pathlib.Path, tuple[int, int]]:
+    for _ in range(16):
+        path = parent / f"{prefix}{uuid.uuid4().hex}"
+        try:
+            return path, _windows_create_owned_directory(path, context)
+        except FileExistsError as error:
+            if getattr(error, "__notes__", None):
+                raise ExportError(
+                    f"cannot create {context} at {path}: handle release failed"
+                ) from error
+            continue
+    raise ExportError(f"cannot create unique {context}")
+
+
+def _windows_open_change_watch_handle(root: pathlib.Path) -> int:
+    kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+    create_file = kernel32.CreateFileW
+    create_file.argtypes = [
+        ctypes.c_wchar_p,
+        ctypes.c_uint32,
+        ctypes.c_uint32,
+        ctypes.c_void_p,
+        ctypes.c_uint32,
+        ctypes.c_uint32,
+        ctypes.c_void_p,
+    ]
+    create_file.restype = ctypes.c_void_p
+    handle = create_file(
+        str(root),
+        0x00000001,
+        0x00000001 | 0x00000002 | 0x00000004,
+        None,
+        3,
+        0x02000000 | 0x00200000 | 0x40000000,
+        None,
+    )
+    if handle == ctypes.c_void_p(-1).value:
+        raise ExportError(
+            "cannot watch publication membership: Windows error "
+            f"{ctypes.get_last_error()}"
+        )
+    return int(handle)
+
+
+def _windows_create_event_handle() -> int:
+    kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+    create_event = kernel32.CreateEventW
+    create_event.argtypes = [
+        ctypes.c_void_p,
+        ctypes.c_int,
+        ctypes.c_int,
+        ctypes.c_wchar_p,
+    ]
+    create_event.restype = ctypes.c_void_p
+    event = create_event(None, True, False, None)
+    if not event:
+        raise ExportError(
+            "cannot watch publication membership: Windows error "
+            f"{ctypes.get_last_error()}"
+        )
+    return int(event)
+
+
+def _windows_start_directory_change_watch(
+    handle: int,
+    buffer: ctypes.Array,
+    overlapped: ctypes.Structure,
+) -> None:
+    kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+    read_changes = kernel32.ReadDirectoryChangesW
+    read_changes.argtypes = [
+        ctypes.c_void_p,
+        ctypes.c_void_p,
+        ctypes.c_uint32,
+        ctypes.c_int,
+        ctypes.c_uint32,
+        ctypes.c_void_p,
+        ctypes.c_void_p,
+        ctypes.c_void_p,
+    ]
+    read_changes.restype = ctypes.c_int
+    if not read_changes(
+        ctypes.c_void_p(handle),
+        buffer,
+        len(buffer),
+        True,
+        0x00000001 | 0x00000002,
+        None,
+        ctypes.byref(overlapped),
+        None,
+    ) and ctypes.get_last_error() != 997:
+        raise ExportError(
+            "cannot watch publication membership: Windows error "
+            f"{ctypes.get_last_error()}"
+        )
+
+
+_UNRESOLVED_WINDOWS_WATCHES: list[Any] = []
+
+
 class _WindowsDirectoryChangeWatch:
     class Overlapped(ctypes.Structure):
         _fields_ = [
@@ -284,82 +546,48 @@ class _WindowsDirectoryChangeWatch:
         ]
 
     def __init__(self, root: pathlib.Path):
-        kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
-        create_file = kernel32.CreateFileW
-        create_file.argtypes = [
-            ctypes.c_wchar_p,
-            ctypes.c_uint32,
-            ctypes.c_uint32,
-            ctypes.c_void_p,
-            ctypes.c_uint32,
-            ctypes.c_uint32,
-            ctypes.c_void_p,
-        ]
-        create_file.restype = ctypes.c_void_p
-        self.handle = create_file(
-            str(root),
-            0x00000001,
-            0x00000001 | 0x00000002 | 0x00000004,
-            None,
-            3,
-            0x02000000 | 0x00200000 | 0x40000000,
-            None,
-        )
-        if self.handle == ctypes.c_void_p(-1).value:
-            raise ExportError(
-                "cannot watch publication membership: Windows error "
-                f"{ctypes.get_last_error()}"
-            )
-        create_event = kernel32.CreateEventW
-        create_event.argtypes = [
-            ctypes.c_void_p,
-            ctypes.c_int,
-            ctypes.c_int,
-            ctypes.c_wchar_p,
-        ]
-        create_event.restype = ctypes.c_void_p
-        self.event = create_event(None, True, False, None)
-        if not self.event:
-            error_number = ctypes.get_last_error()
-            _windows_close_handle(int(self.handle))
-            raise ExportError(
-                "cannot watch publication membership: Windows error "
-                f"{error_number}"
-            )
+        self.handle: int | None = None
+        self.event: int | None = None
         self.overlapped = self.Overlapped()
-        self.overlapped.hEvent = self.event
         self.buffer = ctypes.create_string_buffer(64 * 1024)
-        read_changes = kernel32.ReadDirectoryChangesW
-        read_changes.argtypes = [
-            ctypes.c_void_p,
-            ctypes.c_void_p,
-            ctypes.c_uint32,
-            ctypes.c_int,
-            ctypes.c_uint32,
-            ctypes.c_void_p,
-            ctypes.POINTER(self.Overlapped),
-            ctypes.c_void_p,
-        ]
-        read_changes.restype = ctypes.c_int
-        if not read_changes(
-            self.handle,
-            self.buffer,
-            len(self.buffer),
-            True,
-            0x00000001 | 0x00000002,
-            None,
-            ctypes.byref(self.overlapped),
-            None,
-        ) and ctypes.get_last_error() != 997:
-            error_number = ctypes.get_last_error()
-            _windows_close_handle(int(self.event))
-            _windows_close_handle(int(self.handle))
-            raise ExportError(
-                "cannot watch publication membership: Windows error "
-                f"{error_number}"
+        self._retained = False
+        try:
+            self.handle = _windows_open_change_watch_handle(root)
+            self.event = _windows_create_event_handle()
+            self.overlapped.hEvent = self.event
+            _windows_start_directory_change_watch(
+                self.handle, self.buffer, self.overlapped
             )
+        except BaseException as error:
+            close_errors = self._release_handles()
+            if close_errors:
+                self._retain_unresolved_resources()
+            for close_error in close_errors:
+                error.add_note(close_error)
+            raise
+
+    def _release_handles(self) -> list[str]:
+        errors = []
+        for attribute in ("event", "handle"):
+            handle = getattr(self, attribute)
+            if handle is None:
+                continue
+            try:
+                _windows_close_handle(handle)
+            except ExportError as error:
+                errors.append(f"cannot release change-watch {attribute}: {error}")
+            else:
+                setattr(self, attribute, None)
+        return errors
+
+    def _retain_unresolved_resources(self) -> None:
+        if not self._retained:
+            _UNRESOLVED_WINDOWS_WATCHES.append(self)
+            self._retained = True
 
     def finish(self) -> bool:
+        if self.handle is None or self.event is None:
+            raise ExportError("publication membership watch is not active")
         kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
         wait = kernel32.WaitForSingleObject
         wait.argtypes = [ctypes.c_void_p, ctypes.c_uint32]
@@ -375,14 +603,30 @@ class _WindowsDirectoryChangeWatch:
             ctypes.c_int,
         ]
         get_result.restype = ctypes.c_int
-        changed = wait(self.event, 0) == 0
+        initial_wait = wait(self.event, 0)
+        changed = initial_wait == 0
         errors = []
+        if initial_wait == 0xFFFFFFFF:
+            errors.append(
+                f"change-watch wait failed with Windows error {ctypes.get_last_error()}"
+            )
         if not changed and not cancel(self.handle, ctypes.byref(self.overlapped)):
             error_number = ctypes.get_last_error()
             if error_number != 1168:
                 errors.append(f"cancel failed with Windows error {error_number}")
-        if wait(self.event, 5000) != 0:
-            errors.append("change-watch cancellation did not complete")
+        completion_wait = wait(self.event, 5000)
+        if completion_wait != 0:
+            if completion_wait == 0xFFFFFFFF:
+                errors.append(
+                    "change-watch completion wait failed with Windows error "
+                    f"{ctypes.get_last_error()}"
+                )
+            else:
+                errors.append("change-watch cancellation did not complete")
+            self._retain_unresolved_resources()
+            raise ExportError(
+                "cannot finish publication membership watch: " + "; ".join(errors)
+            )
         transferred = ctypes.c_uint32()
         if get_result(
             self.handle,
@@ -395,11 +639,9 @@ class _WindowsDirectoryChangeWatch:
             error_number = ctypes.get_last_error()
             if error_number != 995:
                 errors.append(f"change-watch result failed with Windows error {error_number}")
-        for handle in (self.event, self.handle):
-            try:
-                _windows_close_handle(int(handle))
-            except ExportError as error:
-                errors.append(str(error))
+        errors.extend(self._release_handles())
+        if self.handle is not None or self.event is not None:
+            self._retain_unresolved_resources()
         if errors:
             raise ExportError("cannot finish publication membership watch: " + "; ".join(errors))
         return changed
@@ -2142,13 +2384,15 @@ def export_plan(plan_path: pathlib.Path, output: pathlib.Path) -> dict:
         if output.exists():
             raise ExportError(f"output already exists: {output}")
         output.parent.mkdir(parents=True, exist_ok=True)
-        staging = pathlib.Path(
-            tempfile.mkdtemp(prefix=f".{output.name}.staging-", dir=output.parent)
+        staging, staging_identity = _windows_create_unique_owned_directory(
+            output.parent,
+            f".{output.name}.staging-",
+            "export staging",
         )
-        staging_identity = _directory_identity(staging, "export staging")
         spool_directory = staging / ".private-source"
-        spool_directory.mkdir()
-        spool_identity = _directory_identity(spool_directory, "private source staging")
+        spool_identity = _windows_create_owned_directory(
+            spool_directory, "private source staging"
+        )
         owned_children[spool_directory] = spool_identity
         temporary_bundle = staging / "capture-bundle.zip"
         artifact, capture, receipt, bundle_seal = _build_records(
