@@ -4,10 +4,12 @@
 from __future__ import annotations
 
 import binascii
+import contextlib
 import copy
 import ctypes
 import hashlib
 import importlib.util
+import io
 import json
 import os
 import pathlib
@@ -605,9 +607,11 @@ class CaptureExporterTest(unittest.TestCase):
         self._write_inputs()
         original = EXPORTER._write_bundle
 
-        def mutate_then_write(path: pathlib.Path, inspected: dict) -> tuple[int, int, dict]:
+        def mutate_then_write(
+            path: pathlib.Path, inspected: dict, **kwargs
+        ) -> tuple[int, int, dict]:
             inspected["frames"][0]["_sourcePaths"][0].write_bytes(_png(value=99))
-            return original(path, inspected)
+            return original(path, inspected, **kwargs)
 
         with mock.patch.object(EXPORTER, "_write_bundle", side_effect=mutate_then_write):
             with self.assertRaisesRegex(EXPORTER.ExportError, "staged frame changed"):
@@ -662,8 +666,8 @@ class CaptureExporterTest(unittest.TestCase):
         self._write_inputs()
         original_build = EXPORTER._build_records
 
-        def replace_bundle(*args):
-            result = original_build(*args)
+        def replace_bundle(*args, **kwargs):
+            result = original_build(*args, **kwargs)
             pathlib.Path(args[3]).write_bytes(b"replacement")
             return result
 
@@ -843,6 +847,27 @@ class CaptureExporterTest(unittest.TestCase):
             with self.assertRaisesRegex(EXPORTER.ExportError, "generated public record"):
                 EXPORTER.export_plan(
                     self.plan_path, self.root / "valid-but-wrong-public-record"
+                )
+
+        self._write_inputs()
+
+        def replace_with_identical_record(staging: pathlib.Path, *args):
+            path = staging / "public-preview.json"
+            contents = path.read_bytes()
+            path.unlink()
+            path.write_bytes(contents)
+            return original(staging, *args)
+
+        with mock.patch.object(
+            EXPORTER,
+            "_seal_public_stage",
+            side_effect=replace_with_identical_record,
+        ):
+            with self.assertRaisesRegex(
+                EXPORTER.ExportError, "file ownership changed"
+            ):
+                EXPORTER.export_plan(
+                    self.plan_path, self.root / "same-bytes-foreign-record"
                 )
 
         self._write_inputs()
@@ -1080,9 +1105,9 @@ class CaptureExporterTest(unittest.TestCase):
         foreign_spool = None
         original_build = EXPORTER._build_records
 
-        def substitute_spool(*args):
+        def substitute_spool(*args, **kwargs):
             nonlocal foreign_spool
-            result = original_build(*args)
+            result = original_build(*args, **kwargs)
             spool = pathlib.Path(args[4])
             os.rename(spool, moved_spool)
             spool.mkdir()
@@ -1103,6 +1128,9 @@ class CaptureExporterTest(unittest.TestCase):
         root.mkdir()
         (root / "owned.txt").write_text("owned", encoding="utf-8")
         expected_identity = EXPORTER._directory_identity(root, "fixture root")
+        owned_files = {
+            "owned.txt": EXPORTER._windows_path_identity(root / "owned.txt")
+        }
         moved = self.root / "moved-root"
         original_open = EXPORTER._windows_open_path_handle
         attempted = False
@@ -1123,7 +1151,9 @@ class CaptureExporterTest(unittest.TestCase):
             "_windows_open_path_handle",
             side_effect=attempt_substitution,
         ):
-            EXPORTER._windows_delete_owned_tree(root, expected_identity, {})
+            EXPORTER._windows_delete_owned_tree(
+                root, expected_identity, {".": expected_identity}, owned_files
+            )
         self.assertTrue(attempted)
         self.assertFalse(root.exists())
         self.assertFalse(moved.exists())
@@ -1136,6 +1166,7 @@ class CaptureExporterTest(unittest.TestCase):
         (child / "owned.txt").write_text("owned", encoding="utf-8")
         root_identity = EXPORTER._directory_identity(root, "fixture root")
         child_identity = EXPORTER._directory_identity(child, "fixture child")
+        owned_file_identity = EXPORTER._windows_path_identity(child / "owned.txt")
         moved_child = root / "moved-active-child"
         original_open = EXPORTER._windows_open_path_handle
         substituted = False
@@ -1159,7 +1190,10 @@ class CaptureExporterTest(unittest.TestCase):
         ):
             with self.assertRaisesRegex(EXPORTER.ExportError, "changed before deletion"):
                 EXPORTER._windows_delete_owned_tree(
-                    root, root_identity, {"active-child": child_identity}
+                    root,
+                    root_identity,
+                    {".": root_identity, "active-child": child_identity},
+                    {"active-child/owned.txt": owned_file_identity},
                 )
         self.assertTrue(substituted)
         self.assertEqual((child / "foreign.txt").read_text(), "foreign")
@@ -1171,6 +1205,8 @@ class CaptureExporterTest(unittest.TestCase):
         (root / "child").mkdir(parents=True)
         (root / "child" / "owned.txt").write_text("owned", encoding="utf-8")
         root_identity = EXPORTER._directory_identity(root, "fixture root")
+        child_identity = EXPORTER._directory_identity(root / "child", "fixture child")
+        file_identity = EXPORTER._windows_path_identity(root / "child" / "owned.txt")
         opened = []
         closed = []
         original_open = EXPORTER._windows_open_path_handle
@@ -1197,7 +1233,12 @@ class CaptureExporterTest(unittest.TestCase):
             with self.assertRaisesRegex(
                 EXPORTER.ExportError, "fixture disposition failure"
             ):
-                EXPORTER._windows_delete_owned_tree(root, root_identity, {})
+                EXPORTER._windows_delete_owned_tree(
+                    root,
+                    root_identity,
+                    {".": root_identity, "child": child_identity},
+                    {"child/owned.txt": file_identity},
+                )
         for handle in opened:
             self.assertIn(handle, closed)
 
@@ -1257,20 +1298,20 @@ class CaptureExporterTest(unittest.TestCase):
         self._write_inputs()
         moved = self.root / "initial-stage-owner"
         replacement = None
-        original_create = EXPORTER._windows_create_unique_owned_directory
+        original_create = EXPORTER._WindowsOwnedTree.create_unique
 
         def replace_after_creation(parent, prefix, context):
             nonlocal replacement
-            path, identity = original_create(parent, prefix, context)
-            os.rename(path, moved)
-            path.mkdir()
-            replacement = path
-            (path / "foreign.txt").write_text("foreign", encoding="utf-8")
-            return path, identity
+            tree = original_create(parent, prefix, context)
+            os.rename(tree.root, moved)
+            tree.root.mkdir()
+            replacement = tree.root
+            (tree.root / "foreign.txt").write_text("foreign", encoding="utf-8")
+            return tree
 
         with mock.patch.object(
-            EXPORTER,
-            "_windows_create_unique_owned_directory",
+            EXPORTER._WindowsOwnedTree,
+            "create_unique",
             side_effect=replace_after_creation,
         ):
             with self.assertRaisesRegex(EXPORTER.ExportError, "cleanup failed"):
@@ -1279,25 +1320,82 @@ class CaptureExporterTest(unittest.TestCase):
         self.assertEqual((replacement / "foreign.txt").read_text(), "foreign")
         self.assertTrue(moved.exists())
 
+    def test_stage_mutations_remain_bound_to_the_created_owner(self) -> None:
+        self._write_inputs()
+        moved = self.root / "handle-bound-stage-owner"
+        replacement = None
+        owner = None
+        original_tree_create = EXPORTER._WindowsOwnedTree.create_unique
+        original_create_directory = EXPORTER._WindowsOwnedTree.create_directory
+
+        def retain_owner(parent, prefix, context):
+            nonlocal owner
+            owner = original_tree_create(parent, prefix, context)
+            return owner
+
+        def replace_before_public_members(path, context):
+            nonlocal replacement
+            assert owner is not None
+            if context == "artifact staging":
+                os.rename(owner.root, moved)
+                owner.root.mkdir()
+                replacement = owner.root
+                (owner.root / "public-preview.json").write_bytes(b"foreign preview")
+                (owner.root / "export-receipt.json").write_bytes(b"foreign receipt")
+            original_create_directory(owner, path, context)
+
+        with mock.patch.object(
+            EXPORTER._WindowsOwnedTree,
+            "create_unique",
+            side_effect=retain_owner,
+        ), mock.patch.object(
+            EXPORTER._WindowsOwnedTree,
+            "create_directory",
+            side_effect=replace_before_public_members,
+        ):
+            with self.assertRaisesRegex(EXPORTER.ExportError, "cleanup failed"):
+                EXPORTER.export_plan(self.plan_path, self.root / "handle-bound-stage")
+        self.assertIsNotNone(replacement)
+        self.assertEqual(
+            (replacement / "public-preview.json").read_bytes(), b"foreign preview"
+        )
+        self.assertEqual(
+            (replacement / "export-receipt.json").read_bytes(), b"foreign receipt"
+        )
+        self.assertTrue((moved / "public-preview.json").is_file())
+        self.assertTrue((moved / "export-receipt.json").is_file())
+        self.assertFalse((self.root / "handle-bound-stage").exists())
+
     def test_initial_spool_handoff_preserves_replacement(self) -> None:
         self._write_inputs()
         moved = self.root / "initial-spool-owner"
         replacement = None
-        original_create = EXPORTER._windows_create_owned_directory
+        owner = None
+        original_tree_create = EXPORTER._WindowsOwnedTree.create_unique
+        original_create = EXPORTER._WindowsOwnedTree.create_directory
+
+        def retain_owner(parent, prefix, context):
+            nonlocal owner
+            owner = original_tree_create(parent, prefix, context)
+            return owner
 
         def replace_spool_after_creation(path, context):
             nonlocal replacement
-            identity = original_create(path, context)
+            assert owner is not None
+            original_create(owner, path, context)
             if context == "private source staging":
                 os.rename(path, moved)
                 path.mkdir()
                 replacement = path
                 (path / "foreign.txt").write_text("foreign", encoding="utf-8")
-            return identity
 
         with mock.patch.object(
-            EXPORTER,
-            "_windows_create_owned_directory",
+            EXPORTER._WindowsOwnedTree,
+            "create_unique",
+            side_effect=retain_owner,
+        ), mock.patch.object(
+            EXPORTER._WindowsOwnedTree,
+            "create_directory",
             side_effect=replace_spool_after_creation,
         ):
             with self.assertRaisesRegex(EXPORTER.ExportError, "cleanup failed"):
@@ -1342,6 +1440,30 @@ class CaptureExporterTest(unittest.TestCase):
         self.assertEqual(retained.event, 202)
         self.assertIsNone(retained.handle)
 
+    def test_watch_setup_interruption_retains_possible_pending_io(self) -> None:
+        retained_before = len(EXPORTER._UNRESOLVED_WINDOWS_WATCHES)
+        with mock.patch.object(
+            EXPORTER, "_windows_open_change_watch_handle", return_value=101
+        ), mock.patch.object(
+            EXPORTER, "_windows_create_event_handle", return_value=202
+        ), mock.patch.object(
+            EXPORTER,
+            "_windows_start_directory_change_watch",
+            side_effect=KeyboardInterrupt("fixture setup interruption"),
+        ), mock.patch.object(EXPORTER, "_windows_close_handle") as close_handle:
+            with self.assertRaisesRegex(
+                KeyboardInterrupt, "fixture setup interruption"
+            ) as caught:
+                EXPORTER._WindowsDirectoryChangeWatch(self.root)
+        self.assertIn("native state was retained", caught.exception.__notes__[0])
+        self.assertEqual(
+            len(EXPORTER._UNRESOLVED_WINDOWS_WATCHES), retained_before + 1
+        )
+        retained = EXPORTER._UNRESOLVED_WINDOWS_WATCHES.pop()
+        self.assertEqual(retained.handle, 101)
+        self.assertEqual(retained.event, 202)
+        close_handle.assert_not_called()
+
     def test_watch_timeout_retains_pending_io_without_closing_handles(self) -> None:
         kernel32 = mock.MagicMock()
         kernel32.WaitForSingleObject.side_effect = [258, 258]
@@ -1364,12 +1486,109 @@ class CaptureExporterTest(unittest.TestCase):
         close_handle.assert_not_called()
         EXPORTER._UNRESOLVED_WINDOWS_WATCHES.remove(watch)
 
+    def test_watch_interruption_retains_pending_io_for_a_continuing_caller(self) -> None:
+        kernel32 = mock.MagicMock()
+        kernel32.WaitForSingleObject.side_effect = [258, KeyboardInterrupt("fixture")]
+        kernel32.CancelIoEx.return_value = 1
+        watch = object.__new__(EXPORTER._WindowsDirectoryChangeWatch)
+        watch.handle = 101
+        watch.event = 202
+        watch.overlapped = EXPORTER._WindowsDirectoryChangeWatch.Overlapped()
+        watch.buffer = ctypes.create_string_buffer(64 * 1024)
+        watch._retained = False
+
+        with mock.patch.object(
+            EXPORTER.ctypes, "WinDLL", return_value=kernel32
+        ), mock.patch.object(EXPORTER, "_windows_close_handle") as close_handle:
+            with self.assertRaisesRegex(KeyboardInterrupt, "fixture") as caught:
+                watch.finish()
+        self.assertIn(watch, EXPORTER._UNRESOLVED_WINDOWS_WATCHES)
+        self.assertIn("native state was retained", caught.exception.__notes__[0])
+        close_handle.assert_not_called()
+        EXPORTER._UNRESOLVED_WINDOWS_WATCHES.remove(watch)
+
+    def test_watch_can_release_retained_state_after_late_completion(self) -> None:
+        kernel32 = mock.MagicMock()
+        kernel32.WaitForSingleObject.side_effect = [258, 258]
+        kernel32.CancelIoEx.return_value = 1
+        watch = object.__new__(EXPORTER._WindowsDirectoryChangeWatch)
+        watch.handle = 101
+        watch.event = 202
+        watch.overlapped = EXPORTER._WindowsDirectoryChangeWatch.Overlapped()
+        watch.buffer = ctypes.create_string_buffer(64 * 1024)
+        watch._retained = False
+
+        with mock.patch.object(EXPORTER.ctypes, "WinDLL", return_value=kernel32):
+            with self.assertRaisesRegex(
+                EXPORTER.ExportError, "cancellation did not complete"
+            ):
+                watch.finish()
+            kernel32.WaitForSingleObject.side_effect = [0, 0]
+            kernel32.GetOverlappedResult.return_value = 1
+            self.assertTrue(watch.finish())
+        self.assertNotIn(watch, EXPORTER._UNRESOLVED_WINDOWS_WATCHES)
+        self.assertIsNone(watch.handle)
+        self.assertIsNone(watch.event)
+
+    def test_membership_guard_preserves_body_failure_during_teardown_failure(
+        self,
+    ) -> None:
+        watch = mock.MagicMock()
+        teardown = KeyboardInterrupt("fixture teardown interruption")
+        teardown.add_note("fixture watch retained")
+        watch.finish.side_effect = teardown
+        with mock.patch.object(
+            EXPORTER, "_WindowsDirectoryChangeWatch", return_value=watch
+        ):
+            with self.assertRaisesRegex(ValueError, "fixture body failure") as caught:
+                with EXPORTER._directory_membership_guard(self.root):
+                    raise ValueError("fixture body failure")
+        self.assertIn("fixture teardown interruption", caught.exception.__notes__[0])
+        self.assertIn("fixture watch retained", caught.exception.__notes__[0])
+
+    def test_cli_reports_primary_and_secondary_release_diagnostics(self) -> None:
+        primary = EXPORTER.ExportError("fixture primary failure")
+        primary.add_note("fixture unresolved release")
+        failure = EXPORTER.ExportError("fixture public wrapper")
+        failure.__cause__ = primary
+        stderr = io.StringIO()
+        with mock.patch.object(
+            EXPORTER, "export_plan", side_effect=failure
+        ), contextlib.redirect_stderr(stderr):
+            result = EXPORTER.main(
+                ["--plan", str(self.plan_path), "--output", str(self.root / "out")]
+            )
+        self.assertEqual(result, 1)
+        self.assertIn("fixture public wrapper", stderr.getvalue())
+        self.assertIn("fixture primary failure", stderr.getvalue())
+        self.assertIn("fixture unresolved release", stderr.getvalue())
+
+    @unittest.skipUnless(os.name == "nt", "Windows handle-custody behavior")
+    def test_cleanup_rejects_untracked_stable_members(self) -> None:
+        root = self.root / "foreign-cleanup-member"
+        root.mkdir()
+        owned = root / "owned.txt"
+        foreign = root / "foreign.txt"
+        owned.write_text("owned", encoding="utf-8")
+        foreign.write_text("foreign", encoding="utf-8")
+        root_identity = EXPORTER._directory_identity(root, "fixture root")
+        with self.assertRaisesRegex(EXPORTER.ExportError, "untracked or missing"):
+            EXPORTER._windows_delete_owned_tree(
+                root,
+                root_identity,
+                {".": root_identity},
+                {"owned.txt": EXPORTER._windows_path_identity(owned)},
+            )
+        self.assertEqual(owned.read_text(), "owned")
+        self.assertEqual(foreign.read_text(), "foreign")
+
     @unittest.skipUnless(os.name == "nt", "Windows handle-custody behavior")
     def test_cleanup_attempts_both_handle_groups_after_release_failure(self) -> None:
         root = self.root / "release-groups"
         root.mkdir()
         (root / "owned.txt").write_text("owned", encoding="utf-8")
         root_identity = EXPORTER._directory_identity(root, "fixture root")
+        file_identity = EXPORTER._windows_path_identity(root / "owned.txt")
         opened = []
         original_open = EXPORTER._windows_open_path_handle
 
@@ -1400,7 +1619,12 @@ class CaptureExporterTest(unittest.TestCase):
             with self.assertRaisesRegex(
                 EXPORTER.ExportError, "fixture disposition failure"
             ) as caught:
-                EXPORTER._windows_delete_owned_tree(root, root_identity, {})
+                EXPORTER._windows_delete_owned_tree(
+                    root,
+                    root_identity,
+                    {".": root_identity},
+                    {"owned.txt": file_identity},
+                )
         self.assertEqual(close_groups.call_count, 2)
         self.assertEqual(len(caught.exception.__notes__), 2)
         for handle in opened:

@@ -16,12 +16,14 @@ to the plan and is never copied into public output.
 
 The v1 producer runs on Windows, where each private directory is atomically
 created by the native file API with its original identity returned on the same
-handle. This binds ownership before another process can replace the pathname;
-later publication and cleanup checks continue to compare against that original
-identity. Other platforms fail before the plan, source media, output parent, or
-staging directory is read or changed. Portable ledger validation and dataset
-compilation remain cross-platform; this boundary applies only to capture
-production.
+handle. The exporter retains the stage owner and creates every directory and
+file relative to that held object, so a renamed or replaced stage pathname
+cannot redirect generated writes into a foreign tree. Every created member is
+recorded in an identity ledger. Later sealing, publication, and cleanup require
+the observed tree to match that ledger exactly. Other platforms fail before the
+plan, source media, output parent, or staging directory is read or changed.
+Portable ledger validation and dataset compilation remain cross-platform; this
+boundary applies only to capture production.
 
 The source must be a final `csx.screenshot` 1.0 sequence manifest with schema
 revision 1 or later. The exporter rejects rather than guesses when:
@@ -78,32 +80,38 @@ identifiers, capture tags, and other private manifest fields.
 The adapter admits only the exact generated public-record bytes and the expected
 root, `artifacts`, and `content` directory layout. It holds exclusive file locks
 while it validates and seals the complete member set, public-file scans, file
-identities, modification times, lengths, and digests. ZIP admission also requires
-the exact generated entry order and metadata, rejects duplicate or additional
-members and archive comments, and covers generation through both whole-file
-hashes with one lock. Directory identity and change metadata are sampled before
-and after enumeration, and a recursive native change watch covers the sampling
-interval, so a membership change during the observation fails. Watch setup and
-shutdown account for every acquired handle independently. If cancellation does
-not complete within the bounded wait, the exporter retains the handle, event,
-overlapped state, and buffer instead of releasing memory still owned by pending
-I/O. It verifies the same coherent tree after an operating-system no-replace
-rename of the sibling staging directory. The post-rename comparison retains
-directory identities and complete membership but excludes rename-volatile
-directory timestamps; each pre- and post-rename inventory still checks those
-timestamps internally for concurrent membership changes.
+identities, modification times, lengths, and digests. The seal also requires
+every file and directory identity to match its creation-time ownership ledger;
+equal replacement bytes are not adopted. ZIP admission requires the exact
+generated entry order and metadata, rejects duplicate or additional members and
+archive comments, and covers generation through both whole-file hashes with one
+lock. Directory identity and change metadata are sampled before and after
+enumeration, and a recursive native change watch covers the sampling interval,
+so a membership change during the observation fails. Watch setup and shutdown
+account for every acquired handle independently. Every normal, failed, or
+interrupted shutdown must establish terminal completion before releasing native
+state. If it cannot, the exporter retains the handle, event, overlapped state,
+and buffer instead of releasing memory still owned by pending I/O. It verifies
+the same coherent tree after an operating-system no-replace rename of the sibling
+staging directory. The post-rename comparison retains directory identities and
+complete membership but excludes rename-volatile directory timestamps; each
+pre- and post-rename inventory still checks those timestamps internally for
+concurrent membership changes.
 
 A concurrent creator of the destination wins without being overwritten. If
 required verification fails or is interrupted after the rename, the exporter
 reconciles the old and new names, then withdraws the output only while its
 creation-time directory identity remains proven; otherwise it reports the
 publication and custody uncertainty. Cleanup similarly removes only the
-originally created stage and active private spool identities. On Windows it
-retains native deletion handles that exclude ordinary path replacement while
-removal is in progress, accounts for each handle until release, and attempts all
-remaining releases after an error. A substituted or missing pathname is
-preserved and reported as uncertain rather than being treated as successful
-cleanup.
+exact identity-ledger contents of the originally created stage or private spool.
+An untracked, missing, or identity-replaced descendant rejects the whole cleanup
+before deletion begins. On Windows the exporter retains native deletion handles
+that exclude ordinary path replacement while removal is in progress, accounts
+for each handle until release, and attempts all remaining releases after an
+error. A substituted or missing pathname is preserved and reported as uncertain
+rather than being treated as successful cleanup. CLI failures include exception
+notes from unresolved handle release and custody operations instead of hiding
+secondary cleanup uncertainty.
 
 ## Actual capture semantics
 
