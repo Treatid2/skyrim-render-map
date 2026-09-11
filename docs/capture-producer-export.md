@@ -92,12 +92,15 @@ archive comments, and covers generation through both whole-file hashes with one
 lock. Directory identity and change metadata are sampled before and after
 enumeration, and a recursive native change watch covers the sampling interval,
 so a membership change during the observation fails. Watch setup and shutdown
-account for every acquired handle independently. Each watch is opened afresh,
-relative to a retained parent owner, immediately before its inventory. Every
-normal, failed, or interrupted shutdown must establish terminal completion
-before releasing native state. If it cannot, the exporter retains the handle,
-event, overlapped state, and buffer instead of releasing memory still owned by
-pending I/O. Immediately
+account for every acquired handle independently. Each watch resolves the
+retained directory handle's current path immediately before its inventory,
+opens a fresh watch there, and verifies that the fresh handle has the same
+ledger identity before starting observation. A replacement at a remembered
+pathname or a rename during this handoff cannot become the watched object.
+Every normal, failed, or interrupted shutdown must establish terminal
+completion before releasing native state. If it cannot, the exporter retains
+the handle, event, overlapped state, and buffer instead of releasing memory
+still owned by pending I/O. Immediately
 before publication, descendant directory handles are released, the root is
 renamed without replacement through its retained handle relative to the
 retained output-parent handle, and descendant owners are reopened relative to
@@ -110,7 +113,13 @@ A concurrent creator of the destination wins without being overwritten. If
 required verification fails or is interrupted after the rename, the exporter
 resolves the root's current name from its handle and attempts a handle-bound
 withdrawal. If withdrawal is unavailable, cleanup can still address the owned
-root directly through that handle. Cleanup removes only the exact
+root directly through that handle. The final public observation handle enters
+its cleanup owner before identity inspection and is opened for asynchronous
+observation and recovery deletion. If final handle release fails after
+publication, a verified observation handle is transferred back to the tree
+owner when necessary and the complete output is withdrawn. If no verified
+recovery handle remains, the failure reports publication custody as uncertain.
+Cleanup removes only the exact
 identity-ledger contents of the originally created stage or private spool.
 An untracked, missing, or identity-replaced descendant rejects the whole cleanup
 before deletion begins. On Windows the exporter enumerates directories and

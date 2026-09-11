@@ -974,6 +974,182 @@ class CaptureExporterTest(unittest.TestCase):
                 EXPORTER.export_plan(self.plan_path, output)
         self.assertFalse(output.exists())
 
+    @unittest.skipUnless(os.name == "nt", "Windows handle-custody behavior")
+    def test_final_observation_is_owned_before_identity_query(self) -> None:
+        self._write_inputs()
+        output = self.root / "final-observation-identity-error"
+        original_publish = EXPORTER._publish_no_clobber
+        original_open_owner = EXPORTER._windows_open_owner_directory
+        original_identity = EXPORTER._windows_handle_identity
+        original_close = EXPORTER._windows_close_handle
+        publication_handle = None
+        published = False
+        closed = []
+
+        def publish_then_arm(*args, **kwargs):
+            nonlocal published
+            result = original_publish(*args, **kwargs)
+            published = True
+            return result
+
+        def retain_publication_handle(path, context, **kwargs):
+            nonlocal publication_handle
+            handle = original_open_owner(path, context, **kwargs)
+            if context == "published output":
+                publication_handle = handle
+            return handle
+
+        def fail_final_identity(handle):
+            if published and handle == publication_handle:
+                raise EXPORTER.ExportError("fixture final identity query")
+            return original_identity(handle)
+
+        def record_close(handle):
+            closed.append(handle)
+            return original_close(handle)
+
+        with mock.patch.object(
+            EXPORTER, "_publish_no_clobber", side_effect=publish_then_arm
+        ), mock.patch.object(
+            EXPORTER,
+            "_windows_open_owner_directory",
+            side_effect=retain_publication_handle,
+        ), mock.patch.object(
+            EXPORTER, "_windows_handle_identity", side_effect=fail_final_identity
+        ), mock.patch.object(
+            EXPORTER, "_windows_close_handle", side_effect=record_close
+        ):
+            with self.assertRaisesRegex(
+                EXPORTER.ExportError, "fixture final identity query"
+            ):
+                EXPORTER.export_plan(self.plan_path, output)
+        self.assertIsNotNone(publication_handle)
+        self.assertIn(publication_handle, closed)
+        self.assertFalse(output.exists())
+
+    @unittest.skipUnless(os.name == "nt", "Windows handle-custody behavior")
+    def test_final_observation_identity_and_release_failures_retain_owner(self) -> None:
+        self._write_inputs()
+        output = self.root / "final-observation-retained"
+        original_publish = EXPORTER._publish_no_clobber
+        original_open_owner = EXPORTER._windows_open_owner_directory
+        original_identity = EXPORTER._windows_handle_identity
+        original_close = EXPORTER._windows_close_handle
+        publication_handle = None
+        published = False
+        release_failed = False
+
+        def publish_then_arm(*args, **kwargs):
+            nonlocal published
+            result = original_publish(*args, **kwargs)
+            published = True
+            return result
+
+        def retain_publication_handle(path, context, **kwargs):
+            nonlocal publication_handle
+            handle = original_open_owner(path, context, **kwargs)
+            if context == "published output":
+                publication_handle = handle
+            return handle
+
+        def fail_final_identity(handle):
+            if published and handle == publication_handle:
+                raise EXPORTER.ExportError("fixture final identity query")
+            return original_identity(handle)
+
+        def fail_publication_release(handle):
+            nonlocal release_failed
+            if handle == publication_handle and not release_failed:
+                release_failed = True
+                raise KeyboardInterrupt("fixture final observation release")
+            return original_close(handle)
+
+        retained_before = len(EXPORTER._UNRESOLVED_WINDOWS_CLEANUP_OWNERS)
+        with mock.patch.object(
+            EXPORTER, "_publish_no_clobber", side_effect=publish_then_arm
+        ), mock.patch.object(
+            EXPORTER,
+            "_windows_open_owner_directory",
+            side_effect=retain_publication_handle,
+        ), mock.patch.object(
+            EXPORTER, "_windows_handle_identity", side_effect=fail_final_identity
+        ), mock.patch.object(
+            EXPORTER, "_windows_close_handle", side_effect=fail_publication_release
+        ):
+            with self.assertRaisesRegex(EXPORTER.ExportError, "cleanup failed"):
+                EXPORTER.export_plan(self.plan_path, output)
+        self.assertTrue(release_failed)
+        self.assertEqual(
+            len(EXPORTER._UNRESOLVED_WINDOWS_CLEANUP_OWNERS), retained_before + 1
+        )
+        retained = EXPORTER._UNRESOLVED_WINDOWS_CLEANUP_OWNERS[-1]
+        self.assertEqual(retained.context, "published output observation")
+        self.assertEqual(retained.handles, {".": publication_handle})
+        self.assertEqual(retained.identities, {".": None})
+        retained.close()
+        self.assertNotIn(retained, EXPORTER._UNRESOLVED_WINDOWS_CLEANUP_OWNERS)
+        self.assertFalse(output.exists())
+
+    @unittest.skipUnless(os.name == "nt", "Windows handle-custody behavior")
+    def test_final_release_failures_withdraw_published_output(self) -> None:
+        for failure_kind in ("tree", "observation"):
+            with self.subTest(failure_kind=failure_kind):
+                self._write_inputs()
+                output = self.root / f"final-release-{failure_kind}"
+                original_tree_close = EXPORTER._WindowsOwnedTree.close
+                original_owner_close = EXPORTER._WindowsHandleOwner.close
+                failed = False
+
+                def close_tree_then_fail(tree):
+                    nonlocal failed
+                    if failure_kind == "tree" and tree.root == output and not failed:
+                        failed = True
+                        original_tree_close(tree)
+                        raise EXPORTER.ExportError("fixture final tree release")
+                    return original_tree_close(tree)
+
+                def fail_observation_close(owner):
+                    nonlocal failed
+                    if (
+                        failure_kind == "observation"
+                        and owner.context == "published output observation"
+                        and not failed
+                    ):
+                        failed = True
+                        raise EXPORTER.ExportError(
+                            "fixture final observation release"
+                        )
+                    return original_owner_close(owner)
+
+                with mock.patch.object(
+                    EXPORTER._WindowsOwnedTree,
+                    "close",
+                    side_effect=close_tree_then_fail,
+                    autospec=True,
+                ), mock.patch.object(
+                    EXPORTER._WindowsHandleOwner,
+                    "close",
+                    side_effect=fail_observation_close,
+                    autospec=True,
+                ):
+                    with self.assertRaisesRegex(
+                        EXPORTER.ExportError, f"fixture final {failure_kind} release"
+                    ):
+                        EXPORTER.export_plan(self.plan_path, output)
+                self.assertTrue(failed)
+                self.assertFalse(
+                    output.exists(),
+                    msg=(
+                        f"surviving={list(output.rglob('*')) if output.exists() else []}; "
+                        f"trees={EXPORTER._UNRESOLVED_WINDOWS_OWNED_TREES!r}; "
+                        f"owners={EXPORTER._UNRESOLVED_WINDOWS_CLEANUP_OWNERS!r}; "
+                        f"watches={EXPORTER._UNRESOLVED_WINDOWS_WATCHES!r}"
+                    ),
+                )
+                self.assertFalse((output / "export-receipt.json").exists())
+
+    def test_post_publication_interruption_and_uncertain_withdrawal(self) -> None:
+        original = EXPORTER._snapshot_stage
         self._write_inputs()
         interrupted_output = self.root / "verification-interrupted"
 
@@ -1512,6 +1688,93 @@ class CaptureExporterTest(unittest.TestCase):
         retained = EXPORTER._UNRESOLVED_WINDOWS_WATCHES.pop()
         self.assertEqual(retained.event, 202)
         self.assertIsNone(retained.handle)
+
+    def test_owner_watch_reopens_and_verifies_the_retained_directory(self) -> None:
+        information = {"attributes": 0x00000010, "identity": (7, 11)}
+        closed = []
+
+        with mock.patch.object(
+            EXPORTER, "_windows_reopen_directory_handle", return_value=101
+        ) as reopen, mock.patch.object(
+            EXPORTER, "_windows_handle_information", return_value=information
+        ), mock.patch.object(
+            EXPORTER, "_windows_create_event_handle", return_value=202
+        ), mock.patch.object(
+            EXPORTER, "_windows_start_directory_change_watch"
+        ) as start, mock.patch.object(
+            EXPORTER, "_windows_close_handle", side_effect=closed.append
+        ):
+            watch = EXPORTER._WindowsDirectoryChangeWatch(
+                owner_handle=77, owner_identity=(7, 11)
+            )
+            self.assertEqual(watch._release_handles(), [])
+
+        reopen.assert_called_once_with(
+            77, "publication membership watch handle"
+        )
+        start.assert_called_once()
+        self.assertEqual(start.call_args.args[0], 101)
+        self.assertEqual(closed, [202, 101])
+
+    def test_owner_watch_rejects_a_reopen_with_the_wrong_identity(self) -> None:
+        with mock.patch.object(
+            EXPORTER, "_windows_reopen_directory_handle", return_value=101
+        ), mock.patch.object(
+            EXPORTER,
+            "_windows_handle_information",
+            return_value={"attributes": 0x00000010, "identity": (7, 12)},
+        ), mock.patch.object(
+            EXPORTER, "_windows_close_handle"
+        ) as close:
+            with self.assertRaisesRegex(
+                EXPORTER.ExportError, "watch owner identity changed"
+            ):
+                EXPORTER._WindowsDirectoryChangeWatch(
+                    owner_handle=77, owner_identity=(7, 11)
+                )
+        close.assert_called_once_with(101)
+
+    @unittest.skipUnless(os.name == "nt", "Windows handle-custody behavior")
+    def test_inventories_watch_root_subtree_and_displaced_owner_handles(self) -> None:
+        tree = EXPORTER._WindowsOwnedTree.create_unique(
+            self.root, ".watch-owner-", "fixture root"
+        )
+        original_path = tree.root
+        child = tree.root / "child"
+        tree.create_directory(child, "fixture child")
+        expected_root = tree.directories["."]
+        expected_child = tree.directories["child"]
+        observed = []
+        original_reopen = EXPORTER._windows_reopen_directory_handle
+
+        def record_reopen(handle, context):
+            observed.append((EXPORTER._windows_handle_identity(handle), context))
+            return original_reopen(handle, context)
+
+        with mock.patch.object(
+            EXPORTER, "_windows_reopen_directory_handle", side_effect=record_reopen
+        ):
+            tree.inventory(".")
+            tree.inventory(child)
+            moved = self.root / "displaced-watch-owner"
+            tree.rename_root(moved, "fixture root displacement")
+            original_path.mkdir()
+            (original_path / "foreign.txt").write_text("foreign", encoding="utf-8")
+            tree.inventory(".")
+
+        self.assertEqual(
+            observed,
+            [
+                (expected_root, "publication membership watch handle"),
+                (expected_child, "publication membership watch handle"),
+                (expected_root, "publication membership watch handle"),
+            ],
+        )
+        self.assertEqual((original_path / "foreign.txt").read_text(), "foreign")
+        tree.delete_subtree(".")
+        tree.close()
+        self.assertFalse(moved.exists())
+        self.assertEqual((original_path / "foreign.txt").read_text(), "foreign")
 
     def test_watch_setup_interruption_retains_possible_pending_io(self) -> None:
         retained_before = len(EXPORTER._UNRESOLVED_WINDOWS_WATCHES)

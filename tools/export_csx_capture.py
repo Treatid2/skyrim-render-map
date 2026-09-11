@@ -31,7 +31,7 @@ import compile_dataset as compiler
 import validate_repository as validator
 
 
-TOOL_VERSION = "1.0.8"
+TOOL_VERSION = "1.0.9"
 PLAN_SCHEMA = {
     "name": "skyrim-render-map.csx-capture-export-plan",
     "major": 1,
@@ -244,7 +244,9 @@ def _windows_open_path_handle(
     return int(handle)
 
 
-def _windows_open_owner_directory(path: pathlib.Path, context: str) -> int:
+def _windows_open_owner_directory(
+    path: pathlib.Path, context: str, *, recovery: bool = False
+) -> int:
     kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
     create_file = kernel32.CreateFileW
     create_file.argtypes = [
@@ -259,11 +261,16 @@ def _windows_open_owner_directory(path: pathlib.Path, context: str) -> int:
     create_file.restype = ctypes.c_void_p
     handle = create_file(
         str(path),
-        0x00000001 | 0x00000004 | 0x00000020 | 0x00000040 | 0x00000080,
+        (0x00010000 if recovery else 0)
+        | 0x00000001
+        | 0x00000004
+        | 0x00000020
+        | 0x00000040
+        | 0x00000080,
         0x00000001 | 0x00000002 | 0x00000004,
         None,
         3,
-        0x02000000,
+        0x02000000 | (0x40000000 if recovery else 0),
         None,
     )
     if handle == ctypes.c_void_p(-1).value:
@@ -657,6 +664,24 @@ class _WindowsHandleOwner:
             _UNRESOLVED_WINDOWS_CLEANUP_OWNERS.append(self)
             self._retained = True
 
+    def _update_retention(self) -> None:
+        if self.handles and not self._retained:
+            self.retain()
+        elif not self.handles and self._retained:
+            try:
+                _UNRESOLVED_WINDOWS_CLEANUP_OWNERS.remove(self)
+            except ValueError:
+                pass
+            self._retained = False
+
+    def take(self, key: str) -> tuple[int, tuple[int, int] | None]:
+        if key not in self.handles:
+            raise ExportError(f"retained handle key is unavailable: {key!r}")
+        handle = self.handles.pop(key)
+        identity = self.identities.pop(key, None)
+        self._update_retention()
+        return handle, identity
+
     def close(self) -> None:
         failures: list[tuple[str, BaseException]] = []
         for key, handle in list(self.handles.items()):
@@ -667,14 +692,7 @@ class _WindowsHandleOwner:
             else:
                 self.handles.pop(key)
                 self.identities.pop(key, None)
-        if self.handles and not self._retained:
-            self.retain()
-        elif not self.handles and self._retained:
-            try:
-                _UNRESOLVED_WINDOWS_CLEANUP_OWNERS.remove(self)
-            except ValueError:
-                pass
-            self._retained = False
+        self._update_retention()
         if failures:
             error = ExportError(
                 f"cannot release {self.context}; unresolved handles: "
@@ -1024,16 +1042,10 @@ class _WindowsOwnedTree:
 
         root_relative = global_relative(".")
         root_handle = self.directory_handles[root_relative]
-        if root_relative == ".":
-            if self.parent_handle is None:
-                raise ExportError("publication parent owner is no longer retained")
-            watch_parent, watch_name = self.parent_handle, self.root.name
-        else:
-            watch_parent, watch_name = self._parent(root_relative)
         with _directory_membership_guard(
             self.root,
-            owner_parent_handle=watch_parent,
-            owner_name=watch_name,
+            owner_handle=root_handle,
+            owner_identity=selected_directories["."],
         ):
             for local_relative, expected_identity in sorted(
                 selected_directories.items()
@@ -1407,6 +1419,16 @@ def _windows_open_change_watch_handle(root: pathlib.Path) -> int:
     return int(handle)
 
 
+def _windows_reopen_directory_handle(handle: int, context: str) -> int:
+    try:
+        current_path = _windows_final_path(handle)
+        return _windows_open_change_watch_handle(current_path)
+    except BaseException as error:
+        if isinstance(error, ExportError):
+            raise ExportError(f"cannot reopen {context}: {error}") from error
+        raise
+
+
 def _windows_create_event_handle() -> int:
     kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
     create_event = kernel32.CreateEventW
@@ -1477,8 +1499,8 @@ class _WindowsDirectoryChangeWatch:
         self,
         root: pathlib.Path | None = None,
         *,
-        owner_parent_handle: int | None = None,
-        owner_name: str | None = None,
+        owner_handle: int | None = None,
+        owner_identity: tuple[int, int] | None = None,
     ):
         self.handle: int | None = None
         self.event: int | None = None
@@ -1487,17 +1509,25 @@ class _WindowsDirectoryChangeWatch:
         self._retained = False
         self._start_may_be_pending = False
         try:
-            if owner_parent_handle is not None and owner_name is not None:
-                self.handle, _ = _windows_nt_open_relative(
-                    owner_parent_handle,
-                    owner_name,
-                    desired_access=0x00000001,
-                    share_access=0x00000001 | 0x00000002 | 0x00000004,
-                    disposition=1,
-                    create_options=0x00000001,
-                    file_attributes=0,
-                    context="publication membership watch",
+            if owner_handle is not None:
+                if owner_identity is None:
+                    raise ExportError(
+                        "publication membership watch requires an owner identity"
+                    )
+                self.handle = _windows_reopen_directory_handle(
+                    owner_handle, "publication membership watch handle"
                 )
+                information = _windows_handle_information(self.handle)
+                if not information["attributes"] & 0x00000010 or information[
+                    "attributes"
+                ] & 0x00000400:
+                    raise ExportError(
+                        "publication membership watch owner is not an ordinary directory"
+                    )
+                if information["identity"] != owner_identity:
+                    raise ExportError(
+                        "publication membership watch owner identity changed"
+                    )
             elif root is not None:
                 self.handle = _windows_open_change_watch_handle(root)
             else:
@@ -1659,16 +1689,16 @@ class _WindowsDirectoryChangeWatch:
 def _directory_membership_guard(
     root: pathlib.Path,
     *,
-    owner_parent_handle: int | None = None,
-    owner_name: str | None = None,
+    owner_handle: int | None = None,
+    owner_identity: tuple[int, int] | None = None,
 ):
     if os.name != "nt":
         yield
         return
     watch = _WindowsDirectoryChangeWatch(
         root,
-        owner_parent_handle=owner_parent_handle,
-        owner_name=owner_name,
+        owner_handle=owner_handle,
+        owner_identity=owner_identity,
     )
     try:
         yield
@@ -3305,6 +3335,7 @@ def export_plan(plan_path: pathlib.Path, output: pathlib.Path) -> dict:
     staging_identity: tuple[int, int] | None = None
     owned_tree: _WindowsOwnedTree | None = None
     publication_owner: _WindowsHandleOwner | None = None
+    publication_completed = False
     try:
         if os.name != "nt":
             raise ExportError(
@@ -3381,12 +3412,14 @@ def export_plan(plan_path: pathlib.Path, output: pathlib.Path) -> dict:
         _publish_no_clobber(
             staging, output, stage_snapshot, staging_identity, owned_tree
         )
+        publication_completed = True
         publication_owner = _WindowsHandleOwner("published output observation")
         publication_handle = _windows_open_owner_directory(
-            output, "published output"
+            output, "published output", recovery=True
         )
+        publication_owner.add(".", publication_handle, None)
         publication_identity = _windows_handle_identity(publication_handle)
-        publication_owner.add(".", publication_handle, publication_identity)
+        publication_owner.identities["."] = publication_identity
         if publication_identity != staging_identity:
             raise ExportError("published output identity changed before release")
         owned_tree.close()
@@ -3397,11 +3430,26 @@ def export_plan(plan_path: pathlib.Path, output: pathlib.Path) -> dict:
         publication_owner = None
     except BaseException as error:
         cleanup_errors: list[BaseException] = []
-        if publication_owner is not None:
-            try:
-                publication_owner.close()
-            except BaseException as cleanup_error:
-                cleanup_errors.append(cleanup_error)
+        if (
+            publication_completed
+            and owned_tree is not None
+            and "." not in owned_tree.directory_handles
+        ):
+            if (
+                publication_owner is not None
+                and publication_owner.identities.get(".") == staging_identity
+            ):
+                recovery_handle, recovery_identity = publication_owner.take(".")
+                owned_tree.directory_handles["."] = recovery_handle
+                owned_tree.directories["."] = recovery_identity
+                owned_tree._update_retention()
+            else:
+                cleanup_errors.append(
+                    ExportError(
+                        "published output withdrawal is uncertain; no verified "
+                        "publication recovery handle remains"
+                    )
+                )
         if owned_tree is not None and "." in owned_tree.directory_handles:
             try:
                 owned_tree.delete_subtree(".")
@@ -3409,6 +3457,11 @@ def export_plan(plan_path: pathlib.Path, output: pathlib.Path) -> dict:
                 cleanup_errors.append(cleanup_error)
                 if "." in owned_tree.directory_handles:
                     owned_tree._update_retention()
+        if publication_owner is not None:
+            try:
+                publication_owner.close()
+            except BaseException as cleanup_error:
+                cleanup_errors.append(cleanup_error)
         if owned_tree is not None and "." not in owned_tree.directory_handles:
             try:
                 owned_tree.close()
