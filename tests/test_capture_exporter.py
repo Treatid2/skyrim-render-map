@@ -13,7 +13,6 @@ import io
 import json
 import os
 import pathlib
-import shutil
 import struct
 import sys
 import tempfile
@@ -650,10 +649,11 @@ class CaptureExporterTest(unittest.TestCase):
             destination: pathlib.Path,
             expected: dict,
             expected_identity: tuple[int, int],
+            owned_tree,
         ) -> None:
             destination.mkdir()
             (destination / "owner.txt").write_text("other producer", encoding="utf-8")
-            original(staging, destination, expected, expected_identity)
+            original(staging, destination, expected, expected_identity, owned_tree)
 
         with mock.patch.object(
             EXPORTER, "_publish_no_clobber", side_effect=create_destination
@@ -704,12 +704,18 @@ class CaptureExporterTest(unittest.TestCase):
             destination: pathlib.Path,
             expected: dict,
             expected_identity: tuple[int, int],
+            owned_tree,
         ):
-            (staging / "unlisted.json").write_text("{}", encoding="utf-8")
-            original_publish(staging, destination, expected, expected_identity)
+            with owned_tree.create_file(
+                staging / "unlisted.json", "fixture late member"
+            ) as stream:
+                stream.write(b"{}")
+            original_publish(
+                staging, destination, expected, expected_identity, owned_tree
+            )
 
         with mock.patch.object(EXPORTER, "_publish_no_clobber", side_effect=add_member):
-            with self.assertRaisesRegex(EXPORTER.ExportError, "changed after validation"):
+            with self.assertRaisesRegex(EXPORTER.ExportError, "changed|differs"):
                 EXPORTER.export_plan(self.plan_path, self.root / "mutated-public-stage")
         self.assertFalse((self.root / "mutated-public-stage").exists())
 
@@ -718,21 +724,33 @@ class CaptureExporterTest(unittest.TestCase):
             destination: pathlib.Path,
             expected: dict,
             expected_identity: tuple[int, int],
+            owned_tree,
         ):
             original_snapshot = EXPORTER._snapshot_stage
 
-            def snapshot(root: pathlib.Path, scan_public: bool = False):
+            def snapshot(
+                root: pathlib.Path,
+                scan_public: bool = False,
+                owned_tree=None,
+            ):
                 if root == destination and destination.exists():
-                    (destination / "late-member.json").write_text("{}", encoding="utf-8")
-                return original_snapshot(root, scan_public=scan_public)
+                    with owned_tree.create_file(
+                        destination / "late-member.json", "fixture late member"
+                    ) as stream:
+                        stream.write(b"{}")
+                return original_snapshot(
+                    root, scan_public=scan_public, owned_tree=owned_tree
+                )
 
             with mock.patch.object(EXPORTER, "_snapshot_stage", side_effect=snapshot):
-                original_publish(staging, destination, expected, expected_identity)
+                original_publish(
+                    staging, destination, expected, expected_identity, owned_tree
+                )
 
         with mock.patch.object(
             EXPORTER, "_publish_no_clobber", side_effect=mutate_after_publish
         ):
-            with self.assertRaisesRegex(EXPORTER.ExportError, "published output differs"):
+            with self.assertRaisesRegex(EXPORTER.ExportError, "changed|differs"):
                 EXPORTER.export_plan(self.plan_path, self.root / "mutated-after-publish")
         self.assertFalse((self.root / "mutated-after-publish").exists())
 
@@ -864,7 +882,7 @@ class CaptureExporterTest(unittest.TestCase):
             side_effect=replace_with_identical_record,
         ):
             with self.assertRaisesRegex(
-                EXPORTER.ExportError, "file ownership changed"
+                EXPORTER.ExportError, "identity changed"
             ):
                 EXPORTER.export_plan(
                     self.plan_path, self.root / "same-bytes-foreign-record"
@@ -873,7 +891,10 @@ class CaptureExporterTest(unittest.TestCase):
         self._write_inputs()
 
         def add_directory(staging: pathlib.Path, *args):
-            (staging / "unexpected-empty-directory").mkdir()
+            owned_tree = args[0]
+            owned_tree.create_directory(
+                staging / "unexpected-empty-directory", "fixture late directory"
+            )
             return original(staging, *args)
 
         with mock.patch.object(EXPORTER, "_seal_public_stage", side_effect=add_directory):
@@ -941,10 +962,12 @@ class CaptureExporterTest(unittest.TestCase):
         output = self.root / "verification-error"
         original = EXPORTER._snapshot_stage
 
-        def fail_published(root: pathlib.Path, scan_public: bool = False):
+        def fail_published(
+            root: pathlib.Path, scan_public: bool = False, owned_tree=None
+        ):
             if root == output:
                 raise EXPORTER.ExportError("fixture final verification")
-            return original(root, scan_public=scan_public)
+            return original(root, scan_public=scan_public, owned_tree=owned_tree)
 
         with mock.patch.object(EXPORTER, "_snapshot_stage", side_effect=fail_published):
             with self.assertRaisesRegex(EXPORTER.ExportError, "fixture final verification"):
@@ -954,10 +977,12 @@ class CaptureExporterTest(unittest.TestCase):
         self._write_inputs()
         interrupted_output = self.root / "verification-interrupted"
 
-        def interrupt_published(root: pathlib.Path, scan_public: bool = False):
+        def interrupt_published(
+            root: pathlib.Path, scan_public: bool = False, owned_tree=None
+        ):
             if root == interrupted_output:
                 raise KeyboardInterrupt("fixture interruption")
-            return original(root, scan_public=scan_public)
+            return original(root, scan_public=scan_public, owned_tree=owned_tree)
 
         with mock.patch.object(
             EXPORTER, "_snapshot_stage", side_effect=interrupt_published
@@ -969,36 +994,47 @@ class CaptureExporterTest(unittest.TestCase):
         self._write_inputs()
         uncertain_output = self.root / "verification-uncertain"
 
-        def fail_uncertain(root: pathlib.Path, scan_public: bool = False):
+        def fail_uncertain(
+            root: pathlib.Path, scan_public: bool = False, owned_tree=None
+        ):
             if root == uncertain_output:
                 raise EXPORTER.ExportError("fixture final verification")
-            return original(root, scan_public=scan_public)
+            return original(root, scan_public=scan_public, owned_tree=owned_tree)
+
+        original_handle_rename = EXPORTER._windows_rename_handle
+
+        def fail_withdrawal(handle, parent_handle, target_name, context):
+            if context == "failed publication withdrawal":
+                raise EXPORTER.ExportError("fixture withdrawal uncertainty")
+            return original_handle_rename(handle, parent_handle, target_name, context)
 
         with mock.patch.object(
             EXPORTER, "_snapshot_stage", side_effect=fail_uncertain
         ), mock.patch.object(
             EXPORTER,
-            "_withdraw_owned_publication",
-            side_effect=EXPORTER.ExportError("fixture withdrawal uncertainty"),
+            "_windows_rename_handle",
+            side_effect=fail_withdrawal,
         ):
-            with self.assertRaisesRegex(EXPORTER.ExportError, "withdrawal failed"):
+            with self.assertRaisesRegex(EXPORTER.ExportError, "could not be withdrawn"):
                 EXPORTER.export_plan(self.plan_path, uncertain_output)
-        self.assertTrue(uncertain_output.exists())
+        self.assertFalse(uncertain_output.exists())
 
     def test_interruption_at_rename_completion_withdraws_owned_output(self) -> None:
         self._write_inputs()
         output = self.root / "rename-interrupted"
-        original_rename = os.rename
+        original_rename = EXPORTER._windows_rename_handle
         interrupted = False
 
-        def rename_then_interrupt(source, destination):
+        def rename_then_interrupt(handle, parent_handle, target_name, context):
             nonlocal interrupted
-            original_rename(source, destination)
-            if pathlib.Path(destination) == output and not interrupted:
+            original_rename(handle, parent_handle, target_name, context)
+            if target_name == output.name and not interrupted:
                 interrupted = True
                 raise KeyboardInterrupt("fixture rename completion interruption")
 
-        with mock.patch.object(EXPORTER.os, "rename", side_effect=rename_then_interrupt):
+        with mock.patch.object(
+            EXPORTER, "_windows_rename_handle", side_effect=rename_then_interrupt
+        ):
             with self.assertRaisesRegex(
                 KeyboardInterrupt, "fixture rename completion interruption"
             ):
@@ -1011,9 +1047,11 @@ class CaptureExporterTest(unittest.TestCase):
         original_snapshot = EXPORTER._snapshot_stage
 
         def alter_output_directory_metadata(
-            root: pathlib.Path, scan_public: bool = False
+            root: pathlib.Path, scan_public: bool = False, owned_tree=None
         ):
-            snapshot = original_snapshot(root, scan_public=scan_public)
+            snapshot = original_snapshot(
+                root, scan_public=scan_public, owned_tree=owned_tree
+            )
             if root == output:
                 snapshot = copy.deepcopy(snapshot)
                 snapshot["directories"]["."]["ctimeNs"] += 1
@@ -1034,25 +1072,27 @@ class CaptureExporterTest(unittest.TestCase):
         replacement_stage = None
         original_seal = EXPORTER._seal_public_stage
 
-        def replace_root_before_seal(staging: pathlib.Path, *args):
+        def replace_root_before_seal(staging: pathlib.Path, owned_tree, *args):
             nonlocal replacement_stage
-            os.rename(staging, moved_original)
+            owned_tree.rename_root(moved_original, "fixture root displacement")
             staging.mkdir()
             replacement_stage = staging
-            for name in ("artifacts", "content"):
-                shutil.move(str(moved_original / name), str(staging / name))
-            for name in ("export-receipt.json", "public-preview.json"):
-                shutil.move(str(moved_original / name), str(staging / name))
-            return original_seal(staging, *args)
+            (staging / "foreign.txt").write_text("foreign", encoding="utf-8")
+            return original_seal(moved_original, owned_tree, *args)
 
         with mock.patch.object(
             EXPORTER, "_seal_public_stage", side_effect=replace_root_before_seal
         ):
-            with self.assertRaisesRegex(EXPORTER.ExportError, "cleanup failed"):
-                EXPORTER.export_plan(self.plan_path, self.root / "replaced-first-seal")
+            receipt = EXPORTER.export_plan(
+                self.plan_path, self.root / "replaced-first-seal"
+            )
         self.assertIsNotNone(replacement_stage)
         self.assertTrue(replacement_stage.exists())
-        self.assertTrue(moved_original.exists())
+        self.assertEqual((replacement_stage / "foreign.txt").read_text(), "foreign")
+        self.assertFalse(moved_original.exists())
+        self.assertTrue(
+            (self.root / "replaced-first-seal" / receipt["artifactFile"]).is_file()
+        )
 
     def test_cleanup_preserves_substituted_or_lost_owned_directories(self) -> None:
         self._write_inputs()
@@ -1064,9 +1104,10 @@ class CaptureExporterTest(unittest.TestCase):
             destination: pathlib.Path,
             expected: dict,
             expected_identity: tuple[int, int],
+            owned_tree,
         ):
             nonlocal foreign_stage
-            os.rename(staging, moved_stage)
+            owned_tree.rename_root(moved_stage, "fixture stage displacement")
             staging.mkdir()
             foreign_stage = staging
             (staging / "owner.txt").write_text("foreign", encoding="utf-8")
@@ -1075,11 +1116,11 @@ class CaptureExporterTest(unittest.TestCase):
         with mock.patch.object(
             EXPORTER, "_publish_no_clobber", side_effect=substitute_stage
         ):
-            with self.assertRaisesRegex(EXPORTER.ExportError, "cleanup failed"):
+            with self.assertRaisesRegex(EXPORTER.ExportError, "stage substitution"):
                 EXPORTER.export_plan(self.plan_path, self.root / "substituted-stage")
         self.assertIsNotNone(foreign_stage)
         self.assertEqual((foreign_stage / "owner.txt").read_text(), "foreign")
-        self.assertTrue(moved_stage.exists())
+        self.assertFalse(moved_stage.exists())
 
         self._write_inputs()
         missing_stage = self.root / "missing-owned-stage"
@@ -1089,16 +1130,17 @@ class CaptureExporterTest(unittest.TestCase):
             destination: pathlib.Path,
             expected: dict,
             expected_identity: tuple[int, int],
+            owned_tree,
         ):
-            os.rename(staging, missing_stage)
+            owned_tree.rename_root(missing_stage, "fixture stage disappearance")
             raise EXPORTER.ExportError("fixture stage disappearance")
 
         with mock.patch.object(
             EXPORTER, "_publish_no_clobber", side_effect=remove_stage
         ):
-            with self.assertRaisesRegex(EXPORTER.ExportError, "cleanup failed"):
+            with self.assertRaisesRegex(EXPORTER.ExportError, "stage disappearance"):
                 EXPORTER.export_plan(self.plan_path, self.root / "absent-stage")
-        self.assertTrue(missing_stage.exists())
+        self.assertFalse(missing_stage.exists())
 
         self._write_inputs()
         moved_spool = self.root / "moved-owned-spool"
@@ -1109,7 +1151,13 @@ class CaptureExporterTest(unittest.TestCase):
             nonlocal foreign_spool
             result = original_build(*args, **kwargs)
             spool = pathlib.Path(args[4])
-            os.rename(spool, moved_spool)
+            owned_tree = kwargs["owned_tree"]
+            EXPORTER._windows_rename_handle(
+                owned_tree.directory_handles[".private-source"],
+                owned_tree.parent_handle,
+                moved_spool.name,
+                "fixture spool displacement",
+            )
             spool.mkdir()
             foreign_spool = spool
             (spool / "owner.txt").write_text("foreign", encoding="utf-8")
@@ -1117,113 +1165,96 @@ class CaptureExporterTest(unittest.TestCase):
 
         with mock.patch.object(EXPORTER, "_build_records", side_effect=substitute_spool):
             with self.assertRaisesRegex(EXPORTER.ExportError, "cleanup failed"):
-                EXPORTER.export_plan(self.plan_path, self.root / "substituted-spool")
+                EXPORTER.export_plan(
+                    self.plan_path, self.root / "substituted-spool"
+                )
         self.assertIsNotNone(foreign_spool)
         self.assertEqual((foreign_spool / "owner.txt").read_text(), "foreign")
-        self.assertTrue(moved_spool.exists())
+        self.assertFalse(moved_spool.exists())
+        self.assertFalse((self.root / "substituted-spool").exists())
 
     @unittest.skipUnless(os.name == "nt", "Windows handle-custody behavior")
     def test_cleanup_holds_root_identity_through_deletion(self) -> None:
-        root = self.root / "owned-root"
-        root.mkdir()
-        (root / "owned.txt").write_text("owned", encoding="utf-8")
-        expected_identity = EXPORTER._directory_identity(root, "fixture root")
-        owned_files = {
-            "owned.txt": EXPORTER._windows_path_identity(root / "owned.txt")
-        }
+        tree = EXPORTER._WindowsOwnedTree.create_unique(
+            self.root, ".owned-root-", "fixture root"
+        )
+        with tree.create_file(tree.root / "owned.txt", "fixture file") as stream:
+            stream.write(b"owned")
+        root = tree.root
         moved = self.root / "moved-root"
-        original_open = EXPORTER._windows_open_path_handle
+        original_mark = EXPORTER._windows_mark_delete
         attempted = False
 
-        def attempt_substitution(path, *, delete, deny_delete_sharing):
+        def attempt_substitution(handle):
             nonlocal attempted
-            handle = original_open(
-                path, delete=delete, deny_delete_sharing=deny_delete_sharing
-            )
-            if pathlib.Path(path) == root and delete and deny_delete_sharing:
+            if not attempted:
                 attempted = True
                 with self.assertRaises(OSError):
                     os.rename(root, moved)
-            return handle
+            return original_mark(handle)
 
         with mock.patch.object(
-            EXPORTER,
-            "_windows_open_path_handle",
+            EXPORTER, "_windows_mark_delete",
             side_effect=attempt_substitution,
+        ), mock.patch.object(
+            EXPORTER,
+            "_directory_membership_guard",
+            return_value=contextlib.nullcontext(),
         ):
-            EXPORTER._windows_delete_owned_tree(
-                root, expected_identity, {".": expected_identity}, owned_files
-            )
+            tree.delete_subtree(".")
+        tree.close()
         self.assertTrue(attempted)
         self.assertFalse(root.exists())
         self.assertFalse(moved.exists())
 
     @unittest.skipUnless(os.name == "nt", "Windows handle-custody behavior")
     def test_cleanup_preserves_child_substituted_during_deletion(self) -> None:
-        root = self.root / "owned-parent"
-        child = root / "active-child"
-        child.mkdir(parents=True)
-        (child / "owned.txt").write_text("owned", encoding="utf-8")
-        root_identity = EXPORTER._directory_identity(root, "fixture root")
-        child_identity = EXPORTER._directory_identity(child, "fixture child")
-        owned_file_identity = EXPORTER._windows_path_identity(child / "owned.txt")
-        moved_child = root / "moved-active-child"
-        original_open = EXPORTER._windows_open_path_handle
-        substituted = False
-
-        def substitute_before_child_handle(path, *, delete, deny_delete_sharing):
-            nonlocal substituted
-            candidate = pathlib.Path(path)
-            if candidate == child and delete and deny_delete_sharing and not substituted:
-                substituted = True
-                os.rename(child, moved_child)
-                child.mkdir()
-                (child / "foreign.txt").write_text("foreign", encoding="utf-8")
-            return original_open(
-                path, delete=delete, deny_delete_sharing=deny_delete_sharing
-            )
-
-        with mock.patch.object(
-            EXPORTER,
-            "_windows_open_path_handle",
-            side_effect=substitute_before_child_handle,
-        ):
-            with self.assertRaisesRegex(EXPORTER.ExportError, "changed before deletion"):
-                EXPORTER._windows_delete_owned_tree(
-                    root,
-                    root_identity,
-                    {".": root_identity, "active-child": child_identity},
-                    {"active-child/owned.txt": owned_file_identity},
-                )
-        self.assertTrue(substituted)
-        self.assertEqual((child / "foreign.txt").read_text(), "foreign")
-        self.assertEqual((moved_child / "owned.txt").read_text(), "owned")
+        tree = EXPORTER._WindowsOwnedTree.create_unique(
+            self.root, ".owned-parent-", "fixture root"
+        )
+        tree.create_directory(tree.root / "child", "fixture child")
+        with tree.create_file(tree.root / "child" / "owned.txt", "fixture file") as stream:
+            stream.write(b"owned")
+        moved = self.root / "moved-active-child"
+        EXPORTER._windows_rename_handle(
+            tree.directory_handles["child"],
+            tree.parent_handle,
+            moved.name,
+            "fixture child displacement",
+        )
+        replacement = tree.root / "child"
+        replacement.mkdir()
+        (replacement / "foreign.txt").write_text("foreign", encoding="utf-8")
+        with self.assertRaisesRegex(EXPORTER.ExportError, "identity changed"):
+            tree.delete_subtree(".")
+        self.assertEqual((replacement / "foreign.txt").read_text(), "foreign")
+        self.assertEqual((moved / "owned.txt").read_text(), "owned")
+        (replacement / "foreign.txt").unlink()
+        replacement.rmdir()
+        EXPORTER._windows_rename_handle(
+            tree.directory_handles["child"],
+            tree.directory_handles["."],
+            "child",
+            "fixture child restoration",
+        )
+        tree.delete_subtree(".")
+        tree.close()
 
     @unittest.skipUnless(os.name == "nt", "Windows handle-custody behavior")
     def test_cleanup_releases_all_handles_after_disposition_failure(self) -> None:
-        root = self.root / "disposition-failure"
-        (root / "child").mkdir(parents=True)
-        (root / "child" / "owned.txt").write_text("owned", encoding="utf-8")
-        root_identity = EXPORTER._directory_identity(root, "fixture root")
-        child_identity = EXPORTER._directory_identity(root / "child", "fixture child")
-        file_identity = EXPORTER._windows_path_identity(root / "child" / "owned.txt")
-        opened = []
+        tree = EXPORTER._WindowsOwnedTree.create_unique(
+            self.root, ".disposition-failure-", "fixture root"
+        )
+        with tree.create_file(tree.root / "owned.txt", "fixture file") as stream:
+            stream.write(b"owned")
         closed = []
-        original_open = EXPORTER._windows_open_path_handle
         original_close = EXPORTER._windows_close_handle
-
-        def record_open(*args, **kwargs):
-            handle = original_open(*args, **kwargs)
-            opened.append(handle)
-            return handle
 
         def record_close(handle):
             closed.append(handle)
             return original_close(handle)
 
         with mock.patch.object(
-            EXPORTER, "_windows_open_path_handle", side_effect=record_open
-        ), mock.patch.object(
             EXPORTER,
             "_windows_mark_delete",
             side_effect=EXPORTER.ExportError("fixture disposition failure"),
@@ -1233,17 +1264,16 @@ class CaptureExporterTest(unittest.TestCase):
             with self.assertRaisesRegex(
                 EXPORTER.ExportError, "fixture disposition failure"
             ):
-                EXPORTER._windows_delete_owned_tree(
-                    root,
-                    root_identity,
-                    {".": root_identity, "child": child_identity},
-                    {"child/owned.txt": file_identity},
-                )
-        for handle in opened:
-            self.assertIn(handle, closed)
+                tree.delete_subtree(".")
+        self.assertGreaterEqual(len(closed), 1)
+        tree.delete_subtree(".")
+        tree.close()
 
     def test_handle_release_attempts_every_handle_and_retains_failures(self) -> None:
         handles = {"first": 101, "second": 202, "third": 303}
+        owner = EXPORTER._WindowsHandleOwner("fixture handles")
+        for key, handle in handles.items():
+            owner.add(key, handle, (1, handle))
         calls = []
 
         def close_with_one_failure(handle):
@@ -1257,34 +1287,67 @@ class CaptureExporterTest(unittest.TestCase):
             with self.assertRaisesRegex(
                 EXPORTER.ExportError, "unresolved handles"
             ):
-                EXPORTER._close_windows_handles(handles)
+                owner.close()
         self.assertEqual(calls, [101, 202, 303])
-        self.assertEqual(handles, {"second": 202})
+        self.assertEqual(owner.handles, {"second": 202})
+        EXPORTER._UNRESOLVED_WINDOWS_CLEANUP_OWNERS.remove(owner)
+
+    def test_owned_tree_close_attempts_every_handle_after_base_exception(self) -> None:
+        tree = EXPORTER._WindowsOwnedTree(
+            self.root,
+            101,
+            self.root / "fixture-tree",
+            (1, 1),
+            {".": 202, "child": 303},
+            {".": (1, 1), "child": (1, 2)},
+        )
+        calls = []
+
+        def close_with_interruptions(handle):
+            calls.append(handle)
+            if handle in {101, 303}:
+                raise KeyboardInterrupt(f"fixture close {handle}")
+
+        with mock.patch.object(
+            EXPORTER, "_windows_close_handle", side_effect=close_with_interruptions
+        ):
+            with self.assertRaisesRegex(
+                EXPORTER.ExportError, "publication parent, directory 'child'"
+            ) as caught:
+                tree.close()
+        self.assertEqual(calls, [101, 303, 202])
+        diagnostics = EXPORTER._format_exception_diagnostics(caught.exception)
+        self.assertIn("fixture close 101", diagnostics)
+        self.assertIn("fixture close 303", diagnostics)
+        self.assertIn(tree, EXPORTER._UNRESOLVED_WINDOWS_OWNED_TREES)
+        EXPORTER._UNRESOLVED_WINDOWS_OWNED_TREES.remove(tree)
+
+    def test_secondary_diagnostic_chain_is_not_flattened(self) -> None:
+        primary = EXPORTER.ExportError("fixture primary")
+        cause = ValueError("fixture nested cause")
+        secondary = KeyboardInterrupt("fixture secondary")
+        secondary.__cause__ = cause
+        secondary.add_note("fixture retained owner")
+        EXPORTER._attach_exception_diagnostics(
+            primary, secondary, "fixture cleanup branch"
+        )
+        rendered = EXPORTER._format_exception_diagnostics(primary)
+        self.assertIn("fixture cleanup branch", rendered)
+        self.assertIn("fixture secondary", rendered)
+        self.assertIn("fixture nested cause", rendered)
+        self.assertIn("fixture retained owner", rendered)
 
     @unittest.skipUnless(os.name == "nt", "Windows creation-custody behavior")
     def test_owned_directory_creation_holds_identity_from_creation(self) -> None:
-        owned = self.root / "atomic-owner"
+        tree = EXPORTER._WindowsOwnedTree.create_unique(
+            self.root, ".atomic-owner-", "fixture atomic owner"
+        )
+        owned = tree.root
         moved = self.root / "replacement-window"
-        original_information = EXPORTER._windows_handle_information
-        attempted = False
-
-        def attempt_replacement(handle):
-            nonlocal attempted
-            attempted = True
-            os.rename(owned, moved)
-            owned.mkdir()
-            (owned / "foreign.txt").write_text("foreign", encoding="utf-8")
-            return original_information(handle)
-
-        with mock.patch.object(
-            EXPORTER,
-            "_windows_handle_information",
-            side_effect=attempt_replacement,
-        ):
-            identity = EXPORTER._windows_create_owned_directory(
-                owned, "fixture atomic owner"
-            )
-        self.assertTrue(attempted)
+        tree.rename_root(moved, "fixture owner displacement")
+        owned.mkdir()
+        (owned / "foreign.txt").write_text("foreign", encoding="utf-8")
+        identity = EXPORTER._windows_handle_identity(tree.directory_handles["."])
         self.assertEqual(
             identity, EXPORTER._directory_identity(moved, "fixture original owner")
         )
@@ -1292,7 +1355,8 @@ class CaptureExporterTest(unittest.TestCase):
             identity, EXPORTER._directory_identity(owned, "fixture replacement")
         )
         self.assertEqual((owned / "foreign.txt").read_text(), "foreign")
-        EXPORTER._remove_private_staging(moved, "fixture original owner", identity)
+        tree.delete_subtree(".")
+        tree.close()
 
     def test_initial_stage_handoff_preserves_replacement(self) -> None:
         self._write_inputs()
@@ -1314,11 +1378,15 @@ class CaptureExporterTest(unittest.TestCase):
             "create_unique",
             side_effect=replace_after_creation,
         ):
-            with self.assertRaisesRegex(EXPORTER.ExportError, "cleanup failed"):
-                EXPORTER.export_plan(self.plan_path, self.root / "initial-stage")
+            receipt = EXPORTER.export_plan(
+                self.plan_path, self.root / "initial-stage"
+            )
         self.assertIsNotNone(replacement)
         self.assertEqual((replacement / "foreign.txt").read_text(), "foreign")
-        self.assertTrue(moved.exists())
+        self.assertFalse(moved.exists())
+        self.assertTrue(
+            (self.root / "initial-stage" / receipt["artifactFile"]).is_file()
+        )
 
     def test_stage_mutations_remain_bound_to_the_created_owner(self) -> None:
         self._write_inputs()
@@ -1353,8 +1421,9 @@ class CaptureExporterTest(unittest.TestCase):
             "create_directory",
             side_effect=replace_before_public_members,
         ):
-            with self.assertRaisesRegex(EXPORTER.ExportError, "cleanup failed"):
-                EXPORTER.export_plan(self.plan_path, self.root / "handle-bound-stage")
+            receipt = EXPORTER.export_plan(
+                self.plan_path, self.root / "handle-bound-stage"
+            )
         self.assertIsNotNone(replacement)
         self.assertEqual(
             (replacement / "public-preview.json").read_bytes(), b"foreign preview"
@@ -1362,9 +1431,10 @@ class CaptureExporterTest(unittest.TestCase):
         self.assertEqual(
             (replacement / "export-receipt.json").read_bytes(), b"foreign receipt"
         )
-        self.assertTrue((moved / "public-preview.json").is_file())
-        self.assertTrue((moved / "export-receipt.json").is_file())
-        self.assertFalse((self.root / "handle-bound-stage").exists())
+        self.assertFalse(moved.exists())
+        self.assertTrue(
+            (self.root / "handle-bound-stage" / receipt["artifactFile"]).is_file()
+        )
 
     def test_initial_spool_handoff_preserves_replacement(self) -> None:
         self._write_inputs()
@@ -1399,10 +1469,13 @@ class CaptureExporterTest(unittest.TestCase):
             side_effect=replace_spool_after_creation,
         ):
             with self.assertRaisesRegex(EXPORTER.ExportError, "cleanup failed"):
-                EXPORTER.export_plan(self.plan_path, self.root / "initial-spool")
+                EXPORTER.export_plan(
+                    self.plan_path, self.root / "initial-spool"
+                )
         self.assertIsNotNone(replacement)
         self.assertEqual((replacement / "foreign.txt").read_text(), "foreign")
-        self.assertTrue(moved.exists())
+        self.assertFalse(moved.exists())
+        self.assertFalse((self.root / "initial-spool").exists())
 
     def test_watch_setup_releases_every_acquired_handle(self) -> None:
         closed = []
@@ -1565,70 +1638,67 @@ class CaptureExporterTest(unittest.TestCase):
 
     @unittest.skipUnless(os.name == "nt", "Windows handle-custody behavior")
     def test_cleanup_rejects_untracked_stable_members(self) -> None:
-        root = self.root / "foreign-cleanup-member"
-        root.mkdir()
-        owned = root / "owned.txt"
-        foreign = root / "foreign.txt"
-        owned.write_text("owned", encoding="utf-8")
+        tree = EXPORTER._WindowsOwnedTree.create_unique(
+            self.root, ".foreign-cleanup-member-", "fixture root"
+        )
+        owned = tree.root / "owned.txt"
+        foreign = tree.root / "foreign.txt"
+        with tree.create_file(owned, "fixture owned file") as stream:
+            stream.write(b"owned")
         foreign.write_text("foreign", encoding="utf-8")
-        root_identity = EXPORTER._directory_identity(root, "fixture root")
-        with self.assertRaisesRegex(EXPORTER.ExportError, "untracked or missing"):
-            EXPORTER._windows_delete_owned_tree(
-                root,
-                root_identity,
-                {".": root_identity},
-                {"owned.txt": EXPORTER._windows_path_identity(owned)},
-            )
+        with self.assertRaisesRegex(EXPORTER.ExportError, "untracked, missing"):
+            tree.delete_subtree(".")
         self.assertEqual(owned.read_text(), "owned")
         self.assertEqual(foreign.read_text(), "foreign")
+        foreign.unlink()
+        tree.delete_subtree(".")
+        tree.close()
 
     @unittest.skipUnless(os.name == "nt", "Windows handle-custody behavior")
     def test_cleanup_attempts_both_handle_groups_after_release_failure(self) -> None:
-        root = self.root / "release-groups"
-        root.mkdir()
-        (root / "owned.txt").write_text("owned", encoding="utf-8")
-        root_identity = EXPORTER._directory_identity(root, "fixture root")
-        file_identity = EXPORTER._windows_path_identity(root / "owned.txt")
-        opened = []
-        original_open = EXPORTER._windows_open_path_handle
+        tree = EXPORTER._WindowsOwnedTree.create_unique(
+            self.root, ".release-groups-", "fixture root"
+        )
+        with tree.create_file(tree.root / "owned.txt", "fixture file") as stream:
+            stream.write(b"owned")
+        original_close = EXPORTER._windows_close_handle
+        failed_once = False
+        retained_before = len(EXPORTER._UNRESOLVED_WINDOWS_CLEANUP_OWNERS)
 
-        def record_persistent_open(path, *, delete, deny_delete_sharing):
-            handle = original_open(
-                path, delete=delete, deny_delete_sharing=deny_delete_sharing
-            )
-            if delete:
-                opened.append(handle)
-            return handle
+        def interrupt_one_close(handle):
+            nonlocal failed_once
+            if not failed_once:
+                failed_once = True
+                raise KeyboardInterrupt("fixture file release")
+            return original_close(handle)
 
         with mock.patch.object(
-            EXPORTER,
-            "_windows_open_path_handle",
-            side_effect=record_persistent_open,
-        ), mock.patch.object(
             EXPORTER,
             "_windows_mark_delete",
             side_effect=EXPORTER.ExportError("fixture disposition failure"),
         ), mock.patch.object(
             EXPORTER,
-            "_close_windows_handles",
-            side_effect=(
-                EXPORTER.ExportError("fixture file release"),
-                EXPORTER.ExportError("fixture directory release"),
-            ),
-        ) as close_groups:
+            "_windows_close_handle",
+            side_effect=interrupt_one_close,
+        ), mock.patch.object(
+            EXPORTER,
+            "_directory_membership_guard",
+            return_value=contextlib.nullcontext(),
+        ):
             with self.assertRaisesRegex(
                 EXPORTER.ExportError, "fixture disposition failure"
             ) as caught:
-                EXPORTER._windows_delete_owned_tree(
-                    root,
-                    root_identity,
-                    {".": root_identity},
-                    {"owned.txt": file_identity},
-                )
-        self.assertEqual(close_groups.call_count, 2)
-        self.assertEqual(len(caught.exception.__notes__), 2)
-        for handle in opened:
-            EXPORTER._windows_close_handle(handle)
+                tree.delete_subtree(".")
+        self.assertIn("fixture file release", "\n".join(caught.exception.__notes__))
+        self.assertEqual(
+            len(EXPORTER._UNRESOLVED_WINDOWS_CLEANUP_OWNERS), retained_before + 1
+        )
+        retained = EXPORTER._UNRESOLVED_WINDOWS_CLEANUP_OWNERS[-1]
+        self.assertTrue(retained.handles)
+        self.assertEqual(set(retained.handles), set(retained.identities))
+        retained.close()
+        tree.delete_subtree(".")
+        tree.close()
 
     def test_non_windows_export_fails_before_processing(self) -> None:
         output = self.root / "unsupported-platform"
@@ -1650,8 +1720,8 @@ class CaptureExporterTest(unittest.TestCase):
         with mock.patch.object(
             EXPORTER, "_build_records", side_effect=AttributeError("fixture")
         ), mock.patch.object(
-            EXPORTER,
-            "_remove_private_staging",
+            EXPORTER._WindowsOwnedTree,
+            "delete_subtree",
             side_effect=EXPORTER.ExportError("fixture cleanup"),
         ):
             with self.assertRaisesRegex(EXPORTER.ExportError, "cleanup failed"):

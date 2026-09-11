@@ -14,14 +14,15 @@ to the plan and is never copied into public output.
 
 ## Preconditions
 
-The v1 producer runs on Windows, where each private directory is atomically
-created by the native file API with its original identity returned on the same
-handle. The exporter retains the stage owner and creates every directory and
-file relative to that held object, so a renamed or replaced stage pathname
-cannot redirect generated writes into a foreign tree. Every created member is
-recorded in an identity ledger. Later sealing, publication, and cleanup require
-the observed tree to match that ledger exactly. Other platforms fail before the
-plan, source media, output parent, or staging directory is read or changed.
+The v1 producer runs on Windows, where the output parent and each generated
+directory are retained by native handle and each original identity is read from
+that handle. The exporter creates every descendant relative to a retained
+directory owner, so a renamed or replaced stage pathname cannot redirect
+generated writes into a foreign tree. Every created member is recorded in an
+identity ledger. Later enumeration, file opening, sealing, publication, and
+cleanup use those owners and require the observed tree to match that ledger
+exactly. Other platforms fail before the plan, source media, output parent, or
+staging directory is read or changed.
 Portable ledger validation and dataset compilation remain cross-platform; this
 boundary applies only to capture production.
 
@@ -78,9 +79,12 @@ omissions. It deliberately omits local paths, request identifiers, session
 identifiers, capture tags, and other private manifest fields.
 
 The adapter admits only the exact generated public-record bytes and the expected
-root, `artifacts`, and `content` directory layout. It holds exclusive file locks
-while it validates and seals the complete member set, public-file scans, file
-identities, modification times, lengths, and digests. The seal also requires
+root, `artifacts`, and `content` directory layout. It opens files relative to
+their retained parent owners while it validates and seals the complete member
+set, public-file scans, file identities, modification times, lengths, and
+digests. Each parent-directory entry ID is matched to the corresponding
+creation ledger entry, so a foreign object at an old child name cannot be
+mistaken for the retained original. The seal also requires
 every file and directory identity to match its creation-time ownership ledger;
 equal replacement bytes are not adopted. ZIP admission requires the exact
 generated entry order and metadata, rejects duplicate or additional members and
@@ -88,30 +92,36 @@ archive comments, and covers generation through both whole-file hashes with one
 lock. Directory identity and change metadata are sampled before and after
 enumeration, and a recursive native change watch covers the sampling interval,
 so a membership change during the observation fails. Watch setup and shutdown
-account for every acquired handle independently. Every normal, failed, or
-interrupted shutdown must establish terminal completion before releasing native
-state. If it cannot, the exporter retains the handle, event, overlapped state,
-and buffer instead of releasing memory still owned by pending I/O. It verifies
-the same coherent tree after an operating-system no-replace rename of the sibling
-staging directory. The post-rename comparison retains directory identities and
-complete membership but excludes rename-volatile directory timestamps; each
-pre- and post-rename inventory still checks those timestamps internally for
-concurrent membership changes.
+account for every acquired handle independently. Each watch is opened afresh,
+relative to a retained parent owner, immediately before its inventory. Every
+normal, failed, or interrupted shutdown must establish terminal completion
+before releasing native state. If it cannot, the exporter retains the handle,
+event, overlapped state, and buffer instead of releasing memory still owned by
+pending I/O. Immediately
+before publication, descendant directory handles are released, the root is
+renamed without replacement through its retained handle relative to the
+retained output-parent handle, and descendant owners are reopened relative to
+the root for verification. The post-rename comparison retains directory
+identities and complete membership but excludes rename-volatile directory
+timestamps; each pre- and post-rename inventory still checks those timestamps
+internally for concurrent membership changes.
 
 A concurrent creator of the destination wins without being overwritten. If
 required verification fails or is interrupted after the rename, the exporter
-reconciles the old and new names, then withdraws the output only while its
-creation-time directory identity remains proven; otherwise it reports the
-publication and custody uncertainty. Cleanup similarly removes only the
-exact identity-ledger contents of the originally created stage or private spool.
+resolves the root's current name from its handle and attempts a handle-bound
+withdrawal. If withdrawal is unavailable, cleanup can still address the owned
+root directly through that handle. Cleanup removes only the exact
+identity-ledger contents of the originally created stage or private spool.
 An untracked, missing, or identity-replaced descendant rejects the whole cleanup
-before deletion begins. On Windows the exporter retains native deletion handles
-that exclude ordinary path replacement while removal is in progress, accounts
-for each handle until release, and attempts all remaining releases after an
-error. A substituted or missing pathname is preserved and reported as uncertain
-rather than being treated as successful cleanup. CLI failures include exception
-notes from unresolved handle release and custody operations instead of hiding
-secondary cleanup uncertainty.
+before deletion begins. On Windows the exporter enumerates directories and
+opens deletion handles relative to retained owners, accounts for each handle
+until release, and attempts all remaining releases after any exception,
+including interruption. A handle that cannot be released is retained by a
+durable cleanup owner together with its identity ledger, rather than being left
+only in traceback-local state. A substituted pathname is preserved; the
+original owner remains addressable independently. CLI failures preserve nested
+exception causes and notes from every unresolved release or custody branch
+instead of hiding secondary cleanup uncertainty.
 
 ## Actual capture semantics
 

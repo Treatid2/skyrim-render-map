@@ -31,7 +31,7 @@ import compile_dataset as compiler
 import validate_repository as validator
 
 
-TOOL_VERSION = "1.0.7"
+TOOL_VERSION = "1.0.8"
 PLAN_SCHEMA = {
     "name": "skyrim-render-map.csx-capture-export-plan",
     "major": 1,
@@ -168,6 +168,12 @@ def _format_exception_diagnostics(error: BaseException) -> str:
     return " | ".join(messages)
 
 
+def _attach_exception_diagnostics(
+    target: BaseException, source: BaseException, label: str
+) -> None:
+    target.add_note(f"{label}: {_format_exception_diagnostics(source)}")
+
+
 def _strict_keys(value: Any, expected: set[str], context: str) -> dict:
     if not isinstance(value, dict):
         raise ExportError(f"{context} must be an object")
@@ -238,6 +244,35 @@ def _windows_open_path_handle(
     return int(handle)
 
 
+def _windows_open_owner_directory(path: pathlib.Path, context: str) -> int:
+    kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+    create_file = kernel32.CreateFileW
+    create_file.argtypes = [
+        ctypes.c_wchar_p,
+        ctypes.c_uint32,
+        ctypes.c_uint32,
+        ctypes.c_void_p,
+        ctypes.c_uint32,
+        ctypes.c_uint32,
+        ctypes.c_void_p,
+    ]
+    create_file.restype = ctypes.c_void_p
+    handle = create_file(
+        str(path),
+        0x00000001 | 0x00000004 | 0x00000020 | 0x00000040 | 0x00000080,
+        0x00000001 | 0x00000002 | 0x00000004,
+        None,
+        3,
+        0x02000000,
+        None,
+    )
+    if handle == ctypes.c_void_p(-1).value:
+        raise ExportError(
+            f"cannot hold {context}: Windows error {ctypes.get_last_error()}"
+        )
+    return int(handle)
+
+
 def _windows_handle_information(handle: int) -> dict:
     class ByHandleFileInformation(ctypes.Structure):
         _fields_ = [
@@ -281,6 +316,81 @@ def _windows_handle_information(handle: int) -> dict:
     }
 
 
+def _windows_list_directory_entries(
+    handle: int, context: str
+) -> list[tuple[str, int, int]]:
+    class FileIdBothDirectoryInformation(ctypes.Structure):
+        _fields_ = [
+            ("NextEntryOffset", ctypes.c_uint32),
+            ("FileIndex", ctypes.c_uint32),
+            ("CreationTime", ctypes.c_int64),
+            ("LastAccessTime", ctypes.c_int64),
+            ("LastWriteTime", ctypes.c_int64),
+            ("ChangeTime", ctypes.c_int64),
+            ("EndOfFile", ctypes.c_int64),
+            ("AllocationSize", ctypes.c_int64),
+            ("FileAttributes", ctypes.c_uint32),
+            ("FileNameLength", ctypes.c_uint32),
+            ("EaSize", ctypes.c_uint32),
+            ("ShortNameLength", ctypes.c_ubyte),
+            ("ShortName", ctypes.c_wchar * 12),
+            ("FileId", ctypes.c_int64),
+            ("FileName", ctypes.c_wchar * 1),
+        ]
+
+    kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+    get_information = kernel32.GetFileInformationByHandleEx
+    get_information.argtypes = [
+        ctypes.c_void_p,
+        ctypes.c_int,
+        ctypes.c_void_p,
+        ctypes.c_uint32,
+    ]
+    get_information.restype = ctypes.c_int
+    buffer = ctypes.create_string_buffer(64 * 1024)
+    entries: list[tuple[str, int, int]] = []
+    seen: set[str] = set()
+    information_class = 11
+    while True:
+        if not get_information(
+            ctypes.c_void_p(handle), information_class, buffer, len(buffer)
+        ):
+            error_number = ctypes.get_last_error()
+            if error_number == 18:
+                break
+            raise ExportError(
+                f"cannot enumerate {context}: Windows error {error_number}"
+            )
+        information_class = 10
+        offset = 0
+        while True:
+            item = FileIdBothDirectoryInformation.from_buffer(buffer, offset)
+            name = ctypes.string_at(
+                ctypes.addressof(buffer)
+                + offset
+                + FileIdBothDirectoryInformation.FileName.offset,
+                item.FileNameLength,
+            ).decode("utf-16-le")
+            if name not in {".", ".."}:
+                folded = name.casefold()
+                if folded in seen:
+                    raise ExportError(f"{context} contains a duplicate member name")
+                seen.add(folded)
+                entries.append(
+                    (
+                        name,
+                        int(item.FileAttributes),
+                        int(item.FileId) & 0xFFFFFFFFFFFFFFFF,
+                    )
+                )
+            if item.NextEntryOffset == 0:
+                break
+            offset += item.NextEntryOffset
+            if offset >= len(buffer):
+                raise ExportError(f"cannot enumerate {context}: invalid entry offset")
+    return sorted(entries, key=lambda item: item[0].casefold())
+
+
 def _windows_handle_identity(handle: int) -> tuple[int, int]:
     return _windows_handle_information(handle)["identity"]
 
@@ -294,6 +404,37 @@ def _windows_close_handle(handle: int) -> None:
         raise ExportError(
             f"cannot close owned path handle: Windows error {ctypes.get_last_error()}"
         )
+
+
+def _windows_final_path(handle: int) -> pathlib.Path:
+    kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
+    get_name = kernel32.GetFinalPathNameByHandleW
+    get_name.argtypes = [
+        ctypes.c_void_p,
+        ctypes.c_wchar_p,
+        ctypes.c_uint32,
+        ctypes.c_uint32,
+    ]
+    get_name.restype = ctypes.c_uint32
+    required = get_name(ctypes.c_void_p(handle), None, 0, 0)
+    if not required:
+        raise ExportError(
+            "cannot resolve owned directory handle: Windows error "
+            f"{ctypes.get_last_error()}"
+        )
+    buffer = ctypes.create_unicode_buffer(required + 1)
+    written = get_name(ctypes.c_void_p(handle), buffer, len(buffer), 0)
+    if not written or written >= len(buffer):
+        raise ExportError(
+            "cannot resolve owned directory handle: Windows error "
+            f"{ctypes.get_last_error()}"
+        )
+    value = buffer.value
+    if value.startswith("\\\\?\\UNC\\"):
+        value = "\\\\" + value[8:]
+    elif value.startswith("\\\\?\\"):
+        value = value[4:]
+    return pathlib.Path(value)
 
 
 def _stream_identity(stream) -> tuple[int, int]:
@@ -406,153 +547,148 @@ def _windows_nt_open_relative(
     return int(returned_handle.value), int(status_block.Information)
 
 
-def _windows_create_owned_directory_handle(
-    path: pathlib.Path, context: str
-) -> tuple[int, tuple[int, int]]:
-    kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
-    create_file = kernel32.CreateFileW
-    create_file.argtypes = [
-        ctypes.c_wchar_p,
-        ctypes.c_uint32,
-        ctypes.c_uint32,
-        ctypes.c_void_p,
-        ctypes.c_uint32,
-        ctypes.c_uint32,
-        ctypes.c_void_p,
-    ]
-    create_file.restype = ctypes.c_void_p
-    parent_handle = create_file(
-        str(path.parent),
-        0x00000020 | 0x00000080,
-        0x00000001 | 0x00000002 | 0x00000004,
-        None,
-        3,
-        0x02000000 | 0x00200000,
-        None,
+def _windows_rename_handle(
+    handle: int, target_parent_handle: int, target_name: str, context: str
+) -> None:
+    if not target_name or target_name in {".", ".."} or any(
+        separator in target_name for separator in ("/", "\\")
+    ):
+        raise ExportError(f"cannot rename {context}: invalid destination name")
+
+    class FileRenameInformation(ctypes.Structure):
+        _fields_ = [
+            ("Flags", ctypes.c_uint32),
+            ("RootDirectory", ctypes.c_void_p),
+            ("FileNameLength", ctypes.c_uint32),
+            ("FileName", ctypes.c_wchar * 1),
+        ]
+
+    encoded_name = target_name.encode("utf-16-le")
+    rename_buffer = ctypes.create_string_buffer(
+        FileRenameInformation.FileName.offset + len(encoded_name) + 2
     )
-    if parent_handle == ctypes.c_void_p(-1).value:
-        raise ExportError(
-            f"cannot create {context} at {path}: cannot hold parent directory: "
-            f"Windows error {ctypes.get_last_error()}"
+    rename = ctypes.cast(
+        rename_buffer, ctypes.POINTER(FileRenameInformation)
+    ).contents
+    rename.Flags = 0
+    rename.RootDirectory = target_parent_handle
+    rename.FileNameLength = len(encoded_name)
+    ctypes.memmove(
+        ctypes.addressof(rename_buffer) + FileRenameInformation.FileName.offset,
+        encoded_name,
+        len(encoded_name),
+    )
+    class IoStatusBlock(ctypes.Structure):
+        _fields_ = [
+            ("Status", ctypes.c_void_p),
+            ("Information", ctypes.c_size_t),
+        ]
+
+    status_block = IoStatusBlock()
+    ntdll = ctypes.WinDLL("ntdll", use_last_error=True)
+    set_information = ntdll.NtSetInformationFile
+    set_information.argtypes = [
+        ctypes.c_void_p,
+        ctypes.POINTER(IoStatusBlock),
+        ctypes.c_void_p,
+        ctypes.c_uint32,
+        ctypes.c_int,
+    ]
+    set_information.restype = ctypes.c_long
+    status = int(
+        set_information(
+            ctypes.c_void_p(handle),
+            ctypes.byref(status_block),
+            rename_buffer,
+            len(rename_buffer),
+            10,
         )
-
-    directory_handle: int | None = None
-    primary_error: BaseException | None = None
-    identity: tuple[int, int] | None = None
-    try:
-        directory_handle, creation_result = _windows_nt_open_relative(
-            int(parent_handle),
-            path.name,
-            desired_access=0x00100000 | 0x00010000 | 0x00000080 | 0x00000020,
-            share_access=0x00000001 | 0x00000002 | 0x00000004,
-            disposition=2,
-            create_options=0x00000001 | 0x00000020,
-            file_attributes=0x00000010,
-            context=f"{context} at {path}",
-        )
-        if creation_result != 2:
-            raise ExportError(
-                f"cannot create {context} at {path}: directory was not newly created"
+    )
+    if status < 0:
+        error_number = _windows_nt_status_error(status)
+        if ctypes.c_uint32(status).value in {0xC0000035, 0xC00000BA}:
+            raise FileExistsError(
+                errno.EEXIST, os.strerror(errno.EEXIST), target_name
             )
-        information = _windows_handle_information(directory_handle)
-        if not information["attributes"] & 0x00000010 or information[
-            "attributes"
-        ] & 0x00000400:
-            raise ExportError(
-                f"cannot create {context} at {path}: created path is not an owned directory"
-            )
-        identity = information["identity"]
-    except BaseException as error:
-        primary_error = error
-
-    try:
-        _windows_close_handle(int(parent_handle))
-    except ExportError as error:
-        _UNRESOLVED_WINDOWS_HANDLES.append(int(parent_handle))
-        if primary_error is None:
-            primary_error = ExportError(
-                f"cannot release {context} parent custody at {path}: {error}"
-            )
-        else:
-            primary_error.add_note(
-                f"cannot release {context} parent custody at {path}: {error}"
-            )
-    if primary_error is not None:
-        if directory_handle is not None:
-            try:
-                _windows_mark_delete(directory_handle)
-            except ExportError as error:
-                primary_error.add_note(
-                    f"cannot remove failed {context} at {path}: {error}"
-                )
-            try:
-                _windows_close_handle(directory_handle)
-            except ExportError as error:
-                _UNRESOLVED_WINDOWS_HANDLES.append(directory_handle)
-                primary_error.add_note(
-                    f"cannot release {context} custody at {path}: {error}"
-                )
-        raise primary_error
-    if directory_handle is None or identity is None:
-        raise ExportError(
-            f"cannot create {context} at {path}: identity was not established"
-        )
-    return directory_handle, identity
-
-
-def _windows_create_owned_directory(
-    path: pathlib.Path, context: str
-) -> tuple[int, int]:
-    directory_handle, identity = _windows_create_owned_directory_handle(path, context)
-    try:
-        _windows_close_handle(directory_handle)
-    except ExportError as error:
-        _UNRESOLVED_WINDOWS_HANDLES.append(directory_handle)
-        raise ExportError(
-            f"cannot release {context} custody at {path}: {error}"
-        ) from error
-    return identity
-
-
-def _windows_create_unique_owned_directory(
-    parent: pathlib.Path, prefix: str, context: str
-) -> tuple[pathlib.Path, tuple[int, int]]:
-    for _ in range(16):
-        path = parent / f"{prefix}{uuid.uuid4().hex}"
-        try:
-            return path, _windows_create_owned_directory(path, context)
-        except FileExistsError as error:
-            if getattr(error, "__notes__", None):
-                raise ExportError(
-                    f"cannot create {context} at {path}: handle release failed"
-                ) from error
-            continue
-    raise ExportError(f"cannot create unique {context}")
-
-
-def _windows_create_unique_owned_directory_handle(
-    parent: pathlib.Path, prefix: str, context: str
-) -> tuple[pathlib.Path, int, tuple[int, int]]:
-    for _ in range(16):
-        path = parent / f"{prefix}{uuid.uuid4().hex}"
-        try:
-            handle, identity = _windows_create_owned_directory_handle(path, context)
-            return path, handle, identity
-        except FileExistsError as error:
-            if getattr(error, "__notes__", None):
-                raise ExportError(
-                    f"cannot create {context} at {path}: handle release failed"
-                ) from error
-            continue
-    raise ExportError(f"cannot create unique {context}")
+        raise ExportError(f"cannot rename {context}: Windows error {error_number}")
 
 
 _UNRESOLVED_WINDOWS_OWNED_TREES: list[Any] = []
-_UNRESOLVED_WINDOWS_HANDLES: list[int] = []
+_UNRESOLVED_WINDOWS_CLEANUP_OWNERS: list[Any] = []
+
+
+def _retain_unresolved_handle(
+    context: str,
+    handle: int,
+    identity: tuple[int, int] | None,
+    diagnostic_target: BaseException,
+) -> None:
+    if identity is None:
+        try:
+            identity = _windows_handle_identity(handle)
+        except BaseException as identity_error:
+            _attach_exception_diagnostics(
+                diagnostic_target,
+                identity_error,
+                f"cannot identify retained {context}",
+            )
+    owner = _WindowsHandleOwner(context)
+    owner.add(context, handle, identity)
+    owner.retain()
+
+
+@dataclass
+class _WindowsHandleOwner:
+    context: str
+    handles: dict[str, int] = field(default_factory=dict)
+    identities: dict[str, tuple[int, int] | None] = field(default_factory=dict)
+    _retained: bool = False
+
+    def add(
+        self, key: str, handle: int, identity: tuple[int, int] | None
+    ) -> None:
+        if key in self.handles:
+            raise ExportError(f"duplicate retained handle key: {key!r}")
+        self.handles[key] = handle
+        self.identities[key] = identity
+
+    def retain(self) -> None:
+        if not self._retained:
+            _UNRESOLVED_WINDOWS_CLEANUP_OWNERS.append(self)
+            self._retained = True
+
+    def close(self) -> None:
+        failures: list[tuple[str, BaseException]] = []
+        for key, handle in list(self.handles.items()):
+            try:
+                _windows_close_handle(handle)
+            except BaseException as error:
+                failures.append((key, error))
+            else:
+                self.handles.pop(key)
+                self.identities.pop(key, None)
+        if self.handles and not self._retained:
+            self.retain()
+        elif not self.handles and self._retained:
+            try:
+                _UNRESOLVED_WINDOWS_CLEANUP_OWNERS.remove(self)
+            except ValueError:
+                pass
+            self._retained = False
+        if failures:
+            error = ExportError(
+                f"cannot release {self.context}; unresolved handles: "
+                + ", ".join(repr(key) for key, _ in failures)
+            )
+            for key, failure in failures:
+                _attach_exception_diagnostics(error, failure, f"handle {key!r}")
+            raise error from failures[0][1]
 
 
 @dataclass
 class _WindowsOwnedTree:
+    parent: pathlib.Path
+    parent_handle: int | None
     root: pathlib.Path
     root_identity: tuple[int, int]
     directory_handles: dict[str, int]
@@ -564,10 +700,90 @@ class _WindowsOwnedTree:
     def create_unique(
         cls, parent: pathlib.Path, prefix: str, context: str
     ) -> "_WindowsOwnedTree":
-        path, handle, identity = _windows_create_unique_owned_directory_handle(
-            parent, prefix, context
-        )
-        return cls(path, identity, {".": handle}, {".": identity})
+        parent_handle = _windows_open_owner_directory(parent, f"{context} parent")
+        try:
+            parent_information = _windows_handle_information(parent_handle)
+            if not parent_information["attributes"] & 0x00000010 or (
+                parent_information["attributes"] & 0x00000400
+            ):
+                raise ExportError(
+                    f"cannot create {context}: parent is not an ordinary directory"
+                )
+            for _ in range(16):
+                path = parent / f"{prefix}{uuid.uuid4().hex}"
+                handle: int | None = None
+                identity: tuple[int, int] | None = None
+                try:
+                    handle, creation_result = _windows_nt_open_relative(
+                        parent_handle,
+                        path.name,
+                        desired_access=(
+                            0x00100000
+                            | 0x00010000
+                            | 0x00000080
+                            | 0x00000020
+                            | 0x00000001
+                            | 0x00000002
+                        ),
+                        share_access=0x00000001 | 0x00000002 | 0x00000004,
+                        disposition=2,
+                        create_options=0x00000001,
+                        file_attributes=0x00000010,
+                        context=f"{context} at {path}",
+                    )
+                except FileExistsError:
+                    continue
+                if creation_result != 2:
+                    raise ExportError(
+                        f"cannot create {context} at {path}: directory was not newly created"
+                    )
+                information = _windows_handle_information(handle)
+                if not information["attributes"] & 0x00000010 or information[
+                    "attributes"
+                ] & 0x00000400:
+                    raise ExportError(
+                        f"cannot create {context} at {path}: member is not a directory"
+                    )
+                identity = information["identity"]
+                return cls(
+                    parent,
+                    parent_handle,
+                    path,
+                    identity,
+                    {".": handle},
+                    {".": identity},
+                )
+            raise ExportError(f"cannot create unique {context}")
+        except BaseException as error:
+            if "handle" in locals() and handle is not None:
+                try:
+                    _windows_mark_delete(handle)
+                except BaseException as cleanup_error:
+                    _attach_exception_diagnostics(
+                        error, cleanup_error, f"failed {context} disposition"
+                    )
+                try:
+                    _windows_close_handle(handle)
+                except BaseException as close_error:
+                    _retain_unresolved_handle(
+                        f"failed {context} handle", handle, identity, error
+                    )
+                    _attach_exception_diagnostics(
+                        error, close_error, f"failed {context} handle"
+                    )
+            try:
+                _windows_close_handle(parent_handle)
+            except BaseException as close_error:
+                _retain_unresolved_handle(
+                    f"failed {context} parent handle",
+                    parent_handle,
+                    None,
+                    error,
+                )
+                _attach_exception_diagnostics(
+                    error, close_error, f"failed {context} parent handle"
+                )
+            raise
 
     def _relative(self, path: pathlib.Path | str) -> str:
         candidate = pathlib.Path(path)
@@ -602,16 +818,22 @@ class _WindowsOwnedTree:
             raise ExportError(f"cannot create {context}: member already exists")
         parent_handle, name = self._parent(relative)
         handle: int | None = None
+        handle_identity: tuple[int, int] | None = None
         try:
             handle, creation_result = _windows_nt_open_relative(
                 parent_handle,
                 name,
                 desired_access=(
-                    0x00100000 | 0x00010000 | 0x00000080 | 0x00000020
+                    0x00100000
+                    | 0x00010000
+                    | 0x00000080
+                    | 0x00000020
+                    | 0x00000001
+                    | 0x00000002
                 ),
                 share_access=0x00000001 | 0x00000002 | 0x00000004,
                 disposition=2,
-                create_options=0x00000001 | 0x00000020,
+                create_options=0x00000001,
                 file_attributes=0x00000010,
                 context=context,
             )
@@ -623,16 +845,22 @@ class _WindowsOwnedTree:
             ] & 0x00000400:
                 raise ExportError(f"cannot create {context}: member is not a directory")
             self.directory_handles[relative] = handle
-            self.directories[relative] = information["identity"]
+            handle_identity = information["identity"]
+            self.directories[relative] = handle_identity
             handle = None
         except BaseException as error:
             if handle is not None:
                 try:
                     _windows_close_handle(handle)
-                except ExportError as close_error:
-                    _UNRESOLVED_WINDOWS_HANDLES.append(handle)
-                    error.add_note(
-                        f"cannot release failed {context} handle: {close_error}"
+                except BaseException as close_error:
+                    _retain_unresolved_handle(
+                        f"failed {context} handle",
+                        handle,
+                        handle_identity,
+                        error,
+                    )
+                    _attach_exception_diagnostics(
+                        error, close_error, f"cannot release failed {context} handle"
                     )
             raise
 
@@ -652,6 +880,7 @@ class _WindowsOwnedTree:
         parent_handle, name = self._parent(relative)
         handle: int | None = None
         descriptor: int | None = None
+        identity: tuple[int, int] | None = None
         try:
             handle, creation_result = _windows_nt_open_relative(
                 parent_handle,
@@ -688,15 +917,19 @@ class _WindowsOwnedTree:
             if descriptor is not None:
                 try:
                     os.close(descriptor)
-                except OSError as close_error:
-                    error.add_note(f"cannot release failed {context}: {close_error}")
+                except BaseException as close_error:
+                    _attach_exception_diagnostics(
+                        error, close_error, f"cannot release failed {context} descriptor"
+                    )
             if handle is not None:
                 try:
                     _windows_close_handle(handle)
-                except ExportError as close_error:
-                    _UNRESOLVED_WINDOWS_HANDLES.append(handle)
-                    error.add_note(
-                        f"cannot release failed {context} handle: {close_error}"
+                except BaseException as close_error:
+                    _retain_unresolved_handle(
+                        f"failed {context} handle", handle, identity, error
+                    )
+                    _attach_exception_diagnostics(
+                        error, close_error, f"cannot release failed {context} handle"
                     )
             raise
 
@@ -705,6 +938,215 @@ class _WindowsOwnedTree:
 
     def open_file(self, path: pathlib.Path | str, context: str):
         return self._file_stream(path, create=False, context=context)
+
+    def ensure_directory_handles(self, path: pathlib.Path | str = ".") -> None:
+        prefix = self._relative(path)
+        if "." not in self.directory_handles:
+            raise ExportError("publication root owner is no longer retained")
+        for relative in sorted(
+            self.directories,
+            key=lambda value: (value != ".") + value.count("/"),
+        ):
+            if relative == "." or relative in self.directory_handles:
+                continue
+            if prefix != "." and not (
+                relative == prefix or relative.startswith(prefix + "/")
+            ):
+                continue
+            parent_handle, name = self._parent(relative)
+            handle: int | None = None
+            try:
+                handle, _ = _windows_nt_open_relative(
+                    parent_handle,
+                    name,
+                    desired_access=(
+                        0x00100000
+                        | 0x00010000
+                        | 0x00000080
+                        | 0x00000020
+                        | 0x00000001
+                        | 0x00000002
+                    ),
+                    share_access=0x00000001 | 0x00000002 | 0x00000004,
+                    disposition=1,
+                    create_options=0x00000001,
+                    file_attributes=0,
+                    context=f"owned directory {relative!r}",
+                )
+                information = _windows_handle_information(handle)
+                if not information["attributes"] & 0x00000010 or information[
+                    "attributes"
+                ] & 0x00000400:
+                    raise ExportError(
+                        f"owned directory {relative!r} is not an ordinary directory"
+                    )
+                if information["identity"] != self.directories[relative]:
+                    raise ExportError(
+                        f"owned directory {relative!r} identity changed"
+                    )
+                self.directory_handles[relative] = handle
+                handle = None
+            except BaseException as error:
+                if handle is not None:
+                    try:
+                        _windows_close_handle(handle)
+                    except BaseException as close_error:
+                        _retain_unresolved_handle(
+                            f"failed directory {relative!r}",
+                            handle,
+                            self.directories[relative],
+                            error,
+                        )
+                        _attach_exception_diagnostics(
+                            error,
+                            close_error,
+                            f"cannot release failed directory {relative!r}",
+                        )
+                raise
+
+    def inventory(
+        self, path: pathlib.Path | str = "."
+    ) -> tuple[dict[str, dict], list[str]]:
+        prefix = self._relative(path)
+        self.ensure_directory_handles(prefix)
+        selected_directories, selected_files = self.subtree_ledgers(prefix)
+        directory_seals: dict[str, dict] = {}
+        actual_directories: set[str] = {"."}
+        actual_files: set[str] = set()
+        prefix_path = pathlib.PurePosixPath(prefix) if prefix != "." else None
+
+        def global_relative(local: str) -> str:
+            if prefix_path is None:
+                return local
+            if local == ".":
+                return prefix
+            return (prefix_path / local).as_posix()
+
+        root_relative = global_relative(".")
+        root_handle = self.directory_handles[root_relative]
+        if root_relative == ".":
+            if self.parent_handle is None:
+                raise ExportError("publication parent owner is no longer retained")
+            watch_parent, watch_name = self.parent_handle, self.root.name
+        else:
+            watch_parent, watch_name = self._parent(root_relative)
+        with _directory_membership_guard(
+            self.root,
+            owner_parent_handle=watch_parent,
+            owner_name=watch_name,
+        ):
+            for local_relative, expected_identity in sorted(
+                selected_directories.items()
+            ):
+                relative = global_relative(local_relative)
+                handle = self.directory_handles.get(relative)
+                if handle is None:
+                    raise ExportError(
+                        f"owned directory {relative!r} is not retained for inspection"
+                    )
+                information = _windows_handle_information(handle)
+                if not information["attributes"] & 0x00000010 or information[
+                    "attributes"
+                ] & 0x00000400:
+                    raise ExportError(
+                        f"owned directory {relative!r} is not an ordinary directory"
+                    )
+                if information["identity"] != expected_identity:
+                    raise ExportError(
+                        f"owned directory {relative!r} identity changed"
+                    )
+                directory_seals[local_relative] = {
+                    key: information[key]
+                    for key in ("identity", "mtimeNs", "ctimeNs", "size", "links")
+                }
+                for name, attributes, file_id in _windows_list_directory_entries(
+                    handle, f"owned directory {relative!r}"
+                ):
+                    local_child = (
+                        name
+                        if local_relative == "."
+                        else f"{local_relative}/{name}"
+                    )
+                    if attributes & 0x00000400:
+                        raise ExportError(
+                            "publication stage contains a reparse-point member"
+                        )
+                    if attributes & 0x00000010:
+                        actual_directories.add(local_child)
+                        expected_child = selected_directories.get(local_child)
+                    else:
+                        actual_files.add(local_child)
+                        expected_child = selected_files.get(local_child)
+                    if expected_child is not None and expected_child[1] != file_id:
+                        raise ExportError(
+                            f"owned member {local_child!r} identity changed"
+                        )
+            if actual_directories != set(selected_directories) or actual_files != set(
+                selected_files
+            ):
+                raise ExportError(
+                    "owned tree contains untracked, missing, or mistyped members; "
+                    f"directories={sorted(actual_directories)!r}, "
+                    f"expectedDirectories={sorted(selected_directories)!r}, "
+                    f"files={sorted(actual_files)!r}, "
+                    f"expectedFiles={sorted(selected_files)!r}"
+                )
+            for local_relative, seal in directory_seals.items():
+                information = _windows_handle_information(
+                    self.directory_handles[global_relative(local_relative)]
+                )
+                current = {
+                    key: information[key]
+                    for key in ("identity", "mtimeNs", "ctimeNs", "size", "links")
+                }
+                if current != seal:
+                    raise ExportError(
+                        "publication stage membership changed during enumeration"
+                    )
+        return directory_seals, sorted(actual_files)
+
+    def rename_root(self, destination: pathlib.Path, context: str) -> None:
+        destination = destination.resolve()
+        if destination.parent != self.parent.resolve():
+            raise ExportError(f"cannot rename {context}: destination parent changed")
+        if self.parent_handle is None or "." not in self.directory_handles:
+            raise ExportError(f"cannot rename {context}: owner handle is unavailable")
+        release_failures: list[tuple[str, BaseException]] = []
+        for relative in sorted(
+            set(self.directory_handles) - {"."},
+            key=lambda value: value.count("/"),
+            reverse=True,
+        ):
+            try:
+                _windows_close_handle(self.directory_handles[relative])
+            except BaseException as error:
+                release_failures.append((relative, error))
+            else:
+                self.directory_handles.pop(relative)
+        if release_failures:
+            self._update_retention()
+            error = ExportError(
+                f"cannot rename {context}: cannot release descendant owner handles"
+            )
+            for relative, failure in release_failures:
+                _attach_exception_diagnostics(
+                    error, failure, f"directory {relative!r}"
+                )
+            raise error from release_failures[0][1]
+        root_handle = self.directory_handles["."]
+        try:
+            _windows_rename_handle(
+                root_handle, self.parent_handle, destination.name, context
+            )
+        except BaseException as error:
+            try:
+                self.root = _windows_final_path(root_handle)
+            except BaseException as path_error:
+                _attach_exception_diagnostics(
+                    error, path_error, f"cannot reconcile {context} destination"
+                )
+            raise
+        self.root = destination
 
     def move_file(
         self,
@@ -736,53 +1178,7 @@ class _WindowsOwnedTree:
             )
             if _windows_handle_identity(handle) != expected_identity:
                 raise ExportError(f"cannot move {context}: source identity changed")
-
-            class FileRenameInformation(ctypes.Structure):
-                _fields_ = [
-                    ("Flags", ctypes.c_uint32),
-                    ("RootDirectory", ctypes.c_void_p),
-                    ("FileNameLength", ctypes.c_uint32),
-                    ("FileName", ctypes.c_wchar * (len(target_name) + 1)),
-                ]
-
-            rename = FileRenameInformation(
-                0,
-                target_parent,
-                len(target_name.encode("utf-16-le")),
-                target_name,
-            )
-
-            class IoStatusBlock(ctypes.Structure):
-                _fields_ = [
-                    ("Status", ctypes.c_void_p),
-                    ("Information", ctypes.c_size_t),
-                ]
-
-            status_block = IoStatusBlock()
-            ntdll = ctypes.WinDLL("ntdll", use_last_error=True)
-            set_information = ntdll.NtSetInformationFile
-            set_information.argtypes = [
-                ctypes.c_void_p,
-                ctypes.POINTER(IoStatusBlock),
-                ctypes.c_void_p,
-                ctypes.c_uint32,
-                ctypes.c_int,
-            ]
-            set_information.restype = ctypes.c_long
-            status = int(
-                set_information(
-                    ctypes.c_void_p(handle),
-                    ctypes.byref(status_block),
-                    ctypes.byref(rename),
-                    ctypes.sizeof(rename),
-                    10,
-                )
-            )
-            if status < 0:
-                raise ExportError(
-                    f"cannot move {context}: Windows error "
-                    f"{_windows_nt_status_error(status)}"
-                )
+            _windows_rename_handle(handle, target_parent, target_name, context)
             self.files[destination_relative] = self.files.pop(source_relative)
         except BaseException as error:
             primary_error = error
@@ -790,54 +1186,178 @@ class _WindowsOwnedTree:
             if handle is not None:
                 try:
                     _windows_close_handle(handle)
-                except ExportError as close_error:
-                    _UNRESOLVED_WINDOWS_HANDLES.append(handle)
+                except BaseException as close_error:
+                    _retain_unresolved_handle(
+                        f"failed {context} handle",
+                        handle,
+                        expected_identity,
+                        primary_error or close_error,
+                    )
                     if primary_error is None:
                         primary_error = ExportError(
                             f"cannot release {context} handle: {close_error}"
                         )
+                        _attach_exception_diagnostics(
+                            primary_error, close_error, f"{context} handle"
+                        )
                     else:
-                        primary_error.add_note(
-                            f"cannot release {context} handle: {close_error}"
+                        _attach_exception_diagnostics(
+                            primary_error, close_error, f"cannot release {context} handle"
                         )
         if primary_error is not None:
             raise primary_error
 
-    def close_directory(self, path: pathlib.Path | str) -> None:
-        relative = self._relative(path)
-        handle = self.directory_handles.get(relative)
-        if handle is None:
-            return
-        _windows_close_handle(handle)
-        self.directory_handles.pop(relative)
-
-    def close(self) -> None:
-        errors = []
-        for relative in sorted(
-            self.directory_handles,
-            key=lambda value: (value != ".") + value.count("/"),
-            reverse=True,
-        ):
-            handle = self.directory_handles[relative]
-            try:
-                _windows_close_handle(handle)
-            except ExportError as error:
-                errors.append(f"{relative!r}: {error}")
-            else:
-                self.directory_handles.pop(relative)
-        if self.directory_handles and not self._retained:
+    def _update_retention(self) -> None:
+        unresolved = self.parent_handle is not None or bool(self.directory_handles)
+        if unresolved and not self._retained:
             _UNRESOLVED_WINDOWS_OWNED_TREES.append(self)
             self._retained = True
-        elif not self.directory_handles and self._retained:
+        elif not unresolved and self._retained:
             try:
                 _UNRESOLVED_WINDOWS_OWNED_TREES.remove(self)
             except ValueError:
                 pass
             self._retained = False
-        if errors:
-            raise ExportError(
-                "cannot release owned staging directories: " + "; ".join(errors)
+
+    def close(self) -> None:
+        failures: list[tuple[str, BaseException]] = []
+        if self.parent_handle is not None:
+            try:
+                _windows_close_handle(self.parent_handle)
+            except BaseException as error:
+                failures.append(("publication parent", error))
+            else:
+                self.parent_handle = None
+        for relative in sorted(
+            set(self.directory_handles) - {"."},
+            key=lambda value: value.count("/"),
+            reverse=True,
+        ):
+            handle = self.directory_handles[relative]
+            try:
+                _windows_close_handle(handle)
+            except BaseException as error:
+                failures.append((f"directory {relative!r}", error))
+            else:
+                self.directory_handles.pop(relative)
+        if "." in self.directory_handles:
+            try:
+                _windows_close_handle(self.directory_handles["."])
+            except BaseException as error:
+                failures.append(("publication root", error))
+            else:
+                self.directory_handles.pop(".")
+        self._update_retention()
+        if failures:
+            error = ExportError(
+                "cannot release owned staging tree: "
+                + ", ".join(label for label, _ in failures)
             )
+            for label, failure in failures:
+                _attach_exception_diagnostics(error, failure, label)
+            raise error from failures[0][1]
+
+    def delete_subtree(self, path: pathlib.Path | str = ".") -> None:
+        prefix = self._relative(path)
+        expected_directories, expected_files = self.subtree_ledgers(prefix)
+        directories, files = self.inventory(prefix)
+        if set(directories) != set(expected_directories) or set(files) != set(
+            expected_files
+        ):
+            raise ExportError(
+                "owned cleanup tree contains untracked or missing members"
+            )
+        for relative, seal in directories.items():
+            if seal["identity"] != expected_directories[relative]:
+                raise ExportError(
+                    f"owned cleanup directory {relative!r} identity changed"
+                )
+
+        def global_relative(local: str) -> str:
+            if prefix == ".":
+                return local
+            if local == ".":
+                return prefix
+            return f"{prefix}/{local}"
+
+        acquired = _WindowsHandleOwner("owned cleanup handles")
+        try:
+            for local_relative in files:
+                relative = global_relative(local_relative)
+                parent_handle, name = self._parent(relative)
+                handle, _ = _windows_nt_open_relative(
+                    parent_handle,
+                    name,
+                    desired_access=0x00100000 | 0x00010000 | 0x00000080,
+                    share_access=0x00000001 | 0x00000002 | 0x00000004,
+                    disposition=1,
+                    create_options=0x00000040 | 0x00000020,
+                    file_attributes=0,
+                    context=f"owned cleanup file {relative!r}",
+                )
+                acquired.add(relative, handle, self.files[relative])
+                information = _windows_handle_information(handle)
+                if information["attributes"] & (0x00000010 | 0x00000400):
+                    raise ExportError(
+                        f"owned cleanup file {relative!r} is not an ordinary file"
+                    )
+                if information["identity"] != self.files[relative]:
+                    raise ExportError(
+                        f"owned cleanup file {relative!r} identity changed"
+                    )
+
+            final_directories, final_files = self.inventory(prefix)
+            if final_directories != directories or final_files != files:
+                raise ExportError("owned cleanup tree changed before deletion")
+        except BaseException as error:
+            try:
+                acquired.close()
+            except BaseException as close_error:
+                _attach_exception_diagnostics(
+                    error, close_error, "cleanup acquisition rollback"
+                )
+            raise
+
+        failures: list[tuple[str, BaseException]] = []
+        for local_relative in sorted(files):
+            relative = global_relative(local_relative)
+            handle = acquired.handles[relative]
+            try:
+                _windows_mark_delete(handle)
+                _windows_close_handle(handle)
+            except BaseException as error:
+                failures.append((f"file {relative!r}", error))
+            else:
+                acquired.handles.pop(relative)
+                acquired.identities.pop(relative, None)
+                self.files.pop(relative, None)
+
+        for local_relative in sorted(
+            directories,
+            key=lambda value: (value != ".") + value.count("/"),
+            reverse=True,
+        ):
+            relative = global_relative(local_relative)
+            handle = self.directory_handles[relative]
+            try:
+                _windows_mark_delete(handle)
+                _windows_close_handle(handle)
+            except BaseException as error:
+                failures.append((f"directory {relative!r}", error))
+            else:
+                self.directory_handles.pop(relative)
+                self.directories.pop(relative, None)
+
+        try:
+            acquired.close()
+        except BaseException as close_error:
+            failures.append(("cleanup handle release", close_error))
+        self._update_retention()
+        if failures:
+            primary = failures[0][1]
+            for label, failure in failures[1:]:
+                _attach_exception_diagnostics(primary, failure, label)
+            raise primary
 
     def subtree_ledgers(
         self, path: pathlib.Path | str
@@ -845,6 +1365,8 @@ class _WindowsOwnedTree:
         prefix = self._relative(path)
 
         def select(values: dict[str, tuple[int, int]]) -> dict[str, tuple[int, int]]:
+            if prefix == ".":
+                return dict(values)
             selected = {}
             for relative, identity in values.items():
                 if relative == prefix:
@@ -854,14 +1376,6 @@ class _WindowsOwnedTree:
             return selected
 
         return select(self.directories), select(self.files)
-
-    def forget_subtree(self, path: pathlib.Path | str) -> None:
-        prefix = self._relative(path)
-        for values in (self.directories, self.files):
-            for relative in list(values):
-                if relative == prefix or relative.startswith(prefix + "/"):
-                    values.pop(relative)
-
 
 def _windows_open_change_watch_handle(root: pathlib.Path) -> int:
     kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
@@ -959,7 +1473,13 @@ class _WindowsDirectoryChangeWatch:
             ("hEvent", ctypes.c_void_p),
         ]
 
-    def __init__(self, root: pathlib.Path):
+    def __init__(
+        self,
+        root: pathlib.Path | None = None,
+        *,
+        owner_parent_handle: int | None = None,
+        owner_name: str | None = None,
+    ):
         self.handle: int | None = None
         self.event: int | None = None
         self.overlapped = self.Overlapped()
@@ -967,7 +1487,21 @@ class _WindowsDirectoryChangeWatch:
         self._retained = False
         self._start_may_be_pending = False
         try:
-            self.handle = _windows_open_change_watch_handle(root)
+            if owner_parent_handle is not None and owner_name is not None:
+                self.handle, _ = _windows_nt_open_relative(
+                    owner_parent_handle,
+                    owner_name,
+                    desired_access=0x00000001,
+                    share_access=0x00000001 | 0x00000002 | 0x00000004,
+                    disposition=1,
+                    create_options=0x00000001,
+                    file_attributes=0,
+                    context="publication membership watch",
+                )
+            elif root is not None:
+                self.handle = _windows_open_change_watch_handle(root)
+            else:
+                raise ExportError("publication membership watch requires an owner")
             self.event = _windows_create_event_handle()
             self.overlapped.hEvent = self.event
             self._start_may_be_pending = True
@@ -990,20 +1524,24 @@ class _WindowsDirectoryChangeWatch:
             close_errors = self._release_handles()
             if close_errors:
                 self._retain_unresolved_resources()
-            for close_error in close_errors:
-                error.add_note(close_error)
+            for attribute, close_error in close_errors:
+                _attach_exception_diagnostics(
+                    error,
+                    close_error,
+                    f"cannot release change-watch {attribute}",
+                )
             raise
 
-    def _release_handles(self) -> list[str]:
-        errors = []
+    def _release_handles(self) -> list[tuple[str, BaseException]]:
+        errors: list[tuple[str, BaseException]] = []
         for attribute in ("event", "handle"):
             handle = getattr(self, attribute)
             if handle is None:
                 continue
             try:
                 _windows_close_handle(handle)
-            except ExportError as error:
-                errors.append(f"cannot release change-watch {attribute}: {error}")
+            except BaseException as error:
+                errors.append((attribute, error))
             else:
                 setattr(self, attribute, None)
         return errors
@@ -1081,16 +1619,25 @@ class _WindowsDirectoryChangeWatch:
                     errors.append(
                         f"change-watch result failed with Windows error {error_number}"
                     )
-            errors.extend(self._release_handles())
+            release_errors = self._release_handles()
             if self.handle is not None or self.event is not None:
                 self._retain_unresolved_resources()
             else:
                 self._release_retention()
-            if errors:
-                raise ExportError(
-                    "cannot finish publication membership watch: "
-                    + "; ".join(errors)
-                )
+            if errors or release_errors:
+                message = "cannot finish publication membership watch"
+                if errors:
+                    message += ": " + "; ".join(errors)
+                failure = ExportError(message)
+                for attribute, release_error in release_errors:
+                    _attach_exception_diagnostics(
+                        failure,
+                        release_error,
+                        f"cannot release change-watch {attribute}",
+                    )
+                if release_errors:
+                    raise failure from release_errors[0][1]
+                raise failure
             return changed
         except BaseException as error:
             if not completion_established or self.handle is not None or self.event is not None:
@@ -1109,11 +1656,20 @@ class _WindowsDirectoryChangeWatch:
 
 
 @contextlib.contextmanager
-def _directory_membership_guard(root: pathlib.Path):
+def _directory_membership_guard(
+    root: pathlib.Path,
+    *,
+    owner_parent_handle: int | None = None,
+    owner_name: str | None = None,
+):
     if os.name != "nt":
         yield
         return
-    watch = _WindowsDirectoryChangeWatch(root)
+    watch = _WindowsDirectoryChangeWatch(
+        root,
+        owner_parent_handle=owner_parent_handle,
+        owner_name=owner_name,
+    )
     try:
         yield
     except BaseException as error:
@@ -1123,7 +1679,9 @@ def _directory_membership_guard(root: pathlib.Path):
                     "publication stage membership changed during enumeration"
                 )
         except BaseException as watch_error:
-            error.add_note(_format_exception_diagnostics(watch_error))
+            _attach_exception_diagnostics(
+                error, watch_error, "publication membership watch teardown"
+            )
         raise
     else:
         if watch.finish():
@@ -1340,7 +1898,11 @@ def _read_sealed_file(
         raise ExportError(f"cannot seal staged file {path.name!r}: {error}") from error
 
 
-def _inventory_stage(root: pathlib.Path) -> tuple[dict[str, dict], list[str]]:
+def _inventory_stage(
+    root: pathlib.Path, owned_tree: _WindowsOwnedTree | None = None
+) -> tuple[dict[str, dict], list[str]]:
+    if owned_tree is not None:
+        return owned_tree.inventory()
     with _directory_membership_guard(root):
         directories: dict[str, dict] = {
             ".": _directory_seal(root, "publication stage")
@@ -1377,20 +1939,32 @@ def _inventory_stage(root: pathlib.Path) -> tuple[dict[str, dict], list[str]]:
     return directories, sorted(files)
 
 
-def _snapshot_stage(root: pathlib.Path, scan_public: bool = False) -> dict:
-    directories, filenames = _inventory_stage(root)
+def _snapshot_stage(
+    root: pathlib.Path,
+    scan_public: bool = False,
+    owned_tree: _WindowsOwnedTree | None = None,
+) -> dict:
+    if owned_tree is not None:
+        root = owned_tree.root
+    directories, filenames = _inventory_stage(root, owned_tree=owned_tree)
     files: dict[str, dict] = {}
     with contextlib.ExitStack() as stack:
         streams = {}
         for relative in filenames:
             path = root / relative
             try:
-                stream = stack.enter_context(path.open("r+b"))
+                stream = stack.enter_context(
+                    owned_tree.open_file(path, f"staged file {relative!r}")
+                    if owned_tree is not None
+                    else path.open("r+b")
+                )
                 stack.enter_context(_exclusive_stream_lock(stream))
             except OSError as error:
                 raise ExportError(f"cannot seal staged file {relative!r}: {error}") from error
             streams[relative] = stream
-        locked_directories, locked_filenames = _inventory_stage(root)
+        locked_directories, locked_filenames = _inventory_stage(
+            root, owned_tree=owned_tree
+        )
         if locked_directories != directories or locked_filenames != filenames:
             raise ExportError("publication stage changed while files were locked")
         for relative in filenames:
@@ -1414,14 +1988,20 @@ def _snapshot_stage(root: pathlib.Path, scan_public: bool = False) -> dict:
                 or current.st_mtime_ns != seal["mtimeNs"]
             ):
                 raise ExportError("publication stage changed during coherent verification")
-        final_directories, final_filenames = _inventory_stage(root)
+        final_directories, final_filenames = _inventory_stage(
+            root, owned_tree=owned_tree
+        )
         if final_directories != directories or final_filenames != filenames:
             raise ExportError("publication stage changed during coherent verification")
     return {"directories": directories, "files": files}
 
 
-def _require_stage_snapshot(root: pathlib.Path, expected: dict) -> None:
-    if _snapshot_stage(root) != expected:
+def _require_stage_snapshot(
+    root: pathlib.Path,
+    expected: dict,
+    owned_tree: _WindowsOwnedTree | None = None,
+) -> None:
+    if _snapshot_stage(root, owned_tree=owned_tree) != expected:
         raise ExportError("publication stage changed after validation")
 
 
@@ -2583,6 +3163,7 @@ def _jsonl_bytes(records: list[dict]) -> bytes:
 
 def _seal_public_stage(
     staging: pathlib.Path,
+    owned_tree: _WindowsOwnedTree,
     expected_root_identity: tuple[int, int],
     expected_directories: dict[str, tuple[int, int]],
     expected_files: dict[str, tuple[int, int]],
@@ -2597,7 +3178,9 @@ def _seal_public_stage(
         "export-receipt.json",
         "public-preview.json",
     }
-    snapshot = _snapshot_stage(staging, scan_public=True)
+    snapshot = _snapshot_stage(
+        staging, scan_public=True, owned_tree=owned_tree
+    )
     if snapshot["directories"]["."]["identity"] != expected_root_identity:
         raise ExportError("publication stage root identity changed before sealing")
     if set(snapshot["directories"]) != {".", "artifacts", "content"}:
@@ -2628,40 +3211,6 @@ def _seal_public_stage(
     return snapshot
 
 
-def _withdraw_owned_publication(
-    output: pathlib.Path,
-    staging: pathlib.Path,
-    expected_identity: tuple[int, int],
-) -> None:
-    if _directory_identity(output, "published output") != expected_identity:
-        raise ExportError("published output custody is uncertain; root identity changed")
-    if staging.exists():
-        raise ExportError("published output cannot be withdrawn; staging path is occupied")
-    try:
-        os.rename(output, staging)
-    except OSError as error:
-        raise ExportError(f"published output could not be withdrawn: {error}") from error
-    if _directory_identity(staging, "withdrawn publication") != expected_identity:
-        try:
-            if not output.exists():
-                os.rename(staging, output)
-        except OSError as restore_error:
-            raise ExportError(
-                "published output custody changed during withdrawal and restoration failed: "
-                f"{restore_error}"
-            ) from restore_error
-        raise ExportError("published output custody changed during withdrawal")
-
-
-def _observe_directory(path: pathlib.Path, context: str) -> tuple[str, tuple[int, int] | None]:
-    try:
-        return "present", _directory_identity(path, context)
-    except ExportError as error:
-        if not os.path.lexists(path):
-            return "absent", None
-        raise ExportError(f"{context} custody could not be established: {error}") from error
-
-
 def _publication_snapshot(snapshot: dict) -> dict:
     return {
         "directories": {
@@ -2677,14 +3226,15 @@ def _publish_no_clobber(
     output: pathlib.Path,
     expected_snapshot: dict,
     expected_identity: tuple[int, int],
+    owned_tree: _WindowsOwnedTree,
 ) -> None:
     """Atomically publish a directory while refusing an existing destination."""
-    _require_stage_snapshot(staging, expected_snapshot)
+    _require_stage_snapshot(staging, expected_snapshot, owned_tree=owned_tree)
     if expected_snapshot["directories"]["."]["identity"] != expected_identity:
         raise ExportError("validated stage does not have its creation-time identity")
     try:
-        os.rename(staging, output)
-        published_snapshot = _snapshot_stage(output)
+        owned_tree.rename_root(output, "publication stage")
+        published_snapshot = _snapshot_stage(output, owned_tree=owned_tree)
         if (
             published_snapshot["directories"]["."]["identity"] != expected_identity
             or _publication_snapshot(published_snapshot)
@@ -2692,27 +3242,21 @@ def _publish_no_clobber(
         ):
             raise ExportError("published output differs from the validated stage")
     except BaseException as error:
-        try:
-            stage_state, stage_identity = _observe_directory(
-                staging, "publication staging"
-            )
-            output_state, output_identity = _observe_directory(
-                output, "published output"
-            )
-        except ExportError as custody_error:
-            raise ExportError(
-                f"publication transition failed: {error}; {custody_error}"
-            ) from error
-        if output_identity == expected_identity and stage_state == "absent":
+        if owned_tree.root == output:
             try:
-                _withdraw_owned_publication(output, staging, expected_identity)
-            except ExportError as withdrawal_error:
-                raise ExportError(
-                    f"publication transition failed: {error}; "
-                    f"withdrawal failed: {withdrawal_error}"
-                ) from error
+                owned_tree.rename_root(staging, "failed publication withdrawal")
+            except BaseException as withdrawal_error:
+                wrapped = ExportError(
+                    "publication transition failed and the owned output "
+                    "could not be withdrawn"
+                )
+                _attach_exception_diagnostics(wrapped, error, "publication")
+                _attach_exception_diagnostics(
+                    wrapped, withdrawal_error, "withdrawal"
+                )
+                raise wrapped from error
             raise
-        if stage_identity == expected_identity and output_identity != expected_identity:
+        if owned_tree.root == staging:
             if isinstance(error, FileExistsError) or (
                 isinstance(error, OSError)
                 and error.errno in {errno.EEXIST, errno.ENOTEMPTY, errno.EACCES}
@@ -2722,10 +3266,12 @@ def _publish_no_clobber(
             if isinstance(error, OSError):
                 raise ExportError(f"cannot publish export: {error}") from error
             raise
-        raise ExportError(
-            "publication transition failed with uncertain stage/output custody: "
-            f"{error}; stage={stage_state}, output={output_state}"
-        ) from error
+        wrapped = ExportError(
+            "publication transition failed with uncertain pathname custody; "
+            "the generated root remains retained by handle"
+        )
+        _attach_exception_diagnostics(wrapped, error, "publication")
+        raise wrapped from error
 
 
 def _windows_mark_delete(handle: int) -> None:
@@ -2754,161 +3300,11 @@ def _windows_mark_delete(handle: int) -> None:
         )
 
 
-def _close_windows_handles(handles: dict[str, int]) -> None:
-    errors = []
-    for relative, handle in list(handles.items()):
-        try:
-            _windows_close_handle(handle)
-        except ExportError as error:
-            errors.append(f"{relative!r}: {error}")
-        else:
-            handles.pop(relative, None)
-    if errors:
-        raise ExportError(
-            "cannot close owned paths; unresolved handles: " + "; ".join(errors)
-        )
-
-
-def _windows_delete_owned_tree(
-    root: pathlib.Path,
-    expected_identity: tuple[int, int],
-    owned_directories: dict[str, tuple[int, int]],
-    owned_files: dict[str, tuple[int, int]],
-) -> None:
-    directory_handles: dict[str, int] = {}
-    file_handles: dict[str, int] = {}
-    try:
-        root_handle = _windows_open_path_handle(
-            root, delete=True, deny_delete_sharing=True
-        )
-        directory_handles["."] = root_handle
-        if _windows_handle_identity(root_handle) != expected_identity:
-            raise ExportError("owned cleanup root identity changed before deletion")
-
-        directories, files = _inventory_stage(root)
-        if directories["."]["identity"] != expected_identity:
-            raise ExportError("owned cleanup root identity changed during enumeration")
-        if set(directories) != set(owned_directories) or set(files) != set(
-            owned_files
-        ):
-            raise ExportError(
-                "owned cleanup tree contains untracked or missing members"
-            )
-        for relative, seal in directories.items():
-            if seal["identity"] != owned_directories[relative]:
-                raise ExportError(
-                    f"owned cleanup directory {relative!r} identity changed"
-                )
-        for relative in sorted(set(directories) - {"."}):
-            handle = _windows_open_path_handle(
-                root / relative, delete=True, deny_delete_sharing=True
-            )
-            directory_handles[relative] = handle
-            if _windows_handle_identity(handle) != owned_directories[relative]:
-                raise ExportError(
-                    f"owned cleanup directory {relative!r} changed before deletion"
-                )
-        for relative in files:
-            handle = _windows_open_path_handle(
-                root / relative, delete=True, deny_delete_sharing=True
-            )
-            file_handles[relative] = handle
-            if _windows_handle_identity(handle) != owned_files[relative]:
-                raise ExportError(
-                    f"owned cleanup file {relative!r} changed before deletion"
-                )
-
-        final_directories, final_files = _inventory_stage(root)
-        if final_directories != directories or final_files != files:
-            raise ExportError("owned cleanup tree changed before deletion")
-        for relative in sorted(file_handles):
-            handle = file_handles[relative]
-            _windows_mark_delete(handle)
-            _windows_close_handle(handle)
-            file_handles.pop(relative)
-        for relative in sorted(
-            directory_handles,
-            key=lambda value: (value != ".") + value.count("/"),
-            reverse=True,
-        ):
-            handle = directory_handles[relative]
-            _windows_mark_delete(handle)
-            _windows_close_handle(handle)
-            directory_handles.pop(relative)
-    except BaseException as error:
-        for handles in (file_handles, directory_handles):
-            try:
-                _close_windows_handles(handles)
-            except ExportError as close_error:
-                error.add_note(str(close_error))
-        raise
-
-
-def _delete_owned_tree(
-    root: pathlib.Path,
-    expected_identity: tuple[int, int],
-    owned_directories: dict[str, tuple[int, int]],
-    owned_files: dict[str, tuple[int, int]],
-) -> None:
-    if os.name != "nt":
-        raise ExportError("object-bound recursive cleanup requires Windows")
-    _windows_delete_owned_tree(
-        root, expected_identity, owned_directories, owned_files
-    )
-
-
-def _remove_private_staging(
-    path: pathlib.Path,
-    context: str,
-    expected_identity: tuple[int, int],
-    owned_directories: dict[str, tuple[int, int]] | None = None,
-    owned_files: dict[str, tuple[int, int]] | None = None,
-) -> None:
-    expected_directories = dict(owned_directories or {".": expected_identity})
-    expected_files = dict(owned_files or {})
-    if expected_directories.get(".") != expected_identity:
-        raise ExportError(f"cannot remove {context}: root ledger is inconsistent")
-    quarantine = path.parent / f".{path.name}.cleanup-{uuid.uuid4().hex}"
-    if quarantine.exists():
-        raise ExportError(f"cannot remove {context}: cleanup path already exists")
-    try:
-        os.rename(path, quarantine)
-    except FileNotFoundError as error:
-        raise ExportError(f"cannot remove {context}: owned directory is absent") from error
-    except OSError as error:
-        raise ExportError(f"cannot remove {context}: {error}") from error
-    actual_identity = _directory_identity(quarantine, context)
-    if actual_identity != expected_identity:
-        try:
-            if not path.exists():
-                os.rename(quarantine, path)
-        except OSError as restore_error:
-            raise ExportError(
-                f"cannot remove {context}: ownership changed and restoration failed: "
-                f"{restore_error}"
-            ) from restore_error
-        raise ExportError(f"cannot remove {context}: pathname identified another directory")
-    try:
-        _delete_owned_tree(
-            quarantine, expected_identity, expected_directories, expected_files
-        )
-    except BaseException as error:
-        try:
-            if not path.exists():
-                os.rename(quarantine, path)
-        except OSError as restore_error:
-            error.add_note(
-                f"cannot restore {context} after rejected cleanup: {restore_error}"
-            )
-        raise
-    if quarantine.exists():
-        raise ExportError(f"cannot remove {context}")
-
-
 def export_plan(plan_path: pathlib.Path, output: pathlib.Path) -> dict:
     staging: pathlib.Path | None = None
     staging_identity: tuple[int, int] | None = None
     owned_tree: _WindowsOwnedTree | None = None
+    publication_owner: _WindowsHandleOwner | None = None
     try:
         if os.name != "nt":
             raise ExportError(
@@ -2944,18 +3340,7 @@ def export_plan(plan_path: pathlib.Path, output: pathlib.Path) -> dict:
             spool_directory,
             owned_tree=owned_tree,
         )
-        owned_tree.close_directory(spool_directory)
-        spool_directories, spool_files = owned_tree.subtree_ledgers(
-            spool_directory
-        )
-        _remove_private_staging(
-            spool_directory,
-            "private source staging",
-            spool_identity,
-            owned_directories=spool_directories,
-            owned_files=spool_files,
-        )
-        owned_tree.forget_subtree(spool_directory)
+        owned_tree.delete_subtree(spool_directory)
         artifact_directory = staging / "artifacts"
         owned_tree.create_directory(artifact_directory, "artifact staging")
         final_bundle = artifact_directory / f"{artifact['artifactSha256']}.zip"
@@ -2983,9 +3368,9 @@ def export_plan(plan_path: pathlib.Path, output: pathlib.Path) -> dict:
                 stream.write(data)
                 stream.flush()
                 os.fsync(stream.fileno())
-        owned_tree.close()
         stage_snapshot = _seal_public_stage(
             staging,
+            owned_tree,
             staging_identity,
             owned_tree.directories,
             owned_tree.files,
@@ -2994,47 +3379,46 @@ def export_plan(plan_path: pathlib.Path, output: pathlib.Path) -> dict:
             expected_public_bytes,
         )
         _publish_no_clobber(
-            staging, output, stage_snapshot, staging_identity
+            staging, output, stage_snapshot, staging_identity, owned_tree
         )
+        publication_owner = _WindowsHandleOwner("published output observation")
+        publication_handle = _windows_open_owner_directory(
+            output, "published output"
+        )
+        publication_identity = _windows_handle_identity(publication_handle)
+        publication_owner.add(".", publication_handle, publication_identity)
+        if publication_identity != staging_identity:
+            raise ExportError("published output identity changed before release")
+        owned_tree.close()
+        publication_owner.close()
         staging = None
         staging_identity = None
         owned_tree = None
+        publication_owner = None
     except BaseException as error:
-        cleanup_error = None
-        if owned_tree is not None and owned_tree.directory_handles:
+        cleanup_errors: list[BaseException] = []
+        if publication_owner is not None:
+            try:
+                publication_owner.close()
+            except BaseException as cleanup_error:
+                cleanup_errors.append(cleanup_error)
+        if owned_tree is not None and "." in owned_tree.directory_handles:
+            try:
+                owned_tree.delete_subtree(".")
+            except BaseException as cleanup_error:
+                cleanup_errors.append(cleanup_error)
+                if "." in owned_tree.directory_handles:
+                    owned_tree._update_retention()
+        if owned_tree is not None and "." not in owned_tree.directory_handles:
             try:
                 owned_tree.close()
-            except ExportError as caught:
-                cleanup_error = caught
-        if staging is not None and staging_identity is not None:
-            if owned_tree is not None and owned_tree.directory_handles:
-                if cleanup_error is None:
-                    cleanup_error = ExportError(
-                        "owned staging handles remain unresolved"
-                    )
-            else:
-                try:
-                    _remove_private_staging(
-                        staging,
-                        "export staging",
-                        staging_identity,
-                        owned_directories=(
-                            owned_tree.directories
-                            if owned_tree is not None
-                            else {".": staging_identity}
-                        ),
-                        owned_files=(owned_tree.files if owned_tree is not None else {}),
-                    )
-                except ExportError as caught:
-                    if cleanup_error is None:
-                        cleanup_error = caught
-                    else:
-                        cleanup_error.add_note(str(caught))
-        if cleanup_error is not None:
-            wrapped = ExportError(f"{error}; cleanup failed: {cleanup_error}")
-            for source, label in ((error, "primary"), (cleanup_error, "cleanup")):
-                for note in getattr(source, "__notes__", ()):
-                    wrapped.add_note(f"{label}: {note}")
+            except BaseException as close_error:
+                cleanup_errors.append(close_error)
+        if cleanup_errors:
+            wrapped = ExportError(f"{error}; cleanup failed")
+            _attach_exception_diagnostics(wrapped, error, "primary")
+            for cleanup_error in cleanup_errors:
+                _attach_exception_diagnostics(wrapped, cleanup_error, "cleanup")
             raise wrapped from error
         if isinstance(error, (ExportError, KeyboardInterrupt, SystemExit)):
             raise
