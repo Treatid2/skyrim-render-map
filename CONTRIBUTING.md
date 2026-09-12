@@ -70,6 +70,10 @@ remain outside Git. Keep correctness, visual effect, and preference distinct;
 retain every trial and disagreement; and follow the
 [visual evaluation](docs/visual-evaluation.md) and
 [capture evidence](docs/capture-evidence.md) guides.
+The [CSX capture exporter](docs/capture-producer-export.md) can produce a
+deterministic review bundle and both neutral record types from a finalized CSX
+screenshot sequence. It does not upload the bundle or create the surrounding
+submission manifest.
 
 Before opening a PR, also run:
 
