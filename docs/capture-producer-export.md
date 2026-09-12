@@ -139,6 +139,11 @@ the actual source, and `sourceFallbackApplied` records whether CSX substituted
 that source for the request. This prevents an HMD request that fell back to a
 desktop mirror from being mislabelled as an HMD submission.
 
+When fallback changes the source, stale requested output declarations do not
+describe the substituted source. An explicit `effective.outputs` declaration
+does: its complete view set, filename suffixes, format, and colour contract
+must agree with every retained artifact or the export is rejected.
+
 Dropped, failed, cancelled, duplicated, or warning-bearing frame slots are
 retained in the bundle manifest and make the visual-capture record
 `contaminated`. Such evidence can still be admitted and inspected, but the

@@ -31,7 +31,7 @@ import compile_dataset as compiler
 import validate_repository as validator
 
 
-TOOL_VERSION = "1.0.9"
+TOOL_VERSION = "1.0.10"
 PLAN_SCHEMA = {
     "name": "skyrim-render-map.csx-capture-export-plan",
     "major": 1,
@@ -2543,9 +2543,9 @@ def _inspect_completed_child(
         raise ExportError(f"{context} changed capture source without declaring fallback")
 
     declared_capture = capture
-    if isinstance(effective.get("outputs"), list):
+    if "outputs" in effective:
         declared_capture = {"outputs": effective["outputs"]}
-    if fallback_value and actual_source.get("kind") != requested_source.get("kind"):
+    elif fallback_value and actual_source.get("kind") != requested_source.get("kind"):
         declared_capture = {}
     artifacts = child.get("artifacts")
     if not isinstance(artifacts, list) or not artifacts:

@@ -247,6 +247,33 @@ class CaptureExporterTest(unittest.TestCase):
         (self.source / old_name).replace(self.source / new_name)
         artifact["path"] = f"D:/expired/capture/{new_name}"
 
+    def _fallback_manifest(self, effective_outputs: list[dict] | None = None) -> dict:
+        manifest = self._manifest()
+        manifest["capture"] = None
+        for child in manifest["children"]:
+            child["artifacts"] = child["artifacts"][:1]
+            artifact = child["artifacts"][0]
+            original_name = pathlib.Path(artifact["path"]).name
+            combined_name = original_name.replace("_left.png", "_combined.png")
+            self._rename_artifact(artifact, combined_name)
+            artifact["actual"] = {
+                "view": "source_native",
+                "width": 2,
+                "height": 1,
+                "format": "png",
+                "colourContract": "sdr_srgb",
+            }
+            child["requested"] = {"source": {"kind": "hmd_submission"}}
+            child["effective"] = {"source": {"kind": "desktop_mirror"}}
+            if effective_outputs is not None:
+                child["effective"]["outputs"] = copy.deepcopy(effective_outputs)
+            child["actual"] = {
+                "source": {"kind": "desktop_mirror", "fallbackApplied": True}
+            }
+            child["state"] = "completed_with_warnings"
+            child["warnings"] = [{"code": "source_fallback"}]
+        return manifest
+
     @staticmethod
     def _read_jsonl(path: pathlib.Path) -> dict:
         return json.loads(path.read_text(encoding="utf-8").strip())
@@ -295,29 +322,7 @@ class CaptureExporterTest(unittest.TestCase):
         self.assertNotIn("requestId", bundle["source"])
 
     def test_actual_fallback_source_is_preserved(self) -> None:
-        manifest = self._manifest()
-        manifest["capture"] = None
-        for child in manifest["children"]:
-            child["artifacts"] = child["artifacts"][:1]
-            artifact = child["artifacts"][0]
-            original_name = pathlib.Path(artifact["path"]).name
-            combined_name = original_name.replace("_left.png", "_combined.png")
-            (self.source / original_name).replace(self.source / combined_name)
-            artifact["path"] = f"D:/expired/capture/{combined_name}"
-            artifact["actual"] = {
-                "view": "source_native",
-                "width": 2,
-                "height": 1,
-                "format": "png",
-                "colourContract": "sdr_srgb",
-            }
-            child["requested"] = {"source": {"kind": "hmd_submission"}}
-            child["effective"] = {"source": {"kind": "hmd_submission"}}
-            child["actual"] = {
-                "source": {"kind": "desktop_mirror", "fallbackApplied": True}
-            }
-            child["state"] = "completed_with_warnings"
-            child["warnings"] = [{"code": "source_fallback"}]
+        manifest = self._fallback_manifest()
         self._write_inputs(manifest)
 
         output = self.root / "fallback"
@@ -327,6 +332,77 @@ class CaptureExporterTest(unittest.TestCase):
         self.assertEqual(capture["protocol"]["sourceKind"], "desktop_mirror")
         self.assertTrue(capture["protocol"]["sourceFallbackApplied"])
         self.assertEqual(capture["validity"]["state"], "contaminated")
+
+    def test_fallback_reconciles_matching_effective_output(self) -> None:
+        outputs = [
+            {
+                "view": "combined",
+                "nameSuffix": "combined",
+                "encoding": {"format": "png", "colourContract": "sdr_srgb"},
+            }
+        ]
+        manifest = self._fallback_manifest(outputs)
+        self._write_inputs(manifest)
+
+        output = self.root / "fallback-effective"
+        receipt = EXPORTER.export_plan(self.plan_path, output)
+        capture = self._read_jsonl(output / "content" / "visual-captures.jsonl")
+        self.assertEqual(receipt["retainedFrameCount"], 2)
+        self.assertEqual(capture["protocol"]["mediaKind"], "mono-sequence")
+        self.assertEqual(capture["protocol"]["sourceKind"], "desktop_mirror")
+
+    def test_fallback_rejects_conflicting_effective_colour(self) -> None:
+        outputs = [
+            {
+                "view": "combined",
+                "nameSuffix": "combined",
+                "encoding": {"format": "png", "colourContract": "display-p3"},
+            }
+        ]
+        manifest = self._fallback_manifest(outputs)
+        self._write_inputs(manifest)
+
+        output = self.root / "fallback-colour-conflict"
+        with self.assertRaisesRegex(EXPORTER.ExportError, "conflicting colour"):
+            EXPORTER.export_plan(self.plan_path, output)
+        self.assertFalse(output.exists())
+
+    def test_fallback_rejects_conflicting_effective_format(self) -> None:
+        outputs = [
+            {
+                "view": "combined",
+                "nameSuffix": "combined",
+                "encoding": {"format": "jpeg", "colourContract": "sdr_srgb"},
+            }
+        ]
+        manifest = self._fallback_manifest(outputs)
+        self._write_inputs(manifest)
+
+        output = self.root / "fallback-format-conflict"
+        with self.assertRaisesRegex(EXPORTER.ExportError, "conflicting format"):
+            EXPORTER.export_plan(self.plan_path, output)
+        self.assertFalse(output.exists())
+
+    def test_fallback_rejects_incomplete_effective_view_set(self) -> None:
+        outputs = [
+            {
+                "view": "combined",
+                "nameSuffix": "combined",
+                "encoding": {"format": "png", "colourContract": "sdr_srgb"},
+            },
+            {
+                "view": "left_eye",
+                "nameSuffix": "left",
+                "encoding": {"format": "png", "colourContract": "sdr_srgb"},
+            },
+        ]
+        manifest = self._fallback_manifest(outputs)
+        self._write_inputs(manifest)
+
+        output = self.root / "fallback-view-conflict"
+        with self.assertRaisesRegex(EXPORTER.ExportError, "complete output declaration"):
+            EXPORTER.export_plan(self.plan_path, output)
+        self.assertFalse(output.exists())
 
     def test_fallback_requires_an_explicit_actual_source(self) -> None:
         manifest = self._manifest()
