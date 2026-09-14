@@ -1,7 +1,7 @@
 # Blinded visual evaluation
 
 Visual evidence is kept separate from performance timing and from the
-structural render map. A visual comparison pins an exact map/runtime context,
+structural engine map. A visual comparison pins an exact map/runtime context,
 two content-addressed capture stimuli, a versioned rubric, and the raw trials
 performed by human, multimodal-model, or algorithmic evaluators.
 

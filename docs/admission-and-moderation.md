@@ -46,7 +46,9 @@ technical conclusion.
 
 The reviewer confirms that the submission:
 
-- is relevant to the Skyrim, Skyrim VR, shader, render, or performance map;
+- is relevant to a Skyrim engine subsystem, its extension interfaces, or an
+  evidenced relationship between subsystems, as defined in the
+  [engine mapping guide](engine-map.md); rendering relevance is not required;
 - is intelligible enough for another person to inspect or attempt to reproduce;
 - does not make claims materially broader than its declared evidence and
   applicability;
@@ -56,6 +58,13 @@ The reviewer confirms that the submission:
 - does not contain prohibited private, dangerous, or copyrighted material; and
 - does not attempt to gain authority by naming a contributor, organization, or
   tool as inherently trusted.
+
+Expanding domain coverage does not relax these requirements. An observed
+behaviour in a patched installation is not automatically a base-engine fact;
+a library declaration is not proof that a runtime path executed; and an absent
+event is only a negative observation within a stated capture interval and
+coverage. Reviewers check these distinctions for every domain. A relationship
+between two supported endpoints still needs evidence for the relationship.
 
 Reproducing a reverse-engineering result, capture, or benchmark is welcome but
 is not required for admission. A reviewer must not imply that admission

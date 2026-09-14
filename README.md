@@ -1,7 +1,19 @@
-# Skyrim render map
+# Skyrim Engine Map
 
-This repository is a public, versioned knowledge base for the rendering
-systems of Skyrim SE, Skyrim AE, Skyrim VR, and compatible shader extensions.
+This repository is a public, versioned knowledge base for the engine systems
+of Skyrim SE, Skyrim AE, Skyrim VR, and their extension interfaces. Rendering
+is one domain alongside actors, animation, physics, scripting, input, AI,
+persistence, audio, UI, and engine infrastructure. Relationships across these
+domains belong in the same evidence ledger.
+
+The [engine mapping guide](docs/engine-map.md) defines the scope, contribution
+routes, provenance requirements, and current representation limits. A domain
+being in scope does not mean that it has been mapped or independently verified.
+
+The repository address `Treatid2/skyrim-render-map`, existing
+`skyrim-render-map.*` schema names, and `urn:skyrim-render-map:*` identifiers
+remain stable compatibility identifiers. The broader name does not migrate,
+relabel, or change the applicability of existing evidence.
 
 It is evidence-led rather than authority-led. Treatid2 supplied the initial
 material, but that material has no privileged evidentiary status. Every claim
@@ -70,8 +82,13 @@ Finalized CSX screenshot sequences can be normalized with the offline
 - This repository owns the neutral contribution ledger and published map
   projections.
 
-Other shader projects do not need to implement CSX or DevBench. They may
-produce the neutral contribution format directly or through an adapter.
+Other engine research and extension projects do not need to implement CSX or
+DevBench. They may produce the neutral contribution format directly or through
+an adapter.
+
+Modlist composition, override resolution, and compatibility diagnosis are a
+possible future project. The engine ledger can supply evidence to that work;
+it currently makes no claim to model or validate a complete installed list.
 
 ## Validation
 

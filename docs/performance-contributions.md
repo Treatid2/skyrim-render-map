@@ -5,6 +5,15 @@ compare them. They are evidence, not universal performance claims. Admission
 does not certify a result, and a statistical outlier is retained rather than
 silently discarded.
 
+This specialised v1 contract also accepts timing of non-render engine nodes
+when its required runtime, render, cache, metric, and sampling fields genuinely
+describe the experiment. It is not a universal engine telemetry schema. For
+events, state transitions, counts, or offline work that cannot satisfy it, use
+the observation/assertion routes in the [engine mapping guide](engine-map.md).
+Do not supply dummy dimensions or unrelated shader-cache hashes. Such evidence
+is retained without entering these timing aggregates until a suitable reviewed
+contract exists.
+
 ## 1. Submission shape
 
 A performance PR is an `observation` data contribution. It adds one immutable

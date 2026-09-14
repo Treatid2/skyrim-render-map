@@ -1,5 +1,19 @@
 # Contributing
 
+## Engine scope
+
+Contributions may cover any Skyrim base engine subsystem, its extension
+interfaces, and evidenced relationships between them. There is no requirement
+for a claim to affect rendering. Use the [engine mapping guide](docs/engine-map.md)
+to distinguish the subject being mapped, the producer that observed it, and the
+runtime conditions under which the evidence applies.
+
+Structural facts use the existing entity/assertion contracts. Choose the
+measurement or artifact lane that actually fits the evidence; never invent
+render dimensions, cache identities, source commits, or a CSX dependency to
+satisfy a specialised schema. The guide explains the available fallback and
+the requirements for a future schema extension.
+
 ## Data contributions
 
 Submit data through a pull request. A data PR must:

@@ -1,5 +1,10 @@
 # Repository working agreements
 
+- Map any Skyrim engine domain and evidenced relationships across domains;
+  rendering is one domain. Follow `docs/engine-map.md` for scope and provenance.
+- Preserve the existing repository, schema, URN, and content identity contracts
+  when changing display names or organizing maps. Never broaden old claims.
+- Keep scope examples and synthetic test fixtures outside the evidence ledger.
 - Treat accepted submissions as immutable evidence.
 - Data PRs add one new `submissions/YYYY/MM/<submission-id>` directory only.
 - Corrections are new amendment or resolution records; never rewrite history.

@@ -1,12 +1,12 @@
-# Public Skyrim render-map repository architecture
+# Public Skyrim engine-map repository architecture
 
 Status: bootstrap implementation v1
-Intended repository: `Treatid2/skyrim-render-map`
+Repository compatibility address: `Treatid2/skyrim-render-map`
 
 ## 1. Purpose
 
-The repository is the managed public knowledge base for versioned Skyrim,
-Skyrim VR, and shader-extension render maps. It accepts evidence and map claims
+The repository is the managed public knowledge base for versioned Skyrim SE,
+Skyrim AE, Skyrim VR, and engine extension maps. It accepts evidence and map claims
 from multiple producers without allowing a contribution to overwrite accepted
 information.
 
@@ -14,6 +14,12 @@ The canonical source is an append-only evidence and assertion ledger. Human
 readable maps, graph files, performance summaries, indexes, and the public web
 site are deterministic projections of that ledger. Contributors do not edit
 those projections directly.
+
+The [engine mapping guide](engine-map.md) defines the scope across subsystems,
+cross-domain evidence rules, and implemented versus planned representation.
+Rendering remains a first-class domain. Expanding the scope does not change
+old record identifiers, schema names, content hashes, or applicability, and
+does not turn an unmeasured subsystem into a populated map.
 
 The initial producer is CSX through DevBench and the Skyrim VR automation
 tools. The contribution format is producer-neutral so Community Shaders Core,
@@ -56,10 +62,13 @@ without changing the contract.
 - Contribution bundle construction and validation.
 - Optional PR or upload submission clients.
 
-### Render-map repository
+### Engine-map repository
 
 - Producer-neutral contribution envelope schemas.
 - Versioned Skyrim engine-map facts.
+- Actor, animation, physics, scripting, AI, input, persistence, rendering, and
+  other subsystem claims under the same provenance and conflict rules.
+- Cross-domain relationships with their own evidence and applicability.
 - Versioned extension maps under separate namespaces.
 - Accepted observations, claims, amendments, disputes, and resolutions.
 - Offline graph compilation and conflict detection.

@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:skyrim-render-map:schema:dataset-snapshot:1",
-  "title": "Generated Skyrim render-map dataset snapshot",
+  "title": "Generated Skyrim engine-map dataset snapshot",
   "type": "object",
   "required": [
     "snapshotId",
