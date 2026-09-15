@@ -143,6 +143,10 @@ When fallback changes the source, stale requested output declarations do not
 describe the substituted source. An explicit `effective.outputs` declaration
 does: its complete view set, filename suffixes, format, and colour contract
 must agree with every retained artifact or the export is rejected.
+Presence is significant: an explicit empty effective list declares no views
+and therefore contradicts a completed child with retained artifacts, whether
+or not its source changed. An absent effective declaration remains supported;
+an empty root/requested list can still use explicit artifact view metadata.
 
 Dropped, failed, cancelled, duplicated, or warning-bearing frame slots are
 retained in the bundle manifest and make the visual-capture record

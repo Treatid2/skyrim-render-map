@@ -247,9 +247,15 @@ class CaptureExporterTest(unittest.TestCase):
         (self.source / old_name).replace(self.source / new_name)
         artifact["path"] = f"D:/expired/capture/{new_name}"
 
-    def _fallback_manifest(self, effective_outputs: list[dict] | None = None) -> dict:
+    def _fallback_manifest(
+        self,
+        effective_outputs: list[dict] | None = None,
+        *,
+        retain_requested_outputs: bool = False,
+    ) -> dict:
         manifest = self._manifest()
-        manifest["capture"] = None
+        if not retain_requested_outputs:
+            manifest["capture"] = None
         for child in manifest["children"]:
             child["artifacts"] = child["artifacts"][:1]
             artifact = child["artifacts"][0]
@@ -350,6 +356,50 @@ class CaptureExporterTest(unittest.TestCase):
         self.assertEqual(receipt["retainedFrameCount"], 2)
         self.assertEqual(capture["protocol"]["mediaKind"], "mono-sequence")
         self.assertEqual(capture["protocol"]["sourceKind"], "desktop_mirror")
+
+    def test_fallback_rejects_empty_effective_outputs(self) -> None:
+        manifest = self._fallback_manifest([], retain_requested_outputs=True)
+        self._write_inputs(manifest)
+
+        output = self.root / "fallback-empty-effective"
+        with self.assertRaisesRegex(EXPORTER.ExportError, "complete output declaration"):
+            EXPORTER.export_plan(self.plan_path, output)
+        self.assertFalse(output.exists())
+
+    def test_ordinary_source_rejects_empty_effective_outputs(self) -> None:
+        manifest = self._manifest()
+        for child in manifest["children"]:
+            child["effective"] = {"outputs": []}
+            for artifact, view in zip(child["artifacts"], ("left_eye", "right_eye")):
+                artifact["actual"] = {
+                    "view": view,
+                    "format": "png",
+                    "colourContract": "sdr_srgb",
+                }
+        self._write_inputs(manifest)
+
+        output = self.root / "ordinary-empty-effective"
+        with self.assertRaisesRegex(EXPORTER.ExportError, "complete output declaration"):
+            EXPORTER.export_plan(self.plan_path, output)
+        self.assertFalse(output.exists())
+
+    def test_fallback_without_effective_outputs_discards_requested_stereo(self) -> None:
+        manifest = self._fallback_manifest(retain_requested_outputs=True)
+        self.assertEqual(
+            [item["view"] for item in manifest["capture"]["outputs"]],
+            ["left_eye", "right_eye"],
+        )
+        for child in manifest["children"]:
+            self.assertNotIn("outputs", child["effective"])
+        self._write_inputs(manifest)
+
+        output = self.root / "fallback-stale-requested-stereo"
+        receipt = EXPORTER.export_plan(self.plan_path, output)
+        capture = self._read_jsonl(output / "content" / "visual-captures.jsonl")
+        self.assertEqual(receipt["retainedFrameCount"], 2)
+        self.assertEqual(capture["protocol"]["mediaKind"], "mono-sequence")
+        self.assertEqual(capture["protocol"]["sourceKind"], "desktop_mirror")
+        self.assertTrue(capture["protocol"]["sourceFallbackApplied"])
 
     def test_fallback_rejects_conflicting_effective_colour(self) -> None:
         outputs = [

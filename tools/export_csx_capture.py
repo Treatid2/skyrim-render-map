@@ -2543,7 +2543,8 @@ def _inspect_completed_child(
         raise ExportError(f"{context} changed capture source without declaring fallback")
 
     declared_capture = capture
-    if "outputs" in effective:
+    effective_outputs_declared = "outputs" in effective
+    if effective_outputs_declared:
         declared_capture = {"outputs": effective["outputs"]}
     elif fallback_value and actual_source.get("kind") != requested_source.get("kind"):
         declared_capture = {}
@@ -2567,7 +2568,9 @@ def _inspect_completed_child(
     if len(views) != len(set(views)):
         raise ExportError(f"{context} repeats an output view")
     declared_views = set(_declared_outputs(declared_capture))
-    if declared_views and set(views) != declared_views:
+    # A present effective contract remains authoritative even when empty.
+    # Empty requested outputs still permit explicit artifact view metadata.
+    if (effective_outputs_declared or declared_views) and set(views) != declared_views:
         raise ExportError(f"{context} artifacts do not match the complete output declaration")
     engine_frame = child.get("scheduledEngineFrame")
     timestamp_us = child.get("scheduledTimestampUs")
