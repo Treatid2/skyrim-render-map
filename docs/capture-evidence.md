@@ -72,6 +72,8 @@ This prevents a copied digest or stale label from silently joining unrelated
 captures. Preprocessing remains separately identified by the comparison
 protocol, so evaluators can repeat a presentation from the immutable sources.
 
-This contract does not upload, download, execute, or inspect media. A later
-producer adapter can normalize CSX screenshot-sequence manifests into these
-records without changing the neutral ledger format.
+The ledger contract does not upload, download, execute, or inspect media. The
+[CSX capture exporter](capture-producer-export.md) can inspect a finalized CSX
+screenshot-sequence manifest and normalize it into a deterministic external
+bundle plus these neutral records. Upload and publication remain explicit
+contributor actions.

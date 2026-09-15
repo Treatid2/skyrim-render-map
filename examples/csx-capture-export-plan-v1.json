@@ -1,0 +1,79 @@
+{
+  "schema": {
+    "name": "skyrim-render-map.csx-capture-export-plan",
+    "major": 1,
+    "minor": 0
+  },
+  "submissionId": "sub-example-capture-export",
+  "artifactId": "visual-artifact-export-a",
+  "captureId": "visual-capture-export-a",
+  "recordedAt": "2026-09-07T01:00:00Z",
+  "source": {
+    "kind": "csx-screenshot-sequence-v1",
+    "manifestPath": "private-captures/CS_sequence_example/sequence.json"
+  },
+  "artifact": {
+    "locationTemplate": "https://example.invalid/captures/{sha256}.zip",
+    "license": "CC-BY-SA-4.0",
+    "retentionClass": "object-storage"
+  },
+  "map": {
+    "mapSnapshotId": "map-snapshot-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "nodeRefs": ["urn:skyrim-render-map:catalog:engine:frame"]
+  },
+  "runtime": {
+    "engine": {
+      "runtime": "skyrim-vr-1.4.15",
+      "executableSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "moduleSha256": null
+    },
+    "extensions": [{
+      "namespace": "csx",
+      "sourceCommit": "cccccccccccccccccccccccccccccccccccccccc",
+      "buildId": "example-build",
+      "artifactSha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+    }],
+    "runtimeRoute": "steamvr-physical-hmd"
+  },
+  "environment": {
+    "installationId": "inst-0123456789abcdef0123456789abcdef",
+    "cpuModel": "Example CPU",
+    "gpuModel": "Example GPU",
+    "gpuDriverVersion": "example-driver",
+    "renderContext": {
+      "renderWidth": 2000,
+      "renderHeight": 2200,
+      "viewCount": 2,
+      "refreshRateHz": "72",
+      "renderScale": "0.67",
+      "frameLimiter": "disabled",
+      "targetFrameRate": "72",
+      "reprojectionMode": "disabled"
+    }
+  },
+  "scenario": {
+    "label": "Illustrative synchronized stereo sequence",
+    "scenarioSha256": "1111111111111111111111111111111111111111111111111111111111111111",
+    "configurationSha256": "2222222222222222222222222222222222222222222222222222222222222222",
+    "cacheSha256": "3333333333333333333333333333333333333333333333333333333333333333"
+  },
+  "treatment": {
+    "label": "Illustrative treatment A",
+    "treatmentSha256": "4444444444444444444444444444444444444444444444444444444444444444",
+    "baselineObservationRef": null
+  },
+  "protocol": {
+    "name": "example-capture-orchestration",
+    "version": "1.0.0",
+    "artifactSha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "frameRateHz": "2",
+    "timingMode": "wall-clock"
+  },
+  "privacy": {
+    "publicationOptIn": true,
+    "fieldsPreviewed": true,
+    "installationIdRandom": true,
+    "installationIdResettable": true
+  },
+  "notes": "Illustrative private producer plan; its local source path is never exported."
+}
