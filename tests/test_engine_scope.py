@@ -109,9 +109,15 @@ class EngineScopeTest(unittest.TestCase):
             {f"{domain}.fixture" for domain in DOMAINS},
         )
 
-    def test_records_and_provenance_survive_compilation_without_render_metadata(self) -> None:
+    def test_records_manifest_bytes_and_projected_source_identity_are_preserved(self) -> None:
         records = [self._claim(domain) for domain in DOMAINS]
         directory = self._add_engine(records)
+        manifest_path = directory / "submission.json"
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        # Source-tree identity is distinct from the included content digest.
+        # This synthetic value tests retention, not external source verification.
+        manifest["provenance"]["sourceContentTreeSha256"] = "f" * 64
+        manifest_path.write_text(json.dumps(manifest) + "\n", encoding="utf-8")
         before = {p.relative_to(directory): p.read_bytes()
                   for p in directory.rglob("*") if p.is_file()}
         snapshot = COMPILER.compile_repository(self.repository)
@@ -129,6 +135,13 @@ class EngineScopeTest(unittest.TestCase):
         self.assertEqual(submission["sourceCommit"], manifest["provenance"]["sourceCommit"])
         self.assertEqual(submission["sourceRepository"], manifest["provenance"]["sourceRepository"])
         self.assertEqual(submission["contentTreeSha256"], manifest["content"]["treeSha256"].lower())
+        retained_manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        self.assertEqual(retained_manifest["provenance"], manifest["provenance"])
+        self.assertEqual(retained_manifest["provenance"]["sourceContentTreeSha256"], "f" * 64)
+        self.assertNotEqual(
+            retained_manifest["provenance"]["sourceContentTreeSha256"],
+            submission["contentTreeSha256"],
+        )
         self.assertEqual(before, {p.relative_to(directory): p.read_bytes()
                                   for p in directory.rglob("*") if p.is_file()})
 
@@ -175,14 +188,55 @@ class EngineScopeTest(unittest.TestCase):
         with self.assertRaisesRegex(VALIDATOR.ValidationError, "evidence.refs"):
             COMPILER.compile_repository(self.repository)
 
-    def test_non_render_submission_cannot_omit_source_provenance(self) -> None:
+    def test_source_provenance_requires_each_declared_field(self) -> None:
         directory = self._add_engine()
         path = directory / "submission.json"
         manifest = json.loads(path.read_text(encoding="utf-8"))
-        del manifest["provenance"]["sourceCommit"]
+        for field in manifest["provenance"]:
+            with self.subTest(missing_field=field):
+                candidate = copy.deepcopy(manifest)
+                del candidate["provenance"][field]
+                path.write_text(json.dumps(candidate) + "\n", encoding="utf-8")
+                with self.assertRaisesRegex(
+                    VALIDATOR.ValidationError,
+                    rf"provenance fields differ; missing=\['{field}'\]",
+                ):
+                    COMPILER.compile_repository(self.repository)
+
+    def test_source_commit_and_source_tree_digest_reject_malformed_strings(self) -> None:
+        directory = self._add_engine()
+        path = directory / "submission.json"
+        manifest = json.loads(path.read_text(encoding="utf-8"))
+        for field, width in (("sourceCommit", 40), ("sourceContentTreeSha256", 64)):
+            for value in ("a" * (width - 1), "a" * (width + 1), "g" * width):
+                with self.subTest(field=field, value=value):
+                    candidate = copy.deepcopy(manifest)
+                    candidate["provenance"][field] = value
+                    path.write_text(json.dumps(candidate) + "\n", encoding="utf-8")
+                    with self.assertRaisesRegex(VALIDATOR.ValidationError, f"invalid {field}"):
+                        COMPILER.compile_repository(self.repository)
+
+    def test_source_format_validation_does_not_authenticate_provenance(self) -> None:
+        directory = self._add_engine()
+        path = directory / "submission.json"
+        manifest = json.loads(path.read_text(encoding="utf-8"))
+        manifest["provenance"].update({
+            "sourceRepository": "https://example.invalid/unrelated-synthetic-source",
+            "sourceCommit": "0" * 40,
+            "sourceContentTreeSha256": "0" * 64,
+        })
         path.write_text(json.dumps(manifest) + "\n", encoding="utf-8")
-        with self.assertRaises(VALIDATOR.ValidationError):
-            COMPILER.compile_repository(self.repository)
+        # Document the current mechanical boundary. These invented identities
+        # are prohibited by admission policy, but are syntactically valid.
+        snapshot = COMPILER.compile_repository(self.repository)
+        submission = next(s for s in snapshot["submissions"] if s["submissionId"] == SUBMISSION_ID)
+        self.assertEqual(submission["sourceCommit"], "0" * 40)
+        self.assertEqual(submission["sourceRepository"], manifest["provenance"]["sourceRepository"])
+        self.assertEqual(submission["status"], "candidate-unreviewed")
+        self.assertEqual(
+            json.loads(path.read_text(encoding="utf-8"))["provenance"],
+            manifest["provenance"],
+        )
 
     def test_tampered_engine_evidence_is_rejected(self) -> None:
         directory = self._add_engine()

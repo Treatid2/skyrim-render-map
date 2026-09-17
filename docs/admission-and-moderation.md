@@ -154,14 +154,14 @@ an admitted claim into an endorsed fact.
 
 ## 8. Current compiler limitation
 
-Dataset compiler v1.1 uses `supported` to mean only that an assertion has no
+The current v1 compiler uses `supported` to mean only that an assertion has no
 detected incompatible-value conflict. That label does **not** establish the
-independent corroboration required by this policy. Consumers must treat v1.1
+independent corroboration required by this policy. Consumers must treat its
 `supported` assertions as `provisional` unless they inspect the evidence
 lineage themselves.
 
 A future compiler contract should represent evidence lineage explicitly,
-derive the states above, and preserve a compatibility mapping for v1.1
+derive the states above, and preserve a compatibility mapping for existing v1
 snapshots. That change requires a separately reviewed tooling and schema pull
 request. The current schema also lacks a standalone moderation-exclusion
 record; until that contract exists, maintainers must stop ordinary publication,

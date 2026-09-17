@@ -98,6 +98,18 @@ required field. If the available evidence cannot truthfully satisfy the
 envelope, preserve it outside the admitted ledger until a reviewed contract
 extension supports its provenance.
 
+These are contributor and admission-review obligations, not all mechanical
+guarantees. The v1 validator requires the provenance fields and checks the
+source commit and source-content digest formats. It does not establish that
+the repository is relevant, that a commit exists, or that the declared
+`provenance.sourceContentTreeSha256` matches an external source tree; even
+all-zero source digests pass those format checks. Substantive review must
+assess that evidence under the admission policy. The separately named
+`content.treeSha256` is recomputed against the included submission bytes.
+The original manifest retains the full provenance block; the compiled
+submission summary projects only selected fields. Structural acceptance must
+not be described as source authentication.
+
 The timing schema requires render context and cache identity and has a finite
 metric vocabulary. Do not encode Papyrus event counts as milliseconds, invent
 render dimensions for offline analysis, or label an unrelated digest as a
@@ -218,7 +230,8 @@ copies. A new view may not upgrade those states through presentation.
 The synthetic integration tests in
 [`tests/test_engine_scope.py`](../tests/test_engine_scope.py) exercise every
 domain above, cross-submission subjects, evidence preservation, applicability,
-conflicts, and rejection of missing provenance. Their invented functions,
+conflicts, required provenance fields, malformed source digest rejection, and
+the boundary between format validation and source authentication. Their invented functions,
 digests, and results are test data, never engine findings. No test fixture is
 admitted under `submissions/`.
 
