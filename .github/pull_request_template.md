@@ -17,6 +17,9 @@ retained every candidate outcome, and linked objectives to raw observations.
 
 ## Provenance and privacy
 
+- [ ] For engine data, I followed `docs/engine-map.md`, including evidence for
+      relationships and the distinction between base engine, extensions, and
+      instrumentation. Scope labels do not imply verified coverage.
 - [ ] I ran the repository validator.
 - [ ] I reviewed every file that will become public.
 - [ ] The contribution contains no prohibited private or copyrighted material.

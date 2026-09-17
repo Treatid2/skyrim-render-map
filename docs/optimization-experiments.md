@@ -1,7 +1,7 @@
 # Optimization experiments and Pareto surfaces
 
 Optimization experiments connect automated preset searches to the structural
-render map and its performance evidence. They preserve the explored parameter
+engine map and its performance evidence. They preserve the explored parameter
 space and every candidate outcome. The dataset compiler derives Pareto
 frontiers; contributors do not submit a preferred winner as map truth.
 

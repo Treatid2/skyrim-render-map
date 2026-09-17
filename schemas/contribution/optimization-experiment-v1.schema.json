@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:skyrim-render-map:schema:optimization-experiment:1",
-  "title": "Skyrim render-map optimization experiment",
+  "title": "Skyrim engine-map optimization experiment",
   "type": "object",
   "required": [
     "schema",

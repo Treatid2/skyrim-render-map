@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "urn:skyrim-render-map:schema:entity:1",
-  "title": "Skyrim render-map entity declaration",
+  "title": "Skyrim engine-map entity declaration",
   "type": "object",
   "required": ["schema", "entityId", "kind", "label", "sourceRefs", "notes"],
   "additionalProperties": false,

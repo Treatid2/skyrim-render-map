@@ -2,7 +2,7 @@
 # SPDX-FileCopyrightText: 2026 Treatid2 and contributors
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-"""Deterministically validate the public render-map submission structure."""
+"""Deterministically validate the public engine-map submission structure."""
 
 from __future__ import annotations
 

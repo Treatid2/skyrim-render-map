@@ -4,6 +4,12 @@ The semantic ledger turns immutable contribution records into a reproducible
 dataset snapshot. It detects disagreement without treating any contributor as
 an authority and without editing accepted evidence.
 
+The ledger is shared by all Skyrim engine domains. Entity kinds, predicates,
+and literal JSON values are open vocabularies; they do not require render or
+shader concepts. See the [engine mapping guide](engine-map.md) for domain,
+relationship, and provenance conventions. All existing schema names and URNs
+retain their `skyrim-render-map` spelling for identity compatibility.
+
 ## Structured records
 
 An `assertion` or `amendment` submission contains a canonical
@@ -33,6 +39,13 @@ catalog promotion remains a separate reviewed operation.
 `null` applicability values mean that the record does not establish a more
 specific boundary. They are not wildcards chosen by the compiler and they are
 not evidence that all versions behave identically.
+
+In particular, null extension fields do not certify an unmodified game. Use
+retained method/context evidence to distinguish unknown extension state,
+irrelevance to the bounded claim, and verified absence. Do not put a collector's
+build into subject applicability merely because it collected the observation.
+When instrumentation can affect the result, retain its identity and effect in
+the experimental context as well as in provenance.
 
 ## Stable identities
 
