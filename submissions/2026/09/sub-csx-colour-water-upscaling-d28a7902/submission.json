@@ -2,8 +2,8 @@
   "content": {
     "fileCount": 6,
     "root": "content",
-    "totalBytes": 95139,
-    "treeSha256": "DEB04DBB99EA7F6E204153B868AE0CFF6512BC081CC5A78EA9A47D9DAEB65B8C"
+    "totalBytes": 95450,
+    "treeSha256": "3583240F4D79E836970EDF0E131AA11D3F51CB62DDBF65A098F1521397344FEC"
   },
   "contributor": {
     "displayName": "Treatid2",
@@ -40,7 +40,8 @@
       "Normalized the controlled AMD five-treatment campaign into content-addressed runtime bounds, physical resolution topology, aggregate linear-light comparisons, and explicit sequential-order limitations without publishing absolute paths or identifying fixture strings.",
       "Re-normalized drifted report line references against the exact shared Upscaling.cpp Git blob before mapping loaded-None lifecycle and VR mask-repair source contracts.",
       "Superseded the provisional failed boot-disabled observation with a repaired zero-failure control, preserving the 46-failure diagnosis as invalid-frame evidence and binding the valid result to the exact one-line Lighting shader include repair.",
-      "2026-10-02: corrected unadmitted candidate from preserved render-map research commit 64bb49dd20c83ec5c24b28b77c1ec2ccead5af5a; see content/correction-provenance.md. Historical runtime/source identities retained; no new game run."
+      "2026-10-02: corrected unadmitted candidate from preserved render-map research commit 64bb49dd20c83ec5c24b28b77c1ec2ccead5af5a; see content/correction-provenance.md. Historical runtime/source identities retained; no new game run.",
+      "2026-10-02 substantive-review follow-up: AMD measurements with DLSS unavailable do not establish identity with, or the mechanism of, the original NVIDIA-host report. Narrative only; all assertions and measured values unchanged."
     ]
   },
   "schema": {

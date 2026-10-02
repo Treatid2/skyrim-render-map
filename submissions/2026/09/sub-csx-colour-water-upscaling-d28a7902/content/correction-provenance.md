@@ -18,3 +18,8 @@ or runtime observations change.
 This removes six false pairwise conflicts between distinct comparisons.
 Contradictory values for the same contrast, predicate and applicability remain
 detectable; a synthetic negative-control compilation verifies that property.
+
+Substantive-review follow-up: narrowed the README's original "The phenomenon
+therefore is not DLSS-specific" wording. The AMD results show differences with
+DLSS unavailable, but their identity or mechanism relative to the original
+NVIDIA-host report remains unresolved. No assertion or measured value changes.

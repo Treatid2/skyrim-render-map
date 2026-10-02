@@ -117,9 +117,9 @@ phenomenon is specific to or caused by DLSS. No ledger assertion in this
 submission assigns the report to DLSS or attaches it to the DLSS contract
 entity.
 
-The later AMD five-treatment campaign narrows that boundary: measurable FSR
-and render-scale colour/luminance differences were reproduced on a host where
-DLSS was unavailable. The phenomenon therefore is not DLSS-specific. The
+These AMD observations establish measurable colour/luminance differences in
+the recorded conditions with DLSS unavailable. Whether they reproduce the
+original NVIDIA-host report, or share its mechanism, remains unresolved. The
 campaign does not isolate one mechanism, close water-only causality, or
 generalize its magnitudes across GPU vendors. A repaired follow-up does establish
 that feature absence is not generally equivalent to loaded None.
