@@ -1,0 +1,51 @@
+{
+  "content": {
+    "fileCount": 4,
+    "root": "content",
+    "totalBytes": 28575,
+    "treeSha256": "C798BF4B7EA3EB633B2E0D7E0C756599BE31B647CA3064949747208BA9CB5194"
+  },
+  "contributor": {
+    "displayName": "Treatid2",
+    "github": "Treatid2",
+    "standing": "ordinary-contributor"
+  },
+  "createdAt": "2026-09-13T02:38:00+01:00",
+  "licensing": {
+    "content": "CC-BY-SA-4.0",
+    "dcoAcknowledged": true,
+    "schemas": "CC0-1.0"
+  },
+  "namespace": "csx",
+  "notes": "Append-only mapping update for the exact development build that observes five same-frame colour seams and a five-preset HDR-input/auto-exposure factorial. The Quality interaction is a scene-bounded replication lead; no monotonic scaling law or individual-shader attribution is claimed.",
+  "provenance": {
+    "importedAt": "2026-09-13T02:38:00+01:00",
+    "relatedUrls": [
+      "https://github.com/Treatid2/skyrim-render-map"
+    ],
+    "sourceCommit": "c46b93b2a0e0944fbfeb8746e3ca2bc84ef276a6",
+    "sourceContentTreeSha256": "ABA24C96D1C4818B43CBDF1CBF3B6C312402D34AB74E2753D6692AC803252FFD",
+    "sourceDirty": true,
+    "sourceParentCommit": "a7248b0200497b2292a965edf42bed41dae18cc3",
+    "sourcePubliclyReachable": false,
+    "sourceRef": "work/csx-all-development; exact dirty Build ID 74dee907c708e4bee3ed01041a00f6d8e0da25a215376d3da535dd42680b1f8e",
+    "sourceRepository": "https://github.com/ParticleTroned/skyrim-community-shaders",
+    "sourceState": "identified-dirty-working-tree-and-compiled-artifact",
+    "transformations": [
+      "Added an asynchronous same-engine-frame DevBench probe for five colour-pipeline seams, with two per-eye slots per seam and exact resource, dispatch, colour-contract, and frame metadata.",
+      "Captured a fixed Riverwood Skyrim VR fixture under five FSR 4 presets and four HDR-input/auto-exposure cells using three counterbalanced mirrored cycles per preset.",
+      "Reduced 135 definitive ten-slot captures to stage-local sampled ratios, pointwise normal-approximation intervals (historical bootstrap wording corrected), integrity checks, and an explicit sampled FSR-output copy-back comparison.",
+      "Separated the R11G11B10_FLOAT combined kMAIN resource from the R8G8B8A8_UNORM kVR_FRAMEBUFFER ImageSpace destination and disclosed the absent transfer conversion in the probe.",
+      "Published only bounded observations and deterministic evidence hashes; omitted absolute paths, task, profile and session identifiers, and raw capture media.",
+      "2026-10-02: corrected unadmitted candidate from preserved render-map research commit 64bb49dd20c83ec5c24b28b77c1ec2ccead5af5a; see content/correction-provenance.md. Historical runtime/source identities retained; no new game run."
+    ]
+  },
+  "schema": {
+    "major": 1,
+    "minor": 0,
+    "name": "skyrim-render-map.submission"
+  },
+  "status": "candidate-unreviewed",
+  "submissionClass": "assertion",
+  "submissionId": "sub-csx-colour-pipeline-probe-74dee907"
+}
