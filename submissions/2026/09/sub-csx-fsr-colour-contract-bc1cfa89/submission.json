@@ -1,0 +1,51 @@
+{
+  "content": {
+    "fileCount": 4,
+    "root": "content",
+    "totalBytes": 17553,
+    "treeSha256": "57D5169713AF7E191AA5D84D2ACE290E9BA569DC27C21C83C9C925F0CA663995"
+  },
+  "contributor": {
+    "displayName": "Treatid2",
+    "github": "Treatid2",
+    "standing": "ordinary-contributor"
+  },
+  "createdAt": "2026-09-13T00:22:00+01:00",
+  "licensing": {
+    "content": "CC-BY-SA-4.0",
+    "dcoAcknowledged": true,
+    "schemas": "CC0-1.0"
+  },
+  "namespace": "csx",
+  "notes": "Append-only mapping update for the exact development build that exposes and live-qualifies independent FSR HDR-input and auto-exposure flags. Context lifecycle, active dispatch regions, and bounded preset cost observations are positive evidence. Visible HDR/AE magnitude remains unresolved because measured scene drift and replicate scatter exceed the fitted effects. Depth Culling and render-map endpoints are recorded as advertised but not callable in this build.",
+  "provenance": {
+    "importedAt": "2026-09-13T00:22:00+01:00",
+    "relatedUrls": [
+      "https://github.com/Treatid2/skyrim-render-map/tree/bbb16c86963baaba41514285364031645d93d905/submissions/2026/09/sub-csx-colour-water-upscaling-d28a7902"
+    ],
+    "sourceCommit": "c46b93b2a0e0944fbfeb8746e3ca2bc84ef276a6",
+    "sourceContentTreeSha256": "24DCD04C6106623F025319DA026B4BAF6BC15E9AF6458623AAFC6AE2D708ACF1",
+    "sourceDirty": true,
+    "sourceParentCommit": "a7248b0200497b2292a965edf42bed41dae18cc3",
+    "sourcePubliclyReachable": false,
+    "sourceRef": "work/csx-all-development; exact dirty Build ID bc1cfa895048a255a3221a7570860be5f9a007e2bc2334536b3520f54a3d558b",
+    "sourceRepository": "https://github.com/ParticleTroned/skyrim-community-shaders",
+    "sourceState": "identified-dirty-working-tree-and-compiled-artifact",
+    "transformations": [
+      "Added two independent runtime-only FSR context flag controls and a guarded DevBench snapshot/apply surface to the identified CSX working tree.",
+      "Captured two fixed Skyrim VR fixtures under one Build ID, locked time and weather, unchanged shader preset, render-scale mode off, and accepted SDR sRGB HMD submissions.",
+      "Reduced raw runtime evidence to exact context lifecycle, dispatch region, profiler, drift, and identifiability assertions while retaining media and local paths offline by content hash.",
+      "Separated catalogue advertisement from dispatch-verified DevBench capability after two advertised instrumentation endpoints returned Tool not found.",
+      "Kept Skyrim ImageSpace HDR and vendor FSR colour-context flags as separate map controls; no shader isolation or causal visible-effect claim was inferred.",
+      "2026-10-02: corrected unadmitted candidate from preserved render-map research commit 64bb49dd20c83ec5c24b28b77c1ec2ccead5af5a; see content/correction-provenance.md. Historical runtime/source identities retained; no new game run."
+    ]
+  },
+  "schema": {
+    "major": 1,
+    "minor": 0,
+    "name": "skyrim-render-map.submission"
+  },
+  "status": "candidate-unreviewed",
+  "submissionClass": "assertion",
+  "submissionId": "sub-csx-fsr-colour-contract-bc1cfa89"
+}
