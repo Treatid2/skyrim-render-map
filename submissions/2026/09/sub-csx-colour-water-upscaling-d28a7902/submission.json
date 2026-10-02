@@ -1,0 +1,55 @@
+{
+  "content": {
+    "fileCount": 6,
+    "root": "content",
+    "totalBytes": 95450,
+    "treeSha256": "3583240F4D79E836970EDF0E131AA11D3F51CB62DDBF65A098F1521397344FEC"
+  },
+  "contributor": {
+    "displayName": "Treatid2",
+    "github": "Treatid2",
+    "standing": "ordinary-contributor"
+  },
+  "createdAt": "2026-09-12T18:32:31+01:00",
+  "licensing": {
+    "content": "CC-BY-SA-4.0",
+    "dcoAcknowledged": true,
+    "schemas": "CC0-1.0"
+  },
+  "namespace": "csx",
+  "notes": "Comprehensive source-and-runtime boundary map for colour, water, and VR reconstruction work. The controlled AMD campaign establishes bounded FSR and render-scale colour/luminance differences without DLSS. Its repaired boot-disabled control establishes that feature absence is not generally equivalent to loaded None or simply loaded TAA, with a strong daytime and weak nighttime distinction. Sequential order still prevents isolation of one mechanism or water-only causality, and magnitudes are not generalized across GPUs. The original NVIDIA host provenance does not establish enabled DLSS or a DLSS-specific cause. No profiler or post-compositor effect is claimed.",
+  "provenance": {
+    "importedAt": "2026-09-12T18:32:31+01:00",
+    "relatedUrls": [
+      "https://github.com/ParticleTroned/skyrim-community-shaders/pull/625",
+      "https://github.com/Treatid2/skyrim-render-map/tree/bbb16c86963baaba41514285364031645d93d905/submissions/2026/08/sub-csx-full-render-exploration-9935c5210"
+    ],
+    "sourceCommit": "d28a790278273de6c3d8173866322a372b20440b",
+    "sourceContentTreeSha256": "2F43230F5B828CF13248E23521079280A9AF053FCAAA198B6AE1928F738E4977",
+    "sourceDirty": false,
+    "sourceParentCommit": "700dbb5f875a6217e7c6d4d0b7f1055443c5f3b5",
+    "sourcePubliclyReachable": false,
+    "sourceRef": "codex/local-main-VR capture baseline; committed local preservation",
+    "sourceRepository": "https://github.com/Treatid2/skyrim-community-shaders",
+    "sourceState": "committed-local-preservation",
+    "transformations": [
+      "Manually normalized source-visible colour, water, temporal, reconstruction, sharpening, mip-bias, and presentation contracts into atomic assertions bounded to the clean CSX commit.",
+      "Indexed private runtime evidence by content hash and bounded counts while excluding absolute paths, process identifiers, profile identities, and session identifiers.",
+      "Kept possible FSR tone-domain and DLSS input-class explanations as narrative hypotheses rather than ledger assertions because no controlled runtime treatment establishes either causal effect.",
+      "Recorded NVIDIA hardware only as original-report host provenance, not as evidence that DLSS was active or caused the reported phenomenon; no report assertion was created.",
+      "Normalized the controlled AMD five-treatment campaign into content-addressed runtime bounds, physical resolution topology, aggregate linear-light comparisons, and explicit sequential-order limitations without publishing absolute paths or identifying fixture strings.",
+      "Re-normalized drifted report line references against the exact shared Upscaling.cpp Git blob before mapping loaded-None lifecycle and VR mask-repair source contracts.",
+      "Superseded the provisional failed boot-disabled observation with a repaired zero-failure control, preserving the 46-failure diagnosis as invalid-frame evidence and binding the valid result to the exact one-line Lighting shader include repair.",
+      "2026-10-02: corrected unadmitted candidate from preserved render-map research commit 64bb49dd20c83ec5c24b28b77c1ec2ccead5af5a; see content/correction-provenance.md. Historical runtime/source identities retained; no new game run.",
+      "2026-10-02 substantive-review follow-up: AMD measurements with DLSS unavailable do not establish identity with, or the mechanism of, the original NVIDIA-host report. Narrative only; all assertions and measured values unchanged."
+    ]
+  },
+  "schema": {
+    "major": 1,
+    "minor": 0,
+    "name": "skyrim-render-map.submission"
+  },
+  "status": "candidate-unreviewed",
+  "submissionClass": "assertion",
+  "submissionId": "sub-csx-colour-water-upscaling-d28a7902"
+}
