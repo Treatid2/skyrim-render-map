@@ -1,0 +1,49 @@
+{
+  "content": {
+    "fileCount": 4,
+    "root": "content",
+    "totalBytes": 874030,
+    "treeSha256": "58A5B262549F580CB0FB3E8F98270AF7B1B0E6465929D1345F5E76714360CB56"
+  },
+  "contributor": {
+    "displayName": "Treatid2",
+    "github": "Treatid2",
+    "standing": "ordinary-contributor"
+  },
+  "createdAt": "2026-10-03T23:02:47.596466+00:00",
+  "licensing": {
+    "content": "CC-BY-SA-4.0",
+    "dcoAcknowledged": true,
+    "schemas": "CC0-1.0"
+  },
+  "namespace": "csx",
+  "notes": "Verified partial failed-state CPU ordering/binding and same-resource two-eye accepted-publication observations. Incomplete capture/uncalibrated flags explicit. Not full pipeline, rendering-causal, HDR, RS-off or performance evidence. Publication for ordinary admission review; no implicit merge authority.",
+  "provenance": {
+    "importedAt": "2026-10-03T23:02:47.596466+00:00",
+    "relatedUrls": [
+      "https://github.com/Treatid2/skyrim-community-shaders/commit/f3623871660d0d5073957458daeb8055dddc40ce"
+    ],
+    "sourceCommit": "f3623871660d0d5073957458daeb8055dddc40ce",
+    "sourceContentTreeSha256": "bf6880af4473e686363e8a4acf4887ee227b57bc626572b59d444e5c0b0c8f44",
+    "sourceDirty": false,
+    "sourceParentCommit": "cc53d3e5a98d3667ac603ce9cb20bd517ce41691",
+    "sourcePubliclyReachable": true,
+    "sourceRef": null,
+    "sourceRepository": "https://github.com/Treatid2/skyrim-community-shaders",
+    "sourceState": "public-branch",
+    "transformations": [
+      "Source content identity is SHA256 of canonical capture-input inventory in provenance.json, not a hash of the entire CSX Git tree.",
+      "Independently reconciled v2 private intakes normalized into capture-scoped ledger observations.",
+      "Public sanitization described in provenance.json; immutable original archives retained privately.",
+      "Partial observation claims separated from unratified causal lineage and unadmitted scientific treatments."
+    ]
+  },
+  "schema": {
+    "major": 1,
+    "minor": 0,
+    "name": "skyrim-render-map.submission"
+  },
+  "status": "candidate-unreviewed",
+  "submissionClass": "assertion",
+  "submissionId": "sub-csx-failed-recovery-seam-f362-v1"
+}

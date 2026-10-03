@@ -1,0 +1,84 @@
+{
+  "identityQualification": "Producer source commit and truncated build ID come from native manifests. Full deployed DLL identity exists in separate owner custody but is not independently established here; applicability artifact hash remains null.",
+  "nextCapturePriorities": [
+    "Before next attempt, exact capacity formula for chosen event/cataloque limits; raise saturated target-view capacity with empirical headroom. Current64 retained vs3865 drops does not justify another64-slot trace; estimated attempted admissions are not unique-view counts.",
+    "Capture complete originalMain_PostProcessing span plus post-boundary tail through both accepted publications; retain requested/resolved event filters, stop reason, all drop counters and useful coverage.",
+    "Retain output-merger/RTV/UAV bindings and defining view/resource records at each operation, plus native stage identities. The33 repeated read candidates do not identify the main or submitted resource.",
+    "Retain actual copy/resolve/dispatch/draw operations connecting format26 main and format28 submit, source/destination descriptors, subresources and actual regions where instrumentation exposes them. Binding alone is not consumption.",
+    "Retain same-frame resource-version/write and command-epoch evidence, exact context/order, publication leases and both eye records. If lifetime, completion or pixel lineage is not instrumented, mark unknown rather than synthesize it.",
+    "Use a second same-state complete trace/stop-start only when it adds reproducibility evidence. Keep failed-state diagnostics separate from calibration and HDR factorial treatment."
+  ],
+  "openGaps": [
+    "Main candidate format26 to submitted format28 causal write/transfer connection.",
+    "Actual shader consumption, GPU completion and command-version/native-lifetime continuity.",
+    "Catalogue saturation/filtered coverage; native scene/config/executable identity gaps.",
+    "Fresh geometric/time/weather calibration and intended effective RS-off treatment."
+  ],
+  "partialClaimReview": {
+    "firstCaptureAcceptedEyeAbsenceScope": "Retained truncated trace only",
+    "firstMatchedOriginalRecords": 103,
+    "fullLineageRatified": false,
+    "scientificTreatmentAdmitted": false,
+    "secondCaptureEyeTypeRecordCount": 4,
+    "secondCaptureUniqueSelectedEyes": 2,
+    "secondMatchedOriginalRecords": 310,
+    "status": "independently-verified-narrow-observations; candidate-admission"
+  },
+  "publicTransformations": [
+    "Excluded absolute local paths, native capture IDs, process/thread IDs, native pointers, QPC timestamps and cache paths.",
+    "Preserved original sequence/CPU-frame numbers, capture-local observation IDs, descriptors, counters, null fields and producer false flags.",
+    "Derived same-thread equality from independently matched records; did not publish native thread number.",
+    "No shaders, binaries, media, archives, save files, dumps or machine configuration published."
+  ],
+  "schemaVersion": 1,
+  "secondAccessInventory": {
+    "mainCandidateOrSubmittedResourceAmongThese33": false,
+    "resources": {
+      "obs-resource-17382-g2": 11,
+      "obs-resource-17385-g2": 11,
+      "obs-resource-17388-g2": 11
+    },
+    "roles": "observed-read-candidate"
+  },
+  "sourceInventory": {
+    "trace-1": {
+      "privateIntakeSha256": "20b58d94607977b5d0b20f5b3e8b85217c47fcbc7af35aa4fdc0ba70c569eede",
+      "reconcilerSha256": "7cbf020951b184530ab6859966f95f7ba20e3e73d91b8b78230865a3425c0614",
+      "sourceIdentities": {
+        "original-capture.lossless.zip": {
+          "bytes": 1806776,
+          "sha256": "f8347e9e403d0a3bc7c605bf71dc223668a76b793b3bea2c6456462ea0ab27d5"
+        },
+        "capture-manifest.json": {
+          "bytes": 12064,
+          "sha256": "495553f57a421f94b6597b9b328984349dfe218bc296f444ac12edc7b37d9b36"
+        },
+        "post-processing-partial-v2.json": {
+          "bytes": 241680,
+          "sha256": "789f03585869e95e04c9196c7ba6031fbffa3a286ca90fdf1e83900b3b1200ca"
+        }
+      },
+      "sourcesUnchangedDuringReconciliation": true
+    },
+    "trace-2": {
+      "privateIntakeSha256": "a92853125e20dd267b3e1d7173701ecd01d5c51a9a1e3f12035cc0ebbd0a21e4",
+      "reconcilerSha256": "50025f63edcd08862c58a1e95dec522bd068998d3dd680fe9ae48262c4294a3f",
+      "sourceIdentities": {
+        "original-capture.lossless.zip": {
+          "bytes": 829493,
+          "sha256": "54031eb50f26842ec5a000497d5c21c59ca986513632818355c5b70cb0f0b1e1"
+        },
+        "capture-manifest.json": {
+          "bytes": 9290,
+          "sha256": "ef113f687070557a9c18fcbb1b9b364d94b580e19c4a7defd5fbb74af27ad361"
+        },
+        "post-processing-seam-partial-v2.json": {
+          "bytes": 849714,
+          "sha256": "def5187c7e008ebab8e5954a7ef5df2b34465175fda4d6b5eaee5a4b48405ac2"
+        }
+      },
+      "sourcesUnchangedDuringReconciliation": true
+    }
+  },
+  "verification": "Original archives streamed, sizes/digests and selected native JSON records independently matched; no contributor-controlled program executed."
+}
