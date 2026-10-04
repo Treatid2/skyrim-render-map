@@ -1,0 +1,6185 @@
+{
+  "dispatchStatus": {
+    "capturedAtUtc": "2026-10-04T02:22:56.3549802Z",
+    "harnessRuntimeBinding": {
+      "artifactBytes": 29196800,
+      "artifactSha256": "3954dcd6424756c15f9af4c78e21cf11cad458f1bea8e73f6c492b68d3720c49",
+      "buildId": "bc58e74af94af0fd8e2f436a242f213beba9b97564cce49f3ac39764c8fcc836",
+      "complete": true,
+      "qualification": "Retained harness receipt inspected; DLL not independently rehashed by this map author.",
+      "verified": true,
+      "verifiedAtUtc": "2026-10-04T02:22:56.2893663Z"
+    },
+    "native": {
+      "hostContext": {
+        "autoExposure": false,
+        "generation": 0,
+        "highDynamicRangeInput": false,
+        "valid": false
+      },
+      "lastSuccessfulDispatch": {
+        "autoExposure": true,
+        "configuredSharpnessAtDispatch": 0.8999999761581421,
+        "contextGeneration": 2,
+        "contextIndex": 1,
+        "displayHeight": 1680,
+        "displayWidth": 1512,
+        "effectiveSharpness": 0.8999999761581421,
+        "exposureResourceBound": false,
+        "frame": 61039,
+        "highDynamicRangeInput": true,
+        "path": 3,
+        "preExposure": 1.0,
+        "renderHeight": 1120,
+        "renderWidth": 1008,
+        "serial": 21880,
+        "sharpeningEnabled": true,
+        "valid": true
+      },
+      "lastSuccessfulEyeDispatches": [
+        {
+          "autoExposure": true,
+          "configuredSharpnessAtDispatch": 0.8999999761581421,
+          "contextGeneration": 2,
+          "contextIndex": 0,
+          "displayHeight": 1680,
+          "displayWidth": 1512,
+          "effectiveSharpness": 0.8999999761581421,
+          "exposureResourceBound": false,
+          "frame": 61039,
+          "highDynamicRangeInput": true,
+          "path": 3,
+          "preExposure": 1.0,
+          "renderHeight": 1120,
+          "renderWidth": 1008,
+          "serial": 21879,
+          "sharpeningEnabled": true,
+          "valid": true
+        },
+        {
+          "autoExposure": true,
+          "configuredSharpnessAtDispatch": 0.8999999761581421,
+          "contextGeneration": 2,
+          "contextIndex": 1,
+          "displayHeight": 1680,
+          "displayWidth": 1512,
+          "effectiveSharpness": 0.8999999761581421,
+          "exposureResourceBound": false,
+          "frame": 61039,
+          "highDynamicRangeInput": true,
+          "path": 3,
+          "preExposure": 1.0,
+          "renderHeight": 1120,
+          "renderWidth": 1008,
+          "serial": 21880,
+          "sharpeningEnabled": true,
+          "valid": true
+        }
+      ],
+      "producer": {
+        "artifactSha256": "",
+        "buildId": "bc58e74af94af0fd8e2f436a242f213beba9b97564cce49f3ac39764c8fcc836",
+        "buildIdShort": "bc58e74af94a",
+        "component": "CommunityShaders",
+        "configuration": "Release",
+        "manifestError": "runtime artifact verification delegated to deployment harness",
+        "manifestVerified": false,
+        "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+        "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+        "sourceCommit": "f3623871660d0d5073957458daeb8055dddc40ce",
+        "sourceDescribe": "f362387",
+        "sourceDirty": false
+      },
+      "requested": {
+        "autoExposure": true,
+        "highDynamicRangeInput": true,
+        "revision": 1
+      },
+      "runtimeContext": {
+        "autoExposure": true,
+        "generation": 2,
+        "highDynamicRangeInput": true,
+        "valid": true
+      },
+      "sourceColorContractChanged": false
+    },
+    "wrapper": {
+      "nativeIsError": false,
+      "ok": false,
+      "semantic": {
+        "affirmative": false,
+        "affirmativePaths": [],
+        "codes": [],
+        "explicitOutcomeEvidence": [],
+        "guarded": false,
+        "known": false,
+        "ok": true,
+        "outcome": "unverified",
+        "reasons": [
+          "A verified semantic outcome was required, but the response did not provide one."
+        ],
+        "rejectedOutcomeEvidence": [],
+        "schedulerOnly": false,
+        "schedulerReceiptPaths": [],
+        "states": [],
+        "transient": false
+      },
+      "state": "semantic-failed",
+      "transportOk": true
+    }
+  },
+  "profileSnapshot": {
+    "capturedAtUtc": "2026-10-04T02:20:49.9428477Z",
+    "profilePresenceMeaning": {
+      "applying": false,
+      "configured": true,
+      "effective": true,
+      "persisted": false,
+      "requested": false,
+      "stable": false
+    },
+    "qualification": "Undeclared serialized default profiles are not authoritative None treatments. Separate read from dispatch status; not an atomic joined snapshot.",
+    "snapshot": {
+      "activeOperationId": 0,
+      "capabilityRevision": 1,
+      "dimensions": {
+        "displayEyeHeight": 1680,
+        "displayEyeWidth": 1512,
+        "renderEyeHeight": 1120,
+        "renderEyeWidth": 2016
+      },
+      "flags": 1,
+      "observedConditions": {
+        "mask": 0,
+        "names": []
+      },
+      "profilePresence": 9,
+      "profiles": {
+        "applying": {
+          "dlssProfile": {
+            "name": "K",
+            "value": 1
+          },
+          "fsrRuntime": {
+            "name": "fsr3",
+            "value": 0
+          },
+          "method": {
+            "name": "none",
+            "value": 0
+          },
+          "qualityMode": {
+            "name": "native_aa",
+            "value": 0
+          },
+          "renderScaleMode": false
+        },
+        "configured": {
+          "dlssProfile": {
+            "name": "K",
+            "value": 1
+          },
+          "fsrRuntime": {
+            "name": "fsr4",
+            "value": 1
+          },
+          "method": {
+            "name": "fsr",
+            "value": 2
+          },
+          "qualityMode": {
+            "name": "quality",
+            "value": 3
+          },
+          "renderScaleMode": false
+        },
+        "effective": {
+          "dlssProfile": {
+            "name": "K",
+            "value": 1
+          },
+          "fsrRuntime": {
+            "name": "fsr4",
+            "value": 1
+          },
+          "method": {
+            "name": "fsr",
+            "value": 2
+          },
+          "qualityMode": {
+            "name": "quality",
+            "value": 3
+          },
+          "renderScaleMode": false
+        },
+        "persisted": {
+          "dlssProfile": {
+            "name": "K",
+            "value": 1
+          },
+          "fsrRuntime": {
+            "name": "fsr3",
+            "value": 0
+          },
+          "method": {
+            "name": "none",
+            "value": 0
+          },
+          "qualityMode": {
+            "name": "native_aa",
+            "value": 0
+          },
+          "renderScaleMode": false
+        },
+        "requested": {
+          "dlssProfile": {
+            "name": "K",
+            "value": 1
+          },
+          "fsrRuntime": {
+            "name": "fsr3",
+            "value": 0
+          },
+          "method": {
+            "name": "none",
+            "value": 0
+          },
+          "qualityMode": {
+            "name": "native_aa",
+            "value": 0
+          },
+          "renderScaleMode": false
+        },
+        "stable": {
+          "dlssProfile": {
+            "name": "K",
+            "value": 1
+          },
+          "fsrRuntime": {
+            "name": "fsr3",
+            "value": 0
+          },
+          "method": {
+            "name": "none",
+            "value": 0
+          },
+          "qualityMode": {
+            "name": "native_aa",
+            "value": 0
+          },
+          "renderScaleMode": false
+        }
+      },
+      "renderScaleStatus": {
+        "name": "disabled",
+        "value": 0
+      },
+      "stateRevision": 1,
+      "transitionState": {
+        "name": "idle",
+        "value": 0
+      }
+    }
+  },
+  "sourceIndex": [
+    {
+      "path": "src/Features/Upscaling.cpp",
+      "gitBlob": "66288680c1babb7a3c4581bdb2ca118a8222d5be",
+      "bytes": 2382285,
+      "sha256": "ea5ef5de2bdb39129fc0a98b7f6dcdbe8e4bd0cf2e13c2ae3342272dd4f89702",
+      "url": "https://github.com/Treatid2/skyrim-community-shaders/blob/f3623871660d0d5073957458daeb8055dddc40ce/src/Features/Upscaling.cpp"
+    },
+    {
+      "bytes": 23465,
+      "gitBlob": "7f7e249c924560687d701b80cc93173908819389",
+      "path": "src/Features/Upscaling/FidelityFX.h",
+      "sha256": "9c70821e5c622b3253457d67363ff0c7a51ee6a335d42a34baaf5736451f071c",
+      "url": "https://github.com/Treatid2/skyrim-community-shaders/blob/f3623871660d0d5073957458daeb8055dddc40ce/src/Features/Upscaling/FidelityFX.h"
+    },
+    {
+      "bytes": 193471,
+      "gitBlob": "327e5d3f5008d3849585e9e5bb4fbdfa137fa28f",
+      "path": "src/Features/Upscaling/FidelityFX.cpp",
+      "sha256": "26a572ffc693203d7c313e5ed98a2acce168a254d384c314a40e6c50656c574b",
+      "url": "https://github.com/Treatid2/skyrim-community-shaders/blob/f3623871660d0d5073957458daeb8055dddc40ce/src/Features/Upscaling/FidelityFX.cpp"
+    },
+    {
+      "bytes": 7480,
+      "gitBlob": "c77efa5fa0e781db6fa6d80b58fca0585eca68df",
+      "path": "src/Features/Upscaling/FSRColorContractDevBenchBridge.cpp",
+      "sha256": "ef65b15c285fde063ebe5df35215570c3925e96e39ff5ff70d3d0c3245ecf591",
+      "url": "https://github.com/Treatid2/skyrim-community-shaders/blob/f3623871660d0d5073957458daeb8055dddc40ce/src/Features/Upscaling/FSRColorContractDevBenchBridge.cpp"
+    },
+    {
+      "bytes": 47873,
+      "gitBlob": "59d6d066bbe9ece80f6a126285a0f294e83cc9d3",
+      "path": "src/Api/UpscalingService.cpp",
+      "sha256": "1ccfb833c04d70305896d0241719e6c395971185805e451b0c7d75b1d2a341f5",
+      "url": "https://github.com/Treatid2/skyrim-community-shaders/blob/f3623871660d0d5073957458daeb8055dddc40ce/src/Api/UpscalingService.cpp"
+    },
+    {
+      "bytes": 12087,
+      "gitBlob": "d8bd921a18b2babe469797744979795d1e34b0f1",
+      "path": "include/VRAPI/CSupscalingapi.h",
+      "sha256": "203f5f23fe4da31884449f630eca926fc0ac6e4e4f10c235a7e521c66b642bf8",
+      "url": "https://github.com/Treatid2/skyrim-community-shaders/blob/f3623871660d0d5073957458daeb8055dddc40ce/include/VRAPI/CSupscalingapi.h"
+    }
+  ],
+  "structuralPrefix": {
+    "bounds": {
+      "eventKinds": [
+        "device-context-observed",
+        "draw",
+        "gap",
+        "render-pass-enter",
+        "render-pass-exit",
+        "render-target-bind",
+        "resource-flow",
+        "resource-observed",
+        "resource-view-bind",
+        "resource-view-state-observed",
+        "shader-observed",
+        "stage-shader-observed",
+        "target-view-observed"
+      ],
+      "executionWithinSelectedGeometry": false,
+      "geometryShaderTypes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63
+      ],
+      "maxBytes": 67108864,
+      "maxDurationMs": 2000,
+      "maxEvents": 32768,
+      "maxFrames": 2,
+      "maxGeometryObservations": 1024,
+      "maxMaterialStateObservations": 1024,
+      "maxResourceObservations": 1024,
+      "maxSceneObjectObservations": 512,
+      "maxShaderObservations": 64,
+      "maxStageShaderObservations": 2048,
+      "maxTargetBindingObservations": 64,
+      "maxTargetViewObservations": 4096,
+      "maxTransferVersionResources": 256,
+      "observedEventKinds": [
+        "device-context-observed",
+        "draw",
+        "gap",
+        "render-pass-enter",
+        "render-pass-exit",
+        "render-target-bind",
+        "resource-flow",
+        "resource-observed",
+        "resource-view-bind",
+        "resource-view-state-observed",
+        "shader-observed",
+        "stage-shader-observed",
+        "target-view-observed"
+      ],
+      "pointerPolicy": "retain",
+      "requestedEventKinds": [
+        "eye-submitted"
+      ],
+      "resolvedEventKinds": [
+        "render-pass-created",
+        "render-pass-enter",
+        "render-pass-exit",
+        "render-target-bind",
+        "draw",
+        "dispatch",
+        "command-recording-observed",
+        "shader-observed",
+        "stage-shader-observed",
+        "device-context-observed",
+        "target-view-observed",
+        "resource-observed",
+        "resource-view-bind",
+        "resource-view-state-observed",
+        "resource-flow",
+        "eye-submitted",
+        "raster-state-observed",
+        "transfer-resource-access"
+      ]
+    },
+    "catalogueDefinitions": {
+      "obs-depth-target-24849-g1": {
+        "execution": {
+          "commandStreamSequence": 56110,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 45,
+          "kind": "depth-target",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-24848-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 0,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-depth-target-24849-g1",
+          "viewDimension": 3
+        },
+        "sequence": 30807,
+        "type": "target-view-observed"
+      },
+      "obs-depth-target-6-g1": {
+        "execution": {
+          "commandStreamSequence": 6,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": null,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 55,
+          "kind": "depth-target",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-5-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 1,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-depth-target-6-g1",
+          "viewDimension": 4
+        },
+        "sequence": 6,
+        "type": "target-view-observed"
+      },
+      "obs-depth-target-8388-g1": {
+        "execution": {
+          "commandStreamSequence": 18837,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 55,
+          "kind": "depth-target",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-5-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 1,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 1,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-depth-target-8388-g1",
+          "viewDimension": 4
+        },
+        "sequence": 10318,
+        "type": "target-view-observed"
+      },
+      "obs-device-context-1-g1": {
+        "execution": {
+          "commandStreamSequence": null,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": null,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "contextFlags": 0,
+          "contextPointer": "0x12DF1E9D508",
+          "creationEvidence": "initial-immediate-context",
+          "deviceContextObservationId": "obs-device-context-1-g1",
+          "kind": "immediate",
+          "pointerGeneration": 1,
+          "schema": "device-context-observation-v2"
+        },
+        "sequence": 0,
+        "type": "device-context-observed"
+      },
+      "obs-pixel-shader-2558-g1": {
+        "execution": {
+          "commandStreamSequence": null,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bytecodeSha256": "e139c40a6839ce8bd8a9d86de0a7447a5b7b98122d3a26e8f4b29a1302838795",
+          "bytecodeSize": 1216,
+          "engineAliasTotalCount": 1,
+          "engineAliases": [
+            {
+              "compileSourceName": "Utility",
+              "descriptor": 81922,
+              "loaderType": "Utility",
+              "truncated": {
+                "compileSourceName": false,
+                "loaderType": false
+              }
+            }
+          ],
+          "identityBasis": [
+            "stage",
+            "wrapper",
+            "d3dObject",
+            "wrapperDescriptor",
+            "bytecodeSha256",
+            "cachePath",
+            "engineAliases"
+          ],
+          "identityDetailsAvailable": true,
+          "pointerGeneration": 1,
+          "schema": "stage-shader-observation-v3",
+          "stage": "pixel",
+          "stageShaderObservationId": "obs-pixel-shader-2558-g1",
+          "truncated": {
+            "bytecodeSha256": false,
+            "engineAliases": false
+          },
+          "wrapperDescriptor": 81922
+        },
+        "sequence": 3202,
+        "type": "stage-shader-observed"
+      },
+      "obs-pixel-shader-3135-g1": {
+        "execution": {
+          "commandStreamSequence": null,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bytecodeSha256": "f5f62be17498c17ac9fcde466446532abf5278685d44bb361dfcf430f2e3fbba",
+          "bytecodeSize": 4068,
+          "engineAliasTotalCount": 1,
+          "engineAliases": [
+            {
+              "compileSourceName": "Utility",
+              "descriptor": 82050,
+              "loaderType": "Utility",
+              "truncated": {
+                "compileSourceName": false,
+                "loaderType": false
+              }
+            }
+          ],
+          "identityBasis": [
+            "stage",
+            "wrapper",
+            "d3dObject",
+            "wrapperDescriptor",
+            "bytecodeSha256",
+            "cachePath",
+            "engineAliases"
+          ],
+          "identityDetailsAvailable": true,
+          "pointerGeneration": 1,
+          "schema": "stage-shader-observation-v3",
+          "stage": "pixel",
+          "stageShaderObservationId": "obs-pixel-shader-3135-g1",
+          "truncated": {
+            "bytecodeSha256": false,
+            "engineAliases": false
+          },
+          "wrapperDescriptor": 82050
+        },
+        "sequence": 3785,
+        "type": "stage-shader-observed"
+      },
+      "obs-pixel-shader-3297-g1": {
+        "execution": {
+          "commandStreamSequence": null,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bytecodeSha256": "bea3236dc9b40e45e1c1414e38a91cff232edc741df4c474861ac59b31c33802",
+          "bytecodeSize": 4140,
+          "engineAliasTotalCount": 1,
+          "engineAliases": [
+            {
+              "compileSourceName": "Utility",
+              "descriptor": 82051,
+              "loaderType": "Utility",
+              "truncated": {
+                "compileSourceName": false,
+                "loaderType": false
+              }
+            }
+          ],
+          "identityBasis": [
+            "stage",
+            "wrapper",
+            "d3dObject",
+            "wrapperDescriptor",
+            "bytecodeSha256",
+            "cachePath",
+            "engineAliases"
+          ],
+          "identityDetailsAvailable": true,
+          "pointerGeneration": 1,
+          "schema": "stage-shader-observation-v3",
+          "stage": "pixel",
+          "stageShaderObservationId": "obs-pixel-shader-3297-g1",
+          "truncated": {
+            "bytecodeSha256": false,
+            "engineAliases": false
+          },
+          "wrapperDescriptor": 82051
+        },
+        "sequence": 3995,
+        "type": "stage-shader-observed"
+      },
+      "obs-pixel-shader-3670-g1": {
+        "execution": {
+          "commandStreamSequence": null,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bytecodeSha256": "f5f62be17498c17ac9fcde466446532abf5278685d44bb361dfcf430f2e3fbba",
+          "bytecodeSize": 4068,
+          "engineAliasTotalCount": 1,
+          "engineAliases": [
+            {
+              "compileSourceName": "Utility",
+              "descriptor": 67190915,
+              "loaderType": "Utility",
+              "truncated": {
+                "compileSourceName": false,
+                "loaderType": false
+              }
+            }
+          ],
+          "identityBasis": [
+            "stage",
+            "wrapper",
+            "d3dObject",
+            "wrapperDescriptor",
+            "bytecodeSha256",
+            "cachePath",
+            "engineAliases"
+          ],
+          "identityDetailsAvailable": true,
+          "pointerGeneration": 1,
+          "schema": "stage-shader-observation-v3",
+          "stage": "pixel",
+          "stageShaderObservationId": "obs-pixel-shader-3670-g1",
+          "truncated": {
+            "bytecodeSha256": false,
+            "engineAliases": false
+          },
+          "wrapperDescriptor": 67190915
+        },
+        "sequence": 4494,
+        "type": "stage-shader-observed"
+      },
+      "obs-pixel-shader-3735-g1": {
+        "execution": {
+          "commandStreamSequence": null,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bytecodeSha256": "26dc4aaf7f4479bad8fb04fd2abeb8bf72d15c8bc38014fcadb64a64aa23b580",
+          "bytecodeSize": 4096,
+          "engineAliasTotalCount": 1,
+          "engineAliases": [
+            {
+              "compileSourceName": "Utility",
+              "descriptor": 213122,
+              "loaderType": "Utility",
+              "truncated": {
+                "compileSourceName": false,
+                "loaderType": false
+              }
+            }
+          ],
+          "identityBasis": [
+            "stage",
+            "wrapper",
+            "d3dObject",
+            "wrapperDescriptor",
+            "bytecodeSha256",
+            "cachePath",
+            "engineAliases"
+          ],
+          "identityDetailsAvailable": true,
+          "pointerGeneration": 1,
+          "schema": "stage-shader-observation-v3",
+          "stage": "pixel",
+          "stageShaderObservationId": "obs-pixel-shader-3735-g1",
+          "truncated": {
+            "bytecodeSha256": false,
+            "engineAliases": false
+          },
+          "wrapperDescriptor": 213122
+        },
+        "sequence": 4571,
+        "type": "stage-shader-observed"
+      },
+      "obs-pixel-shader-3744-g1": {
+        "execution": {
+          "commandStreamSequence": null,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bytecodeSha256": "75ac55a682d159d27a3cb53afddf435b7a3ce4a65d815f38a688abed66133f76",
+          "bytecodeSize": 4168,
+          "engineAliasTotalCount": 1,
+          "engineAliases": [
+            {
+              "compileSourceName": "Utility",
+              "descriptor": 213123,
+              "loaderType": "Utility",
+              "truncated": {
+                "compileSourceName": false,
+                "loaderType": false
+              }
+            }
+          ],
+          "identityBasis": [
+            "stage",
+            "wrapper",
+            "d3dObject",
+            "wrapperDescriptor",
+            "bytecodeSha256",
+            "cachePath",
+            "engineAliases"
+          ],
+          "identityDetailsAvailable": true,
+          "pointerGeneration": 1,
+          "schema": "stage-shader-observation-v3",
+          "stage": "pixel",
+          "stageShaderObservationId": "obs-pixel-shader-3744-g1",
+          "truncated": {
+            "bytecodeSha256": false,
+            "engineAliases": false
+          },
+          "wrapperDescriptor": 213123
+        },
+        "sequence": 4583,
+        "type": "stage-shader-observed"
+      },
+      "obs-pixel-shader-9-g1": {
+        "execution": {
+          "commandStreamSequence": null,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": null,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bytecodeSha256": "e139c40a6839ce8bd8a9d86de0a7447a5b7b98122d3a26e8f4b29a1302838795",
+          "bytecodeSize": 1216,
+          "engineAliasTotalCount": 1,
+          "engineAliases": [
+            {
+              "compileSourceName": "Utility",
+              "descriptor": 81923,
+              "loaderType": "Utility",
+              "truncated": {
+                "compileSourceName": false,
+                "loaderType": false
+              }
+            }
+          ],
+          "identityBasis": [
+            "stage",
+            "wrapper",
+            "d3dObject",
+            "wrapperDescriptor",
+            "bytecodeSha256",
+            "cachePath",
+            "engineAliases"
+          ],
+          "identityDetailsAvailable": true,
+          "pointerGeneration": 1,
+          "schema": "stage-shader-observation-v3",
+          "stage": "pixel",
+          "stageShaderObservationId": "obs-pixel-shader-9-g1",
+          "truncated": {
+            "bytecodeSha256": false,
+            "engineAliases": false
+          },
+          "wrapperDescriptor": 81923
+        },
+        "sequence": 17,
+        "type": "stage-shader-observed"
+      },
+      "obs-resource-17387-g1": {
+        "execution": {
+          "commandStreamSequence": 39104,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 99,
+          "height": 2048,
+          "mipLevels": 12,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-17387-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 2048
+        },
+        "sequence": 21442,
+        "type": "resource-observed"
+      },
+      "obs-resource-17524-g1": {
+        "execution": {
+          "commandStreamSequence": 39433,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 99,
+          "height": 2048,
+          "mipLevels": 12,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-17524-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 2048
+        },
+        "sequence": 21620,
+        "type": "resource-observed"
+      },
+      "obs-resource-17538-g1": {
+        "execution": {
+          "commandStreamSequence": 39463,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 98,
+          "height": 2048,
+          "mipLevels": 12,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-17538-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 2048
+        },
+        "sequence": 21638,
+        "type": "resource-observed"
+      },
+      "obs-resource-17572-g1": {
+        "execution": {
+          "commandStreamSequence": 39539,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 98,
+          "height": 2048,
+          "mipLevels": 12,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-17572-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 2048
+        },
+        "sequence": 21679,
+        "type": "resource-observed"
+      },
+      "obs-resource-17887-g1": {
+        "execution": {
+          "commandStreamSequence": 40291,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 99,
+          "height": 2048,
+          "mipLevels": 12,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-17887-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 1024
+        },
+        "sequence": 22087,
+        "type": "resource-observed"
+      },
+      "obs-resource-18039-g1": {
+        "execution": {
+          "commandStreamSequence": 40661,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 99,
+          "height": 512,
+          "mipLevels": 10,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-18039-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 512
+        },
+        "sequence": 22299,
+        "type": "resource-observed"
+      },
+      "obs-resource-18169-g1": {
+        "execution": {
+          "commandStreamSequence": 40956,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 77,
+          "height": 1024,
+          "mipLevels": 12,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-18169-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 2048
+        },
+        "sequence": 22447,
+        "type": "resource-observed"
+      },
+      "obs-resource-18211-g1": {
+        "execution": {
+          "commandStreamSequence": 41052,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 99,
+          "height": 2048,
+          "mipLevels": 12,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-18211-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 2048
+        },
+        "sequence": 22501,
+        "type": "resource-observed"
+      },
+      "obs-resource-18230-g1": {
+        "execution": {
+          "commandStreamSequence": 41093,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 72,
+          "height": 2048,
+          "mipLevels": 12,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-18230-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 2048
+        },
+        "sequence": 22524,
+        "type": "resource-observed"
+      },
+      "obs-resource-18238-g1": {
+        "execution": {
+          "commandStreamSequence": 41108,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 99,
+          "height": 1024,
+          "mipLevels": 11,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-18238-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 1024
+        },
+        "sequence": 22534,
+        "type": "resource-observed"
+      },
+      "obs-resource-18324-g1": {
+        "execution": {
+          "commandStreamSequence": 41310,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 99,
+          "height": 1024,
+          "mipLevels": 12,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-18324-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 2048
+        },
+        "sequence": 22631,
+        "type": "resource-observed"
+      },
+      "obs-resource-2-g1": {
+        "execution": {
+          "commandStreamSequence": 1,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": null,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 4,
+          "cpuAccessFlags": 65536,
+          "depthOrArraySize": 0,
+          "dimension": "buffer",
+          "format": 0,
+          "height": 0,
+          "mipLevels": 0,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-2-g1",
+          "sampleCount": 0,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 2,
+          "widthOrBytes": 48
+        },
+        "sequence": 1,
+        "type": "resource-observed"
+      },
+      "obs-resource-24821-g1": {
+        "execution": {
+          "commandStreamSequence": 56067,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 4,
+          "cpuAccessFlags": 65536,
+          "depthOrArraySize": 0,
+          "dimension": "buffer",
+          "format": 0,
+          "height": 0,
+          "mipLevels": 0,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-24821-g1",
+          "sampleCount": 0,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 2,
+          "widthOrBytes": 704
+        },
+        "sequence": 30766,
+        "type": "resource-observed"
+      },
+      "obs-resource-24823-g1": {
+        "execution": {
+          "commandStreamSequence": 56069,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 4,
+          "cpuAccessFlags": 65536,
+          "depthOrArraySize": 0,
+          "dimension": "buffer",
+          "format": 0,
+          "height": 0,
+          "mipLevels": 0,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-24823-g1",
+          "sampleCount": 0,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 2,
+          "widthOrBytes": 1408
+        },
+        "sequence": 30767,
+        "type": "resource-observed"
+      },
+      "obs-resource-24825-g1": {
+        "execution": {
+          "commandStreamSequence": 56071,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 136,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 56,
+          "height": 1680,
+          "mipLevels": 1,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-24825-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 3024
+        },
+        "sequence": 30768,
+        "type": "resource-observed"
+      },
+      "obs-resource-24828-g1": {
+        "execution": {
+          "commandStreamSequence": 56083,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 65536,
+          "depthOrArraySize": 0,
+          "dimension": "buffer",
+          "format": 0,
+          "height": 0,
+          "mipLevels": 0,
+          "miscFlags": 64,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-24828-g1",
+          "sampleCount": 0,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 272,
+          "usage": 2,
+          "widthOrBytes": 272
+        },
+        "sequence": 30783,
+        "type": "resource-observed"
+      },
+      "obs-resource-24831-g1": {
+        "execution": {
+          "commandStreamSequence": 56087,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 40,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 6,
+          "dimension": "texture-2d",
+          "format": 61,
+          "height": 128,
+          "mipLevels": 1,
+          "miscFlags": 4,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-24831-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 128
+        },
+        "sequence": 30788,
+        "type": "resource-observed"
+      },
+      "obs-resource-24833-g1": {
+        "execution": {
+          "commandStreamSequence": 56091,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 4,
+          "cpuAccessFlags": 65536,
+          "depthOrArraySize": 0,
+          "dimension": "buffer",
+          "format": 0,
+          "height": 0,
+          "mipLevels": 0,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-24833-g1",
+          "sampleCount": 0,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 2,
+          "widthOrBytes": 64
+        },
+        "sequence": 30796,
+        "type": "resource-observed"
+      },
+      "obs-resource-24836-g1": {
+        "execution": {
+          "commandStreamSequence": 56095,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 72,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 44,
+          "height": 1680,
+          "mipLevels": 1,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-24836-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 3024
+        },
+        "sequence": 30797,
+        "type": "resource-observed"
+      },
+      "obs-resource-24837-g1": {
+        "execution": {
+          "commandStreamSequence": 56096,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 65536,
+          "depthOrArraySize": 0,
+          "dimension": "buffer",
+          "format": 0,
+          "height": 0,
+          "mipLevels": 0,
+          "miscFlags": 64,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-24837-g1",
+          "sampleCount": 0,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 64,
+          "usage": 2,
+          "widthOrBytes": 262144
+        },
+        "sequence": 30799,
+        "type": "resource-observed"
+      },
+      "obs-resource-24839-g1": {
+        "execution": {
+          "commandStreamSequence": 56098,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 4,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 0,
+          "dimension": "buffer",
+          "format": 0,
+          "height": 0,
+          "mipLevels": 0,
+          "miscFlags": 2,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-24839-g1",
+          "sampleCount": 0,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 400
+        },
+        "sequence": 30800,
+        "type": "resource-observed"
+      },
+      "obs-resource-24840-g1": {
+        "execution": {
+          "commandStreamSequence": 56098,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 0,
+          "cpuAccessFlags": 131072,
+          "depthOrArraySize": 0,
+          "dimension": "buffer",
+          "format": 0,
+          "height": 0,
+          "mipLevels": 0,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-24840-g1",
+          "sampleCount": 0,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 3,
+          "widthOrBytes": 400
+        },
+        "sequence": 30801,
+        "type": "resource-observed"
+      },
+      "obs-resource-24848-g1": {
+        "execution": {
+          "commandStreamSequence": 56109,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 72,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 44,
+          "height": 1680,
+          "mipLevels": 1,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-24848-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 3024
+        },
+        "sequence": 30805,
+        "type": "resource-observed"
+      },
+      "obs-resource-2560-g1": {
+        "execution": {
+          "commandStreamSequence": 5744,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 4,
+          "cpuAccessFlags": 65536,
+          "depthOrArraySize": 0,
+          "dimension": "buffer",
+          "format": 0,
+          "height": 0,
+          "mipLevels": 0,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-2560-g1",
+          "sampleCount": 0,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 2,
+          "widthOrBytes": 3840
+        },
+        "sequence": 3203,
+        "type": "resource-observed"
+      },
+      "obs-resource-2562-g1": {
+        "execution": {
+          "commandStreamSequence": 5746,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 4,
+          "cpuAccessFlags": 65536,
+          "depthOrArraySize": 0,
+          "dimension": "buffer",
+          "format": 0,
+          "height": 0,
+          "mipLevels": 0,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-2562-g1",
+          "sampleCount": 0,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 2,
+          "widthOrBytes": 3840
+        },
+        "sequence": 3204,
+        "type": "resource-observed"
+      },
+      "obs-resource-2567-g1": {
+        "execution": {
+          "commandStreamSequence": 5755,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 4,
+          "cpuAccessFlags": 65536,
+          "depthOrArraySize": 0,
+          "dimension": "buffer",
+          "format": 0,
+          "height": 0,
+          "mipLevels": 0,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-2567-g1",
+          "sampleCount": 0,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 2,
+          "widthOrBytes": 3840
+        },
+        "sequence": 3210,
+        "type": "resource-observed"
+      },
+      "obs-resource-2569-g1": {
+        "execution": {
+          "commandStreamSequence": 5757,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 4,
+          "cpuAccessFlags": 65536,
+          "depthOrArraySize": 0,
+          "dimension": "buffer",
+          "format": 0,
+          "height": 0,
+          "mipLevels": 0,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-2569-g1",
+          "sampleCount": 0,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 2,
+          "widthOrBytes": 3840
+        },
+        "sequence": 3211,
+        "type": "resource-observed"
+      },
+      "obs-resource-3-g1": {
+        "execution": {
+          "commandStreamSequence": 2,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": null,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 4,
+          "cpuAccessFlags": 65536,
+          "depthOrArraySize": 0,
+          "dimension": "buffer",
+          "format": 0,
+          "height": 0,
+          "mipLevels": 0,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3-g1",
+          "sampleCount": 0,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 2,
+          "widthOrBytes": 208
+        },
+        "sequence": 2,
+        "type": "resource-observed"
+      },
+      "obs-resource-3137-g1": {
+        "execution": {
+          "commandStreamSequence": 7004,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 4,
+          "cpuAccessFlags": 65536,
+          "depthOrArraySize": 0,
+          "dimension": "buffer",
+          "format": 0,
+          "height": 0,
+          "mipLevels": 0,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3137-g1",
+          "sampleCount": 0,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 2,
+          "widthOrBytes": 16
+        },
+        "sequence": 3786,
+        "type": "resource-observed"
+      },
+      "obs-resource-3140-g1": {
+        "execution": {
+          "commandStreamSequence": 7008,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 4,
+          "cpuAccessFlags": 65536,
+          "depthOrArraySize": 0,
+          "dimension": "buffer",
+          "format": 0,
+          "height": 0,
+          "mipLevels": 0,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3140-g1",
+          "sampleCount": 0,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 2,
+          "widthOrBytes": 48
+        },
+        "sequence": 3787,
+        "type": "resource-observed"
+      },
+      "obs-resource-3142-g1": {
+        "execution": {
+          "commandStreamSequence": 7010,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 99,
+          "height": 2048,
+          "mipLevels": 12,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3142-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 2048
+        },
+        "sequence": 3788,
+        "type": "resource-observed"
+      },
+      "obs-resource-3155-g1": {
+        "execution": {
+          "commandStreamSequence": 7036,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 99,
+          "height": 2048,
+          "mipLevels": 12,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3155-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 2048
+        },
+        "sequence": 3803,
+        "type": "resource-observed"
+      },
+      "obs-resource-3168-g1": {
+        "execution": {
+          "commandStreamSequence": 7064,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 99,
+          "height": 4096,
+          "mipLevels": 13,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3168-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 2048
+        },
+        "sequence": 3821,
+        "type": "resource-observed"
+      },
+      "obs-resource-3187-g1": {
+        "execution": {
+          "commandStreamSequence": 7107,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 72,
+          "height": 1024,
+          "mipLevels": 11,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3187-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 1024
+        },
+        "sequence": 3847,
+        "type": "resource-observed"
+      },
+      "obs-resource-3200-g1": {
+        "execution": {
+          "commandStreamSequence": 7135,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 99,
+          "height": 1024,
+          "mipLevels": 11,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3200-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 1024
+        },
+        "sequence": 3865,
+        "type": "resource-observed"
+      },
+      "obs-resource-3237-g1": {
+        "execution": {
+          "commandStreamSequence": 7216,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 99,
+          "height": 2048,
+          "mipLevels": 12,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3237-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 2048
+        },
+        "sequence": 3908,
+        "type": "resource-observed"
+      },
+      "obs-resource-3244-g1": {
+        "execution": {
+          "commandStreamSequence": 7229,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 99,
+          "height": 1024,
+          "mipLevels": 11,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3244-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 1024
+        },
+        "sequence": 3918,
+        "type": "resource-observed"
+      },
+      "obs-resource-3261-g1": {
+        "execution": {
+          "commandStreamSequence": 7266,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 99,
+          "height": 2048,
+          "mipLevels": 12,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3261-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 2048
+        },
+        "sequence": 3941,
+        "type": "resource-observed"
+      },
+      "obs-resource-3268-g1": {
+        "execution": {
+          "commandStreamSequence": 7279,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 99,
+          "height": 1024,
+          "mipLevels": 11,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3268-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 1024
+        },
+        "sequence": 3951,
+        "type": "resource-observed"
+      },
+      "obs-resource-3285-g1": {
+        "execution": {
+          "commandStreamSequence": 7316,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 77,
+          "height": 2048,
+          "mipLevels": 12,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3285-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 2048
+        },
+        "sequence": 3974,
+        "type": "resource-observed"
+      },
+      "obs-resource-3292-g1": {
+        "execution": {
+          "commandStreamSequence": 7329,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 99,
+          "height": 2048,
+          "mipLevels": 12,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3292-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 2048
+        },
+        "sequence": 3984,
+        "type": "resource-observed"
+      },
+      "obs-resource-3301-g1": {
+        "execution": {
+          "commandStreamSequence": 7342,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 99,
+          "height": 2048,
+          "mipLevels": 12,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3301-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 2048
+        },
+        "sequence": 3996,
+        "type": "resource-observed"
+      },
+      "obs-resource-3318-g1": {
+        "execution": {
+          "commandStreamSequence": 7377,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 99,
+          "height": 2048,
+          "mipLevels": 12,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3318-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 2048
+        },
+        "sequence": 4016,
+        "type": "resource-observed"
+      },
+      "obs-resource-3325-g1": {
+        "execution": {
+          "commandStreamSequence": 7390,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 99,
+          "height": 4096,
+          "mipLevels": 13,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3325-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 2048
+        },
+        "sequence": 4026,
+        "type": "resource-observed"
+      },
+      "obs-resource-3332-g1": {
+        "execution": {
+          "commandStreamSequence": 7403,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 99,
+          "height": 2048,
+          "mipLevels": 12,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3332-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 2048
+        },
+        "sequence": 4036,
+        "type": "resource-observed"
+      },
+      "obs-resource-3339-g1": {
+        "execution": {
+          "commandStreamSequence": 7416,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 99,
+          "height": 2048,
+          "mipLevels": 12,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3339-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 2048
+        },
+        "sequence": 4046,
+        "type": "resource-observed"
+      },
+      "obs-resource-3356-g1": {
+        "execution": {
+          "commandStreamSequence": 7453,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 99,
+          "height": 2048,
+          "mipLevels": 12,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3356-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 2048
+        },
+        "sequence": 4069,
+        "type": "resource-observed"
+      },
+      "obs-resource-3363-g1": {
+        "execution": {
+          "commandStreamSequence": 7466,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 99,
+          "height": 4096,
+          "mipLevels": 13,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3363-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 2048
+        },
+        "sequence": 4079,
+        "type": "resource-observed"
+      },
+      "obs-resource-3391-g1": {
+        "execution": {
+          "commandStreamSequence": 7533,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 99,
+          "height": 2048,
+          "mipLevels": 12,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3391-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 2048
+        },
+        "sequence": 4121,
+        "type": "resource-observed"
+      },
+      "obs-resource-3424-g1": {
+        "execution": {
+          "commandStreamSequence": 7611,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 99,
+          "height": 512,
+          "mipLevels": 10,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3424-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 512
+        },
+        "sequence": 4168,
+        "type": "resource-observed"
+      },
+      "obs-resource-3431-g1": {
+        "execution": {
+          "commandStreamSequence": 7624,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 72,
+          "height": 4096,
+          "mipLevels": 13,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3431-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 4096
+        },
+        "sequence": 4178,
+        "type": "resource-observed"
+      },
+      "obs-resource-3443-g1": {
+        "execution": {
+          "commandStreamSequence": 7650,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 99,
+          "height": 2048,
+          "mipLevels": 12,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3443-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 2048
+        },
+        "sequence": 4196,
+        "type": "resource-observed"
+      },
+      "obs-resource-3510-g1": {
+        "execution": {
+          "commandStreamSequence": 7817,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 99,
+          "height": 512,
+          "mipLevels": 10,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3510-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 512
+        },
+        "sequence": 4299,
+        "type": "resource-observed"
+      },
+      "obs-resource-3533-g1": {
+        "execution": {
+          "commandStreamSequence": 7869,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 99,
+          "height": 1024,
+          "mipLevels": 12,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3533-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 2048
+        },
+        "sequence": 4330,
+        "type": "resource-observed"
+      },
+      "obs-resource-3541-g1": {
+        "execution": {
+          "commandStreamSequence": 7884,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 72,
+          "height": 2048,
+          "mipLevels": 12,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3541-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 2048
+        },
+        "sequence": 4340,
+        "type": "resource-observed"
+      },
+      "obs-resource-3575-g1": {
+        "execution": {
+          "commandStreamSequence": 7962,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 99,
+          "height": 1024,
+          "mipLevels": 11,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3575-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 1024
+        },
+        "sequence": 4384,
+        "type": "resource-observed"
+      },
+      "obs-resource-3583-g1": {
+        "execution": {
+          "commandStreamSequence": 7977,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 77,
+          "height": 1024,
+          "mipLevels": 10,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3583-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 1024
+        },
+        "sequence": 4394,
+        "type": "resource-observed"
+      },
+      "obs-resource-3596-g1": {
+        "execution": {
+          "commandStreamSequence": 8003,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 3,
+          "cpuAccessFlags": 65536,
+          "depthOrArraySize": 0,
+          "dimension": "buffer",
+          "format": 0,
+          "height": 0,
+          "mipLevels": 0,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3596-g1",
+          "sampleCount": 0,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 2,
+          "widthOrBytes": 4194304
+        },
+        "sequence": 4413,
+        "type": "resource-observed"
+      },
+      "obs-resource-3601-g1": {
+        "execution": {
+          "commandStreamSequence": 8011,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 77,
+          "height": 2048,
+          "mipLevels": 12,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3601-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 2048
+        },
+        "sequence": 4414,
+        "type": "resource-observed"
+      },
+      "obs-resource-3611-g1": {
+        "execution": {
+          "commandStreamSequence": 8033,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 71,
+          "height": 2048,
+          "mipLevels": 1,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3611-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 2048
+        },
+        "sequence": 4427,
+        "type": "resource-observed"
+      },
+      "obs-resource-3620-g1": {
+        "execution": {
+          "commandStreamSequence": 8050,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 72,
+          "height": 4096,
+          "mipLevels": 13,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3620-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 2048
+        },
+        "sequence": 4437,
+        "type": "resource-observed"
+      },
+      "obs-resource-3628-g1": {
+        "execution": {
+          "commandStreamSequence": 8065,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 99,
+          "height": 4096,
+          "mipLevels": 13,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3628-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 2048
+        },
+        "sequence": 4447,
+        "type": "resource-observed"
+      },
+      "obs-resource-3638-g1": {
+        "execution": {
+          "commandStreamSequence": 8082,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 99,
+          "height": 512,
+          "mipLevels": 11,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3638-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 1024
+        },
+        "sequence": 4458,
+        "type": "resource-observed"
+      },
+      "obs-resource-3653-g1": {
+        "execution": {
+          "commandStreamSequence": 8112,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 99,
+          "height": 4096,
+          "mipLevels": 13,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3653-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 2048
+        },
+        "sequence": 4473,
+        "type": "resource-observed"
+      },
+      "obs-resource-3675-g1": {
+        "execution": {
+          "commandStreamSequence": 8153,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 99,
+          "height": 2048,
+          "mipLevels": 12,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3675-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 2048
+        },
+        "sequence": 4495,
+        "type": "resource-observed"
+      },
+      "obs-resource-3683-g1": {
+        "execution": {
+          "commandStreamSequence": 8168,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 77,
+          "height": 2048,
+          "mipLevels": 12,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3683-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 2048
+        },
+        "sequence": 4505,
+        "type": "resource-observed"
+      },
+      "obs-resource-3702-g1": {
+        "execution": {
+          "commandStreamSequence": 8209,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 98,
+          "height": 2048,
+          "mipLevels": 12,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3702-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 2048
+        },
+        "sequence": 4528,
+        "type": "resource-observed"
+      },
+      "obs-resource-3716-g1": {
+        "execution": {
+          "commandStreamSequence": 8239,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 99,
+          "height": 2048,
+          "mipLevels": 12,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3716-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 2048
+        },
+        "sequence": 4546,
+        "type": "resource-observed"
+      },
+      "obs-resource-3750-g1": {
+        "execution": {
+          "commandStreamSequence": 8311,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 8,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 1,
+          "dimension": "texture-2d",
+          "format": 98,
+          "height": 512,
+          "mipLevels": 11,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3750-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 1024
+        },
+        "sequence": 4584,
+        "type": "resource-observed"
+      },
+      "obs-resource-3752-g1": {
+        "execution": {
+          "commandStreamSequence": 8316,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 4,
+          "cpuAccessFlags": 65536,
+          "depthOrArraySize": 0,
+          "dimension": "buffer",
+          "format": 0,
+          "height": 0,
+          "mipLevels": 0,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3752-g1",
+          "sampleCount": 0,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 2,
+          "widthOrBytes": 1408
+        },
+        "sequence": 4593,
+        "type": "resource-observed"
+      },
+      "obs-resource-5-g1": {
+        "execution": {
+          "commandStreamSequence": 6,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": null,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bindFlags": 72,
+          "cpuAccessFlags": 0,
+          "depthOrArraySize": 8,
+          "dimension": "texture-2d",
+          "format": 53,
+          "height": 4096,
+          "mipLevels": 1,
+          "miscFlags": 0,
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-5-g1",
+          "sampleCount": 1,
+          "sampleQuality": 0,
+          "schema": "resource-observation-v1",
+          "structureByteStride": 0,
+          "usage": 0,
+          "widthOrBytes": 4096
+        },
+        "sequence": 5,
+        "type": "resource-observed"
+      },
+      "obs-shader-11-g1": {
+        "execution": {
+          "commandStreamSequence": null,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "compileSourceName": "Utility",
+          "definesSuffix": null,
+          "fxpFilename": "Utility",
+          "identityBasis": [
+            "pointer",
+            "shaderType",
+            "fxpFilename",
+            "imageSpaceName",
+            "compileSourceName",
+            "definesSuffix"
+          ],
+          "identityDetailsAvailable": true,
+          "imageSpaceName": null,
+          "pointerGeneration": 1,
+          "schema": "shader-observation-v2",
+          "shaderObservationId": "obs-shader-11-g1",
+          "shaderPointer": "0x12DF6C0AF20",
+          "shaderType": 8,
+          "truncated": {
+            "compileSourceName": false,
+            "definesSuffix": false,
+            "fxpFilename": false,
+            "imageSpaceName": false
+          }
+        },
+        "sequence": 20,
+        "type": "shader-observed"
+      },
+      "obs-shader-resource-view-17388-g1": {
+        "execution": {
+          "commandStreamSequence": 39104,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 99,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-17387-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 12,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-17388-g1",
+          "viewDimension": 4
+        },
+        "sequence": 21443,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-17525-g1": {
+        "execution": {
+          "commandStreamSequence": 39433,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 99,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-17524-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 12,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-17525-g1",
+          "viewDimension": 4
+        },
+        "sequence": 21621,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-17539-g1": {
+        "execution": {
+          "commandStreamSequence": 39463,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 98,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-17538-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 12,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-17539-g1",
+          "viewDimension": 4
+        },
+        "sequence": 21639,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-17573-g1": {
+        "execution": {
+          "commandStreamSequence": 39539,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 98,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-17572-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 12,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-17573-g1",
+          "viewDimension": 4
+        },
+        "sequence": 21680,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-17888-g1": {
+        "execution": {
+          "commandStreamSequence": 40291,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 99,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-17887-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 12,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-17888-g1",
+          "viewDimension": 4
+        },
+        "sequence": 22088,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-18040-g1": {
+        "execution": {
+          "commandStreamSequence": 40661,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 99,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-18039-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 10,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-18040-g1",
+          "viewDimension": 4
+        },
+        "sequence": 22300,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-18170-g1": {
+        "execution": {
+          "commandStreamSequence": 40956,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 77,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-18169-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 12,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-18170-g1",
+          "viewDimension": 4
+        },
+        "sequence": 22448,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-18212-g1": {
+        "execution": {
+          "commandStreamSequence": 41052,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 99,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-18211-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 12,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-18212-g1",
+          "viewDimension": 4
+        },
+        "sequence": 22502,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-18231-g1": {
+        "execution": {
+          "commandStreamSequence": 41093,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 72,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-18230-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 12,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-18231-g1",
+          "viewDimension": 4
+        },
+        "sequence": 22525,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-18239-g1": {
+        "execution": {
+          "commandStreamSequence": 41108,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 99,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-18238-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 11,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-18239-g1",
+          "viewDimension": 4
+        },
+        "sequence": 22535,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-18325-g1": {
+        "execution": {
+          "commandStreamSequence": 41310,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 99,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-18324-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 12,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-18325-g1",
+          "viewDimension": 4
+        },
+        "sequence": 22632,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-24826-g1": {
+        "execution": {
+          "commandStreamSequence": 56071,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 56,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-24825-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 1,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-24826-g1",
+          "viewDimension": 4
+        },
+        "sequence": 30769,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-24830-g1": {
+        "execution": {
+          "commandStreamSequence": 56085,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 0,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-24828-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 0,
+            "elementCountOrArraySize": 1,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-24830-g1",
+          "viewDimension": 1
+        },
+        "sequence": 30784,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-24832-g1": {
+        "execution": {
+          "commandStreamSequence": 56087,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 61,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-24831-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 1,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-24832-g1",
+          "viewDimension": 9
+        },
+        "sequence": 30789,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3143-g1": {
+        "execution": {
+          "commandStreamSequence": 7010,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 99,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3142-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 12,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3143-g1",
+          "viewDimension": 4
+        },
+        "sequence": 3789,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3156-g1": {
+        "execution": {
+          "commandStreamSequence": 7036,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 99,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3155-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 12,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3156-g1",
+          "viewDimension": 4
+        },
+        "sequence": 3804,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3169-g1": {
+        "execution": {
+          "commandStreamSequence": 7064,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 99,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3168-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 13,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3169-g1",
+          "viewDimension": 4
+        },
+        "sequence": 3822,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3188-g1": {
+        "execution": {
+          "commandStreamSequence": 7107,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 72,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3187-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 11,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3188-g1",
+          "viewDimension": 4
+        },
+        "sequence": 3848,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3201-g1": {
+        "execution": {
+          "commandStreamSequence": 7135,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 99,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3200-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 11,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3201-g1",
+          "viewDimension": 4
+        },
+        "sequence": 3866,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3238-g1": {
+        "execution": {
+          "commandStreamSequence": 7216,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 99,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3237-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 12,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3238-g1",
+          "viewDimension": 4
+        },
+        "sequence": 3909,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3245-g1": {
+        "execution": {
+          "commandStreamSequence": 7229,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 99,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3244-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 11,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3245-g1",
+          "viewDimension": 4
+        },
+        "sequence": 3919,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3262-g1": {
+        "execution": {
+          "commandStreamSequence": 7266,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 99,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3261-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 12,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3262-g1",
+          "viewDimension": 4
+        },
+        "sequence": 3942,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3269-g1": {
+        "execution": {
+          "commandStreamSequence": 7279,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 99,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3268-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 11,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3269-g1",
+          "viewDimension": 4
+        },
+        "sequence": 3952,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3286-g1": {
+        "execution": {
+          "commandStreamSequence": 7316,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 77,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3285-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 12,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3286-g1",
+          "viewDimension": 4
+        },
+        "sequence": 3975,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3293-g1": {
+        "execution": {
+          "commandStreamSequence": 7329,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 99,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3292-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 12,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3293-g1",
+          "viewDimension": 4
+        },
+        "sequence": 3985,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3302-g1": {
+        "execution": {
+          "commandStreamSequence": 7342,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 99,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3301-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 12,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3302-g1",
+          "viewDimension": 4
+        },
+        "sequence": 3997,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3319-g1": {
+        "execution": {
+          "commandStreamSequence": 7377,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 99,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3318-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 12,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3319-g1",
+          "viewDimension": 4
+        },
+        "sequence": 4017,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3326-g1": {
+        "execution": {
+          "commandStreamSequence": 7390,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 99,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3325-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 13,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3326-g1",
+          "viewDimension": 4
+        },
+        "sequence": 4027,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3333-g1": {
+        "execution": {
+          "commandStreamSequence": 7403,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 99,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3332-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 12,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3333-g1",
+          "viewDimension": 4
+        },
+        "sequence": 4037,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3340-g1": {
+        "execution": {
+          "commandStreamSequence": 7416,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 99,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3339-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 12,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3340-g1",
+          "viewDimension": 4
+        },
+        "sequence": 4047,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3357-g1": {
+        "execution": {
+          "commandStreamSequence": 7453,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 99,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3356-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 12,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3357-g1",
+          "viewDimension": 4
+        },
+        "sequence": 4070,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3364-g1": {
+        "execution": {
+          "commandStreamSequence": 7466,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 99,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3363-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 13,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3364-g1",
+          "viewDimension": 4
+        },
+        "sequence": 4080,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3392-g1": {
+        "execution": {
+          "commandStreamSequence": 7533,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 99,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3391-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 12,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3392-g1",
+          "viewDimension": 4
+        },
+        "sequence": 4122,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3425-g1": {
+        "execution": {
+          "commandStreamSequence": 7611,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 99,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3424-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 10,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3425-g1",
+          "viewDimension": 4
+        },
+        "sequence": 4169,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3432-g1": {
+        "execution": {
+          "commandStreamSequence": 7624,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 72,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3431-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 13,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3432-g1",
+          "viewDimension": 4
+        },
+        "sequence": 4179,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3444-g1": {
+        "execution": {
+          "commandStreamSequence": 7650,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 99,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3443-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 12,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3444-g1",
+          "viewDimension": 4
+        },
+        "sequence": 4197,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3511-g1": {
+        "execution": {
+          "commandStreamSequence": 7817,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 99,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3510-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 10,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3511-g1",
+          "viewDimension": 4
+        },
+        "sequence": 4300,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3534-g1": {
+        "execution": {
+          "commandStreamSequence": 7869,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 99,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3533-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 12,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3534-g1",
+          "viewDimension": 4
+        },
+        "sequence": 4331,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3542-g1": {
+        "execution": {
+          "commandStreamSequence": 7884,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 72,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3541-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 12,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3542-g1",
+          "viewDimension": 4
+        },
+        "sequence": 4341,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3576-g1": {
+        "execution": {
+          "commandStreamSequence": 7962,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 99,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3575-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 11,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3576-g1",
+          "viewDimension": 4
+        },
+        "sequence": 4385,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3584-g1": {
+        "execution": {
+          "commandStreamSequence": 7977,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 77,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3583-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 10,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3584-g1",
+          "viewDimension": 4
+        },
+        "sequence": 4395,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3602-g1": {
+        "execution": {
+          "commandStreamSequence": 8011,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 77,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3601-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 12,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3602-g1",
+          "viewDimension": 4
+        },
+        "sequence": 4415,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3612-g1": {
+        "execution": {
+          "commandStreamSequence": 8033,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 71,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3611-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 1,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3612-g1",
+          "viewDimension": 4
+        },
+        "sequence": 4428,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3621-g1": {
+        "execution": {
+          "commandStreamSequence": 8050,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 72,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3620-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 13,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3621-g1",
+          "viewDimension": 4
+        },
+        "sequence": 4438,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3629-g1": {
+        "execution": {
+          "commandStreamSequence": 8065,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 99,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3628-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 13,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3629-g1",
+          "viewDimension": 4
+        },
+        "sequence": 4448,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3639-g1": {
+        "execution": {
+          "commandStreamSequence": 8082,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 99,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3638-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 11,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3639-g1",
+          "viewDimension": 4
+        },
+        "sequence": 4459,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3654-g1": {
+        "execution": {
+          "commandStreamSequence": 8112,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 99,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3653-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 13,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3654-g1",
+          "viewDimension": 4
+        },
+        "sequence": 4474,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3676-g1": {
+        "execution": {
+          "commandStreamSequence": 8153,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 99,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3675-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 12,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3676-g1",
+          "viewDimension": 4
+        },
+        "sequence": 4496,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3684-g1": {
+        "execution": {
+          "commandStreamSequence": 8168,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 77,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3683-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 12,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3684-g1",
+          "viewDimension": 4
+        },
+        "sequence": 4506,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3703-g1": {
+        "execution": {
+          "commandStreamSequence": 8209,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 98,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3702-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 12,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3703-g1",
+          "viewDimension": 4
+        },
+        "sequence": 4529,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3717-g1": {
+        "execution": {
+          "commandStreamSequence": 8239,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 99,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3716-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 12,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3717-g1",
+          "viewDimension": 4
+        },
+        "sequence": 4547,
+        "type": "target-view-observed"
+      },
+      "obs-shader-resource-view-3751-g1": {
+        "execution": {
+          "commandStreamSequence": 8311,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "flags": 0,
+          "format": 98,
+          "kind": "shader-resource-view",
+          "pointerGeneration": 1,
+          "resourceObservationId": "obs-resource-3750-g1",
+          "schema": "target-view-observation-v1",
+          "subresources": {
+            "arraySizeOrMipCount": 11,
+            "elementCountOrArraySize": 0,
+            "firstArraySlice": 0,
+            "firstElement": 0,
+            "mipSliceOrFirstMip": 0
+          },
+          "targetViewObservationId": "obs-shader-resource-view-3751-g1",
+          "viewDimension": 4
+        },
+        "sequence": 4585,
+        "type": "target-view-observed"
+      },
+      "obs-vertex-shader-24845-g1": {
+        "execution": {
+          "commandStreamSequence": null,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bytecodeSha256": "ed0faae9d6fd093b7e06b294397bc8214fa6d63d02b40719586c5c16371e7870",
+          "bytecodeSize": 5288,
+          "engineAliasTotalCount": 1,
+          "engineAliases": [
+            {
+              "compileSourceName": "Utility",
+              "descriptor": 8196,
+              "loaderType": "Utility",
+              "truncated": {
+                "compileSourceName": false,
+                "loaderType": false
+              }
+            }
+          ],
+          "identityBasis": [
+            "stage",
+            "wrapper",
+            "d3dObject",
+            "wrapperDescriptor",
+            "bytecodeSha256",
+            "cachePath",
+            "engineAliases"
+          ],
+          "identityDetailsAvailable": true,
+          "pointerGeneration": 1,
+          "schema": "stage-shader-observation-v3",
+          "stage": "vertex",
+          "stageShaderObservationId": "obs-vertex-shader-24845-g1",
+          "truncated": {
+            "bytecodeSha256": false,
+            "engineAliases": false
+          },
+          "wrapperDescriptor": 8196
+        },
+        "sequence": 30804,
+        "type": "stage-shader-observed"
+      },
+      "obs-vertex-shader-24862-g1": {
+        "execution": {
+          "commandStreamSequence": null,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bytecodeSha256": "7d8a726fc6ee0ea014ef340f5eeb52b28146545535ba9e2ebfa1691cc4fd0639",
+          "bytecodeSize": 5184,
+          "engineAliasTotalCount": 1,
+          "engineAliases": [
+            {
+              "compileSourceName": "Utility",
+              "descriptor": 8192,
+              "loaderType": "Utility",
+              "truncated": {
+                "compileSourceName": false,
+                "loaderType": false
+              }
+            }
+          ],
+          "identityBasis": [
+            "stage",
+            "wrapper",
+            "d3dObject",
+            "wrapperDescriptor",
+            "bytecodeSha256",
+            "cachePath",
+            "engineAliases"
+          ],
+          "identityDetailsAvailable": true,
+          "pointerGeneration": 1,
+          "schema": "stage-shader-observation-v3",
+          "stage": "vertex",
+          "stageShaderObservationId": "obs-vertex-shader-24862-g1",
+          "truncated": {
+            "bytecodeSha256": false,
+            "engineAliases": false
+          },
+          "wrapperDescriptor": 8192
+        },
+        "sequence": 30839,
+        "type": "stage-shader-observed"
+      },
+      "obs-vertex-shader-2557-g1": {
+        "execution": {
+          "commandStreamSequence": null,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bytecodeSha256": "7cfb03db784ca42466baac33edfebb634539925be9b6955bf5acdfd13d7586c0",
+          "bytecodeSize": 6072,
+          "engineAliasTotalCount": 1,
+          "engineAliases": [
+            {
+              "compileSourceName": "Utility",
+              "descriptor": 81950,
+              "loaderType": "Utility",
+              "truncated": {
+                "compileSourceName": false,
+                "loaderType": false
+              }
+            }
+          ],
+          "identityBasis": [
+            "stage",
+            "wrapper",
+            "d3dObject",
+            "wrapperDescriptor",
+            "bytecodeSha256",
+            "cachePath",
+            "engineAliases"
+          ],
+          "identityDetailsAvailable": true,
+          "pointerGeneration": 1,
+          "schema": "stage-shader-observation-v3",
+          "stage": "vertex",
+          "stageShaderObservationId": "obs-vertex-shader-2557-g1",
+          "truncated": {
+            "bytecodeSha256": false,
+            "engineAliases": false
+          },
+          "wrapperDescriptor": 81950
+        },
+        "sequence": 3201,
+        "type": "stage-shader-observed"
+      },
+      "obs-vertex-shader-2578-g1": {
+        "execution": {
+          "commandStreamSequence": null,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bytecodeSha256": "060f66b079c5c15885978c5bba8c0fb17f093fe0cc3da83a108783a8f2dfbdfa",
+          "bytecodeSize": 6100,
+          "engineAliasTotalCount": 1,
+          "engineAliases": [
+            {
+              "compileSourceName": "Utility",
+              "descriptor": 81951,
+              "loaderType": "Utility",
+              "truncated": {
+                "compileSourceName": false,
+                "loaderType": false
+              }
+            }
+          ],
+          "identityBasis": [
+            "stage",
+            "wrapper",
+            "d3dObject",
+            "wrapperDescriptor",
+            "bytecodeSha256",
+            "cachePath",
+            "engineAliases"
+          ],
+          "identityDetailsAvailable": true,
+          "pointerGeneration": 1,
+          "schema": "stage-shader-observation-v3",
+          "stage": "vertex",
+          "stageShaderObservationId": "obs-vertex-shader-2578-g1",
+          "truncated": {
+            "bytecodeSha256": false,
+            "engineAliases": false
+          },
+          "wrapperDescriptor": 81951
+        },
+        "sequence": 3228,
+        "type": "stage-shader-observed"
+      },
+      "obs-vertex-shader-3134-g1": {
+        "execution": {
+          "commandStreamSequence": null,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bytecodeSha256": "81f7e786eea2f710cd4db5fd918e02f0690976dd4d29ebc03f28d49f1cd8d39a",
+          "bytecodeSize": 6172,
+          "engineAliasTotalCount": 1,
+          "engineAliases": [
+            {
+              "compileSourceName": "Utility",
+              "descriptor": 82074,
+              "loaderType": "Utility",
+              "truncated": {
+                "compileSourceName": false,
+                "loaderType": false
+              }
+            }
+          ],
+          "identityBasis": [
+            "stage",
+            "wrapper",
+            "d3dObject",
+            "wrapperDescriptor",
+            "bytecodeSha256",
+            "cachePath",
+            "engineAliases"
+          ],
+          "identityDetailsAvailable": true,
+          "pointerGeneration": 1,
+          "schema": "stage-shader-observation-v3",
+          "stage": "vertex",
+          "stageShaderObservationId": "obs-vertex-shader-3134-g1",
+          "truncated": {
+            "bytecodeSha256": false,
+            "engineAliases": false
+          },
+          "wrapperDescriptor": 82074
+        },
+        "sequence": 3784,
+        "type": "stage-shader-observed"
+      },
+      "obs-vertex-shader-3296-g1": {
+        "execution": {
+          "commandStreamSequence": null,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bytecodeSha256": "019431af79a837cdb9da810b0add07e85e16f8dc0062494351cd305bb2fb3abf",
+          "bytecodeSize": 6272,
+          "engineAliasTotalCount": 1,
+          "engineAliases": [
+            {
+              "compileSourceName": "Utility",
+              "descriptor": 82075,
+              "loaderType": "Utility",
+              "truncated": {
+                "compileSourceName": false,
+                "loaderType": false
+              }
+            }
+          ],
+          "identityBasis": [
+            "stage",
+            "wrapper",
+            "d3dObject",
+            "wrapperDescriptor",
+            "bytecodeSha256",
+            "cachePath",
+            "engineAliases"
+          ],
+          "identityDetailsAvailable": true,
+          "pointerGeneration": 1,
+          "schema": "stage-shader-observation-v3",
+          "stage": "vertex",
+          "stageShaderObservationId": "obs-vertex-shader-3296-g1",
+          "truncated": {
+            "bytecodeSha256": false,
+            "engineAliases": false
+          },
+          "wrapperDescriptor": 82075
+        },
+        "sequence": 3994,
+        "type": "stage-shader-observed"
+      },
+      "obs-vertex-shader-3593-g1": {
+        "execution": {
+          "commandStreamSequence": null,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bytecodeSha256": "ca8375e68d8439c337362b481c991fb29f1f11949636645849ed6879f58b3591",
+          "bytecodeSize": 6336,
+          "engineAliasTotalCount": 1,
+          "engineAliases": [
+            {
+              "compileSourceName": "Utility",
+              "descriptor": 82078,
+              "loaderType": "Utility",
+              "truncated": {
+                "compileSourceName": false,
+                "loaderType": false
+              }
+            }
+          ],
+          "identityBasis": [
+            "stage",
+            "wrapper",
+            "d3dObject",
+            "wrapperDescriptor",
+            "bytecodeSha256",
+            "cachePath",
+            "engineAliases"
+          ],
+          "identityDetailsAvailable": true,
+          "pointerGeneration": 1,
+          "schema": "stage-shader-observation-v3",
+          "stage": "vertex",
+          "stageShaderObservationId": "obs-vertex-shader-3593-g1",
+          "truncated": {
+            "bytecodeSha256": false,
+            "engineAliases": false
+          },
+          "wrapperDescriptor": 82078
+        },
+        "sequence": 4412,
+        "type": "stage-shader-observed"
+      },
+      "obs-vertex-shader-3632-g1": {
+        "execution": {
+          "commandStreamSequence": null,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bytecodeSha256": "34a0c0390eb219c1c37be8574301c244def91683401e0577c3940e4a6b4459c4",
+          "bytecodeSize": 6432,
+          "engineAliasTotalCount": 1,
+          "engineAliases": [
+            {
+              "compileSourceName": "Utility",
+              "descriptor": 82079,
+              "loaderType": "Utility",
+              "truncated": {
+                "compileSourceName": false,
+                "loaderType": false
+              }
+            }
+          ],
+          "identityBasis": [
+            "stage",
+            "wrapper",
+            "d3dObject",
+            "wrapperDescriptor",
+            "bytecodeSha256",
+            "cachePath",
+            "engineAliases"
+          ],
+          "identityDetailsAvailable": true,
+          "pointerGeneration": 1,
+          "schema": "stage-shader-observation-v3",
+          "stage": "vertex",
+          "stageShaderObservationId": "obs-vertex-shader-3632-g1",
+          "truncated": {
+            "bytecodeSha256": false,
+            "engineAliases": false
+          },
+          "wrapperDescriptor": 82079
+        },
+        "sequence": 4457,
+        "type": "stage-shader-observed"
+      },
+      "obs-vertex-shader-3669-g1": {
+        "execution": {
+          "commandStreamSequence": null,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bytecodeSha256": "5f2fc78fb3408a3a1aaed63ffba02ba1d79f558554daf6a50b67d69b6d1f6ff1",
+          "bytecodeSize": 6956,
+          "engineAliasTotalCount": 1,
+          "engineAliases": [
+            {
+              "compileSourceName": "Utility",
+              "descriptor": 67190939,
+              "loaderType": "Utility",
+              "truncated": {
+                "compileSourceName": false,
+                "loaderType": false
+              }
+            }
+          ],
+          "identityBasis": [
+            "stage",
+            "wrapper",
+            "d3dObject",
+            "wrapperDescriptor",
+            "bytecodeSha256",
+            "cachePath",
+            "engineAliases"
+          ],
+          "identityDetailsAvailable": true,
+          "pointerGeneration": 1,
+          "schema": "stage-shader-observation-v3",
+          "stage": "vertex",
+          "stageShaderObservationId": "obs-vertex-shader-3669-g1",
+          "truncated": {
+            "bytecodeSha256": false,
+            "engineAliases": false
+          },
+          "wrapperDescriptor": 67190939
+        },
+        "sequence": 4493,
+        "type": "stage-shader-observed"
+      },
+      "obs-vertex-shader-3756-g1": {
+        "execution": {
+          "commandStreamSequence": null,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bytecodeSha256": "bc793353bf6d7e0371dc005bd8233ebe4be7263d7b32aa9e2d8cfdc1434c7b59",
+          "bytecodeSize": 6008,
+          "engineAliasTotalCount": 1,
+          "engineAliases": [
+            {
+              "compileSourceName": "Utility",
+              "descriptor": 81926,
+              "loaderType": "Utility",
+              "truncated": {
+                "compileSourceName": false,
+                "loaderType": false
+              }
+            }
+          ],
+          "identityBasis": [
+            "stage",
+            "wrapper",
+            "d3dObject",
+            "wrapperDescriptor",
+            "bytecodeSha256",
+            "cachePath",
+            "engineAliases"
+          ],
+          "identityDetailsAvailable": true,
+          "pointerGeneration": 1,
+          "schema": "stage-shader-observation-v3",
+          "stage": "vertex",
+          "stageShaderObservationId": "obs-vertex-shader-3756-g1",
+          "truncated": {
+            "bytecodeSha256": false,
+            "engineAliases": false
+          },
+          "wrapperDescriptor": 81926
+        },
+        "sequence": 4595,
+        "type": "stage-shader-observed"
+      },
+      "obs-vertex-shader-3767-g1": {
+        "execution": {
+          "commandStreamSequence": null,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bytecodeSha256": "c799a09a720be595bda20c8fad1c2a30ce381cac49407d288b1f7f96ae0e6a9f",
+          "bytecodeSize": 6036,
+          "engineAliasTotalCount": 1,
+          "engineAliases": [
+            {
+              "compileSourceName": "Utility",
+              "descriptor": 81927,
+              "loaderType": "Utility",
+              "truncated": {
+                "compileSourceName": false,
+                "loaderType": false
+              }
+            }
+          ],
+          "identityBasis": [
+            "stage",
+            "wrapper",
+            "d3dObject",
+            "wrapperDescriptor",
+            "bytecodeSha256",
+            "cachePath",
+            "engineAliases"
+          ],
+          "identityDetailsAvailable": true,
+          "pointerGeneration": 1,
+          "schema": "stage-shader-observation-v3",
+          "stage": "vertex",
+          "stageShaderObservationId": "obs-vertex-shader-3767-g1",
+          "truncated": {
+            "bytecodeSha256": false,
+            "engineAliases": false
+          },
+          "wrapperDescriptor": 81927
+        },
+        "sequence": 4609,
+        "type": "stage-shader-observed"
+      },
+      "obs-vertex-shader-3774-g1": {
+        "execution": {
+          "commandStreamSequence": null,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bytecodeSha256": "0a506480d6d92f2b83a4d1bc66f0373671e8b8008947d16ac9c14153da645d12",
+          "bytecodeSize": 5908,
+          "engineAliasTotalCount": 1,
+          "engineAliases": [
+            {
+              "compileSourceName": "Utility",
+              "descriptor": 81946,
+              "loaderType": "Utility",
+              "truncated": {
+                "compileSourceName": false,
+                "loaderType": false
+              }
+            }
+          ],
+          "identityBasis": [
+            "stage",
+            "wrapper",
+            "d3dObject",
+            "wrapperDescriptor",
+            "bytecodeSha256",
+            "cachePath",
+            "engineAliases"
+          ],
+          "identityDetailsAvailable": true,
+          "pointerGeneration": 1,
+          "schema": "stage-shader-observation-v3",
+          "stage": "vertex",
+          "stageShaderObservationId": "obs-vertex-shader-3774-g1",
+          "truncated": {
+            "bytecodeSha256": false,
+            "engineAliases": false
+          },
+          "wrapperDescriptor": 81946
+        },
+        "sequence": 4621,
+        "type": "stage-shader-observed"
+      },
+      "obs-vertex-shader-8-g1": {
+        "execution": {
+          "commandStreamSequence": null,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": null,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "bytecodeSha256": "49faf401d6a639a07f1b68a342db7124b3c46e68ad8202fdde1e87a23328d4a5",
+          "bytecodeSize": 5940,
+          "engineAliasTotalCount": 1,
+          "engineAliases": [
+            {
+              "compileSourceName": "Utility",
+              "descriptor": 81947,
+              "loaderType": "Utility",
+              "truncated": {
+                "compileSourceName": false,
+                "loaderType": false
+              }
+            }
+          ],
+          "identityBasis": [
+            "stage",
+            "wrapper",
+            "d3dObject",
+            "wrapperDescriptor",
+            "bytecodeSha256",
+            "cachePath",
+            "engineAliases"
+          ],
+          "identityDetailsAvailable": true,
+          "pointerGeneration": 1,
+          "schema": "stage-shader-observation-v3",
+          "stage": "vertex",
+          "stageShaderObservationId": "obs-vertex-shader-8-g1",
+          "truncated": {
+            "bytecodeSha256": false,
+            "engineAliases": false
+          },
+          "wrapperDescriptor": 81947
+        },
+        "sequence": 16,
+        "type": "stage-shader-observed"
+      }
+    },
+    "completion": {
+      "collectorOverheadUs": null,
+      "droppedEventCount": 1,
+      "errors": [],
+      "eventCount": 32769,
+      "firstSequence": 0,
+      "lastSequence": 32768,
+      "reason": "event-limit",
+      "truncated": true
+    },
+    "counters": {
+      "csx.acceptedEventCount": 32768,
+      "csx.boundaryRejectionCount": 0,
+      "csx.droppedGeometryObservationCount": 0,
+      "csx.droppedMaterialStateObservationCount": 0,
+      "csx.droppedResourceObservationCount": 0,
+      "csx.droppedSceneObjectObservationCount": 0,
+      "csx.droppedShaderObservationCount": 0,
+      "csx.droppedStageShaderObservationCount": 0,
+      "csx.droppedTargetBindingObservationCount": 0,
+      "csx.droppedTargetViewObservationCount": 0,
+      "csx.filteredEventCount": 39145,
+      "csx.geometryObservationCount": 0,
+      "csx.materialStateObservationCount": 0,
+      "csx.maximumTransferVersionResources": 256,
+      "csx.observedTransferVersionAdmissionFailures": 0,
+      "csx.requestedEventKinds": [
+        "eye-submitted"
+      ],
+      "csx.resolvedEventKinds": [
+        "render-pass-created",
+        "render-pass-enter",
+        "render-pass-exit",
+        "render-target-bind",
+        "draw",
+        "dispatch",
+        "command-recording-observed",
+        "shader-observed",
+        "stage-shader-observed",
+        "device-context-observed",
+        "target-view-observed",
+        "resource-observed",
+        "resource-view-bind",
+        "resource-view-state-observed",
+        "resource-flow",
+        "eye-submitted",
+        "raster-state-observed",
+        "transfer-resource-access"
+      ],
+      "csx.resourceObservationCount": 71,
+      "csx.sceneObjectObservationCount": 0,
+      "csx.sessionGeneration": 1,
+      "csx.shaderCompilation": {
+        "availability": "observed",
+        "capturedAt": "capture-start",
+        "compatibilityRegistry": {
+          "compatibilitySetDigest": null,
+          "complete": false,
+          "phase": "unknown",
+          "registrationCount": 0,
+          "registrations": [],
+          "revision": 1
+        },
+        "compileMode": "optimized",
+        "compilerFlags": {
+          "avoidFlowControl": false,
+          "partialPrecision": false
+        },
+        "evidenceClass": "runtime-observed",
+        "globalCompileState": {
+          "algorithm": "xxh3-128",
+          "digest": "b4b8df48cf1d7bd88202022205c3c6ea",
+          "identityBasis": [
+            "compile-mode",
+            "virtual-reality",
+            "partial-precision",
+            "avoid-flow-control",
+            "shader-cache-abi",
+            "global-defines"
+          ]
+        },
+        "globalDefines": {
+          "cachePathSuffix": "",
+          "canonicalText": ""
+        },
+        "qualification": "globalCompileState is observed; current main-VR does not expose a shader-specific compatibility registry, so compatibilityRegistry is explicitly incomplete",
+        "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+        "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+        "virtualReality": true
+      },
+      "csx.shaderObservationCount": 1,
+      "csx.stageShaderObservationCount": 20,
+      "csx.stopRaceRejectionCount": 0,
+      "csx.targetBindingObservationCount": 4,
+      "csx.targetViewObservationCount": 55
+    },
+    "cpuFrameRecordCounts": {
+      "119681": 32749,
+      "None": 20
+    },
+    "createdAtUtc": "2026-10-04T02:38:44.340Z",
+    "eventCount": 32769,
+    "eventTypeCounts": {
+      "device-context-observed": 1,
+      "draw": 6330,
+      "gap": 1,
+      "render-pass-enter": 6294,
+      "render-pass-exit": 6293,
+      "render-target-bind": 9,
+      "resource-flow": 4,
+      "resource-observed": 71,
+      "resource-view-bind": 6990,
+      "resource-view-state-observed": 6700,
+      "shader-observed": 1,
+      "stage-shader-observed": 20,
+      "target-view-observed": 55
+    },
+    "mainPostProcessingNameOccurrences": 0,
+    "nativeEventMinorCounts": {
+      "18": 32769
+    },
+    "nativeScenario": {
+      "cameraMarker": null,
+      "cell": null,
+      "gameHour": null,
+      "id": "unspecified",
+      "notes": "No scenario metadata was supplied to the v1.0 live controller.",
+      "saveFingerprint": null,
+      "weather": null,
+      "worldspace": null
+    },
+    "parseErrors": 0,
+    "producer": {
+      "dirty": false,
+      "gitCommit": "f3623871660d0d5073957458daeb8055dddc40ce",
+      "name": "CommunityShaders",
+      "version": "bc58e74af94a"
+    },
+    "qualification": "Incomplete prefix of frame119681, not a join to dispatch frame61039 and not proof that late operations or vendor dispatch never occurred.",
+    "resourceFlowCandidates": [
+      {
+        "execution": {
+          "commandStreamSequence": 18836,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "destinationResourceObservationId": "obs-resource-5-g1",
+          "destinationSubresource": 0,
+          "operation": "clear-depth-stencil",
+          "schema": "resource-flow-v1",
+          "sourceResourceObservationId": null,
+          "sourceSubresource": 0
+        },
+        "sequence": 10317,
+        "type": "resource-flow"
+      },
+      {
+        "execution": {
+          "commandStreamSequence": 56095,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "destinationResourceObservationId": "obs-resource-24836-g1",
+          "destinationSubresource": 0,
+          "operation": "clear-depth-stencil",
+          "schema": "resource-flow-v1",
+          "sourceResourceObservationId": null,
+          "sourceSubresource": 0
+        },
+        "sequence": 30798,
+        "type": "resource-flow"
+      },
+      {
+        "execution": {
+          "commandStreamSequence": 56098,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "destinationResourceObservationId": "obs-resource-24840-g1",
+          "destinationSubresource": 0,
+          "operation": "copy-resource",
+          "schema": "resource-flow-v1",
+          "sourceResourceObservationId": "obs-resource-24839-g1",
+          "sourceSubresource": 0
+        },
+        "sequence": 30802,
+        "type": "resource-flow"
+      },
+      {
+        "execution": {
+          "commandStreamSequence": 56109,
+          "gpuTimestampFrequencyHz": null,
+          "gpuTimestampTicks": null,
+          "observationDomain": "cpu-call"
+        },
+        "frame": {
+          "cpuFrame": 119681,
+          "eye": "unknown",
+          "eyeMask": null,
+          "sceneEpoch": null,
+          "submissionEpoch": null
+        },
+        "payload": {
+          "destinationResourceObservationId": "obs-resource-24848-g1",
+          "destinationSubresource": 0,
+          "operation": "clear-depth-stencil",
+          "schema": "resource-flow-v1",
+          "sourceResourceObservationId": null,
+          "sourceSubresource": 0
+        },
+        "sequence": 30806,
+        "type": "resource-flow"
+      }
+    ],
+    "retainedLateEventCounts": {
+      "dispatch": 0,
+      "eye-submitted": 0,
+      "raster-state-observed": 0,
+      "transfer-resource-access": 0
+    },
+    "schema": {
+      "major": 1,
+      "minor": 8,
+      "name": "csx.render-capture-manifest",
+      "producerVersion": "collector-v1"
+    }
+  }
+}

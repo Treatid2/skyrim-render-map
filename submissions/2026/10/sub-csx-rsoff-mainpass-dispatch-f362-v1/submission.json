@@ -1,0 +1,50 @@
+{
+  "content": {
+    "fileCount": 4,
+    "root": "content",
+    "totalBytes": 240558,
+    "treeSha256": "E0673B272F5070BFC67B29F96173A44096B5B7674D42CDF2B5C4EED67AE2819E"
+  },
+  "contributor": {
+    "displayName": "Treatid2",
+    "github": "Treatid2",
+    "standing": "ordinary-contributor"
+  },
+  "createdAt": "2026-10-04T02:47:07.757700+00:00",
+  "licensing": {
+    "content": "CC-BY-SA-4.0",
+    "dcoAcknowledged": true,
+    "schemas": "CC0-1.0"
+  },
+  "namespace": "csx",
+  "notes": "Recorded main-pass runtime FSR4 stereo success in configured/effective Quality RS-off state, not wrapper PASS or stable presentation qualification. Independent incomplete structural prefix has no retained late seams. Full lineage and scientific pixel results remain unratified.",
+  "provenance": {
+    "importedAt": "2026-10-04T02:47:07.757700+00:00",
+    "relatedUrls": [
+      "https://github.com/Treatid2/skyrim-community-shaders/commit/f3623871660d0d5073957458daeb8055dddc40ce"
+    ],
+    "sourceCommit": "f3623871660d0d5073957458daeb8055dddc40ce",
+    "sourceContentTreeSha256": "6d6648d3dbbc790a1f17e235b483a76447ea8d0840e4c320cf8c1d7b763c0121",
+    "sourceDirty": false,
+    "sourceParentCommit": "cc53d3e5a98d3667ac603ce9cb20bd517ce41691",
+    "sourcePubliclyReachable": true,
+    "sourceRef": null,
+    "sourceRepository": "https://github.com/Treatid2/skyrim-community-shaders",
+    "sourceState": "public-branch",
+    "transformations": [
+      "Source content identity is hash of canonical retained capture-input inventory in provenance.json, not entire Git tree.",
+      "Verified native pair and source contract normalized separately from wrapper semantic failure.",
+      "Public profile-presence semantics exclude undeclared default slots from authoritative treatment claims.",
+      "Event-limited prefix preserves bounded counts/catalogue definitions; no downstream joins or same-frame attribution to separate dispatch snapshot.",
+      "Sanitized public text only; original private evidence unchanged."
+    ]
+  },
+  "schema": {
+    "major": 1,
+    "minor": 0,
+    "name": "skyrim-render-map.submission"
+  },
+  "status": "candidate-unreviewed",
+  "submissionClass": "assertion",
+  "submissionId": "sub-csx-rsoff-mainpass-dispatch-f362-v1"
+}
