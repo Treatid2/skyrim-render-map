@@ -1,0 +1,110 @@
+{
+  "calibration": {
+    "composition": "unratified",
+    "scientificImageTreatmentAdmitted": false,
+    "worldScale": "unratified"
+  },
+  "identityScope": "Native producer manifestVerified=false retained. Artifact hash in runtime-status assertions is a inspected harness binding, not a new independent DLL hash; structural-prefix assertions leave artifact hash null.",
+  "independentChecks": {
+    "catalogueObservationDrops": 0,
+    "fullPrefixParseErrors": 0,
+    "originalArchiveEventStreamHashAndSize": true,
+    "profilePresenceDecodedFromExactSource": true,
+    "rawNativeAndNormalizedResponseEqual": true,
+    "sourceInputsUnchanged": true,
+    "transferVersionAdmissionFailures": 0,
+    "validSameFrameEyePair": true
+  },
+  "nonAtomicReadScope": "Profile snapshot, colour status and structural pilot are separate reads. Dispatch frame61039 is not joined to prefix frame119681; wrapper outcome remains failed.",
+  "sanitization": "Public subset excludes local paths/endpoints, process/thread/session/capture IDs, native pointers, QPC values and unrestricted environment data. Keeps capture-local descriptor IDs, source hashes and observed values.",
+  "schemaVersion": 1,
+  "sourceIndex": [
+    {
+      "path": "src/Features/Upscaling.cpp",
+      "gitBlob": "66288680c1babb7a3c4581bdb2ca118a8222d5be",
+      "bytes": 2382285,
+      "sha256": "ea5ef5de2bdb39129fc0a98b7f6dcdbe8e4bd0cf2e13c2ae3342272dd4f89702",
+      "url": "https://github.com/Treatid2/skyrim-community-shaders/blob/f3623871660d0d5073957458daeb8055dddc40ce/src/Features/Upscaling.cpp"
+    },
+    {
+      "bytes": 23465,
+      "gitBlob": "7f7e249c924560687d701b80cc93173908819389",
+      "path": "src/Features/Upscaling/FidelityFX.h",
+      "sha256": "9c70821e5c622b3253457d67363ff0c7a51ee6a335d42a34baaf5736451f071c",
+      "url": "https://github.com/Treatid2/skyrim-community-shaders/blob/f3623871660d0d5073957458daeb8055dddc40ce/src/Features/Upscaling/FidelityFX.h"
+    },
+    {
+      "bytes": 193471,
+      "gitBlob": "327e5d3f5008d3849585e9e5bb4fbdfa137fa28f",
+      "path": "src/Features/Upscaling/FidelityFX.cpp",
+      "sha256": "26a572ffc693203d7c313e5ed98a2acce168a254d384c314a40e6c50656c574b",
+      "url": "https://github.com/Treatid2/skyrim-community-shaders/blob/f3623871660d0d5073957458daeb8055dddc40ce/src/Features/Upscaling/FidelityFX.cpp"
+    },
+    {
+      "bytes": 7480,
+      "gitBlob": "c77efa5fa0e781db6fa6d80b58fca0585eca68df",
+      "path": "src/Features/Upscaling/FSRColorContractDevBenchBridge.cpp",
+      "sha256": "ef65b15c285fde063ebe5df35215570c3925e96e39ff5ff70d3d0c3245ecf591",
+      "url": "https://github.com/Treatid2/skyrim-community-shaders/blob/f3623871660d0d5073957458daeb8055dddc40ce/src/Features/Upscaling/FSRColorContractDevBenchBridge.cpp"
+    },
+    {
+      "bytes": 47873,
+      "gitBlob": "59d6d066bbe9ece80f6a126285a0f294e83cc9d3",
+      "path": "src/Api/UpscalingService.cpp",
+      "sha256": "1ccfb833c04d70305896d0241719e6c395971185805e451b0c7d75b1d2a341f5",
+      "url": "https://github.com/Treatid2/skyrim-community-shaders/blob/f3623871660d0d5073957458daeb8055dddc40ce/src/Api/UpscalingService.cpp"
+    },
+    {
+      "bytes": 12087,
+      "gitBlob": "d8bd921a18b2babe469797744979795d1e34b0f1",
+      "path": "include/VRAPI/CSupscalingapi.h",
+      "sha256": "203f5f23fe4da31884449f630eca926fc0ac6e4e4f10c235a7e521c66b642bf8",
+      "url": "https://github.com/Treatid2/skyrim-community-shaders/blob/f3623871660d0d5073957458daeb8055dddc40ce/include/VRAPI/CSupscalingapi.h"
+    }
+  ],
+  "sourceInventory": {
+    "native-colour-status": {
+      "bytes": 15973,
+      "sha256": "7d2cfb42da6c6e8425f6a3e4f98d7973ad481638732763b4943ef79d3ff343ef"
+    },
+    "native-profile-snapshot": {
+      "bytes": 27109,
+      "sha256": "a050597c2401df6af95fb82b8f595374ad125253001783caef5e45c7fd19bab2"
+    },
+    "original-prefix-archive": {
+      "bytes": 642453,
+      "sha256": "3ad3d1d064dda4051715be72c64854e7deef9c73441c3543fe39b81480681525"
+    },
+    "original-prefix-manifest": {
+      "bytes": 8509,
+      "sha256": "70ba24e5bb5bdd1b1f928bab93e07e97e4e81157bc1920ca696e8e704c3d9555"
+    }
+  },
+  "sourceReviewBoundaries": {
+    "inspectedRanges": {
+      "CSupscalingapi.h": "181-193",
+      "FSRColorContractDevBenchBridge.cpp": "23-83",
+      "FidelityFX.cpp": "1254-1285,1448-1510,4241-4299",
+      "FidelityFX.h": "58-66",
+      "UpscalingService.cpp": "756-816",
+      "Upscaling.cpp": "58206-58268"
+    },
+    "notClaimed": [
+      "Full code review",
+      "Build qualification",
+      "GPU completion",
+      "Compositor publication",
+      "Pixel result",
+      "Calibrated HDR comparison",
+      "Full render-scale qualification"
+    ],
+    "sourcePaths": [
+      "src/Features/Upscaling/FidelityFX.h",
+      "src/Features/Upscaling/FidelityFX.cpp",
+      "src/Features/Upscaling/FSRColorContractDevBenchBridge.cpp",
+      "src/Api/UpscalingService.cpp",
+      "include/VRAPI/CSupscalingapi.h",
+      "src/Features/Upscaling.cpp"
+    ]
+  }
+}
