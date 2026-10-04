@@ -1,0 +1,49 @@
+{
+  "content": {
+    "fileCount": 3,
+    "root": "content",
+    "totalBytes": 23019,
+    "treeSha256": "DFE2C0A089077C2A743DD299BC6AE5A8EE45BA811F72CB4D32DAE1EC0C35A04A"
+  },
+  "contributor": {
+    "displayName": "Treatid2",
+    "github": "Treatid2",
+    "standing": "ordinary-contributor"
+  },
+  "createdAt": "2026-10-04T21:17:40.059797+00:00",
+  "licensing": {
+    "content": "CC-BY-SA-4.0",
+    "dcoAcknowledged": true,
+    "schemas": "CC0-1.0"
+  },
+  "namespace": "csx",
+  "notes": "Later5-image coarse composition assessment, attributed to Mapping and identity-linked to prior corpus. Stacked data candidate preserving prior chronology and original evidence; no ad8 runtime claim.",
+  "provenance": {
+    "importedAt": "2026-10-04T21:17:40.059797+00:00",
+    "relatedUrls": [
+      "https://github.com/Treatid2/skyrim-community-shaders/commit/f3623871660d0d5073957458daeb8055dddc40ce",
+      "https://github.com/Treatid2/skyrim-render-map/pull/32"
+    ],
+    "sourceCommit": "f3623871660d0d5073957458daeb8055dddc40ce",
+    "sourceContentTreeSha256": "acb90c57180ac76e87be3e92cc7c012848723541854d3471525f1b7070ff3e79",
+    "sourceDirty": false,
+    "sourceParentCommit": "cc53d3e5a98d3667ac603ce9cb20bd517ce41691",
+    "sourcePubliclyReachable": true,
+    "sourceRef": null,
+    "sourceRepository": "https://github.com/Treatid2/skyrim-community-shaders",
+    "sourceState": "public-branch",
+    "transformations": [
+      "Later attributed visual receipt identity-linked to5 prior image entities; earlier first-left-only evidence unchanged.",
+      "Source digest identifies canonical retained input inventory, not full Git tree.",
+      "No repeated original-media inspection/rehash, new runtime evidence, calibration upgrade or automatic independence."
+    ]
+  },
+  "schema": {
+    "major": 1,
+    "minor": 0,
+    "name": "skyrim-render-map.submission"
+  },
+  "status": "candidate-unreviewed",
+  "submissionClass": "assertion",
+  "submissionId": "sub-csx-selected-scene-visual-supplement-v1"
+}

@@ -1,0 +1,190 @@
+{
+  "laterReportedInspections": [
+    {
+      "artifactFreeClaim": false,
+      "chronology": "Later coarse visual assessment of retained original. Does not retroactively change PR32 first-left-only assessment or establish independent corroboration by this importing chat.",
+      "completeStereoCalibrationEstablished": false,
+      "exactScreenshotFramePoseJoinEstablished": false,
+      "heldLightingOrBrightnessCausalityEstablished": false,
+      "identityMatchedToPriorVerifiedMapImage": true,
+      "imageIdentity": {
+        "bytes": 2905737,
+        "eye": "right",
+        "height": 1680,
+        "sha256": "2d99e7f75cf64a0be195de726748a41d53e1a5ff931d22c57a153644450b0fc5",
+        "width": 1512
+      },
+      "imageRegistrationPerformed": false,
+      "independentlyReinspectedByMapManager": false,
+      "inspectionObserver": "Mapping chat",
+      "method": "Five exact permanent PNG originals inspected through view_image at original detail; file identities independently checked against original publication",
+      "originalAcquisitionFrame": 101379,
+      "originalCompositorCycle": 42501,
+      "pixelLandmarkToleranceMeasured": false,
+      "receiptRecordedAtUtc": "2026-10-04T21:14:08Z",
+      "reportedBlockingLoadingOrMenuOverlaySeen": false,
+      "reportedCompositionSupported": true,
+      "reportedOtherVisibleFeatures": [
+        "foreground player hand at lower right",
+        "small blue graphic near left stair post; type not determined"
+      ],
+      "reportedVisibleLandmarks": [
+        "central wooden stair flight and rails",
+        "dark ceiling and horizontal beams",
+        "right dining table and narrow stained-glass window"
+      ],
+      "unknownGraphicType": true
+    },
+    {
+      "artifactFreeClaim": false,
+      "chronology": "Later coarse visual assessment of retained original. Does not retroactively change PR32 first-left-only assessment or establish independent corroboration by this importing chat.",
+      "completeStereoCalibrationEstablished": false,
+      "exactScreenshotFramePoseJoinEstablished": false,
+      "heldLightingOrBrightnessCausalityEstablished": false,
+      "identityMatchedToPriorVerifiedMapImage": true,
+      "imageIdentity": {
+        "bytes": 2918368,
+        "eye": "left",
+        "height": 1680,
+        "sha256": "482547926b166f2eaa3637691ff66128a5a8474bae2677f469cf4833b0618573",
+        "width": 1512
+      },
+      "imageRegistrationPerformed": false,
+      "independentlyReinspectedByMapManager": false,
+      "inspectionObserver": "Mapping chat",
+      "method": "Five exact permanent PNG originals inspected through view_image at original detail; file identities independently checked against original publication",
+      "originalAcquisitionFrame": 104560,
+      "originalCompositorCycle": 45682,
+      "pixelLandmarkToleranceMeasured": false,
+      "receiptRecordedAtUtc": "2026-10-04T21:14:08Z",
+      "reportedBlockingLoadingOrMenuOverlaySeen": false,
+      "reportedCompositionSupported": true,
+      "reportedOtherVisibleFeatures": [
+        "foreground player hand at lower right",
+        "small blue graphic near left stair post; type not determined"
+      ],
+      "reportedVisibleLandmarks": [
+        "central wooden stair flight and rails",
+        "dark ceiling and horizontal beams",
+        "right dining table and narrow stained-glass window"
+      ],
+      "unknownGraphicType": true
+    },
+    {
+      "artifactFreeClaim": false,
+      "chronology": "Later coarse visual assessment of retained original. Does not retroactively change PR32 first-left-only assessment or establish independent corroboration by this importing chat.",
+      "completeStereoCalibrationEstablished": false,
+      "exactScreenshotFramePoseJoinEstablished": false,
+      "heldLightingOrBrightnessCausalityEstablished": false,
+      "identityMatchedToPriorVerifiedMapImage": true,
+      "imageIdentity": {
+        "bytes": 2925407,
+        "eye": "right",
+        "height": 1680,
+        "sha256": "0cc792d39ed0ace4eded8e3fdbb3e55de8ee9f9d2df14fb049342b67b82c0bc1",
+        "width": 1512
+      },
+      "imageRegistrationPerformed": false,
+      "independentlyReinspectedByMapManager": false,
+      "inspectionObserver": "Mapping chat",
+      "method": "Five exact permanent PNG originals inspected through view_image at original detail; file identities independently checked against original publication",
+      "originalAcquisitionFrame": 104560,
+      "originalCompositorCycle": 45682,
+      "pixelLandmarkToleranceMeasured": false,
+      "receiptRecordedAtUtc": "2026-10-04T21:14:08Z",
+      "reportedBlockingLoadingOrMenuOverlaySeen": false,
+      "reportedCompositionSupported": true,
+      "reportedOtherVisibleFeatures": [
+        "foreground player hand at lower right",
+        "small blue graphic near left stair post; type not determined"
+      ],
+      "reportedVisibleLandmarks": [
+        "central wooden stair flight and rails",
+        "dark ceiling and horizontal beams",
+        "right dining table and narrow stained-glass window"
+      ],
+      "unknownGraphicType": true
+    },
+    {
+      "artifactFreeClaim": false,
+      "chronology": "Later coarse visual assessment of retained original. Does not retroactively change PR32 first-left-only assessment or establish independent corroboration by this importing chat.",
+      "completeStereoCalibrationEstablished": false,
+      "exactScreenshotFramePoseJoinEstablished": false,
+      "heldLightingOrBrightnessCausalityEstablished": false,
+      "identityMatchedToPriorVerifiedMapImage": true,
+      "imageIdentity": {
+        "bytes": 2933066,
+        "eye": "left",
+        "height": 1680,
+        "sha256": "1f247d93347d05fef0e65491b2a17651c1a03d49f8e204154da75d33ce24069e",
+        "width": 1512
+      },
+      "imageRegistrationPerformed": false,
+      "independentlyReinspectedByMapManager": false,
+      "inspectionObserver": "Mapping chat",
+      "method": "Five exact permanent PNG originals inspected through view_image at original detail; file identities independently checked against original publication",
+      "originalAcquisitionFrame": 104833,
+      "originalCompositorCycle": 45955,
+      "pixelLandmarkToleranceMeasured": false,
+      "receiptRecordedAtUtc": "2026-10-04T21:14:08Z",
+      "reportedBlockingLoadingOrMenuOverlaySeen": false,
+      "reportedCompositionSupported": true,
+      "reportedOtherVisibleFeatures": [
+        "foreground player hand at lower right",
+        "small blue graphic near left stair post; type not determined"
+      ],
+      "reportedVisibleLandmarks": [
+        "central wooden stair flight and rails",
+        "dark ceiling and horizontal beams",
+        "right dining table and narrow stained-glass window"
+      ],
+      "unknownGraphicType": true
+    },
+    {
+      "artifactFreeClaim": false,
+      "chronology": "Later coarse visual assessment of retained original. Does not retroactively change PR32 first-left-only assessment or establish independent corroboration by this importing chat.",
+      "completeStereoCalibrationEstablished": false,
+      "exactScreenshotFramePoseJoinEstablished": false,
+      "heldLightingOrBrightnessCausalityEstablished": false,
+      "identityMatchedToPriorVerifiedMapImage": true,
+      "imageIdentity": {
+        "bytes": 2941965,
+        "eye": "right",
+        "height": 1680,
+        "sha256": "352885b4349dff0cdd41aa7628aa4fb1220cb7ccc9c8fe3eaf6e7e3275520293",
+        "width": 1512
+      },
+      "imageRegistrationPerformed": false,
+      "independentlyReinspectedByMapManager": false,
+      "inspectionObserver": "Mapping chat",
+      "method": "Five exact permanent PNG originals inspected through view_image at original detail; file identities independently checked against original publication",
+      "originalAcquisitionFrame": 104833,
+      "originalCompositorCycle": 45955,
+      "pixelLandmarkToleranceMeasured": false,
+      "receiptRecordedAtUtc": "2026-10-04T21:14:08Z",
+      "reportedBlockingLoadingOrMenuOverlaySeen": false,
+      "reportedCompositionSupported": true,
+      "reportedOtherVisibleFeatures": [
+        "foreground player hand at lower right",
+        "small blue graphic near left stair post; type not determined"
+      ],
+      "reportedVisibleLandmarks": [
+        "central wooden stair flight and rails",
+        "dark ceiling and horizontal beams",
+        "right dining table and narrow stained-glass window"
+      ],
+      "unknownGraphicType": true
+    }
+  ],
+  "newRuntimeCapture": false,
+  "notAd8LiveEvidence": true,
+  "originalEvidenceChanged": false,
+  "originalMethod": "Five exact permanent PNG originals inspected through view_image at original detail; file identities independently checked against original publication",
+  "originalReceiptRecordedAtUtc": "2026-10-04T21:14:08Z",
+  "priorFirstLeftInspection": "Already reported separately in finalized corpus; not repeated here",
+  "priorFirstLeftOnlyClaimRef": "urn:skyrim-render-map:submission:sub-csx-selected-scene-capture6f7-v1#visual-composition",
+  "priorPr32Head": "d513db3eccd24f271be96f29ce1b199368e71700",
+  "priorSubmissionCreatedAt": "2026-10-04T11:19:39.917125+00:00",
+  "schemaVersion": 1,
+  "scope": "Coarse scene/composition ratification only. Does not measure pixel landmark coordinates, tolerance or image registration; does not establish tracking at exact screenshot frame, cross-session camera/height/projection equivalence, calibrated stereo, static lighting, complete artifact freedom or controlled brightness/color causality."
+}

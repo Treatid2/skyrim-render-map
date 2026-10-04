@@ -1,0 +1,19 @@
+{
+  "baseDependency": "Draft PR32 supplies5 existing image entities; this draft adds new assertions only and does not promote its base to maintainer acceptance.",
+  "chronology": "Prior first-left-only record remains byte-for-byte unchanged. Receipt time records later reporting; no per-image inspection timestamp supplied, no exact inspection-time ordering among the5 inferred.",
+  "independence": "Mapping reports original-detail inspection and independent original-file identity checks. Importer did not repeat those inspections/hashes; this import is not another independent corroboration.",
+  "limits": "Coarse visual landmarks and absence of blocking overlay only. Foreground hand and unidentified small blue graphic noted. No2px measurement, registration, artifact freedom, full calibration, cross-session equivalence, exact-frame tracking association or lighting science.",
+  "method": "Parsed later Mapping receipt, matched all5 unique SHA/byte identities and eye/frame/cycle to prior independently verified map image identities, reused exact prior image entity subjects, retained explicit attributed observer and unknowns.",
+  "privacy": "Local source paths and native original filenames omitted; image hashes/roles/frame/cycle retained.",
+  "sourceInventory": {
+    "later-visual-inspection-receipt": {
+      "bytes": 5187,
+      "sha256": "a0be58bec1e18f26bb50b30d4288c22e1d7ce500c82410eafc6c3fcfebe65f62"
+    },
+    "prior-map-observations": {
+      "bytes": 52480,
+      "sha256": "5478e3ac851a2c5e35ebf25d6026f2ff4f69b5e1b86d95c64987499c7053b2c1"
+    }
+  },
+  "sourceInventoryDigestMeaning": "Canonical retained receipt and prior map identity inventory, not a full Git tree."
+}
