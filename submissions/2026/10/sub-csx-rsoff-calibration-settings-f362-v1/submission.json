@@ -1,0 +1,49 @@
+{
+  "content": {
+    "fileCount": 4,
+    "root": "content",
+    "totalBytes": 201963,
+    "treeSha256": "51D8F298A6BB1DF8D9B493288DCA329112F882240A134C3C418268404CDB0CD1"
+  },
+  "contributor": {
+    "displayName": "Treatid2",
+    "github": "Treatid2",
+    "standing": "ordinary-contributor"
+  },
+  "createdAt": "2026-10-04T03:27:58.230589+00:00",
+  "licensing": {
+    "content": "CC-BY-SA-4.0",
+    "dcoAcknowledged": true,
+    "schemas": "CC0-1.0"
+  },
+  "namespace": "csx",
+  "notes": "Closed RS-off excursion observational map:37 timestamp/replay-scoped feature values, private stereo/tracking corpus references and later device/camera/scale diagnostics. No calibrated reference, fixed lighting, treatment, pixel or post-processing proof. PR30 untouched.",
+  "provenance": {
+    "importedAt": "2026-10-04T03:27:58.230589+00:00",
+    "relatedUrls": [
+      "https://github.com/Treatid2/skyrim-community-shaders/commit/f3623871660d0d5073957458daeb8055dddc40ce"
+    ],
+    "sourceCommit": "f3623871660d0d5073957458daeb8055dddc40ce",
+    "sourceContentTreeSha256": "df31f04ddb75f4344715fe99fac13680d31246460dac7fe90efcc05305c1243b",
+    "sourceDirty": false,
+    "sourceParentCommit": "cc53d3e5a98d3667ac603ce9cb20bd517ce41691",
+    "sourcePubliclyReachable": true,
+    "sourceRef": null,
+    "sourceRepository": "https://github.com/Treatid2/skyrim-community-shaders",
+    "sourceState": "public-branch",
+    "transformations": [
+      "Source content digest identifies canonical retained input inventory in provenance.json, not full Git source tree.",
+      "Sanitized corpus references, later calibration diagnostics and recorded settings values mapped separately; original private evidence unchanged.",
+      "Per-feature replay/timestamp evidence preserved; no atomic or all-fresh census claim.",
+      "Earlier images never attributed to later selected pose; old rounded-zero derived diagnostic excluded."
+    ]
+  },
+  "schema": {
+    "major": 1,
+    "minor": 0,
+    "name": "skyrim-render-map.submission"
+  },
+  "status": "candidate-unreviewed",
+  "submissionClass": "assertion",
+  "submissionId": "sub-csx-rsoff-calibration-settings-f362-v1"
+}

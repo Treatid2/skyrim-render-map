@@ -1,0 +1,229 @@
+{
+  "admissionScope": {
+    "calibratedReference": false,
+    "crossSessionEquivalence": false,
+    "fixedLighting": false,
+    "pixelLineage": false,
+    "postProcessingOrdering": false,
+    "scientificHdrAeTreatment": false,
+    "shaderCost": false
+  },
+  "corpusCoverage": "12 declared archive members byte/hash verified; original stereo PNGs retained privately and checked against native receipt and PNG headers. Native recording session/capture tags matched,9918 samples parsed. No pixel-value analysis or all-sample physical validity claim.",
+  "featureVerification": "39 declared census receipts hash/size matched;37 settings payloads equal original vector.11 explicit replays retained with native timestamps;26 omitted replay field is not proof of fresh reads. Equal later revision bracket does not cover all earlier reply times.",
+  "finalizationVerification": "105 exact declared L-retained destination files verified; no access to released scratch or source game/MO2 directories. Owner process-close/access-release statement not independently re-executed.",
+  "priorDataPr30Unchanged": true,
+  "publicPrivacy": "Local paths, process/session/request/capture identifiers, device pointers, nonces, save names and corpus binaries not published. Relative generic corpus roles and hashes are retained.",
+  "sceneVerification": "Six native source files hash/size matched. Repeated camera equality, fenced scale, device neutrality, translation residuals, command-quaternion/matrix residual and vertical arithmetic checked. V2 angular residuals retained as reported derived values at medium confidence; v1 not imported.",
+  "schemaVersion": 1,
+  "sourceInventory": {
+    "corpus-lossless-archive": {
+      "bytes": 6229383,
+      "sha256": "1afdbb5c3b85cc15fb65f31b8b10bebf5b8a08679d23cedf8548c832e45c47e9"
+    },
+    "corpus-publication-receipt": {
+      "bytes": 5600,
+      "sha256": "d6a76cd72e0a6faba5d0f27906937012fc79829126d55da7880cdcfac82137c2"
+    },
+    "feature-receipt-census-AdaptiveBrightness-001": {
+      "bytes": 30088,
+      "sha256": "3f0b910e5b2e69964883b73e3c554b3613d85d50e554159820e6de18928943ad"
+    },
+    "feature-receipt-census-CSEditor-001": {
+      "bytes": 12937,
+      "sha256": "8ef85739ae060dd71c4bd24a89e465e1dcca448eacd12ad522de69d6840e75c5"
+    },
+    "feature-receipt-census-CSUtility-001": {
+      "bytes": 16385,
+      "sha256": "872019f9a0eb8f90d222db37cf759181c34ac470aae11b2f6ba4d6656c1376de"
+    },
+    "feature-receipt-census-CloudShadows-001": {
+      "bytes": 13059,
+      "sha256": "610100cfc8c3a235473e275798e19867ee662181f959e6098bf1c0916c711db8"
+    },
+    "feature-receipt-census-DynamicCubemaps-001": {
+      "bytes": 13118,
+      "sha256": "d4b4d2d0cd6bb78895df84681a195a780b3ad1034e132bc020e027476bb3ff89"
+    },
+    "feature-receipt-census-ExtendedMaterials-001": {
+      "bytes": 13313,
+      "sha256": "6879b94ec1c2a13da608933b0086cf2dfc99f4ea1b7a4fdef670fe821192fb20"
+    },
+    "feature-receipt-census-ExtendedTranslucency-001": {
+      "bytes": 13305,
+      "sha256": "8c31eaad27c6593b47f05eedd9366329daf9edd95488bb8ea3e9820c3678a9d4"
+    },
+    "feature-receipt-census-FoliageLighting-001": {
+      "bytes": 13346,
+      "sha256": "7dd9f325a0f54d537de21f54babf773f180d4c47b220248bfa85b94d8515958e"
+    },
+    "feature-receipt-census-GrassCollision-001": {
+      "bytes": 13085,
+      "sha256": "9ffdf0bd92c23602e2b67a329fcb2d28c107ed40e62f7f5c59b74ca1350d1ecc"
+    },
+    "feature-receipt-census-GrassLighting-001": {
+      "bytes": 13484,
+      "sha256": "768955c2e7689ef83db09e968e83ca5cda122002de09054e5a81915fc2580369"
+    },
+    "feature-receipt-census-HairSpecular-001": {
+      "bytes": 13912,
+      "sha256": "97d38b38d6e6adc04f81956a595fa4ba7082ebb57b89a8010625027ea732b05d"
+    },
+    "feature-receipt-census-ImageBasedLighting-001": {
+      "bytes": 13682,
+      "sha256": "725ec609574503a5975a16e23b56a588819e6edb6c3747b29647a0375dd0ec01"
+    },
+    "feature-receipt-census-InteriorSun-001": {
+      "bytes": 13164,
+      "sha256": "7577e6773b45523549d9884424cb00b6c37ce019140a282ce43517adf79fd45b"
+    },
+    "feature-receipt-census-InverseSquareLighting-001": {
+      "bytes": 12976,
+      "sha256": "9e82b2724034e05bd48f164f4208fd527416c0bb8d48642c31100b410340b0ef"
+    },
+    "feature-receipt-census-LODBlending-001": {
+      "bytes": 13536,
+      "sha256": "fe81d75d4ea6c4846f54d2482f28543d5383af5dd1d42fb9f24b71738b72c64b"
+    },
+    "feature-receipt-census-LightLimitFix-001": {
+      "bytes": 14751,
+      "sha256": "53b4562453784000f03a045d156bf4a27cf2b1e520f824f29a6a8eb72557b87a"
+    },
+    "feature-receipt-census-LinearLighting-001": {
+      "bytes": 14635,
+      "sha256": "82183bf635a9c03431cbcee04868d50ee8553b9ec3efb2f1c85e6ee694653919"
+    },
+    "feature-receipt-census-PerformanceOverlay-001": {
+      "bytes": 13706,
+      "sha256": "b4aa12d778f002662554c734f2f7459e1e734625608ad27fe5442702b316d2ed"
+    },
+    "feature-receipt-census-RenderDoc-001": {
+      "bytes": 13024,
+      "sha256": "a18276c52016ea8376c7093fa5e112c9f4b3d824a67929146e23a3c303f22c34"
+    },
+    "feature-receipt-census-ScreenSpaceGI-001": {
+      "bytes": 14803,
+      "sha256": "4852f9c5132a0dcbfe696fa573552ad28bec9ef8543752bc4226a57a1b5b286c"
+    },
+    "feature-receipt-census-ScreenSpaceShadows-001": {
+      "bytes": 13540,
+      "sha256": "a233b06c87d9ba36ac55cfa80a9e34a897742a943382cc12a227c3068a5aa441"
+    },
+    "feature-receipt-census-Screenshot-001": {
+      "bytes": 15509,
+      "sha256": "e3d846014c7c93044e1b30b89e8dfe92407cbf07d5b65a85ecd9d66f5e2c1980"
+    },
+    "feature-receipt-census-SkySync-001": {
+      "bytes": 13481,
+      "sha256": "c32dbb4f444594dd14d2cd68ac5759afd924482bbb7261d9503a521a117c50a2"
+    },
+    "feature-receipt-census-Skylighting-001": {
+      "bytes": 13859,
+      "sha256": "3fa7f167d2d51526de9eaa2f1d63066d3c34bebef14d0dbc49e709930180602e"
+    },
+    "feature-receipt-census-SubsurfaceScattering-001": {
+      "bytes": 15351,
+      "sha256": "0043760a3c0a73a03ab4f9d75eeec9a45533f307ea0e4a9feceb2574417dc87b"
+    },
+    "feature-receipt-census-TerrainBlending-001": {
+      "bytes": 13067,
+      "sha256": "a5df0acbcfe6d7e6faa2a5d8ec9ead2a7dbd705e585d6dd3c607b0500a606ceb"
+    },
+    "feature-receipt-census-TerrainHelper-001": {
+      "bytes": 12969,
+      "sha256": "f2dfc6e7446d570bac21d1cc2ecc87b7c4f184f3c5455c4802c47c5fd1d3ab36"
+    },
+    "feature-receipt-census-TerrainShadows-001": {
+      "bytes": 12973,
+      "sha256": "4ed8358338e5fd057f406b1ec82e82bcb1764f0c89f9afbe823d56084468f11b"
+    },
+    "feature-receipt-census-TerrainVariation-001": {
+      "bytes": 12987,
+      "sha256": "799fdde74198395362294a1250187ddbe0e0acad2d08f25777bed11cdadd048c"
+    },
+    "feature-receipt-census-UnifiedWater-001": {
+      "bytes": 13963,
+      "sha256": "fec01e66bb92e68ade219a486a27eba5090eadefc9a319bcbc2a702c96b69779"
+    },
+    "feature-receipt-census-Upscaling-001": {
+      "bytes": 16299,
+      "sha256": "47f9484b49bf8478e3dde7f00d75d29cf48808d47128cd4c588eb9fcba66e8b3"
+    },
+    "feature-receipt-census-VR-001": {
+      "bytes": 16980,
+      "sha256": "9ece609f80101b5e1ea77b39ce23ae8ffa1c21b526ddd6b54e59b2c3b6e1cae9"
+    },
+    "feature-receipt-census-VolumetricLighting-001": {
+      "bytes": 14483,
+      "sha256": "bdebbb5b07a9e3aeb596b4d7f715571a0e7d4424f88c291c830549fca5310768"
+    },
+    "feature-receipt-census-VolumetricShadows-001": {
+      "bytes": 12961,
+      "sha256": "0bba06e52044ed81fbda720aeca64ec57cead113e29c7ab9f52ce56df0c3d802"
+    },
+    "feature-receipt-census-WaterEffects-001": {
+      "bytes": 12894,
+      "sha256": "1c37f2e3f66fea4f72d006224fd8c508d710e74c0ab7a4383b215c5d008ce7cf"
+    },
+    "feature-receipt-census-WeatherPicker-001": {
+      "bytes": 13137,
+      "sha256": "c96680e92b38210ac06259cd8b01866a76cbeb0d6304323f4aa2f42b8d4178c1"
+    },
+    "feature-receipt-census-Wetterness-001": {
+      "bytes": 17279,
+      "sha256": "2ade4b53189348684903e0212b25177d48d6dec63c8c8d8fb4ae8b92c7253a37"
+    },
+    "feature-receipt-census-snapshot-after-001": {
+      "bytes": 13452,
+      "sha256": "0c5afe191d6b2e1a22f0d2478eb12611d888250394d213e63e56c9993bc0290e"
+    },
+    "feature-receipt-census-snapshot-before-001": {
+      "bytes": 13511,
+      "sha256": "7c048e0757f55558831fb8719eb2377b2e6dd2711d194fccbc186da1061e0d1b"
+    },
+    "finalization-publication-receipt": {
+      "bytes": 54400,
+      "sha256": "769d02a3d7ec5366f5e8dc005c23811e84b3f71c04d06e37f368247247752927"
+    },
+    "later-scene-selection": {
+      "bytes": 2944,
+      "sha256": "c5d7dde466293e6d8fc93418d3a72d16bf15cd7d6a70b4d9b97cb7c9b34ac12e"
+    },
+    "scene-diagnostic-v2": {
+      "bytes": 5406,
+      "sha256": "01d6dcb7e3c18e9f2a01f9965248d561a5f2e6a91b863007ddfe33b26a0cb8db"
+    },
+    "scene-native-camera": {
+      "bytes": 11106,
+      "sha256": "629b0137304748f7120c4c35b692448fa01d1df5e4c52c8d75400bab90449632"
+    },
+    "scene-native-cameraRepeat": {
+      "bytes": 11104,
+      "sha256": "4bb4ddbdea2ad60d35640b394461f741b25de52cfb0c01f1ce802db1cbb123cd"
+    },
+    "scene-native-pose": {
+      "bytes": 848,
+      "sha256": "cf55365bb1c005be4b23caa883b2841a52cf187ccf81cdb8ec0f51225cbb0857"
+    },
+    "scene-native-scale": {
+      "bytes": 11876,
+      "sha256": "94339a82aaef2b596e08222120a68d3df929819f7c7f82d8b1af10c256dad6fa"
+    },
+    "scene-native-scene": {
+      "bytes": 11653,
+      "sha256": "b879ce3eaf2fdfe9fe7f6f2726fb144bcc565a4fdfa9c655588650c512dc7307"
+    },
+    "scene-native-tracked": {
+      "bytes": 14768,
+      "sha256": "9fde1cddd6fcec4d5074f2dc328e07e3320bb763cb5e7a24bad70c38273533ec"
+    },
+    "settings-census-receipt": {
+      "bytes": 15540,
+      "sha256": "3ee2fa1d7861614bf4e0eaf45e3e956eb92ed931370c0f56f94068a0480fd2fd"
+    },
+    "settings-vector-original": {
+      "bytes": 30609,
+      "sha256": "1b664ad1dae9def355fbd314efef829e50db52551184d5da50a08bbc76c972dc"
+    }
+  },
+  "sourceReadsUnchanged": true
+}
