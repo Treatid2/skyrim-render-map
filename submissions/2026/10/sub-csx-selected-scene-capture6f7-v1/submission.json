@@ -1,0 +1,50 @@
+{
+  "content": {
+    "fileCount": 4,
+    "root": "content",
+    "totalBytes": 150943,
+    "treeSha256": "3C235C9DC709FAE3F0373BF9D2429D56B9A47C806D53196B10438DECB0480905"
+  },
+  "contributor": {
+    "displayName": "Treatid2",
+    "github": "Treatid2",
+    "standing": "ordinary-contributor"
+  },
+  "createdAt": "2026-10-04T11:19:39.917125+00:00",
+  "licensing": {
+    "content": "CC-BY-SA-4.0",
+    "dcoAcknowledged": true,
+    "schemas": "CC0-1.0"
+  },
+  "namespace": "csx",
+  "notes": "Closed selected-scene corpus extends engine/input/camera/environment/rendering/persistence/UI diagnostics without changing prior submissions. Draft admission candidate; exact-frame pose/lighting/science boundaries explicit.",
+  "provenance": {
+    "importedAt": "2026-10-04T11:19:39.917125+00:00",
+    "relatedUrls": [
+      "https://github.com/Treatid2/skyrim-community-shaders/commit/f3623871660d0d5073957458daeb8055dddc40ce"
+    ],
+    "sourceCommit": "f3623871660d0d5073957458daeb8055dddc40ce",
+    "sourceContentTreeSha256": "4115ab8bf1bbfdef70e0184ddbc8be444525f796f8a6d64a63ed667c726b87cd",
+    "sourceDirty": false,
+    "sourceParentCommit": "cc53d3e5a98d3667ac603ce9cb20bd517ce41691",
+    "sourcePubliclyReachable": true,
+    "sourceRef": null,
+    "sourceRepository": "https://github.com/Treatid2/skyrim-community-shaders",
+    "sourceState": "public-branch",
+    "transformations": [
+      "Source digest identifies retained input inventory, not full Git source tree.",
+      "Independent byte/hash, native/projected input equality, sample/bracket, camera/scale and diagnostic-boundary verification.",
+      "Sanitized private corpus roles; original publication null-pose helper error retained and separately qualified from native data.",
+      "No exact-frame pose association, held lighting, causal brightness treatment, complete calibration or performance admission.",
+      "Six separately captured retained custody metadata files verified; public corpus filenames replaced by generic role aliases, originals unchanged."
+    ]
+  },
+  "schema": {
+    "major": 1,
+    "minor": 0,
+    "name": "skyrim-render-map.submission"
+  },
+  "status": "candidate-unreviewed",
+  "submissionClass": "assertion",
+  "submissionId": "sub-csx-selected-scene-capture6f7-v1"
+}

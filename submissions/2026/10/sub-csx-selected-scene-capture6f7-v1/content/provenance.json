@@ -1,0 +1,229 @@
+{
+  "coverageLimits": {
+    "exactFramePoseJoin": false,
+    "freshAllFeatureCensus": false,
+    "fullStereoCalibration": false,
+    "fullStructuralTrace": false,
+    "lightingHeld": false,
+    "newBinaryHashByReviewer": false,
+    "performanceMeasurement": false,
+    "pixelLandmarkToleranceMeasured": false,
+    "scientificBrightnessAdmission": false
+  },
+  "custodyVerification": "Six retained metadata files hash/size matched. Native nested close/owner/remaining/force fields, released session, completed config and unverified/non-promoted cache state checked. No underlying cache or source binary verification and no atomic capture inferred.",
+  "imageCheck": "Six original PNG SHA/bytes/header dimensions match native artifact receipt. Same-frame BOTH EYES is within each acquired pair, not an exact tracked-pose join or full pixel/source lineage.",
+  "memberHashByteChecks": 31,
+  "nativeVsDerived": "Native acquisition/recording/response bytes unchanged. Helper physicalPose:null separately superseded by actual input.trackedSet.value from immutable observe replies; owner qualification independently checked, original publication not repaired.",
+  "noLiveActionsByReviewer": true,
+  "originalInputsUnchanged": true,
+  "priorSubmissionsUnchanged": true,
+  "privacy": "Private originals stay outside repository; local paths, session/request/process/command identities, device pointers and save name omitted. Public content-addressed roles retain original hashes. Native journal/record filenames replaced by generic member aliases; private alias correspondence retained outside repository.",
+  "producerSubjectDistinction": "Captured native producer f362/bc58 differs from owner-reported controller6f7. Controller source checkout not independently authenticated here; live receipt behaviour verified. Harness-retained artifact hash not a new binary read by this reviewer; native manifestVerified false retained.",
+  "recordingCheck": "All1000 origin/device matrix sets compared; device validity/neutral input and zero recorded velocities checked. Exact screenshot frames absent; nearest recorded brackets only. Native input raw-result JSON equals projected trackedSet value.",
+  "schemaVersion": 1,
+  "sourceInventory": {
+    "additional-run/failedReadiness": {
+      "bytes": 18156,
+      "sha256": "f7d4419200e506470770cabf115646ea80e57ba05c7c29b4e3e1efa9dd28934c"
+    },
+    "additional-run/fixtureBarrier": {
+      "bytes": 11367,
+      "sha256": "b19319489bb8582bd490ced2dcaa51279bbfbbece9cd3a08bcddc48237569029"
+    },
+    "additional-run/fixtureDispatch": {
+      "bytes": 11151,
+      "sha256": "d627c48f7f7a50e5d95161c4ae9dc5c2f7d15281a7122bd10be1aea090a3a070"
+    },
+    "additional-run/freshMenu": {
+      "bytes": 10820,
+      "sha256": "13d49de97104a8aa13b663644c13a250023dc0988af603891b829b5b3121a242"
+    },
+    "additional-run/headCommand": {
+      "bytes": 845,
+      "sha256": "54c8c5ad280fc8e6de8f3ad09833053948e530d1b42902d733ebb4a8c4f81d4c"
+    },
+    "additional-run/probeStatus": {
+      "bytes": 13829,
+      "sha256": "c053c064006fbe2665a55ea06655113844af22df1958109c4a3db407c871dfda"
+    },
+    "additional-run/recordStart": {
+      "bytes": 2239,
+      "sha256": "b7554be9e2fa8d1c14c0e6b9940d38063d93bee924838a3b8e9234155c617fbb"
+    },
+    "corpus-member-01": {
+      "bytes": 7752,
+      "sha256": "3fda96266153cb1257bef9319becab09d21f761461ad87e8d943d5360804053c"
+    },
+    "corpus-member-02": {
+      "bytes": 2897360,
+      "sha256": "c9bd639a327838e8681dfcbf173adc355d61bdd9c88c11a6ec35dc05edbb9931"
+    },
+    "corpus-member-03": {
+      "bytes": 2905737,
+      "sha256": "2d99e7f75cf64a0be195de726748a41d53e1a5ff931d22c57a153644450b0fc5"
+    },
+    "corpus-member-04": {
+      "bytes": 2918368,
+      "sha256": "482547926b166f2eaa3637691ff66128a5a8474bae2677f469cf4833b0618573"
+    },
+    "corpus-member-05": {
+      "bytes": 2925407,
+      "sha256": "0cc792d39ed0ace4eded8e3fdbb3e55de8ee9f9d2df14fb049342b67b82c0bc1"
+    },
+    "corpus-member-06": {
+      "bytes": 2933066,
+      "sha256": "1f247d93347d05fef0e65491b2a17651c1a03d49f8e204154da75d33ce24069e"
+    },
+    "corpus-member-07": {
+      "bytes": 2941965,
+      "sha256": "352885b4349dff0cdd41aa7628aa4fb1220cb7ccc9c8fe3eaf6e7e3275520293"
+    },
+    "corpus-member-08": {
+      "bytes": 102908,
+      "sha256": "074565493992aea3da28616d55a285e50bffbc79ab5ad3e80de33cdd4b2fc1e6"
+    },
+    "corpus-member-09": {
+      "bytes": 16194,
+      "sha256": "6eac18d655c07c20bae3d8e8fa3b66f75e2f9ae31df1ce18ff84a53832c23487"
+    },
+    "corpus-member-10": {
+      "bytes": 16194,
+      "sha256": "361d48942006c64a9f66f1b54442760346ff9518bc0d7f8932094716cf6bc9e7"
+    },
+    "corpus-member-11": {
+      "bytes": 16194,
+      "sha256": "f96a839c6629cf2130205b3be66505c81ccbd75f6b701c04c04033f7c091835d"
+    },
+    "corpus-member-12": {
+      "bytes": 15867,
+      "sha256": "0965825a96b6e89b96ba3676362b6223e444df70ac1092c87e2d11477251b046"
+    },
+    "corpus-member-13": {
+      "bytes": 15867,
+      "sha256": "116235c7d8cc9c3a51e95066b7bb3d24b06584eddf332bf9bd7c80b8e758f067"
+    },
+    "corpus-member-14": {
+      "bytes": 15867,
+      "sha256": "1e33b723bbbd262e71664c9b23c1c00359b4f48d28b60b8cf1805f8fe21f3334"
+    },
+    "corpus-member-15": {
+      "bytes": 15739,
+      "sha256": "70092008b52cac80a0995f29c6c6cf5662c6d5a14d1e8abee5a24a6e0f498d65"
+    },
+    "corpus-member-16": {
+      "bytes": 15739,
+      "sha256": "38c46fe0e3788808ea3a562cd1f0cb91d0707757e6392a6ffc55087541f4c6ef"
+    },
+    "corpus-member-17": {
+      "bytes": 15739,
+      "sha256": "15ae4c37ccc183a77d660308807edf33655b3ac71c0a55954bcee68a43b72e68"
+    },
+    "corpus-member-18": {
+      "bytes": 1239656,
+      "sha256": "6fad22b0e2e46095391d9bb95ecb16726f929b9155051880236f129b838bfbb8"
+    },
+    "corpus-member-19": {
+      "bytes": 11108,
+      "sha256": "65396a52896172cb7429abfeb1f151b09f1d0b7f4cc3174ff25c2ae16d5f4df6"
+    },
+    "corpus-member-20": {
+      "bytes": 11110,
+      "sha256": "316478029a7fa1ac38f1b9301b7d5fc4c7769192bc80f95d27f29f013a3965af"
+    },
+    "corpus-member-21": {
+      "bytes": 66109,
+      "sha256": "83491e3b43a1047c7563650a59e556de3225d34d0bc8d8b3ab57aca51362e675"
+    },
+    "corpus-member-22": {
+      "bytes": 66107,
+      "sha256": "7c573f8a58dea8248d0a0cbb145025e721a0a7fe502dfe4e502e995b5c27c747"
+    },
+    "corpus-member-23": {
+      "bytes": 66111,
+      "sha256": "b83fdf429568f18a8703959f7408f2d245f8efb6df81172707fe35534a4f817d"
+    },
+    "corpus-member-24": {
+      "bytes": 5161,
+      "sha256": "1ee44eebb833a626d8245b6a7d03a0f9e2103cefc56920dc3b0e21413c8366a1"
+    },
+    "corpus-member-25": {
+      "bytes": 11876,
+      "sha256": "2a60a999a5a692363db5429d4434de5a1599b2f639c0c57f546f9f541fe8775f"
+    },
+    "corpus-member-26": {
+      "bytes": 11651,
+      "sha256": "6fde3b5fcef3946999314d038ebad1516d1f77fdad6fbdee9859f99debab0a4f"
+    },
+    "corpus-member-27": {
+      "bytes": 11655,
+      "sha256": "67e63809614f849e3958d905401cb90868e0193ef8d635ff0aa2370b8afd4620"
+    },
+    "corpus-member-28": {
+      "bytes": 17972,
+      "sha256": "af256529e047bf1f7b077427dbd74680070cd6e21b637e04cbd326b6f06c8e84"
+    },
+    "corpus-member-29": {
+      "bytes": 15924,
+      "sha256": "0b9f13e9e200c7c1dfa8fd402623b9fea0ffc332e6803ad236346b14428fc748"
+    },
+    "corpus-member-30": {
+      "bytes": 192871,
+      "sha256": "188e9045c0669dfefaf4147e4eb598bcfb9864ae9f94340e7e9b953137b48221"
+    },
+    "corpus-member-31": {
+      "bytes": 1657,
+      "sha256": "cdb1353591aae769b3cdda20ae352976bb5506dc247587201bba27f5016ce9fe"
+    },
+    "custody-publication-receipt": {
+      "bytes": 3359,
+      "sha256": "291c560eb05453ada66d1625c651f08cb03224a4c5fae2edd8a414860332e7e7"
+    },
+    "custody/cache-completion": {
+      "bytes": 677098,
+      "sha256": "1ad35304adf13bdf183c03aea8e87e4642411e395b2f843b714d372d60b36265"
+    },
+    "custody/cache-plan": {
+      "bytes": 2465730,
+      "sha256": "c77c74a0140871ab293ca52cd91ca9a9fbaf3265fd1522b6b024dc18264f9a0f"
+    },
+    "custody/config-plan": {
+      "bytes": 674703,
+      "sha256": "39dda6a8ff4d97e30d05caa54461bc2150c94a7af03bc7f24268bc318661e8ec"
+    },
+    "custody/mo2-stop": {
+      "bytes": 4450,
+      "sha256": "6c5b1d9f6d4c5a2071dab1769cebba69407ddf6133b91855d40f54a4d5ef66d2"
+    },
+    "custody/session": {
+      "bytes": 265922,
+      "sha256": "4509fb15f1b6dd60e34aa465ce23eb32a1b612437a97f69b59bbd603ed0efac9"
+    },
+    "custody/workspace": {
+      "bytes": 216261,
+      "sha256": "077d905003ec6146b0bc16a8f0a357ce1c0db49684796542edb07c4351cd555b"
+    },
+    "owner-derived-qualification": {
+      "bytes": 14265,
+      "sha256": "70b97f9b03808a981b91889eae11a858a4ebe836881879479e30667e65f0beb3"
+    },
+    "owner-handoff": {
+      "bytes": 3139,
+      "sha256": "fd3a0f0380029076dd3b3fd2fb0f8dbbaf697ae25addab80aaafe3d77073f30f"
+    },
+    "publication-receipt": {
+      "bytes": 24011,
+      "sha256": "105a73d3836b6ba21c6a3641dc7fa5c5dadf09f92f68bb3694a5e4091dd390c0"
+    },
+    "scene-specification": {
+      "bytes": 2687,
+      "sha256": "ab448b9ea426cde1dde1c9d02fba8634d615548b3d06d69b7cd3153b031d598a"
+    },
+    "state-receipts-lossless-zip": {
+      "bytes": 113167,
+      "sha256": "6310f84b2cf133fc6cba103cd4559f8f05898b2d6d82b87857ff383ce88477ea"
+    }
+  },
+  "sourceInventoryDigestMeaning": "Canonical retained input inventory, not full Git source-tree digest.",
+  "visualCheck": "Primary independently viewed first left-eye original. No pixel landmark measurements or independent composition admission for other five images.",
+  "zipMembersByteCompared": 25
+}
