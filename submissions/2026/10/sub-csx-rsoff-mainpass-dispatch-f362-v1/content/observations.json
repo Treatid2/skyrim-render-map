@@ -581,7 +581,6 @@
         },
         "payload": {
           "contextFlags": 0,
-          "contextPointer": "0x12DF1E9D508",
           "creationEvidence": "initial-immediate-context",
           "deviceContextObservationId": "obs-device-context-1-g1",
           "kind": "immediate",
@@ -3471,7 +3470,6 @@
           "pointerGeneration": 1,
           "schema": "shader-observation-v2",
           "shaderObservationId": "obs-shader-11-g1",
-          "shaderPointer": "0x12DF6C0AF20",
           "shaderType": 8,
           "truncated": {
             "compileSourceName": false,
