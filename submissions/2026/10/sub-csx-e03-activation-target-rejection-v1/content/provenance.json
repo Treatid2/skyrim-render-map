@@ -1,0 +1,194 @@
+{
+  "attribution": "Builder same-enum/source-versus-destination diagnosis and intended correction remain owner source analysis, not live validation. Importer independently inspected bridge e03 line507 kMAIN source symbol only, not pairedCommonLib numeric destination definition. Raw100 independent-probe sample rows not reparsed; retained qualified summary checked. Cache3619-member roundtrip and current live restoration proofs remain owner-attributed.",
+  "calibration": "Standing-from-raw inferred from neutral left acknowledgement and observed matrix, cross-checked against HMD/right. Component residual not angular error or direct transform API read; separate provider times, no atomic calibration or historical session equivalence. Delta-state reconstruction not separately serialized fullcamera poses; exact numeric frame matches or brackets not atomic tracking-image join.",
+  "chronology": "Existing ad8 PR34/35, prior owner left-only diagnostic assessment and20-member release-note text unchanged. New independent both-eye diagnostic inspection and actual17-original machine manifest admitted with separate chronology; no cleanup replay.",
+  "limits": "All75 attempts were target-rejected; only last observed target114 is reported, no per-attempt target trace. First-only capture/no successor mitigates identified turnover scenario but does not prove general producer integrity. No authoritative render-pass/cull/visibility joins, order, fullpipeline, pixeltransfer, HDR/brightness or performance. Screenshot native completion/committed PNGs do not override schema1 adapter rejection or admit healthy stereo corpus.",
+  "method": "Independent17-member original and2archive identity checks; original native manifest/0B event verification and native start/status/stop equality; six before/after compiler guard snapshots; all1900 tracking and delta records; recordingZIP roundtrip; raw-ack/standing-input equality plus independently recomputed left-derived transform and right/HMD residuals; native schema2 screenshot metadata/PNG IHDR/hash match and original-detail both-image diagnostic inspection.",
+  "privacy": "Native pointers, process/session/request/capture/device identities, raw source filenames, account/save/local/network paths omitted. Generic role digests retain identity; originals private onL outsideGit. Full source review, raw media/corpus and cache binaries not committed.",
+  "skillInfluence": "Shader-cache-control preserves unverified/notpromoted working cache, exact restore receipt and compatibility records. No cache selection, catalog update, promotion, clearing, seeding or restoration by importer.",
+  "sourceInventory": {
+    "access-release": {
+      "bytes": 2087,
+      "sha256": "9945d40123ccab2d2992405651cfcdbe712717af850d00edcaaf1f1ec15587aa"
+    },
+    "archive-1": {
+      "bytes": 39860896,
+      "sha256": "6ecfab77d0e0b8260cb83131f73df354a540f8eb3498de3182cb3d5cff1d7c0b"
+    },
+    "archive-2": {
+      "bytes": 53694,
+      "sha256": "2178de0b90103eacce952b152ef94239251387cdb8fa6c11525972fabf9994a7"
+    },
+    "cache-completion": {
+      "bytes": 679505,
+      "sha256": "66a0a84323ef9ae6238ab72aac61ad8c9fe4c94392d1a2c6b115d92a3870b7f3"
+    },
+    "camera": {
+      "bytes": 28982,
+      "sha256": "282da04f1858161f60529530cb871053c613fe8797ec9f7578ea5c233467bc67"
+    },
+    "capture-scratch-release": {
+      "bytes": 804,
+      "sha256": "2fb53a8dd8322a8c108ae1b28b9224b15aecafad1962e7875455e49fd5b2d5fe"
+    },
+    "derived-calibration": {
+      "bytes": 4607,
+      "sha256": "64e5656f3866ba46e4e223c4c8f6364623de00257c11b69dfec4e5523cd6dd41"
+    },
+    "evidence-promotion": {
+      "bytes": 9742,
+      "sha256": "da85ff47f446d1d2aaf946797485c555ce7f76ec0a3a61fd7d042f9ba2126af2"
+    },
+    "failed-adapter-observation": {
+      "bytes": 95042,
+      "sha256": "d97770dfb9d2a1948b4efdfaa51797b90f7511cf535c498526e316c968df6ae3"
+    },
+    "image-left_eye": {
+      "bytes": 2980983,
+      "sha256": "509f3bcfb69a1f854c0d6451c3e7ee42f67387cccbd7a2383cb5ee3a7f8af6ca"
+    },
+    "image-right_eye": {
+      "bytes": 2986741,
+      "sha256": "9b799edbf1a0de17cce7228b8a2cdd32a6b6efbbbf39f514e8cfc963bb7dc177"
+    },
+    "immutable-bridge-source": {
+      "bytes": 37345,
+      "gitBlob": "964126c231ee2123a2e5d0800b3bc961dda647e1",
+      "repositoryPath": "src/RenderMap/DevBenchBridge.cpp",
+      "sha256": "5061799d02c3510648187c90cc7c6809d2f9a4386ce7fc4d6969195bf696e61a"
+    },
+    "independent-probe-qualification": {
+      "bytes": 8547,
+      "sha256": "3d75f8c4a72571793f442e47d5c3a911224472252cdbd96f41c3b0189723a7a4"
+    },
+    "native-events": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native-manifest": {
+      "bytes": 9094,
+      "sha256": "141a1b123988fb8f01b9f921f8c2e1e41c96794cba0d11ce684cadfc7cab7843"
+    },
+    "native-screenshot-final-receipt": {
+      "bytes": 33384,
+      "sha256": "4b148432640241e59d9a996c869d9a6a4097869cbfd7b7ab5693131c205e8310"
+    },
+    "original-member-1": {
+      "bytes": 7740,
+      "sha256": "0520f3ad5add455a578f8cd69e84dd9f6c5e622d5c127a538833ea4db9bfa8a7"
+    },
+    "original-member-10": {
+      "bytes": 343276,
+      "sha256": "76dbe4db0b58d46e0d7d04e1f7900c47e9adc0dabe94995facd6cab45467f64e"
+    },
+    "original-member-11": {
+      "bytes": 271395,
+      "sha256": "005d9f8bb9122cc960cf6fd024b5fb52afe033ea5525c93bb837f8d1059f58d6"
+    },
+    "original-member-12": {
+      "bytes": 221385,
+      "sha256": "332421e852339ba6309363e96d5019b64a4c161117bfb40f9fc7f02f664a24fc"
+    },
+    "original-member-13": {
+      "bytes": 26428,
+      "sha256": "75e3baf7bcd5f59533bf580412dc0ce3032fda7b75b618a8b0efbf19da7461bd"
+    },
+    "original-member-14": {
+      "bytes": 33384,
+      "sha256": "4b148432640241e59d9a996c869d9a6a4097869cbfd7b7ab5693131c205e8310"
+    },
+    "original-member-15": {
+      "bytes": 679505,
+      "sha256": "66a0a84323ef9ae6238ab72aac61ad8c9fe4c94392d1a2c6b115d92a3870b7f3"
+    },
+    "original-member-16": {
+      "bytes": 2229501,
+      "sha256": "cb4a658295f0f1bf009d75bbdcec3234a9c9da5df9a0f72d59ca47610ea1cc2a"
+    },
+    "original-member-17": {
+      "bytes": 1091,
+      "sha256": "a483439df3e9cdb3c8cb294622bdc598d223a731a3bdf1edb653aa02bd578f69"
+    },
+    "original-member-2": {
+      "bytes": 95042,
+      "sha256": "d97770dfb9d2a1948b4efdfaa51797b90f7511cf535c498526e316c968df6ae3"
+    },
+    "original-member-3": {
+      "bytes": 2980983,
+      "sha256": "509f3bcfb69a1f854c0d6451c3e7ee42f67387cccbd7a2383cb5ee3a7f8af6ca"
+    },
+    "original-member-4": {
+      "bytes": 2986741,
+      "sha256": "9b799edbf1a0de17cce7228b8a2cdd32a6b6efbbbf39f514e8cfc963bb7dc177"
+    },
+    "original-member-5": {
+      "bytes": 9094,
+      "sha256": "141a1b123988fb8f01b9f921f8c2e1e41c96794cba0d11ce684cadfc7cab7843"
+    },
+    "original-member-6": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "original-member-7": {
+      "bytes": 2347955,
+      "sha256": "c6d6797f3e00025f871d827107a1d152496c3d1bf32b6ddf83c7ecf41b2bde1d"
+    },
+    "original-member-8": {
+      "bytes": 56952,
+      "sha256": "809928d5a172040dfa36509419e28ac0e2000384f0e34b50dcb68195ce84228f"
+    },
+    "original-member-9": {
+      "bytes": 1657,
+      "sha256": "5096bf1ea621057c6e4c38ce116fd3b25b28cab6cc8603c8d82f45e797a315fd"
+    },
+    "owner-ratification": {
+      "bytes": 6200,
+      "sha256": "d123f30075472b7e7890f95117025a96debe54dd22e5efbef1076c3fe0a4c417"
+    },
+    "owner-turnover-limitation": {
+      "bytes": 3060,
+      "sha256": "c1ca70a2777fbdf1be46d7378a49fe987f78a90e86b62f83be124cdc1c10f2f9"
+    },
+    "raw-controller-ack": {
+      "bytes": 1088,
+      "sha256": "fc53d583bc447c05993408f9d3d6bb40bf7c3b68830b8debc04b5decc3584cb0"
+    },
+    "raw-head-ack": {
+      "bytes": 1199,
+      "sha256": "fc4c3d0f2e4e95752b85a58e35678b96cb46f14fa7af1ad2a623ee7b1341c707"
+    },
+    "recording": {
+      "bytes": 2347955,
+      "sha256": "c6d6797f3e00025f871d827107a1d152496c3d1bf32b6ddf83c7ecf41b2bde1d"
+    },
+    "render-scale": {
+      "bytes": 67338,
+      "sha256": "4749866477600df1285b3cb96139461996a0be6fe8757b870595fdbb9363db49"
+    },
+    "render-start": {
+      "bytes": 34169,
+      "sha256": "99d29f8f0e6d595e7130d906ffc978a55f7d3e1435762aecd66a1f8db2a5701f"
+    },
+    "render-status": {
+      "bytes": 36866,
+      "sha256": "e15a506e48643b9b4c6771773ad56c44ee1842a887ff44aecd59b1c7ffbf0e91"
+    },
+    "render-stop": {
+      "bytes": 40234,
+      "sha256": "48c2675b8ac194ae47b8bee2fe680117cf23094bf86d0e45022f2805878dfaca"
+    },
+    "standing-observation": {
+      "bytes": 61317,
+      "sha256": "1b12c61029bab23de19ce00f3daf0e6474699c675e0897477aeb6740d2799222"
+    },
+    "upscaling": {
+      "bytes": 18884,
+      "sha256": "3663b7b653a42719e0e4332bbf7964dc95297c2651cb6190ca91229078d83c57"
+    },
+    "worldscale": {
+      "bytes": 11902,
+      "sha256": "30638c23c0ba270059ba70cac4dbbebc3f66a1d07f6727322549404e04b3db0f"
+    }
+  },
+  "sourceInventoryDigestMeaning": "Canonical finite retained corpus, native wrappers, owner limitation and pinned bridge source blob; not full Git source tree."
+}

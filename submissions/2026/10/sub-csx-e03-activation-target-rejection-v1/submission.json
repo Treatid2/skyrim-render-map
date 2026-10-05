@@ -1,0 +1,51 @@
+{
+  "content": {
+    "fileCount": 4,
+    "root": "content",
+    "totalBytes": 96437,
+    "treeSha256": "4C1922C265B6F5EC560D5FABC7135B7CFB40E233D350B7155F67A3F9D87C8EAC"
+  },
+  "contributor": {
+    "displayName": "Treatid2",
+    "github": "Treatid2",
+    "standing": "ordinary-contributor"
+  },
+  "createdAt": "2026-10-05T12:51:16.377391+00:00",
+  "licensing": {
+    "content": "CC-BY-SA-4.0",
+    "dcoAcknowledged": true,
+    "schemas": "CC0-1.0"
+  },
+  "namespace": "csx",
+  "notes": "Scoped first e03 callback rejection/compiler/calibration/recording diagnostics. Native window incomplete; schema2 PNGs diagnostic only; turnover limitation and unverified cache preserved.",
+  "provenance": {
+    "importedAt": "2026-10-05T12:51:16.377391+00:00",
+    "relatedUrls": [
+      "https://github.com/Treatid2/skyrim-community-shaders/commit/e03bd1fd4790795f9dd205d9458f34ce96092ca8",
+      "https://github.com/Treatid2/skyrim-render-map/pull/35"
+    ],
+    "sourceCommit": "e03bd1fd4790795f9dd205d9458f34ce96092ca8",
+    "sourceContentTreeSha256": "3bf51add260cd6f31d494ad470be4bc1cac5d8fe542658e61fce819bd8ace294",
+    "sourceDirty": false,
+    "sourceParentCommit": "f9776441a43bc48ca616c3a37aafc45a2e3e47c4",
+    "sourcePubliclyReachable": true,
+    "sourceRef": null,
+    "sourceRepository": "https://github.com/Treatid2/skyrim-community-shaders",
+    "sourceState": "public-branch",
+    "transformations": [
+      "Finite original corpus/native wrapper/hash and scalar/matrix equality verification, originals unchanged.",
+      "Independent derived calibration and1900-sample state/tracking summaries; raw100probe rows not repeated.",
+      "Native activation counters and incomplete serialization state distinct from attributed owner target-domain diagnosis and unvalidated correction.",
+      "Schema2 native committed artifacts retained separately from schema1 adapter rejection; both PNGs inspected diagnostically without healthy corpus promotion.",
+      "Unverified cache and producer-turnover limitations retained; priorad8 data untouched."
+    ]
+  },
+  "schema": {
+    "major": 1,
+    "minor": 0,
+    "name": "skyrim-render-map.submission"
+  },
+  "status": "candidate-unreviewed",
+  "submissionClass": "assertion",
+  "submissionId": "sub-csx-e03-activation-target-rejection-v1"
+}

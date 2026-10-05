@@ -1,0 +1,807 @@
+{
+  "calibration": {
+    "crossCheckResiduals": {
+      "hmd": 5.245208734017126e-08,
+      "right": 0.0
+    },
+    "directTransformApiRead": false,
+    "probe": {
+      "controllers": {
+        "inputEvents": 0,
+        "leftIndex": 2,
+        "neutralSamples": 100,
+        "packetNumbers": [
+          1398,
+          1398
+        ],
+        "required": true,
+        "rightIndex": 3,
+        "valid": true
+      },
+      "hmdIndex": 0,
+      "ok": true,
+      "raw": {
+        "connected": true,
+        "position": [
+          0.0,
+          1.68,
+          0.0
+        ],
+        "trackingResult": 200,
+        "valid": true
+      },
+      "standing": {
+        "connected": true,
+        "position": [
+          0.0,
+          1.71,
+          0.0
+        ],
+        "trackingResult": 200,
+        "valid": true
+      },
+      "state": "pose-observed",
+      "stereo": {
+        "eyeSeparationMeters": 0.063,
+        "leftEyeTranslation": [
+          -0.0315,
+          0.0,
+          0.0
+        ],
+        "recommendedRenderTarget": [
+          1512,
+          1680
+        ],
+        "rightEyeTranslation": [
+          0.0315,
+          0.0,
+          0.0
+        ],
+        "valid": true
+      }
+    },
+    "standingFromRaw": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.029999971389770508,
+      0.0,
+      0.0,
+      1.0,
+      5.960464455334602e-09
+    ]
+  },
+  "classification": "INCOMPLETE_ACTIVATION_TARGET_REJECTED",
+  "compilerSnapshots": [
+    {
+      "call": "start",
+      "compilation": {
+        "active": false,
+        "activeShaderCapture": false,
+        "async": true,
+        "backgroundThreadCount": 8,
+        "completedTasks": 10,
+        "currentFailedShaders": 0,
+        "diskCacheHits": 8,
+        "failedTasks": 0,
+        "foregroundThreadCount": 12,
+        "heavyTasksInFlight": 0,
+        "memoryCacheHits": 0,
+        "recentFailures": [],
+        "skipUnchanged": true,
+        "slowTasks": 0,
+        "sourceCompiles": 2,
+        "statisticsText": "10/10 (successful/total)\tfailed: 0\tdeduplicated: 0\tdisk cache: 8\tsource compiles: 2\nElapsed/Estimated Time: 00:00:00/00:00:00",
+        "totalTasks": 10,
+        "verySlowTasks": 0
+      },
+      "nativeProducerManifestVerified": false,
+      "phase": "before",
+      "scope": "compiler snapshot only; not package/include/provider closure, visual correctness or capture completion",
+      "state": "COMPILER_HEALTHY_AT_SNAPSHOT",
+      "stateRevision": 1,
+      "timestampUtc": "2026-10-05T12:29:21.354Z"
+    },
+    {
+      "call": "start",
+      "compilation": {
+        "active": false,
+        "activeShaderCapture": false,
+        "async": true,
+        "backgroundThreadCount": 8,
+        "completedTasks": 10,
+        "currentFailedShaders": 0,
+        "diskCacheHits": 8,
+        "failedTasks": 0,
+        "foregroundThreadCount": 12,
+        "heavyTasksInFlight": 0,
+        "memoryCacheHits": 0,
+        "recentFailures": [],
+        "skipUnchanged": true,
+        "slowTasks": 0,
+        "sourceCompiles": 2,
+        "statisticsText": "10/10 (successful/total)\tfailed: 0\tdeduplicated: 0\tdisk cache: 8\tsource compiles: 2\nElapsed/Estimated Time: 00:00:00/00:00:00",
+        "totalTasks": 10,
+        "verySlowTasks": 0
+      },
+      "nativeProducerManifestVerified": false,
+      "phase": "after",
+      "scope": "compiler snapshot only; not package/include/provider closure, visual correctness or capture completion",
+      "state": "COMPILER_HEALTHY_AT_SNAPSHOT",
+      "stateRevision": 1,
+      "timestampUtc": "2026-10-05T12:29:21.471Z"
+    },
+    {
+      "call": "status",
+      "compilation": {
+        "active": false,
+        "activeShaderCapture": false,
+        "async": true,
+        "backgroundThreadCount": 8,
+        "completedTasks": 10,
+        "currentFailedShaders": 0,
+        "diskCacheHits": 8,
+        "failedTasks": 0,
+        "foregroundThreadCount": 12,
+        "heavyTasksInFlight": 0,
+        "memoryCacheHits": 0,
+        "recentFailures": [],
+        "skipUnchanged": true,
+        "slowTasks": 0,
+        "sourceCompiles": 2,
+        "statisticsText": "10/10 (successful/total)\tfailed: 0\tdeduplicated: 0\tdisk cache: 8\tsource compiles: 2\nElapsed/Estimated Time: 00:00:00/00:00:00",
+        "totalTasks": 10,
+        "verySlowTasks": 0
+      },
+      "nativeProducerManifestVerified": false,
+      "phase": "before",
+      "scope": "compiler snapshot only; not package/include/provider closure, visual correctness or capture completion",
+      "state": "COMPILER_HEALTHY_AT_SNAPSHOT",
+      "stateRevision": 1,
+      "timestampUtc": "2026-10-05T12:29:58.554Z"
+    },
+    {
+      "call": "status",
+      "compilation": {
+        "active": false,
+        "activeShaderCapture": false,
+        "async": true,
+        "backgroundThreadCount": 8,
+        "completedTasks": 10,
+        "currentFailedShaders": 0,
+        "diskCacheHits": 8,
+        "failedTasks": 0,
+        "foregroundThreadCount": 12,
+        "heavyTasksInFlight": 0,
+        "memoryCacheHits": 0,
+        "recentFailures": [],
+        "skipUnchanged": true,
+        "slowTasks": 0,
+        "sourceCompiles": 2,
+        "statisticsText": "10/10 (successful/total)\tfailed: 0\tdeduplicated: 0\tdisk cache: 8\tsource compiles: 2\nElapsed/Estimated Time: 00:00:00/00:00:00",
+        "totalTasks": 10,
+        "verySlowTasks": 0
+      },
+      "nativeProducerManifestVerified": false,
+      "phase": "after",
+      "scope": "compiler snapshot only; not package/include/provider closure, visual correctness or capture completion",
+      "state": "COMPILER_HEALTHY_AT_SNAPSHOT",
+      "stateRevision": 1,
+      "timestampUtc": "2026-10-05T12:29:58.672Z"
+    },
+    {
+      "call": "stop",
+      "compilation": {
+        "active": false,
+        "activeShaderCapture": false,
+        "async": true,
+        "backgroundThreadCount": 8,
+        "completedTasks": 10,
+        "currentFailedShaders": 0,
+        "diskCacheHits": 8,
+        "failedTasks": 0,
+        "foregroundThreadCount": 12,
+        "heavyTasksInFlight": 0,
+        "memoryCacheHits": 0,
+        "recentFailures": [],
+        "skipUnchanged": true,
+        "slowTasks": 0,
+        "sourceCompiles": 2,
+        "statisticsText": "10/10 (successful/total)\tfailed: 0\tdeduplicated: 0\tdisk cache: 8\tsource compiles: 2\nElapsed/Estimated Time: 00:00:00/00:00:00",
+        "totalTasks": 10,
+        "verySlowTasks": 0
+      },
+      "nativeProducerManifestVerified": false,
+      "phase": "before",
+      "scope": "compiler snapshot only; not package/include/provider closure, visual correctness or capture completion",
+      "state": "COMPILER_HEALTHY_AT_SNAPSHOT",
+      "stateRevision": 1,
+      "timestampUtc": "2026-10-05T12:30:16.940Z"
+    },
+    {
+      "call": "stop",
+      "compilation": {
+        "active": false,
+        "activeShaderCapture": false,
+        "async": true,
+        "backgroundThreadCount": 8,
+        "completedTasks": 10,
+        "currentFailedShaders": 0,
+        "diskCacheHits": 8,
+        "failedTasks": 0,
+        "foregroundThreadCount": 12,
+        "heavyTasksInFlight": 0,
+        "memoryCacheHits": 0,
+        "recentFailures": [],
+        "skipUnchanged": true,
+        "slowTasks": 0,
+        "sourceCompiles": 2,
+        "statisticsText": "10/10 (successful/total)\tfailed: 0\tdeduplicated: 0\tdisk cache: 8\tsource compiles: 2\nElapsed/Estimated Time: 00:00:00/00:00:00",
+        "totalTasks": 10,
+        "verySlowTasks": 0
+      },
+      "nativeProducerManifestVerified": false,
+      "phase": "after",
+      "scope": "compiler snapshot only; not package/include/provider closure, visual correctness or capture completion",
+      "state": "COMPILER_HEALTHY_AT_SNAPSHOT",
+      "stateRevision": 1,
+      "timestampUtc": "2026-10-05T12:30:17.084Z"
+    }
+  ],
+  "custody": {
+    "archiveIdentitiesVerified": 2,
+    "originalMembersVerified": 17,
+    "releaseNoteCountDiscrepancyPreserved": true,
+    "workingCacheUnverified": true
+  },
+  "recording": {
+    "activityContract": {
+      "clock": "steadyMillisecondsFromRecordStart",
+      "eventKinds": [
+        "input",
+        "menu",
+        "lifecycle",
+        "cell",
+        "console"
+      ],
+      "inputEventTypes": [
+        "button",
+        "mouseMove",
+        "char",
+        "thumbstick",
+        "deviceConnect",
+        "kinect",
+        "vrTouchpadPosition",
+        "vrTouchpadSwipe",
+        "unknown"
+      ],
+      "inputLayer": "Skyrim.BSInputDeviceManager",
+      "name": "devbench.recording.activity",
+      "normalized": true,
+      "ordering": "seq",
+      "replay": {
+        "analogControllerAxes": true,
+        "controllerButtonTransitions": true,
+        "keyboardButtonTransitions": true,
+        "legacyControllerUpgrade": "wand-index mapping; right-handed primary/secondary fallback",
+        "observationalEvents": false,
+        "pointerFromTrackedPoses": true,
+        "policy": "capture-all-replay-only-declared",
+        "vrTrackedInputFrames": true
+      },
+      "version": {
+        "major": 1,
+        "minor": 1
+      }
+    },
+    "activityCounts": {
+      "cell": 0,
+      "console": 0,
+      "input": 0,
+      "keyboardTransitions": 0,
+      "lifecycle": 0,
+      "menu": 0,
+      "total": 0,
+      "unsupportedInput": 0,
+      "vrControllerEvents": 0
+    },
+    "deltaMethod": "Missing pose/camPose carried forward across timestamp-matched delta wait steps. Not separately serialized camera records or inter-sample constancy.",
+    "deltaSteps": 1900,
+    "distinctReconstructedCameraStates": 1,
+    "durationMs": 207484,
+    "explicitCameraChanges": 1,
+    "explicitPlayerChanges": 1,
+    "firstCameraPose": [
+      -536.1541,
+      0.2545,
+      228.0591,
+      -0.1744,
+      -0.0417
+    ],
+    "firstPlayerPose": [
+      -536.15,
+      0.25,
+      65.37,
+      2.42,
+      10.0
+    ],
+    "format": "devbench-recording-3",
+    "poseContract": {
+      "camera": [
+        "worldPosition",
+        "worldPitch",
+        "worldYaw",
+        "pov"
+      ],
+      "name": "devbench.recording.pose",
+      "player": [
+        "position",
+        "yaw",
+        "pitch"
+      ],
+      "transformEncoding": "[tx,ty,tz,r00,r01,r02,r10,r11,r12,r20,r21,r22,scale]",
+      "version": {
+        "major": 2,
+        "minor": 0
+      },
+      "vrTrackedNodes": [
+        "hmd",
+        "leftWand",
+        "rightWand"
+      ],
+      "vrTransformReplay": true
+    },
+    "reconstructedCameraStates": 1900,
+    "relativeMsRange": [
+      112,
+      207438
+    ],
+    "requestedIntervalMs": 100,
+    "sampleIntervalMs": {
+      "max": 128,
+      "median": 109,
+      "min": 100
+    },
+    "sceneAtRecordStart": {
+      "calendarWeatherHeld": false,
+      "cell": "WhiterunBreezehome",
+      "cellFormId": 91560,
+      "gameHour": 8.120899200439453,
+      "interior": true,
+      "weather": "Helios_SkyrimClearTU",
+      "weatherFormId": 4261608071
+    },
+    "stateSamples": 1900,
+    "trackingContract": {
+      "angularVelocityEncoding": "tracking-space radians/second",
+      "availableBeforePlayerLoad": true,
+      "controllerEncoding": "OpenVR packetNumber/pressed/touched/five axes",
+      "devices": [
+        "hmd",
+        "left",
+        "right"
+      ],
+      "identity": [
+        "device index",
+        "class",
+        "role"
+      ],
+      "name": "devbench.recording.openvrTracking",
+      "origin": "captured per sample from IVRCompositor.GetTrackingSpace",
+      "replay": true,
+      "replayDevice": "input.vrTrackedSet",
+      "source": "IVRCompositor.GetLastPoses",
+      "transformEncoding": "OpenVR device-to-absolute 3x4 row-major",
+      "velocityEncoding": "tracking-space metres/second",
+      "version": {
+        "major": 2,
+        "minor": 0
+      }
+    },
+    "trackingFrameRange": [
+      23081,
+      34360
+    ],
+    "trackingSamples": 1900,
+    "zeroActivityScope": "No normalized activity records in this recording; not proof of absent raw OS/game input or full replay qualification."
+  },
+  "schemaVersion": 1,
+  "screenshot": {
+    "acquisition": {
+      "compositorCycle": 20636,
+      "engineFrame": 24867,
+      "monotonicTimestampUs": 2253807196536,
+      "planes": [
+        {
+          "boundsApplied": true,
+          "colourSpace": 1,
+          "dxgiFormat": 28,
+          "eye": "left",
+          "orientation": {
+            "flipHorizontal": false,
+            "flipVertical": false
+          },
+          "publicationGeneration": 4,
+          "sourceHeight": 1680,
+          "sourceWidth": 3024,
+          "stagedHeight": 1680,
+          "stagedWidth": 1512,
+          "submittedBounds": {
+            "uMax": 0.5,
+            "uMin": 0.0,
+            "vMax": 1.0,
+            "vMin": 0.0
+          },
+          "tonemapSceneHdr": false
+        },
+        {
+          "boundsApplied": true,
+          "colourSpace": 1,
+          "dxgiFormat": 28,
+          "eye": "right",
+          "orientation": {
+            "flipHorizontal": false,
+            "flipVertical": false
+          },
+          "publicationGeneration": 4,
+          "sourceHeight": 1680,
+          "sourceWidth": 3024,
+          "stagedHeight": 1680,
+          "stagedWidth": 1512,
+          "submittedBounds": {
+            "uMax": 1.0,
+            "uMin": 0.5,
+            "vMax": 1.0,
+            "vMin": 0.0
+          },
+          "tonemapSceneHdr": false
+        }
+      ],
+      "sourceKind": "hmd_submission",
+      "utcTimestamp": "2026-10-05T12:27:24.220Z"
+    },
+    "adapterQualified": false,
+    "bothImagesDiagnosticallyInspectedLaterByImporter": true,
+    "images": [
+      {
+        "bytes": 2980983,
+        "committedReported": true,
+        "diagnosticPixelsInspectedByImporter": true,
+        "eye": "left_eye",
+        "healthyAdapterQualified": false,
+        "height": 1680,
+        "sha256": "509f3bcfb69a1f854c0d6451c3e7ee42f67387cccbd7a2383cb5ee3a7f8af6ca",
+        "width": 1512
+      },
+      {
+        "bytes": 2986741,
+        "committedReported": true,
+        "diagnosticPixelsInspectedByImporter": true,
+        "eye": "right_eye",
+        "healthyAdapterQualified": false,
+        "height": 1680,
+        "sha256": "9b799edbf1a0de17cce7228b8a2cdd32a6b6efbbbf39f514e8cfc963bb7dc177",
+        "width": 1512
+      }
+    ],
+    "nativeContract": {
+      "major": 1,
+      "minor": 1,
+      "name": "csx.screenshot",
+      "schemaRevision": 2
+    },
+    "trackingAssociation": {
+      "afterFrame": 24872,
+      "afterRelativeMs": 31582,
+      "atomicJoinRatified": false,
+      "beforeFrame": 24866,
+      "beforeRelativeMs": 31478,
+      "exactFrameMatchingSamples": 0,
+      "relativeToUtcClockMappingEstablished": false
+    }
+  },
+  "tracking": {
+    "hmd": {
+      "connected": 1900,
+      "distinctMatrices": 1,
+      "distinctVelocities": 1,
+      "firstMatrix": [
+        0.9659258127212524,
+        0.04494345560669899,
+        -0.25488701462745667,
+        0.0,
+        0.0,
+        0.9848077297210693,
+        0.1736481785774231,
+        1.709999918937683,
+        0.258819043636322,
+        -0.16773125529289246,
+        0.9512512683868408,
+        0.0
+      ],
+      "origins": [
+        "standing"
+      ],
+      "samples": 1900,
+      "valid": 1900
+    },
+    "left": {
+      "connected": 1900,
+      "distinctAxisArrays": 1,
+      "distinctMatrices": 1,
+      "distinctVelocities": 1,
+      "firstMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        -0.25,
+        0.0,
+        1.0,
+        0.0,
+        1.2799999713897705,
+        0.0,
+        0.0,
+        1.0,
+        -0.3499999940395355
+      ],
+      "origins": [
+        "standing"
+      ],
+      "pressedMasks": [
+        0
+      ],
+      "samples": 1900,
+      "touchedMasks": [
+        0
+      ],
+      "valid": 1900
+    },
+    "right": {
+      "connected": 1900,
+      "distinctAxisArrays": 1,
+      "distinctMatrices": 1,
+      "distinctVelocities": 1,
+      "firstMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.25,
+        0.0,
+        1.0,
+        0.0,
+        1.2799999713897705,
+        0.0,
+        0.0,
+        1.0,
+        -0.3499999940395355
+      ],
+      "origins": [
+        "standing"
+      ],
+      "pressedMasks": [
+        0
+      ],
+      "samples": 1900,
+      "touchedMasks": [
+        0
+      ],
+      "valid": 1900
+    }
+  },
+  "upscaling": {
+    "activeOperationId": 0,
+    "capabilityRevision": 1,
+    "dimensions": {
+      "displayEyeHeight": 1680,
+      "displayEyeWidth": 1512,
+      "renderEyeHeight": 1120,
+      "renderEyeWidth": 2016
+    },
+    "flags": 1,
+    "observedConditions": {
+      "mask": 0,
+      "names": []
+    },
+    "profilePresence": 9,
+    "profiles": {
+      "applying": {
+        "dlssProfile": {
+          "name": "K",
+          "value": 1
+        },
+        "fsrRuntime": {
+          "name": "fsr3",
+          "value": 0
+        },
+        "method": {
+          "name": "none",
+          "value": 0
+        },
+        "qualityMode": {
+          "name": "native_aa",
+          "value": 0
+        },
+        "renderScaleMode": false
+      },
+      "configured": {
+        "dlssProfile": {
+          "name": "K",
+          "value": 1
+        },
+        "fsrRuntime": {
+          "name": "fsr4",
+          "value": 1
+        },
+        "method": {
+          "name": "fsr",
+          "value": 2
+        },
+        "qualityMode": {
+          "name": "quality",
+          "value": 3
+        },
+        "renderScaleMode": false
+      },
+      "effective": {
+        "dlssProfile": {
+          "name": "K",
+          "value": 1
+        },
+        "fsrRuntime": {
+          "name": "fsr4",
+          "value": 1
+        },
+        "method": {
+          "name": "fsr",
+          "value": 2
+        },
+        "qualityMode": {
+          "name": "quality",
+          "value": 3
+        },
+        "renderScaleMode": false
+      },
+      "persisted": {
+        "dlssProfile": {
+          "name": "K",
+          "value": 1
+        },
+        "fsrRuntime": {
+          "name": "fsr3",
+          "value": 0
+        },
+        "method": {
+          "name": "none",
+          "value": 0
+        },
+        "qualityMode": {
+          "name": "native_aa",
+          "value": 0
+        },
+        "renderScaleMode": false
+      },
+      "requested": {
+        "dlssProfile": {
+          "name": "K",
+          "value": 1
+        },
+        "fsrRuntime": {
+          "name": "fsr3",
+          "value": 0
+        },
+        "method": {
+          "name": "none",
+          "value": 0
+        },
+        "qualityMode": {
+          "name": "native_aa",
+          "value": 0
+        },
+        "renderScaleMode": false
+      },
+      "stable": {
+        "dlssProfile": {
+          "name": "K",
+          "value": 1
+        },
+        "fsrRuntime": {
+          "name": "fsr3",
+          "value": 0
+        },
+        "method": {
+          "name": "none",
+          "value": 0
+        },
+        "qualityMode": {
+          "name": "native_aa",
+          "value": 0
+        },
+        "renderScaleMode": false
+      }
+    },
+    "renderScaleStatus": {
+      "name": "disabled",
+      "value": 0
+    },
+    "stateRevision": 1,
+    "transitionState": {
+      "name": "idle",
+      "value": 0
+    }
+  },
+  "window": {
+    "captureWindow": {
+      "acceptedEyeMask": 0,
+      "activationBoundary": {
+        "attemptCount": 75,
+        "frameRejections": 0,
+        "lastCpuFrame": 31800,
+        "lastPublicationGeneration": 4,
+        "lastTarget": 114,
+        "publicationRejections": 0,
+        "scope": "armed-window-input-validation",
+        "targetRejections": 75
+      },
+      "activationTick": 0,
+      "armedTick": 22539244034069,
+      "bootstrapComplete": false,
+      "bootstrapEventCount": 0,
+      "compositorCycle": 0,
+      "cpuFrame": null,
+      "endTick": 22539264034072,
+      "failure": "activation-timeout",
+      "fullPipelineEstablished": false,
+      "omittedPrefix": {
+        "fromTickInclusive": 22539244034069,
+        "toTickExclusive": null
+      },
+      "phase": "incomplete",
+      "pixelTransferEstablished": false,
+      "preWindowProducerHistory": "unobserved",
+      "prefixEventCount": null,
+      "publicationGeneration": 0
+    },
+    "completion": {
+      "attemptedEventCount": 0,
+      "boundaryRejectionCount": 0,
+      "droppedEventCount": 0,
+      "droppedGeometryObservationCount": 0,
+      "droppedMaterialStateObservationCount": 0,
+      "droppedResourceObservationCount": 0,
+      "droppedSceneObjectObservationCount": 0,
+      "droppedShaderObservationCount": 0,
+      "droppedStageShaderObservationCount": 0,
+      "droppedTargetBindingObservationCount": 0,
+      "droppedTargetViewObservationCount": 0,
+      "eventCount": 0,
+      "filteredEventCount": 0,
+      "geometryObservationCount": 0,
+      "incomplete": true,
+      "incompleteReasons": [
+        "capture-window-incomplete"
+      ],
+      "materialStateObservationCount": 0,
+      "maximumTransferVersionResources": 256,
+      "observedTransferVersionAdmissionFailures": 0,
+      "reason": "requested",
+      "resourceObservationCount": 0,
+      "sceneObjectObservationCount": 0,
+      "scopeMismatchCount": 0,
+      "scopeOverflowCount": 0,
+      "shaderObservationCount": 0,
+      "stageShaderObservationCount": 0,
+      "stopRaceRejectionCount": 0,
+      "targetBindingObservationCount": 0,
+      "targetViewObservationCount": 0,
+      "truncated": true
+    },
+    "lastObservedTarget": 114,
+    "manifestStatus": "incomplete",
+    "nativeFinalState": "complete",
+    "selectedTarget": 1
+  }
+}
