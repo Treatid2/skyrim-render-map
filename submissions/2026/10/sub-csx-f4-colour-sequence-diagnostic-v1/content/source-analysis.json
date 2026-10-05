@@ -1,0 +1,310 @@
+{
+  "findings": [
+    {
+      "id": "page-path-string",
+      "interpretation": "Probe dispatch path is a source-defined string, distinct from colour-status integer enum. Adapter numeric-page guard mismatch is not native corruption.",
+      "source": {
+        "excerpt": "\t\tbool sharpeningEnabled = false;\n\t\tstd::uint64_t dispatchQpc = 0;\n\t\tstd::string path;\n\t};\n\n\t/** Arm one bounded VR capture; return its immutable generation receipt. */\n\tbool Arm(\n\t\tconst std::string& a_captureId,\n\t\tstd::uint64_t a_expectedColourContractRevision,",
+        "fileIdentity": {
+          "bytes": 3218,
+          "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.h",
+          "sha256": "dcefe0d9bc2e447bb79ace8eff5655b0c613a56ac889e832ab65207964ee661f"
+        },
+        "inclusiveLineRange": [
+          33,
+          41
+        ],
+        "locator": "https://github.com/Treatid2/skyrim-community-shaders/blob/f4fe744560df1aa890e90f8b794c28983f156c14/src/Features/Upscaling/ColourPipelineProbe.h#L33",
+        "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.h",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "page-path-serialization",
+      "interpretation": "Page serializes successful dispatch path directly. No enum coercion should be inferred.",
+      "source": {
+        "excerpt": "\t\t\t\t{ \"contextGeneration\", a_dispatch.dispatchSerial ? json(a_dispatch.contextGeneration) : json(nullptr) },\n\t\t\t\t{ \"contextIndex\", a_dispatch.dispatchSerial ? json(a_dispatch.contextIndex) : json(nullptr) },\n\t\t\t\t{ \"path\", a_dispatch.dispatchSerial ? json(a_dispatch.path) : json(nullptr) },\n\t\t\t\t{ \"renderWidth\", a_dispatch.renderWidth },\n\t\t\t\t{ \"renderHeight\", a_dispatch.renderHeight },\n\t\t\t\t{ \"displayWidth\", a_dispatch.displayWidth },\n\t\t\t\t{ \"displayHeight\", a_dispatch.displayHeight },\n\t\t\t\t{ \"requestedHighDynamicRangeInput\", a_dispatch.requestedHighDynamicRangeInput },\n\t\t\t\t{ \"requestedAutoExposure\", a_dispatch.requestedAutoExposure },",
+        "fileIdentity": {
+          "bytes": 44326,
+          "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+          "sha256": "29fe3413e33551e035af119786a932bf499efb62a45adf6798c4da9e23f29cd5"
+        },
+        "inclusiveLineRange": [
+          688,
+          696
+        ],
+        "locator": "https://github.com/Treatid2/skyrim-community-shaders/blob/f4fe744560df1aa890e90f8b794c28983f156c14/src/Features/Upscaling/ColourPipelineProbe.cpp#L688",
+        "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "unsigned-float-decode",
+      "interpretation": "Unsigned mini-float exponent5/mantissa6-or5 decode, no transfer conversion; source-qualified independent289sample verification.",
+      "source": {
+        "excerpt": "\t\tfloat DecodeUnsignedFloat(std::uint32_t a_value, std::uint32_t a_mantissaBits) noexcept\n\t\t{\n\t\t\tconst std::uint32_t mantissaMask = (1u << a_mantissaBits) - 1u;\n\t\t\tconst std::uint32_t exponent = (a_value >> a_mantissaBits) & 0x1Fu;\n\t\t\tconst std::uint32_t mantissa = a_value & mantissaMask;\n\t\t\tif (exponent == 0)\n\t\t\t\treturn std::ldexp(static_cast<float>(mantissa), 1 - 15 - static_cast<int>(a_mantissaBits));\n\t\t\tif (exponent == 0x1Fu)\n\t\t\t\treturn mantissa == 0 ? std::numeric_limits<float>::infinity() : std::numeric_limits<float>::quiet_NaN();\n\t\t\treturn std::ldexp(1.0f + static_cast<float>(mantissa) / static_cast<float>(1u << a_mantissaBits), static_cast<int>(exponent) - 15);\n\t\t}\n\n\t\tbool DecodePixel(DXGI_FORMAT a_format, const std::uint8_t* a_pixel, std::array<float, 4>& a_value) noexcept",
+        "fileIdentity": {
+          "bytes": 44326,
+          "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+          "sha256": "29fe3413e33551e035af119786a932bf499efb62a45adf6798c4da9e23f29cd5"
+        },
+        "inclusiveLineRange": [
+          241,
+          253
+        ],
+        "locator": "https://github.com/Treatid2/skyrim-community-shaders/blob/f4fe744560df1aa890e90f8b794c28983f156c14/src/Features/Upscaling/ColourPipelineProbe.cpp#L241",
+        "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "packed-r11g11b10",
+      "interpretation": "Four little-endian bytes map low11R/next11G/high10B and syntheticalpha1.",
+      "source": {
+        "excerpt": "\t\t\tcase DXGI_FORMAT_R11G11B10_FLOAT:\n\t\t\t\t{\n\t\t\t\t\tstd::uint32_t packed = 0;\n\t\t\t\t\tstd::memcpy(&packed, a_pixel, sizeof(packed));\n\t\t\t\t\ta_value = { DecodeUnsignedFloat(packed & 0x7FFu, 6u), DecodeUnsignedFloat((packed >> 11u) & 0x7FFu, 6u), DecodeUnsignedFloat((packed >> 22u) & 0x3FFu, 5u), 1.0f };\n\t\t\t\t\treturn true;\n\t\t\t\t}\n\t\t\tcase DXGI_FORMAT_R16G16B16A16_FLOAT:",
+        "fileIdentity": {
+          "bytes": 44326,
+          "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+          "sha256": "29fe3413e33551e035af119786a932bf499efb62a45adf6798c4da9e23f29cd5"
+        },
+        "inclusiveLineRange": [
+          280,
+          287
+        ],
+        "locator": "https://github.com/Treatid2/skyrim-community-shaders/blob/f4fe744560df1aa890e90f8b794c28983f156c14/src/Features/Upscaling/ColourPipelineProbe.cpp#L280",
+        "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "sampling-luma",
+      "interpretation": "Rec709 weighted format-native channels without transfer conversion; not HDR perceptual brightness or a cross-condition result.",
+      "source": {
+        "excerpt": "\t\t\t\t\t\tfor (std::size_t channel = 0; channel < decoded.size(); ++channel)\n\t\t\t\t\t\t\tsums[channel] += decoded[channel];\n\t\t\t\t\t\tconst double luma = 0.2126 * decoded[0] + 0.7152 * decoded[1] + 0.0722 * decoded[2];\n\t\t\t\t\t\tlumaSum += luma;\n\t\t\t\t\t\tminimumLuma = std::min(minimumLuma, luma);\n\t\t\t\t\t\tmaximumLuma = std::max(maximumLuma, luma);\n\t\t\t\t\t\t++finiteSamples;\n\t\t\t\t\t}\n\t\t\t\t\tsamples.push_back({\n\t\t\t\t\t\t{ \"grid\", { gridX, gridY } },",
+        "fileIdentity": {
+          "bytes": 44326,
+          "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+          "sha256": "29fe3413e33551e035af119786a932bf499efb62a45adf6798c4da9e23f29cd5"
+        },
+        "inclusiveLineRange": [
+          616,
+          625
+        ],
+        "locator": "https://github.com/Treatid2/skyrim-community-shaders/blob/f4fe744560df1aa890e90f8b794c28983f156c14/src/Features/Upscaling/ColourPipelineProbe.cpp#L616",
+        "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "native-status-slots",
+      "interpretation": "Status reports namedqueued/mapped slots; missingarray marks unqueued slots, soidle10missing is not a failedcapture.",
+      "source": {
+        "excerpt": "\t\tconst auto queued = std::ranges::count_if(g_state.slots, [](const Slot& a_slot) { return a_slot.queued; });\n\t\tconst auto mapped = std::ranges::count_if(g_state.slots, [](const Slot& a_slot) { return a_slot.mapped; });\n\t\tauto stageEyeSlots = json::array();\n\t\tauto missingStageEyeSlots = json::array();\n\t\tfor (const auto& slot : Policy::DescribeStageEyeSlots(g_state.slots)) {\n\t\t\tjson identity{ { \"stage\", StageName(slot.stage) }, { \"eye\", slot.eye },\n\t\t\t\t{ \"eyeName\", slot.eye == 0 ? \"left\" : \"right\" } };\n\t\t\tif (!slot.queued)\n\t\t\t\tmissingStageEyeSlots.push_back(identity);\n\t\t\tidentity.update({ { \"queued\", slot.queued }, { \"mapped\", slot.mapped } });\n\t\t\tstageEyeSlots.push_back(std::move(identity));\n\t\t}\n\t\treturn {\n\t\t\t{ \"schemaVersion\", kSchemaVersion },\n\t\t\t{ \"state\", StateName(g_state.state) },\n\t\t\t{ \"generation\", g_state.generation },\n\t\t\t{ \"captureId\", g_state.captureId },\n\t\t\t{ \"cpuFrame\", g_state.cpuFrame ? json(g_state.cpuFrame) : json(nullptr) },",
+        "fileIdentity": {
+          "bytes": 44326,
+          "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+          "sha256": "29fe3413e33551e035af119786a932bf499efb62a45adf6798c4da9e23f29cd5"
+        },
+        "inclusiveLineRange": [
+          1091,
+          1108
+        ],
+        "locator": "https://github.com/Treatid2/skyrim-community-shaders/blob/f4fe744560df1aa890e90f8b794c28983f156c14/src/Features/Upscaling/ColourPipelineProbe.cpp#L1091",
+        "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "literal-exposure-annotation",
+      "interpretation": "Successful CPU dispatch evidence writes literal preExposure/exposureResourceBound; not dynamic descriptor readback.",
+      "source": {
+        "excerpt": "\t\t\tdevBenchSuccessfulDispatch = {};\n\t\t\tdevBenchSuccessfulEyeDispatches = {};\n\t\t},\n\t\t[this]() { return GetDevBenchFsrColorContractStatusSnapshotLocked(); });\n}\n\nFSRColorContractPolicy::ReplacementState FidelityFX::GetDevBenchFsrColorContractReplacementState() const noexcept\n{\n\tconst std::lock_guard lock(devBenchFsrColorContractMutex);\n\tconst uint64_t requested = GetDevBenchFsrColorContractState();\n\tconst uint64_t host = devBenchHostContextColorContract.load(std::memory_order_acquire);\n\tconst uint64_t runtime = devBenchRuntimeContextColorContract.load(std::memory_order_acquire);\n\tconst uint32_t currentFrame =\n\t\tglobals::state ? std::max(globals::state->frameCount, 1u) : 0u;\n\treturn FSRColorContractPolicy::GetReplacementState(\n\t\thost,\n\t\tdevBenchHostContextLastDispatchFrame.load(std::memory_order_acquire),\n\t\truntime,\n\t\tdevBenchRuntimeContextLastDispatchFrame.load(std::memory_order_acquire),\n\t\trequested,\n\t\tcurrentFrame);\n}\n\nvoid FidelityFX::PublishDevBenchFsrColorContext(bool a_runtime, uint64_t a_flags) noexcept\n{",
+        "fileIdentity": {
+          "bytes": 193471,
+          "repositoryPath": "src/Features/Upscaling/FidelityFX.cpp",
+          "sha256": "26a572ffc693203d7c313e5ed98a2acce168a254d384c314a40e6c50656c574b"
+        },
+        "inclusiveLineRange": [
+          1297,
+          1321
+        ],
+        "locator": "https://github.com/Treatid2/skyrim-community-shaders/blob/f4fe744560df1aa890e90f8b794c28983f156c14/src/Features/Upscaling/FidelityFX.cpp#L1297",
+        "repositoryPath": "src/Features/Upscaling/FidelityFX.cpp",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "literal-source-colour-changed",
+      "interpretation": "sourceColorContractChanged remains a literal bridge annotation, not transition detector.",
+      "source": {
+        "excerpt": "\t\t\t{ \"lastSuccessfulDispatch\", DispatchJson(dispatch) },\n\t\t\t{ \"lastSuccessfulEyeDispatches\", json::array({ DispatchJson(a_status.eyeDispatches[0]), DispatchJson(a_status.eyeDispatches[1]) }) },\n\t\t\t{ \"sourceColorContractChanged\", false },\n\t\t};\n\t}\n",
+        "fileIdentity": {
+          "bytes": 7480,
+          "repositoryPath": "src/Features/Upscaling/FSRColorContractDevBenchBridge.cpp",
+          "sha256": "ef65b15c285fde063ebe5df35215570c3925e96e39ff5ff70d3d0c3245ecf591"
+        },
+        "inclusiveLineRange": [
+          71,
+          76
+        ],
+        "locator": "https://github.com/Treatid2/skyrim-community-shaders/blob/f4fe744560df1aa890e90f8b794c28983f156c14/src/Features/Upscaling/FSRColorContractDevBenchBridge.cpp#L71",
+        "repositoryPath": "src/Features/Upscaling/FSRColorContractDevBenchBridge.cpp",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "exposure-record-field-order",
+      "interpretation": "Header field order maps successful-dispatch initializer false/1.0f to exposureResourceBound/preExposure. These are literal annotations, not independent dynamic readback.",
+      "source": {
+        "excerpt": "\t\tbool highDynamicRangeInput = true;\n\t\tbool autoExposure = true;\n\t\tbool exposureResourceBound = false;\n\t\tfloat preExposure = 1.0f;\n\t\tfloat configuredSharpness = 0.0f;\n\t\tfloat effectiveSharpness = 0.0f;\n\t\tbool sharpeningEnabled = false;",
+        "fileIdentity": {
+          "bytes": 23465,
+          "repositoryPath": "src/Features/Upscaling/FidelityFX.h",
+          "sha256": "9c70821e5c622b3253457d67363ff0c7a51ee6a335d42a34baaf5736451f071c"
+        },
+        "inclusiveLineRange": [
+          128,
+          134
+        ],
+        "locator": "https://github.com/Treatid2/skyrim-community-shaders/blob/f4fe744560df1aa890e90f8b794c28983f156c14/src/Features/Upscaling/FidelityFX.h#L128",
+        "repositoryPath": "src/Features/Upscaling/FidelityFX.h",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "runtime-dispatch-exposure",
+      "interpretation": "Runtime descriptor explicitly supplies empty exposure resource; this source rule is distinct from native metadata annotations and does not measure brightness.",
+      "source": {
+        "excerpt": "\t\t\tdispatchParameters.depth = guideResource(FSRSharedGuidePolicy::Guide::Depth);\n\t\t\tdispatchParameters.motionVectors = guideResource(FSRSharedGuidePolicy::Guide::MotionVectors);\n\t\t\tdispatchParameters.exposure = FfxApiResource({});\n\t\t\tdispatchParameters.reactive = guideResource(FSRSharedGuidePolicy::Guide::Reactive);\n\t\t\tdispatchParameters.transparencyAndComposition = guideResource(FSRSharedGuidePolicy::Guide::Transparency);\n\t\t\tdispatchParameters.output = ffxApiGetResourceDX12(runtimeOutputShared[contextIndex]->resource.get(), FFX_API_RESOURCE_STATE_UNORDERED_ACCESS, FFX_API_RESOURCE_USAGE_UAV);\n\t\t\tdispatchParameters.jitterOffset = { -temporal.jitterX, -temporal.jitterY };\n\t\t\tdispatchParameters.motionVectorScale = { region.motionVectorScaleX, region.motionVectorScaleY };\n\t\t\tdispatchParameters.renderSize = { region.renderWidth, region.renderHeight };",
+        "fileIdentity": {
+          "bytes": 193471,
+          "repositoryPath": "src/Features/Upscaling/FidelityFX.cpp",
+          "sha256": "26a572ffc693203d7c313e5ed98a2acce168a254d384c314a40e6c50656c574b"
+        },
+        "inclusiveLineRange": [
+          4188,
+          4196
+        ],
+        "locator": "https://github.com/Treatid2/skyrim-community-shaders/blob/f4fe744560df1aa890e90f8b794c28983f156c14/src/Features/Upscaling/FidelityFX.cpp#L4188",
+        "repositoryPath": "src/Features/Upscaling/FidelityFX.cpp",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "runtime-dispatch-preexposure",
+      "interpretation": "Runtime descriptor uses literal preExposure1.0f; not a measured engine exposure.",
+      "source": {
+        "excerpt": "\t\t\tLogFSRSharpeningDispatch(sharpening, \"runtime\");\n\t\t\tdispatchParameters.frameTimeDelta = temporal.frameTimeMilliseconds;\n\t\t\tdispatchParameters.preExposure = 1.0f;\n\t\t\tdispatchParameters.reset = upscaling.ShouldResetHistoryThisFrame() || regionIndex < resumeResetCount;\n\t\t\tdispatchParameters.cameraNear = temporal.cameraNear;\n\t\t\tdispatchParameters.cameraFar = temporal.cameraFar;\n\t\t\tdispatchParameters.cameraFovAngleVertical = temporal.verticalFov;",
+        "fileIdentity": {
+          "bytes": 193471,
+          "repositoryPath": "src/Features/Upscaling/FidelityFX.cpp",
+          "sha256": "26a572ffc693203d7c313e5ed98a2acce168a254d384c314a40e6c50656c574b"
+        },
+        "inclusiveLineRange": [
+          4201,
+          4207
+        ],
+        "locator": "https://github.com/Treatid2/skyrim-community-shaders/blob/f4fe744560df1aa890e90f8b794c28983f156c14/src/Features/Upscaling/FidelityFX.cpp#L4201",
+        "repositoryPath": "src/Features/Upscaling/FidelityFX.cpp",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "exact-owned-generated-directory",
+      "interpretation": "Pinned corrected offline adapter rule; owner reported archived requalification. No adapter/test execution here and no original failed live envelope rewritten.",
+      "source": {
+        "excerpt": "function SequenceDirectory-SE($Owner) {\n    Assert-SE ($Owner.requestId -is [string] -and $Owner.requestId -cmatch '^[A-Za-z0-9-]+$') 'native safe request-directory suffix required.'\n    Assert-SE ([IO.Path]::IsPathFullyQualified($Owner.destinationDirectory)) 'explicit absolute parent destination required.'\n    return [IO.Path]::Combine([IO.Path]::GetFullPath($Owner.destinationDirectory),('CS_sequence_'+$Owner.requestId))\n}\nfunction Envelope-SE($Payload,[Collections.IDictionary]$Arguments,[string]$Build,[string]$Session) {",
+        "fileIdentity": {
+          "bytes": 39241,
+          "sha256": "dcb831042583afa526dd4f2349bdc13b48b5c5268fab22de6d6895fdaf7b80fd"
+        },
+        "inclusiveLineRange": [
+          51,
+          56
+        ],
+        "repositoryPath": "tools/devbench-control/ScreenshotSequenceEvidence.psm1",
+        "sourceCommit": "066d292dfd89adafc454aa2426851745d576ce91"
+      }
+    },
+    {
+      "id": "exact-zero-output-preparation-exception",
+      "interpretation": "Pinned corrected offline adapter rule; owner reported archived requalification. No adapter/test execution here and no original failed live envelope rewritten.",
+      "source": {
+        "excerpt": "            $sequenceDirectory=SequenceDirectory-SE ([pscustomobject]@{requestId=$r.requestId;destinationDirectory=$DestinationDirectory})\n            $emptyPartial=Exact-SE $r.manifest.partialPath ''\n            if($emptyPartial) {\n                Assert-SE ($terminal -and $r.state -ceq 'failed' -and $pack.state -ceq 'failed' -and $null -eq $r.manifest.finalPath -and $null -eq (Field-SE $pack 'path') -and $r.artifacts.Count -eq 0 -and $r.counts.scheduled -eq 0 -and (Exact-SE (Field-SE $r.error 'code') 'destination_preparation_failed') -and (Exact-SE (Field-SE $r.error 'phase') 'preparation')) 'empty uncreated partial path only qualifies exact zero-output preparation failure.'\n            }\n            foreach ($n in @('partialPath','finalPath')) { if ($null -ne $r.manifest.$n -and -not ($n -ceq 'partialPath' -and $emptyPartial)) {\n                $path=Path-SE $r.manifest.$n $sequenceDirectory\n                $file=if($n -ceq 'partialPath'){'sequence.json.partial'}else{'sequence.json'}\n                Assert-SE ([string]::Equals($path,[IO.Path]::Combine($sequenceDirectory,$file),[StringComparison]::OrdinalIgnoreCase)) 'manifest path must be the exact owned generated sequence file.'\n            } }",
+        "fileIdentity": {
+          "bytes": 39241,
+          "sha256": "dcb831042583afa526dd4f2349bdc13b48b5c5268fab22de6d6895fdaf7b80fd"
+        },
+        "inclusiveLineRange": [
+          185,
+          194
+        ],
+        "repositoryPath": "tools/devbench-control/ScreenshotSequenceEvidence.psm1",
+        "sourceCommit": "066d292dfd89adafc454aa2426851745d576ce91"
+      }
+    },
+    {
+      "id": "manifest-parent-versus-child-directory",
+      "interpretation": "Pinned corrected offline adapter rule; owner reported archived requalification. No adapter/test execution here and no original failed live envelope rewritten.",
+      "source": {
+        "excerpt": "        # Native manifest effective is sequence.capture with requested parent\n        # directory; the lease-generated child directory belongs to artifacts.\n        Capture-SE $m.effective $owner.destinationDirectory\n        if($m.effective.destination.PSObject.Properties['resolvedDirectory']) {\n            Assert-SE ((Text-SE $m.effective.destination.resolvedDirectory) -and [string]::Equals([IO.Path]::GetFullPath($m.effective.destination.resolvedDirectory),[IO.Path]::GetFullPath($owner.destinationDirectory),[StringComparison]::OrdinalIgnoreCase)) 'manifest resolved parent destination changed.'\n        }\n        $directory=SequenceDirectory-SE $owner\n        Assert-SE ([string]::Equals([IO.Path]::GetDirectoryName([IO.Path]::GetFullPath($ManifestPath)),$directory,[StringComparison]::OrdinalIgnoreCase)) 'manifest must be in its exact generated request directory.'\n        Assert-SE ($m.children -is [array] -and $m.children.Count -le 3 -and $FrameEvidence.Count -eq $m.children.Count -and $m.actual.children -eq $m.children.Count -and $m.actual.fallbacksPresent -is [bool] -and -not $m.actual.fallbacksPresent) 'exact bounded non-fallback child inventory required.'",
+        "fileIdentity": {
+          "bytes": 39241,
+          "sha256": "dcb831042583afa526dd4f2349bdc13b48b5c5268fab22de6d6895fdaf7b80fd"
+        },
+        "inclusiveLineRange": [
+          303,
+          311
+        ],
+        "repositoryPath": "tools/devbench-control/ScreenshotSequenceEvidence.psm1",
+        "sourceCommit": "066d292dfd89adafc454aa2426851745d576ce91"
+      }
+    },
+    {
+      "id": "adapter-page-path-mismatch",
+      "interpretation": "Live-used controller UInt-checks page.dispatch.path then compares3; exactnativepage has source-defined string. No guard relaxed or controller executed here.",
+      "source": {
+        "excerpt": "                    foreach($value in @($d.contextIndex,$d.path,$slot.readback.sampling.gridSize,$slot.readback.sampling.sampleCount,$page.samplingContract.gridSize)){if(-not (UInt $value)){throw 'Page numeric fields cannot be strings/Booleans/fractions.'}}\n                    foreach($value in @($d.requestedHighDynamicRangeInput,$d.effectiveHighDynamicRangeInput,$d.requestedAutoExposure,$d.effectiveAutoExposure)){if($value -isnot [bool]){throw 'Page dynamic flags require actual Booleans.'}}\n                    if($page.metadata -isnot [pscustomobject] -or $page.metadata.calibratedScene -isnot [string] -or $page.metadata.calibratedScene -cne $Plan.metadata.calibratedScene){throw 'Owner calibration metadata differs from the arm request.'}\n                    if($slot.stage -cne $stage -or $slot.eye -cne @('left','right')[$eye] -or $slot.eyeMask -ne (1 -shl $eye) -or $slot.queued -isnot [bool] -or -not $slot.queued -or $slot.mapped -isnot [bool] -or -not $slot.mapped -or $slot.frame.cpuFrame -ne $p.cpuFrame){throw 'Capture page is incomplete or wrong stage/eye.'}\n                    if($page.immediateContext.kind -cne 'immediate' -or $page.immediateContext.pointer -isnot [string] -or $page.immediateContext.pointer -notmatch '^0x[0-9a-fA-F]+$' -or $page.immediateContext.pointer -match '^0x0+$'){throw 'Capture immediate context is unproven.'}\n                    if($null -eq $context){$context=$page.immediateContext.pointer}else{if($context -cne $page.immediateContext.pointer){throw 'Capture pages changed immediate context.'}}\n                    if($d.attribution -cne 'observed-successful-dispatch' -or $d.colourContractRevision -ne $revision -or $d.contextGeneration -ne $s.runtimeContext.generation -or $d.contextIndex -ne $eye -or $d.path -ne 3 -or $d.frame -ne $p.cpuFrame -or $d.requestedHighDynamicRangeInput -cne $Plan.highDynamicRangeInput -or $d.effectiveHighDynamicRangeInput -cne $Plan.highDynamicRangeInput -or $d.requestedAutoExposure -cne $auto -or $d.effectiveAutoExposure -cne $auto -or $d.dispatchSerial -le 0){throw 'Page lacks matching actual successful eye dispatch.'}",
+        "fileIdentity": {
+          "bytes": 24091,
+          "sha256": "8ca7c3474a7be2ae02317cb7f6b78804297d86a320e9c926ea23854a614e1d80"
+        },
+        "inclusiveLineRange": [
+          143,
+          149
+        ],
+        "repositoryPath": "tools/devbench-control/ColourMeasurementWindow.psm1",
+        "sourceCommit": "89573ef14099a5d3dd03ea4389c6bcee9f405ae1"
+      }
+    }
+  ],
+  "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14",
+  "sourceExecuted": false,
+  "sourceFiles": {
+    "src/Features/Upscaling/ColourPipelineProbe.cpp": {
+      "bytes": 44326,
+      "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+      "sha256": "29fe3413e33551e035af119786a932bf499efb62a45adf6798c4da9e23f29cd5"
+    },
+    "src/Features/Upscaling/ColourPipelineProbe.h": {
+      "bytes": 3218,
+      "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.h",
+      "sha256": "dcefe0d9bc2e447bb79ace8eff5655b0c613a56ac889e832ab65207964ee661f"
+    },
+    "src/Features/Upscaling/FSRColorContractDevBenchBridge.cpp": {
+      "bytes": 7480,
+      "repositoryPath": "src/Features/Upscaling/FSRColorContractDevBenchBridge.cpp",
+      "sha256": "ef65b15c285fde063ebe5df35215570c3925e96e39ff5ff70d3d0c3245ecf591"
+    },
+    "src/Features/Upscaling/FidelityFX.cpp": {
+      "bytes": 193471,
+      "repositoryPath": "src/Features/Upscaling/FidelityFX.cpp",
+      "sha256": "26a572ffc693203d7c313e5ed98a2acce168a254d384c314a40e6c50656c574b"
+    },
+    "src/Features/Upscaling/FidelityFX.h": {
+      "bytes": 23465,
+      "repositoryPath": "src/Features/Upscaling/FidelityFX.h",
+      "sha256": "9c70821e5c622b3253457d67363ff0c7a51ee6a335d42a34baaf5736451f071c"
+    }
+  }
+}
