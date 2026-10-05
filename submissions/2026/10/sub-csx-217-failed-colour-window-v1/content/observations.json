@@ -1,0 +1,1815 @@
+{
+  "calendar": {
+    "binding": {
+      "cellFormId": 91560,
+      "globalFormIds": [
+        53,
+        54,
+        55,
+        56,
+        57,
+        58
+      ],
+      "loadGeneration": 3
+    },
+    "held": {
+      "action": "hold",
+      "available": true,
+      "binding": {
+        "cellFormId": 91560,
+        "globalFormIds": [
+          53,
+          54,
+          55,
+          56,
+          57,
+          58
+        ],
+        "loadGeneration": 3
+      },
+      "cleanupPending": false,
+      "disconnectRecovery": "expiry-bounded; no disconnect callback",
+      "expiryDue": false,
+      "frame": 18907,
+      "globalOrder": [
+        "year",
+        "month",
+        "day",
+        "gameHour",
+        "daysPassed",
+        "calendarRate"
+      ],
+      "holdValid": true,
+      "lastTransition": {
+        "ok": true,
+        "restored": false,
+        "status": "held"
+      },
+      "lease": {
+        "applied": true,
+        "binding": {
+          "cellFormId": 91560,
+          "globalFormIds": [
+            53,
+            54,
+            55,
+            56,
+            57,
+            58
+          ],
+          "loadGeneration": 3
+        },
+        "captured": {
+          "calendarRate": 20.0,
+          "day": 17.0,
+          "daysPassed": 0.34604403376579285,
+          "engineMultiplier": 1.0,
+          "gameHour": 8.30505657196045,
+          "month": 7.0,
+          "year": 201.0
+        },
+        "cleanupAttempted": false,
+        "deadlineMonotonicMs": 2274871994
+      },
+      "leaseActive": true,
+      "observedMonotonicMs": 2274691994,
+      "ok": true,
+      "outstanding": true,
+      "plugin": "devbench",
+      "readbackFresh": true,
+      "restored": false,
+      "schemaVersion": 1,
+      "serviceStopping": false,
+      "status": "held",
+      "values": {
+        "calendarRate": 0.0,
+        "day": 17.0,
+        "daysPassed": 0.34604403376579285,
+        "engineMultiplier": 1.0,
+        "gameHour": 8.30505657196045,
+        "month": 7.0,
+        "year": 201.0
+      },
+      "version": "1.22.0",
+      "worldLoaded": true
+    },
+    "heldReadOrdinalsZeroBased": [
+      1,
+      2,
+      4,
+      5,
+      7,
+      8,
+      10,
+      11,
+      13,
+      14,
+      16,
+      17,
+      19,
+      20,
+      22
+    ],
+    "postStatus": {
+      "action": "status",
+      "available": true,
+      "binding": {
+        "cellFormId": 91560,
+        "globalFormIds": [
+          53,
+          54,
+          55,
+          56,
+          57,
+          58
+        ],
+        "loadGeneration": 3
+      },
+      "cleanupPending": false,
+      "disconnectRecovery": "expiry-bounded; no disconnect callback",
+      "expiryDue": false,
+      "frame": 18970,
+      "globalOrder": [
+        "year",
+        "month",
+        "day",
+        "gameHour",
+        "daysPassed",
+        "calendarRate"
+      ],
+      "holdValid": false,
+      "lastTransition": {
+        "ok": true,
+        "restored": true,
+        "status": "released"
+      },
+      "lease": {
+        "applied": true,
+        "binding": {
+          "cellFormId": 91560,
+          "globalFormIds": [
+            53,
+            54,
+            55,
+            56,
+            57,
+            58
+          ],
+          "loadGeneration": 3
+        },
+        "captured": {
+          "calendarRate": 20.0,
+          "day": 17.0,
+          "daysPassed": 0.34604403376579285,
+          "engineMultiplier": 1.0,
+          "gameHour": 8.30505657196045,
+          "month": 7.0,
+          "year": 201.0
+        },
+        "cleanupAttempted": true,
+        "deadlineMonotonicMs": 2274871994
+      },
+      "leaseActive": false,
+      "observedMonotonicMs": 2274693050,
+      "ok": true,
+      "outstanding": false,
+      "plugin": "devbench",
+      "readbackFresh": true,
+      "restored": false,
+      "schemaVersion": 1,
+      "serviceStopping": false,
+      "status": "observed",
+      "values": {
+        "calendarRate": 20.0,
+        "day": 17.0,
+        "daysPassed": 0.3460480570793152,
+        "engineMultiplier": 1.0,
+        "gameHour": 8.305152893066406,
+        "month": 7.0,
+        "year": 201.0
+      },
+      "version": "1.22.0",
+      "worldLoaded": true
+    },
+    "release": {
+      "action": "release",
+      "available": true,
+      "binding": {
+        "cellFormId": 91560,
+        "globalFormIds": [
+          53,
+          54,
+          55,
+          56,
+          57,
+          58
+        ],
+        "loadGeneration": 3
+      },
+      "cleanupPending": false,
+      "disconnectRecovery": "expiry-bounded; no disconnect callback",
+      "expiryDue": false,
+      "frame": 18969,
+      "globalOrder": [
+        "year",
+        "month",
+        "day",
+        "gameHour",
+        "daysPassed",
+        "calendarRate"
+      ],
+      "holdValid": false,
+      "lastTransition": {
+        "ok": true,
+        "restored": true,
+        "status": "released"
+      },
+      "lease": {
+        "applied": true,
+        "binding": {
+          "cellFormId": 91560,
+          "globalFormIds": [
+            53,
+            54,
+            55,
+            56,
+            57,
+            58
+          ],
+          "loadGeneration": 3
+        },
+        "captured": {
+          "calendarRate": 20.0,
+          "day": 17.0,
+          "daysPassed": 0.34604403376579285,
+          "engineMultiplier": 1.0,
+          "gameHour": 8.30505657196045,
+          "month": 7.0,
+          "year": 201.0
+        },
+        "cleanupAttempted": true,
+        "deadlineMonotonicMs": 2274871994
+      },
+      "leaseActive": false,
+      "observedMonotonicMs": 2274693033,
+      "ok": true,
+      "outstanding": false,
+      "plugin": "devbench",
+      "readbackFresh": true,
+      "restored": true,
+      "schemaVersion": 1,
+      "serviceStopping": false,
+      "status": "released",
+      "values": {
+        "calendarRate": 20.0,
+        "day": 17.0,
+        "daysPassed": 0.34604403376579285,
+        "engineMultiplier": 1.0,
+        "gameHour": 8.30505657196045,
+        "month": 7.0,
+        "year": 201.0
+      },
+      "version": "1.22.0",
+      "worldLoaded": true
+    }
+  },
+  "calibration": {
+    "residuals": {
+      "hmd": 5.245208734017126e-08,
+      "right": 0.0
+    },
+    "standingFromRaw": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.029999971389770508,
+      0.0,
+      0.0,
+      1.0,
+      5.960464455334602e-09
+    ]
+  },
+  "compilerSnapshots": [
+    {
+      "admissible": true,
+      "call": "colour-before",
+      "health": {
+        "admissible": true,
+        "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+        "compilation": {
+          "active": false,
+          "activeShaderCapture": false,
+          "async": true,
+          "backgroundThreadCount": 8,
+          "completedTasks": 10,
+          "currentFailedShaders": 0,
+          "diskCacheHits": 8,
+          "failedTasks": 0,
+          "foregroundThreadCount": 12,
+          "heavyTasksInFlight": 0,
+          "memoryCacheHits": 0,
+          "recentFailures": [],
+          "skipUnchanged": true,
+          "slowTasks": 0,
+          "sourceCompiles": 2,
+          "statisticsText": "10/10 (successful/total)\tfailed: 0\tdeduplicated: 0\tdisk cache: 8\tsource compiles: 2\nElapsed/Estimated Time: 00:00:00/00:00:00",
+          "totalTasks": 10,
+          "verySlowTasks": 0
+        },
+        "producer": {
+          "artifactSha256": "",
+          "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+          "buildIdShort": "ef49a37c28a0",
+          "component": "CommunityShaders",
+          "configuration": "Release",
+          "manifestError": "runtime artifact verification delegated to deployment harness",
+          "manifestVerified": false,
+          "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+          "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+          "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+          "sourceDescribe": "217992d",
+          "sourceDirty": false
+        },
+        "readQualified": true,
+        "reasons": [],
+        "schema": "auto-tools.shader-compiler-health.1",
+        "scope": "compiler snapshot only; not package/include/provider closure, visual correctness or capture completion",
+        "state": "COMPILER_HEALTHY_AT_SNAPSHOT",
+        "stateRevision": 1,
+        "timestampUtc": "2026-10-05T18:11:49.327Z"
+      },
+      "phase": "before"
+    },
+    {
+      "admissible": true,
+      "call": "colour-before",
+      "health": {
+        "admissible": true,
+        "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+        "compilation": {
+          "active": false,
+          "activeShaderCapture": false,
+          "async": true,
+          "backgroundThreadCount": 8,
+          "completedTasks": 10,
+          "currentFailedShaders": 0,
+          "diskCacheHits": 8,
+          "failedTasks": 0,
+          "foregroundThreadCount": 12,
+          "heavyTasksInFlight": 0,
+          "memoryCacheHits": 0,
+          "recentFailures": [],
+          "skipUnchanged": true,
+          "slowTasks": 0,
+          "sourceCompiles": 2,
+          "statisticsText": "10/10 (successful/total)\tfailed: 0\tdeduplicated: 0\tdisk cache: 8\tsource compiles: 2\nElapsed/Estimated Time: 00:00:00/00:00:00",
+          "totalTasks": 10,
+          "verySlowTasks": 0
+        },
+        "producer": {
+          "artifactSha256": "",
+          "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+          "buildIdShort": "ef49a37c28a0",
+          "component": "CommunityShaders",
+          "configuration": "Release",
+          "manifestError": "runtime artifact verification delegated to deployment harness",
+          "manifestVerified": false,
+          "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+          "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+          "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+          "sourceDescribe": "217992d",
+          "sourceDirty": false
+        },
+        "readQualified": true,
+        "reasons": [],
+        "schema": "auto-tools.shader-compiler-health.1",
+        "scope": "compiler snapshot only; not package/include/provider closure, visual correctness or capture completion",
+        "state": "COMPILER_HEALTHY_AT_SNAPSHOT",
+        "stateRevision": 1,
+        "timestampUtc": "2026-10-05T18:11:49.411Z"
+      },
+      "phase": "after"
+    },
+    {
+      "admissible": true,
+      "call": "colour-after",
+      "health": {
+        "admissible": true,
+        "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+        "compilation": {
+          "active": false,
+          "activeShaderCapture": false,
+          "async": true,
+          "backgroundThreadCount": 8,
+          "completedTasks": 10,
+          "currentFailedShaders": 0,
+          "diskCacheHits": 8,
+          "failedTasks": 0,
+          "foregroundThreadCount": 12,
+          "heavyTasksInFlight": 0,
+          "memoryCacheHits": 0,
+          "recentFailures": [],
+          "skipUnchanged": true,
+          "slowTasks": 0,
+          "sourceCompiles": 2,
+          "statisticsText": "10/10 (successful/total)\tfailed: 0\tdeduplicated: 0\tdisk cache: 8\tsource compiles: 2\nElapsed/Estimated Time: 00:00:00/00:00:00",
+          "totalTasks": 10,
+          "verySlowTasks": 0
+        },
+        "producer": {
+          "artifactSha256": "",
+          "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+          "buildIdShort": "ef49a37c28a0",
+          "component": "CommunityShaders",
+          "configuration": "Release",
+          "manifestError": "runtime artifact verification delegated to deployment harness",
+          "manifestVerified": false,
+          "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+          "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+          "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+          "sourceDescribe": "217992d",
+          "sourceDirty": false
+        },
+        "readQualified": true,
+        "reasons": [],
+        "schema": "auto-tools.shader-compiler-health.1",
+        "scope": "compiler snapshot only; not package/include/provider closure, visual correctness or capture completion",
+        "state": "COMPILER_HEALTHY_AT_SNAPSHOT",
+        "stateRevision": 1,
+        "timestampUtc": "2026-10-05T18:17:16.161Z"
+      },
+      "phase": "before"
+    },
+    {
+      "admissible": true,
+      "call": "colour-after",
+      "health": {
+        "admissible": true,
+        "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+        "compilation": {
+          "active": false,
+          "activeShaderCapture": false,
+          "async": true,
+          "backgroundThreadCount": 8,
+          "completedTasks": 10,
+          "currentFailedShaders": 0,
+          "diskCacheHits": 8,
+          "failedTasks": 0,
+          "foregroundThreadCount": 12,
+          "heavyTasksInFlight": 0,
+          "memoryCacheHits": 0,
+          "recentFailures": [],
+          "skipUnchanged": true,
+          "slowTasks": 0,
+          "sourceCompiles": 2,
+          "statisticsText": "10/10 (successful/total)\tfailed: 0\tdeduplicated: 0\tdisk cache: 8\tsource compiles: 2\nElapsed/Estimated Time: 00:00:00/00:00:00",
+          "totalTasks": 10,
+          "verySlowTasks": 0
+        },
+        "producer": {
+          "artifactSha256": "",
+          "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+          "buildIdShort": "ef49a37c28a0",
+          "component": "CommunityShaders",
+          "configuration": "Release",
+          "manifestError": "runtime artifact verification delegated to deployment harness",
+          "manifestVerified": false,
+          "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+          "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+          "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+          "sourceDescribe": "217992d",
+          "sourceDirty": false
+        },
+        "readQualified": true,
+        "reasons": [],
+        "schema": "auto-tools.shader-compiler-health.1",
+        "scope": "compiler snapshot only; not package/include/provider closure, visual correctness or capture completion",
+        "state": "COMPILER_HEALTHY_AT_SNAPSHOT",
+        "stateRevision": 1,
+        "timestampUtc": "2026-10-05T18:17:16.359Z"
+      },
+      "phase": "after"
+    },
+    {
+      "admissible": true,
+      "call": "probe-before",
+      "health": {
+        "admissible": true,
+        "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+        "compilation": {
+          "active": false,
+          "activeShaderCapture": false,
+          "async": true,
+          "backgroundThreadCount": 8,
+          "completedTasks": 10,
+          "currentFailedShaders": 0,
+          "diskCacheHits": 8,
+          "failedTasks": 0,
+          "foregroundThreadCount": 12,
+          "heavyTasksInFlight": 0,
+          "memoryCacheHits": 0,
+          "recentFailures": [],
+          "skipUnchanged": true,
+          "slowTasks": 0,
+          "sourceCompiles": 2,
+          "statisticsText": "10/10 (successful/total)\tfailed: 0\tdeduplicated: 0\tdisk cache: 8\tsource compiles: 2\nElapsed/Estimated Time: 00:00:00/00:00:00",
+          "totalTasks": 10,
+          "verySlowTasks": 0
+        },
+        "producer": {
+          "artifactSha256": "",
+          "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+          "buildIdShort": "ef49a37c28a0",
+          "component": "CommunityShaders",
+          "configuration": "Release",
+          "manifestError": "runtime artifact verification delegated to deployment harness",
+          "manifestVerified": false,
+          "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+          "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+          "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+          "sourceDescribe": "217992d",
+          "sourceDirty": false
+        },
+        "readQualified": true,
+        "reasons": [],
+        "schema": "auto-tools.shader-compiler-health.1",
+        "scope": "compiler snapshot only; not package/include/provider closure, visual correctness or capture completion",
+        "state": "COMPILER_HEALTHY_AT_SNAPSHOT",
+        "stateRevision": 1,
+        "timestampUtc": "2026-10-05T18:11:49.712Z"
+      },
+      "phase": "before"
+    },
+    {
+      "admissible": true,
+      "call": "probe-before",
+      "health": {
+        "admissible": true,
+        "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+        "compilation": {
+          "active": false,
+          "activeShaderCapture": false,
+          "async": true,
+          "backgroundThreadCount": 8,
+          "completedTasks": 10,
+          "currentFailedShaders": 0,
+          "diskCacheHits": 8,
+          "failedTasks": 0,
+          "foregroundThreadCount": 12,
+          "heavyTasksInFlight": 0,
+          "memoryCacheHits": 0,
+          "recentFailures": [],
+          "skipUnchanged": true,
+          "slowTasks": 0,
+          "sourceCompiles": 2,
+          "statisticsText": "10/10 (successful/total)\tfailed: 0\tdeduplicated: 0\tdisk cache: 8\tsource compiles: 2\nElapsed/Estimated Time: 00:00:00/00:00:00",
+          "totalTasks": 10,
+          "verySlowTasks": 0
+        },
+        "producer": {
+          "artifactSha256": "",
+          "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+          "buildIdShort": "ef49a37c28a0",
+          "component": "CommunityShaders",
+          "configuration": "Release",
+          "manifestError": "runtime artifact verification delegated to deployment harness",
+          "manifestVerified": false,
+          "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+          "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+          "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+          "sourceDescribe": "217992d",
+          "sourceDirty": false
+        },
+        "readQualified": true,
+        "reasons": [],
+        "schema": "auto-tools.shader-compiler-health.1",
+        "scope": "compiler snapshot only; not package/include/provider closure, visual correctness or capture completion",
+        "state": "COMPILER_HEALTHY_AT_SNAPSHOT",
+        "stateRevision": 1,
+        "timestampUtc": "2026-10-05T18:11:49.760Z"
+      },
+      "phase": "after"
+    },
+    {
+      "admissible": true,
+      "call": "probe-after",
+      "health": {
+        "admissible": true,
+        "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+        "compilation": {
+          "active": false,
+          "activeShaderCapture": false,
+          "async": true,
+          "backgroundThreadCount": 8,
+          "completedTasks": 10,
+          "currentFailedShaders": 0,
+          "diskCacheHits": 8,
+          "failedTasks": 0,
+          "foregroundThreadCount": 12,
+          "heavyTasksInFlight": 0,
+          "memoryCacheHits": 0,
+          "recentFailures": [],
+          "skipUnchanged": true,
+          "slowTasks": 0,
+          "sourceCompiles": 2,
+          "statisticsText": "10/10 (successful/total)\tfailed: 0\tdeduplicated: 0\tdisk cache: 8\tsource compiles: 2\nElapsed/Estimated Time: 00:00:00/00:00:00",
+          "totalTasks": 10,
+          "verySlowTasks": 0
+        },
+        "producer": {
+          "artifactSha256": "",
+          "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+          "buildIdShort": "ef49a37c28a0",
+          "component": "CommunityShaders",
+          "configuration": "Release",
+          "manifestError": "runtime artifact verification delegated to deployment harness",
+          "manifestVerified": false,
+          "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+          "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+          "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+          "sourceDescribe": "217992d",
+          "sourceDirty": false
+        },
+        "readQualified": true,
+        "reasons": [],
+        "schema": "auto-tools.shader-compiler-health.1",
+        "scope": "compiler snapshot only; not package/include/provider closure, visual correctness or capture completion",
+        "state": "COMPILER_HEALTHY_AT_SNAPSHOT",
+        "stateRevision": 1,
+        "timestampUtc": "2026-10-05T18:17:17.023Z"
+      },
+      "phase": "before"
+    },
+    {
+      "admissible": true,
+      "call": "probe-after",
+      "health": {
+        "admissible": true,
+        "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+        "compilation": {
+          "active": false,
+          "activeShaderCapture": false,
+          "async": true,
+          "backgroundThreadCount": 8,
+          "completedTasks": 10,
+          "currentFailedShaders": 0,
+          "diskCacheHits": 8,
+          "failedTasks": 0,
+          "foregroundThreadCount": 12,
+          "heavyTasksInFlight": 0,
+          "memoryCacheHits": 0,
+          "recentFailures": [],
+          "skipUnchanged": true,
+          "slowTasks": 0,
+          "sourceCompiles": 2,
+          "statisticsText": "10/10 (successful/total)\tfailed: 0\tdeduplicated: 0\tdisk cache: 8\tsource compiles: 2\nElapsed/Estimated Time: 00:00:00/00:00:00",
+          "totalTasks": 10,
+          "verySlowTasks": 0
+        },
+        "producer": {
+          "artifactSha256": "",
+          "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+          "buildIdShort": "ef49a37c28a0",
+          "component": "CommunityShaders",
+          "configuration": "Release",
+          "manifestError": "runtime artifact verification delegated to deployment harness",
+          "manifestVerified": false,
+          "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+          "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+          "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+          "sourceDescribe": "217992d",
+          "sourceDirty": false
+        },
+        "readQualified": true,
+        "reasons": [],
+        "schema": "auto-tools.shader-compiler-health.1",
+        "scope": "compiler snapshot only; not package/include/provider closure, visual correctness or capture completion",
+        "state": "COMPILER_HEALTHY_AT_SNAPSHOT",
+        "stateRevision": 1,
+        "timestampUtc": "2026-10-05T18:17:17.076Z"
+      },
+      "phase": "after"
+    },
+    {
+      "admissible": true,
+      "call": "camera-before",
+      "health": {
+        "admissible": true,
+        "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+        "compilation": {
+          "active": false,
+          "activeShaderCapture": false,
+          "async": true,
+          "backgroundThreadCount": 8,
+          "completedTasks": 10,
+          "currentFailedShaders": 0,
+          "diskCacheHits": 8,
+          "failedTasks": 0,
+          "foregroundThreadCount": 12,
+          "heavyTasksInFlight": 0,
+          "memoryCacheHits": 0,
+          "recentFailures": [],
+          "skipUnchanged": true,
+          "slowTasks": 0,
+          "sourceCompiles": 2,
+          "statisticsText": "10/10 (successful/total)\tfailed: 0\tdeduplicated: 0\tdisk cache: 8\tsource compiles: 2\nElapsed/Estimated Time: 00:00:00/00:00:00",
+          "totalTasks": 10,
+          "verySlowTasks": 0
+        },
+        "producer": {
+          "artifactSha256": "",
+          "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+          "buildIdShort": "ef49a37c28a0",
+          "component": "CommunityShaders",
+          "configuration": "Release",
+          "manifestError": "runtime artifact verification delegated to deployment harness",
+          "manifestVerified": false,
+          "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+          "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+          "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+          "sourceDescribe": "217992d",
+          "sourceDirty": false
+        },
+        "readQualified": true,
+        "reasons": [],
+        "schema": "auto-tools.shader-compiler-health.1",
+        "scope": "compiler snapshot only; not package/include/provider closure, visual correctness or capture completion",
+        "state": "COMPILER_HEALTHY_AT_SNAPSHOT",
+        "stateRevision": 1,
+        "timestampUtc": "2026-10-05T18:11:47.342Z"
+      },
+      "phase": "before"
+    },
+    {
+      "admissible": true,
+      "call": "camera-before",
+      "health": {
+        "admissible": true,
+        "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+        "compilation": {
+          "active": false,
+          "activeShaderCapture": false,
+          "async": true,
+          "backgroundThreadCount": 8,
+          "completedTasks": 10,
+          "currentFailedShaders": 0,
+          "diskCacheHits": 8,
+          "failedTasks": 0,
+          "foregroundThreadCount": 12,
+          "heavyTasksInFlight": 0,
+          "memoryCacheHits": 0,
+          "recentFailures": [],
+          "skipUnchanged": true,
+          "slowTasks": 0,
+          "sourceCompiles": 2,
+          "statisticsText": "10/10 (successful/total)\tfailed: 0\tdeduplicated: 0\tdisk cache: 8\tsource compiles: 2\nElapsed/Estimated Time: 00:00:00/00:00:00",
+          "totalTasks": 10,
+          "verySlowTasks": 0
+        },
+        "producer": {
+          "artifactSha256": "",
+          "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+          "buildIdShort": "ef49a37c28a0",
+          "component": "CommunityShaders",
+          "configuration": "Release",
+          "manifestError": "runtime artifact verification delegated to deployment harness",
+          "manifestVerified": false,
+          "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+          "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+          "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+          "sourceDescribe": "217992d",
+          "sourceDirty": false
+        },
+        "readQualified": true,
+        "reasons": [],
+        "schema": "auto-tools.shader-compiler-health.1",
+        "scope": "compiler snapshot only; not package/include/provider closure, visual correctness or capture completion",
+        "state": "COMPILER_HEALTHY_AT_SNAPSHOT",
+        "stateRevision": 1,
+        "timestampUtc": "2026-10-05T18:11:47.412Z"
+      },
+      "phase": "after"
+    },
+    {
+      "admissible": true,
+      "call": "camera-after",
+      "health": {
+        "admissible": true,
+        "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+        "compilation": {
+          "active": false,
+          "activeShaderCapture": false,
+          "async": true,
+          "backgroundThreadCount": 8,
+          "completedTasks": 10,
+          "currentFailedShaders": 0,
+          "diskCacheHits": 8,
+          "failedTasks": 0,
+          "foregroundThreadCount": 12,
+          "heavyTasksInFlight": 0,
+          "memoryCacheHits": 0,
+          "recentFailures": [],
+          "skipUnchanged": true,
+          "slowTasks": 0,
+          "sourceCompiles": 2,
+          "statisticsText": "10/10 (successful/total)\tfailed: 0\tdeduplicated: 0\tdisk cache: 8\tsource compiles: 2\nElapsed/Estimated Time: 00:00:00/00:00:00",
+          "totalTasks": 10,
+          "verySlowTasks": 0
+        },
+        "producer": {
+          "artifactSha256": "",
+          "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+          "buildIdShort": "ef49a37c28a0",
+          "component": "CommunityShaders",
+          "configuration": "Release",
+          "manifestError": "runtime artifact verification delegated to deployment harness",
+          "manifestVerified": false,
+          "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+          "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+          "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+          "sourceDescribe": "217992d",
+          "sourceDirty": false
+        },
+        "readQualified": true,
+        "reasons": [],
+        "schema": "auto-tools.shader-compiler-health.1",
+        "scope": "compiler snapshot only; not package/include/provider closure, visual correctness or capture completion",
+        "state": "COMPILER_HEALTHY_AT_SNAPSHOT",
+        "stateRevision": 1,
+        "timestampUtc": "2026-10-05T18:17:17.749Z"
+      },
+      "phase": "before"
+    },
+    {
+      "admissible": true,
+      "call": "camera-after",
+      "health": {
+        "admissible": true,
+        "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+        "compilation": {
+          "active": false,
+          "activeShaderCapture": false,
+          "async": true,
+          "backgroundThreadCount": 8,
+          "completedTasks": 10,
+          "currentFailedShaders": 0,
+          "diskCacheHits": 8,
+          "failedTasks": 0,
+          "foregroundThreadCount": 12,
+          "heavyTasksInFlight": 0,
+          "memoryCacheHits": 0,
+          "recentFailures": [],
+          "skipUnchanged": true,
+          "slowTasks": 0,
+          "sourceCompiles": 2,
+          "statisticsText": "10/10 (successful/total)\tfailed: 0\tdeduplicated: 0\tdisk cache: 8\tsource compiles: 2\nElapsed/Estimated Time: 00:00:00/00:00:00",
+          "totalTasks": 10,
+          "verySlowTasks": 0
+        },
+        "producer": {
+          "artifactSha256": "",
+          "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+          "buildIdShort": "ef49a37c28a0",
+          "component": "CommunityShaders",
+          "configuration": "Release",
+          "manifestError": "runtime artifact verification delegated to deployment harness",
+          "manifestVerified": false,
+          "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+          "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+          "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+          "sourceDescribe": "217992d",
+          "sourceDirty": false
+        },
+        "readQualified": true,
+        "reasons": [],
+        "schema": "auto-tools.shader-compiler-health.1",
+        "scope": "compiler snapshot only; not package/include/provider closure, visual correctness or capture completion",
+        "state": "COMPILER_HEALTHY_AT_SNAPSHOT",
+        "stateRevision": 1,
+        "timestampUtc": "2026-10-05T18:17:17.799Z"
+      },
+      "phase": "after"
+    },
+    {
+      "admissible": true,
+      "call": "stereo",
+      "health": {
+        "admissible": true,
+        "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+        "compilation": {
+          "active": false,
+          "activeShaderCapture": false,
+          "async": true,
+          "backgroundThreadCount": 8,
+          "completedTasks": 10,
+          "currentFailedShaders": 0,
+          "diskCacheHits": 8,
+          "failedTasks": 0,
+          "foregroundThreadCount": 12,
+          "heavyTasksInFlight": 0,
+          "memoryCacheHits": 0,
+          "recentFailures": [],
+          "skipUnchanged": true,
+          "slowTasks": 0,
+          "sourceCompiles": 2,
+          "statisticsText": "10/10 (successful/total)\tfailed: 0\tdeduplicated: 0\tdisk cache: 8\tsource compiles: 2\nElapsed/Estimated Time: 00:00:00/00:00:00",
+          "totalTasks": 10,
+          "verySlowTasks": 0
+        },
+        "producer": {
+          "artifactSha256": "",
+          "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+          "buildIdShort": "ef49a37c28a0",
+          "component": "CommunityShaders",
+          "configuration": "Release",
+          "manifestError": "runtime artifact verification delegated to deployment harness",
+          "manifestVerified": false,
+          "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+          "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+          "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+          "sourceDescribe": "217992d",
+          "sourceDirty": false
+        },
+        "readQualified": true,
+        "reasons": [],
+        "schema": "auto-tools.shader-compiler-health.1",
+        "scope": "compiler snapshot only; not package/include/provider closure, visual correctness or capture completion",
+        "state": "COMPILER_HEALTHY_AT_SNAPSHOT",
+        "stateRevision": 1,
+        "timestampUtc": "2026-10-05T18:12:19.642Z"
+      },
+      "phase": "before"
+    },
+    {
+      "admissible": true,
+      "call": "stereo",
+      "health": {
+        "admissible": true,
+        "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+        "compilation": {
+          "active": false,
+          "activeShaderCapture": false,
+          "async": true,
+          "backgroundThreadCount": 8,
+          "completedTasks": 10,
+          "currentFailedShaders": 0,
+          "diskCacheHits": 8,
+          "failedTasks": 0,
+          "foregroundThreadCount": 12,
+          "heavyTasksInFlight": 0,
+          "memoryCacheHits": 0,
+          "recentFailures": [],
+          "skipUnchanged": true,
+          "slowTasks": 0,
+          "sourceCompiles": 2,
+          "statisticsText": "10/10 (successful/total)\tfailed: 0\tdeduplicated: 0\tdisk cache: 8\tsource compiles: 2\nElapsed/Estimated Time: 00:00:00/00:00:00",
+          "totalTasks": 10,
+          "verySlowTasks": 0
+        },
+        "producer": {
+          "artifactSha256": "",
+          "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+          "buildIdShort": "ef49a37c28a0",
+          "component": "CommunityShaders",
+          "configuration": "Release",
+          "manifestError": "runtime artifact verification delegated to deployment harness",
+          "manifestVerified": false,
+          "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+          "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+          "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+          "sourceDescribe": "217992d",
+          "sourceDirty": false
+        },
+        "readQualified": true,
+        "reasons": [],
+        "schema": "auto-tools.shader-compiler-health.1",
+        "scope": "compiler snapshot only; not package/include/provider closure, visual correctness or capture completion",
+        "state": "COMPILER_HEALTHY_AT_SNAPSHOT",
+        "stateRevision": 1,
+        "timestampUtc": "2026-10-05T18:12:19.722Z"
+      },
+      "phase": "after"
+    },
+    {
+      "admissible": true,
+      "call": "shader",
+      "health": {
+        "admissible": true,
+        "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+        "compilation": {
+          "active": false,
+          "activeShaderCapture": false,
+          "async": true,
+          "backgroundThreadCount": 8,
+          "completedTasks": 10,
+          "currentFailedShaders": 0,
+          "diskCacheHits": 8,
+          "failedTasks": 0,
+          "foregroundThreadCount": 12,
+          "heavyTasksInFlight": 0,
+          "memoryCacheHits": 0,
+          "recentFailures": [],
+          "skipUnchanged": true,
+          "slowTasks": 0,
+          "sourceCompiles": 2,
+          "statisticsText": "10/10 (successful/total)\tfailed: 0\tdeduplicated: 0\tdisk cache: 8\tsource compiles: 2\nElapsed/Estimated Time: 00:00:00/00:00:00",
+          "totalTasks": 10,
+          "verySlowTasks": 0
+        },
+        "producer": {
+          "artifactSha256": "",
+          "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+          "buildIdShort": "ef49a37c28a0",
+          "component": "CommunityShaders",
+          "configuration": "Release",
+          "manifestError": "runtime artifact verification delegated to deployment harness",
+          "manifestVerified": false,
+          "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+          "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+          "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+          "sourceDescribe": "217992d",
+          "sourceDirty": false
+        },
+        "readQualified": true,
+        "reasons": [],
+        "schema": "auto-tools.shader-compiler-health.1",
+        "scope": "compiler snapshot only; not package/include/provider closure, visual correctness or capture completion",
+        "state": "COMPILER_HEALTHY_AT_SNAPSHOT",
+        "stateRevision": 1,
+        "timestampUtc": "2026-10-05T18:12:10.448Z"
+      },
+      "phase": "before"
+    },
+    {
+      "admissible": true,
+      "call": "shader",
+      "health": {
+        "admissible": true,
+        "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+        "compilation": {
+          "active": false,
+          "activeShaderCapture": false,
+          "async": true,
+          "backgroundThreadCount": 8,
+          "completedTasks": 10,
+          "currentFailedShaders": 0,
+          "diskCacheHits": 8,
+          "failedTasks": 0,
+          "foregroundThreadCount": 12,
+          "heavyTasksInFlight": 0,
+          "memoryCacheHits": 0,
+          "recentFailures": [],
+          "skipUnchanged": true,
+          "slowTasks": 0,
+          "sourceCompiles": 2,
+          "statisticsText": "10/10 (successful/total)\tfailed: 0\tdeduplicated: 0\tdisk cache: 8\tsource compiles: 2\nElapsed/Estimated Time: 00:00:00/00:00:00",
+          "totalTasks": 10,
+          "verySlowTasks": 0
+        },
+        "producer": {
+          "artifactSha256": "",
+          "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+          "buildIdShort": "ef49a37c28a0",
+          "component": "CommunityShaders",
+          "configuration": "Release",
+          "manifestError": "runtime artifact verification delegated to deployment harness",
+          "manifestVerified": false,
+          "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+          "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+          "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+          "sourceDescribe": "217992d",
+          "sourceDirty": false
+        },
+        "readQualified": true,
+        "reasons": [],
+        "schema": "auto-tools.shader-compiler-health.1",
+        "scope": "compiler snapshot only; not package/include/provider closure, visual correctness or capture completion",
+        "state": "COMPILER_HEALTHY_AT_SNAPSHOT",
+        "stateRevision": 1,
+        "timestampUtc": "2026-10-05T18:12:10.530Z"
+      },
+      "phase": "after"
+    },
+    {
+      "admissible": true,
+      "call": "colour-window",
+      "health": {
+        "admissible": true,
+        "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+        "compilation": {
+          "active": false,
+          "activeShaderCapture": false,
+          "async": true,
+          "backgroundThreadCount": 8,
+          "completedTasks": 10,
+          "currentFailedShaders": 0,
+          "diskCacheHits": 8,
+          "failedTasks": 0,
+          "foregroundThreadCount": 12,
+          "heavyTasksInFlight": 0,
+          "memoryCacheHits": 0,
+          "recentFailures": [],
+          "skipUnchanged": true,
+          "slowTasks": 0,
+          "sourceCompiles": 2,
+          "statisticsText": "10/10 (successful/total)\tfailed: 0\tdeduplicated: 0\tdisk cache: 8\tsource compiles: 2\nElapsed/Estimated Time: 00:00:00/00:00:00",
+          "totalTasks": 10,
+          "verySlowTasks": 0
+        },
+        "producer": {
+          "artifactSha256": "",
+          "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+          "buildIdShort": "ef49a37c28a0",
+          "component": "CommunityShaders",
+          "configuration": "Release",
+          "manifestError": "runtime artifact verification delegated to deployment harness",
+          "manifestVerified": false,
+          "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+          "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+          "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+          "sourceDescribe": "217992d",
+          "sourceDirty": false
+        },
+        "readQualified": true,
+        "reasons": [],
+        "schema": "auto-tools.shader-compiler-health.1",
+        "scope": "compiler snapshot only; not package/include/provider closure, visual correctness or capture completion",
+        "state": "COMPILER_HEALTHY_AT_SNAPSHOT",
+        "stateRevision": 1,
+        "timestampUtc": "2026-10-05T18:15:29.152Z"
+      },
+      "phaseOrdinalZeroBased": 0
+    },
+    {
+      "admissible": true,
+      "call": "colour-window",
+      "health": {
+        "admissible": true,
+        "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+        "compilation": {
+          "active": false,
+          "activeShaderCapture": false,
+          "async": true,
+          "backgroundThreadCount": 8,
+          "completedTasks": 10,
+          "currentFailedShaders": 0,
+          "diskCacheHits": 8,
+          "failedTasks": 0,
+          "foregroundThreadCount": 12,
+          "heavyTasksInFlight": 0,
+          "memoryCacheHits": 0,
+          "recentFailures": [],
+          "skipUnchanged": true,
+          "slowTasks": 0,
+          "sourceCompiles": 2,
+          "statisticsText": "10/10 (successful/total)\tfailed: 0\tdeduplicated: 0\tdisk cache: 8\tsource compiles: 2\nElapsed/Estimated Time: 00:00:00/00:00:00",
+          "totalTasks": 10,
+          "verySlowTasks": 0
+        },
+        "producer": {
+          "artifactSha256": "",
+          "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+          "buildIdShort": "ef49a37c28a0",
+          "component": "CommunityShaders",
+          "configuration": "Release",
+          "manifestError": "runtime artifact verification delegated to deployment harness",
+          "manifestVerified": false,
+          "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+          "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+          "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+          "sourceDescribe": "217992d",
+          "sourceDirty": false
+        },
+        "readQualified": true,
+        "reasons": [],
+        "schema": "auto-tools.shader-compiler-health.1",
+        "scope": "compiler snapshot only; not package/include/provider closure, visual correctness or capture completion",
+        "state": "COMPILER_HEALTHY_AT_SNAPSHOT",
+        "stateRevision": 1,
+        "timestampUtc": "2026-10-05T18:15:29.419Z"
+      },
+      "phaseOrdinalZeroBased": 1
+    },
+    {
+      "admissible": true,
+      "call": "colour-window",
+      "health": {
+        "admissible": true,
+        "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+        "compilation": {
+          "active": false,
+          "activeShaderCapture": false,
+          "async": true,
+          "backgroundThreadCount": 8,
+          "completedTasks": 10,
+          "currentFailedShaders": 0,
+          "diskCacheHits": 8,
+          "failedTasks": 0,
+          "foregroundThreadCount": 12,
+          "heavyTasksInFlight": 0,
+          "memoryCacheHits": 0,
+          "recentFailures": [],
+          "skipUnchanged": true,
+          "slowTasks": 0,
+          "sourceCompiles": 2,
+          "statisticsText": "10/10 (successful/total)\tfailed: 0\tdeduplicated: 0\tdisk cache: 8\tsource compiles: 2\nElapsed/Estimated Time: 00:00:00/00:00:00",
+          "totalTasks": 10,
+          "verySlowTasks": 0
+        },
+        "producer": {
+          "artifactSha256": "",
+          "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+          "buildIdShort": "ef49a37c28a0",
+          "component": "CommunityShaders",
+          "configuration": "Release",
+          "manifestError": "runtime artifact verification delegated to deployment harness",
+          "manifestVerified": false,
+          "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+          "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+          "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+          "sourceDescribe": "217992d",
+          "sourceDirty": false
+        },
+        "readQualified": true,
+        "reasons": [],
+        "schema": "auto-tools.shader-compiler-health.1",
+        "scope": "compiler snapshot only; not package/include/provider closure, visual correctness or capture completion",
+        "state": "COMPILER_HEALTHY_AT_SNAPSHOT",
+        "stateRevision": 1,
+        "timestampUtc": "2026-10-05T18:15:29.567Z"
+      },
+      "phaseOrdinalZeroBased": 2
+    },
+    {
+      "admissible": true,
+      "call": "colour-window",
+      "health": {
+        "admissible": true,
+        "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+        "compilation": {
+          "active": false,
+          "activeShaderCapture": false,
+          "async": true,
+          "backgroundThreadCount": 8,
+          "completedTasks": 10,
+          "currentFailedShaders": 0,
+          "diskCacheHits": 8,
+          "failedTasks": 0,
+          "foregroundThreadCount": 12,
+          "heavyTasksInFlight": 0,
+          "memoryCacheHits": 0,
+          "recentFailures": [],
+          "skipUnchanged": true,
+          "slowTasks": 0,
+          "sourceCompiles": 2,
+          "statisticsText": "10/10 (successful/total)\tfailed: 0\tdeduplicated: 0\tdisk cache: 8\tsource compiles: 2\nElapsed/Estimated Time: 00:00:00/00:00:00",
+          "totalTasks": 10,
+          "verySlowTasks": 0
+        },
+        "producer": {
+          "artifactSha256": "",
+          "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+          "buildIdShort": "ef49a37c28a0",
+          "component": "CommunityShaders",
+          "configuration": "Release",
+          "manifestError": "runtime artifact verification delegated to deployment harness",
+          "manifestVerified": false,
+          "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+          "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+          "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+          "sourceDescribe": "217992d",
+          "sourceDirty": false
+        },
+        "readQualified": true,
+        "reasons": [],
+        "schema": "auto-tools.shader-compiler-health.1",
+        "scope": "compiler snapshot only; not package/include/provider closure, visual correctness or capture completion",
+        "state": "COMPILER_HEALTHY_AT_SNAPSHOT",
+        "stateRevision": 1,
+        "timestampUtc": "2026-10-05T18:15:29.744Z"
+      },
+      "phaseOrdinalZeroBased": 3
+    }
+  ],
+  "failure": {
+    "armedQpc": 22746928608876,
+    "completedQpc": 22746928936315,
+    "cpuFrame": 18960,
+    "error": "the captured frame did not contain every required stage and eye",
+    "expectedColourContractRevision": 1,
+    "expectedStageEyeSlots": 10,
+    "generation": 1,
+    "mappedStageEyeSlots": 0,
+    "maximumStagingPayloadBytes": 1073741824,
+    "producer": {
+      "artifactSha256": "",
+      "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+      "buildIdShort": "ef49a37c28a0",
+      "component": "CommunityShaders",
+      "configuration": "Release",
+      "manifestError": "runtime artifact verification delegated to deployment harness",
+      "manifestVerified": false,
+      "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+      "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+      "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+      "sourceDescribe": "217992d",
+      "sourceDirty": false
+    },
+    "queryQueuedQpc": 0,
+    "queuedStageEyeSlots": 6,
+    "sceneEpoch": null,
+    "schemaVersion": 3,
+    "stagingPayloadBytes": 49674240,
+    "state": "failed",
+    "submissionEpoch": null,
+    "timeoutSeconds": 15
+  },
+  "frameBrackets": [
+    {
+      "atomic": false,
+      "exactSamples": 1,
+      "followingTrackingFrame": 7351,
+      "precedingTrackingFrame": 7337,
+      "targetFrame": 7344
+    },
+    {
+      "atomic": false,
+      "exactSamples": 0,
+      "followingTrackingFrame": 18948,
+      "precedingTrackingFrame": 18941,
+      "targetFrame": 18945
+    },
+    {
+      "atomic": false,
+      "exactSamples": 0,
+      "followingTrackingFrame": 18961,
+      "precedingTrackingFrame": 18955,
+      "targetFrame": 18960
+    }
+  ],
+  "limitations": [
+    "No AE-off/final AE-on capture; no brightness/HDR/order-of-operations causal inference",
+    "Six-slot count cannot identify individual missing stage/eye slots",
+    "Calendar hold controls progression, not all lighting/physics; weather lock is separate",
+    "Sparse camera storage is not a continuous world-camera trace; tracked poses alone do not establish world-view equivalence",
+    "Screenshot and probe/tracking reads are separately timed, not an atomic snapshot",
+    "Same-process successor and capture turnover remain unqualified",
+    "Compiler readiness is not shader-family/package coverage or a future-render guarantee",
+    "Unverified shader cache retained, not promoted to known-working",
+    "Experimental integration evidence is not focused PR46/PR51 acceptance or a GPU cost measurement"
+  ],
+  "mutationOrdinalsZeroBased": [
+    1,
+    9,
+    18,
+    24,
+    26
+  ],
+  "nativeReadFiles": {
+    "camera-after": "CAMERA-AFTER.json",
+    "camera-before": "CAMERA-CURRENT-QUALIFIED.json",
+    "colour-after": "FSR-COLOUR-AFTER.json",
+    "colour-before": "FSR-COLOUR-BASELINE.json",
+    "physical": "RENDER-SCALE.json",
+    "probe-after": "PROBE-IDLE-AFTER.json",
+    "probe-before": "COLOUR-PROBE-BASELINE.json",
+    "shader": "SCREENSHOT-COMPILER-BEFORE.json",
+    "stereo": "SCREENSHOT-REQUEST-FINAL-QUALIFIED.json",
+    "upscaling": "UPSCALING-SNAPSHOT.json",
+    "weather-before": "WEATHER-BASELINE.json",
+    "weather-locked-after": "WEATHER-LOCKED-AFTER.json",
+    "weather-locked-before": "WEATHER-LOCKED-BEFORE.json",
+    "worldscale": "WORLD-SCALE-READ.json"
+  },
+  "qualification": "failed-instrument-capture-with-separate-cleanup",
+  "recording": {
+    "activityContract": {
+      "clock": "steadyMillisecondsFromRecordStart",
+      "eventKinds": [
+        "input",
+        "menu",
+        "lifecycle",
+        "cell",
+        "console"
+      ],
+      "inputEventTypes": [
+        "button",
+        "mouseMove",
+        "char",
+        "thumbstick",
+        "deviceConnect",
+        "kinect",
+        "vrTouchpadPosition",
+        "vrTouchpadSwipe",
+        "unknown"
+      ],
+      "inputLayer": "Skyrim.BSInputDeviceManager",
+      "name": "devbench.recording.activity",
+      "normalized": true,
+      "ordering": "seq",
+      "replay": {
+        "analogControllerAxes": true,
+        "controllerButtonTransitions": true,
+        "keyboardButtonTransitions": true,
+        "legacyControllerUpgrade": "wand-index mapping; right-handed primary/secondary fallback",
+        "observationalEvents": false,
+        "policy": "capture-all-replay-only-declared",
+        "vrTrackedInputFrames": true
+      },
+      "version": {
+        "major": 1,
+        "minor": 1
+      }
+    },
+    "activityCounts": {
+      "cell": 0,
+      "console": 0,
+      "input": 0,
+      "keyboardTransitions": 0,
+      "lifecycle": 0,
+      "menu": 0,
+      "total": 0,
+      "unsupportedInput": 0,
+      "vrControllerEvents": 0
+    },
+    "deltaSteps": 2781,
+    "durationMs": 309133,
+    "explicitStoredCameraRows": 1,
+    "explicitStoredPlayerRows": 1,
+    "format": "devbench-recording-3",
+    "frameRangeInclusive": [
+      6881,
+      25693
+    ],
+    "oneRowDoesNotProve2781IndependentCameraSamples": true,
+    "poseContract": {
+      "camera": [
+        "worldPosition",
+        "worldPitch",
+        "worldYaw",
+        "pov"
+      ],
+      "name": "devbench.recording.pose",
+      "player": [
+        "position",
+        "yaw",
+        "pitch"
+      ],
+      "transformEncoding": "[tx,ty,tz,r00,r01,r02,r10,r11,r12,r20,r21,r22,scale]",
+      "version": {
+        "major": 2,
+        "minor": 0
+      },
+      "vrTrackedNodes": [
+        "hmd",
+        "leftWand",
+        "rightWand"
+      ],
+      "vrTransformReplay": true
+    },
+    "relativeMsRangeInclusive": [
+      101,
+      309066
+    ],
+    "sampleIntervalMs": {
+      "max": 122,
+      "median": 112.0,
+      "min": 100
+    },
+    "sceneAtRecordStart": {
+      "cell": "WhiterunBreezehome",
+      "cellFormID": 91560,
+      "gameHour": 7.208432674407959,
+      "interior": true,
+      "weather": "Helios_SkyrimClearTU",
+      "weatherFormID": 4261608071
+    },
+    "sourceQualifiedCameraDeltaReconstructionPerformed": false,
+    "storedCameraRows": [
+      [
+        -536.1541,
+        0.2545,
+        228.0591,
+        -0.1744,
+        -0.0417
+      ]
+    ],
+    "storedPlayerRows": [
+      [
+        -536.15,
+        0.25,
+        65.37,
+        2.42,
+        10.0
+      ]
+    ],
+    "trackingContract": {
+      "angularVelocityEncoding": "tracking-space radians/second",
+      "availableBeforePlayerLoad": true,
+      "controllerEncoding": "OpenVR packetNumber/pressed/touched/five axes",
+      "devices": [
+        "hmd",
+        "left",
+        "right"
+      ],
+      "identity": [
+        "device index",
+        "class",
+        "role"
+      ],
+      "name": "devbench.recording.openvrTracking",
+      "origin": "captured per sample from IVRCompositor.GetTrackingSpace",
+      "replay": true,
+      "replayDevice": "input.vrTrackedSet",
+      "source": "IVRCompositor.GetLastPoses",
+      "transformEncoding": "OpenVR device-to-absolute 3x4 row-major",
+      "velocityEncoding": "tracking-space metres/second",
+      "version": {
+        "major": 2,
+        "minor": 0
+      }
+    },
+    "trackingSamples": 2781,
+    "zeroActivityNotAbsenceOfRawInput": true
+  },
+  "schemaVersion": 1,
+  "sessionCleanup": {
+    "attempted": true,
+    "ok": true,
+    "sessions": [
+      {
+        "attempted": true,
+        "error": null,
+        "ok": true,
+        "state": "closed",
+        "statusCode": 200
+      }
+    ],
+    "state": "all_closed"
+  },
+  "settledCondition": {
+    "hostContext": {
+      "autoExposure": false,
+      "generation": 0,
+      "highDynamicRangeInput": false,
+      "valid": false
+    },
+    "lastSuccessfulDispatch": {
+      "autoExposure": true,
+      "configuredSharpnessAtDispatch": 0.8999999761581421,
+      "contextGeneration": 2,
+      "contextIndex": 1,
+      "dispatchQpc": 22746926235485,
+      "displayHeight": 1680,
+      "displayWidth": 1512,
+      "effectiveSharpness": 0.8999999761581421,
+      "exposureResourceBound": false,
+      "frame": 18945,
+      "highDynamicRangeInput": true,
+      "path": 3,
+      "preExposure": 1.0,
+      "renderHeight": 1120,
+      "renderWidth": 1008,
+      "serial": 27306,
+      "sharpeningEnabled": true,
+      "valid": true
+    },
+    "lastSuccessfulEyeDispatches": [
+      {
+        "autoExposure": true,
+        "configuredSharpnessAtDispatch": 0.8999999761581421,
+        "contextGeneration": 2,
+        "contextIndex": 0,
+        "dispatchQpc": 22746926234951,
+        "displayHeight": 1680,
+        "displayWidth": 1512,
+        "effectiveSharpness": 0.8999999761581421,
+        "exposureResourceBound": false,
+        "frame": 18945,
+        "highDynamicRangeInput": true,
+        "path": 3,
+        "preExposure": 1.0,
+        "renderHeight": 1120,
+        "renderWidth": 1008,
+        "serial": 27305,
+        "sharpeningEnabled": true,
+        "valid": true
+      },
+      {
+        "autoExposure": true,
+        "configuredSharpnessAtDispatch": 0.8999999761581421,
+        "contextGeneration": 2,
+        "contextIndex": 1,
+        "dispatchQpc": 22746926235485,
+        "displayHeight": 1680,
+        "displayWidth": 1512,
+        "effectiveSharpness": 0.8999999761581421,
+        "exposureResourceBound": false,
+        "frame": 18945,
+        "highDynamicRangeInput": true,
+        "path": 3,
+        "preExposure": 1.0,
+        "renderHeight": 1120,
+        "renderWidth": 1008,
+        "serial": 27306,
+        "sharpeningEnabled": true,
+        "valid": true
+      }
+    ],
+    "producer": {
+      "artifactSha256": "",
+      "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+      "buildIdShort": "ef49a37c28a0",
+      "component": "CommunityShaders",
+      "configuration": "Release",
+      "manifestError": "runtime artifact verification delegated to deployment harness",
+      "manifestVerified": false,
+      "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+      "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+      "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+      "sourceDescribe": "217992d",
+      "sourceDirty": false
+    },
+    "requested": {
+      "autoExposure": true,
+      "highDynamicRangeInput": true,
+      "revision": 1
+    },
+    "runtimeContext": {
+      "autoExposure": true,
+      "generation": 2,
+      "highDynamicRangeInput": true,
+      "valid": true
+    },
+    "sourceColorContractChanged": false
+  },
+  "stereo": {
+    "acquisition": {
+      "compositorCycle": 3602,
+      "engineFrame": 7344,
+      "monotonicTimestampUs": 2274501516901,
+      "planes": [
+        {
+          "boundsApplied": true,
+          "colourSpace": 1,
+          "dxgiFormat": 28,
+          "eye": "left",
+          "orientation": {
+            "flipHorizontal": false,
+            "flipVertical": false
+          },
+          "publicationGeneration": 4,
+          "sourceHeight": 1680,
+          "sourceWidth": 3024,
+          "stagedHeight": 1680,
+          "stagedWidth": 1512,
+          "submittedBounds": {
+            "uMax": 0.5,
+            "uMin": 0.0,
+            "vMax": 1.0,
+            "vMin": 0.0
+          },
+          "tonemapSceneHdr": false
+        },
+        {
+          "boundsApplied": true,
+          "colourSpace": 1,
+          "dxgiFormat": 28,
+          "eye": "right",
+          "orientation": {
+            "flipHorizontal": false,
+            "flipVertical": false
+          },
+          "publicationGeneration": 4,
+          "sourceHeight": 1680,
+          "sourceWidth": 3024,
+          "stagedHeight": 1680,
+          "stagedWidth": 1512,
+          "submittedBounds": {
+            "uMax": 1.0,
+            "uMin": 0.5,
+            "vMax": 1.0,
+            "vMin": 0.0
+          },
+          "tonemapSceneHdr": false
+        }
+      ],
+      "sourceKind": "hmd_submission",
+      "utcTimestamp": "2026-10-05T18:12:18.541Z"
+    },
+    "images": [
+      {
+        "bytes": 2899373,
+        "currentAdapterQualified": true,
+        "eye": "left_eye",
+        "handAndUnidentifiedSmallBlueMarkerVisible": true,
+        "height": 1680,
+        "intactRoomBeamsStairsFurnitureVisible": true,
+        "nativeCommitted": true,
+        "originalDetailInspectedByImporter": true,
+        "recordingStartNotificationVisible": false,
+        "scientificColourComparisonQualified": false,
+        "sha256": "26a876cd49a80a0377da1de1279f00c63cd630cbff34a0b63bd6e736151bca32",
+        "width": 1512
+      },
+      {
+        "bytes": 2906672,
+        "currentAdapterQualified": true,
+        "eye": "right_eye",
+        "handAndUnidentifiedSmallBlueMarkerVisible": true,
+        "height": 1680,
+        "intactRoomBeamsStairsFurnitureVisible": true,
+        "nativeCommitted": true,
+        "originalDetailInspectedByImporter": true,
+        "recordingStartNotificationVisible": false,
+        "scientificColourComparisonQualified": false,
+        "sha256": "990427ac68a39b973ca937cd5c4ce546f8301f52ee9d51b7c5d92e6bfb2854d2",
+        "width": 1512
+      }
+    ]
+  },
+  "tracking": {
+    "hmd": {
+      "connected": 2781,
+      "distinctMatrices": 1,
+      "firstMatrix": [
+        0.9659258127212524,
+        0.04494345560669899,
+        -0.25488701462745667,
+        0.0,
+        0.0,
+        0.9848077297210693,
+        0.1736481785774231,
+        1.709999918937683,
+        0.258819043636322,
+        -0.16773125529289246,
+        0.9512512683868408,
+        0.0
+      ],
+      "originNames": [
+        "standing"
+      ],
+      "samples": 2781,
+      "valid": 2781
+    },
+    "left": {
+      "allRecordedButtonsTouchesAxesNeutral": true,
+      "connected": 2781,
+      "distinctMatrices": 1,
+      "firstMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        -0.25,
+        0.0,
+        1.0,
+        0.0,
+        1.2799999713897705,
+        0.0,
+        0.0,
+        1.0,
+        -0.3499999940395355
+      ],
+      "originNames": [
+        "standing"
+      ],
+      "samples": 2781,
+      "valid": 2781
+    },
+    "right": {
+      "allRecordedButtonsTouchesAxesNeutral": true,
+      "connected": 2781,
+      "distinctMatrices": 1,
+      "firstMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.25,
+        0.0,
+        1.0,
+        0.0,
+        1.2799999713897705,
+        0.0,
+        0.0,
+        1.0,
+        -0.3499999940395355
+      ],
+      "originNames": [
+        "standing"
+      ],
+      "samples": 2781,
+      "valid": 2781
+    }
+  },
+  "wrapperOutcome": {
+    "continuityVerified": false,
+    "errors": "Colour measurement: Colour action carries foreign producer or native error; raw reply retained.",
+    "ok": false,
+    "restorationVerified": true,
+    "state": "semantic-failed"
+  }
+}

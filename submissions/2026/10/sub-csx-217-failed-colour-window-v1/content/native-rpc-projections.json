@@ -1,0 +1,2519 @@
+{
+  "derivedProjectionsNotOriginalBytes": true,
+  "records": [
+    {
+      "argumentsProjection": {
+        "action": "status"
+      },
+      "declaredInvocationOrdinalZeroBased": 0,
+      "immutableJournalIdentity": {
+        "bytes": 15573,
+        "sha256": "25523513ae84697c929538e234d437e8bf5e4a8c20251644c1e4e7c415355dea"
+      },
+      "intendedUtc": "2026-10-05T18:15:28.9179777Z",
+      "mutation": false,
+      "nativeReplyProjection": {
+        "action": "status",
+        "available": true,
+        "binding": {
+          "cellFormId": 91560,
+          "globalFormIds": [
+            53,
+            54,
+            55,
+            56,
+            57,
+            58
+          ],
+          "loadGeneration": 3
+        },
+        "cleanupPending": false,
+        "disconnectRecovery": "expiry-bounded; no disconnect callback",
+        "expiryDue": false,
+        "frame": 18902,
+        "globalOrder": [
+          "year",
+          "month",
+          "day",
+          "gameHour",
+          "daysPassed",
+          "calendarRate"
+        ],
+        "holdValid": false,
+        "lastTransition": {
+          "ok": true,
+          "restored": false,
+          "status": "idle"
+        },
+        "leaseActive": false,
+        "observedMonotonicMs": 2274691914,
+        "ok": true,
+        "outstanding": false,
+        "plugin": "devbench",
+        "readbackFresh": true,
+        "restored": false,
+        "schemaVersion": 1,
+        "serviceStopping": false,
+        "status": "observed",
+        "values": {
+          "calendarRate": 20.0,
+          "day": 17.0,
+          "daysPassed": 0.3460249900817871,
+          "engineMultiplier": 1.0,
+          "gameHour": 8.30459976196289,
+          "month": 7.0,
+          "year": 201.0
+        },
+        "version": "1.22.0",
+        "worldLoaded": true
+      },
+      "parsedNativeReplyCanonicalSha256": "598355bca2b08b11d8617ec174387b498c60c70379c00ea4f46a87e24f6976bb",
+      "projectionNotOriginalContractConformingRecord": true,
+      "sameMcpSessionPrivatelyVerified": true,
+      "schemaVersion": 1,
+      "tool": "calendar"
+    },
+    {
+      "argumentsProjection": {
+        "action": "hold",
+        "binding": {
+          "cellFormId": 91560,
+          "globalFormIds": [
+            53,
+            54,
+            55,
+            56,
+            57,
+            58
+          ],
+          "loadGeneration": 3
+        },
+        "holdMs": 180000
+      },
+      "declaredInvocationOrdinalZeroBased": 1,
+      "immutableJournalIdentity": {
+        "bytes": 17733,
+        "sha256": "aa0bc8df9d4f3d493a80165f70aeb79e8ac6ab4f6fe979b231973cfb093b5043"
+      },
+      "intendedUtc": "2026-10-05T18:15:28.9771531Z",
+      "mutation": true,
+      "nativeReplyProjection": {
+        "action": "hold",
+        "available": true,
+        "binding": {
+          "cellFormId": 91560,
+          "globalFormIds": [
+            53,
+            54,
+            55,
+            56,
+            57,
+            58
+          ],
+          "loadGeneration": 3
+        },
+        "cleanupPending": false,
+        "disconnectRecovery": "expiry-bounded; no disconnect callback",
+        "expiryDue": false,
+        "frame": 18907,
+        "globalOrder": [
+          "year",
+          "month",
+          "day",
+          "gameHour",
+          "daysPassed",
+          "calendarRate"
+        ],
+        "holdValid": true,
+        "lastTransition": {
+          "ok": true,
+          "restored": false,
+          "status": "held"
+        },
+        "lease": {
+          "applied": true,
+          "binding": {
+            "cellFormId": 91560,
+            "globalFormIds": [
+              53,
+              54,
+              55,
+              56,
+              57,
+              58
+            ],
+            "loadGeneration": 3
+          },
+          "captured": {
+            "calendarRate": 20.0,
+            "day": 17.0,
+            "daysPassed": 0.34604403376579285,
+            "engineMultiplier": 1.0,
+            "gameHour": 8.30505657196045,
+            "month": 7.0,
+            "year": 201.0
+          },
+          "cleanupAttempted": false,
+          "deadlineMonotonicMs": 2274871994
+        },
+        "leaseActive": true,
+        "observedMonotonicMs": 2274691994,
+        "ok": true,
+        "outstanding": true,
+        "plugin": "devbench",
+        "readbackFresh": true,
+        "restored": false,
+        "schemaVersion": 1,
+        "serviceStopping": false,
+        "status": "held",
+        "values": {
+          "calendarRate": 0.0,
+          "day": 17.0,
+          "daysPassed": 0.34604403376579285,
+          "engineMultiplier": 1.0,
+          "gameHour": 8.30505657196045,
+          "month": 7.0,
+          "year": 201.0
+        },
+        "version": "1.22.0",
+        "worldLoaded": true
+      },
+      "parsedNativeReplyCanonicalSha256": "bfad1aaca4b9a48036c48c1eefb7fd8216294e01e1854756fe11667481aea40f",
+      "projectionNotOriginalContractConformingRecord": true,
+      "sameMcpSessionPrivatelyVerified": true,
+      "schemaVersion": 1,
+      "tool": "calendar"
+    },
+    {
+      "argumentsProjection": {
+        "action": "status"
+      },
+      "declaredInvocationOrdinalZeroBased": 2,
+      "immutableJournalIdentity": {
+        "bytes": 17275,
+        "sha256": "bb3e497f0fd42fb494205a9a9945e0efd4628c2c372f1e3ceeb5f7983caf9f74"
+      },
+      "intendedUtc": "2026-10-05T18:15:29.2425259Z",
+      "mutation": false,
+      "nativeReplyProjection": {
+        "action": "status",
+        "available": true,
+        "binding": {
+          "cellFormId": 91560,
+          "globalFormIds": [
+            53,
+            54,
+            55,
+            56,
+            57,
+            58
+          ],
+          "loadGeneration": 3
+        },
+        "cleanupPending": false,
+        "disconnectRecovery": "expiry-bounded; no disconnect callback",
+        "expiryDue": false,
+        "frame": 18921,
+        "globalOrder": [
+          "year",
+          "month",
+          "day",
+          "gameHour",
+          "daysPassed",
+          "calendarRate"
+        ],
+        "holdValid": true,
+        "lastTransition": {
+          "ok": true,
+          "restored": false,
+          "status": "held"
+        },
+        "lease": {
+          "applied": true,
+          "binding": {
+            "cellFormId": 91560,
+            "globalFormIds": [
+              53,
+              54,
+              55,
+              56,
+              57,
+              58
+            ],
+            "loadGeneration": 3
+          },
+          "captured": {
+            "calendarRate": 20.0,
+            "day": 17.0,
+            "daysPassed": 0.34604403376579285,
+            "engineMultiplier": 1.0,
+            "gameHour": 8.30505657196045,
+            "month": 7.0,
+            "year": 201.0
+          },
+          "cleanupAttempted": false,
+          "deadlineMonotonicMs": 2274871994
+        },
+        "leaseActive": true,
+        "observedMonotonicMs": 2274692227,
+        "ok": true,
+        "outstanding": true,
+        "plugin": "devbench",
+        "readbackFresh": true,
+        "restored": false,
+        "schemaVersion": 1,
+        "serviceStopping": false,
+        "status": "observed",
+        "values": {
+          "calendarRate": 0.0,
+          "day": 17.0,
+          "daysPassed": 0.34604403376579285,
+          "engineMultiplier": 1.0,
+          "gameHour": 8.30505657196045,
+          "month": 7.0,
+          "year": 201.0
+        },
+        "version": "1.22.0",
+        "worldLoaded": true
+      },
+      "parsedNativeReplyCanonicalSha256": "530c5bd4eef60e418234068762b0fd622c66ac3e6ec93e2074b17daaa8b0df2e",
+      "projectionNotOriginalContractConformingRecord": true,
+      "sameMcpSessionPrivatelyVerified": true,
+      "schemaVersion": 1,
+      "tool": "calendar"
+    },
+    {
+      "argumentsProjection": {
+        "action": "status",
+        "expectedBuildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438"
+      },
+      "declaredInvocationOrdinalZeroBased": 3,
+      "immutableJournalIdentity": {
+        "bytes": 19361,
+        "sha256": "ba6fa3a4ac63859b524d4515b395a563be91d707790f15122a31e3f41f4e3aab"
+      },
+      "intendedUtc": "2026-10-05T18:15:29.2633620Z",
+      "mutation": false,
+      "nativeReplyProjection": {
+        "hostContext": {
+          "autoExposure": false,
+          "generation": 0,
+          "highDynamicRangeInput": false,
+          "valid": false
+        },
+        "lastSuccessfulDispatch": {
+          "autoExposure": true,
+          "configuredSharpnessAtDispatch": 0.8999999761581421,
+          "contextGeneration": 2,
+          "contextIndex": 1,
+          "dispatchQpc": 22746922266593,
+          "displayHeight": 1680,
+          "displayWidth": 1512,
+          "effectiveSharpness": 0.8999999761581421,
+          "exposureResourceBound": false,
+          "frame": 18921,
+          "highDynamicRangeInput": true,
+          "path": 3,
+          "preExposure": 1.0,
+          "renderHeight": 1120,
+          "renderWidth": 1008,
+          "serial": 27258,
+          "sharpeningEnabled": true,
+          "valid": true
+        },
+        "lastSuccessfulEyeDispatches": [
+          {
+            "autoExposure": true,
+            "configuredSharpnessAtDispatch": 0.8999999761581421,
+            "contextGeneration": 2,
+            "contextIndex": 0,
+            "dispatchQpc": 22746922266039,
+            "displayHeight": 1680,
+            "displayWidth": 1512,
+            "effectiveSharpness": 0.8999999761581421,
+            "exposureResourceBound": false,
+            "frame": 18921,
+            "highDynamicRangeInput": true,
+            "path": 3,
+            "preExposure": 1.0,
+            "renderHeight": 1120,
+            "renderWidth": 1008,
+            "serial": 27257,
+            "sharpeningEnabled": true,
+            "valid": true
+          },
+          {
+            "autoExposure": true,
+            "configuredSharpnessAtDispatch": 0.8999999761581421,
+            "contextGeneration": 2,
+            "contextIndex": 1,
+            "dispatchQpc": 22746922266593,
+            "displayHeight": 1680,
+            "displayWidth": 1512,
+            "effectiveSharpness": 0.8999999761581421,
+            "exposureResourceBound": false,
+            "frame": 18921,
+            "highDynamicRangeInput": true,
+            "path": 3,
+            "preExposure": 1.0,
+            "renderHeight": 1120,
+            "renderWidth": 1008,
+            "serial": 27258,
+            "sharpeningEnabled": true,
+            "valid": true
+          }
+        ],
+        "producer": {
+          "artifactSha256": "",
+          "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+          "buildIdShort": "ef49a37c28a0",
+          "component": "CommunityShaders",
+          "configuration": "Release",
+          "manifestError": "runtime artifact verification delegated to deployment harness",
+          "manifestVerified": false,
+          "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+          "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+          "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+          "sourceDescribe": "217992d",
+          "sourceDirty": false
+        },
+        "requested": {
+          "autoExposure": true,
+          "highDynamicRangeInput": true,
+          "revision": 1
+        },
+        "runtimeContext": {
+          "autoExposure": true,
+          "generation": 2,
+          "highDynamicRangeInput": true,
+          "valid": true
+        },
+        "sourceColorContractChanged": false
+      },
+      "parsedNativeReplyCanonicalSha256": "a8771e3051435261d8581db4acb97539b0f67995536f30e4fc4a89c05dbd36ec",
+      "projectionNotOriginalContractConformingRecord": true,
+      "sameMcpSessionPrivatelyVerified": true,
+      "schemaVersion": 1,
+      "tool": "communityshaders.fsr_color_contract"
+    },
+    {
+      "argumentsProjection": {
+        "action": "status"
+      },
+      "declaredInvocationOrdinalZeroBased": 4,
+      "immutableJournalIdentity": {
+        "bytes": 17275,
+        "sha256": "e08468ed90fa5630c61c7ba94bfc340c8fbfb7e4b45e0bac6343b896e595706f"
+      },
+      "intendedUtc": "2026-10-05T18:15:29.2737876Z",
+      "mutation": false,
+      "nativeReplyProjection": {
+        "action": "status",
+        "available": true,
+        "binding": {
+          "cellFormId": 91560,
+          "globalFormIds": [
+            53,
+            54,
+            55,
+            56,
+            57,
+            58
+          ],
+          "loadGeneration": 3
+        },
+        "cleanupPending": false,
+        "disconnectRecovery": "expiry-bounded; no disconnect callback",
+        "expiryDue": false,
+        "frame": 18923,
+        "globalOrder": [
+          "year",
+          "month",
+          "day",
+          "gameHour",
+          "daysPassed",
+          "calendarRate"
+        ],
+        "holdValid": true,
+        "lastTransition": {
+          "ok": true,
+          "restored": false,
+          "status": "held"
+        },
+        "lease": {
+          "applied": true,
+          "binding": {
+            "cellFormId": 91560,
+            "globalFormIds": [
+              53,
+              54,
+              55,
+              56,
+              57,
+              58
+            ],
+            "loadGeneration": 3
+          },
+          "captured": {
+            "calendarRate": 20.0,
+            "day": 17.0,
+            "daysPassed": 0.34604403376579285,
+            "engineMultiplier": 1.0,
+            "gameHour": 8.30505657196045,
+            "month": 7.0,
+            "year": 201.0
+          },
+          "cleanupAttempted": false,
+          "deadlineMonotonicMs": 2274871994
+        },
+        "leaseActive": true,
+        "observedMonotonicMs": 2274692260,
+        "ok": true,
+        "outstanding": true,
+        "plugin": "devbench",
+        "readbackFresh": true,
+        "restored": false,
+        "schemaVersion": 1,
+        "serviceStopping": false,
+        "status": "observed",
+        "values": {
+          "calendarRate": 0.0,
+          "day": 17.0,
+          "daysPassed": 0.34604403376579285,
+          "engineMultiplier": 1.0,
+          "gameHour": 8.30505657196045,
+          "month": 7.0,
+          "year": 201.0
+        },
+        "version": "1.22.0",
+        "worldLoaded": true
+      },
+      "parsedNativeReplyCanonicalSha256": "048da1f661193de56faf1f904843cbc8fc0b241fe44c60f7795fc79ae350741f",
+      "projectionNotOriginalContractConformingRecord": true,
+      "sameMcpSessionPrivatelyVerified": true,
+      "schemaVersion": 1,
+      "tool": "calendar"
+    },
+    {
+      "argumentsProjection": {
+        "action": "status"
+      },
+      "declaredInvocationOrdinalZeroBased": 5,
+      "immutableJournalIdentity": {
+        "bytes": 17275,
+        "sha256": "a3744d859331799f87ca19fbe858023750fc52b466be84609b20b7963cbf65b7"
+      },
+      "intendedUtc": "2026-10-05T18:15:29.3269082Z",
+      "mutation": false,
+      "nativeReplyProjection": {
+        "action": "status",
+        "available": true,
+        "binding": {
+          "cellFormId": 91560,
+          "globalFormIds": [
+            53,
+            54,
+            55,
+            56,
+            57,
+            58
+          ],
+          "loadGeneration": 3
+        },
+        "cleanupPending": false,
+        "disconnectRecovery": "expiry-bounded; no disconnect callback",
+        "expiryDue": false,
+        "frame": 18926,
+        "globalOrder": [
+          "year",
+          "month",
+          "day",
+          "gameHour",
+          "daysPassed",
+          "calendarRate"
+        ],
+        "holdValid": true,
+        "lastTransition": {
+          "ok": true,
+          "restored": false,
+          "status": "held"
+        },
+        "lease": {
+          "applied": true,
+          "binding": {
+            "cellFormId": 91560,
+            "globalFormIds": [
+              53,
+              54,
+              55,
+              56,
+              57,
+              58
+            ],
+            "loadGeneration": 3
+          },
+          "captured": {
+            "calendarRate": 20.0,
+            "day": 17.0,
+            "daysPassed": 0.34604403376579285,
+            "engineMultiplier": 1.0,
+            "gameHour": 8.30505657196045,
+            "month": 7.0,
+            "year": 201.0
+          },
+          "cleanupAttempted": false,
+          "deadlineMonotonicMs": 2274871994
+        },
+        "leaseActive": true,
+        "observedMonotonicMs": 2274692311,
+        "ok": true,
+        "outstanding": true,
+        "plugin": "devbench",
+        "readbackFresh": true,
+        "restored": false,
+        "schemaVersion": 1,
+        "serviceStopping": false,
+        "status": "observed",
+        "values": {
+          "calendarRate": 0.0,
+          "day": 17.0,
+          "daysPassed": 0.34604403376579285,
+          "engineMultiplier": 1.0,
+          "gameHour": 8.30505657196045,
+          "month": 7.0,
+          "year": 201.0
+        },
+        "version": "1.22.0",
+        "worldLoaded": true
+      },
+      "parsedNativeReplyCanonicalSha256": "cd77d181175fca31302425f7579e1331d303df9a6e85db69cdfc1b439e367907",
+      "projectionNotOriginalContractConformingRecord": true,
+      "sameMcpSessionPrivatelyVerified": true,
+      "schemaVersion": 1,
+      "tool": "calendar"
+    },
+    {
+      "argumentsProjection": {
+        "action": "status",
+        "expectedBuildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438"
+      },
+      "declaredInvocationOrdinalZeroBased": 6,
+      "immutableJournalIdentity": {
+        "bytes": 15419,
+        "sha256": "8dfa57e0628053dd241f4e2c81657fa927e66a1c5889e293ba1b16ec34c43540"
+      },
+      "intendedUtc": "2026-10-05T18:15:29.3456569Z",
+      "mutation": false,
+      "nativeReplyProjection": {
+        "armedQpc": 0,
+        "completedQpc": 0,
+        "cpuFrame": null,
+        "error": null,
+        "expectedColourContractRevision": 0,
+        "expectedStageEyeSlots": 10,
+        "generation": 0,
+        "mappedStageEyeSlots": 0,
+        "maximumStagingPayloadBytes": 1073741824,
+        "producer": {
+          "artifactSha256": "",
+          "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+          "buildIdShort": "ef49a37c28a0",
+          "component": "CommunityShaders",
+          "configuration": "Release",
+          "manifestError": "runtime artifact verification delegated to deployment harness",
+          "manifestVerified": false,
+          "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+          "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+          "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+          "sourceDescribe": "217992d",
+          "sourceDirty": false
+        },
+        "queryQueuedQpc": 0,
+        "queuedStageEyeSlots": 0,
+        "sceneEpoch": null,
+        "schemaVersion": 3,
+        "stagingPayloadBytes": 0,
+        "state": "idle",
+        "submissionEpoch": null,
+        "timeoutSeconds": 15
+      },
+      "parsedNativeReplyCanonicalSha256": "166bc690add3cc36b1c175027a13f256a6b3959ffc618fbd8aa075bcad6d836f",
+      "projectionNotOriginalContractConformingRecord": true,
+      "sameMcpSessionPrivatelyVerified": true,
+      "schemaVersion": 1,
+      "tool": "communityshaders.colour_pipeline_probe"
+    },
+    {
+      "argumentsProjection": {
+        "action": "status"
+      },
+      "declaredInvocationOrdinalZeroBased": 7,
+      "immutableJournalIdentity": {
+        "bytes": 17275,
+        "sha256": "10862e1369c7fd0b54a2749b60b304f1c244346542e609b2dae850135ee097c9"
+      },
+      "intendedUtc": "2026-10-05T18:15:29.3567354Z",
+      "mutation": false,
+      "nativeReplyProjection": {
+        "action": "status",
+        "available": true,
+        "binding": {
+          "cellFormId": 91560,
+          "globalFormIds": [
+            53,
+            54,
+            55,
+            56,
+            57,
+            58
+          ],
+          "loadGeneration": 3
+        },
+        "cleanupPending": false,
+        "disconnectRecovery": "expiry-bounded; no disconnect callback",
+        "expiryDue": false,
+        "frame": 18928,
+        "globalOrder": [
+          "year",
+          "month",
+          "day",
+          "gameHour",
+          "daysPassed",
+          "calendarRate"
+        ],
+        "holdValid": true,
+        "lastTransition": {
+          "ok": true,
+          "restored": false,
+          "status": "held"
+        },
+        "lease": {
+          "applied": true,
+          "binding": {
+            "cellFormId": 91560,
+            "globalFormIds": [
+              53,
+              54,
+              55,
+              56,
+              57,
+              58
+            ],
+            "loadGeneration": 3
+          },
+          "captured": {
+            "calendarRate": 20.0,
+            "day": 17.0,
+            "daysPassed": 0.34604403376579285,
+            "engineMultiplier": 1.0,
+            "gameHour": 8.30505657196045,
+            "month": 7.0,
+            "year": 201.0
+          },
+          "cleanupAttempted": false,
+          "deadlineMonotonicMs": 2274871994
+        },
+        "leaseActive": true,
+        "observedMonotonicMs": 2274692344,
+        "ok": true,
+        "outstanding": true,
+        "plugin": "devbench",
+        "readbackFresh": true,
+        "restored": false,
+        "schemaVersion": 1,
+        "serviceStopping": false,
+        "status": "observed",
+        "values": {
+          "calendarRate": 0.0,
+          "day": 17.0,
+          "daysPassed": 0.34604403376579285,
+          "engineMultiplier": 1.0,
+          "gameHour": 8.30505657196045,
+          "month": 7.0,
+          "year": 201.0
+        },
+        "version": "1.22.0",
+        "worldLoaded": true
+      },
+      "parsedNativeReplyCanonicalSha256": "d45ba5950db9523d47053cba74de85f04c1ed03a8bd10d3bf15f6b0b06f7b79c",
+      "projectionNotOriginalContractConformingRecord": true,
+      "sameMcpSessionPrivatelyVerified": true,
+      "schemaVersion": 1,
+      "tool": "calendar"
+    },
+    {
+      "argumentsProjection": {
+        "action": "status"
+      },
+      "declaredInvocationOrdinalZeroBased": 8,
+      "immutableJournalIdentity": {
+        "bytes": 17275,
+        "sha256": "9020cfa7f80f6b3b58845414bceb2675685d3bfb259e0bf87496c9ee23815f7c"
+      },
+      "intendedUtc": "2026-10-05T18:15:29.4651724Z",
+      "mutation": false,
+      "nativeReplyProjection": {
+        "action": "status",
+        "available": true,
+        "binding": {
+          "cellFormId": 91560,
+          "globalFormIds": [
+            53,
+            54,
+            55,
+            56,
+            57,
+            58
+          ],
+          "loadGeneration": 3
+        },
+        "cleanupPending": false,
+        "disconnectRecovery": "expiry-bounded; no disconnect callback",
+        "expiryDue": false,
+        "frame": 18934,
+        "globalOrder": [
+          "year",
+          "month",
+          "day",
+          "gameHour",
+          "daysPassed",
+          "calendarRate"
+        ],
+        "holdValid": true,
+        "lastTransition": {
+          "ok": true,
+          "restored": false,
+          "status": "held"
+        },
+        "lease": {
+          "applied": true,
+          "binding": {
+            "cellFormId": 91560,
+            "globalFormIds": [
+              53,
+              54,
+              55,
+              56,
+              57,
+              58
+            ],
+            "loadGeneration": 3
+          },
+          "captured": {
+            "calendarRate": 20.0,
+            "day": 17.0,
+            "daysPassed": 0.34604403376579285,
+            "engineMultiplier": 1.0,
+            "gameHour": 8.30505657196045,
+            "month": 7.0,
+            "year": 201.0
+          },
+          "cleanupAttempted": false,
+          "deadlineMonotonicMs": 2274871994
+        },
+        "leaseActive": true,
+        "observedMonotonicMs": 2274692446,
+        "ok": true,
+        "outstanding": true,
+        "plugin": "devbench",
+        "readbackFresh": true,
+        "restored": false,
+        "schemaVersion": 1,
+        "serviceStopping": false,
+        "status": "observed",
+        "values": {
+          "calendarRate": 0.0,
+          "day": 17.0,
+          "daysPassed": 0.34604403376579285,
+          "engineMultiplier": 1.0,
+          "gameHour": 8.30505657196045,
+          "month": 7.0,
+          "year": 201.0
+        },
+        "version": "1.22.0",
+        "worldLoaded": true
+      },
+      "parsedNativeReplyCanonicalSha256": "f1fb1c0a46846d4708274380ef453277278dc7f8cd2ce2b8659bef5b2dd21579",
+      "projectionNotOriginalContractConformingRecord": true,
+      "sameMcpSessionPrivatelyVerified": true,
+      "schemaVersion": 1,
+      "tool": "calendar"
+    },
+    {
+      "argumentsProjection": {
+        "action": "set",
+        "autoExposure": true,
+        "expectedBuildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+        "expectedRevision": 1,
+        "highDynamicRangeInput": true
+      },
+      "declaredInvocationOrdinalZeroBased": 9,
+      "immutableJournalIdentity": {
+        "bytes": 19560,
+        "sha256": "ed3059f6df3d64830db1ab4d5670b6a70d55cb71144cbd23656c08784000cc4d"
+      },
+      "intendedUtc": "2026-10-05T18:15:29.4811410Z",
+      "mutation": true,
+      "nativeReplyProjection": {
+        "accepted": true,
+        "hostContext": {
+          "autoExposure": false,
+          "generation": 0,
+          "highDynamicRangeInput": false,
+          "valid": false
+        },
+        "lastSuccessfulDispatch": {
+          "autoExposure": true,
+          "configuredSharpnessAtDispatch": 0.8999999761581421,
+          "contextGeneration": 2,
+          "contextIndex": 1,
+          "dispatchQpc": 22746924613489,
+          "displayHeight": 1680,
+          "displayWidth": 1512,
+          "effectiveSharpness": 0.8999999761581421,
+          "exposureResourceBound": false,
+          "frame": 18935,
+          "highDynamicRangeInput": true,
+          "path": 3,
+          "preExposure": 1.0,
+          "renderHeight": 1120,
+          "renderWidth": 1008,
+          "serial": 27286,
+          "sharpeningEnabled": true,
+          "valid": true
+        },
+        "lastSuccessfulEyeDispatches": [
+          {
+            "autoExposure": true,
+            "configuredSharpnessAtDispatch": 0.8999999761581421,
+            "contextGeneration": 2,
+            "contextIndex": 0,
+            "dispatchQpc": 22746924613013,
+            "displayHeight": 1680,
+            "displayWidth": 1512,
+            "effectiveSharpness": 0.8999999761581421,
+            "exposureResourceBound": false,
+            "frame": 18935,
+            "highDynamicRangeInput": true,
+            "path": 3,
+            "preExposure": 1.0,
+            "renderHeight": 1120,
+            "renderWidth": 1008,
+            "serial": 27285,
+            "sharpeningEnabled": true,
+            "valid": true
+          },
+          {
+            "autoExposure": true,
+            "configuredSharpnessAtDispatch": 0.8999999761581421,
+            "contextGeneration": 2,
+            "contextIndex": 1,
+            "dispatchQpc": 22746924613489,
+            "displayHeight": 1680,
+            "displayWidth": 1512,
+            "effectiveSharpness": 0.8999999761581421,
+            "exposureResourceBound": false,
+            "frame": 18935,
+            "highDynamicRangeInput": true,
+            "path": 3,
+            "preExposure": 1.0,
+            "renderHeight": 1120,
+            "renderWidth": 1008,
+            "serial": 27286,
+            "sharpeningEnabled": true,
+            "valid": true
+          }
+        ],
+        "producer": {
+          "artifactSha256": "",
+          "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+          "buildIdShort": "ef49a37c28a0",
+          "component": "CommunityShaders",
+          "configuration": "Release",
+          "manifestError": "runtime artifact verification delegated to deployment harness",
+          "manifestVerified": false,
+          "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+          "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+          "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+          "sourceDescribe": "217992d",
+          "sourceDirty": false
+        },
+        "requested": {
+          "autoExposure": true,
+          "highDynamicRangeInput": true,
+          "revision": 1
+        },
+        "resultingRevision": 1,
+        "runtimeContext": {
+          "autoExposure": true,
+          "generation": 2,
+          "highDynamicRangeInput": true,
+          "valid": true
+        },
+        "sourceColorContractChanged": false
+      },
+      "parsedNativeReplyCanonicalSha256": "de4e56c64dfc7607f902a2b6a62318ad4e8662a65ba401921e2a9660c5bbf861",
+      "projectionNotOriginalContractConformingRecord": true,
+      "sameMcpSessionPrivatelyVerified": true,
+      "schemaVersion": 1,
+      "tool": "communityshaders.fsr_color_contract"
+    },
+    {
+      "argumentsProjection": {
+        "action": "status"
+      },
+      "declaredInvocationOrdinalZeroBased": 10,
+      "immutableJournalIdentity": {
+        "bytes": 17275,
+        "sha256": "9453e4d607b69a9f79300c470a92b6d166c093ccbb26a7c78b1e911c476ead9e"
+      },
+      "intendedUtc": "2026-10-05T18:15:29.4991706Z",
+      "mutation": false,
+      "nativeReplyProjection": {
+        "action": "status",
+        "available": true,
+        "binding": {
+          "cellFormId": 91560,
+          "globalFormIds": [
+            53,
+            54,
+            55,
+            56,
+            57,
+            58
+          ],
+          "loadGeneration": 3
+        },
+        "cleanupPending": false,
+        "disconnectRecovery": "expiry-bounded; no disconnect callback",
+        "expiryDue": false,
+        "frame": 18936,
+        "globalOrder": [
+          "year",
+          "month",
+          "day",
+          "gameHour",
+          "daysPassed",
+          "calendarRate"
+        ],
+        "holdValid": true,
+        "lastTransition": {
+          "ok": true,
+          "restored": false,
+          "status": "held"
+        },
+        "lease": {
+          "applied": true,
+          "binding": {
+            "cellFormId": 91560,
+            "globalFormIds": [
+              53,
+              54,
+              55,
+              56,
+              57,
+              58
+            ],
+            "loadGeneration": 3
+          },
+          "captured": {
+            "calendarRate": 20.0,
+            "day": 17.0,
+            "daysPassed": 0.34604403376579285,
+            "engineMultiplier": 1.0,
+            "gameHour": 8.30505657196045,
+            "month": 7.0,
+            "year": 201.0
+          },
+          "cleanupAttempted": false,
+          "deadlineMonotonicMs": 2274871994
+        },
+        "leaseActive": true,
+        "observedMonotonicMs": 2274692477,
+        "ok": true,
+        "outstanding": true,
+        "plugin": "devbench",
+        "readbackFresh": true,
+        "restored": false,
+        "schemaVersion": 1,
+        "serviceStopping": false,
+        "status": "observed",
+        "values": {
+          "calendarRate": 0.0,
+          "day": 17.0,
+          "daysPassed": 0.34604403376579285,
+          "engineMultiplier": 1.0,
+          "gameHour": 8.30505657196045,
+          "month": 7.0,
+          "year": 201.0
+        },
+        "version": "1.22.0",
+        "worldLoaded": true
+      },
+      "parsedNativeReplyCanonicalSha256": "8826c31ce1081e08acd95fcb9e687364ae8748d0432e89679e1f3e8af0a1a12d",
+      "projectionNotOriginalContractConformingRecord": true,
+      "sameMcpSessionPrivatelyVerified": true,
+      "schemaVersion": 1,
+      "tool": "calendar"
+    },
+    {
+      "argumentsProjection": {
+        "action": "status"
+      },
+      "declaredInvocationOrdinalZeroBased": 11,
+      "immutableJournalIdentity": {
+        "bytes": 17275,
+        "sha256": "1b182725cef8286699f522f971e708f83a98fe0a31b7c4184bcc50d0136d0acb"
+      },
+      "intendedUtc": "2026-10-05T18:15:29.6461903Z",
+      "mutation": false,
+      "nativeReplyProjection": {
+        "action": "status",
+        "available": true,
+        "binding": {
+          "cellFormId": 91560,
+          "globalFormIds": [
+            53,
+            54,
+            55,
+            56,
+            57,
+            58
+          ],
+          "loadGeneration": 3
+        },
+        "cleanupPending": false,
+        "disconnectRecovery": "expiry-bounded; no disconnect callback",
+        "expiryDue": false,
+        "frame": 18945,
+        "globalOrder": [
+          "year",
+          "month",
+          "day",
+          "gameHour",
+          "daysPassed",
+          "calendarRate"
+        ],
+        "holdValid": true,
+        "lastTransition": {
+          "ok": true,
+          "restored": false,
+          "status": "held"
+        },
+        "lease": {
+          "applied": true,
+          "binding": {
+            "cellFormId": 91560,
+            "globalFormIds": [
+              53,
+              54,
+              55,
+              56,
+              57,
+              58
+            ],
+            "loadGeneration": 3
+          },
+          "captured": {
+            "calendarRate": 20.0,
+            "day": 17.0,
+            "daysPassed": 0.34604403376579285,
+            "engineMultiplier": 1.0,
+            "gameHour": 8.30505657196045,
+            "month": 7.0,
+            "year": 201.0
+          },
+          "cleanupAttempted": false,
+          "deadlineMonotonicMs": 2274871994
+        },
+        "leaseActive": true,
+        "observedMonotonicMs": 2274692623,
+        "ok": true,
+        "outstanding": true,
+        "plugin": "devbench",
+        "readbackFresh": true,
+        "restored": false,
+        "schemaVersion": 1,
+        "serviceStopping": false,
+        "status": "observed",
+        "values": {
+          "calendarRate": 0.0,
+          "day": 17.0,
+          "daysPassed": 0.34604403376579285,
+          "engineMultiplier": 1.0,
+          "gameHour": 8.30505657196045,
+          "month": 7.0,
+          "year": 201.0
+        },
+        "version": "1.22.0",
+        "worldLoaded": true
+      },
+      "parsedNativeReplyCanonicalSha256": "464f2d4e203f8908fee0b8997b32c2e6bd5f3c0c801a0c3715cede4ec295d26c",
+      "projectionNotOriginalContractConformingRecord": true,
+      "sameMcpSessionPrivatelyVerified": true,
+      "schemaVersion": 1,
+      "tool": "calendar"
+    },
+    {
+      "argumentsProjection": {
+        "action": "status",
+        "expectedBuildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438"
+      },
+      "declaredInvocationOrdinalZeroBased": 12,
+      "immutableJournalIdentity": {
+        "bytes": 19361,
+        "sha256": "30725434e5cbcb9f75129a7e1a8378d5c39c5ab689f40713f6f25f01a33dd99d"
+      },
+      "intendedUtc": "2026-10-05T18:15:29.6581830Z",
+      "mutation": false,
+      "nativeReplyProjection": {
+        "hostContext": {
+          "autoExposure": false,
+          "generation": 0,
+          "highDynamicRangeInput": false,
+          "valid": false
+        },
+        "lastSuccessfulDispatch": {
+          "autoExposure": true,
+          "configuredSharpnessAtDispatch": 0.8999999761581421,
+          "contextGeneration": 2,
+          "contextIndex": 1,
+          "dispatchQpc": 22746926235485,
+          "displayHeight": 1680,
+          "displayWidth": 1512,
+          "effectiveSharpness": 0.8999999761581421,
+          "exposureResourceBound": false,
+          "frame": 18945,
+          "highDynamicRangeInput": true,
+          "path": 3,
+          "preExposure": 1.0,
+          "renderHeight": 1120,
+          "renderWidth": 1008,
+          "serial": 27306,
+          "sharpeningEnabled": true,
+          "valid": true
+        },
+        "lastSuccessfulEyeDispatches": [
+          {
+            "autoExposure": true,
+            "configuredSharpnessAtDispatch": 0.8999999761581421,
+            "contextGeneration": 2,
+            "contextIndex": 0,
+            "dispatchQpc": 22746926234951,
+            "displayHeight": 1680,
+            "displayWidth": 1512,
+            "effectiveSharpness": 0.8999999761581421,
+            "exposureResourceBound": false,
+            "frame": 18945,
+            "highDynamicRangeInput": true,
+            "path": 3,
+            "preExposure": 1.0,
+            "renderHeight": 1120,
+            "renderWidth": 1008,
+            "serial": 27305,
+            "sharpeningEnabled": true,
+            "valid": true
+          },
+          {
+            "autoExposure": true,
+            "configuredSharpnessAtDispatch": 0.8999999761581421,
+            "contextGeneration": 2,
+            "contextIndex": 1,
+            "dispatchQpc": 22746926235485,
+            "displayHeight": 1680,
+            "displayWidth": 1512,
+            "effectiveSharpness": 0.8999999761581421,
+            "exposureResourceBound": false,
+            "frame": 18945,
+            "highDynamicRangeInput": true,
+            "path": 3,
+            "preExposure": 1.0,
+            "renderHeight": 1120,
+            "renderWidth": 1008,
+            "serial": 27306,
+            "sharpeningEnabled": true,
+            "valid": true
+          }
+        ],
+        "producer": {
+          "artifactSha256": "",
+          "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+          "buildIdShort": "ef49a37c28a0",
+          "component": "CommunityShaders",
+          "configuration": "Release",
+          "manifestError": "runtime artifact verification delegated to deployment harness",
+          "manifestVerified": false,
+          "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+          "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+          "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+          "sourceDescribe": "217992d",
+          "sourceDirty": false
+        },
+        "requested": {
+          "autoExposure": true,
+          "highDynamicRangeInput": true,
+          "revision": 1
+        },
+        "runtimeContext": {
+          "autoExposure": true,
+          "generation": 2,
+          "highDynamicRangeInput": true,
+          "valid": true
+        },
+        "sourceColorContractChanged": false
+      },
+      "parsedNativeReplyCanonicalSha256": "4a61f0acd21c519143228715fd1c006b9d547edf4c6206f460fd1f273a9c8c34",
+      "projectionNotOriginalContractConformingRecord": true,
+      "sameMcpSessionPrivatelyVerified": true,
+      "schemaVersion": 1,
+      "tool": "communityshaders.fsr_color_contract"
+    },
+    {
+      "argumentsProjection": {
+        "action": "status"
+      },
+      "declaredInvocationOrdinalZeroBased": 13,
+      "immutableJournalIdentity": {
+        "bytes": 17275,
+        "sha256": "980fa5f4e903b854faa3b2037ab965a4c618506e8f1abf53dce0fb981eb451d4"
+      },
+      "intendedUtc": "2026-10-05T18:15:29.6678729Z",
+      "mutation": false,
+      "nativeReplyProjection": {
+        "action": "status",
+        "available": true,
+        "binding": {
+          "cellFormId": 91560,
+          "globalFormIds": [
+            53,
+            54,
+            55,
+            56,
+            57,
+            58
+          ],
+          "loadGeneration": 3
+        },
+        "cleanupPending": false,
+        "disconnectRecovery": "expiry-bounded; no disconnect callback",
+        "expiryDue": false,
+        "frame": 18947,
+        "globalOrder": [
+          "year",
+          "month",
+          "day",
+          "gameHour",
+          "daysPassed",
+          "calendarRate"
+        ],
+        "holdValid": true,
+        "lastTransition": {
+          "ok": true,
+          "restored": false,
+          "status": "held"
+        },
+        "lease": {
+          "applied": true,
+          "binding": {
+            "cellFormId": 91560,
+            "globalFormIds": [
+              53,
+              54,
+              55,
+              56,
+              57,
+              58
+            ],
+            "loadGeneration": 3
+          },
+          "captured": {
+            "calendarRate": 20.0,
+            "day": 17.0,
+            "daysPassed": 0.34604403376579285,
+            "engineMultiplier": 1.0,
+            "gameHour": 8.30505657196045,
+            "month": 7.0,
+            "year": 201.0
+          },
+          "cleanupAttempted": false,
+          "deadlineMonotonicMs": 2274871994
+        },
+        "leaseActive": true,
+        "observedMonotonicMs": 2274692655,
+        "ok": true,
+        "outstanding": true,
+        "plugin": "devbench",
+        "readbackFresh": true,
+        "restored": false,
+        "schemaVersion": 1,
+        "serviceStopping": false,
+        "status": "observed",
+        "values": {
+          "calendarRate": 0.0,
+          "day": 17.0,
+          "daysPassed": 0.34604403376579285,
+          "engineMultiplier": 1.0,
+          "gameHour": 8.30505657196045,
+          "month": 7.0,
+          "year": 201.0
+        },
+        "version": "1.22.0",
+        "worldLoaded": true
+      },
+      "parsedNativeReplyCanonicalSha256": "47bd72fa7b2868a04785a3a5a4d9bfdd30a9a3c40ee8849f057708ebf1f859fe",
+      "projectionNotOriginalContractConformingRecord": true,
+      "sameMcpSessionPrivatelyVerified": true,
+      "schemaVersion": 1,
+      "tool": "calendar"
+    },
+    {
+      "argumentsProjection": {
+        "action": "status"
+      },
+      "declaredInvocationOrdinalZeroBased": 14,
+      "immutableJournalIdentity": {
+        "bytes": 17275,
+        "sha256": "3833e8f094aded144815340cf0bf68df297201c6abfc1d0c8e5cb5b87a3eb4f0"
+      },
+      "intendedUtc": "2026-10-05T18:15:29.7891359Z",
+      "mutation": false,
+      "nativeReplyProjection": {
+        "action": "status",
+        "available": true,
+        "binding": {
+          "cellFormId": 91560,
+          "globalFormIds": [
+            53,
+            54,
+            55,
+            56,
+            57,
+            58
+          ],
+          "loadGeneration": 3
+        },
+        "cleanupPending": false,
+        "disconnectRecovery": "expiry-bounded; no disconnect callback",
+        "expiryDue": false,
+        "frame": 18954,
+        "globalOrder": [
+          "year",
+          "month",
+          "day",
+          "gameHour",
+          "daysPassed",
+          "calendarRate"
+        ],
+        "holdValid": true,
+        "lastTransition": {
+          "ok": true,
+          "restored": false,
+          "status": "held"
+        },
+        "lease": {
+          "applied": true,
+          "binding": {
+            "cellFormId": 91560,
+            "globalFormIds": [
+              53,
+              54,
+              55,
+              56,
+              57,
+              58
+            ],
+            "loadGeneration": 3
+          },
+          "captured": {
+            "calendarRate": 20.0,
+            "day": 17.0,
+            "daysPassed": 0.34604403376579285,
+            "engineMultiplier": 1.0,
+            "gameHour": 8.30505657196045,
+            "month": 7.0,
+            "year": 201.0
+          },
+          "cleanupAttempted": false,
+          "deadlineMonotonicMs": 2274871994
+        },
+        "leaseActive": true,
+        "observedMonotonicMs": 2274692769,
+        "ok": true,
+        "outstanding": true,
+        "plugin": "devbench",
+        "readbackFresh": true,
+        "restored": false,
+        "schemaVersion": 1,
+        "serviceStopping": false,
+        "status": "observed",
+        "values": {
+          "calendarRate": 0.0,
+          "day": 17.0,
+          "daysPassed": 0.34604403376579285,
+          "engineMultiplier": 1.0,
+          "gameHour": 8.30505657196045,
+          "month": 7.0,
+          "year": 201.0
+        },
+        "version": "1.22.0",
+        "worldLoaded": true
+      },
+      "parsedNativeReplyCanonicalSha256": "710a119a400ae9b4c488d9f662fb8b11aa6523803e6b69e0946e96b075d8a69f",
+      "projectionNotOriginalContractConformingRecord": true,
+      "sameMcpSessionPrivatelyVerified": true,
+      "schemaVersion": 1,
+      "tool": "calendar"
+    },
+    {
+      "argumentsProjection": {
+        "action": "status",
+        "expectedBuildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438"
+      },
+      "declaredInvocationOrdinalZeroBased": 15,
+      "immutableJournalIdentity": {
+        "bytes": 19361,
+        "sha256": "7b3df86f14284e42a8e5bfc22df2d5cab61551633def4af33ee2e50cd0c096c1"
+      },
+      "intendedUtc": "2026-10-05T18:15:29.8047368Z",
+      "mutation": false,
+      "nativeReplyProjection": {
+        "hostContext": {
+          "autoExposure": false,
+          "generation": 0,
+          "highDynamicRangeInput": false,
+          "valid": false
+        },
+        "lastSuccessfulDispatch": {
+          "autoExposure": true,
+          "configuredSharpnessAtDispatch": 0.8999999761581421,
+          "contextGeneration": 2,
+          "contextIndex": 1,
+          "dispatchQpc": 22746927687919,
+          "displayHeight": 1680,
+          "displayWidth": 1512,
+          "effectiveSharpness": 0.8999999761581421,
+          "exposureResourceBound": false,
+          "frame": 18954,
+          "highDynamicRangeInput": true,
+          "path": 3,
+          "preExposure": 1.0,
+          "renderHeight": 1120,
+          "renderWidth": 1008,
+          "serial": 27324,
+          "sharpeningEnabled": true,
+          "valid": true
+        },
+        "lastSuccessfulEyeDispatches": [
+          {
+            "autoExposure": true,
+            "configuredSharpnessAtDispatch": 0.8999999761581421,
+            "contextGeneration": 2,
+            "contextIndex": 0,
+            "dispatchQpc": 22746927687433,
+            "displayHeight": 1680,
+            "displayWidth": 1512,
+            "effectiveSharpness": 0.8999999761581421,
+            "exposureResourceBound": false,
+            "frame": 18954,
+            "highDynamicRangeInput": true,
+            "path": 3,
+            "preExposure": 1.0,
+            "renderHeight": 1120,
+            "renderWidth": 1008,
+            "serial": 27323,
+            "sharpeningEnabled": true,
+            "valid": true
+          },
+          {
+            "autoExposure": true,
+            "configuredSharpnessAtDispatch": 0.8999999761581421,
+            "contextGeneration": 2,
+            "contextIndex": 1,
+            "dispatchQpc": 22746927687919,
+            "displayHeight": 1680,
+            "displayWidth": 1512,
+            "effectiveSharpness": 0.8999999761581421,
+            "exposureResourceBound": false,
+            "frame": 18954,
+            "highDynamicRangeInput": true,
+            "path": 3,
+            "preExposure": 1.0,
+            "renderHeight": 1120,
+            "renderWidth": 1008,
+            "serial": 27324,
+            "sharpeningEnabled": true,
+            "valid": true
+          }
+        ],
+        "producer": {
+          "artifactSha256": "",
+          "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+          "buildIdShort": "ef49a37c28a0",
+          "component": "CommunityShaders",
+          "configuration": "Release",
+          "manifestError": "runtime artifact verification delegated to deployment harness",
+          "manifestVerified": false,
+          "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+          "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+          "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+          "sourceDescribe": "217992d",
+          "sourceDirty": false
+        },
+        "requested": {
+          "autoExposure": true,
+          "highDynamicRangeInput": true,
+          "revision": 1
+        },
+        "runtimeContext": {
+          "autoExposure": true,
+          "generation": 2,
+          "highDynamicRangeInput": true,
+          "valid": true
+        },
+        "sourceColorContractChanged": false
+      },
+      "parsedNativeReplyCanonicalSha256": "b14f7a841bcb7575498c0ed6df0a50541220477937fe4304bc67e3a898b1f1e4",
+      "projectionNotOriginalContractConformingRecord": true,
+      "sameMcpSessionPrivatelyVerified": true,
+      "schemaVersion": 1,
+      "tool": "communityshaders.fsr_color_contract"
+    },
+    {
+      "argumentsProjection": {
+        "action": "status"
+      },
+      "declaredInvocationOrdinalZeroBased": 16,
+      "immutableJournalIdentity": {
+        "bytes": 17275,
+        "sha256": "385971dd8f0cab38e04c432833e987bc5686c527514c7af2fa0434f6d55eef5c"
+      },
+      "intendedUtc": "2026-10-05T18:15:29.8149263Z",
+      "mutation": false,
+      "nativeReplyProjection": {
+        "action": "status",
+        "available": true,
+        "binding": {
+          "cellFormId": 91560,
+          "globalFormIds": [
+            53,
+            54,
+            55,
+            56,
+            57,
+            58
+          ],
+          "loadGeneration": 3
+        },
+        "cleanupPending": false,
+        "disconnectRecovery": "expiry-bounded; no disconnect callback",
+        "expiryDue": false,
+        "frame": 18956,
+        "globalOrder": [
+          "year",
+          "month",
+          "day",
+          "gameHour",
+          "daysPassed",
+          "calendarRate"
+        ],
+        "holdValid": true,
+        "lastTransition": {
+          "ok": true,
+          "restored": false,
+          "status": "held"
+        },
+        "lease": {
+          "applied": true,
+          "binding": {
+            "cellFormId": 91560,
+            "globalFormIds": [
+              53,
+              54,
+              55,
+              56,
+              57,
+              58
+            ],
+            "loadGeneration": 3
+          },
+          "captured": {
+            "calendarRate": 20.0,
+            "day": 17.0,
+            "daysPassed": 0.34604403376579285,
+            "engineMultiplier": 1.0,
+            "gameHour": 8.30505657196045,
+            "month": 7.0,
+            "year": 201.0
+          },
+          "cleanupAttempted": false,
+          "deadlineMonotonicMs": 2274871994
+        },
+        "leaseActive": true,
+        "observedMonotonicMs": 2274692802,
+        "ok": true,
+        "outstanding": true,
+        "plugin": "devbench",
+        "readbackFresh": true,
+        "restored": false,
+        "schemaVersion": 1,
+        "serviceStopping": false,
+        "status": "observed",
+        "values": {
+          "calendarRate": 0.0,
+          "day": 17.0,
+          "daysPassed": 0.34604403376579285,
+          "engineMultiplier": 1.0,
+          "gameHour": 8.30505657196045,
+          "month": 7.0,
+          "year": 201.0
+        },
+        "version": "1.22.0",
+        "worldLoaded": true
+      },
+      "parsedNativeReplyCanonicalSha256": "4b5341356a8642b78d6db2a7fc6161d968f94ed60e521b5162cf5bdf64474af2",
+      "projectionNotOriginalContractConformingRecord": true,
+      "sameMcpSessionPrivatelyVerified": true,
+      "schemaVersion": 1,
+      "tool": "calendar"
+    },
+    {
+      "argumentsProjection": {
+        "action": "status"
+      },
+      "declaredInvocationOrdinalZeroBased": 17,
+      "immutableJournalIdentity": {
+        "bytes": 17275,
+        "sha256": "6ec524b7c115a05806eb8fd75c8fd9b9480b58e16ac9932a996e0e70817da93a"
+      },
+      "intendedUtc": "2026-10-05T18:15:29.8488941Z",
+      "mutation": false,
+      "nativeReplyProjection": {
+        "action": "status",
+        "available": true,
+        "binding": {
+          "cellFormId": 91560,
+          "globalFormIds": [
+            53,
+            54,
+            55,
+            56,
+            57,
+            58
+          ],
+          "loadGeneration": 3
+        },
+        "cleanupPending": false,
+        "disconnectRecovery": "expiry-bounded; no disconnect callback",
+        "expiryDue": false,
+        "frame": 18958,
+        "globalOrder": [
+          "year",
+          "month",
+          "day",
+          "gameHour",
+          "daysPassed",
+          "calendarRate"
+        ],
+        "holdValid": true,
+        "lastTransition": {
+          "ok": true,
+          "restored": false,
+          "status": "held"
+        },
+        "lease": {
+          "applied": true,
+          "binding": {
+            "cellFormId": 91560,
+            "globalFormIds": [
+              53,
+              54,
+              55,
+              56,
+              57,
+              58
+            ],
+            "loadGeneration": 3
+          },
+          "captured": {
+            "calendarRate": 20.0,
+            "day": 17.0,
+            "daysPassed": 0.34604403376579285,
+            "engineMultiplier": 1.0,
+            "gameHour": 8.30505657196045,
+            "month": 7.0,
+            "year": 201.0
+          },
+          "cleanupAttempted": false,
+          "deadlineMonotonicMs": 2274871994
+        },
+        "leaseActive": true,
+        "observedMonotonicMs": 2274692840,
+        "ok": true,
+        "outstanding": true,
+        "plugin": "devbench",
+        "readbackFresh": true,
+        "restored": false,
+        "schemaVersion": 1,
+        "serviceStopping": false,
+        "status": "observed",
+        "values": {
+          "calendarRate": 0.0,
+          "day": 17.0,
+          "daysPassed": 0.34604403376579285,
+          "engineMultiplier": 1.0,
+          "gameHour": 8.30505657196045,
+          "month": 7.0,
+          "year": 201.0
+        },
+        "version": "1.22.0",
+        "worldLoaded": true
+      },
+      "parsedNativeReplyCanonicalSha256": "c7fe3875787fea5df015f503c3cae4938360d16b72548c70dee358a75e8c01c9",
+      "projectionNotOriginalContractConformingRecord": true,
+      "sameMcpSessionPrivatelyVerified": true,
+      "schemaVersion": 1,
+      "tool": "calendar"
+    },
+    {
+      "argumentsProjection": {
+        "action": "arm",
+        "expectedBuildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+        "expectedRevision": 1,
+        "metadata": {
+          "calibratedScene": "<redacted-local-path>",
+          "experiment": "FSR4 Quality RS-off HDR-inputtrue autoExposureon-off-on; six probe captures; weather locked; dynamic lighting not globally frozen",
+          "profileAdmissionReceipt": "<redacted-local-path>",
+          "stereoAdmissionReceipt": "<redacted-local-path>",
+          "weatherAdmissionReceipt": "<redacted-local-path>"
+        }
+      },
+      "declaredInvocationOrdinalZeroBased": 18,
+      "immutableJournalIdentity": {
+        "bytes": 15468,
+        "sha256": "61a47dd64e46b14977ba3fe7b736255c07ede5703fea2cf4b8dd294a99ad762d"
+      },
+      "intendedUtc": "2026-10-05T18:15:29.8752052Z",
+      "mutation": true,
+      "nativeReplyProjection": {
+        "accepted": true,
+        "action": "arm",
+        "error": null,
+        "generation": 1,
+        "producer": {
+          "artifactSha256": "",
+          "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+          "buildIdShort": "ef49a37c28a0",
+          "component": "CommunityShaders",
+          "configuration": "Release",
+          "manifestError": "runtime artifact verification delegated to deployment harness",
+          "manifestVerified": false,
+          "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+          "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+          "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+          "sourceDescribe": "217992d",
+          "sourceDirty": false
+        }
+      },
+      "parsedNativeReplyCanonicalSha256": "a18b204eb500527571b4301a83f9518204f3339fa69744471924150d52d890a4",
+      "projectionNotOriginalContractConformingRecord": true,
+      "sameMcpSessionPrivatelyVerified": true,
+      "schemaVersion": 1,
+      "tool": "communityshaders.colour_pipeline_probe"
+    },
+    {
+      "argumentsProjection": {
+        "action": "status"
+      },
+      "declaredInvocationOrdinalZeroBased": 19,
+      "immutableJournalIdentity": {
+        "bytes": 17275,
+        "sha256": "82309c184738ab2b069b918cfcfa9a0c15eef1fad79493f2eb6ae243949c6399"
+      },
+      "intendedUtc": "2026-10-05T18:15:29.8930093Z",
+      "mutation": false,
+      "nativeReplyProjection": {
+        "action": "status",
+        "available": true,
+        "binding": {
+          "cellFormId": 91560,
+          "globalFormIds": [
+            53,
+            54,
+            55,
+            56,
+            57,
+            58
+          ],
+          "loadGeneration": 3
+        },
+        "cleanupPending": false,
+        "disconnectRecovery": "expiry-bounded; no disconnect callback",
+        "expiryDue": false,
+        "frame": 18960,
+        "globalOrder": [
+          "year",
+          "month",
+          "day",
+          "gameHour",
+          "daysPassed",
+          "calendarRate"
+        ],
+        "holdValid": true,
+        "lastTransition": {
+          "ok": true,
+          "restored": false,
+          "status": "held"
+        },
+        "lease": {
+          "applied": true,
+          "binding": {
+            "cellFormId": 91560,
+            "globalFormIds": [
+              53,
+              54,
+              55,
+              56,
+              57,
+              58
+            ],
+            "loadGeneration": 3
+          },
+          "captured": {
+            "calendarRate": 20.0,
+            "day": 17.0,
+            "daysPassed": 0.34604403376579285,
+            "engineMultiplier": 1.0,
+            "gameHour": 8.30505657196045,
+            "month": 7.0,
+            "year": 201.0
+          },
+          "cleanupAttempted": false,
+          "deadlineMonotonicMs": 2274871994
+        },
+        "leaseActive": true,
+        "observedMonotonicMs": 2274692876,
+        "ok": true,
+        "outstanding": true,
+        "plugin": "devbench",
+        "readbackFresh": true,
+        "restored": false,
+        "schemaVersion": 1,
+        "serviceStopping": false,
+        "status": "observed",
+        "values": {
+          "calendarRate": 0.0,
+          "day": 17.0,
+          "daysPassed": 0.34604403376579285,
+          "engineMultiplier": 1.0,
+          "gameHour": 8.30505657196045,
+          "month": 7.0,
+          "year": 201.0
+        },
+        "version": "1.22.0",
+        "worldLoaded": true
+      },
+      "parsedNativeReplyCanonicalSha256": "809713450e97e6e2bd16583874a351a0ee9576bfe1c7f9af5b420ab8a1e7b720",
+      "projectionNotOriginalContractConformingRecord": true,
+      "sameMcpSessionPrivatelyVerified": true,
+      "schemaVersion": 1,
+      "tool": "calendar"
+    },
+    {
+      "argumentsProjection": {
+        "action": "status"
+      },
+      "declaredInvocationOrdinalZeroBased": 20,
+      "immutableJournalIdentity": {
+        "bytes": 17275,
+        "sha256": "33964388266d83d9594da461ba82fe7739ae850cc7ad510780c32dcba99ff7a5"
+      },
+      "intendedUtc": "2026-10-05T18:15:29.9129354Z",
+      "mutation": false,
+      "nativeReplyProjection": {
+        "action": "status",
+        "available": true,
+        "binding": {
+          "cellFormId": 91560,
+          "globalFormIds": [
+            53,
+            54,
+            55,
+            56,
+            57,
+            58
+          ],
+          "loadGeneration": 3
+        },
+        "cleanupPending": false,
+        "disconnectRecovery": "expiry-bounded; no disconnect callback",
+        "expiryDue": false,
+        "frame": 18961,
+        "globalOrder": [
+          "year",
+          "month",
+          "day",
+          "gameHour",
+          "daysPassed",
+          "calendarRate"
+        ],
+        "holdValid": true,
+        "lastTransition": {
+          "ok": true,
+          "restored": false,
+          "status": "held"
+        },
+        "lease": {
+          "applied": true,
+          "binding": {
+            "cellFormId": 91560,
+            "globalFormIds": [
+              53,
+              54,
+              55,
+              56,
+              57,
+              58
+            ],
+            "loadGeneration": 3
+          },
+          "captured": {
+            "calendarRate": 20.0,
+            "day": 17.0,
+            "daysPassed": 0.34604403376579285,
+            "engineMultiplier": 1.0,
+            "gameHour": 8.30505657196045,
+            "month": 7.0,
+            "year": 201.0
+          },
+          "cleanupAttempted": false,
+          "deadlineMonotonicMs": 2274871994
+        },
+        "leaseActive": true,
+        "observedMonotonicMs": 2274692894,
+        "ok": true,
+        "outstanding": true,
+        "plugin": "devbench",
+        "readbackFresh": true,
+        "restored": false,
+        "schemaVersion": 1,
+        "serviceStopping": false,
+        "status": "observed",
+        "values": {
+          "calendarRate": 0.0,
+          "day": 17.0,
+          "daysPassed": 0.34604403376579285,
+          "engineMultiplier": 1.0,
+          "gameHour": 8.30505657196045,
+          "month": 7.0,
+          "year": 201.0
+        },
+        "version": "1.22.0",
+        "worldLoaded": true
+      },
+      "parsedNativeReplyCanonicalSha256": "c23a1ec340bb784b05bad3355cd986fcb2e67c54640915077dd4ac00dbbe57f6",
+      "projectionNotOriginalContractConformingRecord": true,
+      "sameMcpSessionPrivatelyVerified": true,
+      "schemaVersion": 1,
+      "tool": "calendar"
+    },
+    {
+      "argumentsProjection": {
+        "action": "status",
+        "expectedBuildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438"
+      },
+      "declaredInvocationOrdinalZeroBased": 21,
+      "immutableJournalIdentity": {
+        "bytes": 15679,
+        "sha256": "f75550d4a02303b92d0abf8b0d89a437c17a2df79cd142733aab1c1b732c6951"
+      },
+      "intendedUtc": "2026-10-05T18:15:29.9291918Z",
+      "mutation": false,
+      "nativeReplyProjection": {
+        "armedQpc": 22746928608876,
+        "completedQpc": 22746928936315,
+        "cpuFrame": 18960,
+        "error": "the captured frame did not contain every required stage and eye",
+        "expectedColourContractRevision": 1,
+        "expectedStageEyeSlots": 10,
+        "generation": 1,
+        "mappedStageEyeSlots": 0,
+        "maximumStagingPayloadBytes": 1073741824,
+        "producer": {
+          "artifactSha256": "",
+          "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+          "buildIdShort": "ef49a37c28a0",
+          "component": "CommunityShaders",
+          "configuration": "Release",
+          "manifestError": "runtime artifact verification delegated to deployment harness",
+          "manifestVerified": false,
+          "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+          "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+          "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+          "sourceDescribe": "217992d",
+          "sourceDirty": false
+        },
+        "queryQueuedQpc": 0,
+        "queuedStageEyeSlots": 6,
+        "sceneEpoch": null,
+        "schemaVersion": 3,
+        "stagingPayloadBytes": 49674240,
+        "state": "failed",
+        "submissionEpoch": null,
+        "timeoutSeconds": 15
+      },
+      "parsedNativeReplyCanonicalSha256": "a99193f79e7585108188e53b83796a201f97b83e83af1da7afb8db56ced64a5d",
+      "projectionNotOriginalContractConformingRecord": true,
+      "sameMcpSessionPrivatelyVerified": true,
+      "schemaVersion": 1,
+      "tool": "communityshaders.colour_pipeline_probe"
+    },
+    {
+      "argumentsProjection": {
+        "action": "status"
+      },
+      "declaredInvocationOrdinalZeroBased": 22,
+      "immutableJournalIdentity": {
+        "bytes": 17275,
+        "sha256": "5bf9e2dc7379785cbeb19243cfbae796ac24d2dffe0817f4e6fd4e29382ee3f7"
+      },
+      "intendedUtc": "2026-10-05T18:15:29.9398230Z",
+      "mutation": false,
+      "nativeReplyProjection": {
+        "action": "status",
+        "available": true,
+        "binding": {
+          "cellFormId": 91560,
+          "globalFormIds": [
+            53,
+            54,
+            55,
+            56,
+            57,
+            58
+          ],
+          "loadGeneration": 3
+        },
+        "cleanupPending": false,
+        "disconnectRecovery": "expiry-bounded; no disconnect callback",
+        "expiryDue": false,
+        "frame": 18963,
+        "globalOrder": [
+          "year",
+          "month",
+          "day",
+          "gameHour",
+          "daysPassed",
+          "calendarRate"
+        ],
+        "holdValid": true,
+        "lastTransition": {
+          "ok": true,
+          "restored": false,
+          "status": "held"
+        },
+        "lease": {
+          "applied": true,
+          "binding": {
+            "cellFormId": 91560,
+            "globalFormIds": [
+              53,
+              54,
+              55,
+              56,
+              57,
+              58
+            ],
+            "loadGeneration": 3
+          },
+          "captured": {
+            "calendarRate": 20.0,
+            "day": 17.0,
+            "daysPassed": 0.34604403376579285,
+            "engineMultiplier": 1.0,
+            "gameHour": 8.30505657196045,
+            "month": 7.0,
+            "year": 201.0
+          },
+          "cleanupAttempted": false,
+          "deadlineMonotonicMs": 2274871994
+        },
+        "leaseActive": true,
+        "observedMonotonicMs": 2274692930,
+        "ok": true,
+        "outstanding": true,
+        "plugin": "devbench",
+        "readbackFresh": true,
+        "restored": false,
+        "schemaVersion": 1,
+        "serviceStopping": false,
+        "status": "observed",
+        "values": {
+          "calendarRate": 0.0,
+          "day": 17.0,
+          "daysPassed": 0.34604403376579285,
+          "engineMultiplier": 1.0,
+          "gameHour": 8.30505657196045,
+          "month": 7.0,
+          "year": 201.0
+        },
+        "version": "1.22.0",
+        "worldLoaded": true
+      },
+      "parsedNativeReplyCanonicalSha256": "05baeeb861a9dcf3b07361483532a5b1d47da07bce40e56a034de2a75d913fc1",
+      "projectionNotOriginalContractConformingRecord": true,
+      "sameMcpSessionPrivatelyVerified": true,
+      "schemaVersion": 1,
+      "tool": "calendar"
+    },
+    {
+      "argumentsProjection": {
+        "action": "status",
+        "expectedBuildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438"
+      },
+      "declaredInvocationOrdinalZeroBased": 23,
+      "immutableJournalIdentity": {
+        "bytes": 15679,
+        "sha256": "970b63805f0a6ccf6a9bf580f773712b225a468a95c2edf5149ab2773b53822c"
+      },
+      "intendedUtc": "2026-10-05T18:15:29.9899816Z",
+      "mutation": false,
+      "nativeReplyProjection": {
+        "armedQpc": 22746928608876,
+        "completedQpc": 22746928936315,
+        "cpuFrame": 18960,
+        "error": "the captured frame did not contain every required stage and eye",
+        "expectedColourContractRevision": 1,
+        "expectedStageEyeSlots": 10,
+        "generation": 1,
+        "mappedStageEyeSlots": 0,
+        "maximumStagingPayloadBytes": 1073741824,
+        "producer": {
+          "artifactSha256": "",
+          "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+          "buildIdShort": "ef49a37c28a0",
+          "component": "CommunityShaders",
+          "configuration": "Release",
+          "manifestError": "runtime artifact verification delegated to deployment harness",
+          "manifestVerified": false,
+          "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+          "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+          "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+          "sourceDescribe": "217992d",
+          "sourceDirty": false
+        },
+        "queryQueuedQpc": 0,
+        "queuedStageEyeSlots": 6,
+        "sceneEpoch": null,
+        "schemaVersion": 3,
+        "stagingPayloadBytes": 49674240,
+        "state": "failed",
+        "submissionEpoch": null,
+        "timeoutSeconds": 15
+      },
+      "parsedNativeReplyCanonicalSha256": "a99193f79e7585108188e53b83796a201f97b83e83af1da7afb8db56ced64a5d",
+      "projectionNotOriginalContractConformingRecord": true,
+      "sameMcpSessionPrivatelyVerified": true,
+      "schemaVersion": 1,
+      "tool": "communityshaders.colour_pipeline_probe"
+    },
+    {
+      "argumentsProjection": {
+        "action": "reset",
+        "expectedBuildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+        "generation": 1
+      },
+      "declaredInvocationOrdinalZeroBased": 24,
+      "immutableJournalIdentity": {
+        "bytes": 14723,
+        "sha256": "824b2147339e47c1e9d6a368d7c59ac93a7884c95fe88368ce6704393b52e7ad"
+      },
+      "intendedUtc": "2026-10-05T18:15:30.0069305Z",
+      "mutation": true,
+      "nativeReplyProjection": {
+        "accepted": true,
+        "action": "reset",
+        "error": null,
+        "generation": 2,
+        "producer": {
+          "artifactSha256": "",
+          "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+          "buildIdShort": "ef49a37c28a0",
+          "component": "CommunityShaders",
+          "configuration": "Release",
+          "manifestError": "runtime artifact verification delegated to deployment harness",
+          "manifestVerified": false,
+          "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+          "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+          "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+          "sourceDescribe": "217992d",
+          "sourceDirty": false
+        }
+      },
+      "parsedNativeReplyCanonicalSha256": "31130d31bf765d49e7ab83eb467cac3a27e3f4dee8d2c9452cc3fd7ff4355769",
+      "projectionNotOriginalContractConformingRecord": true,
+      "sameMcpSessionPrivatelyVerified": true,
+      "schemaVersion": 1,
+      "tool": "communityshaders.colour_pipeline_probe"
+    },
+    {
+      "argumentsProjection": {
+        "action": "status",
+        "expectedBuildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438"
+      },
+      "declaredInvocationOrdinalZeroBased": 25,
+      "immutableJournalIdentity": {
+        "bytes": 15419,
+        "sha256": "54f2c86b23b8537cba4585c1e3ce9cb25a923ad1c5d293097856dbda143a00b0"
+      },
+      "intendedUtc": "2026-10-05T18:15:30.0254511Z",
+      "mutation": false,
+      "nativeReplyProjection": {
+        "armedQpc": 0,
+        "completedQpc": 0,
+        "cpuFrame": null,
+        "error": null,
+        "expectedColourContractRevision": 0,
+        "expectedStageEyeSlots": 10,
+        "generation": 2,
+        "mappedStageEyeSlots": 0,
+        "maximumStagingPayloadBytes": 1073741824,
+        "producer": {
+          "artifactSha256": "",
+          "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+          "buildIdShort": "ef49a37c28a0",
+          "component": "CommunityShaders",
+          "configuration": "Release",
+          "manifestError": "runtime artifact verification delegated to deployment harness",
+          "manifestVerified": false,
+          "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+          "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+          "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+          "sourceDescribe": "217992d",
+          "sourceDirty": false
+        },
+        "queryQueuedQpc": 0,
+        "queuedStageEyeSlots": 0,
+        "sceneEpoch": null,
+        "schemaVersion": 3,
+        "stagingPayloadBytes": 0,
+        "state": "idle",
+        "submissionEpoch": null,
+        "timeoutSeconds": 15
+      },
+      "parsedNativeReplyCanonicalSha256": "dd248168446c109bef202f36d7ed696454689573b710f1c02312cbc404b6f3d4",
+      "projectionNotOriginalContractConformingRecord": true,
+      "sameMcpSessionPrivatelyVerified": true,
+      "schemaVersion": 1,
+      "tool": "communityshaders.colour_pipeline_probe"
+    },
+    {
+      "argumentsProjection": {
+        "action": "release",
+        "binding": {
+          "cellFormId": 91560,
+          "globalFormIds": [
+            53,
+            54,
+            55,
+            56,
+            57,
+            58
+          ],
+          "loadGeneration": 3
+        }
+      },
+      "declaredInvocationOrdinalZeroBased": 26,
+      "immutableJournalIdentity": {
+        "bytes": 17758,
+        "sha256": "684c1498022cf9179727a8eceb2f251fc5189b5211b8a62dd53ad12ba42a4128"
+      },
+      "intendedUtc": "2026-10-05T18:15:30.0402342Z",
+      "mutation": true,
+      "nativeReplyProjection": {
+        "action": "release",
+        "available": true,
+        "binding": {
+          "cellFormId": 91560,
+          "globalFormIds": [
+            53,
+            54,
+            55,
+            56,
+            57,
+            58
+          ],
+          "loadGeneration": 3
+        },
+        "cleanupPending": false,
+        "disconnectRecovery": "expiry-bounded; no disconnect callback",
+        "expiryDue": false,
+        "frame": 18969,
+        "globalOrder": [
+          "year",
+          "month",
+          "day",
+          "gameHour",
+          "daysPassed",
+          "calendarRate"
+        ],
+        "holdValid": false,
+        "lastTransition": {
+          "ok": true,
+          "restored": true,
+          "status": "released"
+        },
+        "lease": {
+          "applied": true,
+          "binding": {
+            "cellFormId": 91560,
+            "globalFormIds": [
+              53,
+              54,
+              55,
+              56,
+              57,
+              58
+            ],
+            "loadGeneration": 3
+          },
+          "captured": {
+            "calendarRate": 20.0,
+            "day": 17.0,
+            "daysPassed": 0.34604403376579285,
+            "engineMultiplier": 1.0,
+            "gameHour": 8.30505657196045,
+            "month": 7.0,
+            "year": 201.0
+          },
+          "cleanupAttempted": true,
+          "deadlineMonotonicMs": 2274871994
+        },
+        "leaseActive": false,
+        "observedMonotonicMs": 2274693033,
+        "ok": true,
+        "outstanding": false,
+        "plugin": "devbench",
+        "readbackFresh": true,
+        "restored": true,
+        "schemaVersion": 1,
+        "serviceStopping": false,
+        "status": "released",
+        "values": {
+          "calendarRate": 20.0,
+          "day": 17.0,
+          "daysPassed": 0.34604403376579285,
+          "engineMultiplier": 1.0,
+          "gameHour": 8.30505657196045,
+          "month": 7.0,
+          "year": 201.0
+        },
+        "version": "1.22.0",
+        "worldLoaded": true
+      },
+      "parsedNativeReplyCanonicalSha256": "3187ef4551e44d0e5a6002e33936447983e6fedce2de95fbbe79bc83fa648a79",
+      "projectionNotOriginalContractConformingRecord": true,
+      "sameMcpSessionPrivatelyVerified": true,
+      "schemaVersion": 1,
+      "tool": "calendar"
+    },
+    {
+      "argumentsProjection": {
+        "action": "status"
+      },
+      "declaredInvocationOrdinalZeroBased": 27,
+      "immutableJournalIdentity": {
+        "bytes": 17287,
+        "sha256": "140e14a857435800c54c6854f2dfbf0c51c8925fefbcd91f9c981055566b4c99"
+      },
+      "intendedUtc": "2026-10-05T18:15:30.0690922Z",
+      "mutation": false,
+      "nativeReplyProjection": {
+        "action": "status",
+        "available": true,
+        "binding": {
+          "cellFormId": 91560,
+          "globalFormIds": [
+            53,
+            54,
+            55,
+            56,
+            57,
+            58
+          ],
+          "loadGeneration": 3
+        },
+        "cleanupPending": false,
+        "disconnectRecovery": "expiry-bounded; no disconnect callback",
+        "expiryDue": false,
+        "frame": 18970,
+        "globalOrder": [
+          "year",
+          "month",
+          "day",
+          "gameHour",
+          "daysPassed",
+          "calendarRate"
+        ],
+        "holdValid": false,
+        "lastTransition": {
+          "ok": true,
+          "restored": true,
+          "status": "released"
+        },
+        "lease": {
+          "applied": true,
+          "binding": {
+            "cellFormId": 91560,
+            "globalFormIds": [
+              53,
+              54,
+              55,
+              56,
+              57,
+              58
+            ],
+            "loadGeneration": 3
+          },
+          "captured": {
+            "calendarRate": 20.0,
+            "day": 17.0,
+            "daysPassed": 0.34604403376579285,
+            "engineMultiplier": 1.0,
+            "gameHour": 8.30505657196045,
+            "month": 7.0,
+            "year": 201.0
+          },
+          "cleanupAttempted": true,
+          "deadlineMonotonicMs": 2274871994
+        },
+        "leaseActive": false,
+        "observedMonotonicMs": 2274693050,
+        "ok": true,
+        "outstanding": false,
+        "plugin": "devbench",
+        "readbackFresh": true,
+        "restored": false,
+        "schemaVersion": 1,
+        "serviceStopping": false,
+        "status": "observed",
+        "values": {
+          "calendarRate": 20.0,
+          "day": 17.0,
+          "daysPassed": 0.3460480570793152,
+          "engineMultiplier": 1.0,
+          "gameHour": 8.305152893066406,
+          "month": 7.0,
+          "year": 201.0
+        },
+        "version": "1.22.0",
+        "worldLoaded": true
+      },
+      "parsedNativeReplyCanonicalSha256": "5b024f168befb274bde64c1ebb3adf74128fe297a0c984c0df461f137a5d0e6b",
+      "projectionNotOriginalContractConformingRecord": true,
+      "sameMcpSessionPrivatelyVerified": true,
+      "schemaVersion": 1,
+      "tool": "calendar"
+    }
+  ],
+  "schemaVersion": 1
+}
