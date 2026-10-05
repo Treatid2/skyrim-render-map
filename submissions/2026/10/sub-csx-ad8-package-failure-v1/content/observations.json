@@ -1,0 +1,1745 @@
+{
+  "admission": {
+    "causalBrightness": false,
+    "healthyPerformance": false,
+    "healthyVisual": false,
+    "modlistProjectStarted": false,
+    "runtimeFailureScopeOnly": true
+  },
+  "api": {
+    "after": {
+      "snapshot": {
+        "activeOperationId": 0,
+        "capabilityRevision": 1,
+        "dimensions": {
+          "displayEyeHeight": 1680,
+          "displayEyeWidth": 1512,
+          "renderEyeHeight": 1120,
+          "renderEyeWidth": 2016
+        },
+        "flags": 1,
+        "observedConditions": {
+          "mask": 0,
+          "names": []
+        },
+        "profilePresence": 9,
+        "profiles": {
+          "applying": {
+            "dlssProfile": {
+              "name": "K",
+              "value": 1
+            },
+            "fsrRuntime": {
+              "name": "fsr3",
+              "value": 0
+            },
+            "method": {
+              "name": "none",
+              "value": 0
+            },
+            "qualityMode": {
+              "name": "native_aa",
+              "value": 0
+            },
+            "renderScaleMode": false
+          },
+          "configured": {
+            "dlssProfile": {
+              "name": "K",
+              "value": 1
+            },
+            "fsrRuntime": {
+              "name": "fsr4",
+              "value": 1
+            },
+            "method": {
+              "name": "fsr",
+              "value": 2
+            },
+            "qualityMode": {
+              "name": "quality",
+              "value": 3
+            },
+            "renderScaleMode": false
+          },
+          "effective": {
+            "dlssProfile": {
+              "name": "K",
+              "value": 1
+            },
+            "fsrRuntime": {
+              "name": "fsr4",
+              "value": 1
+            },
+            "method": {
+              "name": "fsr",
+              "value": 2
+            },
+            "qualityMode": {
+              "name": "quality",
+              "value": 3
+            },
+            "renderScaleMode": false
+          },
+          "persisted": {
+            "dlssProfile": {
+              "name": "K",
+              "value": 1
+            },
+            "fsrRuntime": {
+              "name": "fsr3",
+              "value": 0
+            },
+            "method": {
+              "name": "none",
+              "value": 0
+            },
+            "qualityMode": {
+              "name": "native_aa",
+              "value": 0
+            },
+            "renderScaleMode": false
+          },
+          "requested": {
+            "dlssProfile": {
+              "name": "K",
+              "value": 1
+            },
+            "fsrRuntime": {
+              "name": "fsr3",
+              "value": 0
+            },
+            "method": {
+              "name": "none",
+              "value": 0
+            },
+            "qualityMode": {
+              "name": "native_aa",
+              "value": 0
+            },
+            "renderScaleMode": false
+          },
+          "stable": {
+            "dlssProfile": {
+              "name": "K",
+              "value": 1
+            },
+            "fsrRuntime": {
+              "name": "fsr3",
+              "value": 0
+            },
+            "method": {
+              "name": "none",
+              "value": 0
+            },
+            "qualityMode": {
+              "name": "native_aa",
+              "value": 0
+            },
+            "renderScaleMode": false
+          }
+        },
+        "renderScaleStatus": {
+          "name": "disabled",
+          "value": 0
+        },
+        "stateRevision": 1,
+        "transitionState": {
+          "name": "idle",
+          "value": 0
+        }
+      },
+      "status": {
+        "name": "success",
+        "value": 0
+      },
+      "timestampUtc": "2026-10-04T23:45:00.9177355Z"
+    },
+    "attachedSnapshot": {
+      "activeOperationId": 0,
+      "capabilityRevision": 1,
+      "dimensions": {
+        "displayEyeHeight": 1680,
+        "displayEyeWidth": 1512,
+        "renderEyeHeight": 1120,
+        "renderEyeWidth": 2016
+      },
+      "flags": 1,
+      "observedConditions": {
+        "mask": 0,
+        "names": []
+      },
+      "profilePresence": 9,
+      "profiles": {
+        "applying": {
+          "dlssProfile": {
+            "name": "K",
+            "value": 1
+          },
+          "fsrRuntime": {
+            "name": "fsr3",
+            "value": 0
+          },
+          "method": {
+            "name": "none",
+            "value": 0
+          },
+          "qualityMode": {
+            "name": "native_aa",
+            "value": 0
+          },
+          "renderScaleMode": false
+        },
+        "configured": {
+          "dlssProfile": {
+            "name": "K",
+            "value": 1
+          },
+          "fsrRuntime": {
+            "name": "fsr4",
+            "value": 1
+          },
+          "method": {
+            "name": "fsr",
+            "value": 2
+          },
+          "qualityMode": {
+            "name": "quality",
+            "value": 3
+          },
+          "renderScaleMode": false
+        },
+        "effective": {
+          "dlssProfile": {
+            "name": "K",
+            "value": 1
+          },
+          "fsrRuntime": {
+            "name": "fsr4",
+            "value": 1
+          },
+          "method": {
+            "name": "fsr",
+            "value": 2
+          },
+          "qualityMode": {
+            "name": "quality",
+            "value": 3
+          },
+          "renderScaleMode": false
+        },
+        "persisted": {
+          "dlssProfile": {
+            "name": "K",
+            "value": 1
+          },
+          "fsrRuntime": {
+            "name": "fsr3",
+            "value": 0
+          },
+          "method": {
+            "name": "none",
+            "value": 0
+          },
+          "qualityMode": {
+            "name": "native_aa",
+            "value": 0
+          },
+          "renderScaleMode": false
+        },
+        "requested": {
+          "dlssProfile": {
+            "name": "K",
+            "value": 1
+          },
+          "fsrRuntime": {
+            "name": "fsr3",
+            "value": 0
+          },
+          "method": {
+            "name": "none",
+            "value": 0
+          },
+          "qualityMode": {
+            "name": "native_aa",
+            "value": 0
+          },
+          "renderScaleMode": false
+        },
+        "stable": {
+          "dlssProfile": {
+            "name": "K",
+            "value": 1
+          },
+          "fsrRuntime": {
+            "name": "fsr3",
+            "value": 0
+          },
+          "method": {
+            "name": "none",
+            "value": 0
+          },
+          "qualityMode": {
+            "name": "native_aa",
+            "value": 0
+          },
+          "renderScaleMode": false
+        }
+      },
+      "renderScaleStatus": {
+        "name": "disabled",
+        "value": 0
+      },
+      "stateRevision": 1,
+      "transitionState": {
+        "name": "idle",
+        "value": 0
+      }
+    },
+    "before": {
+      "snapshot": {
+        "activeOperationId": 0,
+        "capabilityRevision": 1,
+        "dimensions": {
+          "displayEyeHeight": 1680,
+          "displayEyeWidth": 1512,
+          "renderEyeHeight": 1120,
+          "renderEyeWidth": 2016
+        },
+        "flags": 1,
+        "observedConditions": {
+          "mask": 0,
+          "names": []
+        },
+        "profilePresence": 9,
+        "profiles": {
+          "applying": {
+            "dlssProfile": {
+              "name": "K",
+              "value": 1
+            },
+            "fsrRuntime": {
+              "name": "fsr3",
+              "value": 0
+            },
+            "method": {
+              "name": "none",
+              "value": 0
+            },
+            "qualityMode": {
+              "name": "native_aa",
+              "value": 0
+            },
+            "renderScaleMode": false
+          },
+          "configured": {
+            "dlssProfile": {
+              "name": "K",
+              "value": 1
+            },
+            "fsrRuntime": {
+              "name": "fsr4",
+              "value": 1
+            },
+            "method": {
+              "name": "fsr",
+              "value": 2
+            },
+            "qualityMode": {
+              "name": "quality",
+              "value": 3
+            },
+            "renderScaleMode": false
+          },
+          "effective": {
+            "dlssProfile": {
+              "name": "K",
+              "value": 1
+            },
+            "fsrRuntime": {
+              "name": "fsr4",
+              "value": 1
+            },
+            "method": {
+              "name": "fsr",
+              "value": 2
+            },
+            "qualityMode": {
+              "name": "quality",
+              "value": 3
+            },
+            "renderScaleMode": false
+          },
+          "persisted": {
+            "dlssProfile": {
+              "name": "K",
+              "value": 1
+            },
+            "fsrRuntime": {
+              "name": "fsr3",
+              "value": 0
+            },
+            "method": {
+              "name": "none",
+              "value": 0
+            },
+            "qualityMode": {
+              "name": "native_aa",
+              "value": 0
+            },
+            "renderScaleMode": false
+          },
+          "requested": {
+            "dlssProfile": {
+              "name": "K",
+              "value": 1
+            },
+            "fsrRuntime": {
+              "name": "fsr3",
+              "value": 0
+            },
+            "method": {
+              "name": "none",
+              "value": 0
+            },
+            "qualityMode": {
+              "name": "native_aa",
+              "value": 0
+            },
+            "renderScaleMode": false
+          },
+          "stable": {
+            "dlssProfile": {
+              "name": "K",
+              "value": 1
+            },
+            "fsrRuntime": {
+              "name": "fsr3",
+              "value": 0
+            },
+            "method": {
+              "name": "none",
+              "value": 0
+            },
+            "qualityMode": {
+              "name": "native_aa",
+              "value": 0
+            },
+            "renderScaleMode": false
+          }
+        },
+        "renderScaleStatus": {
+          "name": "disabled",
+          "value": 0
+        },
+        "stateRevision": 1,
+        "transitionState": {
+          "name": "idle",
+          "value": 0
+        }
+      },
+      "status": {
+        "name": "success",
+        "value": 0
+      },
+      "timestampUtc": "2026-10-04T23:44:55.9483329Z"
+    },
+    "controllerRevision": 13,
+    "correlation": {
+      "afterCapabilityRevision": 1,
+      "afterRevision": 1,
+      "afterStatus": 0,
+      "atomicEngineSnapshot": false,
+      "authority": "csx.upscaling.stateRevision",
+      "beforeCapabilityRevision": 1,
+      "beforeRevision": 1,
+      "beforeStatus": 0,
+      "coherent": true,
+      "method": "native-api-bracket-around-physical-status"
+    },
+    "physicalTimestampUtc": "2026-10-04T23:44:58.4588567Z",
+    "runtimeResolutionPlan": {
+      "engineRenderHeight": 1120.0,
+      "engineRenderWidth": 2016.0,
+      "finalOutputHeight": 1680.0,
+      "finalOutputWidth": 3024.0,
+      "menuContextActive": false,
+      "method": "fsr",
+      "outputTarget": "Main",
+      "owner": "VendorDynamicResolution",
+      "qualityMode": 3,
+      "vendorMethod": true
+    },
+    "selectionPolicy": {
+      "linkedToUpscaling": true,
+      "physicallyActive": false,
+      "rememberedPreference": false,
+      "requestedActive": false
+    }
+  },
+  "colour": {
+    "reportedEyes": [
+      {
+        "autoExposure": true,
+        "configuredSharpnessAtDispatch": 0.8999999761581421,
+        "contextGeneration": 2,
+        "contextIndex": 0,
+        "displayHeight": 1680,
+        "displayWidth": 1512,
+        "effectiveSharpness": 0.8999999761581421,
+        "exposureResourceBound": false,
+        "frame": 43049,
+        "highDynamicRangeInput": true,
+        "path": 3,
+        "preExposure": 1.0,
+        "renderHeight": 1120,
+        "renderWidth": 1008,
+        "serial": 55161,
+        "sharpeningEnabled": true,
+        "valid": true
+      },
+      {
+        "autoExposure": true,
+        "configuredSharpnessAtDispatch": 0.8999999761581421,
+        "contextGeneration": 2,
+        "contextIndex": 1,
+        "displayHeight": 1680,
+        "displayWidth": 1512,
+        "effectiveSharpness": 0.8999999761581421,
+        "exposureResourceBound": false,
+        "frame": 43049,
+        "highDynamicRangeInput": true,
+        "path": 3,
+        "preExposure": 1.0,
+        "renderHeight": 1120,
+        "renderWidth": 1008,
+        "serial": 55162,
+        "sharpeningEnabled": true,
+        "valid": true
+      }
+    ],
+    "requested": {
+      "autoExposure": true,
+      "highDynamicRangeInput": true,
+      "revision": 1
+    },
+    "runtimeContext": {
+      "autoExposure": true,
+      "generation": 2,
+      "highDynamicRangeInput": true,
+      "valid": true
+    },
+    "timestampUtc": "2026-10-04T23:47:00.3949263Z"
+  },
+  "custody": {
+    "failedCacheArchiveHashVerified": true,
+    "ownerFinalizationClaim": "See separately attributed assertions; metadata identity verified, no importer live checks.",
+    "ownerRoundTripProofReusedNotRepeated": true
+  },
+  "deployment": {
+    "bytes": 9553640,
+    "capturedAtUtc": "2026-10-04T21:33:57.1876890Z",
+    "completeDeclaredCoreInventory": [
+      {
+        "bytes": 106748,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\CrimsonPro\\CrimsonPro-Light.ttf",
+        "sha256": "3B94DE108CE053DE60666A413E2803F52D325727DFF4E29C551EFA8D55F7475A"
+      },
+      {
+        "bytes": 106696,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\CrimsonPro\\CrimsonPro-Regular.ttf",
+        "sha256": "48FAD08CB1917A7B2F2C6FE5135D6C07743A6663CF7631EC4481108AAF081422"
+      },
+      {
+        "bytes": 107416,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\CrimsonPro\\CrimsonPro-SemiBold.ttf",
+        "sha256": "55882E3102E3B88FF0DFB56690B6A3719B470BC23015FCBF8BA317D120E4026F"
+      },
+      {
+        "bytes": 133468,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\IBMPlexMono\\IBMPlexMono-Light.ttf",
+        "sha256": "9C829B8F32B94999060E0BA9D2299ED1D9637702318346F0C194FB9843038FD8"
+      },
+      {
+        "bytes": 133796,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\IBMPlexMono\\IBMPlexMono-Regular.ttf",
+        "sha256": "AB08018CCD276B79FB2C636BB95B9C543598F9D50505FE92506FCB4DAE7810CD"
+      },
+      {
+        "bytes": 138448,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\IBMPlexMono\\IBMPlexMono-SemiBold.ttf",
+        "sha256": "B1A936F96266FBE036B112F659155F7C32222AF44A9A20F3BB011F51050669D5"
+      },
+      {
+        "bytes": 4362,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\IBMPlexMono\\OFL.txt",
+        "sha256": "65FC2F0DD4812F7A323B363EC014786A12EF5E56703CE1F677830CDE4399408B"
+      },
+      {
+        "bytes": 218888,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\IBMPlexSans\\IBMPlexSans_Condensed-Light.ttf",
+        "sha256": "31F75F64740ECB63ADCD7C15AF7457351D3DFB66970A81DF129E0590D46037A8"
+      },
+      {
+        "bytes": 218360,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\IBMPlexSans\\IBMPlexSans_Condensed-Regular.ttf",
+        "sha256": "964E32E6ED80B2B4F439156970AC66343EBB817A9178FAA211C3EAAAC523BC40"
+      },
+      {
+        "bytes": 218372,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\IBMPlexSans\\IBMPlexSans_Condensed-SemiBold.ttf",
+        "sha256": "F633EB42E8C22DA21DBF2A494C1073100B5A4FDC24463D62862FEDAB705CF617"
+      },
+      {
+        "bytes": 218848,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\IBMPlexSans\\IBMPlexSans-Light.ttf",
+        "sha256": "3170046080CF96674193F7E1C50BBC4DB51466253FB07D5B5A0DB807E998D735"
+      },
+      {
+        "bytes": 218236,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\IBMPlexSans\\IBMPlexSans-Regular.ttf",
+        "sha256": "8685116DFBCFA639621631C4AF0AD62E52DDEB9979ACBEC0007CCEF2E4801A27"
+      },
+      {
+        "bytes": 218248,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\IBMPlexSans\\IBMPlexSans-SemiBold.ttf",
+        "sha256": "659F916CE1922BD4FECAC7CD5F26018817A2946327A5DD00169C8BAB14AE2C58"
+      },
+      {
+        "bytes": 4362,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\IBMPlexSans\\OFL.txt",
+        "sha256": "65FC2F0DD4812F7A323B363EC014786A12EF5E56703CE1F677830CDE4399408B"
+      },
+      {
+        "bytes": 159996,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\IBMPlexSerif\\IBMPlexSerif-Light.ttf",
+        "sha256": "ED1B21C7CF8AD1CEE31253D1099C14813665684127F96BC76EDE8CEBFC35FB88"
+      },
+      {
+        "bytes": 160380,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\IBMPlexSerif\\IBMPlexSerif-Regular.ttf",
+        "sha256": "77CD233A2AF8DC6B1022FAEA3BB3B01F3C75AF68BCF530CB6AEB15982FF3DBB7"
+      },
+      {
+        "bytes": 161724,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\IBMPlexSerif\\IBMPlexSerif-SemiBold.ttf",
+        "sha256": "AFF7A672484C44B51BEF2E6804A796265FA1E7F8C4E3B0117E658F78AC4C2F4E"
+      },
+      {
+        "bytes": 4362,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\IBMPlexSerif\\OFL.txt",
+        "sha256": "65FC2F0DD4812F7A323B363EC014786A12EF5E56703CE1F677830CDE4399408B"
+      },
+      {
+        "bytes": 343440,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\Inter\\Inter_24pt-Light.ttf",
+        "sha256": "4AF699EA5ADD0AC0BDEFA3A43B0DF698E2C0055A445A1C29267525D8EB7862B7"
+      },
+      {
+        "bytes": 342732,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\Inter\\Inter_24pt-Regular.ttf",
+        "sha256": "D2A4911506EA4E124A47CA044E5E79F671DDF8F1A55F1AB9A56C58D088124B63"
+      },
+      {
+        "bytes": 343640,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\Inter\\Inter_24pt-SemiBold.ttf",
+        "sha256": "10238D4C2F85914E3899177426840BDE80B078A612903066CF5C9AFD17DBF023"
+      },
+      {
+        "bytes": 4376,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\Inter\\OFL.txt",
+        "sha256": "5CFD4B1A4302F0828B4D2756B7927F37008767A0F1EC2C30F1238CBC9C43FDEA"
+      },
+      {
+        "bytes": 61624,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\Jost\\Jost-Light.ttf",
+        "sha256": "32B3013C63114BA7B7427F73C1E932FF8EECD2B74EBA7E8E3D1127EB0E46D98F"
+      },
+      {
+        "bytes": 58796,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\Jost\\Jost-Regular.ttf",
+        "sha256": "6416FD39BB5816962425D980B77A163528C0821CD98A1C174064BF31117AC1AE"
+      },
+      {
+        "bytes": 61648,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\Jost\\Jost-SemiBold.ttf",
+        "sha256": "668CE71AEBF52EA47A75F250281F4F87F502787ECE62E48E0DA4BB46834B4A76"
+      },
+      {
+        "bytes": 4350,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\Jost\\OFL.txt",
+        "sha256": "F890821EA84693049EE574262E70E87315EE10DE99199F7C9B86720A8BAB1495"
+      },
+      {
+        "bytes": 4452,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\OpenDyslexic\\OFL.txt",
+        "sha256": "797CB441B593B3326A69FCF83D84264301D89E8871A75B38BAE1D101E922E10C"
+      },
+      {
+        "bytes": 239556,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\OpenDyslexic\\OpenDyslexic3-Bold.ttf",
+        "sha256": "159A62D2C629CB16867FD2822CBCF64D75E6FB3C915C9D2A14B491E9A6A5F605"
+      },
+      {
+        "bytes": 237868,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\OpenDyslexic\\OpenDyslexic3-Regular.ttf",
+        "sha256": "54C5C2129FB7BA2C48FA3CB75379F0EA47CFCC24E20F1956A6C080D1EFB480A3"
+      },
+      {
+        "bytes": 4393,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\Roboto\\OFL.txt",
+        "sha256": "EE94F8704AA81E9A3BF4271E8320E99D975A3EE08EA45A088B494B918476EC12"
+      },
+      {
+        "bytes": 145952,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\Roboto\\Roboto_Condensed-Light.ttf",
+        "sha256": "3F1A3F85852FAFC3A198904F6EFC1FCE5AE1013775AC40DA35BD52EC82D38E41"
+      },
+      {
+        "bytes": 145908,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\Roboto\\Roboto_Condensed-Regular.ttf",
+        "sha256": "D8E6F7C5A1356D41DD82B0C00219FEBD21C791CC5CD1ECF8A0323CBEAFE6496C"
+      },
+      {
+        "bytes": 146516,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\Roboto\\Roboto_Condensed-SemiBold.ttf",
+        "sha256": "A3E44E52C6B7273EC62C8342B204646C0CDB9B51117745D9FB0BBCA163619571"
+      },
+      {
+        "bytes": 146768,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\Roboto\\Roboto-Bold.ttf",
+        "sha256": "27467020FEBCE4C0AC8482EA8E8D6F32BF8C5721FB9C301344D0E3F4D93A0119"
+      },
+      {
+        "bytes": 146004,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\Roboto\\Roboto-Regular.ttf",
+        "sha256": "DBD285B518E398832F6F4A736109C355CE25A49546BFCE41BAB256C9EF7E56EB"
+      },
+      {
+        "bytes": 146760,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\Roboto\\Roboto-SemiBold.ttf",
+        "sha256": "57B40C38D6CC65F07C23EC0319B82904FE65E05DC40B5A13AC60A18FB5943BF1"
+      },
+      {
+        "bytes": 145936,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\Roboto\\Roboto-Thin.ttf",
+        "sha256": "0655F84356B7168BB342CF5AADC560524DAF8E26091159FAF92DAEB33FC1BB0D"
+      },
+      {
+        "bytes": 126680,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\RobotoSlab\\RobotoSlab-Light.ttf",
+        "sha256": "FC1300CCB86353DEF1DBA8D7C2569DFB9C783789BB5D2DD485F0718FD3F0FE39"
+      },
+      {
+        "bytes": 126188,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\RobotoSlab\\RobotoSlab-Regular.ttf",
+        "sha256": "1617414D9F759050B2339B58CA53D1A2D005561D8896AB0A6FB77A50F41954A7"
+      },
+      {
+        "bytes": 127088,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\RobotoSlab\\RobotoSlab-SemiBold.ttf",
+        "sha256": "9E30D302D6E71D9E37DC05DA1D61B73B22DBDFDB5F427660243BD0A7FD97BB3B"
+      },
+      {
+        "bytes": 4383,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\Rubik\\OFL.txt",
+        "sha256": "48C7836F2E819B9F2FE01FAB7AE2F794766FCB85EF21C79C2D8CA00F0D1EBA2E"
+      },
+      {
+        "bytes": 206696,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\Rubik\\Rubik-Light.ttf",
+        "sha256": "0166A843B2704B797842ABC712F1C2A00D3C2EA429EF86A6BF300B25F76CB6D3"
+      },
+      {
+        "bytes": 207628,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\Rubik\\Rubik-Regular.ttf",
+        "sha256": "6B94E23ADEDAB4522E1B65D21158E83C75F377FC99F916C58F8EC40ECC7DD035"
+      },
+      {
+        "bytes": 208208,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\Rubik\\Rubik-SemiBold.ttf",
+        "sha256": "3645E8B65EFCDD3BCCDE6AFEB1E482FBDC34C1A810EE2F19FB9E6E8837744938"
+      },
+      {
+        "bytes": 4231,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\Sanguis\\Sanguis OFL License.txt",
+        "sha256": "FAFC5670B9C8579F57207F527F141FBADF3BEDDAB8B474287A145CD9D7E08CB7"
+      },
+      {
+        "bytes": 60536,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\Sanguis\\Sanguis.ttf",
+        "sha256": "9AD0C8A1222908AC2E3AF688FC75AC1736B8746AE073FC4A08B7FDECBE9B920C"
+      },
+      {
+        "bytes": 4231,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\Sovngarde\\Sovngarde OFL License.txt",
+        "sha256": "BEB729413BD1BB04BFECBFD530EB0B899777FDD57472C8496A26E2CD53EF8BD5"
+      },
+      {
+        "bytes": 68540,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\Sovngarde\\SovngardeBold.ttf",
+        "sha256": "D33B1EFC20591F14F6887BA4C8726049EC494C427439CF86343D91DD8D64D423"
+      },
+      {
+        "bytes": 70168,
+        "relativePath": "Interface\\CommunityShaders\\Fonts\\Sovngarde\\SovngardeLight.ttf",
+        "sha256": "3DDEB5DE43E3F4E5E9511B6FAFE644298C5DD0037D1448AD27C5B56E568BC49F"
+      },
+      {
+        "bytes": 3214,
+        "relativePath": "Interface\\CommunityShaders\\Icons\\Action Icons\\apply-to-game.png",
+        "sha256": "9FA9A94F40BF73A7AF3E6F8F71DA7C37491E37CA49C1611BC7F7F714F3E673C7"
+      },
+      {
+        "bytes": 6739,
+        "relativePath": "Interface\\CommunityShaders\\Icons\\Action Icons\\clear-cache.png",
+        "sha256": "269989B282808FB96093F21A774B36BA8EF972F52F6C68BFC2069C28AEB5B955"
+      },
+      {
+        "bytes": 2465,
+        "relativePath": "Interface\\CommunityShaders\\Icons\\Action Icons\\delete.png",
+        "sha256": "7FCCD5E96F89E8244E0CE13BD2CD0EA1C33CF58C9B314CD1480FA06D5B347FBE"
+      },
+      {
+        "bytes": 738212,
+        "relativePath": "Interface\\CommunityShaders\\Icons\\Action Icons\\discord.png",
+        "sha256": "84C54CA3D893E7349370B15C9F8A02ACE650FAD927123D85B0805B2209608D3A"
+      },
+      {
+        "bytes": 388935,
+        "relativePath": "Interface\\CommunityShaders\\Icons\\Action Icons\\faultier.png",
+        "sha256": "FDED7CDFFECB394EAC142C5EC4D3C4D9A7E805665FEC4688BEA6971635DB57A9"
+      },
+      {
+        "bytes": 7777,
+        "relativePath": "Interface\\CommunityShaders\\Icons\\Action Icons\\free-camera.png",
+        "sha256": "0BB4AC02A367AF0E535DFC84950C166F43CEC64CD1AEB8D43C2EF900E276F290"
+      },
+      {
+        "bytes": 3629,
+        "relativePath": "Interface\\CommunityShaders\\Icons\\Action Icons\\load-settings.png",
+        "sha256": "24F93BA2528F07F72CA1B42A23FC27A86DAB9D31663BAC140861C291794DE2EC"
+      },
+      {
+        "bytes": 1742,
+        "relativePath": "Interface\\CommunityShaders\\Icons\\Action Icons\\Monochrome\\clear-cache.png",
+        "sha256": "2F1565BF24D0A011A17A65FE078EEC95CF69790257F0BABF797D7B4441403FA5"
+      },
+      {
+        "bytes": 2770,
+        "relativePath": "Interface\\CommunityShaders\\Icons\\Action Icons\\Monochrome\\load-settings.png",
+        "sha256": "3B91AB52D56CCFBFEE3C87F07EED6607D62C8F44BC5ECD016916D11B88551487"
+      },
+      {
+        "bytes": 2591,
+        "relativePath": "Interface\\CommunityShaders\\Icons\\Action Icons\\Monochrome\\restore-settings.png",
+        "sha256": "3E97D55428FE9DA319888DD5FC0B503F417C54641DFAC5989B6C5327D1639032"
+      },
+      {
+        "bytes": 1887,
+        "relativePath": "Interface\\CommunityShaders\\Icons\\Action Icons\\Monochrome\\save-settings.png",
+        "sha256": "9FF5463924D63FE58753372C88A87CC7594D79FF68A0DEA759DA222B8538C72C"
+      },
+      {
+        "bytes": 7678,
+        "relativePath": "Interface\\CommunityShaders\\Icons\\Action Icons\\pause.png",
+        "sha256": "1998C6CB6E35B9BD234090788D7AC982E1CA362F38B33471C68680C2481497E8"
+      },
+      {
+        "bytes": 7236,
+        "relativePath": "Interface\\CommunityShaders\\Icons\\Action Icons\\play-mode.png",
+        "sha256": "242DED8DDDB7E58C08EE0F8C50A2C7877422BA2B5860C393EA55A321DA2194BF"
+      },
+      {
+        "bytes": 3185,
+        "relativePath": "Interface\\CommunityShaders\\Icons\\Action Icons\\restore-settings.png",
+        "sha256": "1136E6CCB84122BB0158C9794B9929420099AA73EF7966A7FE261B4C7CDBE1C5"
+      },
+      {
+        "bytes": 2314,
+        "relativePath": "Interface\\CommunityShaders\\Icons\\Action Icons\\save-settings.png",
+        "sha256": "3459AC9AC9F8457DFE3BEA57F90E531C0712F6B59269231271CCBE50D0BBAD65"
+      },
+      {
+        "bytes": 6501,
+        "relativePath": "Interface\\CommunityShaders\\Icons\\Action Icons\\undo.png",
+        "sha256": "38F1D05F8AC6B7DD191565746FC6490648D3CF06B9FFFCC4DF8A42F0554E8A8C"
+      },
+      {
+        "bytes": 4835,
+        "relativePath": "Interface\\CommunityShaders\\Icons\\Categories\\characters.png",
+        "sha256": "F2C80064C0FC701D4413EA54A0EEE95CF27B10111E8BEA75DBD182383A582855"
+      },
+      {
+        "bytes": 4825,
+        "relativePath": "Interface\\CommunityShaders\\Icons\\Categories\\debug.png",
+        "sha256": "40278D4812084A42B80548217BDDF8D59B630F6721FEE6441320C19AA7FE5A2D"
+      },
+      {
+        "bytes": 1602,
+        "relativePath": "Interface\\CommunityShaders\\Icons\\Categories\\display.png",
+        "sha256": "4032A35D120049DA6B4A5DD07B0D0ACA81BEE6C4796873CB89212971D60A7DF8"
+      },
+      {
+        "bytes": 5584,
+        "relativePath": "Interface\\CommunityShaders\\Icons\\Categories\\grass.png",
+        "sha256": "0BC0E06A0825B6E7903D7F0DBB54D7C9727B058E5386E94DED8A5000419AA1F0"
+      },
+      {
+        "bytes": 4507,
+        "relativePath": "Interface\\CommunityShaders\\Icons\\Categories\\landscape.png",
+        "sha256": "11490E151047DAFF0F0334615E8341ED8CB8267F3FBBEB074CCB24CEF0377708"
+      },
+      {
+        "bytes": 4023,
+        "relativePath": "Interface\\CommunityShaders\\Icons\\Categories\\lighting.png",
+        "sha256": "F378EAFA8688FBC6753A5655F626CDCCAF65798010C13DDDFD80C2BE6704CB1C"
+      },
+      {
+        "bytes": 5441,
+        "relativePath": "Interface\\CommunityShaders\\Icons\\Categories\\materials.png",
+        "sha256": "53F9757456FFD2D0347351660AC8524707F1C4C3812EF7D4ABD6210901D8F7BB"
+      },
+      {
+        "bytes": 8844,
+        "relativePath": "Interface\\CommunityShaders\\Icons\\Categories\\post-processing.png",
+        "sha256": "6843B5FD8EFA518E06E3467DA4DFAE8EE24267E85885BB57DC5CD15AB8087057"
+      },
+      {
+        "bytes": 2044,
+        "relativePath": "Interface\\CommunityShaders\\Icons\\Categories\\sky.png",
+        "sha256": "32038B8761A7F2B1C1BB810E0E6DEE2560E9739AEB7036C40CFC59D31C33DE1A"
+      },
+      {
+        "bytes": 3936,
+        "relativePath": "Interface\\CommunityShaders\\Icons\\Categories\\water.png",
+        "sha256": "4F90634BBF3F9FE24AFE4A16FD25AC2E121B5052078FA4BB2A37F2942E7F71E4"
+      },
+      {
+        "bytes": 79622,
+        "relativePath": "Interface\\CommunityShaders\\Icons\\Community Shaders Logo\\cs-logo.png",
+        "sha256": "5C86F231645CCB913607940BED487A7933F747E0ADACD6CDB552DB1C6B281058"
+      },
+      {
+        "bytes": 23006,
+        "relativePath": "Interface\\CommunityShaders\\Icons\\Community Shaders Logo\\Monochrome\\cs-logo.png",
+        "sha256": "01C006277E6CB6DB6BE812D80D236E592C11957327148602F6F9C1B9A44C94DA"
+      },
+      {
+        "bytes": 2314,
+        "relativePath": "Shaders\\BloodSplatter.hlsl",
+        "sha256": "53BEFBC050E6E4F0B2AFC0C543913BE07092EBEE75D910D6D90C9350BDA6BA6F"
+      },
+      {
+        "bytes": 791,
+        "relativePath": "Shaders\\Common\\BlurDither.hlsli",
+        "sha256": "D001AF1913B61C076A45FC92CE6E2D08AB599865DD90CD5E6915E4053DADC7CC"
+      },
+      {
+        "bytes": 10034,
+        "relativePath": "Shaders\\Common\\BRDF.hlsli",
+        "sha256": "55F77886A975CCD7B29BE983B1A1653A90A1981ACDC860F81F6DAD1611C1D052"
+      },
+      {
+        "bytes": 14509,
+        "relativePath": "Shaders\\Common\\Color.hlsli",
+        "sha256": "DD39A0B6A1439D658320A5070543CA889B29B975DB380BCDEAF420C87A060FDD"
+      },
+      {
+        "bytes": 6697,
+        "relativePath": "Shaders\\Common\\DisplayMapping.hlsli",
+        "sha256": "A5832384E5ECF02689B81B2801B137529ADDA1DC6119F3DB2F940F650D769651"
+      },
+      {
+        "bytes": 249,
+        "relativePath": "Shaders\\Common\\DummyVS.hlsl",
+        "sha256": "3BC9A4493EA53521A0A03328F772F5418FDBAD596C93C75E24A1415B7DF5993E"
+      },
+      {
+        "bytes": 346,
+        "relativePath": "Shaders\\Common\\DummyVSTexCoord.hlsl",
+        "sha256": "DE572BBA5409AEA9B7322888945D728EFEF8DB03D87BB20AC3CDA0F61BEAC968"
+      },
+      {
+        "bytes": 9824,
+        "relativePath": "Shaders\\Common\\FastMath.hlsli",
+        "sha256": "64EAC97CD954A1335FC43B29BF29B0912F9C9C7EFEB328640A0A375596F5071C"
+      },
+      {
+        "bytes": 3447,
+        "relativePath": "Shaders\\Common\\FoveatedMask.hlsli",
+        "sha256": "054ABFDC0402F6D3580F43942439140DFAA693F6375AA2B0F0D5B14BE1BEB4C0"
+      },
+      {
+        "bytes": 1026,
+        "relativePath": "Shaders\\Common\\FoveatedShaderDetail.hlsli",
+        "sha256": "1AA484FD898AF11005D3CFD31BF5F8DF707BCF84812312F8EB872A8810AF6983"
+      },
+      {
+        "bytes": 8761,
+        "relativePath": "Shaders\\Common\\FrameBuffer.hlsli",
+        "sha256": "49F43FA9F777F693A94D8527196E94A8900144316B257A9942492924D538FC90"
+      },
+      {
+        "bytes": 842,
+        "relativePath": "Shaders\\Common\\Game.hlsli",
+        "sha256": "94719310ABD1001E4B78AD906BA8BB912B79D8438741B6CC12BC95035F5562B6"
+      },
+      {
+        "bytes": 885,
+        "relativePath": "Shaders\\Common\\GBuffer.hlsli",
+        "sha256": "D0571998D1423767132DA6395CB9EC9866833141BCE3F00F9F340F8DB382F291"
+      },
+      {
+        "bytes": 17062,
+        "relativePath": "Shaders\\Common\\Glints\\Glints2023.hlsli",
+        "sha256": "AAAC7BD0FF487720B9716B33BF05DECD2557605FB33BCDE617564BBBC89B8759"
+      },
+      {
+        "bytes": 3504,
+        "relativePath": "Shaders\\Common\\Glints\\noisegen.cs.hlsl",
+        "sha256": "C12A297AAA8698E1D19D7407D9ECA98210A2D338A6150105F37B61FF745D07D0"
+      },
+      {
+        "bytes": 3189,
+        "relativePath": "Shaders\\Common\\LightingCommon.hlsli",
+        "sha256": "0F95BA05B07CFC3BE793F7818199C815AF2F197716B590B241105796FEA729E6"
+      },
+      {
+        "bytes": 15896,
+        "relativePath": "Shaders\\Common\\LightingEval.hlsli",
+        "sha256": "DDCDD55AAC9FB31A4CCC39FA51DECED96636286141CAACC7C4287015033BEE27"
+      },
+      {
+        "bytes": 7648,
+        "relativePath": "Shaders\\Common\\LightingLandscape.hlsli",
+        "sha256": "4C048DB22CDD65104C3A41DFD55AC50A6282E3029E680871DF5631DB45FD6178"
+      },
+      {
+        "bytes": 729,
+        "relativePath": "Shaders\\Common\\LodLandscape.hlsli",
+        "sha256": "742931388EF4EFD04F312532F1CDDF53B84BEB3CB85DD6EADF729F4183EAA299"
+      },
+      {
+        "bytes": 1535,
+        "relativePath": "Shaders\\Common\\Math.hlsli",
+        "sha256": "E7230FC8409EA230EEFA1F9990ECECEF68492FBE8377AEACAF15EFE6A0F63C16"
+      },
+      {
+        "bytes": 730,
+        "relativePath": "Shaders\\Common\\MotionBlur.hlsli",
+        "sha256": "964EF590526148E3731A622E81D66BA5F1788B2189DF1F2389D2588CE3816246"
+      },
+      {
+        "bytes": 12261,
+        "relativePath": "Shaders\\Common\\PBR.hlsli",
+        "sha256": "ADC415A02318AC3BA2C15A961461111A840CDED2F6839D51214249F67E5B43A9"
+      },
+      {
+        "bytes": 6320,
+        "relativePath": "Shaders\\Common\\PBRMath.hlsli",
+        "sha256": "7D3DD42F339DFFD2073BE772C3F2880A9AA45E4414D842FBE231A4DF98991183"
+      },
+      {
+        "bytes": 2825,
+        "relativePath": "Shaders\\Common\\Permutation.hlsli",
+        "sha256": "FE74088FBC9E02FB0F15AE298374E0E5AC3D4DAA578D53B4BE4D1D4858A13BAA"
+      },
+      {
+        "bytes": 578,
+        "relativePath": "Shaders\\Common\\PointLightFlags.hlsli",
+        "sha256": "CA55F679E2047DBEF0C81B0DB941E734C20193BE2C522DC742D120D24D3CCE2D"
+      },
+      {
+        "bytes": 8416,
+        "relativePath": "Shaders\\Common\\Random.hlsli",
+        "sha256": "492DBE195A6F0BB874394E5C88A34C1CCB0A1FC37E4FC1E3647353338A35B5A0"
+      },
+      {
+        "bytes": 770,
+        "relativePath": "Shaders\\Common\\Shading.hlsli",
+        "sha256": "4EE1269FFF56E4522288E8D88F496DB3A15E9823E6EB00B0677090FF911F83CA"
+      },
+      {
+        "bytes": 13702,
+        "relativePath": "Shaders\\Common\\ShadowSampling.hlsli",
+        "sha256": "C43647170EB502D5C63C8DEEF3C1C622245CFDD9350CE9B8F05A0BE74352CAD5"
+      },
+      {
+        "bytes": 13998,
+        "relativePath": "Shaders\\Common\\SharedData.hlsli",
+        "sha256": "67263FB97AA82D84862CCB3070271B3019AA5BCACCBA05A950F10F0A39CC4C81"
+      },
+      {
+        "bytes": 2087,
+        "relativePath": "Shaders\\Common\\Skinned.hlsli",
+        "sha256": "D0FB28449250E625DB0E45A6CA289CDE9AB36AF87B30800624125CD499B5509D"
+      },
+      {
+        "bytes": 1061,
+        "relativePath": "Shaders\\Common\\Spherical Harmonics\\LICENSE",
+        "sha256": "7C81919C296C1B2CFD26EBBE896881D310A4B8DA3EF960D233FF07935205978D"
+      },
+      {
+        "bytes": 9811,
+        "relativePath": "Shaders\\Common\\Spherical Harmonics\\SphericalHarmonics.hlsli",
+        "sha256": "EDF948A8F256B8AC7383EEF080DDEFEDAE85E61731C03E1D04B1D77D72D53E30"
+      },
+      {
+        "bytes": 3031,
+        "relativePath": "Shaders\\Common\\Triplanar.hlsli",
+        "sha256": "8EDDFABF0B6D714CEE7ADE0B6A037B9431B86CAF12A69AFC10FA2207474FCD1B"
+      },
+      {
+        "bytes": 10592,
+        "relativePath": "Shaders\\Common\\VR.hlsli",
+        "sha256": "782634AB281849CE768F053E1F571834C14586EE2E450D1D063EB3DC35DD5E1A"
+      },
+      {
+        "bytes": 14703,
+        "relativePath": "Shaders\\Common\\VRReproject.hlsli",
+        "sha256": "79CB0A720740C80744F7752EF362F166EBD20E3B0994A59243A0601A1DE1141D"
+      },
+      {
+        "bytes": 6024,
+        "relativePath": "Shaders\\CopyShadowDataCS.hlsl",
+        "sha256": "DA1C7A1C566778DE96C31B8522CEDED1808207895CBFC91F7C97887C9E9634D6"
+      },
+      {
+        "bytes": 11909,
+        "relativePath": "Shaders\\DeferredCompositeCS.hlsl",
+        "sha256": "6F1C03864E8A2AD6586B8B01EEFA60536A32E7976CB5C943966A6D38E0FE4E12"
+      },
+      {
+        "bytes": 8358,
+        "relativePath": "Shaders\\DistantTree.hlsl",
+        "sha256": "C0EDFE40FE7971DE4CDCFCDB8ADB8F2D687D38D715708B157AE988BEA222AD9C"
+      },
+      {
+        "bytes": 30039,
+        "relativePath": "Shaders\\Effect.hlsl",
+        "sha256": "0254B374945B8DB85B1BA7BCB97EC0A09FA3D7DB8E3A38F0E433D782BB01BC7B"
+      },
+      {
+        "bytes": 3536,
+        "relativePath": "Shaders\\ISAlphaBlend.hlsl",
+        "sha256": "119380C9C597DEC4283D002CDCC47533BD455E4596F05E29CB2C7BFECF1DE0E3"
+      },
+      {
+        "bytes": 1231,
+        "relativePath": "Shaders\\ISApplyReflections.hlsl",
+        "sha256": "B144B919C7F8EE5E05C43C55B7EF657AEE66708703D115CC5EB49975E51484BF"
+      },
+      {
+        "bytes": 3453,
+        "relativePath": "Shaders\\ISApplyVolumetricLighting.hlsl",
+        "sha256": "B2576C99746B6D918229CA4E820EC9A7A0693B4CC879A0DF373F0CB68708BABB"
+      },
+      {
+        "bytes": 400,
+        "relativePath": "Shaders\\ISBasicCopy.hlsl",
+        "sha256": "3C1804667F857AEE864B998F1300F1919E3984CEA217027FFD80385920569CBF"
+      },
+      {
+        "bytes": 1770,
+        "relativePath": "Shaders\\ISBlur.hlsl",
+        "sha256": "4D1DAE371B7B8C31EDEBA4AD2A3BC13FC47422B3DEE08576C580696EA54EA606"
+      },
+      {
+        "bytes": 1961,
+        "relativePath": "Shaders\\ISCompositeLensFlareVolumetricLighting.hlsl",
+        "sha256": "58578C3F4D99A0F28996FD8CBE23E32BF409EBFF745B85CF81754055ADD50A8C"
+      },
+      {
+        "bytes": 1109,
+        "relativePath": "Shaders\\ISCopy.hlsl",
+        "sha256": "530644866D582DA7FBC85741F9B6565486AEF7FEEF85C1FC401C5B4AE2A5081F"
+      },
+      {
+        "bytes": 623,
+        "relativePath": "Shaders\\ISDebugSnow.hlsl",
+        "sha256": "37220A7E9BD78DF9D91218BE5C7E78648D1DF02FB1D3F1AB9216DBD3362F232B"
+      },
+      {
+        "bytes": 5350,
+        "relativePath": "Shaders\\ISDepthOfField.hlsl",
+        "sha256": "9969D90DCF6B22D294FD7D05F571A5E77951D789AD730D81F34FFF6046F06058"
+      },
+      {
+        "bytes": 1640,
+        "relativePath": "Shaders\\ISDoubleVision.hlsl",
+        "sha256": "F367DBA730A890CC2113FB4530683E0E14AC7EE5DF2D28CC7EE80952BA65AAE1"
+      },
+      {
+        "bytes": 2015,
+        "relativePath": "Shaders\\ISDownsample.hlsl",
+        "sha256": "CB81741A7BDA44A886A538F38DBFE5B32FC7829CA97ABE3BA2926ABB69090B45"
+      },
+      {
+        "bytes": 510,
+        "relativePath": "Shaders\\ISExp.hlsl",
+        "sha256": "8BA7D05881EA1FE7C9E93DA31E02BEFB32ED62F82E1AD51EFA146CF1A95CAF63"
+      },
+      {
+        "bytes": 3097,
+        "relativePath": "Shaders\\ISFullScreenVR.hlsl",
+        "sha256": "0B494CEFFFEB5EA6F1DD5DF6DB87E60BD7B7668867DCF79CAE3929797E221E09"
+      },
+      {
+        "bytes": 8515,
+        "relativePath": "Shaders\\ISHDR.hlsl",
+        "sha256": "2AEE42FE65E3D7EE3238B0E9050488A6DEF75C93B8D873D1E9E002ECEA83D5DF"
+      },
+      {
+        "bytes": 2013,
+        "relativePath": "Shaders\\ISIBLensFlare.hlsl",
+        "sha256": "DCF01A2302C857A553D6CD7D7E2871ACF4432AE989958C48FBB8E1724E21FA37"
+      },
+      {
+        "bytes": 2092,
+        "relativePath": "Shaders\\ISLightingComposite.hlsl",
+        "sha256": "D72330764F6A95EC01576B1A8BC56B154C21C9021CE800ECD4015E40203D891A"
+      },
+      {
+        "bytes": 1353,
+        "relativePath": "Shaders\\ISLocalMap.hlsl",
+        "sha256": "5770C015CF2E312AFC9C462D5CF649B7FD29A10A974BEC81721C5779EBDCEC41"
+      },
+      {
+        "bytes": 1090,
+        "relativePath": "Shaders\\ISMap.hlsl",
+        "sha256": "CA01705BA63FF0B5DDC5D873EDAD28686E094281BFB4109C67337686E4FDF486"
+      },
+      {
+        "bytes": 2261,
+        "relativePath": "Shaders\\ISNoise.hlsl",
+        "sha256": "CE78CF6142B1CBA59DC484C623C749A3C7B561C19179CD571CFC9A4FDF779056"
+      },
+      {
+        "bytes": 1404,
+        "relativePath": "Shaders\\ISRadialBlur.hlsl",
+        "sha256": "29829ED2D41667F1C8FF41F429FA89823E29B27E8928771F9F2D44A06BEED65B"
+      },
+      {
+        "bytes": 9467,
+        "relativePath": "Shaders\\ISReflectionsRayTracing.hlsl",
+        "sha256": "978D10F4460FE6655D1332F49EAD424940348A6CBDC31ABA3DEFA393FBFDFA14"
+      },
+      {
+        "bytes": 1821,
+        "relativePath": "Shaders\\ISRefraction.hlsl",
+        "sha256": "119CE8E09107F5E1A08EDADCED6E0C13E5E93516A70958A7AC84974D92D506FB"
+      },
+      {
+        "bytes": 2261,
+        "relativePath": "Shaders\\ISSAOBlur.hlsl",
+        "sha256": "E9A11A7014F809A249CC2A497D664A96FC3AE51080768C76A4E27CAABA0F7D45"
+      },
+      {
+        "bytes": 733,
+        "relativePath": "Shaders\\ISSAOCameraZ.hlsl",
+        "sha256": "C655185B02404C4218F6BF3A3E674437D86D3A5E83132C5DF0FA931A255EC179"
+      },
+      {
+        "bytes": 7390,
+        "relativePath": "Shaders\\ISSAOComposite.hlsl",
+        "sha256": "4A8A0725B3103DCA8EF53DA543A3FE666C9933011F66B714E351EACAFE9AC45D"
+      },
+      {
+        "bytes": 1777,
+        "relativePath": "Shaders\\ISSAOMinify.hlsl",
+        "sha256": "8AA0F5934AF034D6ABF597933E7FB2A42A6608CA612AD8F3068A63DE9B9B8E5B"
+      },
+      {
+        "bytes": 627,
+        "relativePath": "Shaders\\ISSILComposite.hlsl",
+        "sha256": "89F6B0FE5EECE5D1203D8A2CCA2DB7598AA9FF3DFE13E5079423034D99A5EF6C"
+      },
+      {
+        "bytes": 1120,
+        "relativePath": "Shaders\\ISSimpleColor.hlsl",
+        "sha256": "2E7C85B559300D779F86675F61D57041AB81D2C0501834591697180241EA0AB5"
+      },
+      {
+        "bytes": 3006,
+        "relativePath": "Shaders\\ISSnowSSS.hlsl",
+        "sha256": "95E8DC1B31085866D7CAC2377938EF76113B56B0739A545D8F9D25F2AB71C663"
+      },
+      {
+        "bytes": 19400,
+        "relativePath": "Shaders\\ISTemporalAA.hlsl",
+        "sha256": "4FC74821A92723DDDFD081FB08EFF9F6984B01F27268E741D54C510229CBC632"
+      },
+      {
+        "bytes": 565,
+        "relativePath": "Shaders\\ISUpsampleDynamicResolution.hlsl",
+        "sha256": "B1C763D9380BD2D5D6EA4F6F503C46D85B10298DAF548333D96055DC6AB5FA9B"
+      },
+      {
+        "bytes": 757,
+        "relativePath": "Shaders\\ISVolumetricLighting.hlsl",
+        "sha256": "584724962005FA3AFEE3473114D55CDACD862C6B1C91B05550DE13303D5E125E"
+      },
+      {
+        "bytes": 1394,
+        "relativePath": "Shaders\\ISVolumetricLightingBlurHCS.hlsl",
+        "sha256": "5AED83788034819DD5B6B41712B5E99C68E7AF8F98ABA6785A7DDCD0A2EB0B70"
+      },
+      {
+        "bytes": 1394,
+        "relativePath": "Shaders\\ISVolumetricLightingBlurVCS.hlsl",
+        "sha256": "D457F5278974DE8EF94FA8F1CB55BDD1C7594BADBB774CA27E32DB37A2BE1D06"
+      },
+      {
+        "bytes": 5298,
+        "relativePath": "Shaders\\ISVolumetricLightingGenerateCS.hlsl",
+        "sha256": "1286F8E9829C6DE1197A232503C5C0766BF180D55AAE83A169568F850C8F8B78"
+      },
+      {
+        "bytes": 531,
+        "relativePath": "Shaders\\ISVolumetricLightingRaymarchCS.hlsl",
+        "sha256": "5EA110A5EBB9E620BBC3B5EA46F64DB1FFAF806240F60557AC8EF698BD632F7F"
+      },
+      {
+        "bytes": 4114,
+        "relativePath": "Shaders\\ISWaterBlend.hlsl",
+        "sha256": "309450208C02947BA4421905DDA2103F132CB32F318590CF58F54C02C1D6E9B2"
+      },
+      {
+        "bytes": 4798,
+        "relativePath": "Shaders\\ISWaterDisplacement.hlsl",
+        "sha256": "AEAF0DDC4C84090836A4657BC713ADB75861953241951A87FA0FAD0ECC114BBF"
+      },
+      {
+        "bytes": 1279,
+        "relativePath": "Shaders\\ISWaterFlow.hlsl",
+        "sha256": "4535CCBD7D32BE77F6D791FCE4C02269843147391F89B464D525949354CDD295"
+      },
+      {
+        "bytes": 1514,
+        "relativePath": "Shaders\\ISWorldMap.hlsl",
+        "sha256": "4A6D78A068D40A3AE165FE66E2F8F253EE2D17FA7DBF6A4897A40922925B275E"
+      },
+      {
+        "bytes": 1072,
+        "relativePath": "Shaders\\LICENSE",
+        "sha256": "54FEA1A39DE36A64717722C505C04692E49DC3BB5A070A7C4068442D2C3210D8"
+      },
+      {
+        "bytes": 182356,
+        "relativePath": "Shaders\\Lighting.hlsl",
+        "sha256": "E4C3267E336BA026B3DC2B0A0BDF61CA5CE71F8866CF6D41079BC777550F2C6B"
+      },
+      {
+        "bytes": 1931,
+        "relativePath": "Shaders\\Menu\\BackgroundBlurHorizontal.hlsl",
+        "sha256": "392651E70BFABD79158C7977BF51F195A244B18CB2FCD856C58B23EBB594A82A"
+      },
+      {
+        "bytes": 1929,
+        "relativePath": "Shaders\\Menu\\BackgroundBlurVertical.hlsl",
+        "sha256": "DBE303DBDAFD57E0951F1A01621FF3BA1BAEF293DDAC5513105C9BE6E51C688C"
+      },
+      {
+        "bytes": 11557,
+        "relativePath": "Shaders\\Particle.hlsl",
+        "sha256": "972381F36C5AD52F6EE8D26B8D7AE20E1197FB1B0C3CB6E0DF5E0A4602B14745"
+      },
+      {
+        "bytes": 35988,
+        "relativePath": "Shaders\\RunGrass.hlsl",
+        "sha256": "AF275134BF393BFAA9C990E4C7155661907DA91BE6424AF1157F5ED9CFDF8206"
+      },
+      {
+        "bytes": 8225,
+        "relativePath": "Shaders\\Sky.hlsl",
+        "sha256": "D47955B9B4E93E8D80864806EF1C5CD529AE2C760DFF25D0A0888F7D190E0418"
+      },
+      {
+        "bytes": 3230,
+        "relativePath": "Shaders\\Tests\\TestBloom.hlsl",
+        "sha256": "2E5D5287AFF31C509BDB1F27E3F31E89D52528436EFBA92BAB12DD52E0F8F466"
+      },
+      {
+        "bytes": 22477,
+        "relativePath": "Shaders\\Tests\\TestBRDF.hlsl",
+        "sha256": "1D61C7ED203D478F59A08481563EF38200BCE1CEE745D044F6C9665026E41A54"
+      },
+      {
+        "bytes": 5487,
+        "relativePath": "Shaders\\Tests\\TestColor.hlsl",
+        "sha256": "8F04DC1EDE5B0432D75C1FE606AF091B5A41C6C24198CD073F75701DFA164746"
+      },
+      {
+        "bytes": 7604,
+        "relativePath": "Shaders\\Tests\\TestDisplayMapping.hlsl",
+        "sha256": "809C5B6111A655352A325EB56CF01850683C132A62A8E098995542053A2DFBA3"
+      },
+      {
+        "bytes": 7276,
+        "relativePath": "Shaders\\Tests\\TestEncodeTexturesBounds.hlsl",
+        "sha256": "08DFA44AE6A0CF19A439CCB6D3DF2B41082A50B9EE7BF3D6CE69892836162C37"
+      },
+      {
+        "bytes": 11168,
+        "relativePath": "Shaders\\Tests\\TestFastMath.hlsl",
+        "sha256": "40F56A2979A8BACF260AF3FD95440757D39AC9904B344F66797ACC86009327FB"
+      },
+      {
+        "bytes": 4269,
+        "relativePath": "Shaders\\Tests\\TestGBuffer.hlsl",
+        "sha256": "B595E306F8711DA4765452B3B41B8D8C547C9E72DAE0AF86D47AF72D28D9F723"
+      },
+      {
+        "bytes": 14455,
+        "relativePath": "Shaders\\Tests\\TestHair.hlsl",
+        "sha256": "B3CA71A8FBC686B53ABD71F537939CA72ABFAE90F7F772E9FE2F269153807BF8"
+      },
+      {
+        "bytes": 4283,
+        "relativePath": "Shaders\\Tests\\TestLightingCommon.hlsl",
+        "sha256": "AAF840360B4FC6E41FD3A49C870CC308B24164C14C793E3A2C172E70BDAB5713"
+      },
+      {
+        "bytes": 2702,
+        "relativePath": "Shaders\\Tests\\TestMath.hlsl",
+        "sha256": "5219A49B24E000476052539DA4E6D2B865F5BDE70A7CF67EEF43B6136AA3F582"
+      },
+      {
+        "bytes": 3764,
+        "relativePath": "Shaders\\Tests\\TestMotionSharpening.hlsl",
+        "sha256": "D8ACAC96ED4BD4299D8561A661614C0E4E8ECE0B81622056C295B5855D822F5E"
+      },
+      {
+        "bytes": 19561,
+        "relativePath": "Shaders\\Tests\\TestPBR.hlsl",
+        "sha256": "4F1F479B0AF67E94F7077D974FE7B2225EEF450F750FA6AB7E365093BD82A322"
+      },
+      {
+        "bytes": 7276,
+        "relativePath": "Shaders\\Tests\\TestRandom.hlsl",
+        "sha256": "12F957A87C5BE38C4D7F6E1BB7180C5E98FFDB8C153CE154EDB81467213E9E19"
+      },
+      {
+        "bytes": 4225,
+        "relativePath": "Shaders\\Tests\\TestShading.hlsl",
+        "sha256": "3D35B78727C2A8A2545D4C98B70F1E7673FC22B256EDD0FBA824BEB08DD4208E"
+      },
+      {
+        "bytes": 12713,
+        "relativePath": "Shaders\\Tests\\TestSphericalHarmonics.hlsl",
+        "sha256": "58132EC5D5D49B7FD1DB5DA4401247AFEF020034BCDC876C3FDFAF5FD7187042"
+      },
+      {
+        "bytes": 7776,
+        "relativePath": "Shaders\\Tests\\TestVR.hlsl",
+        "sha256": "AD90E692A1CBBF2F00584963BCAD054D3703034258D8007E39D310A798371BD4"
+      },
+      {
+        "bytes": 3520,
+        "relativePath": "Shaders\\Tests\\TestVRFlat.hlsl",
+        "sha256": "C7AF00D375BC3B06EE6F805CCB03CAA2BCE46E25ECB3E508DE00FD8F238B5916"
+      },
+      {
+        "bytes": 2122,
+        "relativePath": "Shaders\\UnderwaterFogToDepthOfField.hlsl",
+        "sha256": "27FDD83D016795AC32A37FAE2F9F56EC8D5D867DBDB903E0D886F6EC78DC44AA"
+      },
+      {
+        "bytes": 27761,
+        "relativePath": "Shaders\\Utility.hlsl",
+        "sha256": "F8BA766B70A714F0431F0DF751B433D5FD85A6C8E3B38B470D3978CC8007AA66"
+      },
+      {
+        "bytes": 366,
+        "relativePath": "Shaders\\VR\\InSceneOverlay.ps.hlsl",
+        "sha256": "2C9652BE3A9EA304B3B15C497EB1708B0CCFA751360FB59B9900B00AC00EF7B6"
+      },
+      {
+        "bytes": 439,
+        "relativePath": "Shaders\\VR\\InSceneOverlay.vs.hlsl",
+        "sha256": "D03C04A5F1245C08306D27FAD3676D35E71CFAB09949415442E8AF7E26CAC67C"
+      },
+      {
+        "bytes": 3040,
+        "relativePath": "Shaders\\VR\\StereoBlendCS.hlsl",
+        "sha256": "CEEF08562ED03F0FB3017663C48ACE3D8BC5F8D6BC25E76FBF9CC069ACB1FC94"
+      },
+      {
+        "bytes": 87891,
+        "relativePath": "Shaders\\Water.hlsl",
+        "sha256": "08C073AD23A57D3B21514BA23908A0E4C9332D8BBCAB134679CBC024D0A39B8C"
+      },
+      {
+        "bytes": 5507,
+        "relativePath": "SKSE\\Plugins\\CommunityShaders\\Overrides\\README.md",
+        "sha256": "1A2445F38AA8521A3A62AE939A03AF3AAA86B541564BBA73754EDAF98A0CD6E5"
+      },
+      {
+        "bytes": 4064,
+        "relativePath": "SKSE\\Plugins\\CommunityShaders\\Themes\\Default.json",
+        "sha256": "CA0ED05E6E4A618A23BF29B0E0B5E132213C6FC0AC249A68E6948D9BC151FFCD"
+      },
+      {
+        "bytes": 4741,
+        "relativePath": "SKSE\\Plugins\\CommunityShaders\\Themes\\DragonBlood.json",
+        "sha256": "E662E8F20CE721EAA0FF333D9B8C585A407347E3A6ADB9C504339095BE8D2490"
+      },
+      {
+        "bytes": 105950,
+        "relativePath": "SKSE\\Plugins\\CommunityShaders\\Themes\\DragonBlood\\discord.png",
+        "sha256": "CB8ABD52C653C37B62E7A1BB8C7EF1466E007974FA6459F522C76AAC3A0432A1"
+      },
+      {
+        "bytes": 4836,
+        "relativePath": "SKSE\\Plugins\\CommunityShaders\\Themes\\DwemerBronze.json",
+        "sha256": "1FDBA3A5DE060D97523BAC00B1CCA388950DD45D9EDA4D5A37B42DDBB57B6F40"
+      },
+      {
+        "bytes": 407478,
+        "relativePath": "SKSE\\Plugins\\CommunityShaders\\Themes\\DwemerBronze\\discord.png",
+        "sha256": "18139986FA70DD3999BB7931923C48E4FE6E73453A769ED92DF680A8DED94142"
+      },
+      {
+        "bytes": 4616,
+        "relativePath": "SKSE\\Plugins\\CommunityShaders\\Themes\\HighContrast.json",
+        "sha256": "FED3785CE8A990D20A788E61127FB8FA17EA0D6B62D1F6066975A9F9250E03B0"
+      },
+      {
+        "bytes": 73661,
+        "relativePath": "SKSE\\Plugins\\CommunityShaders\\Themes\\HighContrast\\discord.png",
+        "sha256": "776E2FA9E066A3F6A0261BB422FD40BC1C13594D69A352257EDF2278BA932250"
+      },
+      {
+        "bytes": 5047,
+        "relativePath": "SKSE\\Plugins\\CommunityShaders\\Themes\\Light.json",
+        "sha256": "04D752A86D00F95661F361D91F18DED538F7AAE73647D6D2D2E29A219EF45422"
+      },
+      {
+        "bytes": 2182,
+        "relativePath": "SKSE\\Plugins\\CommunityShaders\\Themes\\Light\\clear-cache.png",
+        "sha256": "91B0226A2CFD0E6E703A62F236899C96AE18837F66D4E1D96D03FE717FAD7C37"
+      },
+      {
+        "bytes": 25838,
+        "relativePath": "SKSE\\Plugins\\CommunityShaders\\Themes\\Light\\cs-logo.png",
+        "sha256": "3C718B964C4AC057A091A71064D58141FA1A31A7C19AD9782E9A50B5094FD495"
+      },
+      {
+        "bytes": 73661,
+        "relativePath": "SKSE\\Plugins\\CommunityShaders\\Themes\\Light\\discord.png",
+        "sha256": "776E2FA9E066A3F6A0261BB422FD40BC1C13594D69A352257EDF2278BA932250"
+      },
+      {
+        "bytes": 3451,
+        "relativePath": "SKSE\\Plugins\\CommunityShaders\\Themes\\Light\\load-settings.png",
+        "sha256": "24E21853FCE47580B51D4946A0E990E9D0CE7DC0F1BF308766C503332BDBFC23"
+      },
+      {
+        "bytes": 3026,
+        "relativePath": "SKSE\\Plugins\\CommunityShaders\\Themes\\Light\\restore-settings.png",
+        "sha256": "70C63CE9A93A0B2CB4E1F6999CD602B38C53A2630CAE564451FE557227EE5250"
+      },
+      {
+        "bytes": 2184,
+        "relativePath": "SKSE\\Plugins\\CommunityShaders\\Themes\\Light\\save-settings.png",
+        "sha256": "8214FE90326124BD3EB93B9C24FA8780E02C95ADE2AAE75375B1C761E7D1CDDC"
+      },
+      {
+        "bytes": 4739,
+        "relativePath": "SKSE\\Plugins\\CommunityShaders\\Themes\\NordicFrost.json",
+        "sha256": "067C33723C79DD91ECF9FC883B3A73D5E22FCBAE1C1A80A75933DAFCE667A795"
+      },
+      {
+        "bytes": 121874,
+        "relativePath": "SKSE\\Plugins\\CommunityShaders\\Themes\\NordicFrost\\discord.png",
+        "sha256": "59A17CE17436F9E9BFAAE8524F310347E12CD46866FEA3E505494CD1F1FD3080"
+      }
+    ],
+    "files": 203,
+    "sourceCommit": "ad8c7a2a8cf7dc9295d40dadd3f45da85fec4dd0",
+    "treeSha256": "344b5e2166393043b98d4f469e80f4a09c430a8bb9146f558939687683e6093e",
+    "wetternessOverlayMembers": 0
+  },
+  "failure": {
+    "compilerError": "Lighting.hlsl(952,12-40): error X1507: failed to open source file: 'Wetterness/PuddleMask.hlsli'",
+    "errorRecords": 733,
+    "failedRecords": 733,
+    "status": "FAILED_RENDERING",
+    "uiReportedCount": 712
+  },
+  "providers": [
+    {
+      "disabledProviders": 3,
+      "enabledProviders": 4,
+      "physicalChecks": [
+        {
+          "bytes": 182356,
+          "exists": true,
+          "role": "task-mod",
+          "sha256": "e4c3267e336ba026b3dc2b0a0bdf61ca5ce71f8866cf6d41079bc777550f2c6b"
+        },
+        {
+          "bytes": null,
+          "exists": false,
+          "role": "overwrite",
+          "sha256": null
+        },
+        {
+          "bytes": null,
+          "exists": false,
+          "role": "unmanaged-game-data",
+          "sha256": null
+        }
+      ],
+      "profileSha256": "849ab2194a610537d340e8263151b2ea738eddeaf42f11a9cc5c7a2e4bd9330f",
+      "providers": [
+        {
+          "enabled": false,
+          "lineNumber": 31,
+          "looseWinner": false,
+          "providerAlias": "disabled-f79-package"
+        },
+        {
+          "enabled": true,
+          "lineNumber": 32,
+          "looseWinner": true,
+          "providerAlias": "task-ad8-core-package"
+        },
+        {
+          "enabled": true,
+          "lineNumber": 33,
+          "looseWinner": false,
+          "providerAlias": "lower-da2-overlay"
+        },
+        {
+          "enabled": false,
+          "lineNumber": 34,
+          "looseWinner": false,
+          "providerAlias": "disabled-da2off-package"
+        },
+        {
+          "enabled": true,
+          "lineNumber": 1652,
+          "looseWinner": false,
+          "providerAlias": "lower-c46-overlay"
+        },
+        {
+          "enabled": true,
+          "lineNumber": 1653,
+          "looseWinner": false,
+          "providerAlias": "lower-base-csx"
+        },
+        {
+          "enabled": false,
+          "lineNumber": 1939,
+          "looseWinner": false,
+          "providerAlias": "disabled-f362-package"
+        }
+      ],
+      "relativePath": "Shaders/Lighting.hlsl",
+      "winnerAlias": "task-ad8-core-package"
+    },
+    {
+      "disabledProviders": 3,
+      "enabledProviders": 3,
+      "physicalChecks": [
+        {
+          "bytes": null,
+          "exists": false,
+          "role": "task-mod",
+          "sha256": null
+        },
+        {
+          "bytes": null,
+          "exists": false,
+          "role": "overwrite",
+          "sha256": null
+        },
+        {
+          "bytes": null,
+          "exists": false,
+          "role": "unmanaged-game-data",
+          "sha256": null
+        }
+      ],
+      "profileSha256": "849ab2194a610537d340e8263151b2ea738eddeaf42f11a9cc5c7a2e4bd9330f",
+      "providers": [
+        {
+          "enabled": false,
+          "lineNumber": 31,
+          "looseWinner": false,
+          "providerAlias": "disabled-f79-package"
+        },
+        {
+          "enabled": true,
+          "lineNumber": 33,
+          "looseWinner": true,
+          "providerAlias": "lower-da2-overlay"
+        },
+        {
+          "enabled": false,
+          "lineNumber": 34,
+          "looseWinner": false,
+          "providerAlias": "disabled-da2off-package"
+        },
+        {
+          "enabled": true,
+          "lineNumber": 1652,
+          "looseWinner": false,
+          "providerAlias": "lower-c46-overlay"
+        },
+        {
+          "enabled": true,
+          "lineNumber": 1653,
+          "looseWinner": false,
+          "providerAlias": "lower-base-csx"
+        },
+        {
+          "enabled": false,
+          "lineNumber": 1939,
+          "looseWinner": false,
+          "providerAlias": "disabled-f362-package"
+        }
+      ],
+      "relativePath": "Shaders/Wetterness/WetternessLighting.hlsli",
+      "winnerAlias": "lower-da2-overlay"
+    },
+    {
+      "disabledProviders": 1,
+      "enabledProviders": 0,
+      "physicalChecks": [
+        {
+          "bytes": null,
+          "exists": false,
+          "role": "task-mod",
+          "sha256": null
+        },
+        {
+          "bytes": null,
+          "exists": false,
+          "role": "overwrite",
+          "sha256": null
+        },
+        {
+          "bytes": null,
+          "exists": false,
+          "role": "unmanaged-game-data",
+          "sha256": null
+        }
+      ],
+      "profileSha256": "849ab2194a610537d340e8263151b2ea738eddeaf42f11a9cc5c7a2e4bd9330f",
+      "providers": [
+        {
+          "enabled": false,
+          "lineNumber": 1939,
+          "looseWinner": false,
+          "providerAlias": "disabled-f362-package"
+        }
+      ],
+      "relativePath": "Shaders/Wetterness/PuddleMask.hlsli",
+      "winnerAlias": null
+    }
+  ],
+  "schemaVersion": 1
+}

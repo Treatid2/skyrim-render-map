@@ -1,0 +1,49 @@
+{
+  "content": {
+    "fileCount": 4,
+    "root": "content",
+    "totalBytes": 107678,
+    "treeSha256": "CCF5102E109C3A09A0A16DBD7701AFD3D47CA741C97D41A652D776753A1312C7"
+  },
+  "contributor": {
+    "displayName": "Treatid2",
+    "github": "Treatid2",
+    "standing": "ordinary-contributor"
+  },
+  "createdAt": "2026-10-05T00:28:38.667493+00:00",
+  "licensing": {
+    "content": "CC-BY-SA-4.0",
+    "dcoAcknowledged": true,
+    "schemas": "CC0-1.0"
+  },
+  "namespace": "csx",
+  "notes": "New failed-excursion qualification across rendering, extension API, deployment and evidence-custody domains. Standalone main-based data candidate, no code or live changes.",
+  "provenance": {
+    "importedAt": "2026-10-05T00:28:38.667493+00:00",
+    "relatedUrls": [
+      "https://github.com/Treatid2/skyrim-community-shaders/commit/ad8c7a2a8cf7dc9295d40dadd3f45da85fec4dd0"
+    ],
+    "sourceCommit": "ad8c7a2a8cf7dc9295d40dadd3f45da85fec4dd0",
+    "sourceContentTreeSha256": "d8e85931414c996f8cee6f5976d826c6738f47bdb1108f5a9a2b63eac2b14f39",
+    "sourceDirty": false,
+    "sourceParentCommit": "8b1157eca6a3af2ceeca1dd965b7a9be11049a03",
+    "sourcePubliclyReachable": true,
+    "sourceRef": null,
+    "sourceRepository": "https://github.com/Treatid2/skyrim-community-shaders",
+    "sourceState": "public-branch",
+    "transformations": [
+      "Finite retained input identity and immutable source inspection; raw private originals retained unchanged.",
+      "New bounded packaging/provider/compiler failure assertions plus explicitly degraded native status reads.",
+      "Owner restoration and archive round-trip claims separately attributed from importer byte/hash verification.",
+      "No prior evidence mutation, healthy baseline promotion, complete VFS/modlist model or causal HDR claim."
+    ]
+  },
+  "schema": {
+    "major": 1,
+    "minor": 0,
+    "name": "skyrim-render-map.submission"
+  },
+  "status": "candidate-unreviewed",
+  "submissionClass": "assertion",
+  "submissionId": "sub-csx-ad8-package-failure-v1"
+}
