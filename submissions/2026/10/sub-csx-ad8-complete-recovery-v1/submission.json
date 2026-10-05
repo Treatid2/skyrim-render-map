@@ -1,0 +1,51 @@
+{
+  "content": {
+    "fileCount": 4,
+    "root": "content",
+    "totalBytes": 325019,
+    "treeSha256": "36763B2F492E3BC9BB38FB1FCDDE8A2B9D3862AF790939B1706366BDEC3C6B4B"
+  },
+  "contributor": {
+    "displayName": "Treatid2",
+    "github": "Treatid2",
+    "standing": "ordinary-contributor"
+  },
+  "createdAt": "2026-10-05T02:44:08.155047+00:00",
+  "licensing": {
+    "content": "CC-BY-SA-4.0",
+    "dcoAcknowledged": true,
+    "schemas": "CC0-1.0"
+  },
+  "namespace": "csx",
+  "notes": "Scoped complete-package compiler/coarse visual/recording/custody recovery; native late-pass remains incomplete. No order/HDR/performance promotion.",
+  "provenance": {
+    "importedAt": "2026-10-05T02:44:08.155047+00:00",
+    "relatedUrls": [
+      "https://github.com/Treatid2/skyrim-community-shaders/commit/ad8c7a2a8cf7dc9295d40dadd3f45da85fec4dd0",
+      "https://github.com/Treatid2/skyrim-render-map/pull/34"
+    ],
+    "sourceCommit": "ad8c7a2a8cf7dc9295d40dadd3f45da85fec4dd0",
+    "sourceContentTreeSha256": "e1ae34a580168afe3715c92defddb0088919447e404c155371a8109bc44c91ad",
+    "sourceDirty": false,
+    "sourceParentCommit": "8b1157eca6a3af2ceeca1dd965b7a9be11049a03",
+    "sourcePubliclyReachable": true,
+    "sourceRef": null,
+    "sourceRepository": "https://github.com/Treatid2/skyrim-community-shaders",
+    "sourceState": "public-branch",
+    "transformations": [
+      "Finite independently hashed retained inputs and published Data members; originals unchanged.",
+      "All3336 raw tracking samples and delta state reconstructed without treating change-entry counts as coverage.",
+      "All4 originalPNG coarse composition inspected; atomic pose/pixel calibration and brightness causality unclaimed.",
+      "Incomplete native window preserved separately from affirmative compiler/scene observations; owner custody/cache roundtrip proofs attributed.",
+      "Shader-cache-control compatibility and scoped known-working boundaries preserved."
+    ]
+  },
+  "schema": {
+    "major": 1,
+    "minor": 0,
+    "name": "skyrim-render-map.submission"
+  },
+  "status": "candidate-unreviewed",
+  "submissionClass": "assertion",
+  "submissionId": "sub-csx-ad8-complete-recovery-v1"
+}
