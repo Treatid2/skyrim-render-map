@@ -1,0 +1,148 @@
+{
+  "attribution": "Provider and physical checks occurred post-shutdown in Mapping. Restoration/process/access/resource-state claims and lossless member-decompression proof are owner-side observations, not importer live inspections. Importer verified archive identity, not a second 2895-member decompression. Original screenshot visual assessment reused from earlier importer disposition, no second image inspection here.",
+  "chronology": "Deployment, API bracket, colour read, failure screenshots/log, post-shutdown audit, restoration and scratch release are separately timed. Earlier map disposition retained unchanged. Finalization verified time precedes appended scratch release; not one atomic snapshot.",
+  "limitations": "No automatic relaunch, one-file patch, cache purge, rendering-health promotion, causal HDR/upscaling claim, code fix, maintainer merge or evidence completeness inferred from structural validation.",
+  "privacy": "Native process/session/request/pointer/path/save/hardware/network identities and private mod labels omitted. Public repository-relative package paths and hashes retained; private input registry retained outside Git.",
+  "scope": "Three exact shader paths; no archives, complete VFS model, pre-shutdown winner/memory identity, complete modlist inventory or other runtime/mode/lighting comparison. API/FSR reads are successful diagnostics inside FAILED_RENDERING, not healthy science.",
+  "sourceInventory": {
+    "api-bracket-derivation": {
+      "bytes": 3386,
+      "sha256": "3b441427dbe32fbbe0f219f252bd0c18f75b58d2c21ad4c4c7488c6049ce0f30"
+    },
+    "cache-custody-member-1": {
+      "bytes": 541644,
+      "sha256": "9dcd85009811f4f79be355b8e0fc73e3a7a820b9ab07a952300cc23159ad2527"
+    },
+    "cache-custody-member-2": {
+      "bytes": 2337798,
+      "sha256": "4b9c294e7b629e70d33fe8c1b14c40e18e5b09cd16ce7ca61b25ea4ddcb673f2"
+    },
+    "cache-custody-member-3": {
+      "bytes": 2868,
+      "sha256": "8b79d3dc0150e1e2f5b6be1ffb0252318ce03a4c9d758b524f0ddac01104b5f8"
+    },
+    "cache-custody-member-4": {
+      "bytes": 678951,
+      "sha256": "e511c7eca56f73d7bb7ca702bed558b6266094d3ad2281c5a17f64ae4eca61e9"
+    },
+    "compiler-log": {
+      "bytes": 228301,
+      "sha256": "b85831f89f61ab5685ceeeece1a0ef68437083a478d1f26cbb775765bd11982e"
+    },
+    "dimension-convention-derivation": {
+      "bytes": 1421,
+      "sha256": "611a17b84548f6b954472f6f539d8f7b7441be7d76c7ab81981cdf1a9eeeb02b"
+    },
+    "failed-cache-archive": {
+      "bytes": 18353020,
+      "sha256": "9cd7f02363cc2f231898670dfc289754895667e538633271362067990a280eec"
+    },
+    "failed-cache-publication": {
+      "bytes": 2983,
+      "sha256": "e37cf52008096c48229c0f2a881f1c5491bf812ada330ee5541106809ec32544"
+    },
+    "failure-member-1": {
+      "bytes": 228301,
+      "sha256": "b85831f89f61ab5685ceeeece1a0ef68437083a478d1f26cbb775765bd11982e"
+    },
+    "failure-member-2": {
+      "bytes": 1447,
+      "sha256": "fb2d8b63595f8b3022bb58356160de2bfd7ad9c3ad34c0fa51df9ba7ea6a02bc"
+    },
+    "failure-member-3": {
+      "bytes": 618159,
+      "sha256": "a1bd8889a23e3bc698ba60fcdc6cd3277ae2e21daec851097e1dc745d141142c"
+    },
+    "failure-member-4": {
+      "bytes": 571318,
+      "sha256": "02d6285f53150d6b13868e5e0dd1fcc6d9b9cca8e1a5ac2cc3f8fcba82661c96"
+    },
+    "failure-member-5": {
+      "bytes": 259090,
+      "sha256": "07ad376d0cc3b9494938cbf9ba2033b4d97820168b45a79708920f378154d0c4"
+    },
+    "failure-receipt": {
+      "bytes": 3441,
+      "sha256": "be900616e33823ae4ad5197da78791440eb05c0c9ea2e74d44b50fe8f7445dcf"
+    },
+    "finalization-member-1": {
+      "bytes": 259138,
+      "sha256": "8a0fe5bfc54505d4de8453457843c1b9141c0486d8e3708001f27a00dc33543f"
+    },
+    "finalization-member-2": {
+      "bytes": 1087,
+      "sha256": "1559a132b36ab0e99bd1d825a353d509d358134177c46e9492056bb9b669d201"
+    },
+    "finalization-receipt": {
+      "bytes": 2390,
+      "sha256": "34e62ff7444a6b6387f95d3b8403b28ce16814906ef7cc98722d77ee2cdb86aa"
+    },
+    "native-api-after": {
+      "bytes": 18906,
+      "sha256": "ee737447b43742a92fb00c718be85fc7b460e1d82d0ee2927504b46f1da4cdcd"
+    },
+    "native-api-before": {
+      "bytes": 18906,
+      "sha256": "2d7912aa8856cd9000bc649cfc1390366dc8f182211746f24ce48c3df99baeef"
+    },
+    "native-colour-status": {
+      "bytes": 15924,
+      "sha256": "6fac93ebd25b15e7c83875a5d5622a72ed4cafc1a03a8a3e27df5ce8e423c464"
+    },
+    "native-physical-status": {
+      "bytes": 67388,
+      "sha256": "34a145ab7d5d0157f6d975cabec818c3195732e0fc87b37ab5e7939567c8f95c"
+    },
+    "native-provider-1": {
+      "bytes": 4995,
+      "sha256": "0b834cbcde1f55f7f568c7131a29d035e9af3f643e8f0b14fe1a7128f53ed478"
+    },
+    "native-provider-2": {
+      "bytes": 4868,
+      "sha256": "b97d0345fa5c8182eeb8f6cb7c1829cf99f404e13febe131a01cf1b4c263ae67"
+    },
+    "native-provider-3": {
+      "bytes": 1309,
+      "sha256": "402f65e396d598b4582b87921aa6ab6e4760a519cd09b9aa764cc12ec9a69004"
+    },
+    "original-core-deployment": {
+      "bytes": 44574,
+      "sha256": "0c40f3d131feefb3135a0fa1b228081b73c8501583486c12970848805997d0c3"
+    },
+    "original-map-disposition": {
+      "bytes": 3836,
+      "sha256": "337d0e8410a178a5393c51efda5ff5417af3a7cafefc8551a0f49f568c05b6aa"
+    },
+    "post-shutdown-provider-audit": {
+      "bytes": 18402,
+      "sha256": "5d1f70e3d2bf2c3a885f9eb4497ca2a371b95ae09e601c916355ffe38f82dfa8"
+    },
+    "source-api-dimensions": {
+      "bytes": 47873,
+      "gitBlob": "59d6d066bbe9ece80f6a126285a0f294e83cc9d3",
+      "repositoryPath": "src/Api/UpscalingService.cpp",
+      "sha256": "1ccfb833c04d70305896d0241719e6c395971185805e451b0c7d75b1d2a341f5"
+    },
+    "source-feature-include-1": {
+      "bytes": 8222,
+      "gitBlob": "b446f8d9924ea0e533e963abd8de9dcd78b63a87",
+      "repositoryPath": "features/Wetterness/Shaders/Wetterness/WetternessLighting.hlsli",
+      "sha256": "2dbcbbf85c67c55b03b878ae540323d3482d9ce62f3d514fdfd61446b92a6686"
+    },
+    "source-feature-include-2": {
+      "bytes": 2160,
+      "gitBlob": "a2a22a3155144dad0dbf3e2d9587d506b4756c0f",
+      "repositoryPath": "features/Wetterness/Shaders/Wetterness/PuddleMask.hlsli",
+      "sha256": "9f438feb485d4121b33d3e802992b353740bc5c01b5f53ce0fb75955f2fbb756"
+    },
+    "source-lighting": {
+      "bytes": 182356,
+      "gitBlob": "25d52de9e5a7f29e970402ca50d0b49c7542f8c8",
+      "repositoryPath": "package/Shaders/Lighting.hlsl",
+      "sha256": "e4c3267e336ba026b3dc2b0a0bdf61ca5ce71f8866cf6d41079bc777550f2c6b"
+    }
+  },
+  "sourceInventoryDigestMeaning": "Canonical finite retained-input and immutable source-blob inventory, not full Git source tree.",
+  "sourceReachability": "Exact ad8 commit independently resolved via GitHub API in Treatid2/skyrim-community-shaders; repository-directory alias is not treated as GitHub repository name.",
+  "verification": "Importer independently rehashed declared failure members, finalized metadata, four cache custody metadata files, archive byte identity; independently counted compiler records, matched all three native provider results to audit, and matched API bracket/dimension derivations against four retained native wrappers. No live controls or original-file mutations."
+}
