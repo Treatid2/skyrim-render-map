@@ -1,0 +1,190 @@
+{
+  "findings": [
+    {
+      "evidenceClass": "source-analysis",
+      "file": "src/Features/Upscaling/FidelityFX.cpp",
+      "finding": "RecordDevBenchSuccessfulDispatch aggregate construction sets exposureResourceBound false and preExposure 1.0f as literals; it does not receive these as arguments or sample a resource binding. Context flags/generation are selected from runtime versus host context state.",
+      "id": "telemetry-literals",
+      "limit": "Not an independent live exposure-resource or pre-exposure measurement.",
+      "linesInclusive": [
+        1448,
+        1506
+      ]
+    },
+    {
+      "evidenceClass": "source-analysis",
+      "file": "src/Features/Upscaling/FSRColorContractDevBenchBridge.cpp",
+      "finding": "SnapshotJson emits sourceColorContractChanged false as a literal.",
+      "id": "source-colour-annotation",
+      "limit": "Annotation, not an independent measurement of source-transfer invariance.",
+      "linesInclusive": [
+        49,
+        75
+      ]
+    },
+    {
+      "evidenceClass": "source-analysis",
+      "file": "src/Features/Upscaling/FidelityFX.cpp",
+      "finding": "Runtime upscale descriptor construction independently assigns an empty exposure resource and preExposure 1.0f; sharpening fields come from ResolveFSRSharpeningSettings, input/output sizes from region extents. The descriptor header is passed to DispatchRuntimeUpscalerProtected.",
+      "id": "actual-runtime-parameters",
+      "limit": "Static source assignments, not a captured descriptor readback, vendor algorithm proof or GPU completion.",
+      "linesInclusive": [
+        4170,
+        4238
+      ]
+    },
+    {
+      "evidenceClass": "source-analysis",
+      "file": "src/Features/Upscaling/FidelityFX.cpp",
+      "finding": "Host FSR3 descriptor construction independently assigns a null exposure resource and preExposure 1.0f; sharpening fields come from ResolveFSRSharpeningSettings and extents from arguments. The descriptor is passed to DispatchHostFsr3UpscaleProtected; successful CPU return records telemetry.",
+      "id": "actual-host-parameters",
+      "limit": "Host branch source evidence; inactive host context in this baseline does not demonstrate this branch ran.",
+      "linesInclusive": [
+        4449,
+        4507
+      ]
+    },
+    {
+      "evidenceClass": "source-analysis",
+      "file": "src/Features/Upscaling/FidelityFX.cpp",
+      "finding": "Host and runtime context creation descriptors conditionally enable their respective HDR-input and auto-exposure flags using processing-contract bits0 and1. DevBench gets current requested flags; non-DevBench uses default flags.",
+      "id": "context-flags",
+      "limit": "Context configuration is not a proof of actual colour transfer or brightness causality.",
+      "lineRangesInclusive": [
+        [
+          1978,
+          2015
+        ],
+        [
+          3515,
+          3558
+        ]
+      ]
+    },
+    {
+      "evidenceClass": "source-analysis",
+      "file": "src/Features/Upscaling/FidelityFX.cpp",
+      "finding": "The getter locks the colour-contract mutex before reading requested flags, host/runtime context validity/generations, global successful dispatch and the two per-eye records; changed accepted requests clear global and per-eye evidence through ApplySet.",
+      "id": "coherent-service-snapshot",
+      "limit": "CPU service coherence, not atomicity with image/tracking/calendar/probe or GPU.",
+      "linesInclusive": [
+        1254,
+        1337
+      ]
+    },
+    {
+      "evidenceClass": "source-analysis",
+      "file": "src/Features/Upscaling/FidelityFX.h",
+      "finding": "RuntimeUpscalerFramePath defines inactive0, hostFSR3.1=1, runtimeFSR3.1=2, runtimeFSR4=3, hostFSR3.1fallback=4.",
+      "id": "path-enum",
+      "limit": "Source enum labels do not independently authenticate the vendor algorithm or provider/GPU behaviour.",
+      "linesInclusive": [
+        60,
+        68
+      ]
+    },
+    {
+      "evidenceClass": "source-analysis",
+      "file": "src/Features/Upscaling/FSRColorContractPolicy.h",
+      "finding": "Defaults revision1/HDRtrue/AEtrue; compare-and-set rejects mismatched revision, unchanged flags do not increment revision, changes increment with max-to1 wrap. Context matching requires validity plus matching flag bits. Context reuse permits an already dispatched frame; replacement ignores invalid contexts, defers a mismatching valid context dispatched this nonzero current frame, otherwise reports ready.",
+      "id": "policy",
+      "limit": "Static policy, not a live transition assay.",
+      "linesInclusive": [
+        1,
+        137
+      ]
+    },
+    {
+      "evidenceClass": "source-analysis",
+      "file": "src/Features/Upscaling/FSRColorContractReceiptPolicy.h",
+      "finding": "ApplySet holds one mutex, clears dispatch evidence and stores new state only for a changed revision-matched request, then builds its status receipt inside that lock.",
+      "id": "set-receipt",
+      "limit": "Static set contract; no mutation was executed by importer.",
+      "linesInclusive": [
+        1,
+        46
+      ]
+    },
+    {
+      "evidenceClass": "source-analysis",
+      "file": "src/Features/Upscaling/ColourPipelineProbe.h",
+      "finding": "Stage enum declares FsrInput/FsrOutput/CombinedMain/ImageSpaceInput/ImageSpaceOutput.",
+      "id": "probe-stage-contract",
+      "limit": "Declared stages, not observed stage samples.",
+      "linesInclusive": [
+        11,
+        21
+      ]
+    },
+    {
+      "evidenceClass": "source-analysis",
+      "file": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+      "finding": "Probe constants declare schema3, five stages and two eyes (ten slots); StageName supplies the five serialized seam names and BuildStatus reports counts.",
+      "id": "probe-slot-contract",
+      "limit": "Idle status in this baseline has zero queued/mapped slots; no scientific probe capture.",
+      "lineRangesInclusive": [
+        [
+          30,
+          48
+        ],
+        [
+          163,
+          178
+        ],
+        [
+          1086,
+          1110
+        ]
+      ]
+    }
+  ],
+  "literalAnnotationBoundaryExplicit": true,
+  "pinnedSourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+  "schemaVersion": 1,
+  "sourceExecutedOrMutated": false,
+  "sourceFiles": {
+    "src/Features/Upscaling/ColourPipelineProbe.cpp": {
+      "bytes": 43500,
+      "gitBlobOid": "bc73bcaffa8fa5f77b0f92c9c2497cd00d9f7cce",
+      "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+      "sha256": "5cc883de7c65987dbfb05bf1c8d3be734d1940060bbd52f8ccb1c6710809aa0a"
+    },
+    "src/Features/Upscaling/ColourPipelineProbe.h": {
+      "bytes": 3291,
+      "gitBlobOid": "776a48eb01635d99cb4fe4362e002e797345cb35",
+      "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.h",
+      "sha256": "1a4d50161c53308489d08d47bf466b88560bd281e0bd3fc1ff3a1f199386a740"
+    },
+    "src/Features/Upscaling/FSRColorContractDevBenchBridge.cpp": {
+      "bytes": 7480,
+      "gitBlobOid": "c77efa5fa0e781db6fa6d80b58fca0585eca68df",
+      "repositoryPath": "src/Features/Upscaling/FSRColorContractDevBenchBridge.cpp",
+      "sha256": "ef65b15c285fde063ebe5df35215570c3925e96e39ff5ff70d3d0c3245ecf591"
+    },
+    "src/Features/Upscaling/FSRColorContractPolicy.h": {
+      "bytes": 4221,
+      "gitBlobOid": "8310a3305aa06df22918793e3c52f857675f007d",
+      "repositoryPath": "src/Features/Upscaling/FSRColorContractPolicy.h",
+      "sha256": "16e714ef232654d3285f7ffcb48940c9e629bb4795393b4b9babb0d811562236"
+    },
+    "src/Features/Upscaling/FSRColorContractReceiptPolicy.h": {
+      "bytes": 1187,
+      "gitBlobOid": "d6e1bcee039b542cc1acf522571bdb7e59270589",
+      "repositoryPath": "src/Features/Upscaling/FSRColorContractReceiptPolicy.h",
+      "sha256": "ab86707d12750cf2ceb366d411063876355d44318f4f63b4eee14e013a29c7a8"
+    },
+    "src/Features/Upscaling/FidelityFX.cpp": {
+      "bytes": 193471,
+      "gitBlobOid": "327e5d3f5008d3849585e9e5bb4fbdfa137fa28f",
+      "repositoryPath": "src/Features/Upscaling/FidelityFX.cpp",
+      "sha256": "26a572ffc693203d7c313e5ed98a2acce168a254d384c314a40e6c50656c574b"
+    },
+    "src/Features/Upscaling/FidelityFX.h": {
+      "bytes": 23465,
+      "gitBlobOid": "7f7e249c924560687d701b80cc93173908819389",
+      "repositoryPath": "src/Features/Upscaling/FidelityFX.h",
+      "sha256": "9c70821e5c622b3253457d67363ff0c7a51ee6a335d42a34baaf5736451f071c"
+    }
+  },
+  "staticSourceNotLiveDescriptorOrGpuReadback": true
+}
