@@ -1,0 +1,50 @@
+{
+  "content": {
+    "fileCount": 9,
+    "root": "content",
+    "totalBytes": 8198750,
+    "treeSha256": "E134622B80C23111B33E9AA46A45AB325C452C7D54FC6C8ED91745439C7115B1"
+  },
+  "contributor": {
+    "displayName": "Treatid2",
+    "github": "Treatid2",
+    "standing": "ordinary-contributor"
+  },
+  "createdAt": "2026-10-05T21:48:01.240344+00:00",
+  "licensing": {
+    "content": "CC-BY-SA-4.0",
+    "dcoAcknowledged": true,
+    "schemas": "CC0-1.0"
+  },
+  "namespace": "csx",
+  "notes": "Separate excursion04 six-capture/60-page on/off/on data; successful condition/dispatch assay, not causal brightness. Prior failures and sparse coverage limitations retained.",
+  "provenance": {
+    "importedAt": "2026-10-05T21:48:01.240344+00:00",
+    "relatedUrls": [
+      "https://github.com/Treatid2/skyrim-community-shaders/commit/f4fe744560df1aa890e90f8b794c28983f156c14",
+      "https://github.com/Treatid2/skyrim-render-map/pull/41"
+    ],
+    "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14",
+    "sourceContentTreeSha256": "2bbff16d361f221f55003810f7532e98db93a76c500f1c639c40de705926bc2d",
+    "sourceDirty": false,
+    "sourceParentCommit": "2f19fe27e886068348d83d4ef0900e3eae52ede9",
+    "sourcePubliclyReachable": true,
+    "sourceRef": null,
+    "sourceRepository": "https://github.com/Treatid2/skyrim-community-shaders",
+    "sourceState": "public-branch",
+    "transformations": [
+      "Finite immutable native journals decoded and all raw samples/statistics/repeat comparisons independently recomputed, no live replay.",
+      "Sanitized actual native pages/RPC/tracking projections and parsed canonical hashes retained; one camera row not continuous view.",
+      "Source-qualified crop-local coordinates preserve original source origin separately.",
+      "Exact archived receipt/package/adapter/cache identities checked; prior PR41 and original failed audit receipts unchanged."
+    ]
+  },
+  "schema": {
+    "major": 1,
+    "minor": 0,
+    "name": "skyrim-render-map.submission"
+  },
+  "status": "candidate-unreviewed",
+  "submissionClass": "assertion",
+  "submissionId": "sub-csx-f4-autoexposure-on-off-on-v1"
+}
