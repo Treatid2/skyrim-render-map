@@ -1,0 +1,390 @@
+{
+  "nativeProjection": {
+    "artifacts": [
+      {
+        "bytes": 1072688,
+        "complete": true,
+        "kind": "events-jsonl",
+        "mediaType": "application/x-ndjson",
+        "path": "events.jsonl",
+        "sha256": "088b53e56ab5eed7091b563edfe221407866c99f3d4312623ce55ad6eb0f8411"
+      }
+    ],
+    "bounds": {
+      "activation": {
+        "maxWaitMs": 2000,
+        "mode": "main-post-processing-to-accepted-eyes",
+        "target": 114
+      },
+      "eventKinds": [
+        "device-context-observed",
+        "draw",
+        "eye-submitted",
+        "raster-state-observed",
+        "render-pass-enter",
+        "render-pass-exit",
+        "render-target-bind",
+        "resource-flow",
+        "resource-observed",
+        "resource-view-bind",
+        "resource-view-state-observed",
+        "shader-observed",
+        "stage-shader-observed",
+        "target-view-observed",
+        "transfer-resource-access"
+      ],
+      "executionWithinSelectedGeometry": false,
+      "geometryShaderTypes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63
+      ],
+      "maxBytes": 67108864,
+      "maxDurationMs": 2000,
+      "maxEvents": 16384,
+      "maxFrames": 2,
+      "maxGeometryObservations": 128,
+      "maxMaterialStateObservations": 128,
+      "maxResourceObservations": 1024,
+      "maxSceneObjectObservations": 128,
+      "maxShaderObservations": 256,
+      "maxStageShaderObservations": 256,
+      "maxTargetBindingObservations": 256,
+      "maxTargetViewObservations": 256,
+      "maxTransferVersionResources": 256,
+      "observedEventKinds": [
+        "device-context-observed",
+        "draw",
+        "eye-submitted",
+        "raster-state-observed",
+        "render-pass-enter",
+        "render-pass-exit",
+        "render-target-bind",
+        "resource-flow",
+        "resource-observed",
+        "resource-view-bind",
+        "resource-view-state-observed",
+        "shader-observed",
+        "stage-shader-observed",
+        "target-view-observed",
+        "transfer-resource-access"
+      ],
+      "requestedEventKinds": [
+        "eye-submitted"
+      ],
+      "resolvedEventKinds": [
+        "render-pass-created",
+        "render-pass-enter",
+        "render-pass-exit",
+        "render-target-bind",
+        "draw",
+        "dispatch",
+        "command-recording-observed",
+        "shader-observed",
+        "stage-shader-observed",
+        "device-context-observed",
+        "target-view-observed",
+        "resource-observed",
+        "resource-view-bind",
+        "resource-view-state-observed",
+        "resource-flow",
+        "eye-submitted",
+        "raster-state-observed",
+        "transfer-resource-access"
+      ]
+    },
+    "capabilities": [
+      "thread-local-render-scopes",
+      "bounded-in-memory-capture",
+      "typed-shader-observations",
+      "resolved-technique-stage-observations",
+      "typed-output-merger-target-observations",
+      "typed-resource-and-view-observations",
+      "ordered-resource-bindings",
+      "resource-flow-observations",
+      "resource-mutation-observations",
+      "resource-cpu-access-observations",
+      "atomic-events-jsonl",
+      "atomic-capture-manifest",
+      "explicit-gap-events",
+      "capture-start-shader-compilation-provenance"
+    ],
+    "clock": {
+      "frequencyHz": 10000000,
+      "source": "QueryPerformanceCounter",
+      "startTick": 22650981197610
+    },
+    "completion": {
+      "collectorOverheadUs": null,
+      "droppedEventCount": 0,
+      "errors": [],
+      "eventCount": 768,
+      "firstSequence": 0,
+      "lastSequence": 767,
+      "reason": "requested",
+      "truncated": false
+    },
+    "createdAtUtc": "2026-10-05T15:35:35.142Z",
+    "environment": {
+      "csx": {
+        "name": "CommunityShaders.dll",
+        "sha256": null,
+        "version": "ef49a37c28a0"
+      },
+      "graphics": {
+        "driver": null,
+        "gpu": null,
+        "presetSha256": null,
+        "renderHeight": null,
+        "renderWidth": null,
+        "settingsSha256": null
+      },
+      "modEnvironment": {
+        "instance": null,
+        "manager": "other",
+        "modlistSha256": null,
+        "pluginLoadOrderSha256": null,
+        "profile": null
+      },
+      "runtimeRoute": "unknown",
+      "shaderCache": {
+        "coldAtStart": false,
+        "identity": "unavailable",
+        "inventorySha256": null
+      },
+      "skyrim": {
+        "name": "SkyrimVR.exe",
+        "sha256": null,
+        "version": "1.4.15.0"
+      }
+    },
+    "extensions": {
+      "csx.acceptedEventCount": 768,
+      "csx.boundaryRejectionCount": 0,
+      "csx.captureIncompleteReasons": [],
+      "csx.captureWindow": {
+        "acceptedEyeMask": 3,
+        "activationBoundary": {
+          "attemptCount": 1,
+          "frameRejections": 0,
+          "lastCpuFrame": 30472,
+          "lastPublicationGeneration": 4,
+          "lastTarget": 114,
+          "publicationRejections": 0,
+          "scope": "armed-window-input-validation",
+          "targetRejections": 0
+        },
+        "activationTick": 22650981375819,
+        "armedTick": 22650981197610,
+        "bootstrapComplete": true,
+        "bootstrapEventCount": 115,
+        "compositorCycle": 26672,
+        "cpuFrame": 30472,
+        "endTick": 22650981385813,
+        "failure": "none",
+        "fullPipelineEstablished": false,
+        "omittedPrefix": {
+          "fromTickInclusive": 22650981197610,
+          "toTickExclusive": 22650981375819
+        },
+        "phase": "matched-eyes",
+        "pixelTransferEstablished": false,
+        "preWindowProducerHistory": "unobserved",
+        "prefixEventCount": null,
+        "publicationGeneration": 4
+      },
+      "csx.droppedGeometryObservationCount": 0,
+      "csx.droppedMaterialStateObservationCount": 0,
+      "csx.droppedResourceObservationCount": 0,
+      "csx.droppedSceneObjectObservationCount": 0,
+      "csx.droppedShaderObservationCount": 0,
+      "csx.droppedStageShaderObservationCount": 0,
+      "csx.droppedTargetBindingObservationCount": 0,
+      "csx.droppedTargetViewObservationCount": 0,
+      "csx.filteredEventCount": 54,
+      "csx.geometryObservationCount": 0,
+      "csx.materialStateObservationCount": 0,
+      "csx.maximumTransferVersionResources": 256,
+      "csx.observedTransferVersionAdmissionFailures": 0,
+      "csx.requestedEventKinds": [
+        "eye-submitted"
+      ],
+      "csx.resolvedEventKinds": [
+        "render-pass-created",
+        "render-pass-enter",
+        "render-pass-exit",
+        "render-target-bind",
+        "draw",
+        "dispatch",
+        "command-recording-observed",
+        "shader-observed",
+        "stage-shader-observed",
+        "device-context-observed",
+        "target-view-observed",
+        "resource-observed",
+        "resource-view-bind",
+        "resource-view-state-observed",
+        "resource-flow",
+        "eye-submitted",
+        "raster-state-observed",
+        "transfer-resource-access"
+      ],
+      "csx.resourceObservationCount": 49,
+      "csx.sceneObjectObservationCount": 0,
+      "csx.sessionGeneration": 1,
+      "csx.shaderCompilation": {
+        "availability": "observed",
+        "capturedAt": "capture-start",
+        "compatibilityRegistry": {
+          "compatibilitySetDigest": null,
+          "complete": false,
+          "phase": "unknown",
+          "registrationCount": 0,
+          "registrations": [],
+          "revision": 1
+        },
+        "compileMode": "optimized",
+        "compilerFlags": {
+          "avoidFlowControl": false,
+          "partialPrecision": false
+        },
+        "evidenceClass": "runtime-observed",
+        "globalCompileState": {
+          "algorithm": "xxh3-128",
+          "digest": "b4b8df48cf1d7bd88202022205c3c6ea",
+          "identityBasis": [
+            "compile-mode",
+            "virtual-reality",
+            "partial-precision",
+            "avoid-flow-control",
+            "shader-cache-abi",
+            "global-defines"
+          ]
+        },
+        "globalDefines": {
+          "cachePathSuffix": "",
+          "canonicalText": ""
+        },
+        "qualification": "globalCompileState is observed; current main-VR does not expose a shader-specific compatibility registry, so compatibilityRegistry is explicitly incomplete",
+        "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+        "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+        "virtualReality": true
+      },
+      "csx.shaderObservationCount": 10,
+      "csx.stageShaderObservationCount": 22,
+      "csx.stopRaceRejectionCount": 0,
+      "csx.targetBindingObservationCount": 12,
+      "csx.targetViewObservationCount": 48
+    },
+    "inputs": {
+      "csxBuildManifest": {
+        "availability": "unavailable",
+        "path": null,
+        "schemaMajor": null,
+        "sha256": null
+      },
+      "engineMap": {
+        "availability": "unavailable",
+        "path": null,
+        "schemaMajor": null,
+        "sha256": null
+      },
+      "shaderManifest": {
+        "availability": "unavailable",
+        "path": null,
+        "schemaMajor": null,
+        "sha256": null
+      }
+    },
+    "producer": {
+      "dirty": false,
+      "gitCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+      "name": "CommunityShaders",
+      "version": "ef49a37c28a0"
+    },
+    "scenario": {
+      "cameraMarker": null,
+      "cell": null,
+      "gameHour": null,
+      "id": "unspecified",
+      "notes": "No scenario metadata was supplied to the v1.0 live controller.",
+      "saveFingerprint": null,
+      "weather": null,
+      "worldspace": null
+    },
+    "schema": {
+      "major": 1,
+      "minor": 9,
+      "name": "csx.render-capture-manifest",
+      "producerVersion": "collector-v1"
+    },
+    "status": "complete"
+  },
+  "originalIdentity": {
+    "bytes": 9821,
+    "sha256": "a5c5c534fba0b271abfa53fd6b8d266c4dc9219e2d2982795f51d7c5b490be83"
+  },
+  "projectionNotOriginalManifest": true,
+  "schemaVersion": 1
+}

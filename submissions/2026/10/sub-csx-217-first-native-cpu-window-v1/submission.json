@@ -1,0 +1,51 @@
+{
+  "content": {
+    "fileCount": 6,
+    "root": "content",
+    "totalBytes": 1734581,
+    "treeSha256": "6C40B63C5F3125348EB76A6CF8883DBE91893702986A3CE2240C9B126AA3EDB4"
+  },
+  "contributor": {
+    "displayName": "Treatid2",
+    "github": "Treatid2",
+    "standing": "ordinary-contributor"
+  },
+  "createdAt": "2026-10-05T16:19:07.203276+00:00",
+  "licensing": {
+    "content": "CC-BY-SA-4.0",
+    "dcoAcknowledged": true,
+    "schemas": "CC0-1.0"
+  },
+  "namespace": "csx",
+  "notes": "First actual217 selectedlateCPUwindow;768 sanitizedevents and explicitboundstage/resource/acceptedeye joins, notGPU/pixelcausality/fullpipeline/scientificbrightness.",
+  "provenance": {
+    "importedAt": "2026-10-05T16:19:07.203276+00:00",
+    "relatedUrls": [
+      "https://github.com/Treatid2/skyrim-community-shaders/commit/217992d1e29e55a707d6e41c3ca111b2154904fa",
+      "https://github.com/Treatid2/skyrim-render-map/pull/37"
+    ],
+    "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+    "sourceContentTreeSha256": "842c2483383909179943f364d2d0e3906ea65b082632c7bde10d2f43662f173c",
+    "sourceDirty": false,
+    "sourceParentCommit": "7b4f84c5645aed34fb84b2513da890a389f474ea",
+    "sourcePubliclyReachable": true,
+    "sourceRef": null,
+    "sourceRepository": "https://github.com/Treatid2/skyrim-community-shaders",
+    "sourceState": "public-branch",
+    "transformations": [
+      "Finite originals/native/recording/adapter identity verified, no originals modified.",
+      "768-row sanitized CPU event projection retaining exactsequence/line/hash/local observationjoins; process/session/pointers removed.",
+      "Independentdrawstagebytecodejoins and uniqueenginealias metadata correlations, notGPUorder/cost/objectidentityproof.",
+      "Originalmanifestunknowns preserved; separate scene/calibration/stereo evidence explicitlynon-atomic.",
+      "Cache/compilecompatibility limitations retained;priorPR37 unchanged;owner nextablationplan notexecuted."
+    ]
+  },
+  "schema": {
+    "major": 1,
+    "minor": 0,
+    "name": "skyrim-render-map.submission"
+  },
+  "status": "candidate-unreviewed",
+  "submissionClass": "assertion",
+  "submissionId": "sub-csx-217-first-native-cpu-window-v1"
+}

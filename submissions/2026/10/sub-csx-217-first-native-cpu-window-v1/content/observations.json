@@ -1,0 +1,1076 @@
+{
+  "acceptedEyes": [
+    {
+      "frame": {
+        "cpuFrame": 30472,
+        "eye": "left",
+        "eyeMask": 1,
+        "sceneEpoch": null,
+        "submissionEpoch": null
+      },
+      "payload": {
+        "acceptedWithCurrentPublicationLease": true,
+        "causalPixelTransferEstablished": false,
+        "commandEpoch": null,
+        "commandVersionObservationId": null,
+        "compositorCycle": 26672,
+        "eye": "left",
+        "eyeMask": 1,
+        "renderTargetPublicationGeneration": 4,
+        "resourceObservationId": "obs-resource-173-g1",
+        "schema": "accepted-eye-publication-v1"
+      },
+      "sequence": 758
+    },
+    {
+      "frame": {
+        "cpuFrame": 30472,
+        "eye": "right",
+        "eyeMask": 2,
+        "sceneEpoch": null,
+        "submissionEpoch": null
+      },
+      "payload": {
+        "acceptedWithCurrentPublicationLease": true,
+        "causalPixelTransferEstablished": false,
+        "commandEpoch": null,
+        "commandVersionObservationId": null,
+        "compositorCycle": 26672,
+        "eye": "right",
+        "eyeMask": 2,
+        "renderTargetPublicationGeneration": 4,
+        "resourceObservationId": "obs-resource-173-g1",
+        "schema": "accepted-eye-publication-v1"
+      },
+      "sequence": 767
+    }
+  ],
+  "calibration": {
+    "crossCheckResiduals": {
+      "hmd": 5.245208734017126e-08,
+      "right": 0.0
+    },
+    "standingFromRaw": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.029999971389770508,
+      0.0,
+      0.0,
+      1.0,
+      5.960464455334602e-09
+    ]
+  },
+  "compilerSnapshots": [
+    {
+      "call": "native-start",
+      "compilation": {
+        "active": false,
+        "activeShaderCapture": false,
+        "async": true,
+        "backgroundThreadCount": 8,
+        "completedTasks": 10,
+        "currentFailedShaders": 0,
+        "diskCacheHits": 8,
+        "failedTasks": 0,
+        "foregroundThreadCount": 12,
+        "heavyTasksInFlight": 0,
+        "memoryCacheHits": 0,
+        "recentFailures": [],
+        "skipUnchanged": true,
+        "slowTasks": 0,
+        "sourceCompiles": 2,
+        "statisticsText": "10/10 (successful/total)\tfailed: 0\tdeduplicated: 0\tdisk cache: 8\tsource compiles: 2\nElapsed/Estimated Time: 00:00:00/00:00:00",
+        "totalTasks": 10,
+        "verySlowTasks": 0
+      },
+      "nativeProducerManifestVerified": false,
+      "phase": "before",
+      "scope": "compiler snapshot only; not package/include/provider closure, visual correctness or capture completion",
+      "state": "COMPILER_HEALTHY_AT_SNAPSHOT",
+      "timestampUtc": "2026-10-05T15:35:35.075Z"
+    },
+    {
+      "call": "native-start",
+      "compilation": {
+        "active": false,
+        "activeShaderCapture": false,
+        "async": true,
+        "backgroundThreadCount": 8,
+        "completedTasks": 10,
+        "currentFailedShaders": 0,
+        "diskCacheHits": 8,
+        "failedTasks": 0,
+        "foregroundThreadCount": 12,
+        "heavyTasksInFlight": 0,
+        "memoryCacheHits": 0,
+        "recentFailures": [],
+        "skipUnchanged": true,
+        "slowTasks": 0,
+        "sourceCompiles": 2,
+        "statisticsText": "10/10 (successful/total)\tfailed: 0\tdeduplicated: 0\tdisk cache: 8\tsource compiles: 2\nElapsed/Estimated Time: 00:00:00/00:00:00",
+        "totalTasks": 10,
+        "verySlowTasks": 0
+      },
+      "nativeProducerManifestVerified": false,
+      "phase": "after",
+      "scope": "compiler snapshot only; not package/include/provider closure, visual correctness or capture completion",
+      "state": "COMPILER_HEALTHY_AT_SNAPSHOT",
+      "timestampUtc": "2026-10-05T15:35:35.183Z"
+    },
+    {
+      "call": "native-status",
+      "compilation": {
+        "active": false,
+        "activeShaderCapture": false,
+        "async": true,
+        "backgroundThreadCount": 8,
+        "completedTasks": 10,
+        "currentFailedShaders": 0,
+        "diskCacheHits": 8,
+        "failedTasks": 0,
+        "foregroundThreadCount": 12,
+        "heavyTasksInFlight": 0,
+        "memoryCacheHits": 0,
+        "recentFailures": [],
+        "skipUnchanged": true,
+        "slowTasks": 0,
+        "sourceCompiles": 2,
+        "statisticsText": "10/10 (successful/total)\tfailed: 0\tdeduplicated: 0\tdisk cache: 8\tsource compiles: 2\nElapsed/Estimated Time: 00:00:00/00:00:00",
+        "totalTasks": 10,
+        "verySlowTasks": 0
+      },
+      "nativeProducerManifestVerified": false,
+      "phase": "before",
+      "scope": "compiler snapshot only; not package/include/provider closure, visual correctness or capture completion",
+      "state": "COMPILER_HEALTHY_AT_SNAPSHOT",
+      "timestampUtc": "2026-10-05T15:36:27.288Z"
+    },
+    {
+      "call": "native-status",
+      "compilation": {
+        "active": false,
+        "activeShaderCapture": false,
+        "async": true,
+        "backgroundThreadCount": 8,
+        "completedTasks": 10,
+        "currentFailedShaders": 0,
+        "diskCacheHits": 8,
+        "failedTasks": 0,
+        "foregroundThreadCount": 12,
+        "heavyTasksInFlight": 0,
+        "memoryCacheHits": 0,
+        "recentFailures": [],
+        "skipUnchanged": true,
+        "slowTasks": 0,
+        "sourceCompiles": 2,
+        "statisticsText": "10/10 (successful/total)\tfailed: 0\tdeduplicated: 0\tdisk cache: 8\tsource compiles: 2\nElapsed/Estimated Time: 00:00:00/00:00:00",
+        "totalTasks": 10,
+        "verySlowTasks": 0
+      },
+      "nativeProducerManifestVerified": false,
+      "phase": "after",
+      "scope": "compiler snapshot only; not package/include/provider closure, visual correctness or capture completion",
+      "state": "COMPILER_HEALTHY_AT_SNAPSHOT",
+      "timestampUtc": "2026-10-05T15:36:27.402Z"
+    }
+  ],
+  "completion": {
+    "attemptedEventCount": 822,
+    "boundaryRejectionCount": 0,
+    "droppedEventCount": 0,
+    "droppedGeometryObservationCount": 0,
+    "droppedMaterialStateObservationCount": 0,
+    "droppedResourceObservationCount": 0,
+    "droppedSceneObjectObservationCount": 0,
+    "droppedShaderObservationCount": 0,
+    "droppedStageShaderObservationCount": 0,
+    "droppedTargetBindingObservationCount": 0,
+    "droppedTargetViewObservationCount": 0,
+    "eventCount": 768,
+    "filteredEventCount": 54,
+    "geometryObservationCount": 0,
+    "incomplete": false,
+    "incompleteReasons": [],
+    "materialStateObservationCount": 0,
+    "maximumTransferVersionResources": 256,
+    "observedTransferVersionAdmissionFailures": 0,
+    "reason": "requested",
+    "resourceObservationCount": 49,
+    "sceneObjectObservationCount": 0,
+    "scopeMismatchCount": 0,
+    "scopeOverflowCount": 0,
+    "shaderObservationCount": 10,
+    "stageShaderObservationCount": 22,
+    "stopRaceRejectionCount": 0,
+    "targetBindingObservationCount": 12,
+    "targetViewObservationCount": 48,
+    "truncated": false
+  },
+  "copyCalls": [
+    {
+      "payload": {
+        "destinationResourceObservationId": "obs-resource-187-g1",
+        "destinationSubresource": 0,
+        "operation": "copy-subresource-region",
+        "schema": "resource-flow-v1",
+        "sourceResourceObservationId": "obs-resource-173-g1",
+        "sourceSubresource": 0
+      },
+      "sequence": 754
+    },
+    {
+      "payload": {
+        "destinationResourceObservationId": "obs-resource-188-g1",
+        "destinationSubresource": 0,
+        "operation": "copy-subresource-region",
+        "schema": "resource-flow-v1",
+        "sourceResourceObservationId": "obs-resource-173-g1",
+        "sourceSubresource": 0
+      },
+      "sequence": 756
+    },
+    {
+      "payload": {
+        "destinationResourceObservationId": "obs-resource-189-g1",
+        "destinationSubresource": 0,
+        "operation": "copy-subresource-region",
+        "schema": "resource-flow-v1",
+        "sourceResourceObservationId": "obs-resource-173-g1",
+        "sourceSubresource": 0
+      },
+      "sequence": 760
+    },
+    {
+      "payload": {
+        "destinationResourceObservationId": "obs-resource-188-g1",
+        "destinationSubresource": 0,
+        "operation": "copy-subresource-region",
+        "schema": "resource-flow-v1",
+        "sourceResourceObservationId": "obs-resource-173-g1",
+        "sourceSubresource": 0
+      },
+      "sequence": 761
+    },
+    {
+      "payload": {
+        "destinationResourceObservationId": "obs-resource-192-g1",
+        "destinationSubresource": 0,
+        "operation": "copy-resource",
+        "schema": "resource-flow-v1",
+        "sourceResourceObservationId": "obs-resource-190-g1",
+        "sourceSubresource": 0
+      },
+      "sequence": 764
+    }
+  ],
+  "custody": {
+    "archivesVerified": 3,
+    "originalsVerified": 18,
+    "workingCacheUnverified": true
+  },
+  "domain": "cpu-call",
+  "draws": [
+    {
+      "arguments": {
+        "baseVertexLocation": 0,
+        "indexCount": 6,
+        "startIndexLocation": 0
+      },
+      "commandStreamSequence": 93,
+      "cpuFrame": 30472,
+      "operation": "draw-indexed",
+      "pixelBytecodeSha256": "1701e75b6d0753e7a9350ddcd4b69eb9628cd69023ed86ddd7bcc6fe91495f98",
+      "pixelEngineAliases": [
+        {
+          "compileSourceName": "ISRefraction",
+          "descriptor": 0,
+          "loaderType": "ISRefraction",
+          "truncated": {
+            "compileSourceName": false,
+            "loaderType": false
+          }
+        }
+      ],
+      "pixelStageObservationId": "obs-pixel-shader-58-g1",
+      "sequence": 171,
+      "targetBindingObservationId": "obs-target-binding-63-g1",
+      "uniqueMetadataMatchedShaderObservationId": "obs-shader-55-g1",
+      "vertexBytecodeSha256": "390c8ee47eff642e092f99e40146e6bdbe77f9de500454dd61cc08826905aa30",
+      "vertexStageObservationId": "obs-vertex-shader-57-g1"
+    },
+    {
+      "arguments": {
+        "baseVertexLocation": 0,
+        "indexCount": 6,
+        "startIndexLocation": 0
+      },
+      "commandStreamSequence": 143,
+      "cpuFrame": 30472,
+      "operation": "draw-indexed",
+      "pixelBytecodeSha256": "74575925d52b1e609a7ac4f721c5ac5a9654d7d8facac3bc706e02fddfd78d00",
+      "pixelEngineAliases": [
+        {
+          "compileSourceName": "ISHDR",
+          "descriptor": 0,
+          "loaderType": "ISHDRDownSample4",
+          "truncated": {
+            "compileSourceName": false,
+            "loaderType": false
+          }
+        }
+      ],
+      "pixelStageObservationId": "obs-pixel-shader-74-g1",
+      "sequence": 225,
+      "targetBindingObservationId": "obs-target-binding-79-g1",
+      "uniqueMetadataMatchedShaderObservationId": "obs-shader-71-g1",
+      "vertexBytecodeSha256": "390c8ee47eff642e092f99e40146e6bdbe77f9de500454dd61cc08826905aa30",
+      "vertexStageObservationId": "obs-vertex-shader-73-g1"
+    },
+    {
+      "arguments": {
+        "baseVertexLocation": 0,
+        "indexCount": 6,
+        "startIndexLocation": 0
+      },
+      "commandStreamSequence": 191,
+      "cpuFrame": 30472,
+      "operation": "draw-indexed",
+      "pixelBytecodeSha256": "70d0038ddf5a115d2fdda4c657e589df2c13f743be419b2a8e46f6125a3d01b4",
+      "pixelEngineAliases": [
+        {
+          "compileSourceName": "ISHDR",
+          "descriptor": 0,
+          "loaderType": "ISHDRDownSample4RGB2Lum",
+          "truncated": {
+            "compileSourceName": false,
+            "loaderType": false
+          }
+        }
+      ],
+      "pixelStageObservationId": "obs-pixel-shader-86-g1",
+      "sequence": 275,
+      "targetBindingObservationId": "obs-target-binding-90-g1",
+      "uniqueMetadataMatchedShaderObservationId": "obs-shader-83-g1",
+      "vertexBytecodeSha256": "390c8ee47eff642e092f99e40146e6bdbe77f9de500454dd61cc08826905aa30",
+      "vertexStageObservationId": "obs-vertex-shader-85-g1"
+    },
+    {
+      "arguments": {
+        "baseVertexLocation": 0,
+        "indexCount": 6,
+        "startIndexLocation": 0
+      },
+      "commandStreamSequence": 239,
+      "cpuFrame": 30472,
+      "operation": "draw-indexed",
+      "pixelBytecodeSha256": "d2457159c4cd5ffd24170638f9766dcc4abccfdbbbe31b420c546d598e37ee34",
+      "pixelEngineAliases": [
+        {
+          "compileSourceName": "ISHDR",
+          "descriptor": 0,
+          "loaderType": "ISHDRDownSample16Lum",
+          "truncated": {
+            "compileSourceName": false,
+            "loaderType": false
+          }
+        }
+      ],
+      "pixelStageObservationId": "obs-pixel-shader-97-g1",
+      "sequence": 325,
+      "targetBindingObservationId": "obs-target-binding-101-g1",
+      "uniqueMetadataMatchedShaderObservationId": "obs-shader-94-g1",
+      "vertexBytecodeSha256": "390c8ee47eff642e092f99e40146e6bdbe77f9de500454dd61cc08826905aa30",
+      "vertexStageObservationId": "obs-vertex-shader-96-g1"
+    },
+    {
+      "arguments": {
+        "baseVertexLocation": 0,
+        "indexCount": 6,
+        "startIndexLocation": 0
+      },
+      "commandStreamSequence": 287,
+      "cpuFrame": 30472,
+      "operation": "draw-indexed",
+      "pixelBytecodeSha256": "d2457159c4cd5ffd24170638f9766dcc4abccfdbbbe31b420c546d598e37ee34",
+      "pixelEngineAliases": [
+        {
+          "compileSourceName": "ISHDR",
+          "descriptor": 0,
+          "loaderType": "ISHDRDownSample16Lum",
+          "truncated": {
+            "compileSourceName": false,
+            "loaderType": false
+          }
+        }
+      ],
+      "pixelStageObservationId": "obs-pixel-shader-97-g1",
+      "sequence": 372,
+      "targetBindingObservationId": "obs-target-binding-109-g1",
+      "uniqueMetadataMatchedShaderObservationId": "obs-shader-94-g1",
+      "vertexBytecodeSha256": "390c8ee47eff642e092f99e40146e6bdbe77f9de500454dd61cc08826905aa30",
+      "vertexStageObservationId": "obs-vertex-shader-96-g1"
+    },
+    {
+      "arguments": {
+        "baseVertexLocation": 0,
+        "indexCount": 6,
+        "startIndexLocation": 0
+      },
+      "commandStreamSequence": 335,
+      "cpuFrame": 30472,
+      "operation": "draw-indexed",
+      "pixelBytecodeSha256": "d2457159c4cd5ffd24170638f9766dcc4abccfdbbbe31b420c546d598e37ee34",
+      "pixelEngineAliases": [
+        {
+          "compileSourceName": "ISHDR",
+          "descriptor": 0,
+          "loaderType": "ISHDRDownSample16Lum",
+          "truncated": {
+            "compileSourceName": false,
+            "loaderType": false
+          }
+        }
+      ],
+      "pixelStageObservationId": "obs-pixel-shader-97-g1",
+      "sequence": 419,
+      "targetBindingObservationId": "obs-target-binding-117-g1",
+      "uniqueMetadataMatchedShaderObservationId": "obs-shader-94-g1",
+      "vertexBytecodeSha256": "390c8ee47eff642e092f99e40146e6bdbe77f9de500454dd61cc08826905aa30",
+      "vertexStageObservationId": "obs-vertex-shader-96-g1"
+    },
+    {
+      "arguments": {
+        "baseVertexLocation": 0,
+        "indexCount": 6,
+        "startIndexLocation": 0
+      },
+      "commandStreamSequence": 386,
+      "cpuFrame": 30472,
+      "operation": "draw-indexed",
+      "pixelBytecodeSha256": "0044c044b54907019fd94087444018f0200f92ae8959a9c8e8b7d6eee4dc8aef",
+      "pixelEngineAliases": [
+        {
+          "compileSourceName": "ISHDR",
+          "descriptor": 0,
+          "loaderType": "ISHDRDownSample16LightAdapt",
+          "truncated": {
+            "compileSourceName": false,
+            "loaderType": false
+          }
+        }
+      ],
+      "pixelStageObservationId": "obs-pixel-shader-124-g1",
+      "sequence": 473,
+      "targetBindingObservationId": "obs-target-binding-128-g1",
+      "uniqueMetadataMatchedShaderObservationId": "obs-shader-121-g1",
+      "vertexBytecodeSha256": "390c8ee47eff642e092f99e40146e6bdbe77f9de500454dd61cc08826905aa30",
+      "vertexStageObservationId": "obs-vertex-shader-123-g1"
+    },
+    {
+      "arguments": {
+        "baseVertexLocation": 0,
+        "indexCount": 6,
+        "startIndexLocation": 0
+      },
+      "commandStreamSequence": 437,
+      "cpuFrame": 30472,
+      "operation": "draw-indexed",
+      "pixelBytecodeSha256": "fe2a9d9960c000a4a47aa85aea5837c27ca0fe24d971eb2cd772d1fdbb1deccc",
+      "pixelEngineAliases": [
+        {
+          "compileSourceName": "ISBlur",
+          "descriptor": 0,
+          "loaderType": "ISBrightPassBlur3",
+          "truncated": {
+            "compileSourceName": false,
+            "loaderType": false
+          }
+        }
+      ],
+      "pixelStageObservationId": "obs-pixel-shader-135-g1",
+      "sequence": 528,
+      "targetBindingObservationId": "obs-target-binding-140-g1",
+      "uniqueMetadataMatchedShaderObservationId": "obs-shader-132-g1",
+      "vertexBytecodeSha256": "6a98eaf84e45d6caff2dea483e2d4f588b3dcdc4ed71afe674f90d6130437a47",
+      "vertexStageObservationId": "obs-vertex-shader-134-g1"
+    },
+    {
+      "arguments": {
+        "baseVertexLocation": 0,
+        "indexCount": 6,
+        "startIndexLocation": 0
+      },
+      "commandStreamSequence": 491,
+      "cpuFrame": 30472,
+      "operation": "draw-indexed",
+      "pixelBytecodeSha256": "a31c273b3c65ff2d9ab3edad073be3cc851fddcef105c9e5a27bb6dad29bc620",
+      "pixelEngineAliases": [
+        {
+          "compileSourceName": "ISBlur",
+          "descriptor": 0,
+          "loaderType": "ISBlur3",
+          "truncated": {
+            "compileSourceName": false,
+            "loaderType": false
+          }
+        }
+      ],
+      "pixelStageObservationId": "obs-pixel-shader-147-g1",
+      "sequence": 586,
+      "targetBindingObservationId": "obs-target-binding-151-g1",
+      "uniqueMetadataMatchedShaderObservationId": "obs-shader-144-g1",
+      "vertexBytecodeSha256": "6a98eaf84e45d6caff2dea483e2d4f588b3dcdc4ed71afe674f90d6130437a47",
+      "vertexStageObservationId": "obs-vertex-shader-146-g1"
+    },
+    {
+      "arguments": {
+        "baseVertexLocation": 0,
+        "indexCount": 6,
+        "startIndexLocation": 0
+      },
+      "commandStreamSequence": 549,
+      "cpuFrame": 30472,
+      "operation": "draw-indexed",
+      "pixelBytecodeSha256": "add4ae48847a2030d8b8facf8e57ee4cd96cf1bfeb7514f05f1121d5f679842c",
+      "pixelEngineAliases": [
+        {
+          "compileSourceName": "ISHDR",
+          "descriptor": 0,
+          "loaderType": "ISHDRTonemapBlendCinematic",
+          "truncated": {
+            "compileSourceName": false,
+            "loaderType": false
+          }
+        }
+      ],
+      "pixelStageObservationId": "obs-pixel-shader-158-g1",
+      "sequence": 649,
+      "targetBindingObservationId": "obs-target-binding-162-g1",
+      "uniqueMetadataMatchedShaderObservationId": "obs-shader-155-g1",
+      "vertexBytecodeSha256": "390c8ee47eff642e092f99e40146e6bdbe77f9de500454dd61cc08826905aa30",
+      "vertexStageObservationId": "obs-vertex-shader-157-g1"
+    },
+    {
+      "arguments": {
+        "baseVertexLocation": 0,
+        "indexCount": 6,
+        "startIndexLocation": 0
+      },
+      "commandStreamSequence": 607,
+      "cpuFrame": 30472,
+      "operation": "draw-indexed",
+      "pixelBytecodeSha256": "eeb552f8b0e74aabab5512044f4cee061504a4b27fe9b32b992b316f73d0099a",
+      "pixelEngineAliases": [
+        {
+          "compileSourceName": "ISFullScreenVR",
+          "descriptor": 0,
+          "loaderType": "ISFullScreenVR",
+          "truncated": {
+            "compileSourceName": false,
+            "loaderType": false
+          }
+        }
+      ],
+      "pixelStageObservationId": "obs-pixel-shader-169-g1",
+      "sequence": 711,
+      "targetBindingObservationId": "obs-target-binding-175-g1",
+      "uniqueMetadataMatchedShaderObservationId": "obs-shader-166-g1",
+      "vertexBytecodeSha256": "390c8ee47eff642e092f99e40146e6bdbe77f9de500454dd61cc08826905aa30",
+      "vertexStageObservationId": "obs-vertex-shader-168-g1"
+    },
+    {
+      "arguments": {
+        "baseVertexLocation": 0,
+        "indexCount": 6,
+        "startIndexLocation": 0
+      },
+      "commandStreamSequence": 642,
+      "cpuFrame": 30472,
+      "operation": "draw-indexed",
+      "pixelBytecodeSha256": "622b98f7c48ed59f924f1ffdff5948acb710fca80f08ceb09b9c5903be6d73f4",
+      "pixelEngineAliases": [
+        {
+          "compileSourceName": "ISCopy",
+          "descriptor": 0,
+          "loaderType": "ISCopyDynamicFetchDisabled",
+          "truncated": {
+            "compileSourceName": false,
+            "loaderType": false
+          }
+        }
+      ],
+      "pixelStageObservationId": "obs-pixel-shader-182-g1",
+      "sequence": 750,
+      "targetBindingObservationId": "obs-target-binding-175-g1",
+      "uniqueMetadataMatchedShaderObservationId": "obs-shader-179-g1",
+      "vertexBytecodeSha256": "6a98eaf84e45d6caff2dea483e2d4f588b3dcdc4ed71afe674f90d6130437a47",
+      "vertexStageObservationId": "obs-vertex-shader-181-g1"
+    }
+  ],
+  "eventCounts": {
+    "device-context-observed": 1,
+    "draw": 12,
+    "eye-submitted": 4,
+    "raster-state-observed": 27,
+    "render-pass-enter": 1,
+    "render-pass-exit": 1,
+    "render-target-bind": 23,
+    "resource-flow": 5,
+    "resource-observed": 49,
+    "resource-view-bind": 88,
+    "resource-view-state-observed": 135,
+    "shader-observed": 10,
+    "stage-shader-observed": 22,
+    "target-view-observed": 48,
+    "transfer-resource-access": 342
+  },
+  "frameAssociations": {
+    "nativeWindow": {
+      "afterFrame": 30475,
+      "atomicJoinRatified": false,
+      "beforeFrame": 30470,
+      "exactFrameMatchingSamples": 0,
+      "frame": 30472
+    },
+    "relativeToUtcClockMappingEstablished": false,
+    "stereo": {
+      "afterFrame": 22768,
+      "atomicJoinRatified": false,
+      "beforeFrame": 22761,
+      "exactFrameMatchingSamples": 0,
+      "frame": 22763
+    },
+    "stereoAndNativeWindowSameFrame": false
+  },
+  "nativeManifestInputs": {
+    "csxBuildManifest": {
+      "availability": "unavailable",
+      "path": null,
+      "schemaMajor": null,
+      "sha256": null
+    },
+    "engineMap": {
+      "availability": "unavailable",
+      "path": null,
+      "schemaMajor": null,
+      "sha256": null
+    },
+    "shaderManifest": {
+      "availability": "unavailable",
+      "path": null,
+      "schemaMajor": null,
+      "sha256": null
+    }
+  },
+  "nativeManifestScenario": {
+    "cameraMarker": null,
+    "cell": null,
+    "gameHour": null,
+    "id": "unspecified",
+    "notes": "No scenario metadata was supplied to the v1.0 live controller.",
+    "saveFingerprint": null,
+    "weather": null,
+    "worldspace": null
+  },
+  "recording": {
+    "activityContract": {
+      "clock": "steadyMillisecondsFromRecordStart",
+      "eventKinds": [
+        "input",
+        "menu",
+        "lifecycle",
+        "cell",
+        "console"
+      ],
+      "inputEventTypes": [
+        "button",
+        "mouseMove",
+        "char",
+        "thumbstick",
+        "deviceConnect",
+        "kinect",
+        "vrTouchpadPosition",
+        "vrTouchpadSwipe",
+        "unknown"
+      ],
+      "inputLayer": "Skyrim.BSInputDeviceManager",
+      "name": "devbench.recording.activity",
+      "normalized": true,
+      "ordering": "seq",
+      "replay": {
+        "analogControllerAxes": true,
+        "controllerButtonTransitions": true,
+        "keyboardButtonTransitions": true,
+        "legacyControllerUpgrade": "wand-index mapping; right-handed primary/secondary fallback",
+        "observationalEvents": false,
+        "pointerFromTrackedPoses": true,
+        "policy": "capture-all-replay-only-declared",
+        "vrTrackedInputFrames": true
+      },
+      "version": {
+        "major": 1,
+        "minor": 1
+      }
+    },
+    "activityCounts": {
+      "cell": 0,
+      "console": 0,
+      "input": 0,
+      "keyboardTransitions": 0,
+      "lifecycle": 0,
+      "menu": 0,
+      "total": 0,
+      "unsupportedInput": 0,
+      "vrControllerEvents": 0
+    },
+    "deltaCarryForwardNotFullSerializationOrInterSampleConstancy": true,
+    "deltaSteps": 2114,
+    "distinctReconstructedCameraStates": 1,
+    "durationMs": 234825,
+    "explicitCameraChanges": 1,
+    "explicitPlayerChanges": 1,
+    "firstCameraPose": [
+      -536.1541,
+      0.2545,
+      228.0591,
+      -0.1744,
+      -0.0417
+    ],
+    "firstPlayerPose": [
+      -536.15,
+      0.25,
+      65.37,
+      2.42,
+      10.0
+    ],
+    "format": "devbench-recording-3",
+    "poseContract": {
+      "camera": [
+        "worldPosition",
+        "worldPitch",
+        "worldYaw",
+        "pov"
+      ],
+      "name": "devbench.recording.pose",
+      "player": [
+        "position",
+        "yaw",
+        "pitch"
+      ],
+      "transformEncoding": "[tx,ty,tz,r00,r01,r02,r10,r11,r12,r20,r21,r22,scale]",
+      "version": {
+        "major": 2,
+        "minor": 0
+      },
+      "vrTrackedNodes": [
+        "hmd",
+        "leftWand",
+        "rightWand"
+      ],
+      "vrTransformReplay": true
+    },
+    "reconstructedCameraStates": 2114,
+    "sceneAtRecordStart": {
+      "cell": "WhiterunBreezehome",
+      "cellFormID": 91560,
+      "gameHour": 8.050271987915039,
+      "interior": true,
+      "weather": "Helios_SkyrimClearTU",
+      "weatherFormID": 4261608071
+    },
+    "stateSamples": 2114,
+    "trackingContract": {
+      "angularVelocityEncoding": "tracking-space radians/second",
+      "availableBeforePlayerLoad": true,
+      "controllerEncoding": "OpenVR packetNumber/pressed/touched/five axes",
+      "devices": [
+        "hmd",
+        "left",
+        "right"
+      ],
+      "identity": [
+        "device index",
+        "class",
+        "role"
+      ],
+      "name": "devbench.recording.openvrTracking",
+      "origin": "captured per sample from IVRCompositor.GetTrackingSpace",
+      "replay": true,
+      "replayDevice": "input.vrTrackedSet",
+      "source": "IVRCompositor.GetLastPoses",
+      "transformEncoding": "OpenVR device-to-absolute 3x4 row-major",
+      "velocityEncoding": "tracking-space metres/second",
+      "version": {
+        "major": 2,
+        "minor": 0
+      }
+    },
+    "trackingFrameRange": [
+      22663,
+      36219
+    ],
+    "trackingSamples": 2114,
+    "zeroActivityNotAbsenceOfRawInput": true
+  },
+  "schemaVersion": 1,
+  "stereoImages": [
+    {
+      "bytes": 2974036,
+      "currentAdapterQualified": true,
+      "diagnosticPixelsInspectedByImporter": true,
+      "eye": "left_eye",
+      "healthyScientificCorpusRatified": false,
+      "height": 1680,
+      "nativeCommitted": true,
+      "sha256": "a45b63dfdcb40c00557f1b303a1de7e5b5d4f3d948ccc9c4107dcddf7a4ca41f",
+      "width": 1512
+    },
+    {
+      "bytes": 2982467,
+      "currentAdapterQualified": true,
+      "diagnosticPixelsInspectedByImporter": true,
+      "eye": "right_eye",
+      "healthyScientificCorpusRatified": false,
+      "height": 1680,
+      "nativeCommitted": true,
+      "sha256": "61482f7b41207eeea41cbe11c2381ac20c1d2e8ece53f1b65494a5a47830185a",
+      "width": 1512
+    }
+  ],
+  "tracking": {
+    "hmd": {
+      "distinctMatrices": 1,
+      "firstMatrix": [
+        0.9659258127212524,
+        0.04494345560669899,
+        -0.25488701462745667,
+        0.0,
+        0.0,
+        0.9848077297210693,
+        0.1736481785774231,
+        1.709999918937683,
+        0.258819043636322,
+        -0.16773125529289246,
+        0.9512512683868408,
+        0.0
+      ],
+      "samples": 2114,
+      "valid": 2114
+    },
+    "left": {
+      "distinctMatrices": 1,
+      "firstMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        -0.25,
+        0.0,
+        1.0,
+        0.0,
+        1.2799999713897705,
+        0.0,
+        0.0,
+        1.0,
+        -0.3499999940395355
+      ],
+      "samples": 2114,
+      "valid": 2114
+    },
+    "right": {
+      "distinctMatrices": 1,
+      "firstMatrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.25,
+        0.0,
+        1.0,
+        0.0,
+        1.2799999713897705,
+        0.0,
+        0.0,
+        1.0,
+        -0.3499999940395355
+      ],
+      "samples": 2114,
+      "valid": 2114
+    }
+  },
+  "upscaling": {
+    "activeOperationId": 0,
+    "capabilityRevision": 1,
+    "dimensions": {
+      "displayEyeHeight": 1680,
+      "displayEyeWidth": 1512,
+      "renderEyeHeight": 1120,
+      "renderEyeWidth": 2016
+    },
+    "flags": 1,
+    "observedConditions": {
+      "mask": 0,
+      "names": []
+    },
+    "profilePresence": 9,
+    "profiles": {
+      "applying": {
+        "dlssProfile": {
+          "name": "K",
+          "value": 1
+        },
+        "fsrRuntime": {
+          "name": "fsr3",
+          "value": 0
+        },
+        "method": {
+          "name": "none",
+          "value": 0
+        },
+        "qualityMode": {
+          "name": "native_aa",
+          "value": 0
+        },
+        "renderScaleMode": false
+      },
+      "configured": {
+        "dlssProfile": {
+          "name": "K",
+          "value": 1
+        },
+        "fsrRuntime": {
+          "name": "fsr4",
+          "value": 1
+        },
+        "method": {
+          "name": "fsr",
+          "value": 2
+        },
+        "qualityMode": {
+          "name": "quality",
+          "value": 3
+        },
+        "renderScaleMode": false
+      },
+      "effective": {
+        "dlssProfile": {
+          "name": "K",
+          "value": 1
+        },
+        "fsrRuntime": {
+          "name": "fsr4",
+          "value": 1
+        },
+        "method": {
+          "name": "fsr",
+          "value": 2
+        },
+        "qualityMode": {
+          "name": "quality",
+          "value": 3
+        },
+        "renderScaleMode": false
+      },
+      "persisted": {
+        "dlssProfile": {
+          "name": "K",
+          "value": 1
+        },
+        "fsrRuntime": {
+          "name": "fsr3",
+          "value": 0
+        },
+        "method": {
+          "name": "none",
+          "value": 0
+        },
+        "qualityMode": {
+          "name": "native_aa",
+          "value": 0
+        },
+        "renderScaleMode": false
+      },
+      "requested": {
+        "dlssProfile": {
+          "name": "K",
+          "value": 1
+        },
+        "fsrRuntime": {
+          "name": "fsr3",
+          "value": 0
+        },
+        "method": {
+          "name": "none",
+          "value": 0
+        },
+        "qualityMode": {
+          "name": "native_aa",
+          "value": 0
+        },
+        "renderScaleMode": false
+      },
+      "stable": {
+        "dlssProfile": {
+          "name": "K",
+          "value": 1
+        },
+        "fsrRuntime": {
+          "name": "fsr3",
+          "value": 0
+        },
+        "method": {
+          "name": "none",
+          "value": 0
+        },
+        "qualityMode": {
+          "name": "native_aa",
+          "value": 0
+        },
+        "renderScaleMode": false
+      }
+    },
+    "renderScaleStatus": {
+      "name": "disabled",
+      "value": 0
+    },
+    "stateRevision": 1,
+    "transitionState": {
+      "name": "idle",
+      "value": 0
+    }
+  },
+  "window": {
+    "acceptedEyeMask": 3,
+    "activationBoundary": {
+      "attemptCount": 1,
+      "frameRejections": 0,
+      "lastCpuFrame": 30472,
+      "lastPublicationGeneration": 4,
+      "lastTarget": 114,
+      "publicationRejections": 0,
+      "scope": "armed-window-input-validation",
+      "targetRejections": 0
+    },
+    "activationTick": 22650981375819,
+    "armedTick": 22650981197610,
+    "bootstrapComplete": true,
+    "bootstrapEventCount": 115,
+    "compositorCycle": 26672,
+    "cpuFrame": 30472,
+    "endTick": 22650981385813,
+    "failure": "none",
+    "fullPipelineEstablished": false,
+    "omittedPrefix": {
+      "fromTickInclusive": 22650981197610,
+      "toTickExclusive": 22650981375819
+    },
+    "phase": "matched-eyes",
+    "pixelTransferEstablished": false,
+    "preWindowProducerHistory": "unobserved",
+    "prefixEventCount": null,
+    "publicationGeneration": 4
+  }
+}
