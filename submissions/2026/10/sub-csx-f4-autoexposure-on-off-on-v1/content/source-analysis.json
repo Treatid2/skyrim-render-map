@@ -1,0 +1,692 @@
+{
+  "findings": [
+    {
+      "id": "page-path-string",
+      "interpretation": "Probe dispatch path is a source-defined string, distinct from colour-status integer enum. Adapter numeric-page guard mismatch is not native corruption.",
+      "source": {
+        "excerpt": "\t\tbool sharpeningEnabled = false;\n\t\tstd::uint64_t dispatchQpc = 0;\n\t\tstd::string path;\n\t};\n\n\t/** Arm one bounded VR capture; return its immutable generation receipt. */\n\tbool Arm(\n\t\tconst std::string& a_captureId,\n\t\tstd::uint64_t a_expectedColourContractRevision,",
+        "fileIdentity": {
+          "bytes": 3218,
+          "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.h",
+          "sha256": "dcefe0d9bc2e447bb79ace8eff5655b0c613a56ac889e832ab65207964ee661f"
+        },
+        "inclusiveLineRange": [
+          33,
+          41
+        ],
+        "locator": "https://github.com/Treatid2/skyrim-community-shaders/blob/f4fe744560df1aa890e90f8b794c28983f156c14/src/Features/Upscaling/ColourPipelineProbe.h#L33",
+        "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.h",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "page-path-serialization",
+      "interpretation": "Page serializes successful dispatch path directly. No enum coercion should be inferred.",
+      "source": {
+        "excerpt": "\t\t\t\t{ \"contextGeneration\", a_dispatch.dispatchSerial ? json(a_dispatch.contextGeneration) : json(nullptr) },\n\t\t\t\t{ \"contextIndex\", a_dispatch.dispatchSerial ? json(a_dispatch.contextIndex) : json(nullptr) },\n\t\t\t\t{ \"path\", a_dispatch.dispatchSerial ? json(a_dispatch.path) : json(nullptr) },\n\t\t\t\t{ \"renderWidth\", a_dispatch.renderWidth },\n\t\t\t\t{ \"renderHeight\", a_dispatch.renderHeight },\n\t\t\t\t{ \"displayWidth\", a_dispatch.displayWidth },\n\t\t\t\t{ \"displayHeight\", a_dispatch.displayHeight },\n\t\t\t\t{ \"requestedHighDynamicRangeInput\", a_dispatch.requestedHighDynamicRangeInput },\n\t\t\t\t{ \"requestedAutoExposure\", a_dispatch.requestedAutoExposure },",
+        "fileIdentity": {
+          "bytes": 44326,
+          "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+          "sha256": "29fe3413e33551e035af119786a932bf499efb62a45adf6798c4da9e23f29cd5"
+        },
+        "inclusiveLineRange": [
+          688,
+          696
+        ],
+        "locator": "https://github.com/Treatid2/skyrim-community-shaders/blob/f4fe744560df1aa890e90f8b794c28983f156c14/src/Features/Upscaling/ColourPipelineProbe.cpp#L688",
+        "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "unsigned-float-decode",
+      "interpretation": "Unsigned mini-float exponent5/mantissa6-or5 decode, no transfer conversion; source-qualified independent289sample verification.",
+      "source": {
+        "excerpt": "\t\tfloat DecodeUnsignedFloat(std::uint32_t a_value, std::uint32_t a_mantissaBits) noexcept\n\t\t{\n\t\t\tconst std::uint32_t mantissaMask = (1u << a_mantissaBits) - 1u;\n\t\t\tconst std::uint32_t exponent = (a_value >> a_mantissaBits) & 0x1Fu;\n\t\t\tconst std::uint32_t mantissa = a_value & mantissaMask;\n\t\t\tif (exponent == 0)\n\t\t\t\treturn std::ldexp(static_cast<float>(mantissa), 1 - 15 - static_cast<int>(a_mantissaBits));\n\t\t\tif (exponent == 0x1Fu)\n\t\t\t\treturn mantissa == 0 ? std::numeric_limits<float>::infinity() : std::numeric_limits<float>::quiet_NaN();\n\t\t\treturn std::ldexp(1.0f + static_cast<float>(mantissa) / static_cast<float>(1u << a_mantissaBits), static_cast<int>(exponent) - 15);\n\t\t}\n\n\t\tbool DecodePixel(DXGI_FORMAT a_format, const std::uint8_t* a_pixel, std::array<float, 4>& a_value) noexcept",
+        "fileIdentity": {
+          "bytes": 44326,
+          "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+          "sha256": "29fe3413e33551e035af119786a932bf499efb62a45adf6798c4da9e23f29cd5"
+        },
+        "inclusiveLineRange": [
+          241,
+          253
+        ],
+        "locator": "https://github.com/Treatid2/skyrim-community-shaders/blob/f4fe744560df1aa890e90f8b794c28983f156c14/src/Features/Upscaling/ColourPipelineProbe.cpp#L241",
+        "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "packed-r11g11b10",
+      "interpretation": "Four little-endian bytes map low11R/next11G/high10B and syntheticalpha1.",
+      "source": {
+        "excerpt": "\t\t\tcase DXGI_FORMAT_R11G11B10_FLOAT:\n\t\t\t\t{\n\t\t\t\t\tstd::uint32_t packed = 0;\n\t\t\t\t\tstd::memcpy(&packed, a_pixel, sizeof(packed));\n\t\t\t\t\ta_value = { DecodeUnsignedFloat(packed & 0x7FFu, 6u), DecodeUnsignedFloat((packed >> 11u) & 0x7FFu, 6u), DecodeUnsignedFloat((packed >> 22u) & 0x3FFu, 5u), 1.0f };\n\t\t\t\t\treturn true;\n\t\t\t\t}\n\t\t\tcase DXGI_FORMAT_R16G16B16A16_FLOAT:",
+        "fileIdentity": {
+          "bytes": 44326,
+          "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+          "sha256": "29fe3413e33551e035af119786a932bf499efb62a45adf6798c4da9e23f29cd5"
+        },
+        "inclusiveLineRange": [
+          280,
+          287
+        ],
+        "locator": "https://github.com/Treatid2/skyrim-community-shaders/blob/f4fe744560df1aa890e90f8b794c28983f156c14/src/Features/Upscaling/ColourPipelineProbe.cpp#L280",
+        "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "sampling-luma",
+      "interpretation": "Rec709 weighted format-native channels without transfer conversion; not HDR perceptual brightness or a cross-condition result.",
+      "source": {
+        "excerpt": "\t\t\t\t\t\tfor (std::size_t channel = 0; channel < decoded.size(); ++channel)\n\t\t\t\t\t\t\tsums[channel] += decoded[channel];\n\t\t\t\t\t\tconst double luma = 0.2126 * decoded[0] + 0.7152 * decoded[1] + 0.0722 * decoded[2];\n\t\t\t\t\t\tlumaSum += luma;\n\t\t\t\t\t\tminimumLuma = std::min(minimumLuma, luma);\n\t\t\t\t\t\tmaximumLuma = std::max(maximumLuma, luma);\n\t\t\t\t\t\t++finiteSamples;\n\t\t\t\t\t}\n\t\t\t\t\tsamples.push_back({\n\t\t\t\t\t\t{ \"grid\", { gridX, gridY } },",
+        "fileIdentity": {
+          "bytes": 44326,
+          "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+          "sha256": "29fe3413e33551e035af119786a932bf499efb62a45adf6798c4da9e23f29cd5"
+        },
+        "inclusiveLineRange": [
+          616,
+          625
+        ],
+        "locator": "https://github.com/Treatid2/skyrim-community-shaders/blob/f4fe744560df1aa890e90f8b794c28983f156c14/src/Features/Upscaling/ColourPipelineProbe.cpp#L616",
+        "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "native-status-slots",
+      "interpretation": "Status reports namedqueued/mapped slots; missingarray marks unqueued slots, soidle10missing is not a failedcapture.",
+      "source": {
+        "excerpt": "\t\tconst auto queued = std::ranges::count_if(g_state.slots, [](const Slot& a_slot) { return a_slot.queued; });\n\t\tconst auto mapped = std::ranges::count_if(g_state.slots, [](const Slot& a_slot) { return a_slot.mapped; });\n\t\tauto stageEyeSlots = json::array();\n\t\tauto missingStageEyeSlots = json::array();\n\t\tfor (const auto& slot : Policy::DescribeStageEyeSlots(g_state.slots)) {\n\t\t\tjson identity{ { \"stage\", StageName(slot.stage) }, { \"eye\", slot.eye },\n\t\t\t\t{ \"eyeName\", slot.eye == 0 ? \"left\" : \"right\" } };\n\t\t\tif (!slot.queued)\n\t\t\t\tmissingStageEyeSlots.push_back(identity);\n\t\t\tidentity.update({ { \"queued\", slot.queued }, { \"mapped\", slot.mapped } });\n\t\t\tstageEyeSlots.push_back(std::move(identity));\n\t\t}\n\t\treturn {\n\t\t\t{ \"schemaVersion\", kSchemaVersion },\n\t\t\t{ \"state\", StateName(g_state.state) },\n\t\t\t{ \"generation\", g_state.generation },\n\t\t\t{ \"captureId\", g_state.captureId },\n\t\t\t{ \"cpuFrame\", g_state.cpuFrame ? json(g_state.cpuFrame) : json(nullptr) },",
+        "fileIdentity": {
+          "bytes": 44326,
+          "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+          "sha256": "29fe3413e33551e035af119786a932bf499efb62a45adf6798c4da9e23f29cd5"
+        },
+        "inclusiveLineRange": [
+          1091,
+          1108
+        ],
+        "locator": "https://github.com/Treatid2/skyrim-community-shaders/blob/f4fe744560df1aa890e90f8b794c28983f156c14/src/Features/Upscaling/ColourPipelineProbe.cpp#L1091",
+        "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "literal-exposure-annotation",
+      "interpretation": "Successful CPU dispatch evidence writes literal preExposure/exposureResourceBound; not dynamic descriptor readback.",
+      "source": {
+        "excerpt": "\t\t\tdevBenchSuccessfulDispatch = {};\n\t\t\tdevBenchSuccessfulEyeDispatches = {};\n\t\t},\n\t\t[this]() { return GetDevBenchFsrColorContractStatusSnapshotLocked(); });\n}\n\nFSRColorContractPolicy::ReplacementState FidelityFX::GetDevBenchFsrColorContractReplacementState() const noexcept\n{\n\tconst std::lock_guard lock(devBenchFsrColorContractMutex);\n\tconst uint64_t requested = GetDevBenchFsrColorContractState();\n\tconst uint64_t host = devBenchHostContextColorContract.load(std::memory_order_acquire);\n\tconst uint64_t runtime = devBenchRuntimeContextColorContract.load(std::memory_order_acquire);\n\tconst uint32_t currentFrame =\n\t\tglobals::state ? std::max(globals::state->frameCount, 1u) : 0u;\n\treturn FSRColorContractPolicy::GetReplacementState(\n\t\thost,\n\t\tdevBenchHostContextLastDispatchFrame.load(std::memory_order_acquire),\n\t\truntime,\n\t\tdevBenchRuntimeContextLastDispatchFrame.load(std::memory_order_acquire),\n\t\trequested,\n\t\tcurrentFrame);\n}\n\nvoid FidelityFX::PublishDevBenchFsrColorContext(bool a_runtime, uint64_t a_flags) noexcept\n{",
+        "fileIdentity": {
+          "bytes": 193471,
+          "repositoryPath": "src/Features/Upscaling/FidelityFX.cpp",
+          "sha256": "26a572ffc693203d7c313e5ed98a2acce168a254d384c314a40e6c50656c574b"
+        },
+        "inclusiveLineRange": [
+          1297,
+          1321
+        ],
+        "locator": "https://github.com/Treatid2/skyrim-community-shaders/blob/f4fe744560df1aa890e90f8b794c28983f156c14/src/Features/Upscaling/FidelityFX.cpp#L1297",
+        "repositoryPath": "src/Features/Upscaling/FidelityFX.cpp",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "literal-source-colour-changed",
+      "interpretation": "sourceColorContractChanged remains a literal bridge annotation, not transition detector.",
+      "source": {
+        "excerpt": "\t\t\t{ \"lastSuccessfulDispatch\", DispatchJson(dispatch) },\n\t\t\t{ \"lastSuccessfulEyeDispatches\", json::array({ DispatchJson(a_status.eyeDispatches[0]), DispatchJson(a_status.eyeDispatches[1]) }) },\n\t\t\t{ \"sourceColorContractChanged\", false },\n\t\t};\n\t}\n",
+        "fileIdentity": {
+          "bytes": 7480,
+          "repositoryPath": "src/Features/Upscaling/FSRColorContractDevBenchBridge.cpp",
+          "sha256": "ef65b15c285fde063ebe5df35215570c3925e96e39ff5ff70d3d0c3245ecf591"
+        },
+        "inclusiveLineRange": [
+          71,
+          76
+        ],
+        "locator": "https://github.com/Treatid2/skyrim-community-shaders/blob/f4fe744560df1aa890e90f8b794c28983f156c14/src/Features/Upscaling/FSRColorContractDevBenchBridge.cpp#L71",
+        "repositoryPath": "src/Features/Upscaling/FSRColorContractDevBenchBridge.cpp",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "exposure-record-field-order",
+      "interpretation": "Header field order maps successful-dispatch initializer false/1.0f to exposureResourceBound/preExposure. These are literal annotations, not independent dynamic readback.",
+      "source": {
+        "excerpt": "\t\tbool highDynamicRangeInput = true;\n\t\tbool autoExposure = true;\n\t\tbool exposureResourceBound = false;\n\t\tfloat preExposure = 1.0f;\n\t\tfloat configuredSharpness = 0.0f;\n\t\tfloat effectiveSharpness = 0.0f;\n\t\tbool sharpeningEnabled = false;",
+        "fileIdentity": {
+          "bytes": 23465,
+          "repositoryPath": "src/Features/Upscaling/FidelityFX.h",
+          "sha256": "9c70821e5c622b3253457d67363ff0c7a51ee6a335d42a34baaf5736451f071c"
+        },
+        "inclusiveLineRange": [
+          128,
+          134
+        ],
+        "locator": "https://github.com/Treatid2/skyrim-community-shaders/blob/f4fe744560df1aa890e90f8b794c28983f156c14/src/Features/Upscaling/FidelityFX.h#L128",
+        "repositoryPath": "src/Features/Upscaling/FidelityFX.h",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "runtime-dispatch-exposure",
+      "interpretation": "Runtime descriptor explicitly supplies empty exposure resource; this source rule is distinct from native metadata annotations and does not measure brightness.",
+      "source": {
+        "excerpt": "\t\t\tdispatchParameters.depth = guideResource(FSRSharedGuidePolicy::Guide::Depth);\n\t\t\tdispatchParameters.motionVectors = guideResource(FSRSharedGuidePolicy::Guide::MotionVectors);\n\t\t\tdispatchParameters.exposure = FfxApiResource({});\n\t\t\tdispatchParameters.reactive = guideResource(FSRSharedGuidePolicy::Guide::Reactive);\n\t\t\tdispatchParameters.transparencyAndComposition = guideResource(FSRSharedGuidePolicy::Guide::Transparency);\n\t\t\tdispatchParameters.output = ffxApiGetResourceDX12(runtimeOutputShared[contextIndex]->resource.get(), FFX_API_RESOURCE_STATE_UNORDERED_ACCESS, FFX_API_RESOURCE_USAGE_UAV);\n\t\t\tdispatchParameters.jitterOffset = { -temporal.jitterX, -temporal.jitterY };\n\t\t\tdispatchParameters.motionVectorScale = { region.motionVectorScaleX, region.motionVectorScaleY };\n\t\t\tdispatchParameters.renderSize = { region.renderWidth, region.renderHeight };",
+        "fileIdentity": {
+          "bytes": 193471,
+          "repositoryPath": "src/Features/Upscaling/FidelityFX.cpp",
+          "sha256": "26a572ffc693203d7c313e5ed98a2acce168a254d384c314a40e6c50656c574b"
+        },
+        "inclusiveLineRange": [
+          4188,
+          4196
+        ],
+        "locator": "https://github.com/Treatid2/skyrim-community-shaders/blob/f4fe744560df1aa890e90f8b794c28983f156c14/src/Features/Upscaling/FidelityFX.cpp#L4188",
+        "repositoryPath": "src/Features/Upscaling/FidelityFX.cpp",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "runtime-dispatch-preexposure",
+      "interpretation": "Runtime descriptor uses literal preExposure1.0f; not a measured engine exposure.",
+      "source": {
+        "excerpt": "\t\t\tLogFSRSharpeningDispatch(sharpening, \"runtime\");\n\t\t\tdispatchParameters.frameTimeDelta = temporal.frameTimeMilliseconds;\n\t\t\tdispatchParameters.preExposure = 1.0f;\n\t\t\tdispatchParameters.reset = upscaling.ShouldResetHistoryThisFrame() || regionIndex < resumeResetCount;\n\t\t\tdispatchParameters.cameraNear = temporal.cameraNear;\n\t\t\tdispatchParameters.cameraFar = temporal.cameraFar;\n\t\t\tdispatchParameters.cameraFovAngleVertical = temporal.verticalFov;",
+        "fileIdentity": {
+          "bytes": 193471,
+          "repositoryPath": "src/Features/Upscaling/FidelityFX.cpp",
+          "sha256": "26a572ffc693203d7c313e5ed98a2acce168a254d384c314a40e6c50656c574b"
+        },
+        "inclusiveLineRange": [
+          4201,
+          4207
+        ],
+        "locator": "https://github.com/Treatid2/skyrim-community-shaders/blob/f4fe744560df1aa890e90f8b794c28983f156c14/src/Features/Upscaling/FidelityFX.cpp#L4201",
+        "repositoryPath": "src/Features/Upscaling/FidelityFX.cpp",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "crop-stagingDimensions",
+      "interpretation": "sourcePixel is staging crop-local. activeRectangle records source texture origin. Add its x/y only to report an absolute source-resource coordinate, never to the mapped staging byte offset.",
+      "source": {
+        "excerpt": "\t\t\tD3D11_TEXTURE2D_DESC stagingDesc = sourceDesc;\n\t\t\tstagingDesc.Width = a_width;\n\t\t\tstagingDesc.Height = a_height;\n\t\t\tstagingDesc.MipLevels = 1;\n\t\t\tstagingDesc.ArraySize = 1;",
+        "fileIdentity": {
+          "bytes": 44326,
+          "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+          "sha256": "29fe3413e33551e035af119786a932bf499efb62a45adf6798c4da9e23f29cd5"
+        },
+        "inclusiveLineRange": [
+          442,
+          446
+        ],
+        "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "crop-sourceBox",
+      "interpretation": "sourcePixel is staging crop-local. activeRectangle records source texture origin. Add its x/y only to report an absolute source-resource coordinate, never to the mapped staging byte offset.",
+      "source": {
+        "excerpt": "\t\t\tconst D3D11_BOX box{ a_x, a_y, 0, a_x + a_width, a_y + a_height, 1 };",
+        "fileIdentity": {
+          "bytes": 44326,
+          "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+          "sha256": "29fe3413e33551e035af119786a932bf499efb62a45adf6798c4da9e23f29cd5"
+        },
+        "inclusiveLineRange": [
+          460,
+          460
+        ],
+        "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "crop-copyDestinationOrigin",
+      "interpretation": "sourcePixel is staging crop-local. activeRectangle records source texture origin. Add its x/y only to report an absolute source-resource coordinate, never to the mapped staging byte offset.",
+      "source": {
+        "excerpt": "\t\t\t\ta_context->CopySubresourceRegion(slot.staging.get(), 0, 0, 0, 0, a_texture, a_subresource, &box);",
+        "fileIdentity": {
+          "bytes": 44326,
+          "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+          "sha256": "29fe3413e33551e035af119786a932bf499efb62a45adf6798c4da9e23f29cd5"
+        },
+        "inclusiveLineRange": [
+          463,
+          463
+        ],
+        "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "crop-savedSourceOrigin",
+      "interpretation": "sourcePixel is staging crop-local. activeRectangle records source texture origin. Add its x/y only to report an absolute source-resource coordinate, never to the mapped staging byte offset.",
+      "source": {
+        "excerpt": "\t\t\tslot.sourceX = a_x;\n\t\t\tslot.sourceY = a_y;\n\t\t\tslot.width = a_width;",
+        "fileIdentity": {
+          "bytes": 44326,
+          "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+          "sha256": "29fe3413e33551e035af119786a932bf499efb62a45adf6798c4da9e23f29cd5"
+        },
+        "inclusiveLineRange": [
+          470,
+          472
+        ],
+        "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "crop-mapStaging",
+      "interpretation": "sourcePixel is staging crop-local. activeRectangle records source texture origin. Add its x/y only to report an absolute source-resource coordinate, never to the mapped staging byte offset.",
+      "source": {
+        "excerpt": "\t\t\tconst HRESULT result = a_context->Map(a_slot.staging.get(), 0, D3D11_MAP_READ, D3D11_MAP_FLAG_DO_NOT_WAIT, &mapped);",
+        "fileIdentity": {
+          "bytes": 44326,
+          "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+          "sha256": "29fe3413e33551e035af119786a932bf499efb62a45adf6798c4da9e23f29cd5"
+        },
+        "inclusiveLineRange": [
+          574,
+          574
+        ],
+        "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "crop-gridCoordinatesAndByteOffset",
+      "interpretation": "sourcePixel is staging crop-local. activeRectangle records source texture origin. Add its x/y only to report an absolute source-resource coordinate, never to the mapped staging byte offset.",
+      "source": {
+        "excerpt": "\t\t\tfor (std::uint32_t gridY = 0; gridY < kGridSize; ++gridY) {\n\t\t\t\tconst std::uint32_t y = kGridSize == 1 ? 0 : static_cast<std::uint32_t>((static_cast<std::uint64_t>(a_slot.height - 1) * gridY) / (kGridSize - 1));\n\t\t\t\tfor (std::uint32_t gridX = 0; gridX < kGridSize; ++gridX) {\n\t\t\t\t\tconst std::uint32_t x = kGridSize == 1 ? 0 : static_cast<std::uint32_t>((static_cast<std::uint64_t>(a_slot.width - 1) * gridX) / (kGridSize - 1));\n\t\t\t\t\tconst auto* pixel = static_cast<const std::uint8_t*>(mapped.pData) + static_cast<std::size_t>(y) * mapped.RowPitch + static_cast<std::size_t>(x) * bytesPerPixel;",
+        "fileIdentity": {
+          "bytes": 44326,
+          "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+          "sha256": "29fe3413e33551e035af119786a932bf499efb62a45adf6798c4da9e23f29cd5"
+        },
+        "inclusiveLineRange": [
+          606,
+          610
+        ],
+        "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "crop-serializedSourcePixel",
+      "interpretation": "sourcePixel is staging crop-local. activeRectangle records source texture origin. Add its x/y only to report an absolute source-resource coordinate, never to the mapped staging byte offset.",
+      "source": {
+        "excerpt": "\t\t\t\t\tsamples.push_back({\n\t\t\t\t\t\t{ \"grid\", { gridX, gridY } },\n\t\t\t\t\t\t{ \"sourcePixel\", { x, y } },\n\t\t\t\t\t\t{ \"rawLittleEndianHex\", Hex(pixel, bytesPerPixel) },\n\t\t\t\t\t\t{ \"decodedRgba\", std::move(value) },",
+        "fileIdentity": {
+          "bytes": 44326,
+          "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+          "sha256": "29fe3413e33551e035af119786a932bf499efb62a45adf6798c4da9e23f29cd5"
+        },
+        "inclusiveLineRange": [
+          624,
+          628
+        ],
+        "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "crop-serializedSourceActiveRectangle",
+      "interpretation": "sourcePixel is staging crop-local. activeRectangle records source texture origin. Add its x/y only to report an absolute source-resource coordinate, never to the mapped staging byte offset.",
+      "source": {
+        "excerpt": "\t\t\t\t{ \"activeRectangle\", { { \"x\", a_slot.sourceX }, { \"y\", a_slot.sourceY }, { \"width\", a_slot.width }, { \"height\", a_slot.height } } },",
+        "fileIdentity": {
+          "bytes": 44326,
+          "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+          "sha256": "29fe3413e33551e035af119786a932bf499efb62a45adf6798c4da9e23f29cd5"
+        },
+        "inclusiveLineRange": [
+          747,
+          747
+        ],
+        "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "current-native-string-page-guard",
+      "interpretation": "Current controller066 checks exact native page string while colour status uses numeric enum3; no coercion or guard relaxation here.",
+      "source": {
+        "excerpt": "                    foreach($value in @($d.contextIndex,$slot.readback.sampling.gridSize,$slot.readback.sampling.sampleCount,$page.samplingContract.gridSize)){if(-not (UInt $value)){throw 'Page numeric fields cannot be strings/Booleans/fractions.'}}\n                    # Probe schema3 DispatchMetadata.path is a native string label;\n                    # colour status path3 is a different, numeric contract. Never coerce.\n                    if($d.path -isnot [string] -or $d.path -cne 'Runtime FSR4 (amd_fidelityfx_upscaler_dx12.dll)'){throw 'Page dispatch path is not the exact native FSR4 string label.'}",
+        "inclusiveLineRange": [
+          143,
+          146
+        ],
+        "repositoryPath": "tools/devbench-control/ColourMeasurementWindow.psm1",
+        "sourceCommit": "066d292dfd89adafc454aa2426851745d576ce91"
+      }
+    },
+    {
+      "id": "exposure-setInvalidatesDispatches",
+      "interpretation": "Exact pinned integration/telemetry boundary: setInvalidatesDispatches. Source control/data flow only, not vendor-internal state or measured per-dispatch reset/jitter/frameTimeDelta.",
+      "source": {
+        "excerptCanonicalSha256": "50091f745688655f7b92616ed4378961d685793fe30485a91b19ff698d7096bc",
+        "excerptTextStoredInPrivateImmutableAckNotRepublished": true,
+        "fileIdentity": {
+          "bytes": 193471,
+          "sha256": "26a572ffc693203d7c313e5ed98a2acce168a254d384c314a40e6c50656c574b"
+        },
+        "inclusiveLineRange": [
+          1285,
+          1300
+        ],
+        "repositoryPath": "src/Features/Upscaling/FidelityFX.cpp",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "exposure-publishContextGeneration",
+      "interpretation": "Exact pinned integration/telemetry boundary: publishContextGeneration. Source control/data flow only, not vendor-internal state or measured per-dispatch reset/jitter/frameTimeDelta.",
+      "source": {
+        "excerptCanonicalSha256": "baad963d70a7c717ac281ae4379c40257c92877af182ce785daac1923c9b9d83",
+        "excerptTextStoredInPrivateImmutableAckNotRepublished": true,
+        "fileIdentity": {
+          "bytes": 193471,
+          "sha256": "26a572ffc693203d7c313e5ed98a2acce168a254d384c314a40e6c50656c574b"
+        },
+        "inclusiveLineRange": [
+          1320,
+          1330
+        ],
+        "repositoryPath": "src/Features/Upscaling/FidelityFX.cpp",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "exposure-recordSuccessfulDispatchFields",
+      "interpretation": "Exact pinned integration/telemetry boundary: recordSuccessfulDispatchFields. Source control/data flow only, not vendor-internal state or measured per-dispatch reset/jitter/frameTimeDelta.",
+      "source": {
+        "excerptCanonicalSha256": "0437b0ab7b23f6fea6ab0554061e6739a01086fafdf9b617f8c3face16bdfbdf",
+        "excerptTextStoredInPrivateImmutableAckNotRepublished": true,
+        "fileIdentity": {
+          "bytes": 193471,
+          "sha256": "26a572ffc693203d7c313e5ed98a2acce168a254d384c314a40e6c50656c574b"
+        },
+        "inclusiveLineRange": [
+          1464,
+          1500
+        ],
+        "repositoryPath": "src/Features/Upscaling/FidelityFX.cpp",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "exposure-contextCreationAeFlag",
+      "interpretation": "Exact pinned integration/telemetry boundary: contextCreationAeFlag. Source control/data flow only, not vendor-internal state or measured per-dispatch reset/jitter/frameTimeDelta.",
+      "source": {
+        "excerptCanonicalSha256": "a4975e521f3aa729d1201f2baa0d7fef79f14f208ad537defae29047b5ad99d5",
+        "excerptTextStoredInPrivateImmutableAckNotRepublished": true,
+        "fileIdentity": {
+          "bytes": 193471,
+          "sha256": "26a572ffc693203d7c313e5ed98a2acce168a254d384c314a40e6c50656c574b"
+        },
+        "inclusiveLineRange": [
+          3519,
+          3531
+        ],
+        "repositoryPath": "src/Features/Upscaling/FidelityFX.cpp",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "exposure-dispatchInputs",
+      "interpretation": "Exact pinned integration/telemetry boundary: dispatchInputs. Source control/data flow only, not vendor-internal state or measured per-dispatch reset/jitter/frameTimeDelta.",
+      "source": {
+        "excerptCanonicalSha256": "326031462fe937d10a36708e3ae31f9f9b56e1d9190212d1134288fea788769f",
+        "excerptTextStoredInPrivateImmutableAckNotRepublished": true,
+        "fileIdentity": {
+          "bytes": 193471,
+          "sha256": "26a572ffc693203d7c313e5ed98a2acce168a254d384c314a40e6c50656c574b"
+        },
+        "inclusiveLineRange": [
+          4186,
+          4204
+        ],
+        "repositoryPath": "src/Features/Upscaling/FidelityFX.cpp",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "exposure-dispatchReturnGuard",
+      "interpretation": "Exact pinned integration/telemetry boundary: dispatchReturnGuard. Source control/data flow only, not vendor-internal state or measured per-dispatch reset/jitter/frameTimeDelta.",
+      "source": {
+        "excerptCanonicalSha256": "ed37aced28fb16dd5b4ae240d3c59b28ac263e5a9e6b8330e3d295cf98984909",
+        "excerptTextStoredInPrivateImmutableAckNotRepublished": true,
+        "fileIdentity": {
+          "bytes": 193471,
+          "sha256": "26a572ffc693203d7c313e5ed98a2acce168a254d384c314a40e6c50656c574b"
+        },
+        "inclusiveLineRange": [
+          4231,
+          4235
+        ],
+        "repositoryPath": "src/Features/Upscaling/FidelityFX.cpp",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "exposure-recordAfterSuccessfulBatch",
+      "interpretation": "Exact pinned integration/telemetry boundary: recordAfterSuccessfulBatch. Source control/data flow only, not vendor-internal state or measured per-dispatch reset/jitter/frameTimeDelta.",
+      "source": {
+        "excerptCanonicalSha256": "747f56dee55eadff79bb9b51ba8df3904169c4f62fcebd97552c36241918e65c",
+        "excerptTextStoredInPrivateImmutableAckNotRepublished": true,
+        "fileIdentity": {
+          "bytes": 193471,
+          "sha256": "26a572ffc693203d7c313e5ed98a2acce168a254d384c314a40e6c50656c574b"
+        },
+        "inclusiveLineRange": [
+          4288,
+          4296
+        ],
+        "repositoryPath": "src/Features/Upscaling/FidelityFX.cpp",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "exposure-publicDispatchSnapshot",
+      "interpretation": "Exact pinned integration/telemetry boundary: publicDispatchSnapshot. Source control/data flow only, not vendor-internal state or measured per-dispatch reset/jitter/frameTimeDelta.",
+      "source": {
+        "excerptCanonicalSha256": "86b7947b31147d35c72e10e882a16752c1bab3eaeae1756587cac11c5ceb5080",
+        "excerptTextStoredInPrivateImmutableAckNotRepublished": true,
+        "fileIdentity": {
+          "bytes": 23465,
+          "sha256": "9c70821e5c622b3253457d67363ff0c7a51ee6a335d42a34baaf5736451f071c"
+        },
+        "inclusiveLineRange": [
+          116,
+          136
+        ],
+        "repositoryPath": "src/Features/Upscaling/FidelityFX.h",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "exposure-supportedDispatchFields",
+      "interpretation": "Exact pinned integration/telemetry boundary: supportedDispatchFields. Source control/data flow only, not vendor-internal state or measured per-dispatch reset/jitter/frameTimeDelta.",
+      "source": {
+        "excerptCanonicalSha256": "dc93f87b91a800ba2d3a4cb7624527dc212611a7d31b2b044c53c9fbe93c4d4d",
+        "excerptTextStoredInPrivateImmutableAckNotRepublished": true,
+        "fileIdentity": {
+          "bytes": 7480,
+          "sha256": "ef65b15c285fde063ebe5df35215570c3925e96e39ff5ff70d3d0c3245ecf591"
+        },
+        "inclusiveLineRange": [
+          24,
+          46
+        ],
+        "repositoryPath": "src/Features/Upscaling/FSRColorContractDevBenchBridge.cpp",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "exposure-contextAndEyeSnapshotFields",
+      "interpretation": "Exact pinned integration/telemetry boundary: contextAndEyeSnapshotFields. Source control/data flow only, not vendor-internal state or measured per-dispatch reset/jitter/frameTimeDelta.",
+      "source": {
+        "excerptCanonicalSha256": "038790ba1276d23aedc5dbe9357289d4ccde034c41d5d6486cf85546f382cb39",
+        "excerptTextStoredInPrivateImmutableAckNotRepublished": true,
+        "fileIdentity": {
+          "bytes": 7480,
+          "sha256": "ef65b15c285fde063ebe5df35215570c3925e96e39ff5ff70d3d0c3245ecf591"
+        },
+        "inclusiveLineRange": [
+          49,
+          73
+        ],
+        "repositoryPath": "src/Features/Upscaling/FSRColorContractDevBenchBridge.cpp",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "exposure-nativePageDispatchFields",
+      "interpretation": "Exact pinned integration/telemetry boundary: nativePageDispatchFields. Source control/data flow only, not vendor-internal state or measured per-dispatch reset/jitter/frameTimeDelta.",
+      "source": {
+        "excerptCanonicalSha256": "fe0f2315c172ee7e205ae8a551acabeada427905393b90f42d90e8092506c3e7",
+        "excerptTextStoredInPrivateImmutableAckNotRepublished": true,
+        "fileIdentity": {
+          "bytes": 44326,
+          "sha256": "29fe3413e33551e035af119786a932bf499efb62a45adf6798c4da9e23f29cd5"
+        },
+        "inclusiveLineRange": [
+          683,
+          705
+        ],
+        "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "exposure-mappedSamplingStatistics",
+      "interpretation": "Exact pinned integration/telemetry boundary: mappedSamplingStatistics. Source control/data flow only, not vendor-internal state or measured per-dispatch reset/jitter/frameTimeDelta.",
+      "source": {
+        "excerptCanonicalSha256": "dca01991c4d4870f34eb7d04e4df1a2e971942a9a8384c413c69f54a9af2f5e0",
+        "excerptTextStoredInPrivateImmutableAckNotRepublished": true,
+        "fileIdentity": {
+          "bytes": 44326,
+          "sha256": "29fe3413e33551e035af119786a932bf499efb62a45adf6798c4da9e23f29cd5"
+        },
+        "inclusiveLineRange": [
+          664,
+          675
+        ],
+        "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "exposure-sdkPin",
+      "interpretation": "Exact pinned integration/telemetry boundary: sdkPin. Source control/data flow only, not vendor-internal state or measured per-dispatch reset/jitter/frameTimeDelta.",
+      "source": {
+        "excerptCanonicalSha256": "95f590e68ec48fcfeca2039448d52ac3f2bb27d53487d64e8472fa83ab99bcf4",
+        "excerptTextStoredInPrivateImmutableAckNotRepublished": true,
+        "fileIdentity": {
+          "bytes": 1324,
+          "sha256": "0b6ccb5b27bdcf0afa24e5e389173c6ea6dd4c70589e03b89e24efe3ed9363cd"
+        },
+        "inclusiveLineRange": [
+          1,
+          5
+        ],
+        "repositoryPath": "cmake/FidelityFX-Runtime.cmake",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14"
+      }
+    },
+    {
+      "id": "exposure-sdk-contract-156-167",
+      "interpretation": "Pinned SDK describes reconstruction exposure and removal of internal tonemapping at output; same output domain does not guarantee unchanged mean or reveal vendor internal exposure.",
+      "source": {
+        "excerptCanonicalSha256": "ffd553968a40c925fc079219f23764eef9a2c2dfc083bb3ecf890a9c4e9dae3f",
+        "excerptTextStoredInPrivateImmutableAckNotRepublished": true,
+        "fileIdentity": {
+          "bytes": 33757,
+          "sha256": "9c761f10d1a0a6aba02cde98adef10229f4800500e36b58f0bcb5424778f2d02"
+        },
+        "inclusiveLineRange": [
+          156,
+          167
+        ],
+        "repositoryPath": "Kits/FidelityFX/docs/techniques/super-resolution-ml.md",
+        "sourceCommit": "60f4ea81909200d8542eca14dccb2628b763a9a3"
+      }
+    },
+    {
+      "id": "exposure-sdk-contract-243-249",
+      "interpretation": "Pinned SDK default Quality jitter cycle is18; not proof of actual current jitter phase, settling duration, or hidden-history convergence.",
+      "source": {
+        "excerptCanonicalSha256": "1541ce59001405d2a75a1f93333fca1b664eb2e627e4aa01523c73488f0bd591",
+        "excerptTextStoredInPrivateImmutableAckNotRepublished": true,
+        "fileIdentity": {
+          "bytes": 33757,
+          "sha256": "9c761f10d1a0a6aba02cde98adef10229f4800500e36b58f0bcb5424778f2d02"
+        },
+        "inclusiveLineRange": [
+          243,
+          249
+        ],
+        "repositoryPath": "Kits/FidelityFX/docs/techniques/super-resolution-ml.md",
+        "sourceCommit": "60f4ea81909200d8542eca14dccb2628b763a9a3"
+      }
+    },
+    {
+      "id": "exposure-sdk-contract-278-282",
+      "interpretation": "Pinned SDK documents frameTimeDelta milliseconds as input to temporal auto-exposure; no actual per-dispatch value is exposed by current colour telemetry.",
+      "source": {
+        "excerptCanonicalSha256": "18656482c01d017f7bd5ae4abfef6e43f9d56e17af77b509d5e47d5d02cf7de8",
+        "excerptTextStoredInPrivateImmutableAckNotRepublished": true,
+        "fileIdentity": {
+          "bytes": 33757,
+          "sha256": "9c761f10d1a0a6aba02cde98adef10229f4800500e36b58f0bcb5424778f2d02"
+        },
+        "inclusiveLineRange": [
+          278,
+          282
+        ],
+        "repositoryPath": "Kits/FidelityFX/docs/techniques/super-resolution-ml.md",
+        "sourceCommit": "60f4ea81909200d8542eca14dccb2628b763a9a3"
+      }
+    }
+  ],
+  "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14",
+  "sourceExecuted": false,
+  "sourceFiles": {
+    "cmake/FidelityFX-Runtime.cmake": {
+      "bytes": 1324,
+      "repositoryPath": "cmake/FidelityFX-Runtime.cmake",
+      "sha256": "0b6ccb5b27bdcf0afa24e5e389173c6ea6dd4c70589e03b89e24efe3ed9363cd"
+    },
+    "src/Features/Upscaling/ColourPipelineProbe.cpp": {
+      "bytes": 44326,
+      "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+      "sha256": "29fe3413e33551e035af119786a932bf499efb62a45adf6798c4da9e23f29cd5"
+    },
+    "src/Features/Upscaling/ColourPipelineProbe.h": {
+      "bytes": 3218,
+      "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.h",
+      "sha256": "dcefe0d9bc2e447bb79ace8eff5655b0c613a56ac889e832ab65207964ee661f"
+    },
+    "src/Features/Upscaling/FSRColorContractDevBenchBridge.cpp": {
+      "bytes": 7480,
+      "repositoryPath": "src/Features/Upscaling/FSRColorContractDevBenchBridge.cpp",
+      "sha256": "ef65b15c285fde063ebe5df35215570c3925e96e39ff5ff70d3d0c3245ecf591"
+    },
+    "src/Features/Upscaling/FidelityFX.cpp": {
+      "bytes": 193471,
+      "repositoryPath": "src/Features/Upscaling/FidelityFX.cpp",
+      "sha256": "26a572ffc693203d7c313e5ed98a2acce168a254d384c314a40e6c50656c574b"
+    },
+    "src/Features/Upscaling/FidelityFX.h": {
+      "bytes": 23465,
+      "repositoryPath": "src/Features/Upscaling/FidelityFX.h",
+      "sha256": "9c70821e5c622b3253457d67363ff0c7a51ee6a335d42a34baaf5736451f071c"
+    }
+  }
+}
