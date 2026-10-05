@@ -1,0 +1,51 @@
+{
+  "content": {
+    "fileCount": 4,
+    "root": "content",
+    "totalBytes": 205464,
+    "treeSha256": "91215E4E1C3E2130CAB3341E561D3E17FCA40CAF3E7A58B9444A168C2993F5E9"
+  },
+  "contributor": {
+    "displayName": "Treatid2",
+    "github": "Treatid2",
+    "standing": "ordinary-contributor"
+  },
+  "createdAt": "2026-10-05T14:16:26.575997+00:00",
+  "licensing": {
+    "content": "CC-BY-SA-4.0",
+    "dcoAcknowledged": true,
+    "schemas": "CC0-1.0"
+  },
+  "namespace": "csx",
+  "notes": "217 diagnostic live schema2 stereo/598 tracking/calibration/compiler/package evidence; exact recipe rejected before native capture, no activation/order/brightness qualification.",
+  "provenance": {
+    "importedAt": "2026-10-05T14:16:26.575997+00:00",
+    "relatedUrls": [
+      "https://github.com/Treatid2/skyrim-community-shaders/commit/217992d1e29e55a707d6e41c3ca111b2154904fa",
+      "https://github.com/Treatid2/skyrim-render-map/pull/36"
+    ],
+    "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+    "sourceContentTreeSha256": "a19c264413ef27d45305e13505e2eb496a2aefbcdc3580b15d6a3ed3fcd33e5f",
+    "sourceDirty": false,
+    "sourceParentCommit": "7b4f84c5645aed34fb84b2513da890a389f474ea",
+    "sourcePubliclyReachable": true,
+    "sourceRef": null,
+    "sourceRepository": "https://github.com/Treatid2/skyrim-community-shaders",
+    "sourceState": "public-branch",
+    "transformations": [
+      "Finite retained originals/package references and allDataZIPbytes independently reverified; no source/runtime mutations.",
+      "Independent598sample/delta summaries and raw-to-standing calibration; probe100summary attributed.",
+      "Current schema2diagnostic PNGqualification separate from e03historical adapterfailure and laterofflineclassification.",
+      "PinnedAPIpresence/source qualification distinguishes absentdefault slots from validNone; rawownerwording unchanged.",
+      "Plannerrefusal/no native start, unheldlighting/HUD and unverifiedcache exclusions preserved."
+    ]
+  },
+  "schema": {
+    "major": 1,
+    "minor": 0,
+    "name": "skyrim-render-map.submission"
+  },
+  "status": "candidate-unreviewed",
+  "submissionClass": "assertion",
+  "submissionId": "sub-csx-217-diagnostic-stereo-v1"
+}
