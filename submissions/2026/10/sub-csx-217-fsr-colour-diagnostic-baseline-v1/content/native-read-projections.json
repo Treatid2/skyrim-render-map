@@ -1,0 +1,1976 @@
+{
+  "calendar": {
+    "action": "status",
+    "available": true,
+    "binding": {
+      "cellFormId": 91560,
+      "globalFormIds": [
+        53,
+        54,
+        55,
+        56,
+        57,
+        58
+      ],
+      "loadGeneration": 3
+    },
+    "cleanupPending": false,
+    "disconnectRecovery": "expiry-bounded; no disconnect callback",
+    "expiryDue": false,
+    "frame": 8245,
+    "globalOrder": [
+      "year",
+      "month",
+      "day",
+      "gameHour",
+      "daysPassed",
+      "calendarRate"
+    ],
+    "holdValid": false,
+    "lastTransition": {
+      "ok": true,
+      "restored": false,
+      "status": "idle"
+    },
+    "leaseActive": false,
+    "observedMonotonicMs": 2269870765,
+    "ok": true,
+    "outstanding": false,
+    "plugin": "devbench",
+    "readbackFresh": true,
+    "restored": false,
+    "schemaVersion": 1,
+    "serviceStopping": false,
+    "status": "observed",
+    "values": {
+      "calendarRate": 20.0,
+      "day": 17.0,
+      "daysPassed": 0.30541422963142395,
+      "engineMultiplier": 1.0,
+      "gameHour": 7.329941272735596,
+      "month": 7.0,
+      "year": 201.0
+    },
+    "version": "1.22.0",
+    "worldLoaded": true
+  },
+  "derivedProjectionsNotOriginalBytes": true,
+  "interpretationSupplement": {
+    "calendarHoldDispatched": false,
+    "cameraObservationCoverage": {
+      "explicitStoredCamPoseRowCount": 1,
+      "maximumAbsoluteStoredPoseDrift": 0,
+      "meaning": "Zero differences among explicit stored camera observations only. One stored camera row is not 638 independently sampled camera values. Source-qualified native delta reconstruction has not been performed by Mapping.",
+      "recordingStepCount": 638
+    },
+    "controlledExperimentExecuted": false,
+    "fsrInterpretation": "The configured/effective API slots report FSR4 Quality; native colour status reports path enum 3 and active runtime context generation2, with both eye dispatches on the same frame12011. This is not independent proof of a vendor algorithm, source transfer, GPU completion or brightness causality. The inactive host context is not evidence of active-path failure.",
+    "lightingHeld": false,
+    "noReviewGate": true,
+    "originalRatificationUnchanged": true,
+    "ratificationSha256": "93D83DE680A0BA959CCB7D866D6CE9A36E01955BC53C3424A0A144CE98D8ABDC",
+    "schema": "render-mapping.interpretation-supplement.1",
+    "trackingObservationCoverage": {
+      "allThreeDevicesValidConnected": true,
+      "atomicJoinEstablished": false,
+      "controllerButtonsTouchesAxesNeutral": true,
+      "exactTrackingSamplesAtStereoFrame": 0,
+      "followingTrackingFrame": 18065,
+      "maximumAbsoluteMatrixDrift": 0,
+      "precedingTrackingFrame": 18058,
+      "sampleCount": 638,
+      "stereoFrame": 18064
+    }
+  },
+  "ownerSourceTelemetrySupplement": {
+    "actualDispatchParametersIndependentlyQualifiedHere": false,
+    "consistencyBoundary": "The getter holds devBenchFsrColorContractMutex for its CPU service snapshot. This does not establish atomicity with separate stereo, tracking, camera or compiler observations or GPU completion.",
+    "controlledExperimentExecuted": false,
+    "fields": [
+      {
+        "field": "lastSuccessfulDispatch.preExposure",
+        "meaning": "Assigned as a literal telemetry annotation, not an independently sampled dispatch parameter",
+        "reportedValue": 1.0,
+        "sourceFile": "src/Features/Upscaling/FidelityFX.cpp",
+        "sourceLineHint": 1483,
+        "sourceSymbol": "RecordDevBenchSuccessfulDispatch"
+      },
+      {
+        "field": "lastSuccessfulDispatch.exposureResourceBound",
+        "meaning": "Assigned as a literal telemetry annotation, not independent observation of a resource binding",
+        "reportedValue": false,
+        "sourceFile": "src/Features/Upscaling/FidelityFX.cpp",
+        "sourceLineHint": 1483,
+        "sourceSymbol": "RecordDevBenchSuccessfulDispatch"
+      },
+      {
+        "field": "sourceColorContractChanged",
+        "meaning": "Serializer literal; does not independently establish invariant source colour transfer",
+        "reportedValue": false,
+        "sourceFile": "src/Features/Upscaling/FSRColorContractDevBenchBridge.cpp",
+        "sourceLineHint": 73,
+        "sourceSymbol": "SnapshotJson"
+      }
+    ],
+    "nextAssayRule": "Do not use these three constant fields as dynamic measurements, transition settlement gates or independent evidence of brightness causality. Retain them verbatim and qualify actual requested/context flags, revision, successful eye records and probe outputs separately.",
+    "originalNativeRepliesUnchanged": true,
+    "originalRatificationUnchanged": true,
+    "pathEnumQualification": {
+      "meaning": "Source-defined runtime path label; still not independent vendor implementation or GPU execution proof",
+      "reportedValue": 3,
+      "sourceEnum": "kRuntimeFsr4",
+      "sourceFile": "src/Features/Upscaling/FidelityFX.h"
+    },
+    "perEyeDispatchQualification": "The same preExposure and exposureResourceBound limitation applies to the reported successful per-eye records.",
+    "qualificationProvenance": {
+      "independentlyReinspectedByMapping": false,
+      "method": "Pinned-source inspection reported directly to Mapping in this turn",
+      "provider": "Map Manager",
+      "sourceFindingReceiptRequested": true
+    },
+    "ratificationSha256": "93D83DE680A0BA959CCB7D866D6CE9A36E01955BC53C3424A0A144CE98D8ABDC",
+    "recordedUtc": "2026-10-05T17:19:31Z",
+    "reviewGate": false,
+    "schema": "render-mapping.source-telemetry-supplement.1",
+    "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+    "underlyingDispatchFaultInferred": false
+  },
+  "reads": {
+    "camera": {
+      "camPitch": -0.17436975240707397,
+      "camX": -536.1541137695312,
+      "camY": 0.25445556640625,
+      "camYaw": -0.041664935648441315,
+      "camZ": 228.05908203125,
+      "freeCam": false,
+      "freeCamBackend": "vr-state",
+      "freeCamOwned": false,
+      "orbit": false,
+      "pov": "other",
+      "stateId": 9
+    },
+    "colour": {
+      "hostContext": {
+        "autoExposure": false,
+        "generation": 0,
+        "highDynamicRangeInput": false,
+        "valid": false
+      },
+      "lastSuccessfulDispatch": {
+        "autoExposure": true,
+        "configuredSharpnessAtDispatch": 0.8999999761581421,
+        "contextGeneration": 2,
+        "contextIndex": 1,
+        "dispatchQpc": 22699304188625,
+        "displayHeight": 1680,
+        "displayWidth": 1512,
+        "effectiveSharpness": 0.8999999761581421,
+        "exposureResourceBound": false,
+        "frame": 12011,
+        "highDynamicRangeInput": true,
+        "path": 3,
+        "preExposure": 1.0,
+        "renderHeight": 1120,
+        "renderWidth": 1008,
+        "serial": 13622,
+        "sharpeningEnabled": true,
+        "valid": true
+      },
+      "lastSuccessfulEyeDispatches": [
+        {
+          "autoExposure": true,
+          "configuredSharpnessAtDispatch": 0.8999999761581421,
+          "contextGeneration": 2,
+          "contextIndex": 0,
+          "dispatchQpc": 22699304188125,
+          "displayHeight": 1680,
+          "displayWidth": 1512,
+          "effectiveSharpness": 0.8999999761581421,
+          "exposureResourceBound": false,
+          "frame": 12011,
+          "highDynamicRangeInput": true,
+          "path": 3,
+          "preExposure": 1.0,
+          "renderHeight": 1120,
+          "renderWidth": 1008,
+          "serial": 13621,
+          "sharpeningEnabled": true,
+          "valid": true
+        },
+        {
+          "autoExposure": true,
+          "configuredSharpnessAtDispatch": 0.8999999761581421,
+          "contextGeneration": 2,
+          "contextIndex": 1,
+          "dispatchQpc": 22699304188625,
+          "displayHeight": 1680,
+          "displayWidth": 1512,
+          "effectiveSharpness": 0.8999999761581421,
+          "exposureResourceBound": false,
+          "frame": 12011,
+          "highDynamicRangeInput": true,
+          "path": 3,
+          "preExposure": 1.0,
+          "renderHeight": 1120,
+          "renderWidth": 1008,
+          "serial": 13622,
+          "sharpeningEnabled": true,
+          "valid": true
+        }
+      ],
+      "producer": {
+        "artifactSha256": "",
+        "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+        "buildIdShort": "ef49a37c28a0",
+        "component": "CommunityShaders",
+        "configuration": "Release",
+        "manifestError": "runtime artifact verification delegated to deployment harness",
+        "manifestVerified": false,
+        "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+        "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+        "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+        "sourceDescribe": "217992d",
+        "sourceDirty": false
+      },
+      "requested": {
+        "autoExposure": true,
+        "highDynamicRangeInput": true,
+        "revision": 1
+      },
+      "runtimeContext": {
+        "autoExposure": true,
+        "generation": 2,
+        "highDynamicRangeInput": true,
+        "valid": true
+      },
+      "sourceColorContractChanged": false
+    },
+    "physical": {
+      "action": "status",
+      "producer": {
+        "artifactSha256": "",
+        "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+        "buildIdShort": "ef49a37c28a0",
+        "component": "CommunityShaders",
+        "configuration": "Release",
+        "manifestError": "runtime artifact verification delegated to deployment harness",
+        "manifestVerified": false,
+        "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+        "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+        "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+        "sourceDescribe": "217992d",
+        "sourceDirty": false
+      },
+      "status": {
+        "adapter": {
+          "available": true,
+          "description": "AMD Radeon RX 7900 XT",
+          "deviceId": 29772,
+          "driverVersion": "",
+          "driverVersionAvailable": false,
+          "driverVersionRaw": 0,
+          "luidHigh": 0,
+          "luidLow": 83974,
+          "revision": 204,
+          "subsystemId": 3832618402,
+          "vendorId": 4098
+        },
+        "authorityLiveness": {
+          "controllerRevision": 13,
+          "controllerRevisionStable": true,
+          "diagnosticOnly": true,
+          "inconsistencies": [],
+          "inconsistencyMask": 0,
+          "ownerMask": 0,
+          "ownerSummary": {
+            "cleanup": {
+              "engineTargetRetirementPending": false,
+              "intermediateRetirementPending": false,
+              "memoryTrimOwnerEpoch": 0,
+              "memoryTrimPending": false
+            },
+            "compositorHold": {
+              "active": false,
+              "awaitingSyncEpoch": 0,
+              "cycleDrainPending": false,
+              "epoch": 2
+            },
+            "controller": {
+              "presentationEpoch": 0,
+              "stableRuntimeProfileHint": false,
+              "stateMirrorBusy": false,
+              "transitionEpoch": 0
+            },
+            "deferredRequest": {
+              "hint": false,
+              "present": false,
+              "transitionEpoch": 0
+            },
+            "fpsStabilizerSyncFrame": 0,
+            "nativeRestore": {
+              "active": false,
+              "ownerEpoch": 0,
+              "presentationGuardEpoch": 0
+            },
+            "pendingRequest": {
+              "present": false,
+              "transitionEpoch": 0
+            },
+            "physicalRelatch": {
+              "inProgress": false,
+              "queued": false,
+              "transitionEpoch": 0
+            },
+            "postLoad": {
+              "deferredRecoveryEpoch": 0,
+              "recoveryActive": false,
+              "recoveryEpoch": 1,
+              "resetEpoch": 0,
+              "resetPending": false
+            },
+            "postMutation": {
+              "chainSerial": 0,
+              "serializationEpoch": 0,
+              "unresolvedPhysicalEpoch": 0
+            },
+            "preMutationFallback": {
+              "admissionActive": false,
+              "providerNeutralRecoveryEpoch": 0,
+              "transitionEpoch": 0
+            },
+            "providerLifecycle": {
+              "dlssActive": false,
+              "dlssResetGeneration": 0,
+              "dlssResetPending": false,
+              "dlssViewportPreparationPending": false,
+              "fsrActive": false,
+              "fsrResetGeneration": 0,
+              "fsrResetPending": false,
+              "resourceTrackingSyncPending": false
+            },
+            "vendorWorkGate": {
+              "ownerEpoch": 9,
+              "ownerMask": 0
+            }
+          },
+          "owners": [],
+          "productionSchedulingEffect": "none",
+          "schemaVersion": 1,
+          "serviceClasses": [],
+          "serviceMask": 0,
+          "unmappedOwnerMask": 0
+        },
+        "controller": {
+          "applied": {
+            "active": false,
+            "backend": "none",
+            "contractGeneration": 0,
+            "displayEyeHeight": 0,
+            "displayEyeWidth": 0,
+            "dlssPreset": 1,
+            "foveatedVendorDispatch": false,
+            "fsr4RuntimeEnabled": false,
+            "method": "none",
+            "origin": "cs_menu",
+            "peripheryTAA": false,
+            "preparationOptionsGeneration": 0,
+            "qualityMode": 0,
+            "queuedFrame": 0,
+            "renderEyeHeight": 0,
+            "renderEyeWidth": 0,
+            "renderScale": 1.0,
+            "renderScaleMode": false,
+            "requestID": 0,
+            "transitionEpoch": 0,
+            "valid": false
+          },
+          "applying": {
+            "active": false,
+            "backend": "none",
+            "contractGeneration": 0,
+            "displayEyeHeight": 0,
+            "displayEyeWidth": 0,
+            "dlssPreset": 1,
+            "foveatedVendorDispatch": false,
+            "fsr4RuntimeEnabled": false,
+            "method": "none",
+            "origin": "cs_menu",
+            "peripheryTAA": false,
+            "preparationOptionsGeneration": 0,
+            "qualityMode": 0,
+            "queuedFrame": 0,
+            "renderEyeHeight": 0,
+            "renderEyeWidth": 0,
+            "renderScale": 1.0,
+            "renderScaleMode": false,
+            "requestID": 0,
+            "transitionEpoch": 0,
+            "valid": false
+          },
+          "currentMetrics": {
+            "backendDeferrals": 0,
+            "failures": 0,
+            "fidelityMismatches": 0,
+            "memoryPreRecreateDrainCount": 0,
+            "memoryPreRecreateDrainFailures": 0,
+            "memoryTrimCount": 0,
+            "memoryTrimFailures": 0,
+            "pressureDeferrals": 0,
+            "retirementDeferrals": 0,
+            "retries": 0,
+            "transitionEpoch": 0,
+            "valid": false
+          },
+          "desiredOwner": {
+            "contractGeneration": 0,
+            "loadingSerial": 0,
+            "transitionEpoch": 0
+          },
+          "dlssLifecycle": {
+            "attempts": 0,
+            "backend": "none",
+            "deferrals": 0,
+            "failures": 0,
+            "method": "none",
+            "phase": "Inactive",
+            "readyForContract": false,
+            "requestedGeneration": 0,
+            "resourcesPresent": false,
+            "runtimeGeneration": 0,
+            "stateFrame": 0,
+            "transitionEpoch": 0
+          },
+          "emergencyRecoveryRequested": false,
+          "engineTargetRetirement": {
+            "capacityBlocked": false,
+            "completedCount": 0,
+            "fenceFailures": 0,
+            "fencePending": false,
+            "newestEpoch": 0,
+            "oldestEpoch": 0,
+            "pending": false,
+            "pendingGenerations": 0,
+            "pendingReleaseCount": 0,
+            "supported": false
+          },
+          "fidelity": {
+            "active": false,
+            "backend": "none",
+            "bothEyesValid": false,
+            "contractGeneration": 0,
+            "evaluationEyeMask": 0,
+            "eyes": [
+              {
+                "evaluated": false,
+                "frame": 0,
+                "generation": 0,
+                "inputHeight": 0,
+                "inputWidth": 0,
+                "outputHeight": 0,
+                "outputWidth": 0,
+                "valid": false
+              },
+              {
+                "evaluated": false,
+                "frame": 0,
+                "generation": 0,
+                "inputHeight": 0,
+                "inputWidth": 0,
+                "outputHeight": 0,
+                "outputWidth": 0,
+                "valid": false
+              }
+            ],
+            "invariantEyeMask": 0,
+            "lastMismatchMask": 0,
+            "method": "none",
+            "mismatchCount": 0,
+            "transitionEpoch": 0
+          },
+          "fsrLifecycle": {
+            "attempts": 0,
+            "backend": "fsr_host",
+            "deferrals": 1,
+            "failures": 1,
+            "method": "fsr",
+            "phase": "Ready",
+            "readyForContract": false,
+            "requestedGeneration": 0,
+            "resourcesPresent": false,
+            "runtimeGeneration": 0,
+            "stateFrame": 5200,
+            "transitionEpoch": 0
+          },
+          "memory": {
+            "budgetBytes": 20607971328,
+            "headroomBytes": 15165239296,
+            "pressure": "Normal",
+            "processPrivateUsageBytes": 16906711040,
+            "processPrivateUsageValid": true,
+            "recoverySamples": 0,
+            "sampleFrame": 5284,
+            "systemCommitBytes": 95724896256,
+            "systemCommitHeadroomBytes": 76900372480,
+            "systemCommitLimitBytes": 172625268736,
+            "systemCommitRatio": 0.5545242417689985,
+            "systemCommitValid": true,
+            "usageBytes": 5442732032,
+            "usageRatio": 0.2641080941628142,
+            "valid": true
+          },
+          "memoryTrim": {
+            "completedCount": 0,
+            "completedFrame": 0,
+            "failures": 0,
+            "fenceFailures": 0,
+            "lastOfferUsedDecommit": false,
+            "lastOfferedResourceCount": 0,
+            "lastSucceeded": false,
+            "ownerEpoch": 0,
+            "pending": false,
+            "preRecreateDrainCount": 0,
+            "preRecreateDrainFailures": 0,
+            "reason": "None",
+            "requestedFrame": 0
+          },
+          "physicalOwner": {
+            "contractGeneration": 0,
+            "loadingSerial": 0,
+            "transitionEpoch": 0
+          },
+          "physicalPhase": "none",
+          "physicalPhaseValue": 0,
+          "postLoadRecovery": {
+            "active": false,
+            "admissionWaitStartFrame": 0,
+            "baselineProcessPrivateUsageBytes": 0,
+            "baselineSystemCommitBytes": 0,
+            "baselineUsageBytes": 0,
+            "cleanupDrained": false,
+            "engineTargetCreateEntered": false,
+            "firstSettledFrame": 0,
+            "lastSettledFrame": 0,
+            "loadingSerial": 2,
+            "peakPressure": "Normal",
+            "peakProcessPrivateUsageBytes": 16906711040,
+            "peakSystemCommitBytes": 95758606336,
+            "peakUsageBytes": 7327948800,
+            "recoveryEpoch": 1,
+            "relatchAdmitted": false,
+            "settleDeadlineExpired": false,
+            "settleTimeoutUsed": false,
+            "settledSamples": 0,
+            "timedAttemptConsumed": false,
+            "timedAttemptInProgress": false,
+            "timedAttemptStartTickMs": 0,
+            "transitionEpoch": 0,
+            "trimArmed": false,
+            "trimCompleted": false,
+            "trimSucceeded": false,
+            "vendorTeardownFallbackRequested": false,
+            "vendorTeardownPhase": "Idle"
+          },
+          "postMutationEmergencyAttemptConsumed": false,
+          "presentation": {
+            "boundsMismatchOriginalFallbackEyeObservations": 0,
+            "consecutiveBothEyesVendorFrames": 0,
+            "eyes": [
+              {
+                "consecutiveFrames": 0,
+                "contractGeneration": 0,
+                "expectedInputHeight": 0,
+                "expectedInputWidth": 0,
+                "frame": 0,
+                "inputHeight": 0,
+                "inputWidth": 0,
+                "loadingOrMenuContext": false,
+                "method": "none",
+                "outputHeight": 0,
+                "outputWidth": 0,
+                "path": "Unknown",
+                "transitionCooldown": false,
+                "transitionEpoch": 0,
+                "valid": false
+              },
+              {
+                "consecutiveFrames": 0,
+                "contractGeneration": 0,
+                "expectedInputHeight": 0,
+                "expectedInputWidth": 0,
+                "frame": 0,
+                "inputHeight": 0,
+                "inputWidth": 0,
+                "loadingOrMenuContext": false,
+                "method": "none",
+                "outputHeight": 0,
+                "outputWidth": 0,
+                "path": "Unknown",
+                "transitionCooldown": false,
+                "transitionEpoch": 0,
+                "valid": false
+              }
+            ],
+            "lastBothEyesVendorFrame": 0,
+            "lastFallbackFrame": 0,
+            "maximumConsecutivePresentationStretchFrames": 0,
+            "presentationStretchEyeObservations": 0,
+            "sessionBoundsMismatchOriginalFallbackEyeObservations": 0,
+            "sessionPresentationStretchEyeObservations": 0,
+            "sessionVendorEvaluatedEyeObservations": 0,
+            "sessionVendorFailureStretchEyeObservations": 0,
+            "vendorEvaluatedEyeObservations": 0,
+            "vendorFailureStretchEyeObservations": 0
+          },
+          "presentationOwner": {
+            "contractGeneration": 0,
+            "loadingSerial": 0,
+            "transitionEpoch": 0
+          },
+          "presentationPhase": "idle",
+          "presentationPhaseValue": 0,
+          "requested": {
+            "active": false,
+            "backend": "none",
+            "contractGeneration": 0,
+            "displayEyeHeight": 0,
+            "displayEyeWidth": 0,
+            "dlssPreset": 1,
+            "foveatedVendorDispatch": false,
+            "fsr4RuntimeEnabled": false,
+            "method": "none",
+            "origin": "cs_menu",
+            "peripheryTAA": false,
+            "preparationOptionsGeneration": 0,
+            "qualityMode": 0,
+            "queuedFrame": 0,
+            "renderEyeHeight": 0,
+            "renderEyeWidth": 0,
+            "renderScale": 1.0,
+            "renderScaleMode": false,
+            "requestID": 0,
+            "transitionEpoch": 0,
+            "valid": false
+          },
+          "resourcePlan": {
+            "admissionUsageLimitBytes": 0,
+            "doorHandoffHardReserveOnly": false,
+            "emergencyProjectedSystemCommitAdditionalBytes": 0,
+            "emergencyProjectedSystemCommitBytes": 0,
+            "emergencySystemCommitAdmissionLimitBytes": 0,
+            "emergencySystemCommitGuardActive": false,
+            "emergencySystemCommitMinimumProjectionBytes": 0,
+            "emergencySystemCommitProjectionMultiplier": 0,
+            "emergencySystemCommitProjectionValid": false,
+            "emergencySystemCommitReserveBytes": 0,
+            "emergencySystemCommitSafe": false,
+            "estimatedAdditionalBytes": 0,
+            "memoryPressure": "Unknown",
+            "postTrimAdmissionUsageLimitBytes": 0,
+            "pressureCleanupRequired": false,
+            "pressureDeferred": false,
+            "previousVendorMethod": "none",
+            "projectedAdditionalBytes": 0,
+            "projectedResidencyDeferred": false,
+            "projectedResidencyGuardActive": false,
+            "projectedResidencyPostTrimRelaxed": false,
+            "projectedSystemCommitAdditionalBytes": 0,
+            "projectedSystemCommitBytes": 0,
+            "projectedUsageBytes": 0,
+            "retainInactiveDLSSResources": false,
+            "systemCommitAdmissionLimitBytes": 0,
+            "systemCommitAdmissionPolicy": "none",
+            "systemCommitDeferred": false,
+            "systemCommitGuardActive": false,
+            "systemCommitLimitBytes": 0,
+            "systemCommitReserveBytes": 0,
+            "transitionEpoch": 0,
+            "valid": false
+          },
+          "retirement": {
+            "capacityBlocked": false,
+            "fencePending": false,
+            "nextCleanupFrame": 0,
+            "pendingSets": 0
+          },
+          "revision": 13,
+          "stable": {
+            "active": false,
+            "backend": "none",
+            "contractGeneration": 0,
+            "displayEyeHeight": 0,
+            "displayEyeWidth": 0,
+            "dlssPreset": 1,
+            "foveatedVendorDispatch": false,
+            "fsr4RuntimeEnabled": false,
+            "method": "none",
+            "origin": "cs_menu",
+            "peripheryTAA": false,
+            "preparationOptionsGeneration": 0,
+            "qualityMode": 0,
+            "queuedFrame": 0,
+            "renderEyeHeight": 0,
+            "renderEyeWidth": 0,
+            "renderScale": 1.0,
+            "renderScaleMode": false,
+            "requestID": 0,
+            "transitionEpoch": 0,
+            "valid": false
+          },
+          "state": "Idle",
+          "targetEpoch": 0,
+          "terminalDeviceLossSignaled": false,
+          "terminalFailureSignaled": false,
+          "unresolvedPhysicalMutationEpoch": 0,
+          "unresolvedPhysicalMutationStartTickMs": 0
+        },
+        "cpuPerformance": {
+          "active": false,
+          "compactPresentationContract": {
+            "publishes": 0,
+            "reuses": 0
+          },
+          "devBenchOnly": true,
+          "generationResourceValidation": {
+            "contractInvalidations": 0,
+            "contractPublishes": 0,
+            "fullValidations": 0,
+            "stableChecks": 0,
+            "stableHits": 0,
+            "stableMisses": 0
+          },
+          "schemaVersion": 1,
+          "state": "reset",
+          "stateProportionalSafety": {
+            "boundsGuard": {
+              "candidates": 0,
+              "fastSkips": 0
+            },
+            "deferredRecovery": {
+              "candidates": 0,
+              "fastSkips": 0
+            },
+            "engineRetirement": {
+              "fastSkips": 0,
+              "services": 0
+            },
+            "memoryTelemetry": {
+              "candidates": 0,
+              "fastSkips": 0
+            },
+            "memoryTrim": {
+              "fastSkips": 0,
+              "services": 0
+            },
+            "nativeGuard": {
+              "candidates": 0,
+              "fastSkips": 0
+            },
+            "postMutationGuard": {
+              "fastSkips": 0,
+              "services": 0
+            },
+            "promotion": {
+              "candidates": 0,
+              "fastSkips": 0
+            }
+          },
+          "strongStereoPacket": {
+            "captures": 0,
+            "commitAccepts": 0,
+            "commitRejects": 0,
+            "commitValidations": 0,
+            "cycleReuses": 0,
+            "fastSkips": 0,
+            "invalidations": 0,
+            "lifetimeRebuilds": 0,
+            "lifetimeReuses": 0,
+            "queueHoldAverageMicroseconds": 0.0,
+            "queueHoldMaximumMicroseconds": 0.0,
+            "queueWaitAverageMicroseconds": 0.0,
+            "queueWaitMaximumMicroseconds": 0.0
+          },
+          "window": {
+            "currentFrame": 8221,
+            "elapsedFrames": 0,
+            "initialized": false,
+            "startFrame": 0
+          }
+        },
+        "frame": 8221,
+        "fsrDispatch": {
+          "actualDispatchBackend": "none",
+          "actualDispatchBackendConverged": false,
+          "actualDispatchBothEyesValid": false,
+          "actualDispatchEyes": [
+            {
+              "backend": "none",
+              "frame": 0,
+              "runtimeFallback": false,
+              "serial": 0,
+              "valid": false
+            },
+            {
+              "backend": "none",
+              "frame": 0,
+              "runtimeFallback": false,
+              "serial": 0,
+              "valid": false
+            }
+          ],
+          "actualDispatchFrame": 0,
+          "actualRuntimeFallbackObserved": false,
+          "authoritativeActive": false,
+          "authoritativeBackend": "none",
+          "authoritativeFsr4RuntimeEnabled": false,
+          "authoritativeMethod": "none",
+          "authoritativeValid": false,
+          "contractLifecycleFailures": 1,
+          "contractLifecyclePhase": "Ready",
+          "contractReady": false,
+          "contractResourcesPresent": false,
+          "desiredActive": false,
+          "desiredBackend": "none",
+          "desiredFsr4RuntimeEnabled": false,
+          "desiredMethod": "none",
+          "desiredValid": false,
+          "evaluationActive": false,
+          "evaluationBothEyesValid": false,
+          "evaluationContractGeneration": 0,
+          "evaluationMethod": "none",
+          "evaluationTransitionEpoch": 0,
+          "expectedEvaluationBackend": "none",
+          "fsrBackendConverged": false,
+          "shaderCompilationActive": false
+        },
+        "fsrHostLifecycle": {
+          "lastContextCreateResult": 0,
+          "quarantined": false
+        },
+        "hmdMaskDiagnostics": {
+          "apiVersion": 5,
+          "configurable": false,
+          "implementation": "tiled_exact_5x5",
+          "performance": {
+            "timerPrefix": "Upscaling::HAM::",
+            "timers": [
+              "Upscaling::HAM::InputTiledExact5x5",
+              "Upscaling::HAM::FinalTiledExact5x5"
+            ],
+            "tool": "communityshaders.profiler_api"
+          },
+          "robustness": {
+            "finalDispatches": 6042,
+            "inputDispatches": 5824,
+            "rejectedDispatches": 0
+          },
+          "safety": {
+            "supportedMapping": "equal-size or upscaling output",
+            "unsupportedMapping": "reject and retain the original compositor path"
+          }
+        },
+        "loadPresentationProbe": {
+          "active": false,
+          "completedReadbacks": 0,
+          "droppedReadbacks": 0,
+          "gridSize": 5,
+          "hamBlackPatternCandidates": 0,
+          "hamBrightPatternCandidates": 0,
+          "hamDarkPatternCandidates": 0,
+          "hamDispatchProbe": {
+            "brightPatternCandidates": 0,
+            "completedReadbacks": 0,
+            "darkPatternCandidates": 0,
+            "droppedReadbacks": 0,
+            "gridSize": 9,
+            "overwrittenDispatches": 0,
+            "pendingCapacity": 8,
+            "pendingReadbacks": 0,
+            "queuedReadbacks": 0,
+            "retainedDispatches": 0,
+            "retentionCapacity": 256,
+            "stereoReleaseRecords": 0,
+            "timeoutHandoff": {
+              "armCount": 0,
+              "armed": false,
+              "budgetMs": 0,
+              "clearEyeMask": 0,
+              "complete": false,
+              "compositorCycle": 0,
+              "elapsedMs": 0,
+              "eyes": [
+                {
+                  "captureQueueStatus": "NotRequested",
+                  "captureRequested": false,
+                  "captureSequence": 0,
+                  "clearColorIdentity": 0,
+                  "clearDecisionSeen": false,
+                  "clearDeferred": false,
+                  "clearDispatchSequence": 0,
+                  "clearEligible": false,
+                  "clearExecuted": false,
+                  "clearPhase": 0,
+                  "clearSeen": false,
+                  "eye": 0,
+                  "submitSeen": false
+                },
+                {
+                  "captureQueueStatus": "NotRequested",
+                  "captureRequested": false,
+                  "captureSequence": 0,
+                  "clearColorIdentity": 0,
+                  "clearDecisionSeen": false,
+                  "clearDeferred": false,
+                  "clearDispatchSequence": 0,
+                  "clearEligible": false,
+                  "clearExecuted": false,
+                  "clearPhase": 0,
+                  "clearSeen": false,
+                  "eye": 1,
+                  "submitSeen": false
+                }
+              ],
+              "hardDeadlineMs": 0,
+              "holdElapsedMs": 0,
+              "loadingSerial": 0,
+              "protectionEpoch": 0,
+              "retained": false,
+              "route": "unknown",
+              "sessionID": 0,
+              "softDeadlineMs": 0,
+              "submitEyeMask": 0
+            },
+            "timeoutReleaseRecords": 0
+          },
+          "hamWhitePatternCandidates": 0,
+          "overwrittenRecords": 0,
+          "pendingCapacity": 16,
+          "pendingReadbacks": 0,
+          "predominantlyBlackCandidates": 0,
+          "predominantlyWhiteCandidates": 0,
+          "qpcFrequency": 10000000,
+          "queuedReadbacks": 0,
+          "retainedRecords": 0,
+          "retentionCapacity": 4096,
+          "schemaVersion": 6,
+          "sessionID": 0,
+          "totalPendingReadbacks": 0
+        },
+        "mainPassDispatch": {
+          "callCount": 3022,
+          "encodeAttemptCount": 3022,
+          "encodeSuccessCount": 3022,
+          "fidelityAttemptCount": 3022,
+          "fidelitySuccessCount": 3021,
+          "lastFrame": 8221,
+          "lastStage": "FidelityDispatchSucceeded",
+          "vendorResetBlockedCount": 0
+        },
+        "modeStatus": "Disabled",
+        "nativeRestorePreparation": {
+          "commitAttemptCount": 0,
+          "commitCompositorCycleToken": 0,
+          "commitFrame": 0,
+          "commitOutcome": 0,
+          "commitSuccessCount": 0,
+          "compositorCycleToken": 4776,
+          "frame": 8221,
+          "rejectMask": 2
+        },
+        "pipelineDiagnostics": {
+          "capture": {
+            "initialized": false,
+            "lastSequence": 0,
+            "latestRecord": null,
+            "session": "",
+            "structuredWriterOpen": false
+          },
+          "configuredForNextStartup": false,
+          "configuredStructuredForNextStartup": false
+        },
+        "preparation": {
+          "active": false,
+          "capacity": 512,
+          "coalescedEvents": 0,
+          "devBenchOnly": true,
+          "events": [],
+          "overwrittenEvents": 0,
+          "qpcFrequency": 0,
+          "retainedEvents": 0,
+          "schemaVersion": 1
+        },
+        "renderScaleSelectionPolicy": {
+          "linkedToUpscaling": true,
+          "physicallyActive": false,
+          "rememberedPreference": false,
+          "requestedActive": false
+        },
+        "retryTelemetry": {
+          "active": false,
+          "available": false,
+          "capacity": 1024,
+          "coalescedEvents": 0,
+          "devBenchOnly": true,
+          "droppedEvents": 0,
+          "events": [],
+          "overwrittenEvents": 0,
+          "qpcFrequency": 0,
+          "retainedEvents": 0,
+          "schemaVersion": 2
+        },
+        "runtimeResolutionPlan": {
+          "engineRenderHeight": 1120.0,
+          "engineRenderWidth": 2016.0,
+          "finalOutputHeight": 1680.0,
+          "finalOutputWidth": 3024.0,
+          "menuContextActive": false,
+          "method": "fsr",
+          "outputTarget": "Main",
+          "owner": "VendorDynamicResolution",
+          "qualityMode": 3,
+          "vendorMethod": true
+        },
+        "runtimeRouting": {
+          "configuredMethod": "fsr",
+          "perfModeActive": false,
+          "presentationUpscalingActive": false,
+          "renderScaleLatched": false,
+          "renderScaleRequested": false,
+          "runtimeMethod": "fsr",
+          "runtimeQualityMode": 3
+        },
+        "session": {
+          "active": false,
+          "coalescedDuplicateCount": 0,
+          "endFrame": 0,
+          "id": 0,
+          "overwrittenEvents": 0,
+          "retainedEvents": 0,
+          "startFrame": 0
+        },
+        "submitInputFreshness": {
+          "boundaryOutcomes": {
+            "CompositorCycleMismatch": 0,
+            "FlagsMismatch": 9082,
+            "FrameMismatch": 0,
+            "MissingBoundary": 0,
+            "MissingDescriptor": 0,
+            "MissingResource": 0,
+            "ResourceMismatch": 470,
+            "ThreadMismatch": 0,
+            "TokenMismatch": 0,
+            "UnsupportedTextureType": 0,
+            "accepted": 0
+          },
+          "counterScope": "process_lifetime",
+          "methods": {
+            "dlss": {
+              "inputOutcomes": {
+                "IncompleteEyePair": 0,
+                "IncompleteGuideFrame": 0,
+                "InvalidEyeRegion": 0,
+                "InvalidSubmitFrame": 0,
+                "MissingCompositorCycle": 0,
+                "MissingOuterBoundary": 0,
+                "MissingSource": 0,
+                "UnprovenSourceSignature": 0,
+                "UnprovenStereoLayout": 0,
+                "WorldFrameMismatch": 0,
+                "accepted": 0
+              },
+              "work": {
+                "colorCopyEyes": 0,
+                "fallbackOutputHits": 0,
+                "fallbackPreparedHits": 0,
+                "guideEncodeEyes": 0,
+                "inputSanitizationEyes": 0,
+                "vendorEyeAttempts": 0,
+                "vendorEyeRetries": 0
+              }
+            },
+            "fsr": {
+              "inputOutcomes": {
+                "IncompleteEyePair": 0,
+                "IncompleteGuideFrame": 0,
+                "InvalidEyeRegion": 0,
+                "InvalidSubmitFrame": 0,
+                "MissingCompositorCycle": 0,
+                "MissingOuterBoundary": 0,
+                "MissingSource": 0,
+                "UnprovenSourceSignature": 0,
+                "UnprovenStereoLayout": 0,
+                "WorldFrameMismatch": 0,
+                "accepted": 0
+              },
+              "work": {
+                "colorCopyEyes": 0,
+                "fallbackOutputHits": 0,
+                "fallbackPreparedHits": 0,
+                "guideEncodeEyes": 0,
+                "inputSanitizationEyes": 0,
+                "vendorEyeAttempts": 0,
+                "vendorEyeRetries": 0
+              }
+            },
+            "other": {
+              "inputOutcomes": {
+                "IncompleteEyePair": 0,
+                "IncompleteGuideFrame": 0,
+                "InvalidEyeRegion": 0,
+                "InvalidSubmitFrame": 0,
+                "MissingCompositorCycle": 0,
+                "MissingOuterBoundary": 0,
+                "MissingSource": 0,
+                "UnprovenSourceSignature": 0,
+                "UnprovenStereoLayout": 0,
+                "WorldFrameMismatch": 0,
+                "accepted": 0
+              },
+              "work": {
+                "colorCopyEyes": 0,
+                "fallbackOutputHits": 0,
+                "fallbackPreparedHits": 0,
+                "guideEncodeEyes": 0,
+                "inputSanitizationEyes": 0,
+                "vendorEyeAttempts": 0,
+                "vendorEyeRetries": 0
+              }
+            }
+          },
+          "schemaVersion": 1,
+          "snapshotConsistency": "independently_sampled_atomic_counters"
+        },
+        "upscalingCorrelation": {
+          "afterCapabilityRevision": 1,
+          "afterRevision": 1,
+          "afterStatus": 0,
+          "atomicEngineSnapshot": false,
+          "authority": "csx.upscaling.stateRevision",
+          "beforeCapabilityRevision": 1,
+          "beforeRevision": 1,
+          "beforeStatus": 0,
+          "coherent": true,
+          "method": "native-api-bracket-around-physical-status"
+        },
+        "upscalingSnapshot": {
+          "activeOperationId": 0,
+          "capabilityRevision": 1,
+          "dimensions": {
+            "displayEyeHeight": 1680,
+            "displayEyeWidth": 1512,
+            "renderEyeHeight": 1120,
+            "renderEyeWidth": 2016
+          },
+          "flags": 1,
+          "observedConditions": {
+            "mask": 0,
+            "names": []
+          },
+          "profilePresence": 9,
+          "profiles": {
+            "applying": {
+              "dlssProfile": {
+                "name": "K",
+                "value": 1
+              },
+              "fsrRuntime": {
+                "name": "fsr3",
+                "value": 0
+              },
+              "method": {
+                "name": "none",
+                "value": 0
+              },
+              "qualityMode": {
+                "name": "native_aa",
+                "value": 0
+              },
+              "renderScaleMode": false
+            },
+            "configured": {
+              "dlssProfile": {
+                "name": "K",
+                "value": 1
+              },
+              "fsrRuntime": {
+                "name": "fsr4",
+                "value": 1
+              },
+              "method": {
+                "name": "fsr",
+                "value": 2
+              },
+              "qualityMode": {
+                "name": "quality",
+                "value": 3
+              },
+              "renderScaleMode": false
+            },
+            "effective": {
+              "dlssProfile": {
+                "name": "K",
+                "value": 1
+              },
+              "fsrRuntime": {
+                "name": "fsr4",
+                "value": 1
+              },
+              "method": {
+                "name": "fsr",
+                "value": 2
+              },
+              "qualityMode": {
+                "name": "quality",
+                "value": 3
+              },
+              "renderScaleMode": false
+            },
+            "persisted": {
+              "dlssProfile": {
+                "name": "K",
+                "value": 1
+              },
+              "fsrRuntime": {
+                "name": "fsr3",
+                "value": 0
+              },
+              "method": {
+                "name": "none",
+                "value": 0
+              },
+              "qualityMode": {
+                "name": "native_aa",
+                "value": 0
+              },
+              "renderScaleMode": false
+            },
+            "requested": {
+              "dlssProfile": {
+                "name": "K",
+                "value": 1
+              },
+              "fsrRuntime": {
+                "name": "fsr3",
+                "value": 0
+              },
+              "method": {
+                "name": "none",
+                "value": 0
+              },
+              "qualityMode": {
+                "name": "native_aa",
+                "value": 0
+              },
+              "renderScaleMode": false
+            },
+            "stable": {
+              "dlssProfile": {
+                "name": "K",
+                "value": 1
+              },
+              "fsrRuntime": {
+                "name": "fsr3",
+                "value": 0
+              },
+              "method": {
+                "name": "none",
+                "value": 0
+              },
+              "qualityMode": {
+                "name": "native_aa",
+                "value": 0
+              },
+              "renderScaleMode": false
+            }
+          },
+          "renderScaleStatus": {
+            "name": "disabled",
+            "value": 0
+          },
+          "stateRevision": 1,
+          "transitionState": {
+            "name": "idle",
+            "value": 0
+          }
+        },
+        "vendorWorkGate": {
+          "active": false,
+          "activeMask": 0,
+          "completedWorldFrame": true,
+          "effectiveLifecycleMask": 0,
+          "effectiveSources": [],
+          "epoch": 9,
+          "existingVendorDispatchReady": false,
+          "gameEntryOwnerMask": 0,
+          "gameEntryReleaseReady": false,
+          "gameLoadNotification": false,
+          "lifecycleGateRelevant": false,
+          "lifecycleMutationDeferred": false,
+          "loadingMenu": false,
+          "loadingPresentationActive": false,
+          "mainMenu": false,
+          "mainMenuActive": false,
+          "postLoadResetPending": false,
+          "preLoadGame": false,
+          "processStartup": false,
+          "profileTransitionPending": false,
+          "raceSexPresentationActive": false,
+          "recoveryPending": false,
+          "relatchFramePending": false,
+          "relatchInProgress": false,
+          "relatchPending": false,
+          "relatchPostLoadSettle": false,
+          "relatchQueued": false,
+          "saveLoadProtectionActive": false,
+          "sources": [],
+          "stabilizerSync": {
+            "closeFrame": 5193,
+            "configuredDLSSPreset": 1,
+            "configuredQualityMode": 3,
+            "configuredRenderScaleMode": false,
+            "configuredUpscaleMethod": 2,
+            "currentPlayerCellFormID": 91560,
+            "destinationCellFormID": 0,
+            "destinationObservationWorldFrame": 0,
+            "lastCompletedWorldRenderFrame": 8221,
+            "lastResolvedCellFormID": 0,
+            "loadingSerial": 2,
+            "pendingSyncFrame": 0,
+            "resolvedSyncFrame": 0,
+            "serialOpen": false,
+            "sourceCellFormID": 0
+          },
+          "state": 38654705664
+        }
+      }
+    },
+    "probe": {
+      "armedQpc": 0,
+      "completedQpc": 0,
+      "cpuFrame": null,
+      "error": null,
+      "expectedColourContractRevision": 0,
+      "expectedStageEyeSlots": 10,
+      "generation": 0,
+      "mappedStageEyeSlots": 0,
+      "maximumStagingPayloadBytes": 1073741824,
+      "producer": {
+        "artifactSha256": "",
+        "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+        "buildIdShort": "ef49a37c28a0",
+        "component": "CommunityShaders",
+        "configuration": "Release",
+        "manifestError": "runtime artifact verification delegated to deployment harness",
+        "manifestVerified": false,
+        "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+        "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+        "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+        "sourceDescribe": "217992d",
+        "sourceDirty": false
+      },
+      "queryQueuedQpc": 0,
+      "queuedStageEyeSlots": 0,
+      "sceneEpoch": null,
+      "schemaVersion": 3,
+      "stagingPayloadBytes": 0,
+      "state": "idle",
+      "submissionEpoch": null,
+      "timeoutSeconds": 15
+    },
+    "shader": {
+      "command": {
+        "action": "snapshot"
+      },
+      "contract": {
+        "major": 1,
+        "minor": 0,
+        "name": "csx.shader",
+        "schemaRevision": 1
+      },
+      "ok": true,
+      "result": {
+        "snapshot": {
+          "available": true,
+          "capabilities": 127,
+          "compilation": {
+            "active": false,
+            "activeShaderCapture": false,
+            "async": true,
+            "backgroundThreadCount": 8,
+            "completedTasks": 10,
+            "currentFailedShaders": 0,
+            "diskCacheHits": 8,
+            "failedTasks": 0,
+            "foregroundThreadCount": 12,
+            "heavyTasksInFlight": 0,
+            "memoryCacheHits": 0,
+            "recentFailures": [],
+            "skipUnchanged": true,
+            "slowTasks": 0,
+            "sourceCompiles": 2,
+            "statisticsText": "10/10 (successful/total)\tfailed: 0\tdeduplicated: 0\tdisk cache: 8\tsource compiles: 2\nElapsed/Estimated Time: 00:00:00/00:00:00",
+            "totalTasks": 10,
+            "verySlowTasks": 0
+          },
+          "customShaders": {
+            "effective": true,
+            "requested": true,
+            "transitionPending": false
+          },
+          "diskCache": {
+            "active": true,
+            "featureSetChanged": false,
+            "featureSetRevertPending": false,
+            "held": false,
+            "previousAvailable": false,
+            "requested": true
+          },
+          "persistence": {
+            "mutationBlocked": false,
+            "saveLoadSafeModeActive": false
+          },
+          "provenance": {
+            "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+            "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+            "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168"
+          },
+          "stateRevision": 1
+        },
+        "status": "success"
+      },
+      "server": {
+        "artifactSha256": "",
+        "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+        "buildIdShort": "ef49a37c28a0",
+        "component": "CommunityShaders",
+        "configuration": "Release",
+        "manifestError": "runtime artifact verification delegated to deployment harness",
+        "manifestVerified": false,
+        "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+        "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+        "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+        "sourceDescribe": "217992d",
+        "sourceDirty": false
+      },
+      "timestampUtc": "2026-10-05T16:57:36.450Z"
+    },
+    "stereo": {
+      "command": {
+        "action": "request_get"
+      },
+      "contract": {
+        "major": 1,
+        "minor": 1,
+        "name": "csx.screenshot",
+        "schemaRevision": 2
+      },
+      "ok": true,
+      "result": {
+        "acceptedUtc": "2026-10-05T16:57:44.359Z",
+        "acknowledged": false,
+        "actual": {
+          "acquisition": {
+            "compositorCycle": 14619,
+            "engineFrame": 18064,
+            "monotonicTimestampUs": 2270027353219,
+            "planes": [
+              {
+                "boundsApplied": true,
+                "colourSpace": 1,
+                "dxgiFormat": 28,
+                "eye": "left",
+                "orientation": {
+                  "flipHorizontal": false,
+                  "flipVertical": false
+                },
+                "publicationGeneration": 4,
+                "sourceHeight": 1680,
+                "sourceWidth": 3024,
+                "stagedHeight": 1680,
+                "stagedWidth": 1512,
+                "submittedBounds": {
+                  "uMax": 0.5,
+                  "uMin": 0.0,
+                  "vMax": 1.0,
+                  "vMin": 0.0
+                },
+                "tonemapSceneHdr": false
+              },
+              {
+                "boundsApplied": true,
+                "colourSpace": 1,
+                "dxgiFormat": 28,
+                "eye": "right",
+                "orientation": {
+                  "flipHorizontal": false,
+                  "flipVertical": false
+                },
+                "publicationGeneration": 4,
+                "sourceHeight": 1680,
+                "sourceWidth": 3024,
+                "stagedHeight": 1680,
+                "stagedWidth": 1512,
+                "submittedBounds": {
+                  "uMax": 1.0,
+                  "uMin": 0.5,
+                  "vMax": 1.0,
+                  "vMin": 0.0
+                },
+                "tonemapSceneHdr": false
+              }
+            ],
+            "sourceKind": "hmd_submission",
+            "utcTimestamp": "2026-10-05T16:57:44.377Z"
+          },
+          "artifacts": [
+            {
+              "colourContract": "sdr_srgb",
+              "format": "png",
+              "height": 1680,
+              "view": "left_eye",
+              "width": 1512
+            },
+            {
+              "colourContract": "sdr_srgb",
+              "format": "png",
+              "height": 1680,
+              "view": "right_eye",
+              "width": 1512
+            }
+          ],
+          "source": {
+            "fallback": "reject",
+            "kind": "hmd_submission"
+          }
+        },
+        "artifactProgress": {
+          "expected": 2,
+          "successful": 2,
+          "terminal": 2
+        },
+        "artifacts": [
+          {
+            "actual": {
+              "colourContract": "sdr_srgb",
+              "format": "png",
+              "height": 1680,
+              "view": "left_eye",
+              "width": 1512
+            },
+            "bytes": 2982177,
+            "committed": true,
+            "path": "<redacted-local-path>",
+            "sha256": "5924bb7fcb2b548fe24331858751fc087f871bc8497ddc0c67a9a1e297720d89"
+          },
+          {
+            "actual": {
+              "colourContract": "sdr_srgb",
+              "format": "png",
+              "height": 1680,
+              "view": "right_eye",
+              "width": 1512
+            },
+            "bytes": 2990597,
+            "committed": true,
+            "path": "<redacted-local-path>",
+            "sha256": "fb4c1d740f3b400f8d70ffcf78a19ce9a2bbbd89eb44b3a52c9553be99de643e"
+          }
+        ],
+        "effective": {
+          "clipboard": "none",
+          "destination": {
+            "baseName": "observe-20261005T165744123Z",
+            "directory": "<redacted-local-path>",
+            "overwrite": "never",
+            "policy": "absolute",
+            "resolvedDirectory": "<redacted-local-path>"
+          },
+          "outputs": [
+            {
+              "encoding": {
+                "colourContract": "sdr_srgb",
+                "format": "png"
+              },
+              "nameSuffix": "left",
+              "view": "left_eye"
+            },
+            {
+              "encoding": {
+                "colourContract": "sdr_srgb",
+                "format": "png"
+              },
+              "nameSuffix": "right",
+              "view": "right_eye"
+            }
+          ],
+          "source": {
+            "fallback": "reject",
+            "kind": "hmd_submission"
+          },
+          "tags": {}
+        },
+        "error": null,
+        "errors": [],
+        "kind": "still",
+        "publication": {
+          "artifactCommitted": null,
+          "state": "settled"
+        },
+        "requested": {
+          "action": "capture",
+          "capture": {
+            "clipboard": "none",
+            "destination": {
+              "baseName": "observe-20261005T165744123Z",
+              "directory": "<redacted-local-path>",
+              "overwrite": "never",
+              "policy": "absolute"
+            },
+            "outputs": [
+              {
+                "encoding": {
+                  "colourContract": "sdr_srgb",
+                  "format": "png"
+                },
+                "nameSuffix": "left",
+                "view": "left_eye"
+              },
+              {
+                "encoding": {
+                  "colourContract": "sdr_srgb",
+                  "format": "png"
+                },
+                "nameSuffix": "right",
+                "view": "right_eye"
+              }
+            ],
+            "source": {
+              "fallback": "reject",
+              "kind": "hmd_submission"
+            },
+            "tags": {}
+          },
+          "contractMajor": 1,
+          "contractMinor": 0,
+          "useSettings": false
+        },
+        "state": "completed",
+        "terminalUtc": "2026-10-05T16:57:44.778Z",
+        "warnings": []
+      },
+      "server": {
+        "artifactSha256": "",
+        "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+        "buildIdShort": "ef49a37c28a0",
+        "component": "CommunityShaders",
+        "configuration": "Release",
+        "csxBuild": 11,
+        "csxVersion": "CSX 3.19-VR",
+        "devBenchBuilt": true,
+        "devBenchRegistered": true,
+        "featureVersion": "1.0.0",
+        "manifestError": "runtime artifact verification delegated to deployment harness",
+        "manifestVerified": false,
+        "runtime": {
+          "game": "SkyrimVR",
+          "hmd": "unknown",
+          "presentation": "openvr"
+        },
+        "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+        "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+        "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+        "sourceDescribe": "217992d",
+        "sourceDirty": false
+      },
+      "timestampUtc": "2026-10-05T16:57:45.460Z"
+    },
+    "upscaling": {
+      "action": "snapshot",
+      "producer": {
+        "artifactSha256": "",
+        "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+        "buildIdShort": "ef49a37c28a0",
+        "component": "CommunityShaders",
+        "configuration": "Release",
+        "manifestError": "runtime artifact verification delegated to deployment harness",
+        "manifestVerified": false,
+        "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+        "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+        "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+        "sourceDescribe": "217992d",
+        "sourceDirty": false
+      },
+      "registry": {
+        "abiMajor": 1,
+        "abiMinor": 0,
+        "identityStatus": {
+          "name": "success",
+          "value": 0
+        },
+        "interface": {
+          "abiMajor": 1,
+          "abiMinor": 0,
+          "structSize": 72
+        },
+        "producer": {
+          "artifactSha256": "",
+          "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+          "component": "CommunityShaders",
+          "configuration": "Release",
+          "manifestError": "runtime artifact verification delegated to deployment harness",
+          "manifestVerified": false,
+          "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+          "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+          "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+          "sourceDescribe": "217992d",
+          "sourceDirty": false
+        },
+        "queryStatus": {
+          "name": "success",
+          "value": 0
+        },
+        "service": {
+          "capabilities": 115,
+          "major": 1,
+          "minor": 0,
+          "name": "csx.upscaling",
+          "schemaRevision": 1
+        },
+        "structSize": 56
+      },
+      "snapshot": {
+        "activeOperationId": 0,
+        "capabilityRevision": 1,
+        "dimensions": {
+          "displayEyeHeight": 1680,
+          "displayEyeWidth": 1512,
+          "renderEyeHeight": 1120,
+          "renderEyeWidth": 2016
+        },
+        "flags": 1,
+        "observedConditions": {
+          "mask": 0,
+          "names": []
+        },
+        "profilePresence": 9,
+        "profiles": {
+          "applying": {
+            "dlssProfile": {
+              "name": "K",
+              "value": 1
+            },
+            "fsrRuntime": {
+              "name": "fsr3",
+              "value": 0
+            },
+            "method": {
+              "name": "none",
+              "value": 0
+            },
+            "qualityMode": {
+              "name": "native_aa",
+              "value": 0
+            },
+            "renderScaleMode": false
+          },
+          "configured": {
+            "dlssProfile": {
+              "name": "K",
+              "value": 1
+            },
+            "fsrRuntime": {
+              "name": "fsr4",
+              "value": 1
+            },
+            "method": {
+              "name": "fsr",
+              "value": 2
+            },
+            "qualityMode": {
+              "name": "quality",
+              "value": 3
+            },
+            "renderScaleMode": false
+          },
+          "effective": {
+            "dlssProfile": {
+              "name": "K",
+              "value": 1
+            },
+            "fsrRuntime": {
+              "name": "fsr4",
+              "value": 1
+            },
+            "method": {
+              "name": "fsr",
+              "value": 2
+            },
+            "qualityMode": {
+              "name": "quality",
+              "value": 3
+            },
+            "renderScaleMode": false
+          },
+          "persisted": {
+            "dlssProfile": {
+              "name": "K",
+              "value": 1
+            },
+            "fsrRuntime": {
+              "name": "fsr3",
+              "value": 0
+            },
+            "method": {
+              "name": "none",
+              "value": 0
+            },
+            "qualityMode": {
+              "name": "native_aa",
+              "value": 0
+            },
+            "renderScaleMode": false
+          },
+          "requested": {
+            "dlssProfile": {
+              "name": "K",
+              "value": 1
+            },
+            "fsrRuntime": {
+              "name": "fsr3",
+              "value": 0
+            },
+            "method": {
+              "name": "none",
+              "value": 0
+            },
+            "qualityMode": {
+              "name": "native_aa",
+              "value": 0
+            },
+            "renderScaleMode": false
+          },
+          "stable": {
+            "dlssProfile": {
+              "name": "K",
+              "value": 1
+            },
+            "fsrRuntime": {
+              "name": "fsr3",
+              "value": 0
+            },
+            "method": {
+              "name": "none",
+              "value": 0
+            },
+            "qualityMode": {
+              "name": "native_aa",
+              "value": 0
+            },
+            "renderScaleMode": false
+          }
+        },
+        "renderScaleStatus": {
+          "name": "disabled",
+          "value": 0
+        },
+        "stateRevision": 1,
+        "transitionState": {
+          "name": "idle",
+          "value": 0
+        }
+      },
+      "status": {
+        "name": "success",
+        "value": 0
+      }
+    },
+    "weather": {
+      "command": {
+        "action": "snapshot"
+      },
+      "contract": {
+        "major": 1,
+        "minor": 0,
+        "name": "csx.weather",
+        "schemaRevision": 1
+      },
+      "ok": true,
+      "result": {
+        "snapshot": {
+          "available": true,
+          "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+          "capabilities": 1023,
+          "lock": {
+            "active": false,
+            "hooksInstalled": true,
+            "weatherKey": ""
+          },
+          "persistence": {
+            "mutationBlocked": false,
+            "saveLoadSafeModeActive": false
+          },
+          "selection": {
+            "defaultWeatherKey": "",
+            "overrideWeatherKey": "0xA87~Helios.esp"
+          },
+          "skyAvailable": true,
+          "stateRevision": 1,
+          "transition": {
+            "active": false,
+            "currentWeatherKey": "0xA87~Helios.esp",
+            "factor": 1.0,
+            "lastWeatherKey": ""
+          },
+          "weatherCount": 226,
+          "weatherFeatureCount": 2
+        },
+        "status": "success"
+      },
+      "server": {
+        "artifactSha256": "",
+        "buildId": "ef49a37c28a042d2dd64e4e4ddd86ce9c10d4a09dc77559221a02823b28a9438",
+        "buildIdShort": "ef49a37c28a0",
+        "component": "CommunityShaders",
+        "configuration": "Release",
+        "manifestError": "runtime artifact verification delegated to deployment harness",
+        "manifestVerified": false,
+        "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+        "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+        "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+        "sourceDescribe": "217992d",
+        "sourceDirty": false
+      },
+      "timestampUtc": "2026-10-05T16:56:08.078Z"
+    },
+    "worldscale": {
+      "count": 1,
+      "diag": {
+        "bufferEmpty": true,
+        "bufferHasBegin": false,
+        "bufferLen": 0,
+        "consoleLogNull": false,
+        "consoleMenuExists": true,
+        "consoleMenuOpen": false,
+        "consoleMode": false,
+        "engineFrames": 4,
+        "lastMessage": "Script command \"DVBCAPENDx9F3\" not found.",
+        "lastMessageHasBegin": false,
+        "printDropped": 0,
+        "printHooked": true,
+        "printLines": 3,
+        "ringLines": 2,
+        "samples": 2,
+        "ticks": 4,
+        "timedOut": false
+      },
+      "lines": [
+        "INISetting fVrScale:VR >> 79.06"
+      ],
+      "lossPossible": false,
+      "markersFound": true,
+      "sawBegin": true,
+      "sawEnd": true,
+      "source": "print"
+    }
+  },
+  "schemaVersion": 1
+}

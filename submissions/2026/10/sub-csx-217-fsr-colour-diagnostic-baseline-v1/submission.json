@@ -1,0 +1,51 @@
+{
+  "content": {
+    "fileCount": 7,
+    "root": "content",
+    "totalBytes": 1248795,
+    "treeSha256": "BC4EA7CE493EB1CBE9AD42339C06AFDE8E13353EE190491E6F610644E568C897"
+  },
+  "contributor": {
+    "displayName": "Treatid2",
+    "github": "Treatid2",
+    "standing": "ordinary-contributor"
+  },
+  "createdAt": "2026-10-05T17:27:39.947428+00:00",
+  "licensing": {
+    "content": "CC-BY-SA-4.0",
+    "dcoAcknowledged": true,
+    "schemas": "CC0-1.0"
+  },
+  "namespace": "csx",
+  "notes": "DiagnosticFSR colourcontext baseline plus pinnedsource/telemetry distinction;638 actualtracking/step projections andone explicitcamera row; no controlledbrightness/GPU/vendor proof. Exact CSX applicability identifies runtime context, not independent DevBench producer binary/source qualification.",
+  "provenance": {
+    "importedAt": "2026-10-05T17:27:39.947428+00:00",
+    "relatedUrls": [
+      "https://github.com/Treatid2/skyrim-community-shaders/commit/217992d1e29e55a707d6e41c3ca111b2154904fa",
+      "https://github.com/Treatid2/skyrim-render-map/pull/38"
+    ],
+    "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+    "sourceContentTreeSha256": "5d069586e4828f281768b4b8f5482577efefaedc49f362bbcff3e534c945f1a7",
+    "sourceDirty": false,
+    "sourceParentCommit": "7b4f84c5645aed34fb84b2513da890a389f474ea",
+    "sourcePubliclyReachable": true,
+    "sourceRef": null,
+    "sourceRepository": "https://github.com/Treatid2/skyrim-community-shaders",
+    "sourceState": "public-branch",
+    "transformations": [
+      "Finite immutable originals and both mandatory supplements rehashed without modification.",
+      "Native reads and all638 parsedtracking/step pairs projected with privateidentities removed; no camera delta reconstruction.",
+      "Seven exactpinned Git blobs independently inspect literals versus actualdescriptor assignments, CPU coherence and static policies; no source execution.",
+      "Current3619 cacheZIP members rehashed againstcurrentinventory; path/size/hash maps equal prior, exactbyteidentity notsemanticpromotion.",
+      "PriorPR38 unchanged; native/profile/cache/frame/lighting/ownerattribution exclusions retained."
+    ]
+  },
+  "schema": {
+    "major": 1,
+    "minor": 0,
+    "name": "skyrim-render-map.submission"
+  },
+  "status": "candidate-unreviewed",
+  "submissionClass": "assertion",
+  "submissionId": "sub-csx-217-fsr-colour-diagnostic-baseline-v1"
+}
