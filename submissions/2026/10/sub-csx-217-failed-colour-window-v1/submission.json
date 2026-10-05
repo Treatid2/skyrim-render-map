@@ -1,0 +1,51 @@
+{
+  "content": {
+    "fileCount": 8,
+    "root": "content",
+    "totalBytes": 4813074,
+    "treeSha256": "A6CCCC820AD9B2F1BF6079EC442B31056840394DF610D1518E7845D391F9A962"
+  },
+  "contributor": {
+    "displayName": "Treatid2",
+    "github": "Treatid2",
+    "standing": "ordinary-contributor"
+  },
+  "createdAt": "2026-10-05T18:45:09.352918+00:00",
+  "licensing": {
+    "content": "CC-BY-SA-4.0",
+    "dcoAcknowledged": true,
+    "schemas": "CC0-1.0"
+  },
+  "namespace": "csx",
+  "notes": "Failed217 colour instrument capture with separately verified reset/calendar/session cleanup;28 native RPCs/2781 actual pairedtracking records;no AE comparison/GPU/brightness proof.",
+  "provenance": {
+    "importedAt": "2026-10-05T18:45:09.352918+00:00",
+    "relatedUrls": [
+      "https://github.com/Treatid2/skyrim-community-shaders/commit/217992d1e29e55a707d6e41c3ca111b2154904fa",
+      "https://github.com/Treatid2/skyrim-render-map/pull/39"
+    ],
+    "sourceCommit": "217992d1e29e55a707d6e41c3ca111b2154904fa",
+    "sourceContentTreeSha256": "56cc3c51a28e24fd57d957259e7a4ed2b2cf96375a42c2548e6f7bde82d55bb9",
+    "sourceDirty": false,
+    "sourceParentCommit": "7b4f84c5645aed34fb84b2513da890a389f474ea",
+    "sourcePubliclyReachable": true,
+    "sourceRef": null,
+    "sourceRepository": "https://github.com/Treatid2/skyrim-community-shaders",
+    "sourceState": "public-branch",
+    "transformations": [
+      "Immutable originals and28 journals rehashed; exact owned native replies and cleanup joins independently checked.",
+      "All2781 tracking/step pairs and native replies projected with private identifiers removed;no camera delta reconstruction.",
+      "Seven exact pinnedGit blobs rehashed, retaining priorPR39 literal annotation qualifications;destination explanation attributed only.",
+      "RecordingZIP and3619 cacheZIP members rehashed;cacheunverified/notpromoted.",
+      "150 live-used adapter source members rehashed without execution;future cases/lateradapter remain unexecuted owner evidence."
+    ]
+  },
+  "schema": {
+    "major": 1,
+    "minor": 0,
+    "name": "skyrim-render-map.submission"
+  },
+  "status": "candidate-unreviewed",
+  "submissionClass": "assertion",
+  "submissionId": "sub-csx-217-failed-colour-window-v1"
+}
