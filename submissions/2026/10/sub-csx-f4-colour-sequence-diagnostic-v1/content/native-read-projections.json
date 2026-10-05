@@ -1,0 +1,5246 @@
+{
+  "cancelManifest": {
+    "acceptedUtc": "2026-10-05T20:42:13.547Z",
+    "actual": {
+      "children": 0,
+      "fallbacksPresent": false
+    },
+    "children": [],
+    "completedUtc": "2026-10-05T20:42:14.028Z",
+    "contract": {
+      "major": 1,
+      "minor": 1,
+      "name": "csx.screenshot",
+      "schemaRevision": 2
+    },
+    "counts": {
+      "acquired": 0,
+      "cancelled": 0,
+      "dropped": 0,
+      "failed": 0,
+      "inFlight": 0,
+      "requested": 3,
+      "scheduled": 0,
+      "written": 0
+    },
+    "effective": {
+      "clipboard": "none",
+      "destination": {
+        "baseName": "frame",
+        "directory": "<redacted-local-path>",
+        "overwrite": "never",
+        "policy": "absolute",
+        "resolvedDirectory": "<redacted-local-path>"
+      },
+      "outputs": [
+        {
+          "encoding": {
+            "colourContract": "sdr_srgb",
+            "format": "png"
+          },
+          "nameSuffix": "left_eye",
+          "view": "left_eye"
+        },
+        {
+          "encoding": {
+            "colourContract": "sdr_srgb",
+            "format": "png"
+          },
+          "nameSuffix": "right_eye",
+          "view": "right_eye"
+        }
+      ],
+      "source": {
+        "fallback": "reject",
+        "kind": "hmd_submission"
+      },
+      "tags": {}
+    },
+    "errors": [],
+    "packaging": {
+      "frameManifest": {
+        "path": "<redacted-local-path>",
+        "requested": true,
+        "state": "written"
+      },
+      "previewVideo": {
+        "requested": false,
+        "required": false,
+        "state": "not_requested"
+      }
+    },
+    "producer": {
+      "artifactSha256": "",
+      "buildId": "ced967f33daf376e65a0950ad0bbb40b323b3d5507b5c3d58c2d3ff56eea5817",
+      "buildIdShort": "ced967f33daf",
+      "component": "CommunityShaders",
+      "configuration": "Release",
+      "manifestError": "runtime artifact verification delegated to deployment harness",
+      "manifestVerified": false,
+      "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+      "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+      "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14",
+      "sourceDescribe": "f4fe744",
+      "sourceDirty": false
+    },
+    "requested": {
+      "backpressure": {
+        "maximumConsecutiveSkips": 1,
+        "policy": "abort"
+      },
+      "capture": {
+        "clipboard": "none",
+        "destination": {
+          "baseName": "frame",
+          "directory": "<redacted-local-path>",
+          "overwrite": "never",
+          "policy": "absolute"
+        },
+        "outputs": [
+          {
+            "encoding": {
+              "colourContract": "sdr_srgb",
+              "format": "png"
+            },
+            "view": "left_eye"
+          },
+          {
+            "encoding": {
+              "colourContract": "sdr_srgb",
+              "format": "png"
+            },
+            "view": "right_eye"
+          }
+        ],
+        "source": {
+          "fallback": "reject",
+          "kind": "hmd_submission"
+        }
+      },
+      "failurePolicy": "abort",
+      "frameCount": 3,
+      "packaging": {
+        "frameManifest": true,
+        "previewVideo": {
+          "requested": false,
+          "required": false
+        }
+      },
+      "schedule": {
+        "basis": "wall_clock",
+        "intervalMs": 500,
+        "pausePolicy": "hold",
+        "startDelayMs": 2000
+      },
+      "useSettings": false
+    },
+    "state": "final",
+    "terminalOutcome": "cancelled",
+    "updatedUtc": "2026-10-05T20:42:14.028Z",
+    "warnings": []
+  },
+  "derivedProjectionsNotOriginalBytes": true,
+  "normalManifest": {
+    "acceptedUtc": "2026-10-05T20:41:17.971Z",
+    "actual": {
+      "children": 3,
+      "fallbacksPresent": false
+    },
+    "children": [
+      {
+        "actual": {
+          "acquisition": {
+            "compositorCycle": 43900,
+            "engineFrame": 48223,
+            "monotonicTimestampUs": 2283440983917,
+            "planes": [
+              {
+                "boundsApplied": true,
+                "colourSpace": 1,
+                "dxgiFormat": 28,
+                "eye": "left",
+                "orientation": {
+                  "flipHorizontal": false,
+                  "flipVertical": false
+                },
+                "publicationGeneration": 4,
+                "sourceHeight": 1680,
+                "sourceWidth": 3024,
+                "stagedHeight": 1680,
+                "stagedWidth": 1512,
+                "submittedBounds": {
+                  "uMax": 0.5,
+                  "uMin": 0.0,
+                  "vMax": 1.0,
+                  "vMin": 0.0
+                },
+                "tonemapSceneHdr": false
+              },
+              {
+                "boundsApplied": true,
+                "colourSpace": 1,
+                "dxgiFormat": 28,
+                "eye": "right",
+                "orientation": {
+                  "flipHorizontal": false,
+                  "flipVertical": false
+                },
+                "publicationGeneration": 4,
+                "sourceHeight": 1680,
+                "sourceWidth": 3024,
+                "stagedHeight": 1680,
+                "stagedWidth": 1512,
+                "submittedBounds": {
+                  "uMax": 1.0,
+                  "uMin": 0.5,
+                  "vMax": 1.0,
+                  "vMin": 0.0
+                },
+                "tonemapSceneHdr": false
+              }
+            ],
+            "schedule": {
+              "basis": "wall_clock",
+              "latenessFrames": 0,
+              "latenessUs": 36961,
+              "requestedEngineFrame": 48223,
+              "requestedMonotonicTimestampUs": 2283440946956,
+              "requestedUtc": "2026-10-05T20:41:17.971Z"
+            },
+            "sourceKind": "hmd_submission",
+            "utcTimestamp": "2026-10-05T20:41:18.008Z"
+          },
+          "artifacts": [
+            {
+              "colourContract": "sdr_srgb",
+              "format": "png",
+              "height": 1680,
+              "view": "left_eye",
+              "width": 1512
+            },
+            {
+              "colourContract": "sdr_srgb",
+              "format": "png",
+              "height": 1680,
+              "view": "right_eye",
+              "width": 1512
+            }
+          ],
+          "source": {
+            "fallback": "reject",
+            "kind": "hmd_submission"
+          }
+        },
+        "artifacts": [
+          {
+            "actual": {
+              "colourContract": "sdr_srgb",
+              "format": "png",
+              "height": 1680,
+              "view": "left_eye",
+              "width": 1512
+            },
+            "bytes": 3038974,
+            "committed": true,
+            "path": "<redacted-local-path>",
+            "sha256": "13c363075adff4162bea9446fbdd428f430fa07c5e750b1ccf6c77ad086268a3"
+          },
+          {
+            "actual": {
+              "colourContract": "sdr_srgb",
+              "format": "png",
+              "height": 1680,
+              "view": "right_eye",
+              "width": 1512
+            },
+            "bytes": 3045234,
+            "committed": true,
+            "path": "<redacted-local-path>",
+            "sha256": "eb3b272b899eeab70348c028c38342c1129c15a9ec70f33aaaa60d80de5c5c5a"
+          }
+        ],
+        "effective": {
+          "clipboard": "none",
+          "destination": {
+            "baseName": "frame_000001",
+            "directory": "<redacted-local-path>",
+            "overwrite": "never",
+            "policy": "absolute",
+            "resolvedDirectory": "<redacted-local-path>"
+          },
+          "outputs": [
+            {
+              "encoding": {
+                "colourContract": "sdr_srgb",
+                "format": "png"
+              },
+              "nameSuffix": "left_eye",
+              "view": "left_eye"
+            },
+            {
+              "encoding": {
+                "colourContract": "sdr_srgb",
+                "format": "png"
+              },
+              "nameSuffix": "right_eye",
+              "view": "right_eye"
+            }
+          ],
+          "source": {
+            "fallback": "reject",
+            "kind": "hmd_submission"
+          },
+          "tags": {}
+        },
+        "error": null,
+        "errors": [],
+        "ordinal": 1,
+        "requested": {
+          "action": "capture",
+          "contractMajor": 1
+        },
+        "scheduledEngineFrame": 48223,
+        "scheduledTimestampUs": 2283440946956,
+        "state": "completed",
+        "warnings": []
+      },
+      {
+        "actual": {
+          "acquisition": {
+            "compositorCycle": 43933,
+            "engineFrame": 48256,
+            "monotonicTimestampUs": 2283441470630,
+            "planes": [
+              {
+                "boundsApplied": true,
+                "colourSpace": 1,
+                "dxgiFormat": 28,
+                "eye": "left",
+                "orientation": {
+                  "flipHorizontal": false,
+                  "flipVertical": false
+                },
+                "publicationGeneration": 4,
+                "sourceHeight": 1680,
+                "sourceWidth": 3024,
+                "stagedHeight": 1680,
+                "stagedWidth": 1512,
+                "submittedBounds": {
+                  "uMax": 0.5,
+                  "uMin": 0.0,
+                  "vMax": 1.0,
+                  "vMin": 0.0
+                },
+                "tonemapSceneHdr": false
+              },
+              {
+                "boundsApplied": true,
+                "colourSpace": 1,
+                "dxgiFormat": 28,
+                "eye": "right",
+                "orientation": {
+                  "flipHorizontal": false,
+                  "flipVertical": false
+                },
+                "publicationGeneration": 4,
+                "sourceHeight": 1680,
+                "sourceWidth": 3024,
+                "stagedHeight": 1680,
+                "stagedWidth": 1512,
+                "submittedBounds": {
+                  "uMax": 1.0,
+                  "uMin": 0.5,
+                  "vMax": 1.0,
+                  "vMin": 0.0
+                },
+                "tonemapSceneHdr": false
+              }
+            ],
+            "schedule": {
+              "basis": "wall_clock",
+              "latenessFrames": 0,
+              "latenessUs": 23674,
+              "requestedEngineFrame": 48256,
+              "requestedMonotonicTimestampUs": 2283441446956,
+              "requestedUtc": "2026-10-05T20:41:18.471Z"
+            },
+            "sourceKind": "hmd_submission",
+            "utcTimestamp": "2026-10-05T20:41:18.494Z"
+          },
+          "artifacts": [
+            {
+              "colourContract": "sdr_srgb",
+              "format": "png",
+              "height": 1680,
+              "view": "left_eye",
+              "width": 1512
+            },
+            {
+              "colourContract": "sdr_srgb",
+              "format": "png",
+              "height": 1680,
+              "view": "right_eye",
+              "width": 1512
+            }
+          ],
+          "source": {
+            "fallback": "reject",
+            "kind": "hmd_submission"
+          }
+        },
+        "artifacts": [
+          {
+            "actual": {
+              "colourContract": "sdr_srgb",
+              "format": "png",
+              "height": 1680,
+              "view": "left_eye",
+              "width": 1512
+            },
+            "bytes": 3022099,
+            "committed": true,
+            "path": "<redacted-local-path>",
+            "sha256": "65d8774ee1153a5dcb1106a5df9e1b7bab67d6bda4867e0d5a7918f5bf2d02ba"
+          },
+          {
+            "actual": {
+              "colourContract": "sdr_srgb",
+              "format": "png",
+              "height": 1680,
+              "view": "right_eye",
+              "width": 1512
+            },
+            "bytes": 3029637,
+            "committed": true,
+            "path": "<redacted-local-path>",
+            "sha256": "15816479e6a7e8cf386e5cdfb8e95a75b56f94fad337ab9f52151909d76b5741"
+          }
+        ],
+        "effective": {
+          "clipboard": "none",
+          "destination": {
+            "baseName": "frame_000002",
+            "directory": "<redacted-local-path>",
+            "overwrite": "never",
+            "policy": "absolute",
+            "resolvedDirectory": "<redacted-local-path>"
+          },
+          "outputs": [
+            {
+              "encoding": {
+                "colourContract": "sdr_srgb",
+                "format": "png"
+              },
+              "nameSuffix": "left_eye",
+              "view": "left_eye"
+            },
+            {
+              "encoding": {
+                "colourContract": "sdr_srgb",
+                "format": "png"
+              },
+              "nameSuffix": "right_eye",
+              "view": "right_eye"
+            }
+          ],
+          "source": {
+            "fallback": "reject",
+            "kind": "hmd_submission"
+          },
+          "tags": {}
+        },
+        "error": null,
+        "errors": [],
+        "ordinal": 2,
+        "requested": {
+          "action": "capture",
+          "contractMajor": 1
+        },
+        "scheduledEngineFrame": 48256,
+        "scheduledTimestampUs": 2283441446956,
+        "state": "completed",
+        "warnings": []
+      },
+      {
+        "actual": {
+          "acquisition": {
+            "compositorCycle": 43965,
+            "engineFrame": 48288,
+            "monotonicTimestampUs": 2283441966092,
+            "planes": [
+              {
+                "boundsApplied": true,
+                "colourSpace": 1,
+                "dxgiFormat": 28,
+                "eye": "left",
+                "orientation": {
+                  "flipHorizontal": false,
+                  "flipVertical": false
+                },
+                "publicationGeneration": 4,
+                "sourceHeight": 1680,
+                "sourceWidth": 3024,
+                "stagedHeight": 1680,
+                "stagedWidth": 1512,
+                "submittedBounds": {
+                  "uMax": 0.5,
+                  "uMin": 0.0,
+                  "vMax": 1.0,
+                  "vMin": 0.0
+                },
+                "tonemapSceneHdr": false
+              },
+              {
+                "boundsApplied": true,
+                "colourSpace": 1,
+                "dxgiFormat": 28,
+                "eye": "right",
+                "orientation": {
+                  "flipHorizontal": false,
+                  "flipVertical": false
+                },
+                "publicationGeneration": 4,
+                "sourceHeight": 1680,
+                "sourceWidth": 3024,
+                "stagedHeight": 1680,
+                "stagedWidth": 1512,
+                "submittedBounds": {
+                  "uMax": 1.0,
+                  "uMin": 0.5,
+                  "vMax": 1.0,
+                  "vMin": 0.0
+                },
+                "tonemapSceneHdr": false
+              }
+            ],
+            "schedule": {
+              "basis": "wall_clock",
+              "latenessFrames": 0,
+              "latenessUs": 19136,
+              "requestedEngineFrame": 48288,
+              "requestedMonotonicTimestampUs": 2283441946956,
+              "requestedUtc": "2026-10-05T20:41:18.971Z"
+            },
+            "sourceKind": "hmd_submission",
+            "utcTimestamp": "2026-10-05T20:41:18.990Z"
+          },
+          "artifacts": [
+            {
+              "colourContract": "sdr_srgb",
+              "format": "png",
+              "height": 1680,
+              "view": "left_eye",
+              "width": 1512
+            },
+            {
+              "colourContract": "sdr_srgb",
+              "format": "png",
+              "height": 1680,
+              "view": "right_eye",
+              "width": 1512
+            }
+          ],
+          "source": {
+            "fallback": "reject",
+            "kind": "hmd_submission"
+          }
+        },
+        "artifacts": [
+          {
+            "actual": {
+              "colourContract": "sdr_srgb",
+              "format": "png",
+              "height": 1680,
+              "view": "left_eye",
+              "width": 1512
+            },
+            "bytes": 3044606,
+            "committed": true,
+            "path": "<redacted-local-path>",
+            "sha256": "8ed0018163dce5005250759eab017f24b01e419a8695b77e6957716da161caa0"
+          },
+          {
+            "actual": {
+              "colourContract": "sdr_srgb",
+              "format": "png",
+              "height": 1680,
+              "view": "right_eye",
+              "width": 1512
+            },
+            "bytes": 3048032,
+            "committed": true,
+            "path": "<redacted-local-path>",
+            "sha256": "fe4639e321c5a9636ef0481ca7d24876107187054f0b3f09b98bde9cb443ac64"
+          }
+        ],
+        "effective": {
+          "clipboard": "none",
+          "destination": {
+            "baseName": "frame_000003",
+            "directory": "<redacted-local-path>",
+            "overwrite": "never",
+            "policy": "absolute",
+            "resolvedDirectory": "<redacted-local-path>"
+          },
+          "outputs": [
+            {
+              "encoding": {
+                "colourContract": "sdr_srgb",
+                "format": "png"
+              },
+              "nameSuffix": "left_eye",
+              "view": "left_eye"
+            },
+            {
+              "encoding": {
+                "colourContract": "sdr_srgb",
+                "format": "png"
+              },
+              "nameSuffix": "right_eye",
+              "view": "right_eye"
+            }
+          ],
+          "source": {
+            "fallback": "reject",
+            "kind": "hmd_submission"
+          },
+          "tags": {}
+        },
+        "error": null,
+        "errors": [],
+        "ordinal": 3,
+        "requested": {
+          "action": "capture",
+          "contractMajor": 1
+        },
+        "scheduledEngineFrame": 48288,
+        "scheduledTimestampUs": 2283441946956,
+        "state": "completed",
+        "warnings": []
+      }
+    ],
+    "completedUtc": "2026-10-05T20:41:19.409Z",
+    "contract": {
+      "major": 1,
+      "minor": 1,
+      "name": "csx.screenshot",
+      "schemaRevision": 2
+    },
+    "counts": {
+      "acquired": 3,
+      "cancelled": 0,
+      "dropped": 0,
+      "failed": 0,
+      "inFlight": 0,
+      "requested": 3,
+      "scheduled": 3,
+      "written": 3
+    },
+    "effective": {
+      "clipboard": "none",
+      "destination": {
+        "baseName": "frame",
+        "directory": "<redacted-local-path>",
+        "overwrite": "never",
+        "policy": "absolute",
+        "resolvedDirectory": "<redacted-local-path>"
+      },
+      "outputs": [
+        {
+          "encoding": {
+            "colourContract": "sdr_srgb",
+            "format": "png"
+          },
+          "nameSuffix": "left_eye",
+          "view": "left_eye"
+        },
+        {
+          "encoding": {
+            "colourContract": "sdr_srgb",
+            "format": "png"
+          },
+          "nameSuffix": "right_eye",
+          "view": "right_eye"
+        }
+      ],
+      "source": {
+        "fallback": "reject",
+        "kind": "hmd_submission"
+      },
+      "tags": {}
+    },
+    "errors": [],
+    "packaging": {
+      "frameManifest": {
+        "path": "<redacted-local-path>",
+        "requested": true,
+        "state": "written"
+      },
+      "previewVideo": {
+        "requested": false,
+        "required": false,
+        "state": "not_requested"
+      }
+    },
+    "producer": {
+      "artifactSha256": "",
+      "buildId": "ced967f33daf376e65a0950ad0bbb40b323b3d5507b5c3d58c2d3ff56eea5817",
+      "buildIdShort": "ced967f33daf",
+      "component": "CommunityShaders",
+      "configuration": "Release",
+      "manifestError": "runtime artifact verification delegated to deployment harness",
+      "manifestVerified": false,
+      "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+      "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+      "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14",
+      "sourceDescribe": "f4fe744",
+      "sourceDirty": false
+    },
+    "requested": {
+      "backpressure": {
+        "maximumConsecutiveSkips": 1,
+        "policy": "abort"
+      },
+      "capture": {
+        "clipboard": "none",
+        "destination": {
+          "baseName": "frame",
+          "directory": "<redacted-local-path>",
+          "overwrite": "never",
+          "policy": "absolute"
+        },
+        "outputs": [
+          {
+            "encoding": {
+              "colourContract": "sdr_srgb",
+              "format": "png"
+            },
+            "view": "left_eye"
+          },
+          {
+            "encoding": {
+              "colourContract": "sdr_srgb",
+              "format": "png"
+            },
+            "view": "right_eye"
+          }
+        ],
+        "source": {
+          "fallback": "reject",
+          "kind": "hmd_submission"
+        }
+      },
+      "failurePolicy": "abort",
+      "frameCount": 3,
+      "packaging": {
+        "frameManifest": true,
+        "previewVideo": {
+          "requested": false,
+          "required": false
+        }
+      },
+      "schedule": {
+        "basis": "wall_clock",
+        "intervalMs": 500,
+        "pausePolicy": "hold",
+        "startDelayMs": 0
+      },
+      "useSettings": false
+    },
+    "state": "final",
+    "terminalOutcome": "completed",
+    "updatedUtc": "2026-10-05T20:41:19.409Z",
+    "warnings": []
+  },
+  "reads": {
+    "baseline-stereo": {
+      "command": {
+        "action": "request_get"
+      },
+      "contract": {
+        "major": 1,
+        "minor": 1,
+        "name": "csx.screenshot",
+        "schemaRevision": 2
+      },
+      "ok": true,
+      "result": {
+        "acceptedUtc": "2026-10-05T20:37:49.186Z",
+        "acknowledged": false,
+        "actual": {
+          "acquisition": {
+            "compositorCycle": 31326,
+            "engineFrame": 35649,
+            "monotonicTimestampUs": 2283232196902,
+            "planes": [
+              {
+                "boundsApplied": true,
+                "colourSpace": 1,
+                "dxgiFormat": 28,
+                "eye": "left",
+                "orientation": {
+                  "flipHorizontal": false,
+                  "flipVertical": false
+                },
+                "publicationGeneration": 4,
+                "sourceHeight": 1680,
+                "sourceWidth": 3024,
+                "stagedHeight": 1680,
+                "stagedWidth": 1512,
+                "submittedBounds": {
+                  "uMax": 0.5,
+                  "uMin": 0.0,
+                  "vMax": 1.0,
+                  "vMin": 0.0
+                },
+                "tonemapSceneHdr": false
+              },
+              {
+                "boundsApplied": true,
+                "colourSpace": 1,
+                "dxgiFormat": 28,
+                "eye": "right",
+                "orientation": {
+                  "flipHorizontal": false,
+                  "flipVertical": false
+                },
+                "publicationGeneration": 4,
+                "sourceHeight": 1680,
+                "sourceWidth": 3024,
+                "stagedHeight": 1680,
+                "stagedWidth": 1512,
+                "submittedBounds": {
+                  "uMax": 1.0,
+                  "uMin": 0.5,
+                  "vMax": 1.0,
+                  "vMin": 0.0
+                },
+                "tonemapSceneHdr": false
+              }
+            ],
+            "sourceKind": "hmd_submission",
+            "utcTimestamp": "2026-10-05T20:37:49.221Z"
+          },
+          "artifacts": [
+            {
+              "colourContract": "sdr_srgb",
+              "format": "png",
+              "height": 1680,
+              "view": "left_eye",
+              "width": 1512
+            },
+            {
+              "colourContract": "sdr_srgb",
+              "format": "png",
+              "height": 1680,
+              "view": "right_eye",
+              "width": 1512
+            }
+          ],
+          "source": {
+            "fallback": "reject",
+            "kind": "hmd_submission"
+          }
+        },
+        "artifactProgress": {
+          "expected": 2,
+          "successful": 2,
+          "terminal": 2
+        },
+        "artifacts": [
+          {
+            "actual": {
+              "colourContract": "sdr_srgb",
+              "format": "png",
+              "height": 1680,
+              "view": "left_eye",
+              "width": 1512
+            },
+            "bytes": 2970041,
+            "committed": true,
+            "path": "<redacted-local-path>",
+            "sha256": "a99aab2f640e54a1d24d441b7d3f1b5feaadfcd0c733982d748470081ac4fb51"
+          },
+          {
+            "actual": {
+              "colourContract": "sdr_srgb",
+              "format": "png",
+              "height": 1680,
+              "view": "right_eye",
+              "width": 1512
+            },
+            "bytes": 2977055,
+            "committed": true,
+            "path": "<redacted-local-path>",
+            "sha256": "329fd49f2fbd05b6673457610c6c8079c22447b89cda68ec85b3a38463d5dd60"
+          }
+        ],
+        "effective": {
+          "clipboard": "none",
+          "destination": {
+            "baseName": "observe-20261005T203748910Z",
+            "directory": "<redacted-local-path>",
+            "overwrite": "never",
+            "policy": "absolute",
+            "resolvedDirectory": "<redacted-local-path>"
+          },
+          "outputs": [
+            {
+              "encoding": {
+                "colourContract": "sdr_srgb",
+                "format": "png"
+              },
+              "nameSuffix": "left",
+              "view": "left_eye"
+            },
+            {
+              "encoding": {
+                "colourContract": "sdr_srgb",
+                "format": "png"
+              },
+              "nameSuffix": "right",
+              "view": "right_eye"
+            }
+          ],
+          "source": {
+            "fallback": "reject",
+            "kind": "hmd_submission"
+          },
+          "tags": {}
+        },
+        "error": null,
+        "errors": [],
+        "kind": "still",
+        "publication": {
+          "artifactCommitted": null,
+          "state": "settled"
+        },
+        "requested": {
+          "action": "capture",
+          "capture": {
+            "clipboard": "none",
+            "destination": {
+              "baseName": "observe-20261005T203748910Z",
+              "directory": "<redacted-local-path>",
+              "overwrite": "never",
+              "policy": "absolute"
+            },
+            "outputs": [
+              {
+                "encoding": {
+                  "colourContract": "sdr_srgb",
+                  "format": "png"
+                },
+                "nameSuffix": "left",
+                "view": "left_eye"
+              },
+              {
+                "encoding": {
+                  "colourContract": "sdr_srgb",
+                  "format": "png"
+                },
+                "nameSuffix": "right",
+                "view": "right_eye"
+              }
+            ],
+            "source": {
+              "fallback": "reject",
+              "kind": "hmd_submission"
+            },
+            "tags": {}
+          },
+          "contractMajor": 1,
+          "contractMinor": 0,
+          "useSettings": false
+        },
+        "state": "completed",
+        "terminalUtc": "2026-10-05T20:37:49.653Z",
+        "warnings": []
+      },
+      "server": {
+        "artifactSha256": "",
+        "buildId": "ced967f33daf376e65a0950ad0bbb40b323b3d5507b5c3d58c2d3ff56eea5817",
+        "buildIdShort": "ced967f33daf",
+        "component": "CommunityShaders",
+        "configuration": "Release",
+        "csxBuild": 11,
+        "csxVersion": "CSX 3.19-VR",
+        "devBenchBuilt": true,
+        "devBenchRegistered": true,
+        "featureVersion": "1.0.0",
+        "manifestError": "runtime artifact verification delegated to deployment harness",
+        "manifestVerified": false,
+        "runtime": {
+          "game": "SkyrimVR",
+          "hmd": "unknown",
+          "presentation": "openvr"
+        },
+        "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+        "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14",
+        "sourceDescribe": "f4fe744",
+        "sourceDirty": false
+      },
+      "timestampUtc": "2026-10-05T20:37:50.456Z"
+    },
+    "camera-after": {
+      "camPitch": -0.17436975240707397,
+      "camX": -536.1541137695312,
+      "camY": 0.25445556640625,
+      "camYaw": -0.041664935648441315,
+      "camZ": 228.05908203125,
+      "freeCam": false,
+      "freeCamBackend": "vr-state",
+      "freeCamOwned": false,
+      "orbit": false,
+      "pov": "other",
+      "stateId": 9
+    },
+    "camera-before": {
+      "camPitch": -0.17436975240707397,
+      "camX": -536.1541137695312,
+      "camY": 0.25445556640625,
+      "camYaw": -0.041664935648441315,
+      "camZ": 228.05908203125,
+      "freeCam": false,
+      "freeCamBackend": "vr-state",
+      "freeCamOwned": false,
+      "orbit": false,
+      "pov": "other",
+      "stateId": 9
+    },
+    "colour-after": {
+      "hostContext": {
+        "autoExposure": false,
+        "generation": 0,
+        "highDynamicRangeInput": false,
+        "valid": false
+      },
+      "lastSuccessfulDispatch": {
+        "autoExposure": true,
+        "configuredSharpnessAtDispatch": 0.8999999761581421,
+        "contextGeneration": 2,
+        "contextIndex": 1,
+        "dispatchQpc": 22835278280041,
+        "displayHeight": 1680,
+        "displayWidth": 1512,
+        "effectiveSharpness": 0.8999999761581421,
+        "exposureResourceBound": false,
+        "frame": 53430,
+        "highDynamicRangeInput": true,
+        "path": 3,
+        "preExposure": 1.0,
+        "renderHeight": 1120,
+        "renderWidth": 1008,
+        "serial": 56164,
+        "sharpeningEnabled": true,
+        "valid": true
+      },
+      "lastSuccessfulEyeDispatches": [
+        {
+          "autoExposure": true,
+          "configuredSharpnessAtDispatch": 0.8999999761581421,
+          "contextGeneration": 2,
+          "contextIndex": 0,
+          "dispatchQpc": 22835278279542,
+          "displayHeight": 1680,
+          "displayWidth": 1512,
+          "effectiveSharpness": 0.8999999761581421,
+          "exposureResourceBound": false,
+          "frame": 53430,
+          "highDynamicRangeInput": true,
+          "path": 3,
+          "preExposure": 1.0,
+          "renderHeight": 1120,
+          "renderWidth": 1008,
+          "serial": 56163,
+          "sharpeningEnabled": true,
+          "valid": true
+        },
+        {
+          "autoExposure": true,
+          "configuredSharpnessAtDispatch": 0.8999999761581421,
+          "contextGeneration": 2,
+          "contextIndex": 1,
+          "dispatchQpc": 22835278280041,
+          "displayHeight": 1680,
+          "displayWidth": 1512,
+          "effectiveSharpness": 0.8999999761581421,
+          "exposureResourceBound": false,
+          "frame": 53430,
+          "highDynamicRangeInput": true,
+          "path": 3,
+          "preExposure": 1.0,
+          "renderHeight": 1120,
+          "renderWidth": 1008,
+          "serial": 56164,
+          "sharpeningEnabled": true,
+          "valid": true
+        }
+      ],
+      "producer": {
+        "artifactSha256": "",
+        "buildId": "ced967f33daf376e65a0950ad0bbb40b323b3d5507b5c3d58c2d3ff56eea5817",
+        "buildIdShort": "ced967f33daf",
+        "component": "CommunityShaders",
+        "configuration": "Release",
+        "manifestError": "runtime artifact verification delegated to deployment harness",
+        "manifestVerified": false,
+        "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+        "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14",
+        "sourceDescribe": "f4fe744",
+        "sourceDirty": false
+      },
+      "requested": {
+        "autoExposure": true,
+        "highDynamicRangeInput": true,
+        "revision": 1
+      },
+      "runtimeContext": {
+        "autoExposure": true,
+        "generation": 2,
+        "highDynamicRangeInput": true,
+        "valid": true
+      },
+      "sourceColorContractChanged": false
+    },
+    "colour-before": {
+      "hostContext": {
+        "autoExposure": false,
+        "generation": 0,
+        "highDynamicRangeInput": false,
+        "valid": false
+      },
+      "lastSuccessfulDispatch": {
+        "autoExposure": true,
+        "configuredSharpnessAtDispatch": 0.8999999761581421,
+        "contextGeneration": 2,
+        "contextIndex": 1,
+        "dispatchQpc": 22831032879714,
+        "displayHeight": 1680,
+        "displayWidth": 1512,
+        "effectiveSharpness": 0.8999999761581421,
+        "exposureResourceBound": false,
+        "frame": 28351,
+        "highDynamicRangeInput": true,
+        "path": 3,
+        "preExposure": 1.0,
+        "renderHeight": 1120,
+        "renderWidth": 1008,
+        "serial": 6006,
+        "sharpeningEnabled": true,
+        "valid": true
+      },
+      "lastSuccessfulEyeDispatches": [
+        {
+          "autoExposure": true,
+          "configuredSharpnessAtDispatch": 0.8999999761581421,
+          "contextGeneration": 2,
+          "contextIndex": 0,
+          "dispatchQpc": 22831032879140,
+          "displayHeight": 1680,
+          "displayWidth": 1512,
+          "effectiveSharpness": 0.8999999761581421,
+          "exposureResourceBound": false,
+          "frame": 28351,
+          "highDynamicRangeInput": true,
+          "path": 3,
+          "preExposure": 1.0,
+          "renderHeight": 1120,
+          "renderWidth": 1008,
+          "serial": 6005,
+          "sharpeningEnabled": true,
+          "valid": true
+        },
+        {
+          "autoExposure": true,
+          "configuredSharpnessAtDispatch": 0.8999999761581421,
+          "contextGeneration": 2,
+          "contextIndex": 1,
+          "dispatchQpc": 22831032879714,
+          "displayHeight": 1680,
+          "displayWidth": 1512,
+          "effectiveSharpness": 0.8999999761581421,
+          "exposureResourceBound": false,
+          "frame": 28351,
+          "highDynamicRangeInput": true,
+          "path": 3,
+          "preExposure": 1.0,
+          "renderHeight": 1120,
+          "renderWidth": 1008,
+          "serial": 6006,
+          "sharpeningEnabled": true,
+          "valid": true
+        }
+      ],
+      "producer": {
+        "artifactSha256": "",
+        "buildId": "ced967f33daf376e65a0950ad0bbb40b323b3d5507b5c3d58c2d3ff56eea5817",
+        "buildIdShort": "ced967f33daf",
+        "component": "CommunityShaders",
+        "configuration": "Release",
+        "manifestError": "runtime artifact verification delegated to deployment harness",
+        "manifestVerified": false,
+        "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+        "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14",
+        "sourceDescribe": "f4fe744",
+        "sourceDirty": false
+      },
+      "requested": {
+        "autoExposure": true,
+        "highDynamicRangeInput": true,
+        "revision": 1
+      },
+      "runtimeContext": {
+        "autoExposure": true,
+        "generation": 2,
+        "highDynamicRangeInput": true,
+        "valid": true
+      },
+      "sourceColorContractChanged": false
+    },
+    "physical": {
+      "action": "status",
+      "producer": {
+        "artifactSha256": "",
+        "buildId": "ced967f33daf376e65a0950ad0bbb40b323b3d5507b5c3d58c2d3ff56eea5817",
+        "buildIdShort": "ced967f33daf",
+        "component": "CommunityShaders",
+        "configuration": "Release",
+        "manifestError": "runtime artifact verification delegated to deployment harness",
+        "manifestVerified": false,
+        "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+        "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14",
+        "sourceDescribe": "f4fe744",
+        "sourceDirty": false
+      },
+      "status": {
+        "adapter": {
+          "available": true,
+          "description": "AMD Radeon RX 7900 XT",
+          "deviceId": 29772,
+          "driverVersion": "",
+          "driverVersionAvailable": false,
+          "driverVersionRaw": 0,
+          "luidHigh": 0,
+          "luidLow": 83974,
+          "revision": 204,
+          "subsystemId": 3832618402,
+          "vendorId": 4098
+        },
+        "authorityLiveness": {
+          "controllerRevision": 13,
+          "controllerRevisionStable": true,
+          "diagnosticOnly": true,
+          "inconsistencies": [],
+          "inconsistencyMask": 0,
+          "ownerMask": 0,
+          "ownerSummary": {
+            "cleanup": {
+              "engineTargetRetirementPending": false,
+              "intermediateRetirementPending": false,
+              "memoryTrimOwnerEpoch": 0,
+              "memoryTrimPending": false
+            },
+            "compositorHold": {
+              "active": false,
+              "awaitingSyncEpoch": 0,
+              "cycleDrainPending": false,
+              "epoch": 2
+            },
+            "controller": {
+              "presentationEpoch": 0,
+              "stableRuntimeProfileHint": false,
+              "stateMirrorBusy": false,
+              "transitionEpoch": 0
+            },
+            "deferredRequest": {
+              "hint": false,
+              "present": false,
+              "transitionEpoch": 0
+            },
+            "fpsStabilizerSyncFrame": 0,
+            "nativeRestore": {
+              "active": false,
+              "ownerEpoch": 0,
+              "presentationGuardEpoch": 0
+            },
+            "pendingRequest": {
+              "present": false,
+              "transitionEpoch": 0
+            },
+            "physicalRelatch": {
+              "inProgress": false,
+              "queued": false,
+              "transitionEpoch": 0
+            },
+            "postLoad": {
+              "deferredRecoveryEpoch": 0,
+              "recoveryActive": false,
+              "recoveryEpoch": 1,
+              "resetEpoch": 0,
+              "resetPending": false
+            },
+            "postMutation": {
+              "chainSerial": 0,
+              "serializationEpoch": 0,
+              "unresolvedPhysicalEpoch": 0
+            },
+            "preMutationFallback": {
+              "admissionActive": false,
+              "providerNeutralRecoveryEpoch": 0,
+              "transitionEpoch": 0
+            },
+            "providerLifecycle": {
+              "dlssActive": false,
+              "dlssResetGeneration": 0,
+              "dlssResetPending": false,
+              "dlssViewportPreparationPending": false,
+              "fsrActive": false,
+              "fsrResetGeneration": 0,
+              "fsrResetPending": false,
+              "resourceTrackingSyncPending": false
+            },
+            "vendorWorkGate": {
+              "ownerEpoch": 9,
+              "ownerMask": 0
+            }
+          },
+          "owners": [],
+          "productionSchedulingEffect": "none",
+          "schemaVersion": 1,
+          "serviceClasses": [],
+          "serviceMask": 0,
+          "unmappedOwnerMask": 0
+        },
+        "controller": {
+          "applied": {
+            "active": false,
+            "backend": "none",
+            "contractGeneration": 0,
+            "displayEyeHeight": 0,
+            "displayEyeWidth": 0,
+            "dlssPreset": 1,
+            "foveatedVendorDispatch": false,
+            "fsr4RuntimeEnabled": false,
+            "method": "none",
+            "origin": "cs_menu",
+            "peripheryTAA": false,
+            "preparationOptionsGeneration": 0,
+            "qualityMode": 0,
+            "queuedFrame": 0,
+            "renderEyeHeight": 0,
+            "renderEyeWidth": 0,
+            "renderScale": 1.0,
+            "renderScaleMode": false,
+            "requestID": 0,
+            "transitionEpoch": 0,
+            "valid": false
+          },
+          "applying": {
+            "active": false,
+            "backend": "none",
+            "contractGeneration": 0,
+            "displayEyeHeight": 0,
+            "displayEyeWidth": 0,
+            "dlssPreset": 1,
+            "foveatedVendorDispatch": false,
+            "fsr4RuntimeEnabled": false,
+            "method": "none",
+            "origin": "cs_menu",
+            "peripheryTAA": false,
+            "preparationOptionsGeneration": 0,
+            "qualityMode": 0,
+            "queuedFrame": 0,
+            "renderEyeHeight": 0,
+            "renderEyeWidth": 0,
+            "renderScale": 1.0,
+            "renderScaleMode": false,
+            "requestID": 0,
+            "transitionEpoch": 0,
+            "valid": false
+          },
+          "currentMetrics": {
+            "backendDeferrals": 0,
+            "failures": 0,
+            "fidelityMismatches": 0,
+            "memoryPreRecreateDrainCount": 0,
+            "memoryPreRecreateDrainFailures": 0,
+            "memoryTrimCount": 0,
+            "memoryTrimFailures": 0,
+            "pressureDeferrals": 0,
+            "retirementDeferrals": 0,
+            "retries": 0,
+            "transitionEpoch": 0,
+            "valid": false
+          },
+          "desiredOwner": {
+            "contractGeneration": 0,
+            "loadingSerial": 0,
+            "transitionEpoch": 0
+          },
+          "dlssLifecycle": {
+            "attempts": 0,
+            "backend": "none",
+            "deferrals": 0,
+            "failures": 0,
+            "method": "none",
+            "phase": "Inactive",
+            "readyForContract": false,
+            "requestedGeneration": 0,
+            "resourcesPresent": false,
+            "runtimeGeneration": 0,
+            "stateFrame": 0,
+            "transitionEpoch": 0
+          },
+          "emergencyRecoveryRequested": false,
+          "engineTargetRetirement": {
+            "capacityBlocked": false,
+            "completedCount": 0,
+            "fenceFailures": 0,
+            "fencePending": false,
+            "newestEpoch": 0,
+            "oldestEpoch": 0,
+            "pending": false,
+            "pendingGenerations": 0,
+            "pendingReleaseCount": 0,
+            "supported": false
+          },
+          "fidelity": {
+            "active": false,
+            "backend": "none",
+            "bothEyesValid": false,
+            "contractGeneration": 0,
+            "evaluationEyeMask": 0,
+            "eyes": [
+              {
+                "evaluated": false,
+                "frame": 0,
+                "generation": 0,
+                "inputHeight": 0,
+                "inputWidth": 0,
+                "outputHeight": 0,
+                "outputWidth": 0,
+                "valid": false
+              },
+              {
+                "evaluated": false,
+                "frame": 0,
+                "generation": 0,
+                "inputHeight": 0,
+                "inputWidth": 0,
+                "outputHeight": 0,
+                "outputWidth": 0,
+                "valid": false
+              }
+            ],
+            "invariantEyeMask": 0,
+            "lastMismatchMask": 0,
+            "method": "none",
+            "mismatchCount": 0,
+            "transitionEpoch": 0
+          },
+          "fsrLifecycle": {
+            "attempts": 0,
+            "backend": "fsr_host",
+            "deferrals": 1,
+            "failures": 1,
+            "method": "fsr",
+            "phase": "Ready",
+            "readyForContract": false,
+            "requestedGeneration": 0,
+            "resourcesPresent": false,
+            "runtimeGeneration": 0,
+            "stateFrame": 25348,
+            "transitionEpoch": 0
+          },
+          "memory": {
+            "budgetBytes": 20607971328,
+            "headroomBytes": 16220958720,
+            "pressure": "Normal",
+            "processPrivateUsageBytes": 18490122240,
+            "processPrivateUsageValid": true,
+            "recoverySamples": 0,
+            "sampleFrame": 25432,
+            "systemCommitBytes": 98215407616,
+            "systemCommitHeadroomBytes": 74409861120,
+            "systemCommitLimitBytes": 172625268736,
+            "systemCommitRatio": 0.5689515117639191,
+            "systemCommitValid": true,
+            "usageBytes": 4387012608,
+            "usageRatio": 0.21287940177009937,
+            "valid": true
+          },
+          "memoryTrim": {
+            "completedCount": 0,
+            "completedFrame": 0,
+            "failures": 0,
+            "fenceFailures": 0,
+            "lastOfferUsedDecommit": false,
+            "lastOfferedResourceCount": 0,
+            "lastSucceeded": false,
+            "ownerEpoch": 0,
+            "pending": false,
+            "preRecreateDrainCount": 0,
+            "preRecreateDrainFailures": 0,
+            "reason": "None",
+            "requestedFrame": 0
+          },
+          "physicalOwner": {
+            "contractGeneration": 0,
+            "loadingSerial": 0,
+            "transitionEpoch": 0
+          },
+          "physicalPhase": "none",
+          "physicalPhaseValue": 0,
+          "postLoadRecovery": {
+            "active": false,
+            "admissionWaitStartFrame": 0,
+            "baselineProcessPrivateUsageBytes": 0,
+            "baselineSystemCommitBytes": 0,
+            "baselineUsageBytes": 0,
+            "cleanupDrained": false,
+            "engineTargetCreateEntered": false,
+            "firstSettledFrame": 0,
+            "lastSettledFrame": 0,
+            "loadingSerial": 2,
+            "peakPressure": "Normal",
+            "peakProcessPrivateUsageBytes": 18490122240,
+            "peakSystemCommitBytes": 98215407616,
+            "peakUsageBytes": 7238557696,
+            "recoveryEpoch": 1,
+            "relatchAdmitted": false,
+            "settleDeadlineExpired": false,
+            "settleTimeoutUsed": false,
+            "settledSamples": 0,
+            "timedAttemptConsumed": false,
+            "timedAttemptInProgress": false,
+            "timedAttemptStartTickMs": 0,
+            "transitionEpoch": 0,
+            "trimArmed": false,
+            "trimCompleted": false,
+            "trimSucceeded": false,
+            "vendorTeardownFallbackRequested": false,
+            "vendorTeardownPhase": "Idle"
+          },
+          "postMutationEmergencyAttemptConsumed": false,
+          "presentation": {
+            "boundsMismatchOriginalFallbackEyeObservations": 0,
+            "consecutiveBothEyesVendorFrames": 0,
+            "eyes": [
+              {
+                "consecutiveFrames": 0,
+                "contractGeneration": 0,
+                "expectedInputHeight": 0,
+                "expectedInputWidth": 0,
+                "frame": 0,
+                "inputHeight": 0,
+                "inputWidth": 0,
+                "loadingOrMenuContext": false,
+                "method": "none",
+                "outputHeight": 0,
+                "outputWidth": 0,
+                "path": "Unknown",
+                "transitionCooldown": false,
+                "transitionEpoch": 0,
+                "valid": false
+              },
+              {
+                "consecutiveFrames": 0,
+                "contractGeneration": 0,
+                "expectedInputHeight": 0,
+                "expectedInputWidth": 0,
+                "frame": 0,
+                "inputHeight": 0,
+                "inputWidth": 0,
+                "loadingOrMenuContext": false,
+                "method": "none",
+                "outputHeight": 0,
+                "outputWidth": 0,
+                "path": "Unknown",
+                "transitionCooldown": false,
+                "transitionEpoch": 0,
+                "valid": false
+              }
+            ],
+            "lastBothEyesVendorFrame": 0,
+            "lastFallbackFrame": 0,
+            "maximumConsecutivePresentationStretchFrames": 0,
+            "presentationStretchEyeObservations": 0,
+            "sessionBoundsMismatchOriginalFallbackEyeObservations": 0,
+            "sessionPresentationStretchEyeObservations": 0,
+            "sessionVendorEvaluatedEyeObservations": 0,
+            "sessionVendorFailureStretchEyeObservations": 0,
+            "vendorEvaluatedEyeObservations": 0,
+            "vendorFailureStretchEyeObservations": 0
+          },
+          "presentationOwner": {
+            "contractGeneration": 0,
+            "loadingSerial": 0,
+            "transitionEpoch": 0
+          },
+          "presentationPhase": "idle",
+          "presentationPhaseValue": 0,
+          "requested": {
+            "active": false,
+            "backend": "none",
+            "contractGeneration": 0,
+            "displayEyeHeight": 0,
+            "displayEyeWidth": 0,
+            "dlssPreset": 1,
+            "foveatedVendorDispatch": false,
+            "fsr4RuntimeEnabled": false,
+            "method": "none",
+            "origin": "cs_menu",
+            "peripheryTAA": false,
+            "preparationOptionsGeneration": 0,
+            "qualityMode": 0,
+            "queuedFrame": 0,
+            "renderEyeHeight": 0,
+            "renderEyeWidth": 0,
+            "renderScale": 1.0,
+            "renderScaleMode": false,
+            "requestID": 0,
+            "transitionEpoch": 0,
+            "valid": false
+          },
+          "resourcePlan": {
+            "admissionUsageLimitBytes": 0,
+            "doorHandoffHardReserveOnly": false,
+            "emergencyProjectedSystemCommitAdditionalBytes": 0,
+            "emergencyProjectedSystemCommitBytes": 0,
+            "emergencySystemCommitAdmissionLimitBytes": 0,
+            "emergencySystemCommitGuardActive": false,
+            "emergencySystemCommitMinimumProjectionBytes": 0,
+            "emergencySystemCommitProjectionMultiplier": 0,
+            "emergencySystemCommitProjectionValid": false,
+            "emergencySystemCommitReserveBytes": 0,
+            "emergencySystemCommitSafe": false,
+            "estimatedAdditionalBytes": 0,
+            "memoryPressure": "Unknown",
+            "postTrimAdmissionUsageLimitBytes": 0,
+            "pressureCleanupRequired": false,
+            "pressureDeferred": false,
+            "previousVendorMethod": "none",
+            "projectedAdditionalBytes": 0,
+            "projectedResidencyDeferred": false,
+            "projectedResidencyGuardActive": false,
+            "projectedResidencyPostTrimRelaxed": false,
+            "projectedSystemCommitAdditionalBytes": 0,
+            "projectedSystemCommitBytes": 0,
+            "projectedUsageBytes": 0,
+            "retainInactiveDLSSResources": false,
+            "systemCommitAdmissionLimitBytes": 0,
+            "systemCommitAdmissionPolicy": "none",
+            "systemCommitDeferred": false,
+            "systemCommitGuardActive": false,
+            "systemCommitLimitBytes": 0,
+            "systemCommitReserveBytes": 0,
+            "transitionEpoch": 0,
+            "valid": false
+          },
+          "retirement": {
+            "capacityBlocked": false,
+            "fencePending": false,
+            "nextCleanupFrame": 0,
+            "pendingSets": 0
+          },
+          "revision": 13,
+          "stable": {
+            "active": false,
+            "backend": "none",
+            "contractGeneration": 0,
+            "displayEyeHeight": 0,
+            "displayEyeWidth": 0,
+            "dlssPreset": 1,
+            "foveatedVendorDispatch": false,
+            "fsr4RuntimeEnabled": false,
+            "method": "none",
+            "origin": "cs_menu",
+            "peripheryTAA": false,
+            "preparationOptionsGeneration": 0,
+            "qualityMode": 0,
+            "queuedFrame": 0,
+            "renderEyeHeight": 0,
+            "renderEyeWidth": 0,
+            "renderScale": 1.0,
+            "renderScaleMode": false,
+            "requestID": 0,
+            "transitionEpoch": 0,
+            "valid": false
+          },
+          "state": "Idle",
+          "targetEpoch": 0,
+          "terminalDeviceLossSignaled": false,
+          "terminalFailureSignaled": false,
+          "unresolvedPhysicalMutationEpoch": 0,
+          "unresolvedPhysicalMutationStartTickMs": 0
+        },
+        "cpuPerformance": {
+          "active": false,
+          "compactPresentationContract": {
+            "publishes": 0,
+            "reuses": 0
+          },
+          "devBenchOnly": true,
+          "generationResourceValidation": {
+            "contractInvalidations": 0,
+            "contractPublishes": 0,
+            "fullValidations": 0,
+            "stableChecks": 0,
+            "stableHits": 0,
+            "stableMisses": 0
+          },
+          "schemaVersion": 1,
+          "state": "reset",
+          "stateProportionalSafety": {
+            "boundsGuard": {
+              "candidates": 0,
+              "fastSkips": 0
+            },
+            "deferredRecovery": {
+              "candidates": 0,
+              "fastSkips": 0
+            },
+            "engineRetirement": {
+              "fastSkips": 0,
+              "services": 0
+            },
+            "memoryTelemetry": {
+              "candidates": 0,
+              "fastSkips": 0
+            },
+            "memoryTrim": {
+              "fastSkips": 0,
+              "services": 0
+            },
+            "nativeGuard": {
+              "candidates": 0,
+              "fastSkips": 0
+            },
+            "postMutationGuard": {
+              "fastSkips": 0,
+              "services": 0
+            },
+            "promotion": {
+              "candidates": 0,
+              "fastSkips": 0
+            }
+          },
+          "strongStereoPacket": {
+            "captures": 0,
+            "commitAccepts": 0,
+            "commitRejects": 0,
+            "commitValidations": 0,
+            "cycleReuses": 0,
+            "fastSkips": 0,
+            "invalidations": 0,
+            "lifetimeRebuilds": 0,
+            "lifetimeReuses": 0,
+            "queueHoldAverageMicroseconds": 0.0,
+            "queueHoldMaximumMicroseconds": 0.0,
+            "queueWaitAverageMicroseconds": 0.0,
+            "queueWaitMaximumMicroseconds": 0.0
+          },
+          "window": {
+            "currentFrame": 28304,
+            "elapsedFrames": 0,
+            "initialized": false,
+            "startFrame": 0
+          }
+        },
+        "frame": 28304,
+        "fsrDispatch": {
+          "actualDispatchBackend": "none",
+          "actualDispatchBackendConverged": false,
+          "actualDispatchBothEyesValid": false,
+          "actualDispatchEyes": [
+            {
+              "backend": "none",
+              "frame": 0,
+              "runtimeFallback": false,
+              "serial": 0,
+              "valid": false
+            },
+            {
+              "backend": "none",
+              "frame": 0,
+              "runtimeFallback": false,
+              "serial": 0,
+              "valid": false
+            }
+          ],
+          "actualDispatchFrame": 0,
+          "actualRuntimeFallbackObserved": false,
+          "authoritativeActive": false,
+          "authoritativeBackend": "none",
+          "authoritativeFsr4RuntimeEnabled": false,
+          "authoritativeMethod": "none",
+          "authoritativeValid": false,
+          "contractLifecycleFailures": 1,
+          "contractLifecyclePhase": "Ready",
+          "contractReady": false,
+          "contractResourcesPresent": false,
+          "desiredActive": false,
+          "desiredBackend": "none",
+          "desiredFsr4RuntimeEnabled": false,
+          "desiredMethod": "none",
+          "desiredValid": false,
+          "evaluationActive": false,
+          "evaluationBothEyesValid": false,
+          "evaluationContractGeneration": 0,
+          "evaluationMethod": "none",
+          "evaluationTransitionEpoch": 0,
+          "expectedEvaluationBackend": "none",
+          "fsrBackendConverged": false,
+          "shaderCompilationActive": false
+        },
+        "fsrHostLifecycle": {
+          "lastContextCreateResult": 0,
+          "quarantined": false
+        },
+        "hmdMaskDiagnostics": {
+          "apiVersion": 5,
+          "configurable": false,
+          "implementation": "tiled_exact_5x5",
+          "performance": {
+            "timerPrefix": "Upscaling::HAM::",
+            "timers": [
+              "Upscaling::HAM::InputTiledExact5x5",
+              "Upscaling::HAM::FinalTiledExact5x5"
+            ],
+            "tool": "communityshaders.profiler_api"
+          },
+          "robustness": {
+            "finalDispatches": 5912,
+            "inputDispatches": 5696,
+            "rejectedDispatches": 0
+          },
+          "safety": {
+            "supportedMapping": "equal-size or upscaling output",
+            "unsupportedMapping": "reject and retain the original compositor path"
+          }
+        },
+        "loadPresentationProbe": {
+          "active": false,
+          "completedReadbacks": 0,
+          "droppedReadbacks": 0,
+          "gridSize": 5,
+          "hamBlackPatternCandidates": 0,
+          "hamBrightPatternCandidates": 0,
+          "hamDarkPatternCandidates": 0,
+          "hamDispatchProbe": {
+            "brightPatternCandidates": 0,
+            "completedReadbacks": 0,
+            "darkPatternCandidates": 0,
+            "droppedReadbacks": 0,
+            "gridSize": 9,
+            "overwrittenDispatches": 0,
+            "pendingCapacity": 8,
+            "pendingReadbacks": 0,
+            "queuedReadbacks": 0,
+            "retainedDispatches": 0,
+            "retentionCapacity": 256,
+            "stereoReleaseRecords": 0,
+            "timeoutHandoff": {
+              "armCount": 0,
+              "armed": false,
+              "budgetMs": 0,
+              "clearEyeMask": 0,
+              "complete": false,
+              "compositorCycle": 0,
+              "elapsedMs": 0,
+              "eyes": [
+                {
+                  "captureQueueStatus": "NotRequested",
+                  "captureRequested": false,
+                  "captureSequence": 0,
+                  "clearColorIdentity": 0,
+                  "clearDecisionSeen": false,
+                  "clearDeferred": false,
+                  "clearDispatchSequence": 0,
+                  "clearEligible": false,
+                  "clearExecuted": false,
+                  "clearPhase": 0,
+                  "clearSeen": false,
+                  "eye": 0,
+                  "submitSeen": false
+                },
+                {
+                  "captureQueueStatus": "NotRequested",
+                  "captureRequested": false,
+                  "captureSequence": 0,
+                  "clearColorIdentity": 0,
+                  "clearDecisionSeen": false,
+                  "clearDeferred": false,
+                  "clearDispatchSequence": 0,
+                  "clearEligible": false,
+                  "clearExecuted": false,
+                  "clearPhase": 0,
+                  "clearSeen": false,
+                  "eye": 1,
+                  "submitSeen": false
+                }
+              ],
+              "hardDeadlineMs": 0,
+              "holdElapsedMs": 0,
+              "loadingSerial": 0,
+              "protectionEpoch": 0,
+              "retained": false,
+              "route": "unknown",
+              "sessionID": 0,
+              "softDeadlineMs": 0,
+              "submitEyeMask": 0
+            },
+            "timeoutReleaseRecords": 0
+          },
+          "hamWhitePatternCandidates": 0,
+          "overwrittenRecords": 0,
+          "pendingCapacity": 16,
+          "pendingReadbacks": 0,
+          "predominantlyBlackCandidates": 0,
+          "predominantlyWhiteCandidates": 0,
+          "qpcFrequency": 10000000,
+          "queuedReadbacks": 0,
+          "retainedRecords": 0,
+          "retentionCapacity": 4096,
+          "schemaVersion": 6,
+          "sessionID": 0,
+          "totalPendingReadbacks": 0
+        },
+        "mainPassDispatch": {
+          "callCount": 2957,
+          "encodeAttemptCount": 2957,
+          "encodeSuccessCount": 2957,
+          "fidelityAttemptCount": 2957,
+          "fidelitySuccessCount": 2956,
+          "lastFrame": 28304,
+          "lastStage": "FidelityDispatchSucceeded",
+          "vendorResetBlockedCount": 0
+        },
+        "modeStatus": "Disabled",
+        "nativeRestorePreparation": {
+          "commitAttemptCount": 0,
+          "commitCompositorCycleToken": 0,
+          "commitFrame": 0,
+          "commitOutcome": 0,
+          "commitSuccessCount": 0,
+          "compositorCycleToken": 23981,
+          "frame": 28304,
+          "rejectMask": 2
+        },
+        "pipelineDiagnostics": {
+          "capture": {
+            "initialized": false,
+            "lastSequence": 0,
+            "latestRecord": null,
+            "session": "",
+            "structuredWriterOpen": false
+          },
+          "configuredForNextStartup": false,
+          "configuredStructuredForNextStartup": false
+        },
+        "preparation": {
+          "active": false,
+          "capacity": 512,
+          "coalescedEvents": 0,
+          "devBenchOnly": true,
+          "events": [],
+          "overwrittenEvents": 0,
+          "qpcFrequency": 0,
+          "retainedEvents": 0,
+          "schemaVersion": 1
+        },
+        "renderScaleSelectionPolicy": {
+          "linkedToUpscaling": true,
+          "physicallyActive": false,
+          "rememberedPreference": false,
+          "requestedActive": false
+        },
+        "retryTelemetry": {
+          "active": false,
+          "available": false,
+          "capacity": 1024,
+          "coalescedEvents": 0,
+          "devBenchOnly": true,
+          "droppedEvents": 0,
+          "events": [],
+          "overwrittenEvents": 0,
+          "qpcFrequency": 0,
+          "retainedEvents": 0,
+          "schemaVersion": 2
+        },
+        "runtimeResolutionPlan": {
+          "engineRenderHeight": 1120.0,
+          "engineRenderWidth": 2016.0,
+          "finalOutputHeight": 1680.0,
+          "finalOutputWidth": 3024.0,
+          "menuContextActive": false,
+          "method": "fsr",
+          "outputTarget": "Main",
+          "qualityMode": 3,
+          "vendorMethod": true
+        },
+        "runtimeRouting": {
+          "configuredMethod": "fsr",
+          "perfModeActive": false,
+          "presentationUpscalingActive": false,
+          "renderScaleLatched": false,
+          "renderScaleRequested": false,
+          "runtimeMethod": "fsr",
+          "runtimeQualityMode": 3
+        },
+        "session": {
+          "active": false,
+          "coalescedDuplicateCount": 0,
+          "endFrame": 0,
+          "id": 0,
+          "overwrittenEvents": 0,
+          "retainedEvents": 0,
+          "startFrame": 0
+        },
+        "submitInputFreshness": {
+          "boundaryOutcomes": {
+            "CompositorCycleMismatch": 0,
+            "FlagsMismatch": 47800,
+            "FrameMismatch": 0,
+            "MissingBoundary": 0,
+            "MissingDescriptor": 0,
+            "MissingResource": 0,
+            "ResourceMismatch": 162,
+            "ThreadMismatch": 0,
+            "TokenMismatch": 0,
+            "UnsupportedTextureType": 0,
+            "accepted": 0
+          },
+          "counterScope": "process_lifetime",
+          "methods": {
+            "dlss": {
+              "inputOutcomes": {
+                "IncompleteEyePair": 0,
+                "IncompleteGuideFrame": 0,
+                "InvalidEyeRegion": 0,
+                "InvalidSubmitFrame": 0,
+                "MissingCompositorCycle": 0,
+                "MissingOuterBoundary": 0,
+                "MissingSource": 0,
+                "UnprovenSourceSignature": 0,
+                "UnprovenStereoLayout": 0,
+                "WorldFrameMismatch": 0,
+                "accepted": 0
+              },
+              "work": {
+                "colorCopyEyes": 0,
+                "fallbackOutputHits": 0,
+                "fallbackPreparedHits": 0,
+                "guideEncodeEyes": 0,
+                "inputSanitizationEyes": 0,
+                "vendorEyeAttempts": 0,
+                "vendorEyeRetries": 0
+              }
+            },
+            "fsr": {
+              "inputOutcomes": {
+                "IncompleteEyePair": 0,
+                "IncompleteGuideFrame": 0,
+                "InvalidEyeRegion": 0,
+                "InvalidSubmitFrame": 0,
+                "MissingCompositorCycle": 0,
+                "MissingOuterBoundary": 0,
+                "MissingSource": 0,
+                "UnprovenSourceSignature": 0,
+                "UnprovenStereoLayout": 0,
+                "WorldFrameMismatch": 0,
+                "accepted": 0
+              },
+              "work": {
+                "colorCopyEyes": 0,
+                "fallbackOutputHits": 0,
+                "fallbackPreparedHits": 0,
+                "guideEncodeEyes": 0,
+                "inputSanitizationEyes": 0,
+                "vendorEyeAttempts": 0,
+                "vendorEyeRetries": 0
+              }
+            },
+            "other": {
+              "inputOutcomes": {
+                "IncompleteEyePair": 0,
+                "IncompleteGuideFrame": 0,
+                "InvalidEyeRegion": 0,
+                "InvalidSubmitFrame": 0,
+                "MissingCompositorCycle": 0,
+                "MissingOuterBoundary": 0,
+                "MissingSource": 0,
+                "UnprovenSourceSignature": 0,
+                "UnprovenStereoLayout": 0,
+                "WorldFrameMismatch": 0,
+                "accepted": 0
+              },
+              "work": {
+                "colorCopyEyes": 0,
+                "fallbackOutputHits": 0,
+                "fallbackPreparedHits": 0,
+                "guideEncodeEyes": 0,
+                "inputSanitizationEyes": 0,
+                "vendorEyeAttempts": 0,
+                "vendorEyeRetries": 0
+              }
+            }
+          },
+          "schemaVersion": 1,
+          "snapshotConsistency": "independently_sampled_atomic_counters"
+        },
+        "upscalingCorrelation": {
+          "afterCapabilityRevision": 1,
+          "afterRevision": 1,
+          "afterStatus": 0,
+          "atomicEngineSnapshot": false,
+          "authority": "csx.upscaling.stateRevision",
+          "beforeCapabilityRevision": 1,
+          "beforeRevision": 1,
+          "beforeStatus": 0,
+          "coherent": true,
+          "method": "native-api-bracket-around-physical-status"
+        },
+        "upscalingSnapshot": {
+          "activeOperationId": 0,
+          "capabilityRevision": 1,
+          "dimensions": {
+            "displayEyeHeight": 1680,
+            "displayEyeWidth": 1512,
+            "renderEyeHeight": 1120,
+            "renderEyeWidth": 2016
+          },
+          "flags": 1,
+          "observedConditions": {
+            "mask": 0,
+            "names": []
+          },
+          "profilePresence": 9,
+          "profiles": {
+            "applying": {
+              "dlssProfile": {
+                "name": "K",
+                "value": 1
+              },
+              "fsrRuntime": {
+                "name": "fsr3",
+                "value": 0
+              },
+              "method": {
+                "name": "none",
+                "value": 0
+              },
+              "qualityMode": {
+                "name": "native_aa",
+                "value": 0
+              },
+              "renderScaleMode": false
+            },
+            "configured": {
+              "dlssProfile": {
+                "name": "K",
+                "value": 1
+              },
+              "fsrRuntime": {
+                "name": "fsr4",
+                "value": 1
+              },
+              "method": {
+                "name": "fsr",
+                "value": 2
+              },
+              "qualityMode": {
+                "name": "quality",
+                "value": 3
+              },
+              "renderScaleMode": false
+            },
+            "effective": {
+              "dlssProfile": {
+                "name": "K",
+                "value": 1
+              },
+              "fsrRuntime": {
+                "name": "fsr4",
+                "value": 1
+              },
+              "method": {
+                "name": "fsr",
+                "value": 2
+              },
+              "qualityMode": {
+                "name": "quality",
+                "value": 3
+              },
+              "renderScaleMode": false
+            },
+            "persisted": {
+              "dlssProfile": {
+                "name": "K",
+                "value": 1
+              },
+              "fsrRuntime": {
+                "name": "fsr3",
+                "value": 0
+              },
+              "method": {
+                "name": "none",
+                "value": 0
+              },
+              "qualityMode": {
+                "name": "native_aa",
+                "value": 0
+              },
+              "renderScaleMode": false
+            },
+            "requested": {
+              "dlssProfile": {
+                "name": "K",
+                "value": 1
+              },
+              "fsrRuntime": {
+                "name": "fsr3",
+                "value": 0
+              },
+              "method": {
+                "name": "none",
+                "value": 0
+              },
+              "qualityMode": {
+                "name": "native_aa",
+                "value": 0
+              },
+              "renderScaleMode": false
+            },
+            "stable": {
+              "dlssProfile": {
+                "name": "K",
+                "value": 1
+              },
+              "fsrRuntime": {
+                "name": "fsr3",
+                "value": 0
+              },
+              "method": {
+                "name": "none",
+                "value": 0
+              },
+              "qualityMode": {
+                "name": "native_aa",
+                "value": 0
+              },
+              "renderScaleMode": false
+            }
+          },
+          "renderScaleStatus": {
+            "name": "disabled",
+            "value": 0
+          },
+          "stateRevision": 1,
+          "transitionState": {
+            "name": "idle",
+            "value": 0
+          }
+        },
+        "vendorWorkGate": {
+          "active": false,
+          "activeMask": 0,
+          "completedWorldFrame": true,
+          "effectiveLifecycleMask": 0,
+          "effectiveSources": [],
+          "epoch": 9,
+          "existingVendorDispatchReady": false,
+          "gameEntryOwnerMask": 0,
+          "gameEntryReleaseReady": false,
+          "gameLoadNotification": false,
+          "lifecycleGateRelevant": false,
+          "lifecycleMutationDeferred": false,
+          "loadingMenu": false,
+          "loadingPresentationActive": false,
+          "mainMenu": false,
+          "mainMenuActive": false,
+          "postLoadResetPending": false,
+          "preLoadGame": false,
+          "processStartup": false,
+          "profileTransitionPending": false,
+          "raceSexPresentationActive": false,
+          "recoveryPending": false,
+          "relatchFramePending": false,
+          "relatchInProgress": false,
+          "relatchPending": false,
+          "relatchPostLoadSettle": false,
+          "relatchQueued": false,
+          "saveLoadProtectionActive": false,
+          "sources": [],
+          "stabilizerSync": {
+            "closeFrame": 25341,
+            "configuredDLSSPreset": 1,
+            "configuredQualityMode": 3,
+            "configuredRenderScaleMode": false,
+            "configuredUpscaleMethod": 2,
+            "currentPlayerCellFormID": 91560,
+            "destinationCellFormID": 0,
+            "destinationObservationWorldFrame": 0,
+            "lastCompletedWorldRenderFrame": 28304,
+            "lastResolvedCellFormID": 0,
+            "loadingSerial": 2,
+            "pendingSyncFrame": 0,
+            "resolvedSyncFrame": 0,
+            "serialOpen": false,
+            "sourceCellFormID": 0
+          },
+          "state": 38654705664
+        }
+      }
+    },
+    "player": {
+      "actorValues": {
+        "carryWeight": {
+          "current": 300.0,
+          "max": 300.0
+        },
+        "health": {
+          "current": 100.0,
+          "max": 100.0
+        },
+        "magicka": {
+          "current": 100.0,
+          "max": 100.0
+        },
+        "stamina": {
+          "current": 100.0,
+          "max": 100.0
+        }
+      },
+      "equipped": {
+        "ammo": null,
+        "left": null,
+        "right": null
+      },
+      "gold": 0,
+      "hands": {
+        "castingArtReady": true,
+        "left": {
+          "caster": null,
+          "equipped": null,
+          "heldLights": [],
+          "heldLightsRendered": 0
+        },
+        "right": {
+          "caster": null,
+          "equipped": null,
+          "heldLights": [],
+          "heldLightsRendered": 0
+        },
+        "weaponDrawn": false,
+        "weaponState": "sheathed"
+      },
+      "level": 1,
+      "name": "Prisoner",
+      "playerLoaded": true,
+      "race": {
+        "editorId": "NordRace",
+        "formId": "0x00013746",
+        "formType": "RACE",
+        "name": "Nord"
+      },
+      "sex": "male"
+    },
+    "player-after-scale": {
+      "actorValues": {
+        "carryWeight": {
+          "current": 300.0,
+          "max": 300.0
+        },
+        "health": {
+          "current": 100.0,
+          "max": 100.0
+        },
+        "magicka": {
+          "current": 100.0,
+          "max": 100.0
+        },
+        "stamina": {
+          "current": 100.0,
+          "max": 100.0
+        }
+      },
+      "equipped": {
+        "ammo": null,
+        "left": null,
+        "right": null
+      },
+      "gold": 0,
+      "hands": {
+        "castingArtReady": true,
+        "left": {
+          "caster": null,
+          "equipped": null,
+          "heldLights": [],
+          "heldLightsRendered": 0
+        },
+        "right": {
+          "caster": null,
+          "equipped": null,
+          "heldLights": [],
+          "heldLightsRendered": 0
+        },
+        "weaponDrawn": false,
+        "weaponState": "sheathed"
+      },
+      "level": 1,
+      "name": "Prisoner",
+      "playerLoaded": true,
+      "race": {
+        "editorId": "NordRace",
+        "formId": "0x00013746",
+        "formType": "RACE",
+        "name": "Nord"
+      },
+      "sex": "male"
+    },
+    "probe-after": {
+      "armedQpc": 0,
+      "completedQpc": 0,
+      "cpuFrame": null,
+      "error": null,
+      "expectedColourContractRevision": 0,
+      "expectedStageEyeSlots": 10,
+      "generation": 2,
+      "mappedStageEyeSlots": 0,
+      "maximumStagingPayloadBytes": 1073741824,
+      "missingStageEyeSlots": [
+        {
+          "eye": 0,
+          "eyeName": "left",
+          "stage": "fsr_input"
+        },
+        {
+          "eye": 1,
+          "eyeName": "right",
+          "stage": "fsr_input"
+        },
+        {
+          "eye": 0,
+          "eyeName": "left",
+          "stage": "fsr_output"
+        },
+        {
+          "eye": 1,
+          "eyeName": "right",
+          "stage": "fsr_output"
+        },
+        {
+          "eye": 0,
+          "eyeName": "left",
+          "stage": "combined_main"
+        },
+        {
+          "eye": 1,
+          "eyeName": "right",
+          "stage": "combined_main"
+        },
+        {
+          "eye": 0,
+          "eyeName": "left",
+          "stage": "imagespace_input"
+        },
+        {
+          "eye": 1,
+          "eyeName": "right",
+          "stage": "imagespace_input"
+        },
+        {
+          "eye": 0,
+          "eyeName": "left",
+          "stage": "imagespace_output"
+        },
+        {
+          "eye": 1,
+          "eyeName": "right",
+          "stage": "imagespace_output"
+        }
+      ],
+      "producer": {
+        "artifactSha256": "",
+        "buildId": "ced967f33daf376e65a0950ad0bbb40b323b3d5507b5c3d58c2d3ff56eea5817",
+        "buildIdShort": "ced967f33daf",
+        "component": "CommunityShaders",
+        "configuration": "Release",
+        "manifestError": "runtime artifact verification delegated to deployment harness",
+        "manifestVerified": false,
+        "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+        "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14",
+        "sourceDescribe": "f4fe744",
+        "sourceDirty": false
+      },
+      "queryQueuedQpc": 0,
+      "queuedStageEyeSlots": 0,
+      "sceneEpoch": null,
+      "schemaVersion": 3,
+      "stageEyeSlots": [
+        {
+          "eye": 0,
+          "eyeName": "left",
+          "mapped": false,
+          "queued": false,
+          "stage": "fsr_input"
+        },
+        {
+          "eye": 1,
+          "eyeName": "right",
+          "mapped": false,
+          "queued": false,
+          "stage": "fsr_input"
+        },
+        {
+          "eye": 0,
+          "eyeName": "left",
+          "mapped": false,
+          "queued": false,
+          "stage": "fsr_output"
+        },
+        {
+          "eye": 1,
+          "eyeName": "right",
+          "mapped": false,
+          "queued": false,
+          "stage": "fsr_output"
+        },
+        {
+          "eye": 0,
+          "eyeName": "left",
+          "mapped": false,
+          "queued": false,
+          "stage": "combined_main"
+        },
+        {
+          "eye": 1,
+          "eyeName": "right",
+          "mapped": false,
+          "queued": false,
+          "stage": "combined_main"
+        },
+        {
+          "eye": 0,
+          "eyeName": "left",
+          "mapped": false,
+          "queued": false,
+          "stage": "imagespace_input"
+        },
+        {
+          "eye": 1,
+          "eyeName": "right",
+          "mapped": false,
+          "queued": false,
+          "stage": "imagespace_input"
+        },
+        {
+          "eye": 0,
+          "eyeName": "left",
+          "mapped": false,
+          "queued": false,
+          "stage": "imagespace_output"
+        },
+        {
+          "eye": 1,
+          "eyeName": "right",
+          "mapped": false,
+          "queued": false,
+          "stage": "imagespace_output"
+        }
+      ],
+      "stagingPayloadBytes": 0,
+      "state": "idle",
+      "submissionEpoch": null,
+      "timeoutSeconds": 15
+    },
+    "probe-before": {
+      "armedQpc": 0,
+      "completedQpc": 0,
+      "cpuFrame": null,
+      "error": null,
+      "expectedColourContractRevision": 0,
+      "expectedStageEyeSlots": 10,
+      "generation": 0,
+      "mappedStageEyeSlots": 0,
+      "maximumStagingPayloadBytes": 1073741824,
+      "missingStageEyeSlots": [
+        {
+          "eye": 0,
+          "eyeName": "left",
+          "stage": "fsr_input"
+        },
+        {
+          "eye": 1,
+          "eyeName": "right",
+          "stage": "fsr_input"
+        },
+        {
+          "eye": 0,
+          "eyeName": "left",
+          "stage": "fsr_output"
+        },
+        {
+          "eye": 1,
+          "eyeName": "right",
+          "stage": "fsr_output"
+        },
+        {
+          "eye": 0,
+          "eyeName": "left",
+          "stage": "combined_main"
+        },
+        {
+          "eye": 1,
+          "eyeName": "right",
+          "stage": "combined_main"
+        },
+        {
+          "eye": 0,
+          "eyeName": "left",
+          "stage": "imagespace_input"
+        },
+        {
+          "eye": 1,
+          "eyeName": "right",
+          "stage": "imagespace_input"
+        },
+        {
+          "eye": 0,
+          "eyeName": "left",
+          "stage": "imagespace_output"
+        },
+        {
+          "eye": 1,
+          "eyeName": "right",
+          "stage": "imagespace_output"
+        }
+      ],
+      "producer": {
+        "artifactSha256": "",
+        "buildId": "ced967f33daf376e65a0950ad0bbb40b323b3d5507b5c3d58c2d3ff56eea5817",
+        "buildIdShort": "ced967f33daf",
+        "component": "CommunityShaders",
+        "configuration": "Release",
+        "manifestError": "runtime artifact verification delegated to deployment harness",
+        "manifestVerified": false,
+        "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+        "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14",
+        "sourceDescribe": "f4fe744",
+        "sourceDirty": false
+      },
+      "queryQueuedQpc": 0,
+      "queuedStageEyeSlots": 0,
+      "sceneEpoch": null,
+      "schemaVersion": 3,
+      "stageEyeSlots": [
+        {
+          "eye": 0,
+          "eyeName": "left",
+          "mapped": false,
+          "queued": false,
+          "stage": "fsr_input"
+        },
+        {
+          "eye": 1,
+          "eyeName": "right",
+          "mapped": false,
+          "queued": false,
+          "stage": "fsr_input"
+        },
+        {
+          "eye": 0,
+          "eyeName": "left",
+          "mapped": false,
+          "queued": false,
+          "stage": "fsr_output"
+        },
+        {
+          "eye": 1,
+          "eyeName": "right",
+          "mapped": false,
+          "queued": false,
+          "stage": "fsr_output"
+        },
+        {
+          "eye": 0,
+          "eyeName": "left",
+          "mapped": false,
+          "queued": false,
+          "stage": "combined_main"
+        },
+        {
+          "eye": 1,
+          "eyeName": "right",
+          "mapped": false,
+          "queued": false,
+          "stage": "combined_main"
+        },
+        {
+          "eye": 0,
+          "eyeName": "left",
+          "mapped": false,
+          "queued": false,
+          "stage": "imagespace_input"
+        },
+        {
+          "eye": 1,
+          "eyeName": "right",
+          "mapped": false,
+          "queued": false,
+          "stage": "imagespace_input"
+        },
+        {
+          "eye": 0,
+          "eyeName": "left",
+          "mapped": false,
+          "queued": false,
+          "stage": "imagespace_output"
+        },
+        {
+          "eye": 1,
+          "eyeName": "right",
+          "mapped": false,
+          "queued": false,
+          "stage": "imagespace_output"
+        }
+      ],
+      "stagingPayloadBytes": 0,
+      "state": "idle",
+      "submissionEpoch": null,
+      "timeoutSeconds": 15
+    },
+    "scene": {
+      "cell": {
+        "editorId": "WhiterunBreezehome",
+        "formId": "0x000165A8",
+        "formType": "CELL",
+        "name": "Breezehome"
+      },
+      "daysPassed": 0.3060625195503235,
+      "gameHour": 7.345500469207764,
+      "location": {
+        "editorId": "WhiterunBreezehomeLocation",
+        "formId": "0x0001F86F",
+        "formType": "LCTN",
+        "name": "Breezehome"
+      },
+      "playerLoaded": true,
+      "position": [
+        -536.1541137695312,
+        0.25445556640625,
+        65.3699951171875
+      ],
+      "weather": {
+        "editorId": "Helios_SkyrimClearTU",
+        "formId": "0xFE02FA87",
+        "formType": "WTHR"
+      }
+    },
+    "scene-after": {
+      "cell": {
+        "editorId": "WhiterunBreezehome",
+        "formId": "0x000165A8",
+        "formType": "CELL",
+        "name": "Breezehome"
+      },
+      "daysPassed": 0.4042297303676605,
+      "gameHour": 9.701513290405273,
+      "location": {
+        "editorId": "WhiterunBreezehomeLocation",
+        "formId": "0x0001F86F",
+        "formType": "LCTN",
+        "name": "Breezehome"
+      },
+      "playerLoaded": true,
+      "position": [
+        -536.1541137695312,
+        0.25445556640625,
+        65.3699951171875
+      ],
+      "weather": {
+        "editorId": "Helios_SkyrimClearTU",
+        "formId": "0xFE02FA87",
+        "formType": "WTHR"
+      }
+    },
+    "screenshot-service-after": {
+      "command": {
+        "action": "status"
+      },
+      "contract": {
+        "major": 1,
+        "minor": 1,
+        "name": "csx.screenshot",
+        "schemaRevision": 2
+      },
+      "ok": true,
+      "result": {
+        "dispatcher": {
+          "activeAcquisitionRequestId": null,
+          "activeSequences": 0,
+          "pendingOperations": 0,
+          "queuedManualCaptures": 0,
+          "queuedSequenceFrames": 0
+        },
+        "feature": {
+          "enabled": true,
+          "loaded": true,
+          "settingsSchemaVersion": 2
+        },
+        "ioWorkers": {
+          "destinationPreparationAdmissionClosed": false,
+          "destinationPreparationOutstanding": 0,
+          "manifestPublicationAdmissionClosed": false,
+          "manifestPublicationOutstanding": 0,
+          "retiredManifestChains": 0
+        },
+        "journal": {
+          "acknowledgedThroughEventId": 0,
+          "latestEventId": 57,
+          "oldestRetainedEventId": 1,
+          "retainedCommands": 20,
+          "retainedEvents": 57,
+          "retainedRequests": 7
+        },
+        "lastTerminalRequest": {
+          "state": "failed",
+          "terminalUtc": "2026-10-05T20:42:17.480Z"
+        },
+        "sourceReadiness": {
+          "desktopPresentObserved": true,
+          "lastAcceptedEyeFrame": null,
+          "loadingMenuOpen": false,
+          "openVrSubmitHookInstalled": true
+        },
+        "worker": {
+          "capacity": 2,
+          "captureJobCapacity": 2,
+          "completedArtifacts": 8,
+          "failedArtifacts": 0,
+          "outstandingArtifacts": 0,
+          "outstandingCaptureJobs": 0
+        }
+      },
+      "server": {
+        "artifactSha256": "",
+        "buildId": "ced967f33daf376e65a0950ad0bbb40b323b3d5507b5c3d58c2d3ff56eea5817",
+        "buildIdShort": "ced967f33daf",
+        "component": "CommunityShaders",
+        "configuration": "Release",
+        "csxBuild": 11,
+        "csxVersion": "CSX 3.19-VR",
+        "devBenchBuilt": true,
+        "devBenchRegistered": true,
+        "featureVersion": "1.0.0",
+        "manifestError": "runtime artifact verification delegated to deployment harness",
+        "manifestVerified": false,
+        "runtime": {
+          "game": "SkyrimVR",
+          "hmd": "unknown",
+          "presentation": "openvr"
+        },
+        "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+        "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14",
+        "sourceDescribe": "f4fe744",
+        "sourceDirty": false
+      },
+      "timestampUtc": "2026-10-05T20:42:46.295Z"
+    },
+    "upscaling": {
+      "action": "snapshot",
+      "producer": {
+        "artifactSha256": "",
+        "buildId": "ced967f33daf376e65a0950ad0bbb40b323b3d5507b5c3d58c2d3ff56eea5817",
+        "buildIdShort": "ced967f33daf",
+        "component": "CommunityShaders",
+        "configuration": "Release",
+        "manifestError": "runtime artifact verification delegated to deployment harness",
+        "manifestVerified": false,
+        "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+        "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14",
+        "sourceDescribe": "f4fe744",
+        "sourceDirty": false
+      },
+      "registry": {
+        "abiMajor": 1,
+        "abiMinor": 0,
+        "identityStatus": {
+          "name": "success",
+          "value": 0
+        },
+        "interface": {
+          "abiMajor": 1,
+          "abiMinor": 0,
+          "structSize": 72
+        },
+        "producer": {
+          "artifactSha256": "",
+          "buildId": "ced967f33daf376e65a0950ad0bbb40b323b3d5507b5c3d58c2d3ff56eea5817",
+          "component": "CommunityShaders",
+          "configuration": "Release",
+          "manifestError": "runtime artifact verification delegated to deployment harness",
+          "manifestVerified": false,
+          "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+          "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+          "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14",
+          "sourceDescribe": "f4fe744",
+          "sourceDirty": false
+        },
+        "queryStatus": {
+          "name": "success",
+          "value": 0
+        },
+        "service": {
+          "capabilities": 115,
+          "major": 1,
+          "minor": 0,
+          "name": "csx.upscaling",
+          "schemaRevision": 1
+        },
+        "structSize": 56
+      },
+      "snapshot": {
+        "activeOperationId": 0,
+        "capabilityRevision": 1,
+        "dimensions": {
+          "displayEyeHeight": 1680,
+          "displayEyeWidth": 1512,
+          "renderEyeHeight": 1120,
+          "renderEyeWidth": 2016
+        },
+        "flags": 1,
+        "observedConditions": {
+          "mask": 0,
+          "names": []
+        },
+        "profilePresence": 9,
+        "profiles": {
+          "applying": {
+            "dlssProfile": {
+              "name": "K",
+              "value": 1
+            },
+            "fsrRuntime": {
+              "name": "fsr3",
+              "value": 0
+            },
+            "method": {
+              "name": "none",
+              "value": 0
+            },
+            "qualityMode": {
+              "name": "native_aa",
+              "value": 0
+            },
+            "renderScaleMode": false
+          },
+          "configured": {
+            "dlssProfile": {
+              "name": "K",
+              "value": 1
+            },
+            "fsrRuntime": {
+              "name": "fsr4",
+              "value": 1
+            },
+            "method": {
+              "name": "fsr",
+              "value": 2
+            },
+            "qualityMode": {
+              "name": "quality",
+              "value": 3
+            },
+            "renderScaleMode": false
+          },
+          "effective": {
+            "dlssProfile": {
+              "name": "K",
+              "value": 1
+            },
+            "fsrRuntime": {
+              "name": "fsr4",
+              "value": 1
+            },
+            "method": {
+              "name": "fsr",
+              "value": 2
+            },
+            "qualityMode": {
+              "name": "quality",
+              "value": 3
+            },
+            "renderScaleMode": false
+          },
+          "persisted": {
+            "dlssProfile": {
+              "name": "K",
+              "value": 1
+            },
+            "fsrRuntime": {
+              "name": "fsr3",
+              "value": 0
+            },
+            "method": {
+              "name": "none",
+              "value": 0
+            },
+            "qualityMode": {
+              "name": "native_aa",
+              "value": 0
+            },
+            "renderScaleMode": false
+          },
+          "requested": {
+            "dlssProfile": {
+              "name": "K",
+              "value": 1
+            },
+            "fsrRuntime": {
+              "name": "fsr3",
+              "value": 0
+            },
+            "method": {
+              "name": "none",
+              "value": 0
+            },
+            "qualityMode": {
+              "name": "native_aa",
+              "value": 0
+            },
+            "renderScaleMode": false
+          },
+          "stable": {
+            "dlssProfile": {
+              "name": "K",
+              "value": 1
+            },
+            "fsrRuntime": {
+              "name": "fsr3",
+              "value": 0
+            },
+            "method": {
+              "name": "none",
+              "value": 0
+            },
+            "qualityMode": {
+              "name": "native_aa",
+              "value": 0
+            },
+            "renderScaleMode": false
+          }
+        },
+        "renderScaleStatus": {
+          "name": "disabled",
+          "value": 0
+        },
+        "stateRevision": 1,
+        "transitionState": {
+          "name": "idle",
+          "value": 0
+        }
+      },
+      "status": {
+        "name": "success",
+        "value": 0
+      }
+    },
+    "weather-before": {
+      "command": {
+        "action": "snapshot"
+      },
+      "contract": {
+        "major": 1,
+        "minor": 0,
+        "name": "csx.weather",
+        "schemaRevision": 1
+      },
+      "ok": true,
+      "result": {
+        "snapshot": {
+          "available": true,
+          "buildId": "ced967f33daf376e65a0950ad0bbb40b323b3d5507b5c3d58c2d3ff56eea5817",
+          "capabilities": 1023,
+          "lock": {
+            "active": false,
+            "hooksInstalled": true,
+            "weatherKey": ""
+          },
+          "persistence": {
+            "mutationBlocked": false,
+            "saveLoadSafeModeActive": false
+          },
+          "selection": {
+            "defaultWeatherKey": "",
+            "overrideWeatherKey": "0xA87~Helios.esp"
+          },
+          "skyAvailable": true,
+          "stateRevision": 1,
+          "transition": {
+            "active": false,
+            "currentWeatherKey": "0xA87~Helios.esp",
+            "factor": 1.0,
+            "lastWeatherKey": ""
+          },
+          "weatherCount": 226,
+          "weatherFeatureCount": 2
+        },
+        "status": "success"
+      },
+      "server": {
+        "artifactSha256": "",
+        "buildId": "ced967f33daf376e65a0950ad0bbb40b323b3d5507b5c3d58c2d3ff56eea5817",
+        "buildIdShort": "ced967f33daf",
+        "component": "CommunityShaders",
+        "configuration": "Release",
+        "manifestError": "runtime artifact verification delegated to deployment harness",
+        "manifestVerified": false,
+        "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+        "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14",
+        "sourceDescribe": "f4fe744",
+        "sourceDirty": false
+      },
+      "timestampUtc": "2026-10-05T20:35:41.117Z"
+    },
+    "weather-locked": {
+      "command": {
+        "action": "snapshot"
+      },
+      "contract": {
+        "major": 1,
+        "minor": 0,
+        "name": "csx.weather",
+        "schemaRevision": 1
+      },
+      "ok": true,
+      "result": {
+        "snapshot": {
+          "available": true,
+          "buildId": "ced967f33daf376e65a0950ad0bbb40b323b3d5507b5c3d58c2d3ff56eea5817",
+          "capabilities": 1023,
+          "lock": {
+            "active": true,
+            "hooksInstalled": true,
+            "weatherKey": "0xA87~Helios.esp"
+          },
+          "persistence": {
+            "mutationBlocked": false,
+            "saveLoadSafeModeActive": false
+          },
+          "selection": {
+            "defaultWeatherKey": "",
+            "overrideWeatherKey": "0xA87~Helios.esp"
+          },
+          "skyAvailable": true,
+          "stateRevision": 2,
+          "transition": {
+            "active": false,
+            "currentWeatherKey": "0xA87~Helios.esp",
+            "factor": 1.0,
+            "lastWeatherKey": ""
+          },
+          "weatherCount": 226,
+          "weatherFeatureCount": 2
+        },
+        "status": "success"
+      },
+      "server": {
+        "artifactSha256": "",
+        "buildId": "ced967f33daf376e65a0950ad0bbb40b323b3d5507b5c3d58c2d3ff56eea5817",
+        "buildIdShort": "ced967f33daf",
+        "component": "CommunityShaders",
+        "configuration": "Release",
+        "manifestError": "runtime artifact verification delegated to deployment harness",
+        "manifestVerified": false,
+        "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+        "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14",
+        "sourceDescribe": "f4fe744",
+        "sourceDirty": false
+      },
+      "timestampUtc": "2026-10-05T20:38:07.082Z"
+    },
+    "worldscale": {
+      "count": 1,
+      "diag": {
+        "bufferEmpty": true,
+        "bufferHasBegin": false,
+        "bufferLen": 0,
+        "consoleLogNull": false,
+        "consoleMenuExists": true,
+        "consoleMenuOpen": false,
+        "consoleMode": false,
+        "engineFrames": 4,
+        "lastMessage": "Script command \"DVBCAPENDx9F3\" not found.",
+        "lastMessageHasBegin": false,
+        "printDropped": 0,
+        "printHooked": true,
+        "printLines": 3,
+        "ringLines": 2,
+        "samples": 2,
+        "ticks": 4,
+        "timedOut": false
+      },
+      "lines": [
+        "INISetting fVrScale:VR >> 79.06"
+      ],
+      "lossPossible": false,
+      "markersFound": true,
+      "sawBegin": true,
+      "sawEnd": true,
+      "source": "print"
+    }
+  },
+  "sequenceReads": {
+    "SEQUENCE-CANCEL-CANCEL.json": {
+      "command": {
+        "action": "request_cancel"
+      },
+      "contract": {
+        "major": 1,
+        "minor": 1,
+        "name": "csx.screenshot",
+        "schemaRevision": 2
+      },
+      "ok": true,
+      "result": {
+        "acceptedUtc": "2026-10-05T20:42:13.547Z",
+        "acknowledged": false,
+        "actual": {},
+        "artifactProgress": {
+          "expected": 1,
+          "successful": 0,
+          "terminal": 0
+        },
+        "artifacts": [],
+        "commandAccepted": true,
+        "counts": {
+          "acquired": 0,
+          "cancelled": 0,
+          "dropped": 0,
+          "failed": 0,
+          "inFlight": 0,
+          "requested": 3,
+          "scheduled": 0,
+          "written": 0
+        },
+        "effective": {
+          "backpressure": {
+            "maximumConsecutiveSkips": 1,
+            "policy": "abort"
+          },
+          "capture": {
+            "clipboard": "none",
+            "destination": {
+              "baseName": "frame",
+              "directory": "<redacted-local-path>",
+              "overwrite": "never",
+              "policy": "absolute"
+            },
+            "outputs": [
+              {
+                "encoding": {
+                  "colourContract": "sdr_srgb",
+                  "format": "png"
+                },
+                "view": "left_eye"
+              },
+              {
+                "encoding": {
+                  "colourContract": "sdr_srgb",
+                  "format": "png"
+                },
+                "view": "right_eye"
+              }
+            ],
+            "source": {
+              "fallback": "reject",
+              "kind": "hmd_submission"
+            }
+          },
+          "failurePolicy": "abort",
+          "frameCount": 3,
+          "packaging": {
+            "frameManifest": true,
+            "previewVideo": {
+              "requested": false,
+              "required": false
+            }
+          },
+          "schedule": {
+            "basis": "wall_clock",
+            "intervalMs": 500,
+            "pausePolicy": "hold",
+            "startDelayMs": 2000
+          },
+          "useSettings": false
+        },
+        "error": null,
+        "errors": [],
+        "kind": "sequence",
+        "manifest": {
+          "finalPath": null,
+          "partialPath": "<redacted-local-path>"
+        },
+        "packaging": {
+          "frameManifest": {
+            "path": "<redacted-local-path>",
+            "requested": true,
+            "state": "partial"
+          },
+          "previewVideo": {
+            "requested": false,
+            "required": false,
+            "state": "not_requested"
+          }
+        },
+        "publication": {
+          "artifactCommitted": null,
+          "state": "settled"
+        },
+        "requested": {
+          "action": "sequence_start",
+          "contractMajor": 1,
+          "expectedBuildId": "ced967f33daf376e65a0950ad0bbb40b323b3d5507b5c3d58c2d3ff56eea5817",
+          "sequence": {
+            "backpressure": {
+              "maximumConsecutiveSkips": 1,
+              "policy": "abort"
+            },
+            "capture": {
+              "clipboard": "none",
+              "destination": {
+                "baseName": "frame",
+                "directory": "<redacted-local-path>",
+                "overwrite": "never",
+                "policy": "absolute"
+              },
+              "outputs": [
+                {
+                  "encoding": {
+                    "colourContract": "sdr_srgb",
+                    "format": "png"
+                  },
+                  "view": "left_eye"
+                },
+                {
+                  "encoding": {
+                    "colourContract": "sdr_srgb",
+                    "format": "png"
+                  },
+                  "view": "right_eye"
+                }
+              ],
+              "source": {
+                "fallback": "reject",
+                "kind": "hmd_submission"
+              }
+            },
+            "failurePolicy": "abort",
+            "frameCount": 3,
+            "packaging": {
+              "frameManifest": true,
+              "previewVideo": {
+                "requested": false,
+                "required": false
+              }
+            },
+            "schedule": {
+              "basis": "wall_clock",
+              "intervalMs": 500,
+              "pausePolicy": "hold",
+              "startDelayMs": 2000
+            },
+            "useSettings": false
+          }
+        },
+        "state": "finalizing",
+        "terminalUtc": null,
+        "termination": {
+          "cancelRequested": true,
+          "committedOutcome": "cancelled",
+          "finalizationCommitted": true,
+          "policyAbortCode": null,
+          "policyAbortRequested": false,
+          "preparationPending": false,
+          "stopRequested": false
+        },
+        "warnings": []
+      },
+      "server": {
+        "artifactSha256": "",
+        "buildId": "ced967f33daf376e65a0950ad0bbb40b323b3d5507b5c3d58c2d3ff56eea5817",
+        "buildIdShort": "ced967f33daf",
+        "component": "CommunityShaders",
+        "configuration": "Release",
+        "csxBuild": 11,
+        "csxVersion": "CSX 3.19-VR",
+        "devBenchBuilt": true,
+        "devBenchRegistered": true,
+        "featureVersion": "1.0.0",
+        "manifestError": "runtime artifact verification delegated to deployment harness",
+        "manifestVerified": false,
+        "runtime": {
+          "game": "SkyrimVR",
+          "hmd": "unknown",
+          "presentation": "openvr"
+        },
+        "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+        "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14",
+        "sourceDescribe": "f4fe744",
+        "sourceDirty": false
+      },
+      "timestampUtc": "2026-10-05T20:42:14.028Z"
+    },
+    "SEQUENCE-CANCEL-FRESH-PARENT.json": {
+      "command": {
+        "action": "request_get"
+      },
+      "contract": {
+        "major": 1,
+        "minor": 1,
+        "name": "csx.screenshot",
+        "schemaRevision": 2
+      },
+      "ok": true,
+      "result": {
+        "acceptedUtc": "2026-10-05T20:42:13.547Z",
+        "acknowledged": false,
+        "actual": {},
+        "artifactProgress": {
+          "expected": 1,
+          "successful": 1,
+          "terminal": 1
+        },
+        "artifacts": [
+          {
+            "bytes": 3913,
+            "committed": true,
+            "path": "<redacted-local-path>",
+            "sha256": "4f8be22435d2a46c4ded2ddb36261dafd171c5ca77c619fcaa18df20be5883b1"
+          }
+        ],
+        "counts": {
+          "acquired": 0,
+          "cancelled": 0,
+          "dropped": 0,
+          "failed": 0,
+          "inFlight": 0,
+          "requested": 3,
+          "scheduled": 0,
+          "written": 0
+        },
+        "effective": {
+          "backpressure": {
+            "maximumConsecutiveSkips": 1,
+            "policy": "abort"
+          },
+          "capture": {
+            "clipboard": "none",
+            "destination": {
+              "baseName": "frame",
+              "directory": "<redacted-local-path>",
+              "overwrite": "never",
+              "policy": "absolute"
+            },
+            "outputs": [
+              {
+                "encoding": {
+                  "colourContract": "sdr_srgb",
+                  "format": "png"
+                },
+                "view": "left_eye"
+              },
+              {
+                "encoding": {
+                  "colourContract": "sdr_srgb",
+                  "format": "png"
+                },
+                "view": "right_eye"
+              }
+            ],
+            "source": {
+              "fallback": "reject",
+              "kind": "hmd_submission"
+            }
+          },
+          "failurePolicy": "abort",
+          "frameCount": 3,
+          "packaging": {
+            "frameManifest": true,
+            "previewVideo": {
+              "requested": false,
+              "required": false
+            }
+          },
+          "schedule": {
+            "basis": "wall_clock",
+            "intervalMs": 500,
+            "pausePolicy": "hold",
+            "startDelayMs": 2000
+          },
+          "useSettings": false
+        },
+        "error": null,
+        "errors": [],
+        "kind": "sequence",
+        "manifest": {
+          "finalPath": "<redacted-local-path>",
+          "partialPath": "<redacted-local-path>"
+        },
+        "packaging": {
+          "frameManifest": {
+            "path": "<redacted-local-path>",
+            "requested": true,
+            "state": "written"
+          },
+          "previewVideo": {
+            "requested": false,
+            "required": false,
+            "state": "not_requested"
+          }
+        },
+        "publication": {
+          "artifactCommitted": null,
+          "state": "settled"
+        },
+        "requested": {
+          "action": "sequence_start",
+          "contractMajor": 1,
+          "expectedBuildId": "ced967f33daf376e65a0950ad0bbb40b323b3d5507b5c3d58c2d3ff56eea5817",
+          "sequence": {
+            "backpressure": {
+              "maximumConsecutiveSkips": 1,
+              "policy": "abort"
+            },
+            "capture": {
+              "clipboard": "none",
+              "destination": {
+                "baseName": "frame",
+                "directory": "<redacted-local-path>",
+                "overwrite": "never",
+                "policy": "absolute"
+              },
+              "outputs": [
+                {
+                  "encoding": {
+                    "colourContract": "sdr_srgb",
+                    "format": "png"
+                  },
+                  "view": "left_eye"
+                },
+                {
+                  "encoding": {
+                    "colourContract": "sdr_srgb",
+                    "format": "png"
+                  },
+                  "view": "right_eye"
+                }
+              ],
+              "source": {
+                "fallback": "reject",
+                "kind": "hmd_submission"
+              }
+            },
+            "failurePolicy": "abort",
+            "frameCount": 3,
+            "packaging": {
+              "frameManifest": true,
+              "previewVideo": {
+                "requested": false,
+                "required": false
+              }
+            },
+            "schedule": {
+              "basis": "wall_clock",
+              "intervalMs": 500,
+              "pausePolicy": "hold",
+              "startDelayMs": 2000
+            },
+            "useSettings": false
+          }
+        },
+        "state": "cancelled",
+        "terminalUtc": "2026-10-05T20:42:14.036Z",
+        "termination": {
+          "cancelRequested": true,
+          "committedOutcome": "cancelled",
+          "finalizationCommitted": true,
+          "policyAbortCode": null,
+          "policyAbortRequested": false,
+          "preparationPending": false,
+          "stopRequested": false
+        },
+        "warnings": []
+      },
+      "server": {
+        "artifactSha256": "",
+        "buildId": "ced967f33daf376e65a0950ad0bbb40b323b3d5507b5c3d58c2d3ff56eea5817",
+        "buildIdShort": "ced967f33daf",
+        "component": "CommunityShaders",
+        "configuration": "Release",
+        "csxBuild": 11,
+        "csxVersion": "CSX 3.19-VR",
+        "devBenchBuilt": true,
+        "devBenchRegistered": true,
+        "featureVersion": "1.0.0",
+        "manifestError": "runtime artifact verification delegated to deployment harness",
+        "manifestVerified": false,
+        "runtime": {
+          "game": "SkyrimVR",
+          "hmd": "unknown",
+          "presentation": "openvr"
+        },
+        "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+        "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14",
+        "sourceDescribe": "f4fe744",
+        "sourceDirty": false
+      },
+      "timestampUtc": "2026-10-05T20:42:14.993Z"
+    },
+    "SEQUENCE-CANCEL-START.json": {
+      "command": {
+        "action": "sequence_start"
+      },
+      "contract": {
+        "major": 1,
+        "minor": 1,
+        "name": "csx.screenshot",
+        "schemaRevision": 2
+      },
+      "ok": true,
+      "result": {
+        "acceptedUtc": "2026-10-05T20:42:13.547Z",
+        "acknowledged": false,
+        "actual": {},
+        "artifactProgress": {
+          "expected": 1,
+          "successful": 0,
+          "terminal": 0
+        },
+        "artifacts": [],
+        "counts": {
+          "acquired": 0,
+          "cancelled": 0,
+          "dropped": 0,
+          "failed": 0,
+          "inFlight": 0,
+          "requested": 3,
+          "scheduled": 0,
+          "written": 0
+        },
+        "effective": {
+          "backpressure": {
+            "maximumConsecutiveSkips": 1,
+            "policy": "abort"
+          },
+          "capture": {
+            "clipboard": "none",
+            "destination": {
+              "baseName": "frame",
+              "directory": "<redacted-local-path>",
+              "overwrite": "never",
+              "policy": "absolute"
+            },
+            "outputs": [
+              {
+                "encoding": {
+                  "colourContract": "sdr_srgb",
+                  "format": "png"
+                },
+                "view": "left_eye"
+              },
+              {
+                "encoding": {
+                  "colourContract": "sdr_srgb",
+                  "format": "png"
+                },
+                "view": "right_eye"
+              }
+            ],
+            "source": {
+              "fallback": "reject",
+              "kind": "hmd_submission"
+            }
+          },
+          "failurePolicy": "abort",
+          "frameCount": 3,
+          "packaging": {
+            "frameManifest": true,
+            "previewVideo": {
+              "requested": false,
+              "required": false
+            }
+          },
+          "schedule": {
+            "basis": "wall_clock",
+            "intervalMs": 500,
+            "pausePolicy": "hold",
+            "startDelayMs": 2000
+          },
+          "useSettings": false
+        },
+        "error": null,
+        "errors": [],
+        "kind": "sequence",
+        "manifest": {
+          "finalPath": null,
+          "partialPath": null
+        },
+        "packaging": {
+          "frameManifest": {
+            "requested": true,
+            "state": "pending"
+          },
+          "previewVideo": {
+            "requested": false,
+            "required": false,
+            "state": "not_requested"
+          }
+        },
+        "publication": {
+          "artifactCommitted": null,
+          "state": "settled"
+        },
+        "requested": {
+          "action": "sequence_start",
+          "contractMajor": 1,
+          "expectedBuildId": "ced967f33daf376e65a0950ad0bbb40b323b3d5507b5c3d58c2d3ff56eea5817",
+          "sequence": {
+            "backpressure": {
+              "maximumConsecutiveSkips": 1,
+              "policy": "abort"
+            },
+            "capture": {
+              "clipboard": "none",
+              "destination": {
+                "baseName": "frame",
+                "directory": "<redacted-local-path>",
+                "overwrite": "never",
+                "policy": "absolute"
+              },
+              "outputs": [
+                {
+                  "encoding": {
+                    "colourContract": "sdr_srgb",
+                    "format": "png"
+                  },
+                  "view": "left_eye"
+                },
+                {
+                  "encoding": {
+                    "colourContract": "sdr_srgb",
+                    "format": "png"
+                  },
+                  "view": "right_eye"
+                }
+              ],
+              "source": {
+                "fallback": "reject",
+                "kind": "hmd_submission"
+              }
+            },
+            "failurePolicy": "abort",
+            "frameCount": 3,
+            "packaging": {
+              "frameManifest": true,
+              "previewVideo": {
+                "requested": false,
+                "required": false
+              }
+            },
+            "schedule": {
+              "basis": "wall_clock",
+              "intervalMs": 500,
+              "pausePolicy": "hold",
+              "startDelayMs": 2000
+            },
+            "useSettings": false
+          }
+        },
+        "state": "preparing",
+        "terminalUtc": null,
+        "termination": {
+          "cancelRequested": false,
+          "committedOutcome": null,
+          "finalizationCommitted": false,
+          "policyAbortCode": null,
+          "policyAbortRequested": false,
+          "preparationPending": true,
+          "stopRequested": false
+        },
+        "warnings": []
+      },
+      "server": {
+        "artifactSha256": "",
+        "buildId": "ced967f33daf376e65a0950ad0bbb40b323b3d5507b5c3d58c2d3ff56eea5817",
+        "buildIdShort": "ced967f33daf",
+        "component": "CommunityShaders",
+        "configuration": "Release",
+        "csxBuild": 11,
+        "csxVersion": "CSX 3.19-VR",
+        "devBenchBuilt": true,
+        "devBenchRegistered": true,
+        "featureVersion": "1.0.0",
+        "manifestError": "runtime artifact verification delegated to deployment harness",
+        "manifestVerified": false,
+        "runtime": {
+          "game": "SkyrimVR",
+          "hmd": "unknown",
+          "presentation": "openvr"
+        },
+        "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+        "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14",
+        "sourceDescribe": "f4fe744",
+        "sourceDirty": false
+      },
+      "timestampUtc": "2026-10-05T20:42:13.547Z"
+    },
+    "SEQUENCE-NORMAL-BINDING-CORRECTED-CHILD-1.json": {
+      "command": {
+        "action": "request_get"
+      },
+      "contract": {
+        "major": 1,
+        "minor": 1,
+        "name": "csx.screenshot",
+        "schemaRevision": 2
+      },
+      "ok": true,
+      "result": {
+        "acceptedUtc": "2026-10-05T20:41:17.988Z",
+        "acknowledged": false,
+        "actual": {
+          "acquisition": {
+            "compositorCycle": 43900,
+            "engineFrame": 48223,
+            "monotonicTimestampUs": 2283440983917,
+            "planes": [
+              {
+                "boundsApplied": true,
+                "colourSpace": 1,
+                "dxgiFormat": 28,
+                "eye": "left",
+                "orientation": {
+                  "flipHorizontal": false,
+                  "flipVertical": false
+                },
+                "publicationGeneration": 4,
+                "sourceHeight": 1680,
+                "sourceWidth": 3024,
+                "stagedHeight": 1680,
+                "stagedWidth": 1512,
+                "submittedBounds": {
+                  "uMax": 0.5,
+                  "uMin": 0.0,
+                  "vMax": 1.0,
+                  "vMin": 0.0
+                },
+                "tonemapSceneHdr": false
+              },
+              {
+                "boundsApplied": true,
+                "colourSpace": 1,
+                "dxgiFormat": 28,
+                "eye": "right",
+                "orientation": {
+                  "flipHorizontal": false,
+                  "flipVertical": false
+                },
+                "publicationGeneration": 4,
+                "sourceHeight": 1680,
+                "sourceWidth": 3024,
+                "stagedHeight": 1680,
+                "stagedWidth": 1512,
+                "submittedBounds": {
+                  "uMax": 1.0,
+                  "uMin": 0.5,
+                  "vMax": 1.0,
+                  "vMin": 0.0
+                },
+                "tonemapSceneHdr": false
+              }
+            ],
+            "schedule": {
+              "basis": "wall_clock",
+              "latenessFrames": 0,
+              "latenessUs": 36961,
+              "requestedEngineFrame": 48223,
+              "requestedMonotonicTimestampUs": 2283440946956,
+              "requestedUtc": "2026-10-05T20:41:17.971Z"
+            },
+            "sourceKind": "hmd_submission",
+            "utcTimestamp": "2026-10-05T20:41:18.008Z"
+          },
+          "artifacts": [
+            {
+              "colourContract": "sdr_srgb",
+              "format": "png",
+              "height": 1680,
+              "view": "left_eye",
+              "width": 1512
+            },
+            {
+              "colourContract": "sdr_srgb",
+              "format": "png",
+              "height": 1680,
+              "view": "right_eye",
+              "width": 1512
+            }
+          ],
+          "source": {
+            "fallback": "reject",
+            "kind": "hmd_submission"
+          }
+        },
+        "artifactProgress": {
+          "expected": 2,
+          "successful": 2,
+          "terminal": 2
+        },
+        "artifacts": [
+          {
+            "actual": {
+              "colourContract": "sdr_srgb",
+              "format": "png",
+              "height": 1680,
+              "view": "left_eye",
+              "width": 1512
+            },
+            "bytes": 3038974,
+            "committed": true,
+            "path": "<redacted-local-path>",
+            "sha256": "13c363075adff4162bea9446fbdd428f430fa07c5e750b1ccf6c77ad086268a3"
+          },
+          {
+            "actual": {
+              "colourContract": "sdr_srgb",
+              "format": "png",
+              "height": 1680,
+              "view": "right_eye",
+              "width": 1512
+            },
+            "bytes": 3045234,
+            "committed": true,
+            "path": "<redacted-local-path>",
+            "sha256": "eb3b272b899eeab70348c028c38342c1129c15a9ec70f33aaaa60d80de5c5c5a"
+          }
+        ],
+        "effective": {
+          "clipboard": "none",
+          "destination": {
+            "baseName": "frame_000001",
+            "directory": "<redacted-local-path>",
+            "overwrite": "never",
+            "policy": "absolute",
+            "resolvedDirectory": "<redacted-local-path>"
+          },
+          "outputs": [
+            {
+              "encoding": {
+                "colourContract": "sdr_srgb",
+                "format": "png"
+              },
+              "nameSuffix": "left_eye",
+              "view": "left_eye"
+            },
+            {
+              "encoding": {
+                "colourContract": "sdr_srgb",
+                "format": "png"
+              },
+              "nameSuffix": "right_eye",
+              "view": "right_eye"
+            }
+          ],
+          "source": {
+            "fallback": "reject",
+            "kind": "hmd_submission"
+          },
+          "tags": {}
+        },
+        "error": null,
+        "errors": [],
+        "kind": "sequence_frame",
+        "publication": {
+          "artifactCommitted": null,
+          "state": "settled"
+        },
+        "requested": {
+          "action": "capture",
+          "contractMajor": 1
+        },
+        "sequenceOrdinal": 1,
+        "state": "completed",
+        "terminalUtc": "2026-10-05T20:41:18.399Z",
+        "warnings": []
+      },
+      "server": {
+        "artifactSha256": "",
+        "buildId": "ced967f33daf376e65a0950ad0bbb40b323b3d5507b5c3d58c2d3ff56eea5817",
+        "buildIdShort": "ced967f33daf",
+        "component": "CommunityShaders",
+        "configuration": "Release",
+        "csxBuild": 11,
+        "csxVersion": "CSX 3.19-VR",
+        "devBenchBuilt": true,
+        "devBenchRegistered": true,
+        "featureVersion": "1.0.0",
+        "manifestError": "runtime artifact verification delegated to deployment harness",
+        "manifestVerified": false,
+        "runtime": {
+          "game": "SkyrimVR",
+          "hmd": "unknown",
+          "presentation": "openvr"
+        },
+        "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+        "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14",
+        "sourceDescribe": "f4fe744",
+        "sourceDirty": false
+      },
+      "timestampUtc": "2026-10-05T20:41:20.765Z"
+    },
+    "SEQUENCE-NORMAL-BINDING-CORRECTED-CHILD-2.json": {
+      "command": {
+        "action": "request_get"
+      },
+      "contract": {
+        "major": 1,
+        "minor": 1,
+        "name": "csx.screenshot",
+        "schemaRevision": 2
+      },
+      "ok": true,
+      "result": {
+        "acceptedUtc": "2026-10-05T20:41:18.479Z",
+        "acknowledged": false,
+        "actual": {
+          "acquisition": {
+            "compositorCycle": 43933,
+            "engineFrame": 48256,
+            "monotonicTimestampUs": 2283441470630,
+            "planes": [
+              {
+                "boundsApplied": true,
+                "colourSpace": 1,
+                "dxgiFormat": 28,
+                "eye": "left",
+                "orientation": {
+                  "flipHorizontal": false,
+                  "flipVertical": false
+                },
+                "publicationGeneration": 4,
+                "sourceHeight": 1680,
+                "sourceWidth": 3024,
+                "stagedHeight": 1680,
+                "stagedWidth": 1512,
+                "submittedBounds": {
+                  "uMax": 0.5,
+                  "uMin": 0.0,
+                  "vMax": 1.0,
+                  "vMin": 0.0
+                },
+                "tonemapSceneHdr": false
+              },
+              {
+                "boundsApplied": true,
+                "colourSpace": 1,
+                "dxgiFormat": 28,
+                "eye": "right",
+                "orientation": {
+                  "flipHorizontal": false,
+                  "flipVertical": false
+                },
+                "publicationGeneration": 4,
+                "sourceHeight": 1680,
+                "sourceWidth": 3024,
+                "stagedHeight": 1680,
+                "stagedWidth": 1512,
+                "submittedBounds": {
+                  "uMax": 1.0,
+                  "uMin": 0.5,
+                  "vMax": 1.0,
+                  "vMin": 0.0
+                },
+                "tonemapSceneHdr": false
+              }
+            ],
+            "schedule": {
+              "basis": "wall_clock",
+              "latenessFrames": 0,
+              "latenessUs": 23674,
+              "requestedEngineFrame": 48256,
+              "requestedMonotonicTimestampUs": 2283441446956,
+              "requestedUtc": "2026-10-05T20:41:18.471Z"
+            },
+            "sourceKind": "hmd_submission",
+            "utcTimestamp": "2026-10-05T20:41:18.494Z"
+          },
+          "artifacts": [
+            {
+              "colourContract": "sdr_srgb",
+              "format": "png",
+              "height": 1680,
+              "view": "left_eye",
+              "width": 1512
+            },
+            {
+              "colourContract": "sdr_srgb",
+              "format": "png",
+              "height": 1680,
+              "view": "right_eye",
+              "width": 1512
+            }
+          ],
+          "source": {
+            "fallback": "reject",
+            "kind": "hmd_submission"
+          }
+        },
+        "artifactProgress": {
+          "expected": 2,
+          "successful": 2,
+          "terminal": 2
+        },
+        "artifacts": [
+          {
+            "actual": {
+              "colourContract": "sdr_srgb",
+              "format": "png",
+              "height": 1680,
+              "view": "left_eye",
+              "width": 1512
+            },
+            "bytes": 3022099,
+            "committed": true,
+            "path": "<redacted-local-path>",
+            "sha256": "65d8774ee1153a5dcb1106a5df9e1b7bab67d6bda4867e0d5a7918f5bf2d02ba"
+          },
+          {
+            "actual": {
+              "colourContract": "sdr_srgb",
+              "format": "png",
+              "height": 1680,
+              "view": "right_eye",
+              "width": 1512
+            },
+            "bytes": 3029637,
+            "committed": true,
+            "path": "<redacted-local-path>",
+            "sha256": "15816479e6a7e8cf386e5cdfb8e95a75b56f94fad337ab9f52151909d76b5741"
+          }
+        ],
+        "effective": {
+          "clipboard": "none",
+          "destination": {
+            "baseName": "frame_000002",
+            "directory": "<redacted-local-path>",
+            "overwrite": "never",
+            "policy": "absolute",
+            "resolvedDirectory": "<redacted-local-path>"
+          },
+          "outputs": [
+            {
+              "encoding": {
+                "colourContract": "sdr_srgb",
+                "format": "png"
+              },
+              "nameSuffix": "left_eye",
+              "view": "left_eye"
+            },
+            {
+              "encoding": {
+                "colourContract": "sdr_srgb",
+                "format": "png"
+              },
+              "nameSuffix": "right_eye",
+              "view": "right_eye"
+            }
+          ],
+          "source": {
+            "fallback": "reject",
+            "kind": "hmd_submission"
+          },
+          "tags": {}
+        },
+        "error": null,
+        "errors": [],
+        "kind": "sequence_frame",
+        "publication": {
+          "artifactCommitted": null,
+          "state": "settled"
+        },
+        "requested": {
+          "action": "capture",
+          "contractMajor": 1
+        },
+        "sequenceOrdinal": 2,
+        "state": "completed",
+        "terminalUtc": "2026-10-05T20:41:18.895Z",
+        "warnings": []
+      },
+      "server": {
+        "artifactSha256": "",
+        "buildId": "ced967f33daf376e65a0950ad0bbb40b323b3d5507b5c3d58c2d3ff56eea5817",
+        "buildIdShort": "ced967f33daf",
+        "component": "CommunityShaders",
+        "configuration": "Release",
+        "csxBuild": 11,
+        "csxVersion": "CSX 3.19-VR",
+        "devBenchBuilt": true,
+        "devBenchRegistered": true,
+        "featureVersion": "1.0.0",
+        "manifestError": "runtime artifact verification delegated to deployment harness",
+        "manifestVerified": false,
+        "runtime": {
+          "game": "SkyrimVR",
+          "hmd": "unknown",
+          "presentation": "openvr"
+        },
+        "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+        "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14",
+        "sourceDescribe": "f4fe744",
+        "sourceDirty": false
+      },
+      "timestampUtc": "2026-10-05T20:41:21.200Z"
+    },
+    "SEQUENCE-NORMAL-BINDING-CORRECTED-CHILD-3.json": {
+      "command": {
+        "action": "request_get"
+      },
+      "contract": {
+        "major": 1,
+        "minor": 1,
+        "name": "csx.screenshot",
+        "schemaRevision": 2
+      },
+      "ok": true,
+      "result": {
+        "acceptedUtc": "2026-10-05T20:41:18.973Z",
+        "acknowledged": false,
+        "actual": {
+          "acquisition": {
+            "compositorCycle": 43965,
+            "engineFrame": 48288,
+            "monotonicTimestampUs": 2283441966092,
+            "planes": [
+              {
+                "boundsApplied": true,
+                "colourSpace": 1,
+                "dxgiFormat": 28,
+                "eye": "left",
+                "orientation": {
+                  "flipHorizontal": false,
+                  "flipVertical": false
+                },
+                "publicationGeneration": 4,
+                "sourceHeight": 1680,
+                "sourceWidth": 3024,
+                "stagedHeight": 1680,
+                "stagedWidth": 1512,
+                "submittedBounds": {
+                  "uMax": 0.5,
+                  "uMin": 0.0,
+                  "vMax": 1.0,
+                  "vMin": 0.0
+                },
+                "tonemapSceneHdr": false
+              },
+              {
+                "boundsApplied": true,
+                "colourSpace": 1,
+                "dxgiFormat": 28,
+                "eye": "right",
+                "orientation": {
+                  "flipHorizontal": false,
+                  "flipVertical": false
+                },
+                "publicationGeneration": 4,
+                "sourceHeight": 1680,
+                "sourceWidth": 3024,
+                "stagedHeight": 1680,
+                "stagedWidth": 1512,
+                "submittedBounds": {
+                  "uMax": 1.0,
+                  "uMin": 0.5,
+                  "vMax": 1.0,
+                  "vMin": 0.0
+                },
+                "tonemapSceneHdr": false
+              }
+            ],
+            "schedule": {
+              "basis": "wall_clock",
+              "latenessFrames": 0,
+              "latenessUs": 19136,
+              "requestedEngineFrame": 48288,
+              "requestedMonotonicTimestampUs": 2283441946956,
+              "requestedUtc": "2026-10-05T20:41:18.971Z"
+            },
+            "sourceKind": "hmd_submission",
+            "utcTimestamp": "2026-10-05T20:41:18.990Z"
+          },
+          "artifacts": [
+            {
+              "colourContract": "sdr_srgb",
+              "format": "png",
+              "height": 1680,
+              "view": "left_eye",
+              "width": 1512
+            },
+            {
+              "colourContract": "sdr_srgb",
+              "format": "png",
+              "height": 1680,
+              "view": "right_eye",
+              "width": 1512
+            }
+          ],
+          "source": {
+            "fallback": "reject",
+            "kind": "hmd_submission"
+          }
+        },
+        "artifactProgress": {
+          "expected": 2,
+          "successful": 2,
+          "terminal": 2
+        },
+        "artifacts": [
+          {
+            "actual": {
+              "colourContract": "sdr_srgb",
+              "format": "png",
+              "height": 1680,
+              "view": "left_eye",
+              "width": 1512
+            },
+            "bytes": 3044606,
+            "committed": true,
+            "path": "<redacted-local-path>",
+            "sha256": "8ed0018163dce5005250759eab017f24b01e419a8695b77e6957716da161caa0"
+          },
+          {
+            "actual": {
+              "colourContract": "sdr_srgb",
+              "format": "png",
+              "height": 1680,
+              "view": "right_eye",
+              "width": 1512
+            },
+            "bytes": 3048032,
+            "committed": true,
+            "path": "<redacted-local-path>",
+            "sha256": "fe4639e321c5a9636ef0481ca7d24876107187054f0b3f09b98bde9cb443ac64"
+          }
+        ],
+        "effective": {
+          "clipboard": "none",
+          "destination": {
+            "baseName": "frame_000003",
+            "directory": "<redacted-local-path>",
+            "overwrite": "never",
+            "policy": "absolute",
+            "resolvedDirectory": "<redacted-local-path>"
+          },
+          "outputs": [
+            {
+              "encoding": {
+                "colourContract": "sdr_srgb",
+                "format": "png"
+              },
+              "nameSuffix": "left_eye",
+              "view": "left_eye"
+            },
+            {
+              "encoding": {
+                "colourContract": "sdr_srgb",
+                "format": "png"
+              },
+              "nameSuffix": "right_eye",
+              "view": "right_eye"
+            }
+          ],
+          "source": {
+            "fallback": "reject",
+            "kind": "hmd_submission"
+          },
+          "tags": {}
+        },
+        "error": null,
+        "errors": [],
+        "kind": "sequence_frame",
+        "publication": {
+          "artifactCommitted": null,
+          "state": "settled"
+        },
+        "requested": {
+          "action": "capture",
+          "contractMajor": 1
+        },
+        "sequenceOrdinal": 3,
+        "state": "completed",
+        "terminalUtc": "2026-10-05T20:41:19.409Z",
+        "warnings": []
+      },
+      "server": {
+        "artifactSha256": "",
+        "buildId": "ced967f33daf376e65a0950ad0bbb40b323b3d5507b5c3d58c2d3ff56eea5817",
+        "buildIdShort": "ced967f33daf",
+        "component": "CommunityShaders",
+        "configuration": "Release",
+        "csxBuild": 11,
+        "csxVersion": "CSX 3.19-VR",
+        "devBenchBuilt": true,
+        "devBenchRegistered": true,
+        "featureVersion": "1.0.0",
+        "manifestError": "runtime artifact verification delegated to deployment harness",
+        "manifestVerified": false,
+        "runtime": {
+          "game": "SkyrimVR",
+          "hmd": "unknown",
+          "presentation": "openvr"
+        },
+        "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+        "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14",
+        "sourceDescribe": "f4fe744",
+        "sourceDirty": false
+      },
+      "timestampUtc": "2026-10-05T20:41:21.584Z"
+    },
+    "SEQUENCE-NORMAL-BINDING-CORRECTED-FRESH-PARENT.json": {
+      "command": {
+        "action": "request_get"
+      },
+      "contract": {
+        "major": 1,
+        "minor": 1,
+        "name": "csx.screenshot",
+        "schemaRevision": 2
+      },
+      "ok": true,
+      "result": {
+        "acceptedUtc": "2026-10-05T20:41:17.971Z",
+        "acknowledged": false,
+        "actual": {},
+        "artifactProgress": {
+          "expected": 1,
+          "successful": 1,
+          "terminal": 1
+        },
+        "artifacts": [
+          {
+            "bytes": 19653,
+            "committed": true,
+            "path": "<redacted-local-path>",
+            "sha256": "cc4824cbd7017482ec86f01e197e9babaaaf84fda0b26bf2f74fc6e74f0c9c52"
+          }
+        ],
+        "counts": {
+          "acquired": 3,
+          "cancelled": 0,
+          "dropped": 0,
+          "failed": 0,
+          "inFlight": 0,
+          "requested": 3,
+          "scheduled": 3,
+          "written": 3
+        },
+        "effective": {
+          "backpressure": {
+            "maximumConsecutiveSkips": 1,
+            "policy": "abort"
+          },
+          "capture": {
+            "clipboard": "none",
+            "destination": {
+              "baseName": "frame",
+              "directory": "<redacted-local-path>",
+              "overwrite": "never",
+              "policy": "absolute"
+            },
+            "outputs": [
+              {
+                "encoding": {
+                  "colourContract": "sdr_srgb",
+                  "format": "png"
+                },
+                "view": "left_eye"
+              },
+              {
+                "encoding": {
+                  "colourContract": "sdr_srgb",
+                  "format": "png"
+                },
+                "view": "right_eye"
+              }
+            ],
+            "source": {
+              "fallback": "reject",
+              "kind": "hmd_submission"
+            }
+          },
+          "failurePolicy": "abort",
+          "frameCount": 3,
+          "packaging": {
+            "frameManifest": true,
+            "previewVideo": {
+              "requested": false,
+              "required": false
+            }
+          },
+          "schedule": {
+            "basis": "wall_clock",
+            "intervalMs": 500,
+            "pausePolicy": "hold",
+            "startDelayMs": 0
+          },
+          "useSettings": false
+        },
+        "error": null,
+        "errors": [],
+        "kind": "sequence",
+        "manifest": {
+          "finalPath": "<redacted-local-path>",
+          "partialPath": "<redacted-local-path>"
+        },
+        "packaging": {
+          "frameManifest": {
+            "path": "<redacted-local-path>",
+            "requested": true,
+            "state": "written"
+          },
+          "previewVideo": {
+            "requested": false,
+            "required": false,
+            "state": "not_requested"
+          }
+        },
+        "publication": {
+          "artifactCommitted": null,
+          "state": "settled"
+        },
+        "requested": {
+          "action": "sequence_start",
+          "contractMajor": 1,
+          "expectedBuildId": "ced967f33daf376e65a0950ad0bbb40b323b3d5507b5c3d58c2d3ff56eea5817",
+          "sequence": {
+            "backpressure": {
+              "maximumConsecutiveSkips": 1,
+              "policy": "abort"
+            },
+            "capture": {
+              "clipboard": "none",
+              "destination": {
+                "baseName": "frame",
+                "directory": "<redacted-local-path>",
+                "overwrite": "never",
+                "policy": "absolute"
+              },
+              "outputs": [
+                {
+                  "encoding": {
+                    "colourContract": "sdr_srgb",
+                    "format": "png"
+                  },
+                  "view": "left_eye"
+                },
+                {
+                  "encoding": {
+                    "colourContract": "sdr_srgb",
+                    "format": "png"
+                  },
+                  "view": "right_eye"
+                }
+              ],
+              "source": {
+                "fallback": "reject",
+                "kind": "hmd_submission"
+              }
+            },
+            "failurePolicy": "abort",
+            "frameCount": 3,
+            "packaging": {
+              "frameManifest": true,
+              "previewVideo": {
+                "requested": false,
+                "required": false
+              }
+            },
+            "schedule": {
+              "basis": "wall_clock",
+              "intervalMs": 500,
+              "pausePolicy": "hold",
+              "startDelayMs": 0
+            },
+            "useSettings": false
+          }
+        },
+        "state": "completed",
+        "terminalUtc": "2026-10-05T20:41:19.418Z",
+        "termination": {
+          "cancelRequested": false,
+          "committedOutcome": "completed",
+          "finalizationCommitted": true,
+          "policyAbortCode": null,
+          "policyAbortRequested": false,
+          "preparationPending": false,
+          "stopRequested": false
+        },
+        "warnings": []
+      },
+      "server": {
+        "artifactSha256": "",
+        "buildId": "ced967f33daf376e65a0950ad0bbb40b323b3d5507b5c3d58c2d3ff56eea5817",
+        "buildIdShort": "ced967f33daf",
+        "component": "CommunityShaders",
+        "configuration": "Release",
+        "csxBuild": 11,
+        "csxVersion": "CSX 3.19-VR",
+        "devBenchBuilt": true,
+        "devBenchRegistered": true,
+        "featureVersion": "1.0.0",
+        "manifestError": "runtime artifact verification delegated to deployment harness",
+        "manifestVerified": false,
+        "runtime": {
+          "game": "SkyrimVR",
+          "hmd": "unknown",
+          "presentation": "openvr"
+        },
+        "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+        "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14",
+        "sourceDescribe": "f4fe744",
+        "sourceDirty": false
+      },
+      "timestampUtc": "2026-10-05T20:41:20.345Z"
+    },
+    "SEQUENCE-NORMAL-BINDING-CORRECTED-START.json": {
+      "command": {
+        "action": "sequence_start"
+      },
+      "contract": {
+        "major": 1,
+        "minor": 1,
+        "name": "csx.screenshot",
+        "schemaRevision": 2
+      },
+      "ok": true,
+      "result": {
+        "acceptedUtc": "2026-10-05T20:41:17.971Z",
+        "acknowledged": false,
+        "actual": {},
+        "artifactProgress": {
+          "expected": 1,
+          "successful": 0,
+          "terminal": 0
+        },
+        "artifacts": [],
+        "counts": {
+          "acquired": 0,
+          "cancelled": 0,
+          "dropped": 0,
+          "failed": 0,
+          "inFlight": 0,
+          "requested": 3,
+          "scheduled": 0,
+          "written": 0
+        },
+        "effective": {
+          "backpressure": {
+            "maximumConsecutiveSkips": 1,
+            "policy": "abort"
+          },
+          "capture": {
+            "clipboard": "none",
+            "destination": {
+              "baseName": "frame",
+              "directory": "<redacted-local-path>",
+              "overwrite": "never",
+              "policy": "absolute"
+            },
+            "outputs": [
+              {
+                "encoding": {
+                  "colourContract": "sdr_srgb",
+                  "format": "png"
+                },
+                "view": "left_eye"
+              },
+              {
+                "encoding": {
+                  "colourContract": "sdr_srgb",
+                  "format": "png"
+                },
+                "view": "right_eye"
+              }
+            ],
+            "source": {
+              "fallback": "reject",
+              "kind": "hmd_submission"
+            }
+          },
+          "failurePolicy": "abort",
+          "frameCount": 3,
+          "packaging": {
+            "frameManifest": true,
+            "previewVideo": {
+              "requested": false,
+              "required": false
+            }
+          },
+          "schedule": {
+            "basis": "wall_clock",
+            "intervalMs": 500,
+            "pausePolicy": "hold",
+            "startDelayMs": 0
+          },
+          "useSettings": false
+        },
+        "error": null,
+        "errors": [],
+        "kind": "sequence",
+        "manifest": {
+          "finalPath": null,
+          "partialPath": null
+        },
+        "packaging": {
+          "frameManifest": {
+            "requested": true,
+            "state": "pending"
+          },
+          "previewVideo": {
+            "requested": false,
+            "required": false,
+            "state": "not_requested"
+          }
+        },
+        "publication": {
+          "artifactCommitted": null,
+          "state": "settled"
+        },
+        "requested": {
+          "action": "sequence_start",
+          "contractMajor": 1,
+          "expectedBuildId": "ced967f33daf376e65a0950ad0bbb40b323b3d5507b5c3d58c2d3ff56eea5817",
+          "sequence": {
+            "backpressure": {
+              "maximumConsecutiveSkips": 1,
+              "policy": "abort"
+            },
+            "capture": {
+              "clipboard": "none",
+              "destination": {
+                "baseName": "frame",
+                "directory": "<redacted-local-path>",
+                "overwrite": "never",
+                "policy": "absolute"
+              },
+              "outputs": [
+                {
+                  "encoding": {
+                    "colourContract": "sdr_srgb",
+                    "format": "png"
+                  },
+                  "view": "left_eye"
+                },
+                {
+                  "encoding": {
+                    "colourContract": "sdr_srgb",
+                    "format": "png"
+                  },
+                  "view": "right_eye"
+                }
+              ],
+              "source": {
+                "fallback": "reject",
+                "kind": "hmd_submission"
+              }
+            },
+            "failurePolicy": "abort",
+            "frameCount": 3,
+            "packaging": {
+              "frameManifest": true,
+              "previewVideo": {
+                "requested": false,
+                "required": false
+              }
+            },
+            "schedule": {
+              "basis": "wall_clock",
+              "intervalMs": 500,
+              "pausePolicy": "hold",
+              "startDelayMs": 0
+            },
+            "useSettings": false
+          }
+        },
+        "state": "preparing",
+        "terminalUtc": null,
+        "termination": {
+          "cancelRequested": false,
+          "committedOutcome": null,
+          "finalizationCommitted": false,
+          "policyAbortCode": null,
+          "policyAbortRequested": false,
+          "preparationPending": true,
+          "stopRequested": false
+        },
+        "warnings": []
+      },
+      "server": {
+        "artifactSha256": "",
+        "buildId": "ced967f33daf376e65a0950ad0bbb40b323b3d5507b5c3d58c2d3ff56eea5817",
+        "buildIdShort": "ced967f33daf",
+        "component": "CommunityShaders",
+        "configuration": "Release",
+        "csxBuild": 11,
+        "csxVersion": "CSX 3.19-VR",
+        "devBenchBuilt": true,
+        "devBenchRegistered": true,
+        "featureVersion": "1.0.0",
+        "manifestError": "runtime artifact verification delegated to deployment harness",
+        "manifestVerified": false,
+        "runtime": {
+          "game": "SkyrimVR",
+          "hmd": "unknown",
+          "presentation": "openvr"
+        },
+        "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+        "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14",
+        "sourceDescribe": "f4fe744",
+        "sourceDirty": false
+      },
+      "timestampUtc": "2026-10-05T20:41:17.971Z"
+    },
+    "SEQUENCE-PREPARATION_FAILURE-READ-1.json": {
+      "command": {
+        "action": "request_get"
+      },
+      "contract": {
+        "major": 1,
+        "minor": 1,
+        "name": "csx.screenshot",
+        "schemaRevision": 2
+      },
+      "ok": true,
+      "result": {
+        "acceptedUtc": "2026-10-05T20:42:17.479Z",
+        "acknowledged": false,
+        "actual": {},
+        "artifactProgress": {
+          "expected": 1,
+          "successful": 0,
+          "terminal": 1
+        },
+        "artifacts": [],
+        "counts": {
+          "acquired": 0,
+          "cancelled": 0,
+          "dropped": 0,
+          "failed": 0,
+          "inFlight": 0,
+          "requested": 3,
+          "scheduled": 0,
+          "written": 0
+        },
+        "effective": {
+          "backpressure": {
+            "maximumConsecutiveSkips": 1,
+            "policy": "abort"
+          },
+          "capture": {
+            "clipboard": "none",
+            "destination": {
+              "baseName": "frame",
+              "directory": "<redacted-local-path>",
+              "overwrite": "never",
+              "policy": "absolute"
+            },
+            "outputs": [
+              {
+                "encoding": {
+                  "colourContract": "sdr_srgb",
+                  "format": "png"
+                },
+                "view": "left_eye"
+              },
+              {
+                "encoding": {
+                  "colourContract": "sdr_srgb",
+                  "format": "png"
+                },
+                "view": "right_eye"
+              }
+            ],
+            "source": {
+              "fallback": "reject",
+              "kind": "hmd_submission"
+            }
+          },
+          "failurePolicy": "abort",
+          "frameCount": 3,
+          "packaging": {
+            "frameManifest": true,
+            "previewVideo": {
+              "requested": false,
+              "required": false
+            }
+          },
+          "schedule": {
+            "basis": "wall_clock",
+            "intervalMs": 500,
+            "pausePolicy": "hold",
+            "startDelayMs": 0
+          },
+          "useSettings": false
+        },
+        "error": {
+          "code": "destination_preparation_failed",
+          "message": "<redacted-local-path>",
+          "phase": "preparation"
+        },
+        "errors": [
+          {
+            "code": "destination_preparation_failed",
+            "message": "<redacted-local-path>",
+            "phase": "preparation"
+          }
+        ],
+        "kind": "sequence",
+        "manifest": {
+          "finalPath": null,
+          "partialPath": ""
+        },
+        "packaging": {
+          "frameManifest": {
+            "error": "<redacted-local-path>",
+            "path": null,
+            "requested": true,
+            "state": "failed"
+          },
+          "previewVideo": {
+            "requested": false,
+            "required": false,
+            "state": "not_requested"
+          }
+        },
+        "publication": {
+          "artifactCommitted": null,
+          "state": "settled"
+        },
+        "requested": {
+          "action": "sequence_start",
+          "contractMajor": 1,
+          "expectedBuildId": "ced967f33daf376e65a0950ad0bbb40b323b3d5507b5c3d58c2d3ff56eea5817",
+          "sequence": {
+            "backpressure": {
+              "maximumConsecutiveSkips": 1,
+              "policy": "abort"
+            },
+            "capture": {
+              "clipboard": "none",
+              "destination": {
+                "baseName": "frame",
+                "directory": "<redacted-local-path>",
+                "overwrite": "never",
+                "policy": "absolute"
+              },
+              "outputs": [
+                {
+                  "encoding": {
+                    "colourContract": "sdr_srgb",
+                    "format": "png"
+                  },
+                  "view": "left_eye"
+                },
+                {
+                  "encoding": {
+                    "colourContract": "sdr_srgb",
+                    "format": "png"
+                  },
+                  "view": "right_eye"
+                }
+              ],
+              "source": {
+                "fallback": "reject",
+                "kind": "hmd_submission"
+              }
+            },
+            "failurePolicy": "abort",
+            "frameCount": 3,
+            "packaging": {
+              "frameManifest": true,
+              "previewVideo": {
+                "requested": false,
+                "required": false
+              }
+            },
+            "schedule": {
+              "basis": "wall_clock",
+              "intervalMs": 500,
+              "pausePolicy": "hold",
+              "startDelayMs": 0
+            },
+            "useSettings": false
+          }
+        },
+        "state": "failed",
+        "terminalUtc": "2026-10-05T20:42:17.480Z",
+        "termination": {
+          "cancelRequested": false,
+          "committedOutcome": null,
+          "finalizationCommitted": true,
+          "policyAbortCode": null,
+          "policyAbortRequested": false,
+          "preparationPending": false,
+          "stopRequested": false
+        },
+        "warnings": []
+      },
+      "server": {
+        "artifactSha256": "",
+        "buildId": "ced967f33daf376e65a0950ad0bbb40b323b3d5507b5c3d58c2d3ff56eea5817",
+        "buildIdShort": "ced967f33daf",
+        "component": "CommunityShaders",
+        "configuration": "Release",
+        "csxBuild": 11,
+        "csxVersion": "CSX 3.19-VR",
+        "devBenchBuilt": true,
+        "devBenchRegistered": true,
+        "featureVersion": "1.0.0",
+        "manifestError": "runtime artifact verification delegated to deployment harness",
+        "manifestVerified": false,
+        "runtime": {
+          "game": "SkyrimVR",
+          "hmd": "unknown",
+          "presentation": "openvr"
+        },
+        "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+        "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14",
+        "sourceDescribe": "f4fe744",
+        "sourceDirty": false
+      },
+      "timestampUtc": "2026-10-05T20:42:18.196Z"
+    },
+    "SEQUENCE-PREPARATION_FAILURE-START.json": {
+      "command": {
+        "action": "sequence_start"
+      },
+      "contract": {
+        "major": 1,
+        "minor": 1,
+        "name": "csx.screenshot",
+        "schemaRevision": 2
+      },
+      "ok": true,
+      "result": {
+        "acceptedUtc": "2026-10-05T20:42:17.479Z",
+        "acknowledged": false,
+        "actual": {},
+        "artifactProgress": {
+          "expected": 1,
+          "successful": 0,
+          "terminal": 0
+        },
+        "artifacts": [],
+        "counts": {
+          "acquired": 0,
+          "cancelled": 0,
+          "dropped": 0,
+          "failed": 0,
+          "inFlight": 0,
+          "requested": 3,
+          "scheduled": 0,
+          "written": 0
+        },
+        "effective": {
+          "backpressure": {
+            "maximumConsecutiveSkips": 1,
+            "policy": "abort"
+          },
+          "capture": {
+            "clipboard": "none",
+            "destination": {
+              "baseName": "frame",
+              "directory": "<redacted-local-path>",
+              "overwrite": "never",
+              "policy": "absolute"
+            },
+            "outputs": [
+              {
+                "encoding": {
+                  "colourContract": "sdr_srgb",
+                  "format": "png"
+                },
+                "view": "left_eye"
+              },
+              {
+                "encoding": {
+                  "colourContract": "sdr_srgb",
+                  "format": "png"
+                },
+                "view": "right_eye"
+              }
+            ],
+            "source": {
+              "fallback": "reject",
+              "kind": "hmd_submission"
+            }
+          },
+          "failurePolicy": "abort",
+          "frameCount": 3,
+          "packaging": {
+            "frameManifest": true,
+            "previewVideo": {
+              "requested": false,
+              "required": false
+            }
+          },
+          "schedule": {
+            "basis": "wall_clock",
+            "intervalMs": 500,
+            "pausePolicy": "hold",
+            "startDelayMs": 0
+          },
+          "useSettings": false
+        },
+        "error": null,
+        "errors": [],
+        "kind": "sequence",
+        "manifest": {
+          "finalPath": null,
+          "partialPath": null
+        },
+        "packaging": {
+          "frameManifest": {
+            "requested": true,
+            "state": "pending"
+          },
+          "previewVideo": {
+            "requested": false,
+            "required": false,
+            "state": "not_requested"
+          }
+        },
+        "publication": {
+          "artifactCommitted": null,
+          "state": "settled"
+        },
+        "requested": {
+          "action": "sequence_start",
+          "contractMajor": 1,
+          "expectedBuildId": "ced967f33daf376e65a0950ad0bbb40b323b3d5507b5c3d58c2d3ff56eea5817",
+          "sequence": {
+            "backpressure": {
+              "maximumConsecutiveSkips": 1,
+              "policy": "abort"
+            },
+            "capture": {
+              "clipboard": "none",
+              "destination": {
+                "baseName": "frame",
+                "directory": "<redacted-local-path>",
+                "overwrite": "never",
+                "policy": "absolute"
+              },
+              "outputs": [
+                {
+                  "encoding": {
+                    "colourContract": "sdr_srgb",
+                    "format": "png"
+                  },
+                  "view": "left_eye"
+                },
+                {
+                  "encoding": {
+                    "colourContract": "sdr_srgb",
+                    "format": "png"
+                  },
+                  "view": "right_eye"
+                }
+              ],
+              "source": {
+                "fallback": "reject",
+                "kind": "hmd_submission"
+              }
+            },
+            "failurePolicy": "abort",
+            "frameCount": 3,
+            "packaging": {
+              "frameManifest": true,
+              "previewVideo": {
+                "requested": false,
+                "required": false
+              }
+            },
+            "schedule": {
+              "basis": "wall_clock",
+              "intervalMs": 500,
+              "pausePolicy": "hold",
+              "startDelayMs": 0
+            },
+            "useSettings": false
+          }
+        },
+        "state": "preparing",
+        "terminalUtc": null,
+        "termination": {
+          "cancelRequested": false,
+          "committedOutcome": null,
+          "finalizationCommitted": false,
+          "policyAbortCode": null,
+          "policyAbortRequested": false,
+          "preparationPending": true,
+          "stopRequested": false
+        },
+        "warnings": []
+      },
+      "server": {
+        "artifactSha256": "",
+        "buildId": "ced967f33daf376e65a0950ad0bbb40b323b3d5507b5c3d58c2d3ff56eea5817",
+        "buildIdShort": "ced967f33daf",
+        "component": "CommunityShaders",
+        "configuration": "Release",
+        "csxBuild": 11,
+        "csxVersion": "CSX 3.19-VR",
+        "devBenchBuilt": true,
+        "devBenchRegistered": true,
+        "featureVersion": "1.0.0",
+        "manifestError": "runtime artifact verification delegated to deployment harness",
+        "manifestVerified": false,
+        "runtime": {
+          "game": "SkyrimVR",
+          "hmd": "unknown",
+          "presentation": "openvr"
+        },
+        "shaderCacheAbiId": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+        "shaderCompilerIdentity": "d3dcompiler_47.dll:10.0.26100.9168",
+        "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14",
+        "sourceDescribe": "f4fe744",
+        "sourceDirty": false
+      },
+      "timestampUtc": "2026-10-05T20:42:17.479Z"
+    }
+  }
+}

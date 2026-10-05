@@ -1,0 +1,51 @@
+{
+  "content": {
+    "fileCount": 8,
+    "root": "content",
+    "totalBytes": 5379442,
+    "treeSha256": "40E1B79F170BA27AB8D19F33E76590A869CF83759C107DFD1CD0921ECACC171E"
+  },
+  "contributor": {
+    "displayName": "Treatid2",
+    "github": "Treatid2",
+    "standing": "ordinary-contributor"
+  },
+  "createdAt": "2026-10-05T21:14:12.593600+00:00",
+  "licensing": {
+    "content": "CC-BY-SA-4.0",
+    "dcoAcknowledged": true,
+    "schemas": "CC0-1.0"
+  },
+  "namespace": "csx",
+  "notes": "f4 diagnostic native10slotcompletion, one289rawsamplepage, normal3child/cancel/preparationfailure andindependentcleanup;incompletecolourassay/adaptergaps preserved.",
+  "provenance": {
+    "importedAt": "2026-10-05T21:14:12.593600+00:00",
+    "relatedUrls": [
+      "https://github.com/Treatid2/skyrim-community-shaders/commit/f4fe744560df1aa890e90f8b794c28983f156c14",
+      "https://github.com/Treatid2/skyrim-render-map/pull/40"
+    ],
+    "sourceCommit": "f4fe744560df1aa890e90f8b794c28983f156c14",
+    "sourceContentTreeSha256": "9a3cd96566dee3202420b7e0a2c2c9104d906b3571d2151ed72fb969b21c3c71",
+    "sourceDirty": false,
+    "sourceParentCommit": "2f19fe27e886068348d83d4ef0900e3eae52ede9",
+    "sourcePubliclyReachable": true,
+    "sourceRef": null,
+    "sourceRepository": "https://github.com/Treatid2/skyrim-community-shaders",
+    "sourceState": "public-branch",
+    "transformations": [
+      "Finite immutable original andsource/package/adapter bytesrehashed, nooriginalmodification.",
+      "34decodedRPCs andall2756pairedtrackingstep projectionswithprivate IDsremoved, nocamerareconstruction.",
+      "One289sample rawpage independentlydecoded withpinnedR11G11B10source, no transferconversion/causal comparison.",
+      "Native sequencechildren/PNGidentity/manifest copies qualifiedseparately fromadaptererrors;cacheall3619membersrt andcurrentpriordifferencepreserved.",
+      "Priorfailed02 unchanged; no live/source/build/deploy/cachepromotion/replay/cleanup/reviewmonitoring."
+    ]
+  },
+  "schema": {
+    "major": 1,
+    "minor": 0,
+    "name": "skyrim-render-map.submission"
+  },
+  "status": "candidate-unreviewed",
+  "submissionClass": "assertion",
+  "submissionId": "sub-csx-f4-colour-sequence-diagnostic-v1"
+}
