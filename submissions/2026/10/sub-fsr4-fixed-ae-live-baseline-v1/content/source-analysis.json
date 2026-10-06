@@ -1,0 +1,372 @@
+{
+  "contributorExecutionHere": false,
+  "healthyFixtureHistoricalHead": "2fd384f360e926c078b34c50c825c1cfcda4712e",
+  "healthyProductionCanonicalByteIdentityVerified": true,
+  "healthyToCurrentChangedFixturePaths": [
+    "plugins/skyrim-vr-automation/tools/devbench-control/Test-ColourWindowEntryPoint.ps1",
+    "tools/devbench-control/Test-ColourWindowEntryPoint.ps1"
+  ],
+  "rules": [
+    {
+      "description": "Exact nine-field fixed-AE plan with actual Boolean AE/HDR, 1..16 captures, required burn-in and arm spacing; original lane remains at four per condition.",
+      "firstLineInclusive": 5,
+      "lastLineInclusive": 26,
+      "ruleId": "typed-plan",
+      "sourceRole": "measurement",
+      "sourceSha256": "5DFD5C047324835C60C7CE069CBD461DF4930B08DA56AEE75BCC2BC18EADC1FA",
+      "spanSha256": "600F85114C5814012C7CDFBC5091CCB7CF2001C73CDD2B9411AB87B5B0E5CB84",
+      "staticSourceNotOutcomeProof": true
+    },
+    {
+      "description": "Actual successful stereo native context/revision/flags/path/eye/order and available submitted reset/jitter/delta telemetry required; inputs are not synthesized.",
+      "firstLineInclusive": 108,
+      "lastLineInclusive": 122,
+      "ruleId": "stereo-admission",
+      "sourceRole": "measurement",
+      "sourceSha256": "5DFD5C047324835C60C7CE069CBD461DF4930B08DA56AEE75BCC2BC18EADC1FA",
+      "spanSha256": "1996DB5A435A62480E0056DAD20C766E7D0F26C57C33B87113AC7493D9D63C7B",
+      "staticSourceNotOutcomeProof": true
+    },
+    {
+      "description": "Fixed baseline admits existing AE and HDR/revision, never sets colour, and selects one condition; original on/off/on lane retained behind separate branch.",
+      "firstLineInclusive": 127,
+      "lastLineInclusive": 152,
+      "ruleId": "single-condition",
+      "sourceRole": "measurement",
+      "sourceSha256": "5DFD5C047324835C60C7CE069CBD461DF4930B08DA56AEE75BCC2BC18EADC1FA",
+      "spanSha256": "972813C3A1FD5CC615C91B41373D2B849EA6F317A8F1703FA7341EC93B789D2A",
+      "staticSourceNotOutcomeProof": true
+    },
+    {
+      "description": "Fixed-AE cleanup verifies unchanged state through fresh reads and refuses rather than setting colour if restoration would require a write.",
+      "firstLineInclusive": 334,
+      "lastLineInclusive": 364,
+      "ruleId": "cleanup-no-colour-set",
+      "sourceRole": "measurement",
+      "sourceSha256": "5DFD5C047324835C60C7CE069CBD461DF4930B08DA56AEE75BCC2BC18EADC1FA",
+      "spanSha256": "2C4C8BA7DC000FED949CD951A2D45372D73151D1A85E346AF170BD7FB53AB40F",
+      "staticSourceNotOutcomeProof": true
+    },
+    {
+      "description": "Typed plan checked before hold; 180-second original invocation ceiling and declared minimum coverage must fit original work/cleanup budget.",
+      "firstLineInclusive": 97,
+      "lastLineInclusive": 106,
+      "ruleId": "pre-hold-budget",
+      "sourceRole": "calendar",
+      "sourceSha256": "1D820E46B9AE570D454D397C482B396113939937E3110AF168A3049A3195C586",
+      "spanSha256": "1841CC3762457BFE7616FE8A2A813055CF362F26F37DEA641B5D525D09FA6BE3",
+      "staticSourceNotOutcomeProof": true
+    },
+    {
+      "description": "Same original held calendar custody brackets colour cleanup, and fixed baseline forbids non-status colour action.",
+      "firstLineInclusive": 125,
+      "lastLineInclusive": 146,
+      "ruleId": "cleanup-firewall",
+      "sourceRole": "calendar",
+      "sourceSha256": "1D820E46B9AE570D454D397C482B396113939937E3110AF168A3049A3195C586",
+      "spanSha256": "4CCE53475D7D4157CA9065EC37EB21592C89D204367B0E3E9EE102C118E7AB6A",
+      "staticSourceNotOutcomeProof": true
+    },
+    {
+      "description": "Fixed baseline accepts only non-mutating colour status; same lease/binding/held-clock continuity is checked before and after each colour action.",
+      "firstLineInclusive": 147,
+      "lastLineInclusive": 158,
+      "ruleId": "measurement-firewall",
+      "sourceRole": "calendar",
+      "sourceSha256": "1D820E46B9AE570D454D397C482B396113939937E3110AF168A3049A3195C586",
+      "spanSha256": "A5771FC85804E728B1FA0FB9EDCCB90D7A55432BF8E8AEEE4EF82317B33474C2",
+      "staticSourceNotOutcomeProof": true
+    },
+    {
+      "description": "Exact original lease and captured calendar rate restored and freshly rechecked, without lease adoption or replay.",
+      "firstLineInclusive": 187,
+      "lastLineInclusive": 200,
+      "ruleId": "exact-calendar-release",
+      "sourceRole": "calendar",
+      "sourceSha256": "1D820E46B9AE570D454D397C482B396113939937E3110AF168A3049A3195C586",
+      "spanSha256": "A90B2FDE1D02B793D57E38F3E11B1704F99B228613202E993129CBBC0067F56A",
+      "staticSourceNotOutcomeProof": true
+    },
+    {
+      "description": "Public typed workflow requires runtime identity verification, no transient retries, 20..180-second budget, covering hold and explicit evidence; generic arguments/error overrides refused.",
+      "firstLineInclusive": 1187,
+      "lastLineInclusive": 1208,
+      "ruleId": "public-entry",
+      "sourceRole": "controller",
+      "sourceSha256": "B00F99CAA0C7BBD6F338FB372644888A2F0CE948F95102D96C2B8A55935BB0AC",
+      "spanSha256": "F87B0FC0F1694B96E35336957471675642F362616F013922AF777401F8A99A44",
+      "staticSourceNotOutcomeProof": true
+    }
+  ],
+  "schema": "engine-map.pinned-fixed-ae-source.1",
+  "sourceAdmissionBeforeLiveLaunch": true,
+  "sourceCommit": "23d70c086307a5cbfa09a206789c246514ef0307",
+  "sourcePhases": [
+    {
+      "checks": 84,
+      "durationMs": 16906,
+      "exitCode": 0,
+      "name": "integrated-v2-core-root-Test-FixedAEColourBaseline",
+      "ownerOutcomeNotReplayed": true,
+      "receiptSha256": "107021924C92E41E164784D0FA54978971031FB564382A9D4AF5DA0D211DAB49",
+      "sourceCommit": "23d70c086307a5cbfa09a206789c246514ef0307"
+    },
+    {
+      "checks": 365,
+      "durationMs": 10701,
+      "exitCode": 0,
+      "name": "integrated-v2-core-root-Test-ColourMeasurementWindow",
+      "ownerOutcomeNotReplayed": true,
+      "receiptSha256": "E9EA402741523C1345573E3D9C6BF537C9367E67E34D7FE4A0E62D379F1C6497",
+      "sourceCommit": "23d70c086307a5cbfa09a206789c246514ef0307"
+    },
+    {
+      "checks": 196,
+      "durationMs": 33467,
+      "exitCode": 0,
+      "name": "integrated-v2-core-root-Test-ColourTimingCoverage",
+      "ownerOutcomeNotReplayed": true,
+      "receiptSha256": "DCA5F2FC522551FD1B57DC86CB920B2EC2AE90C01F4DFF185066658334C45E8A",
+      "sourceCommit": "23d70c086307a5cbfa09a206789c246514ef0307"
+    },
+    {
+      "checks": 398,
+      "durationMs": 1833,
+      "exitCode": 0,
+      "name": "integrated-v2-core-root-Test-CalendarObservationWindow",
+      "ownerOutcomeNotReplayed": true,
+      "receiptSha256": "043AF50820E4021B3C955F17184BF683B8434B49D38FF6B60FB7659FC2E6A7D0",
+      "sourceCommit": "23d70c086307a5cbfa09a206789c246514ef0307"
+    },
+    {
+      "checks": 84,
+      "durationMs": 14963,
+      "exitCode": 0,
+      "name": "integrated-v2-core-plugin-Test-FixedAEColourBaseline",
+      "ownerOutcomeNotReplayed": true,
+      "receiptSha256": "AB0EE619B1CCC2E44A810C5FCF9FDA20B17807157E5AA77C07133ADD2540E178",
+      "sourceCommit": "23d70c086307a5cbfa09a206789c246514ef0307"
+    },
+    {
+      "checks": 365,
+      "durationMs": 9353,
+      "exitCode": 0,
+      "name": "integrated-v2-core-plugin-Test-ColourMeasurementWindow",
+      "ownerOutcomeNotReplayed": true,
+      "receiptSha256": "FF8B38F6D73D36A613A906DC49B9D2AE1C32E962287B45ADA9FCAF772BB9B0FF",
+      "sourceCommit": "23d70c086307a5cbfa09a206789c246514ef0307"
+    },
+    {
+      "checks": 196,
+      "durationMs": 29864,
+      "exitCode": 0,
+      "name": "integrated-v2-core-plugin-Test-ColourTimingCoverage",
+      "ownerOutcomeNotReplayed": true,
+      "receiptSha256": "E806BE3EC4570C45C0080FCC3DC233AAD4733D29B444D1E19DCD9E1A746524B3",
+      "sourceCommit": "23d70c086307a5cbfa09a206789c246514ef0307"
+    },
+    {
+      "checks": 398,
+      "durationMs": 1928,
+      "exitCode": 0,
+      "name": "integrated-v2-core-plugin-Test-CalendarObservationWindow",
+      "ownerOutcomeNotReplayed": true,
+      "receiptSha256": "6158F3D10D56560E4288C70344BCCDC510906452506C17337E6C5EAED8CA090D",
+      "sourceCommit": "23d70c086307a5cbfa09a206789c246514ef0307"
+    },
+    {
+      "checks": 85,
+      "durationMs": 10365,
+      "exitCode": 0,
+      "name": "integrated-v2-public-regression-root-Test-ColourWindowEntryPoint-negative",
+      "ownerOutcomeNotReplayed": true,
+      "receiptSha256": "86C3DD58D44D501DB8F0050F709A614577868E3347E245A41A459FF59F7F782C",
+      "sourceCommit": "23d70c086307a5cbfa09a206789c246514ef0307"
+    },
+    {
+      "checks": 48,
+      "durationMs": 28037,
+      "exitCode": 0,
+      "name": "integrated-v2-public-regression-root-Test-ColourWindowEntryPoint-loss",
+      "ownerOutcomeNotReplayed": true,
+      "receiptSha256": "34C305C9E8C9708424A85B430E1D06D6EE24D4AA3F2A6BDF4F33252A8A37BA51",
+      "sourceCommit": "23d70c086307a5cbfa09a206789c246514ef0307"
+    },
+    {
+      "checks": 90,
+      "durationMs": 38647,
+      "exitCode": 0,
+      "name": "integrated-v2-public-regression-root-Test-ColourWindowEntryPoint-legacy",
+      "ownerOutcomeNotReplayed": true,
+      "receiptSha256": "6E2517664511BC05375FE3A7707797BBEA83F922202D09BF071F4C993CD4AEC1",
+      "sourceCommit": "23d70c086307a5cbfa09a206789c246514ef0307"
+    },
+    {
+      "checks": 85,
+      "durationMs": 11592,
+      "exitCode": 0,
+      "name": "integrated-v2-public-regression-plugin-Test-ColourWindowEntryPoint-negative",
+      "ownerOutcomeNotReplayed": true,
+      "receiptSha256": "B5EC6AECDC12AE679F058BC4E61E08386AC8C6C794EA1D9AA0A5B974F186DA30",
+      "sourceCommit": "23d70c086307a5cbfa09a206789c246514ef0307"
+    },
+    {
+      "checks": 48,
+      "durationMs": 26399,
+      "exitCode": 0,
+      "name": "integrated-v2-public-regression-plugin-Test-ColourWindowEntryPoint-loss",
+      "ownerOutcomeNotReplayed": true,
+      "receiptSha256": "56A96C762214D417E7B746AD0E3BF428FF32997456BC20D3E18EC349F2D58BD2",
+      "sourceCommit": "23d70c086307a5cbfa09a206789c246514ef0307"
+    },
+    {
+      "checks": 90,
+      "durationMs": 40952,
+      "exitCode": 0,
+      "name": "integrated-v2-public-regression-plugin-Test-ColourWindowEntryPoint-legacy",
+      "ownerOutcomeNotReplayed": true,
+      "receiptSha256": "30680D76E65C2FCA1811DA28A0D11CBE4CAFBCAF59CDFD4E859ECC451B4FF727",
+      "sourceCommit": "23d70c086307a5cbfa09a206789c246514ef0307"
+    },
+    {
+      "checks": 18,
+      "durationMs": 71685,
+      "exitCode": 0,
+      "name": "integrated-public-healthy-root-Test-ColourWindowEntryPoint",
+      "ownerOutcomeNotReplayed": true,
+      "receiptSha256": "A8D11C9FDADBFD213E589089DF0D476EC33DC8CD5639B322CC510F9B6869B8DE",
+      "sourceCommit": "2fd384f360e926c078b34c50c825c1cfcda4712e"
+    },
+    {
+      "checks": 18,
+      "durationMs": 75401,
+      "exitCode": 0,
+      "name": "integrated-public-healthy-plugin-Test-ColourWindowEntryPoint",
+      "ownerOutcomeNotReplayed": true,
+      "receiptSha256": "416B762B3DB4DC5748E9F3CC836FD02CA7D3F2DC1A42A60DB2E81DBDAD50F6F6",
+      "sourceCommit": "2fd384f360e926c078b34c50c825c1cfcda4712e"
+    }
+  ],
+  "staticFixtureCases": [
+    {
+      "firstLineInclusive": 57,
+      "name": "healthy",
+      "replayedHere": false,
+      "sourceRole": "fixture",
+      "sourceSha256": "19707195D7F4A854C567CDCC7A36AA9272847AC0E6246614665FEF3356F89D62",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 57,
+      "name": "healthy-false",
+      "replayedHere": false,
+      "sourceRole": "fixture",
+      "sourceSha256": "19707195D7F4A854C567CDCC7A36AA9272847AC0E6246614665FEF3356F89D62",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 57,
+      "name": "ae-mismatch",
+      "replayedHere": false,
+      "sourceRole": "fixture",
+      "sourceSha256": "19707195D7F4A854C567CDCC7A36AA9272847AC0E6246614665FEF3356F89D62",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 57,
+      "name": "hdr-mismatch",
+      "replayedHere": false,
+      "sourceRole": "fixture",
+      "sourceSha256": "19707195D7F4A854C567CDCC7A36AA9272847AC0E6246614665FEF3356F89D62",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 57,
+      "name": "foreign-revision",
+      "replayedHere": false,
+      "sourceRole": "fixture",
+      "sourceSha256": "19707195D7F4A854C567CDCC7A36AA9272847AC0E6246614665FEF3356F89D62",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 57,
+      "name": "telemetry-unavailable",
+      "replayedHere": false,
+      "sourceRole": "fixture",
+      "sourceSha256": "19707195D7F4A854C567CDCC7A36AA9272847AC0E6246614665FEF3356F89D62",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 57,
+      "name": "telemetry-malformed",
+      "replayedHere": false,
+      "sourceRole": "fixture",
+      "sourceSha256": "19707195D7F4A854C567CDCC7A36AA9272847AC0E6246614665FEF3356F89D62",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 57,
+      "name": "page-telemetry-unavailable",
+      "replayedHere": false,
+      "sourceRole": "fixture",
+      "sourceSha256": "19707195D7F4A854C567CDCC7A36AA9272847AC0E6246614665FEF3356F89D62",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 57,
+      "name": "partial-page",
+      "replayedHere": false,
+      "sourceRole": "fixture",
+      "sourceSha256": "19707195D7F4A854C567CDCC7A36AA9272847AC0E6246614665FEF3356F89D62",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 57,
+      "name": "compiler",
+      "replayedHere": false,
+      "sourceRole": "fixture",
+      "sourceSha256": "19707195D7F4A854C567CDCC7A36AA9272847AC0E6246614665FEF3356F89D62",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 57,
+      "name": "lost-arm",
+      "replayedHere": false,
+      "sourceRole": "fixture",
+      "sourceSha256": "19707195D7F4A854C567CDCC7A36AA9272847AC0E6246614665FEF3356F89D62",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 57,
+      "name": "lost-reset",
+      "replayedHere": false,
+      "sourceRole": "fixture",
+      "sourceSha256": "19707195D7F4A854C567CDCC7A36AA9272847AC0E6246614665FEF3356F89D62",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 57,
+      "name": "native-failure",
+      "replayedHere": false,
+      "sourceRole": "fixture",
+      "sourceSha256": "19707195D7F4A854C567CDCC7A36AA9272847AC0E6246614665FEF3356F89D62",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 57,
+      "name": "external-ae-drift",
+      "replayedHere": false,
+      "sourceRole": "fixture",
+      "sourceSha256": "19707195D7F4A854C567CDCC7A36AA9272847AC0E6246614665FEF3356F89D62",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 57,
+      "name": "burnin-incomplete",
+      "replayedHere": false,
+      "sourceRole": "fixture",
+      "sourceSha256": "19707195D7F4A854C567CDCC7A36AA9272847AC0E6246614665FEF3356F89D62",
+      "staticDeclarationOnly": true
+    }
+  ]
+}

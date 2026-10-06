@@ -1,0 +1,51 @@
+{
+  "content": {
+    "fileCount": 5,
+    "root": "content",
+    "totalBytes": 3158981,
+    "treeSha256": "666210DA1B61579149ADE6D797819867FB520C93B9BEFE5DCF4908571315AAB5"
+  },
+  "contributor": {
+    "displayName": "Treatid2",
+    "github": "Treatid2",
+    "standing": "ordinary-contributor"
+  },
+  "createdAt": "2026-10-06T06:00:39.530308+00:00",
+  "licensing": {
+    "content": "CC-BY-SA-4.0",
+    "dcoAcknowledged": true,
+    "schemas": "CC0-1.0"
+  },
+  "namespace": "community-shaders",
+  "notes": "Completed fixed-AE engineering baseline, all ten unchanged0.25% precision gates fail. No causal AE/HDR/jitter result, statistical significance, performance cost, vendor convergence, continuous world-camera equivalence or whole-resource equality. Native bytes/arithmetic independently verified; owner runtime/fixture actions not replayed. Unknown applicability not wildcard; historicalPR47/48 scopes immutable.",
+  "provenance": {
+    "importedAt": "2026-10-06T06:00:39.530308+00:00",
+    "relatedUrls": [
+      "https://github.com/Treatid2/skyrim-render-map/pull/47",
+      "https://github.com/Treatid2/skyrim-render-map/pull/48"
+    ],
+    "sourceCommit": "23d70c086307a5cbfa09a206789c246514ef0307",
+    "sourceContentTreeSha256": "FA1E1B6A4072EDDB5F3D3E5392EA2A33F260D910C5B79CA9C1625496262637BF",
+    "sourceDirty": false,
+    "sourceParentCommit": "2fd384f360e926c078b34c50c825c1cfcda4712e",
+    "sourcePubliclyReachable": true,
+    "sourceRef": null,
+    "sourceRepository": "https://github.com/Treatid2/skyrim-vr-automation",
+    "sourceState": "committed-retained-live-baseline-cutoff",
+    "transformations": [
+      "160original native pages/46240raw samples independently decoded;10comparisons/10contexts/150strata/32sparse equality pairs recomputed.",
+      "All4608declaredZIPmembers independently hashed without extraction;2572tracking rows and calibration independently scoped.",
+      "167source members/9canonicalGit inputs verified without execution;16ownerqualification phases/2568checks attributed not replayed,36healthy checks retain historical head.",
+      "Zero colour setters includingcleanup verified; native actualinputs/resources/contextstate/failedgates projected; privateidentities omitted.",
+      "Newlivebaseline separate from unchanged historicalPR47/48, calendarcontext not cross-runmatched."
+    ]
+  },
+  "schema": {
+    "major": 1,
+    "minor": 0,
+    "name": "skyrim-render-map.submission"
+  },
+  "status": "candidate-unreviewed",
+  "submissionClass": "assertion",
+  "submissionId": "sub-fsr4-fixed-ae-live-baseline-v1"
+}
