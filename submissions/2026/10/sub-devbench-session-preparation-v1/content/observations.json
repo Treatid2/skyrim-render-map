@@ -1,0 +1,498 @@
+{
+  "access-custody": {
+    "configCacheOutputCompletedOwnerAttributed": true,
+    "currentLiveProcessesNotCheckedHere": true,
+    "liveStateRetained": false,
+    "lockRemoved": true,
+    "notAllRuntimeProcessesAbsent": true,
+    "recordedGameProcessCount": 0,
+    "recordedMo2ProcessCount": 0,
+    "recordedRuntimeProcessNames": [
+      "VirtualDesktop.Streamer"
+    ],
+    "state": "access-released",
+    "timestampUtc": "2026-10-06T02:47:26.2115444Z",
+    "workspaceRetainedOwnerAttributed": true
+  },
+  "cache-completion": {
+    "beforeEqualsReportedRestored": true,
+    "materializedFiles": 0,
+    "noInGameCompilerOrKnownWorkingClaim": true,
+    "physicalCacheArchiveAndDisplacedTreeNotRereadHere": true,
+    "preparedEqualsWorking": true,
+    "promoted": null,
+    "restoredTreeSha256": "17A4C9E99FC0FCB4E3FB2C674D35F1458C1ADD518FA8482D1684B622BE90A23D",
+    "state": "complete",
+    "status": "unverified",
+    "unchangedPreparedFailure": true,
+    "workingInventory": {
+      "bytes": 182927417,
+      "files": 3621,
+      "treeSha256": "F776DD13B154A2C18202AEE4329BCF2C8A3EB7BD7E31E45F274E85F28FFC5258"
+    }
+  },
+  "cache-materialization": {
+    "alreadyPresentFiles": 5,
+    "alreadyPresentRecordsOmitted": true,
+    "before": {
+      "bytes": 997276,
+      "files": 9,
+      "treeSha256": "17A4C9E99FC0FCB4E3FB2C674D35F1458C1ADD518FA8482D1684B622BE90A23D"
+    },
+    "bindingMode": "mo2-overwrite-output",
+    "completedUtc": "2026-10-06T02:45:21.5870586Z",
+    "copiedFiles": 3612,
+    "copiedRecordsOmitted": true,
+    "declaredLimits": {
+      "maxBytes": 21474836480,
+      "maxDepth": 24,
+      "maxFiles": 20000,
+      "timeoutSeconds": 120
+    },
+    "detailOmissionNotZero": true,
+    "preparedInventory": {
+      "bytes": 182927417,
+      "files": 3621,
+      "treeSha256": "F776DD13B154A2C18202AEE4329BCF2C8A3EB7BD7E31E45F274E85F28FFC5258"
+    },
+    "profileSha256": "CC6DCD7BFA76BA9FEE4CB19A3D399CD3D8286DE93017399283603DDC227C4248",
+    "requireMaterializedOutput": true,
+    "requiredLowerProviderFiles": 3617,
+    "state": "materialized"
+  },
+  "cache-request": {
+    "buildId": "c080d3f4a1b84d57b12ce31c1e2542bcb860a7f31ad6891affc27749ca7285c0",
+    "bytecodeCompatibilityClass": "skyrimvr-d3d11",
+    "featureSetSha256": null,
+    "gameRuntime": "SkyrimVR-1.4.15",
+    "presetSha256": "7839ECEBA294F6BEE285700889ACC5E1FC0E71D186C6FD4D2EB5070EDD2E3DF2",
+    "renderFamily": "vr-steamvr",
+    "renderPath": "vr-steamvr-null",
+    "shaderCacheAbi": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+    "shaderSourceSha256": "5A5A15C13C0EBD5FC8ECAA16B6E33C91C6EEFF27F50461940AFCC6F288348848",
+    "tags": []
+  },
+  "cache-selection": {
+    "action": "use-current-no-match",
+    "allowSourceMismatch": false,
+    "catalogIssueCount": 0,
+    "compatibilityReason": null,
+    "eligibleCount": 0,
+    "excludedCount": 11,
+    "exclusions": [
+      {
+        "candidateOrdinal": 1,
+        "reasons": [
+          "shader-cache-abi-mismatch",
+          "shader-source-mismatch"
+        ]
+      },
+      {
+        "candidateOrdinal": 2,
+        "reasons": [
+          "shader-cache-abi-mismatch",
+          "shader-source-mismatch"
+        ]
+      },
+      {
+        "candidateOrdinal": 3,
+        "reasons": [
+          "shader-cache-abi-mismatch",
+          "shader-source-mismatch"
+        ]
+      },
+      {
+        "candidateOrdinal": 4,
+        "reasons": [
+          "shader-cache-abi-mismatch",
+          "shader-source-mismatch"
+        ]
+      },
+      {
+        "candidateOrdinal": 5,
+        "reasons": [
+          "shader-cache-abi-mismatch",
+          "shader-source-mismatch"
+        ]
+      },
+      {
+        "candidateOrdinal": 6,
+        "reasons": [
+          "shader-cache-abi-mismatch",
+          "shader-source-mismatch"
+        ]
+      },
+      {
+        "candidateOrdinal": 7,
+        "reasons": [
+          "shader-cache-abi-mismatch",
+          "shader-source-mismatch"
+        ]
+      },
+      {
+        "candidateOrdinal": 8,
+        "reasons": [
+          "shader-cache-abi-mismatch",
+          "shader-source-mismatch"
+        ]
+      },
+      {
+        "candidateOrdinal": 9,
+        "reasons": [
+          "shader-cache-abi-mismatch",
+          "shader-source-mismatch"
+        ]
+      },
+      {
+        "candidateOrdinal": 10,
+        "reasons": [
+          "shader-cache-abi-mismatch",
+          "game-runtime-mismatch",
+          "bytecode-compatibility-class-mismatch",
+          "shader-source-mismatch"
+        ]
+      },
+      {
+        "candidateOrdinal": 11,
+        "reasons": [
+          "shader-cache-abi-mismatch",
+          "shader-source-mismatch"
+        ]
+      }
+    ],
+    "noMatchDoesNotEstablishSemanticCompatibility": true,
+    "seeded": false,
+    "selected": null
+  },
+  "configuration": {
+    "boundAndPreserved": {
+      "bytes": 3265449,
+      "files": 87,
+      "treeSha256": "B2DA2FD6E00F383D1513688A4AF3A67546CB56FBD3B7CD76E669C208F2FB2F14"
+    },
+    "configBoundTreeEqualsPreservedTree": true,
+    "inventoryEntryTotalsIndependentlyChecked": {
+      "preserved": {
+        "bytes": 3265449,
+        "declaredTreeSha256": "B2DA2FD6E00F383D1513688A4AF3A67546CB56FBD3B7CD76E669C208F2FB2F14",
+        "entries": 87,
+        "mapStyleInventoryDigest": "4E4E6FA0CE12F7DED220CA537B3234051F3D54C786174C2B9BAD1F378D2ED645",
+        "note": "Map-style inventory digest is independently derived, not assumed to be the owner-specific tree algorithm."
+      },
+      "restored-baseline": {
+        "bytes": 2116114,
+        "declaredTreeSha256": "31667EC127BB039A3E9BBE10935A7CD12F0778D6FECE86C2B4ACBC1792EC8A69",
+        "entries": 69,
+        "mapStyleInventoryDigest": "0B64BBCD11D34D899F694508D4AE853C4B33C3B1E4EDB91E88E45763D7BC89F5",
+        "note": "Map-style inventory digest is independently derived, not assumed to be the owner-specific tree algorithm."
+      },
+      "staged": {
+        "bytes": 3265449,
+        "declaredTreeSha256": "8B4720DECE543AD2AB47B1BA59C9001B0098CFDC81F9052AB4960AA6D20047A4",
+        "entries": 87,
+        "mapStyleInventoryDigest": "9666D929E2255040061E208CB403EB9984E88FCA9CDD17B9F6344887AD4F719D",
+        "note": "Map-style inventory digest is independently derived, not assumed to be the owner-specific tree algorithm."
+      }
+    },
+    "physicalPresetBytesNotRereadHere": true,
+    "presetBytes": 27148,
+    "presetSha256": "7839ECEBA294F6BEE285700889ACC5E1FC0E71D186C6FD4D2EB5070EDD2E3DF2",
+    "renderScaleOffAndBalancedLabel": "Owner-recorded preparation intent; no current native effective-settings read",
+    "restoredBaseline": {
+      "bytes": 2116114,
+      "files": 69,
+      "treeSha256": "31667EC127BB039A3E9BBE10935A7CD12F0778D6FECE86C2B4ACBC1792EC8A69"
+    },
+    "scope": "Physical loose-source custody, not runtime VFS/effective settings",
+    "staged": {
+      "bytes": 3265449,
+      "files": 87,
+      "treeSha256": "8B4720DECE543AD2AB47B1BA59C9001B0098CFDC81F9052AB4960AA6D20047A4"
+    }
+  },
+  "controller": {
+    "manifestSha256": "86A672F64FA4B199A84C1F576B315EE0600E31421FFD3A8EEA2D016F1B31F26B",
+    "memberCountRehashed": 163,
+    "noRuntimeCallsHere": true,
+    "sourceCommit": "adaa52ded5e0a4d19dd2667b73bfc555cd32f4c1"
+  },
+  "feedback": {
+    "area": "null-hmd",
+    "blockedField": false,
+    "expected": "Do not overwrite unclassified settings drift. Owner should provide a supported exact-leaf preservation or transaction-rebind route after source-bound classification, or identify the specific user decision required.",
+    "kind": "ambiguity",
+    "newSubmissionOrLifecycleMutationHere": false,
+    "observed": "New exact retained mapping workspace resume qualified cb1e/9a93 and balanced RS-off config/cache. Prior null runtime is stopped. restore -WhatIf for exact prior apply rejects only DesktopUI.pairing and DesktopUI.settings_desktop. Current values are comma-delimited window-position-like strings. Actual restore/apply/start and game launch never dispatched. Cause/actor and safety of accepting these leaves are not established. Original settings and prior null transaction preserved.",
+    "ok": true,
+    "ratificationBlockedButFeedbackBlockedFalsePreserved": true,
+    "receipt": "AUTO-20261006-024807152-A4FE25E6",
+    "severity": "high",
+    "state": "recorded",
+    "suggestion": "Assess these two typed DesktopUI leaves against installed SteamVR semantics, preserve full prior transaction evidence, and implement only a narrowly proven safe policy if justified. No generic ignore-drift flag, forced restore, raw settings edits or native fixture replay.",
+    "summary": "Retained null transaction restore refuses changed DesktopUI pairing/settings window strings"
+  },
+  "fixture": {
+    "actualRequestCount": null,
+    "actualRequestCountNotPrintedByHarness": true,
+    "buildKey": "sha256:ead1915ef92d58afe086b6ee2f10bff1953321874baac6db4e89e1e87189edc7",
+    "caseCount": 4,
+    "cases": [
+      {
+        "name": "POST-only same session survives 180 seconds and over 600 requests; DELETE stays final",
+        "result": "PASS"
+      },
+      {
+        "name": "admitted 35-second POST is not idle; its completion restarts the idle interval",
+        "result": "PASS"
+      },
+      {
+        "name": "genuinely idle session retires and cleanup happens once",
+        "result": "PASS"
+      },
+      {
+        "name": "dispatcher retirement is atomic with activity admission and guard exceptional cleanup",
+        "result": "PASS"
+      }
+    ],
+    "classification": "isolated-host-transport-regression-pass-not-game-runtime-acceptance",
+    "commit": "9a93eb0415639316a781e75dc97625df1e77e6e1",
+    "deadlineSeconds": 330,
+    "durationMilliseconds": 227578,
+    "endedAtUtc": "2026-10-06T02:22:40.128492Z",
+    "executableSha256": "56B38D50349513EE7F0EFE280FD155AED0965323FE6A0E6652BE10156F569FDC",
+    "failedCases": 0,
+    "idleCaseTimeoutSeconds": 1,
+    "noApplicationRestorationProof": true,
+    "noMo2OrGameUse": true,
+    "noRetry": true,
+    "passingCaseRequiredRequestLowerBound": 600,
+    "processExitCode": 0,
+    "productionTimeoutSecondsInTwoCases": 30,
+    "requestLowerBoundSource": "Pinned CHECK(count >= 600), not an independently printed request counter; test title says over600.",
+    "startedAtUtc": "2026-10-06T02:18:52.547104Z",
+    "terminalReceiptMatches": true,
+    "tree": "b09bd82967e860792eef2d3fb950030c9f32e748"
+  },
+  "native-artifacts": {
+    "commit": "9a93eb0415639316a781e75dc97625df1e77e6e1",
+    "compiledLanes": [
+      {
+        "buildKey": "sha256:252fa29d9a77ce2c1a93288fbd7d441038fbb02f25aee2317fb57b797cdb152f",
+        "commit": "9a93eb0415639316a781e75dc97625df1e77e6e1",
+        "compileSuccess": true,
+        "frozenContentManifestSha256": "f9636024d7f02680e6dacf58fa89bf1cf5aecca6a34b98e1870d2c164748bb0d",
+        "overlayProofStatus": "PASS",
+        "target": "devbench",
+        "testsRun": false,
+        "tree": "b09bd82967e860792eef2d3fb950030c9f32e748"
+      },
+      {
+        "buildKey": "sha256:ead1915ef92d58afe086b6ee2f10bff1953321874baac6db4e89e1e87189edc7",
+        "commit": "9a93eb0415639316a781e75dc97625df1e77e6e1",
+        "compileSuccess": true,
+        "frozenContentManifestSha256": "f9636024d7f02680e6dacf58fa89bf1cf5aecca6a34b98e1870d2c164748bb0d",
+        "overlayProofStatus": "PASS",
+        "target": "devbench-transport-tests",
+        "testsRun": false,
+        "tree": "b09bd82967e860792eef2d3fb950030c9f32e748"
+      }
+    ],
+    "dllBytes": 2826752,
+    "dllSha256": "81D3127E10A88EC593F96D5EFC8D94179F79D418722BE1D04185AD730DBBF163",
+    "exactPublicBranchOrMergeNotEstablished": true,
+    "ownerFullAuditAttributedNotRerun": true,
+    "parent": "f4f9842ab8c7c099516b4f1ea0bc39feb8d38d09",
+    "pdbBytes": 56553472,
+    "pdbSha256": "286326CE38B6277BCAA1201416B1DFF13A396DE12B78D628D313C1BB242E1315",
+    "publicCommitLookupSucceeded": true,
+    "rawGitInputsRechecked": 10,
+    "retainedIndexedIdentitiesRehashed": 23,
+    "sourceManifestNature": "Retained exact content rehearsal manifest, not an issued authoritative SourceKey",
+    "sourceStateNote": "Publicly reachable pinned commit; no main-branch or maintainer acceptance claim.",
+    "tree": "b09bd82967e860792eef2d3fb950030c9f32e748"
+  },
+  "next-plan-not-observation": {
+    "experiment": "Supported twelve-capture FSR4 Quality autoExposure on/off/on",
+    "hdr": true,
+    "noDispatchOrNewScientificAcceptanceHere": true,
+    "noFixtureReplay": true,
+    "precisionThresholdPercent": 0.25,
+    "prerequisites": [
+      "Resolve current exact null transaction drift through owner controls",
+      "Resume retained verified package environment",
+      "Stage exact balanced RS-off configuration and prepare current cache",
+      "Qualify null runtime and set/independently read back raw head and neutral controllers",
+      "Launch once and qualify current runtime/compiler/stereo pixels",
+      "Set and verify scene/worldscale/calibration",
+      "Run finite capture with positive calendar/AE/probe restoration"
+    ],
+    "renderScale": false,
+    "reviewGate": false,
+    "scene": "Verified Breezehome fixture with explicit camera/HMD/controllers/world scale"
+  },
+  "null-drift": {
+    "actorCauseOrSafetyOfAcceptingDriftEstablished": false,
+    "capturedUtc": "2026-10-06T02:48:03.2646430+00:00",
+    "changedLeaves": [
+      {
+        "backupPresent": true,
+        "backupValue": "891,465,800,600,0",
+        "currentPresent": true,
+        "currentValue": "891,465,-2147483648,-2147483648,0",
+        "path": "DesktopUI.pairing"
+      },
+      {
+        "backupPresent": true,
+        "backupValue": "1349,529,800,600,1",
+        "currentPresent": true,
+        "currentValue": "1349,529,-2147483648,-2147483648,1",
+        "path": "DesktopUI.settings_desktop"
+      }
+    ],
+    "noRestoreApplyStartOrGameLaunchDispatchedOwnerAttributed": true,
+    "previewErrors": [
+      "SteamVR settings changed after apply outside the authorized runtime-managed contract; refusing to overwrite drift: DesktopUI.pairing, DesktopUI.settings_desktop"
+    ],
+    "previewOk": false,
+    "previewState": "blocked",
+    "priorBackupSha256": "988C9EEAE6B76212CADDCC0D517B892B16AC1D09D1C73427664AE2431DA77D88",
+    "scope": "Only the two restore-preview-rejected DesktopUI leaves; cause/actor and safety of accepting drift not established",
+    "settingsBytes": 3732,
+    "settingsNotRereadHere": true,
+    "settingsSha256": "8169195344FADD476AD460BA0318E854557695F000BD62108F7609819766DD75",
+    "sourceChangedDuringOwnerCapture": false,
+    "supportedRebindOrUserDecisionPendingAtCutoff": true
+  },
+  "output-completion": {
+    "completedUtc": "2026-10-06T02:47:25.2712402Z",
+    "ownerCustodyReceiptNotProbeCalendarOrAERestoration": true,
+    "pathExistedBefore": false,
+    "restoredTreeSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "state": "complete",
+    "workingTree": {
+      "bytes": 0,
+      "files": 0,
+      "treeSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    }
+  },
+  "output-requalification": {
+    "cachePrepareRequiredAtRequalification": true,
+    "runtimeQualified": false,
+    "sameOwnerMarkerBindingAcrossCacheAndOutput": true,
+    "state": "output-requalified-cache-prepare-required",
+    "winningLoosePlugin": {
+      "artifactBytes": 29306368,
+      "artifactSha256": "58D2A9D9AB0929F0A71B2EFB9EE2990D4258C014ABDEAC43FCB38AABAB2274D4",
+      "buildId": "c080d3f4a1b84d57b12ce31c1e2542bcb860a7f31ad6891affc27749ca7285c0",
+      "manifestSha256": "FAF5095F4F9D1DFD105A5ABD60CA3CBFACA03B9BF6BBADE345263C9345828CB7",
+      "mode": "mo2-winning-loose-plugin-provider",
+      "profileSha256": "CC6DCD7BFA76BA9FEE4CB19A3D399CD3D8286DE93017399283603DDC227C4248",
+      "relativePluginPath": "SKSE\\Plugins\\CommunityShaders.dll",
+      "shaderCacheAbi": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54"
+    }
+  },
+  "packages": {
+    "csx": {
+      "bytes": 367296961,
+      "laterEnableCommitted": true,
+      "memberCount": 353,
+      "ownerDeploymentAllVerified": true,
+      "physicalDeployedFilesNotRereadHere": true,
+      "profileSha256AfterEnable": "3979DFFF9202BA2224922357528AEDB71399DDC414DA632B2487079620441DDC",
+      "registrationEnabledInitially": false,
+      "retainedArchiveMembersIndependentlyCompared": 353
+    },
+    "devbench": {
+      "bytes": 59380224,
+      "laterEnableCommitted": true,
+      "memberCount": 2,
+      "ownerDeploymentAllVerified": true,
+      "physicalDeployedFilesNotRereadHere": true,
+      "profileSha256AfterEnable": "CC6DCD7BFA76BA9FEE4CB19A3D399CD3D8286DE93017399283603DDC227C4248",
+      "registrationEnabledInitially": false,
+      "retainedDllPdbIndependentlyCompared": 2
+    },
+    "retainedWorkspaceRegisteredFlagsAreNotCurrentEnabledState": true
+  },
+  "scope": {
+    "boundaries": {
+      "correctPixels": false,
+      "headControllerCalibrationDispatched": false,
+      "inGameCompilerHealth": false,
+      "liveDevbenchQualification": false,
+      "nativeCalendarAEProbeRestoration": false,
+      "newGameLaunches": 0,
+      "newSceneCaptures": 0,
+      "newTimingMeasurements": 0,
+      "scientificExposureConclusion": "No new result; prior partial diagnostic remains inconclusive"
+    },
+    "classification": "operational-and-instrumentation-readiness-not-game-science",
+    "cutoffUtc": "2026-10-06T02:49:10.5470867+00:00",
+    "lineage": "Same retained owner preparation and host fixture; offline byte checks are not an independent scientific reproduction.",
+    "noContributorExecutionHere": true,
+    "noFixtureReplay": true,
+    "priorExposureEvidence": "PR43 remains immutable and inconclusive"
+  },
+  "shader-source": {
+    "archivesAndLiveRuntimeResolutionNotQualified": true,
+    "effectiveFileIdentitiesMatchRetainedArchive": true,
+    "files": 228,
+    "packageShaderFiles": 228,
+    "presetSha256": "7839ECEBA294F6BEE285700889ACC5E1FC0E71D186C6FD4D2EB5070EDD2E3DF2",
+    "profileSha256": "CC6DCD7BFA76BA9FEE4CB19A3D399CD3D8286DE93017399283603DDC227C4248",
+    "providerWinnerOrderOwnerAttributed": true,
+    "providers": [
+      {
+        "bytes": 140762354,
+        "files": 228,
+        "ordinal": 1,
+        "treeSha256": "5A5A15C13C0EBD5FC8ECAA16B6E33C91C6EEFF27F50461940AFCC6F288348848"
+      },
+      {
+        "bytes": 140755490,
+        "files": 225,
+        "ordinal": 2,
+        "treeSha256": "80315A64CCFF991EDDCF633A5135902B5DA1829F3CB8A8CE6B712E4BA2B69C6E"
+      },
+      {
+        "bytes": 140740596,
+        "files": 218,
+        "ordinal": 3,
+        "treeSha256": "1821C1C544E7E132D0DDF9DC95EB2C41BDEE30D07CAA35410DCFF45C57689BCF"
+      }
+    ],
+    "scope": "Enabled loose shader-source winner proof only; runtime/compiler/image admission pending",
+    "sourceTreeSha256": "5A5A15C13C0EBD5FC8ECAA16B6E33C91C6EEFF27F50461940AFCC6F288348848"
+  },
+  "workspace": {
+    "nullRuntimeOrLiveRouteQualifiedHere": false,
+    "retainedStatusIsNotGameRuntimeQualification": true,
+    "routeProviderAdmission": "Exact profile reported no enabled OpenVR replacement for SteamVRNull route",
+    "samePrivateWorkspaceAndOwnershipAcrossRecords": true,
+    "sourceIntegrity": {
+      "cloneVerifiedUtc": "2026-10-06T02:31:27.8517066Z",
+      "fixtureId": "breezehome-interior",
+      "integrityVerified": true,
+      "profileFingerprintSha256": "8A7D00DED6C77E77D4F9408477E46211349650490C88FBEE87BFD3DB106C1F66",
+      "runtimeQualified": false,
+      "scope": "fresh-clone-source",
+      "warranty": "Exact source and save bytes were verified at clone creation. This does not assert a live game load. Resumed task profiles are preserved as-is and are not reverified after task edits."
+    },
+    "worldEntryFixture": {
+      "fileIdentities": [
+        {
+          "bytes": 5583837,
+          "role": "game-save",
+          "sha256": "CFAA72802D1A0FF7BACB088A546399747957199F918E7B846C3D53FCDC1EC394"
+        },
+        {
+          "bytes": 192114,
+          "role": "skse-cosave",
+          "sha256": "7436B98DDEFFFC74EFE0C4E288C34AC17BB38229D00A94290A4C8645FBE5B977"
+        }
+      ],
+      "id": "breezehome-interior",
+      "location": "Whiterun Breezehome interior"
+    }
+  }
+}
