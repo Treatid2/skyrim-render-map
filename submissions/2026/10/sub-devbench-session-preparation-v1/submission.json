@@ -1,0 +1,50 @@
+{
+  "content": {
+    "fileCount": 5,
+    "root": "content",
+    "totalBytes": 356829,
+    "treeSha256": "33F26280A3ED71AFFCDD2588D6706618A686AE6590E550098DB2239C2C26F455"
+  },
+  "contributor": {
+    "displayName": "Treatid2",
+    "github": "Treatid2",
+    "standing": "ordinary-contributor"
+  },
+  "createdAt": "2026-10-06T02:57:17.613183+00:00",
+  "licensing": {
+    "content": "CC-BY-SA-4.0",
+    "dcoAcknowledged": true,
+    "schemas": "CC0-1.0"
+  },
+  "namespace": "devbench",
+  "notes": "Separate operational/instrumentation preparation excursion06. Zero new game launches/captures/timing; PR43 unchanged and inconclusive. Host fixture pass is not game-scientific or restoration acceptance.",
+  "provenance": {
+    "importedAt": "2026-10-06T02:57:17.613183+00:00",
+    "relatedUrls": [
+      "https://github.com/Treatid2/skyrim-render-map/pull/43"
+    ],
+    "sourceCommit": "9a93eb0415639316a781e75dc97625df1e77e6e1",
+    "sourceContentTreeSha256": "6E53B59A2E5E86C6FC5FF2D05B036C55C0557EA0B41FC3658D423F625978E744",
+    "sourceDirty": false,
+    "sourceParentCommit": "f4f9842ab8c7c099516b4f1ea0bc39feb8d38d09",
+    "sourcePubliclyReachable": true,
+    "sourceRef": null,
+    "sourceRepository": "https://github.com/Treatid2/devbench",
+    "sourceState": "public-branch",
+    "transformations": [
+      "Finite retained operational receipts and ten raw pinned Git inputs independently checked; no contributor execution, builds, fixtures or live replay.",
+      "353 retained CSX ZIP members and native DLL/PDB identities compared to owner deployment inventories; deployed physical trees and runtime resolution remain owner-attributed.",
+      "228 shader winner identities compared to ZIP, controller members rehashed; preset/cache completion indexed custody only, no active trees or released scratch read.",
+      "Host fixture logs/terminal receipt matched; four passing cases do not establish game restoration, correct pixels or exposure causality.",
+      "Sanitized allowlisted projections retain private artifact hashes, logical roles, source ranges and actual unknowns. Public commit lookup found exact9a93, branch/merge state unestablished; cb1e local-only provenance unchanged."
+    ]
+  },
+  "schema": {
+    "major": 1,
+    "minor": 0,
+    "name": "skyrim-render-map.submission"
+  },
+  "status": "candidate-unreviewed",
+  "submissionClass": "assertion",
+  "submissionId": "sub-devbench-session-preparation-v1"
+}

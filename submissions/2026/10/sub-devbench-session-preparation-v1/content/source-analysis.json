@@ -1,0 +1,137 @@
+{
+  "rules": [
+    {
+      "boundary": "Pinned source or generated broker mirror only; not independent game runtime or application restoration proof.",
+      "description": "Dispatcher begin_request takes dispatcher mutex, refuses closed dispatcher, increments active request count and records steady-clock activity.",
+      "firstLineInclusive": 147,
+      "lastLineInclusive": 154,
+      "rangeHashRepresentation": "UTF-8 decoded source lines joined with LF and final LF; full-file hash retains original bytes",
+      "rangeSha256": "5662988100763822F2A2A99B76CD2F25C8226B93C8975D2A0FF6C4A379BA5674",
+      "ruleId": "activity-admission",
+      "sourceRole": "native-retained-05",
+      "sourceSha256": "E80B760EF9693F57916A9989296FD104B96CE70CD452CE06967FAF15F6AC3EAB"
+    },
+    {
+      "boundary": "Pinned source or generated broker mirror only; not independent game runtime or application restoration proof.",
+      "description": "Dispatcher end_request takes the same mutex, decrements active request count and records completion-time activity.",
+      "firstLineInclusive": 156,
+      "lastLineInclusive": 160,
+      "rangeHashRepresentation": "UTF-8 decoded source lines joined with LF and final LF; full-file hash retains original bytes",
+      "rangeSha256": "FA0500423372EE8118C984CC5ABD9EEABB0BA9DC6ABF4018922640BF30D7912E",
+      "ruleId": "activity-completion",
+      "sourceRole": "native-retained-05",
+      "sourceSha256": "E80B760EF9693F57916A9989296FD104B96CE70CD452CE06967FAF15F6AC3EAB"
+    },
+    {
+      "boundary": "Pinned source or generated broker mirror only; not independent game runtime or application restoration proof.",
+      "description": "close_if_inactive under dispatcher mutex refuses closed dispatcher, nonzero in-flight requests and elapsed inactivity <= timeout; otherwise marks closed and notifies.",
+      "firstLineInclusive": 162,
+      "lastLineInclusive": 170,
+      "rangeHashRepresentation": "UTF-8 decoded source lines joined with LF and final LF; full-file hash retains original bytes",
+      "rangeSha256": "79C0B48EE4202F3427FE4905D2917C7C98DB8C7ED2268DD979B6BAF5FBCB3A5F",
+      "ruleId": "idle-retirement",
+      "sourceRole": "native-retained-05",
+      "sourceSha256": "E80B760EF9693F57916A9989296FD104B96CE70CD452CE06967FAF15F6AC3EAB"
+    },
+    {
+      "boundary": "Pinned source or generated broker mirror only; not independent game runtime or application restoration proof.",
+      "description": "Noncopyable RAII session_request_guard retains the exact dispatcher; acquire must successfully begin activity; destructor ends activity including exceptional exits. It does not create sessions or restore application custody.",
+      "firstLineInclusive": 195,
+      "lastLineInclusive": 212,
+      "rangeHashRepresentation": "UTF-8 decoded source lines joined with LF and final LF; full-file hash retains original bytes",
+      "rangeSha256": "E288CB0EC063D50A12611AC525AD9447F14AECE5272EAF3C483894BA0E2F5B92",
+      "ruleId": "guard-ownership",
+      "sourceRole": "native-retained-05",
+      "sourceSha256": "E80B760EF9693F57916A9989296FD104B96CE70CD452CE06967FAF15F6AC3EAB"
+    },
+    {
+      "boundary": "Pinned source or generated broker mirror only; not independent game runtime or application restoration proof.",
+      "description": "Non-initialize POST requires a session header and selects existing dispatcher under server mutex; guard acquisition refusal or missing dispatcher yields404; request guard remains alive through subsequent handling.",
+      "firstLineInclusive": 961,
+      "lastLineInclusive": 995,
+      "rangeHashRepresentation": "UTF-8 decoded source lines joined with LF and final LF; full-file hash retains original bytes",
+      "rangeSha256": "D71FFB0DA3E00F96820EB5016500C3BDA57F01F8081E707A3DF32BAEDBCC9413",
+      "ruleId": "post-admission",
+      "sourceRole": "native-retained-06",
+      "sourceSha256": "4D68857F3BF32C7D18691434C20C3E4918EEAC75EF1BD02FAC64B043129DCF87"
+    },
+    {
+      "boundary": "Pinned source or generated broker mirror only; not independent game runtime or application restoration proof.",
+      "description": "Maintenance first gathers inactivity candidates, then close_session(id,true) rechecks current activity before retirement; first candidate selection is not the final retirement decision.",
+      "firstLineInclusive": 1504,
+      "lastLineInclusive": 1527,
+      "rangeHashRepresentation": "UTF-8 decoded source lines joined with LF and final LF; full-file hash retains original bytes",
+      "rangeSha256": "C9EA960A65CC4C094BA2AF517C3188C042D16165F1E4EB775A2685C69701E8C8",
+      "ruleId": "idle-candidate-recheck",
+      "sourceRole": "native-retained-06",
+      "sourceSha256": "4D68857F3BF32C7D18691434C20C3E4918EEAC75EF1BD02FAC64B043129DCF87"
+    },
+    {
+      "boundary": "Pinned source or generated broker mirror only; not independent game runtime or application restoration proof.",
+      "description": "close_session selects and erases the exact session under server mutex; an already absent dispatcher returns; idle retirement is rechecked atomically with admission. Copied cleanup handlers execute outside server mutex and handler exceptions are caught.",
+      "firstLineInclusive": 1535,
+      "lastLineInclusive": 1578,
+      "rangeHashRepresentation": "UTF-8 decoded source lines joined with LF and final LF; full-file hash retains original bytes",
+      "rangeSha256": "C57E1DC86E0009CBD092C2C533CA9A76224CDF6F77D0716211572E90A8442DD1",
+      "ruleId": "single-retirement-owner",
+      "sourceRole": "native-retained-06",
+      "sourceSha256": "4D68857F3BF32C7D18691434C20C3E4918EEAC75EF1BD02FAC64B043129DCF87"
+    },
+    {
+      "boundary": "Pinned source or generated broker mirror only; not independent game runtime or application restoration proof.",
+      "description": "POST-only same session survives 180 seconds and over 600 requests; DELETE stays final",
+      "firstLineInclusive": 76,
+      "lastLineInclusive": 112,
+      "rangeHashRepresentation": "UTF-8 decoded source lines joined with LF and final LF; full-file hash retains original bytes",
+      "rangeSha256": "4B41B9D2472E1CB6288A4C4E375129F6CF1F048AE229BC5FD966F7C5BA863B0B",
+      "ruleId": "fixture-case-1",
+      "sourceRole": "native-git-input-00",
+      "sourceSha256": "3CD14F981A3B459385B1AB7F866CA2B8AF7AA9E7F5E129DB824B6255E7CBA3A4"
+    },
+    {
+      "boundary": "Pinned source or generated broker mirror only; not independent game runtime or application restoration proof.",
+      "description": "admitted 35-second POST is not idle; its completion restarts the idle interval",
+      "firstLineInclusive": 113,
+      "lastLineInclusive": 125,
+      "rangeHashRepresentation": "UTF-8 decoded source lines joined with LF and final LF; full-file hash retains original bytes",
+      "rangeSha256": "224D93E53C18FB137FFE23DF70C82285573AA50618C877094F388E9B60DEB4A6",
+      "ruleId": "fixture-case-2",
+      "sourceRole": "native-git-input-00",
+      "sourceSha256": "3CD14F981A3B459385B1AB7F866CA2B8AF7AA9E7F5E129DB824B6255E7CBA3A4"
+    },
+    {
+      "boundary": "Pinned source or generated broker mirror only; not independent game runtime or application restoration proof.",
+      "description": "genuinely idle session retires and cleanup happens once",
+      "firstLineInclusive": 126,
+      "lastLineInclusive": 139,
+      "rangeHashRepresentation": "UTF-8 decoded source lines joined with LF and final LF; full-file hash retains original bytes",
+      "rangeSha256": "A00F408904D3A411C265861E8EBE6D7C54D94846A1A9F4801AD3CED6EA742B94",
+      "ruleId": "fixture-case-3",
+      "sourceRole": "native-git-input-00",
+      "sourceSha256": "3CD14F981A3B459385B1AB7F866CA2B8AF7AA9E7F5E129DB824B6255E7CBA3A4"
+    },
+    {
+      "boundary": "Pinned source or generated broker mirror only; not independent game runtime or application restoration proof.",
+      "description": "dispatcher retirement is atomic with activity admission and guard exceptional cleanup",
+      "firstLineInclusive": 140,
+      "lastLineInclusive": 154,
+      "rangeHashRepresentation": "UTF-8 decoded source lines joined with LF and final LF; full-file hash retains original bytes",
+      "rangeSha256": "0CE46D708359E13DBFFACDB776BADF969DAB63B1751C7E4D99A85A32B4977667",
+      "ruleId": "fixture-case-4",
+      "sourceRole": "native-git-input-00",
+      "sourceSha256": "3CD14F981A3B459385B1AB7F866CA2B8AF7AA9E7F5E129DB824B6255E7CBA3A4"
+    },
+    {
+      "boundary": "Pinned source or generated broker mirror only; not independent game runtime or application restoration proof.",
+      "description": "Test fixture is host-only and preflights its dedicated listener before creating a session; it must never be pointed at a game endpoint.",
+      "firstLineInclusive": 10,
+      "lastLineInclusive": 18,
+      "rangeHashRepresentation": "UTF-8 decoded source lines joined with LF and final LF; full-file hash retains original bytes",
+      "rangeSha256": "E5A103E8C7C3A3B36559501900F757172E89441E6DF78CC4C6155195D3A8AB2A",
+      "ruleId": "fixture-isolation-contract",
+      "sourceRole": "native-git-input-00",
+      "sourceSha256": "3CD14F981A3B459385B1AB7F866CA2B8AF7AA9E7F5E129DB824B6255E7CBA3A4"
+    }
+  ],
+  "schema": "engine-map.pinned-source-rules.1"
+}
