@@ -1,0 +1,65 @@
+{
+  "arithmetic": {
+    "betweenFraction": "betweenSS/totalSS, undefined if totalSS is zero; descriptive association, not causal attribution",
+    "betweenSS": "sum n_g*(group_mean-partition_mean)^2",
+    "fixture": {
+      "totalSS": 20,
+      "twoGroupsWithinSS": 4,
+      "values": [
+        1,
+        3,
+        5,
+        7
+      ]
+    },
+    "identity": "totalSS=withinSS+betweenSS",
+    "identityArithmeticIndependentlyChecked": true,
+    "maximumComparisonResidual": 2.220446049250313e-16,
+    "ownerMaximumSSArithmeticResidual": 8.470329472543003e-21,
+    "precisionRange": "100*(maximum-minimum)/mean, gate at0.25% only if count>1",
+    "singletonGate": null,
+    "totalSS": "sum over unordered pair squared mean differences divided by N",
+    "withinSS": "sum of corresponding pairwise SS within each jitter/reset stratum"
+  },
+  "contextFields": [
+    "stage",
+    "eye",
+    "format",
+    "rectangle",
+    "revision",
+    "contextGeneration",
+    "contextIndex",
+    "path",
+    "requestedAe",
+    "effectiveAe",
+    "requestedHdr",
+    "effectiveHdr",
+    "renderWidth",
+    "renderHeight",
+    "displayWidth",
+    "displayHeight",
+    "preExposure",
+    "exposureResourceBound",
+    "sharpness",
+    "sharpeningEnabled"
+  ],
+  "fieldTolerances": {
+    "means": 1e-15,
+    "percentagesAndFractions": 1e-12,
+    "sumSquaredArithmetic": 1e-18
+  },
+  "genericMaximumComparisonResidualMixedUnitsNotPrecisionMetric": true,
+  "independentChecks": {
+    "actualBinary64JitterAndResetKeys": true,
+    "allStrata": 100,
+    "noContributorExecution": true,
+    "originalRows": 120,
+    "partitions": 30,
+    "repeated": 20,
+    "singletons": 80,
+    "sourceRowMetadataAndPrivateCaptureCorrelationsCheckedNotPublished": true
+  },
+  "interpretation": "Descriptive reanalysis of the same120 historical native rows, not new capture or independent scientific corroboration. Fixed-context scope distinct from historical jitter-only scope. Singletons lack precision evidence; repeated strata have only two samples. Duplicate output/combined stages are not independent experiments. No jitter causation, AE effect, vendor convergence or acceptance; originalPR47 unchanged. Unknown applicability not wildcard.",
+  "maximumSumSquaredArithmeticResidual": 8.470329472543003e-21,
+  "schema": "engine-map.descriptive-method.1"
+}

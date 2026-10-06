@@ -1,0 +1,59 @@
+{
+  "boundaries": "Descriptive reanalysis of the same120 historical native rows, not new capture or independent scientific corroboration. Fixed-context scope distinct from historical jitter-only scope. Singletons lack precision evidence; repeated strata have only two samples. Duplicate output/combined stages are not independent experiments. No jitter causation, AE effect, vendor convergence or acceptance; originalPR47 unchanged. Unknown applicability not wildcard.",
+  "cutoffUtc": "2026-10-06T05:12:07.9459698+00:00",
+  "inputs": {
+    "original-raw-decode-analysis": {
+      "access": "read-only retained file",
+      "bytes": 231161,
+      "sha256": "09D76906BDBEC80A0DD96015F386819DB700B555BEB49F3C9607920D26891D8C",
+      "sourceChangedDuringRead": false
+    },
+    "owner-arithmetic-verification": {
+      "access": "read-only retained file",
+      "bytes": 1141,
+      "sha256": "8189CD3A98A0AA27A6B6A8F68D83C7C060EEB86EA4F21DD7D5AA20E26FE8F281",
+      "sourceChangedDuringRead": false
+    },
+    "owner-fixed-context-partitions": {
+      "access": "read-only retained file",
+      "bytes": 98476,
+      "sha256": "3CEE921D67EF1FA727E27B22374C1A13932E0561A4C347F3ED0739E380D45138",
+      "sourceChangedDuringRead": false
+    },
+    "prior-independent-publication-acknowledgement": {
+      "access": "read-only retained file",
+      "bytes": 12718,
+      "sha256": "C14BC87A6470EF1DC3CECC4953DE9F90AB339F74CDE408091B22C63199488D30",
+      "sourceChangedDuringRead": false
+    },
+    "prior-independent-raw-verification": {
+      "access": "read-only retained file",
+      "bytes": 198259,
+      "sha256": "30E3E6CF800A9F52646E6245FD57BE5177EE84D76CA3C6CD4CAF974672E04479",
+      "sourceChangedDuringRead": false
+    },
+    "prior-map-publication": {
+      "access": "read-only retained file",
+      "bytes": 9595,
+      "sha256": "F6344B1B13A8ACFB913255F730F2DAF1A05521B6AA29C0865535FE10DC427508",
+      "sourceChangedDuringRead": false
+    },
+    "prior-published-native-projection": {
+      "access": "read-only retained file",
+      "bytes": 802271,
+      "sha256": "9B94A0A93F988FB896A41FBDE97AAAF2EA60D1FC98D90BCAA79C47EB3835CCBD",
+      "sourceChangedDuringRead": false
+    }
+  },
+  "method": "Pairwise squared differences independently checked against published centred-deviation decomposition; actual metadata/context/phase keys reconstructed from all120 original rows.",
+  "priorPublication": {
+    "acknowledgementSha256": "C14BC87A6470EF1DC3CECC4953DE9F90AB339F74CDE408091B22C63199488D30",
+    "head": "584517d9402f9c12c932813ea8f69abdb79a3f48",
+    "publicationSha256": "F6344B1B13A8ACFB913255F730F2DAF1A05521B6AA29C0865535FE10DC427508",
+    "pullRequest": "https://github.com/Treatid2/skyrim-render-map/pull/47"
+  },
+  "privacy": "No paths, sessions/capture IDs, addresses, raw pixels/settings/binaries or images published. Native receipt hashes and original index/frame distinguish sample lineage.",
+  "schema": "engine-map.fixed-context-provenance.1",
+  "sourceInventoryDigest": "7FBBA015B1ACE0511E934C3FDD3C2189DE9F7309156DFE87E9F08ABE863C9938",
+  "sourceRepresentation": "Original owner-derived rows hash-bound to previously independently raw-decoded native pages and publicPR47 projections; new arithmetic independently recomputed, native decoding not rerun."
+}

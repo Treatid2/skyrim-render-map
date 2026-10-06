@@ -1,0 +1,49 @@
+{
+  "content": {
+    "fileCount": 5,
+    "root": "content",
+    "totalBytes": 944794,
+    "treeSha256": "D3A85B75226EE5B642799F2D79683C8C3176EC21AEB56730878B92879CECF1C3"
+  },
+  "contributor": {
+    "displayName": "Treatid2",
+    "github": "Treatid2",
+    "standing": "ordinary-contributor"
+  },
+  "createdAt": "2026-10-06T05:18:39.010690+00:00",
+  "licensing": {
+    "content": "CC-BY-SA-4.0",
+    "dcoAcknowledged": true,
+    "schemas": "CC0-1.0"
+  },
+  "namespace": "community-shaders",
+  "notes": "Descriptive reanalysis of the same120 historical native rows, not new capture or independent scientific corroboration. Fixed-context scope distinct from historical jitter-only scope. Singletons lack precision evidence; repeated strata have only two samples. Duplicate output/combined stages are not independent experiments. No jitter causation, AE effect, vendor convergence or acceptance; originalPR47 unchanged. Unknown applicability not wildcard.",
+  "provenance": {
+    "importedAt": "2026-10-06T05:18:39.010690+00:00",
+    "relatedUrls": [
+      "https://github.com/Treatid2/skyrim-render-map/pull/47"
+    ],
+    "sourceCommit": "584517d9402f9c12c932813ea8f69abdb79a3f48",
+    "sourceContentTreeSha256": "7FBBA015B1ACE0511E934C3FDD3C2189DE9F7309156DFE87E9F08ABE863C9938",
+    "sourceDirty": false,
+    "sourceParentCommit": "cc25659b0c84f258a3172acf746f0c2721066e15",
+    "sourcePubliclyReachable": true,
+    "sourceRef": null,
+    "sourceRepository": "https://github.com/Treatid2/skyrim-render-map",
+    "sourceState": "committed-public-draft-data-cutoff",
+    "transformations": [
+      "Reconstruct30fixed-context partitions and100exact binary64 jitter/reset strata from120previously raw-decoded rows.",
+      "Independent pairwise SS/range/gate arithmetic, all original source-row references checked; no native decode/runtime replay.",
+      "Project all30partitions/100strata/120sample references/10stage-eye summaries with explicit singleton and duplicate-stage limitations.",
+      "Keep historicalPR47 and jitter-only30 repeated-stratum scope immutable; private identity payloads omitted."
+    ]
+  },
+  "schema": {
+    "major": 1,
+    "minor": 0,
+    "name": "skyrim-render-map.submission"
+  },
+  "status": "candidate-unreviewed",
+  "submissionClass": "assertion",
+  "submissionId": "sub-fsr4-fixed-context-jitter-supplement-v1"
+}
