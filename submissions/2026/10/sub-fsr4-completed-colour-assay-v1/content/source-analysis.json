@@ -1,0 +1,427 @@
+{
+  "contributorExecutionHere": false,
+  "numericOwnerProjections": [
+    {
+      "accepted": true,
+      "currentParsedType": "System.Int64",
+      "exactDecimalEqual": true,
+      "path": "driver_null.loadPriority",
+      "profileParsedType": "System.Int64"
+    },
+    {
+      "accepted": true,
+      "currentParsedType": "System.Int64",
+      "exactDecimalEqual": true,
+      "path": "driver_null.windowX",
+      "profileParsedType": "System.Int64"
+    },
+    {
+      "accepted": true,
+      "currentParsedType": "System.Int64",
+      "exactDecimalEqual": true,
+      "path": "driver_null.windowY",
+      "profileParsedType": "System.Int64"
+    },
+    {
+      "accepted": true,
+      "currentParsedType": "System.Int64",
+      "exactDecimalEqual": true,
+      "path": "driver_null.windowWidth",
+      "profileParsedType": "System.Int64"
+    },
+    {
+      "accepted": true,
+      "currentParsedType": "System.Int64",
+      "exactDecimalEqual": true,
+      "path": "driver_null.windowHeight",
+      "profileParsedType": "System.Int64"
+    },
+    {
+      "accepted": true,
+      "currentParsedType": "System.Int64",
+      "exactDecimalEqual": true,
+      "path": "driver_null.renderWidth",
+      "profileParsedType": "System.Int64"
+    },
+    {
+      "accepted": true,
+      "currentParsedType": "System.Int64",
+      "exactDecimalEqual": true,
+      "path": "driver_null.renderHeight",
+      "profileParsedType": "System.Int64"
+    },
+    {
+      "accepted": true,
+      "currentParsedType": "System.Double",
+      "exactDecimalEqual": true,
+      "path": "driver_null.secondsFromVsyncToPhotons",
+      "profileParsedType": "System.Double"
+    },
+    {
+      "accepted": true,
+      "currentParsedType": "System.Int64",
+      "exactDecimalEqual": true,
+      "path": "driver_null.displayFrequency",
+      "profileParsedType": "System.Double"
+    },
+    {
+      "accepted": true,
+      "currentParsedType": "System.Int64",
+      "exactDecimalEqual": true,
+      "path": "driver_codex_head_pose.positionX",
+      "profileParsedType": "System.Double"
+    },
+    {
+      "accepted": true,
+      "currentParsedType": "System.Double",
+      "exactDecimalEqual": false,
+      "path": "driver_codex_head_pose.eyeHeightMeters",
+      "profileParsedType": "System.Double"
+    },
+    {
+      "accepted": true,
+      "currentParsedType": "System.Int64",
+      "exactDecimalEqual": true,
+      "path": "driver_codex_head_pose.positionZ",
+      "profileParsedType": "System.Double"
+    },
+    {
+      "accepted": true,
+      "currentParsedType": "System.Int64",
+      "exactDecimalEqual": true,
+      "path": "driver_codex_head_pose.yawDegrees",
+      "profileParsedType": "System.Double"
+    },
+    {
+      "accepted": true,
+      "currentParsedType": "System.Int64",
+      "exactDecimalEqual": true,
+      "path": "driver_codex_head_pose.pitchDegrees",
+      "profileParsedType": "System.Double"
+    },
+    {
+      "accepted": true,
+      "currentParsedType": "System.Int64",
+      "exactDecimalEqual": true,
+      "path": "driver_codex_head_pose.rollDegrees",
+      "profileParsedType": "System.Double"
+    },
+    {
+      "accepted": true,
+      "currentParsedType": "System.Int64",
+      "exactDecimalEqual": true,
+      "path": "power.turnOffControllersTimeout",
+      "profileParsedType": "System.Int64"
+    }
+  ],
+  "rules": [
+    {
+      "description": "Exact decimal identity is checked first; owned Double/Int64 spellings may match after finite identical binary64 conversion. Otherwise canonical G17 remains finite same-Double/bits-only. Signed-zero bits and arbitrary precision changes refuse; integer power timeout remains caller-restricted.",
+      "firstLineInclusive": 101,
+      "lastLineInclusive": 127,
+      "ruleId": "controlled-number-admission",
+      "sourceRole": "helper",
+      "sourceSha256": "088F1067A06D93F1084FA1817E590F65C8DD8154B252A23DACE411ADA04F7AB6",
+      "spanSha256": "836BC76C5F06201043F6A1ED1BF26F97FA5A58C871F991453C5EAC3B73150EA5"
+    },
+    {
+      "description": "Exact decimal coefficient/exponent identity, exact string/Boolean kinds, recursive case-sensitive keys and array structure; not generic approximate equality.",
+      "firstLineInclusive": 3,
+      "lastLineInclusive": 40,
+      "ruleId": "strict-unowned-values",
+      "sourceRole": "helper",
+      "sourceSha256": "088F1067A06D93F1084FA1817E590F65C8DD8154B252A23DACE411ADA04F7AB6",
+      "spanSha256": "C51C490B930B79CAB25D6FCDB5DC6B7B5F8B42BBD402DB15B4319F36EBC3D06C"
+    },
+    {
+      "description": "Case-insensitive duplicate keys rejected before projection; no collapsed case aliases.",
+      "firstLineInclusive": 41,
+      "lastLineInclusive": 55,
+      "ruleId": "case-alias-rejection",
+      "sourceRole": "helper",
+      "sourceSha256": "088F1067A06D93F1084FA1817E590F65C8DD8154B252A23DACE411ADA04F7AB6",
+      "spanSha256": "E8499025A62D56E52E30239E4F11B37BBE554CD41080E8E0B49EDB7823010C51"
+    },
+    {
+      "description": "JSON raw decimal coefficients/exponents normalized without Double rounding; numeric JSON kind remains distinct from string/Boolean/null.",
+      "firstLineInclusive": 56,
+      "lastLineInclusive": 81,
+      "ruleId": "exact-numeric-identity",
+      "sourceRole": "helper",
+      "sourceSha256": "088F1067A06D93F1084FA1817E590F65C8DD8154B252A23DACE411ADA04F7AB6",
+      "spanSha256": "ECB3B9CC15057E961973B963C597A0450C53C7572EB329FFE7C0631D7172AC49"
+    },
+    {
+      "description": "At most1MiB, strict UTF8, JSON object, duplicate-key check, parsed plus raw-exact projections and physical hash.",
+      "firstLineInclusive": 82,
+      "lastLineInclusive": 100,
+      "ruleId": "bounded-input",
+      "sourceRole": "helper",
+      "sourceSha256": "088F1067A06D93F1084FA1817E590F65C8DD8154B252A23DACE411ADA04F7AB6",
+      "spanSha256": "4E1D56923654FA0A6853968A0A2F17D30FB79D966A53B88B32D34CE593049EFE"
+    },
+    {
+      "description": "Exactly present exact-case DesktopUI pairing/settings_desktop string leaves required; no interpretation of serialized contents.",
+      "firstLineInclusive": 128,
+      "lastLineInclusive": 141,
+      "ruleId": "two-string-selection",
+      "sourceRole": "helper",
+      "sourceSha256": "088F1067A06D93F1084FA1817E590F65C8DD8154B252A23DACE411ADA04F7AB6",
+      "spanSha256": "6DB19B62DB38B16ABCA54B64386F7DD696353D6DB1D77B5EEACD1CF3B27C29AC"
+    }
+  ],
+  "schema": "engine-map.pinned-source-rules.1",
+  "sourceCommit": "4d0a9fd654e42048d4ad946a32b4ccdba7e9b073",
+  "sourcePhases": [
+    {
+      "durationMilliseconds": 8525,
+      "exitCode": 0,
+      "failed": 0,
+      "name": "root-Test-DesktopUIRestore",
+      "ownerOutcomeNotReplayed": true,
+      "passed": 49,
+      "receiptSha256": "4393AF733EEC421EFF641D3766131121BB4D524608CC0BAC761010B3A3EFA6FB",
+      "stdoutSha256": "D0D94703A53084C907EE7D56605FDC6DD755ACC6B77155B1E336238911A405D6"
+    },
+    {
+      "durationMilliseconds": 113314,
+      "exitCode": 0,
+      "failed": 0,
+      "name": "root-Test-SteamVRNullControl",
+      "ownerOutcomeNotReplayed": true,
+      "passed": 286,
+      "receiptSha256": "BAB2CD5416A711BECC3FC9B342C2B3C522F65F904F31DB55CFD3C194467F9540",
+      "stdoutSha256": "F4482105ED34D3EC51394214F65F4F69B1907F899B4E758D059E522E7B94B115"
+    },
+    {
+      "durationMilliseconds": 8508,
+      "exitCode": 0,
+      "failed": 0,
+      "name": "plugin-Test-DesktopUIRestore",
+      "ownerOutcomeNotReplayed": true,
+      "passed": 49,
+      "receiptSha256": "A1F031E373AC75C5B1C0D7014B329541FFAE28C878D015EDDA9C7CE480303F1A",
+      "stdoutSha256": "D0D94703A53084C907EE7D56605FDC6DD755ACC6B77155B1E336238911A405D6"
+    },
+    {
+      "durationMilliseconds": 105425,
+      "exitCode": 0,
+      "failed": 0,
+      "name": "plugin-Test-SteamVRNullControl",
+      "ownerOutcomeNotReplayed": true,
+      "passed": 286,
+      "receiptSha256": "6C1A4E2834E20194E10EF270844056C2B7B83D7673CB04C06FEE94CEAF0A03B0",
+      "stdoutSha256": "F4482105ED34D3EC51394214F65F4F69B1907F899B4E758D059E522E7B94B115"
+    }
+  ],
+  "staticRefusalCases": [
+    {
+      "firstLineInclusive": 107,
+      "name": "missing leaf",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "B35437AB2BFDAA9FE4A10CA500DC38701D2D319988F7CEE6FA641AF8CCD8B5F1",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 108,
+      "name": "absent section",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "B35437AB2BFDAA9FE4A10CA500DC38701D2D319988F7CEE6FA641AF8CCD8B5F1",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 109,
+      "name": "wrong root casing",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "B35437AB2BFDAA9FE4A10CA500DC38701D2D319988F7CEE6FA641AF8CCD8B5F1",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 110,
+      "name": "wrong leaf casing",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "B35437AB2BFDAA9FE4A10CA500DC38701D2D319988F7CEE6FA641AF8CCD8B5F1",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 111,
+      "name": "numeric leaf",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "B35437AB2BFDAA9FE4A10CA500DC38701D2D319988F7CEE6FA641AF8CCD8B5F1",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 112,
+      "name": "null leaf",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "B35437AB2BFDAA9FE4A10CA500DC38701D2D319988F7CEE6FA641AF8CCD8B5F1",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 113,
+      "name": "array leaf",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "B35437AB2BFDAA9FE4A10CA500DC38701D2D319988F7CEE6FA641AF8CCD8B5F1",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 114,
+      "name": "nonobject section",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "B35437AB2BFDAA9FE4A10CA500DC38701D2D319988F7CEE6FA641AF8CCD8B5F1",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 115,
+      "name": "other UI drift",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "B35437AB2BFDAA9FE4A10CA500DC38701D2D319988F7CEE6FA641AF8CCD8B5F1",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 116,
+      "name": "literal dotted root",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "B35437AB2BFDAA9FE4A10CA500DC38701D2D319988F7CEE6FA641AF8CCD8B5F1",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 117,
+      "name": "literal dotted child",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "B35437AB2BFDAA9FE4A10CA500DC38701D2D319988F7CEE6FA641AF8CCD8B5F1",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 118,
+      "name": "controlled Boolean numeric alias",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "B35437AB2BFDAA9FE4A10CA500DC38701D2D319988F7CEE6FA641AF8CCD8B5F1",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 119,
+      "name": "controlled value drift",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "B35437AB2BFDAA9FE4A10CA500DC38701D2D319988F7CEE6FA641AF8CCD8B5F1",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 120,
+      "name": "controlled case alias alongside owned leaf",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "B35437AB2BFDAA9FE4A10CA500DC38701D2D319988F7CEE6FA641AF8CCD8B5F1",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 121,
+      "name": "controlled dotted alias alongside owned leaf",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "B35437AB2BFDAA9FE4A10CA500DC38701D2D319988F7CEE6FA641AF8CCD8B5F1",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 122,
+      "name": "other Boolean numeric alias",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "B35437AB2BFDAA9FE4A10CA500DC38701D2D319988F7CEE6FA641AF8CCD8B5F1",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 123,
+      "name": "large integer drift",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "B35437AB2BFDAA9FE4A10CA500DC38701D2D319988F7CEE6FA641AF8CCD8B5F1",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 124,
+      "name": "power numeric kind",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "B35437AB2BFDAA9FE4A10CA500DC38701D2D319988F7CEE6FA641AF8CCD8B5F1",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 125,
+      "name": "history nonstring",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "B35437AB2BFDAA9FE4A10CA500DC38701D2D319988F7CEE6FA641AF8CCD8B5F1",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 135,
+      "name": "changed controlled binary64 bits",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "B35437AB2BFDAA9FE4A10CA500DC38701D2D319988F7CEE6FA641AF8CCD8B5F1",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 136,
+      "name": "noncanonical controlled decimal hidden by Double parsing",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "B35437AB2BFDAA9FE4A10CA500DC38701D2D319988F7CEE6FA641AF8CCD8B5F1",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 137,
+      "name": "controlled signed-zero bit change",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "B35437AB2BFDAA9FE4A10CA500DC38701D2D319988F7CEE6FA641AF8CCD8B5F1",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 138,
+      "name": "unowned canonical binary64 reserialization",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "B35437AB2BFDAA9FE4A10CA500DC38701D2D319988F7CEE6FA641AF8CCD8B5F1",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 139,
+      "name": "controlled JSON number replaced by string",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "B35437AB2BFDAA9FE4A10CA500DC38701D2D319988F7CEE6FA641AF8CCD8B5F1",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 140,
+      "name": "controlled JSON number replaced by Boolean",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "B35437AB2BFDAA9FE4A10CA500DC38701D2D319988F7CEE6FA641AF8CCD8B5F1",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 141,
+      "name": "controlled JSON number replaced by null",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "B35437AB2BFDAA9FE4A10CA500DC38701D2D319988F7CEE6FA641AF8CCD8B5F1",
+      "staticDeclarationOnly": true
+    }
+  ]
+}
