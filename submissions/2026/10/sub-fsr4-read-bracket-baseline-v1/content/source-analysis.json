@@ -1,0 +1,220 @@
+{
+  "negativeClassifierLiveExercised": false,
+  "noContributorExecution": true,
+  "ownerPublicationStagedTests": 53,
+  "ownerQualificationPhases": [
+    {
+      "name": "deployed-loader-981e-harness2-focused-root-Test-MO2DeployedLoaderFailure",
+      "ownerOutcomeNotReplayed": true,
+      "receiptSha256": "B1BE48AC5B10046BD5EF9F2E19AD06281C6DF9D55764E424A6208C71F001D12E",
+      "sourceCommit": "981e01d6297bcdf9541135ce6d09f31014ef7a7e",
+      "tests": 26
+    },
+    {
+      "name": "deployed-loader-981e-harness2-focused-root-Test-MO2LaunchFailure",
+      "ownerOutcomeNotReplayed": true,
+      "receiptSha256": "A59B8771ABBDF8EC417269C6A7CAA0BE9EDF04F53E13265715508480F5BD7C78",
+      "sourceCommit": "981e01d6297bcdf9541135ce6d09f31014ef7a7e",
+      "tests": 27
+    },
+    {
+      "name": "deployed-loader-981e-harness2-focused-root-Test-MO2RunButton",
+      "ownerOutcomeNotReplayed": true,
+      "receiptSha256": "059EBCD33BA413F9F26105BEED207F8BDD73EA73DCCE68609452B44249AA638E",
+      "sourceCommit": "981e01d6297bcdf9541135ce6d09f31014ef7a7e",
+      "tests": 26
+    },
+    {
+      "name": "deployed-loader-981e-harness2-focused-root-Test-MO2DispatchRecovery",
+      "ownerOutcomeNotReplayed": true,
+      "receiptSha256": "ED41C676314CEE45936EA55EA7E7D968552389CD1E046CC71EEC5360503F95FD",
+      "sourceCommit": "981e01d6297bcdf9541135ce6d09f31014ef7a7e",
+      "tests": 58
+    },
+    {
+      "name": "deployed-loader-981e-harness2-focused-plugin-Test-MO2DeployedLoaderFailure",
+      "ownerOutcomeNotReplayed": true,
+      "receiptSha256": "B0630BCB403B12AEC2760675C59ACDFB5E88ACB92FFCB284716B9EE209530E2B",
+      "sourceCommit": "981e01d6297bcdf9541135ce6d09f31014ef7a7e",
+      "tests": 26
+    },
+    {
+      "name": "deployed-loader-981e-general-root-Test-MO2Control",
+      "ownerOutcomeNotReplayed": true,
+      "receiptSha256": "902EC5979DF90C42A77008C56B90CFD2D25227A534D3DA8803F26923D2B182E9",
+      "sourceCommit": "981e01d6297bcdf9541135ce6d09f31014ef7a7e",
+      "tests": 267
+    },
+    {
+      "name": "deployed-loader-981e-general-plugin-Test-MO2Control",
+      "ownerOutcomeNotReplayed": true,
+      "receiptSha256": "4953D2A91E1AFB0C26F6744869847210765D76172ACE523E48EB3BFA56060990",
+      "sourceCommit": "981e01d6297bcdf9541135ce6d09f31014ef7a7e",
+      "tests": 267
+    }
+  ],
+  "ownerQualifiedTests": 697,
+  "physicalScopedRepresentationDifferencesOwnerAttributed": [
+    {
+      "basis": "Preexisting scoped driver checkout CRLF differs from -text committed LF artifact; excluded from scoped feature proof; integrated publication verified against committed bytes",
+      "gitBlob": "c7cd5e28e712921ee943191f1fa78ef97dfa7ccf",
+      "integratedSha256": "690A5F6A3D5B764BE4E277321D5C27B235C9960A510CF072D73A6F504197CA68",
+      "path": "drivers/codex_head_pose/driver.vrdrivermanifest",
+      "scopedSha256": "7AD38AE07BA0A77DB08D0E9465F1F65E3FC8220B0272EF8393AE341B54803343"
+    },
+    {
+      "basis": "Preexisting scoped driver checkout CRLF differs from -text committed LF artifact; excluded from scoped feature proof; integrated publication verified against committed bytes",
+      "gitBlob": "ee83337d7fcb726d14cc10f7dd2fda6799d8a135",
+      "integratedSha256": "F56FF606104D4EF18E617921A75C73AD73B5A1A1D70C69590C29DE16919E04AD",
+      "path": "drivers/codex_head_pose/licenses/OpenVR-LICENSE.txt",
+      "scopedSha256": "9E6D1480FB68E86CEAFED312F7E67DADCDC2A99B350B710D624B8F0F0F1A2329"
+    },
+    {
+      "basis": "Only CRLF/LF normalization; scoped feature proof separately limited to six feature members",
+      "gitBlob": "77294341779ef0e76633f6a8715c2683557ed990",
+      "integratedSha256": "963E9F3044FEC0D68674F66A03765079C89E48EB2F1E2B706FA874526E8A9B15",
+      "path": "tools/devbench-control/RenderMapStartSelection.ps1",
+      "scopedSha256": "7C456B72E1BB2868F56E4A8161550B8E1BC552350A623DEF6DE8ADE1B0D55115"
+    },
+    {
+      "basis": "Only CRLF/LF normalization; scoped feature proof separately limited to six feature members",
+      "gitBlob": "54535f355457a097b87e05e9ff383444e268fba6",
+      "integratedSha256": "4D766F4429E73B4FACCF3B69C2C1317A7E9F66150F40434D3265118DD15A3A32",
+      "path": "tools/devbench-control/Test-InputMouseCapabilities.ps1",
+      "scopedSha256": "071E3F0D058EE658EA70E52465A454074AA7E0304E2362821C391CD2A067EE25"
+    },
+    {
+      "basis": "Only CRLF/LF normalization; scoped feature proof separately limited to six feature members",
+      "gitBlob": "7309de881fb36fe056f261fef6f2df2deb3fd073",
+      "integratedSha256": "41F4F6EE22906FF60905E661735AA23276524094B22E7CB5B099DA2B4CED2C25",
+      "path": "tools/devbench-control/Test-RenderMapStartSelection.ps1",
+      "scopedSha256": "8D1DB64A2F38BB263101E10EF5790F3E959AA0766D0829D65D75AC0C6AF82F56"
+    },
+    {
+      "basis": "Only CRLF/LF normalization; scoped feature proof separately limited to six feature members",
+      "gitBlob": "a4a90f28d9d881c3cb3db044de82c72725a1664c",
+      "integratedSha256": "1C6E14579EE4F910229E0B17132336D50F281D9790A9AC8D3AF404D8D7BA893F",
+      "path": "tools/mo2-control/tests/Test-MO2DeployedLoaderFailure.ps1",
+      "scopedSha256": "B04F302286A5BF3E6BF905809D8A07C41F066F9243AE53B584E18E9338C265B2"
+    },
+    {
+      "basis": "Only CRLF/LF normalization; scoped feature proof separately limited to six feature members",
+      "gitBlob": "32d9a4c752fe093870a6512125913c1e6b0db3e3",
+      "integratedSha256": "B8DE33BFD6EFFFA1614BF9ECFF225C96E8594CD85D6FB610DD1D8084FA667677",
+      "path": "tools/mo2-control/tests/Test-MO2LaunchFailure.ps1",
+      "scopedSha256": "151F05E2B6139513323608FA1F37508CD5A8974C8FA1502A1E2AD3A46AAD2DBC"
+    },
+    {
+      "basis": "Only CRLF/LF normalization; scoped feature proof separately limited to six feature members",
+      "gitBlob": "c55086f3ed73cd9886d976f6544cf2418c62fe16",
+      "integratedSha256": "350FBC50BD393BADA62F0DC063BE3434E1C1400277E0121513947F464CFC1B62",
+      "path": "tools/mo2-profile-control/tests/Test-MO2ProfileControl.ps1",
+      "scopedSha256": "BD93C20723378E84AC6C68D7A92D4E79E52762CD67C9C5A6B43BA8D0DEC7CC6A"
+    },
+    {
+      "basis": "Only CRLF/LF normalization; scoped feature proof separately limited to six feature members",
+      "gitBlob": "735d90f142d261ea6cef675be8a1d69c73437b95",
+      "integratedSha256": "6310EE0C9EBE22BE59C82D06888EFBB80701EFA098315D1D77C57BD62010224E",
+      "path": "tools/mo2-workspace-control/tests/Test-ActiveOutputResume.inc.ps1",
+      "scopedSha256": "CE6F9A5FD6BC8848EE9AEB116011B3582A0EC8DFA3C8EE40CBD7210903E7429F"
+    },
+    {
+      "basis": "Only CRLF/LF normalization; scoped feature proof separately limited to six feature members",
+      "gitBlob": "c5f6f10a66c23b0bb64ed36adb89be578ebdbc4c",
+      "integratedSha256": "9DCDC30D25C91B48C8B1F40C107172FFA7B8A2517D33C9D678C743AD866A69BC",
+      "path": "tools/steamvr-null-control/GripLifecycle.Common.ps1",
+      "scopedSha256": "904F5C032F2BABD4FC653BF12C33F6234886CDB1E43202DE618968DF79129E06"
+    },
+    {
+      "basis": "Only CRLF/LF normalization; scoped feature proof separately limited to six feature members",
+      "gitBlob": "a6fafca1e738b7dd836284b99867a7a4bc67d7a4",
+      "integratedSha256": "659230EAC22DB48E3BC3FBEA6D34A7F0A7456C3AB75E24926D490079C7830FFE",
+      "path": "tools/steamvr-null-control/GripLifecycle.Worker.ps1",
+      "scopedSha256": "0A0F6BAC4A090BAAEC481803A666A9594F614B92CFFC148F813C0B3EE929D397"
+    },
+    {
+      "basis": "Only CRLF/LF normalization; scoped feature proof separately limited to six feature members",
+      "gitBlob": "b33466e9fb94e27123a4e236d2a547ba3f128fd5",
+      "integratedSha256": "EBE53C2998B0AC1A24EACE3656748A60CEAB20CC6C5051C2464CD4F8B2070B48",
+      "path": "tools/steamvr-null-control/Invoke-NullHmdGripDiagnostic.ps1",
+      "scopedSha256": "30C712CEAA3667D7A13547D49546F61D3F6C53F84BEA6C59B70BD80A48CE68DB"
+    },
+    {
+      "basis": "Only CRLF/LF normalization; scoped feature proof separately limited to six feature members",
+      "gitBlob": "66ad508b94ef686c7cabc27e831a21d48716317f",
+      "integratedSha256": "1FCECBABACAEEB5288A1DF1D7DE36AC1AA6A7D9E3BAE65479972C8C276C7BC0A",
+      "path": "tools/steamvr-null-control/Invoke-NullHmdGripSelectedRun.ps1",
+      "scopedSha256": "A0B05BAA3649100C344FC209B72A4C3B3EAEAFE5D13335F53632AD0A2C704466"
+    },
+    {
+      "basis": "Only CRLF/LF normalization; scoped feature proof separately limited to six feature members",
+      "gitBlob": "7bee3a767b5c6e2eab670d03310566abcea76d8c",
+      "integratedSha256": "04E239CDF9CAB49CE90612A3752A6993B1681E6BEFD3A1C995CBA0FB6B3083E7",
+      "path": "tools/steamvr-null-control/tests/GripLifecycle.SelectionOwner.ps1",
+      "scopedSha256": "D3C693B9B5CBB7BC9C3A859FCAC5F5B38612B7CA3C8A7CFB79D6E5877E0CC765"
+    },
+    {
+      "basis": "Only CRLF/LF normalization; scoped feature proof separately limited to six feature members",
+      "gitBlob": "e9bc517eb015a78f1a6bc6819b7774914062a369",
+      "integratedSha256": "1C0620D3C476DF6DBDCC5D6A369D325ED5CBC6A763C6B22744ED322C1944573F",
+      "path": "tools/steamvr-null-control/tests/Test-GripSelectedCustody.ps1",
+      "scopedSha256": "0CA65E0C9BAD02B1722EC97F2C03D49B5DFB842091B37DE15FCE5FE64ACED7B3"
+    }
+  ],
+  "rules": [
+    {
+      "description": "Exact camera get, inspect scene/lights schema selectors and bounded scene limit64 required; ambiguous or unsupported tool schemas refused.",
+      "firstLineInclusive": 5,
+      "lastLineInclusive": 24,
+      "ruleId": "catalog-admission",
+      "sourceRole": "bracket-helper",
+      "sourceSha256": "5E92B0EB4D8DB0901B21691C004F2C01BE32B3793473ED05AD8D7B9EA5F796EE",
+      "spanSha256": "5B717D11BFA1DDC1D280F4D8B1A3563629E70DA5ED2804C85FF2207B1657A7EE",
+      "staticSourceNotOutcomeProof": true
+    },
+    {
+      "description": "Single native payload, semantic/schema/finite vectors/scalars/cell/renderer-list coverage checked; typed availability retained. Light membership and culling do not prove visible illumination or atomic render-frame association.",
+      "firstLineInclusive": 26,
+      "lastLineInclusive": 56,
+      "ruleId": "payload-admission",
+      "sourceRole": "bracket-helper",
+      "sourceSha256": "5E92B0EB4D8DB0901B21691C004F2C01BE32B3793473ED05AD8D7B9EA5F796EE",
+      "spanSha256": "56DC50A97369737BFB9B877D1CA4DACE6EAB8DC692F16BB1C0BD27E9BA62FA17",
+      "staticSourceNotOutcomeProof": true
+    },
+    {
+      "description": "Camera then scene then bounded lights on original deadline; qualified native receipts and read times retained. Explicit atomic-frame equivalence false.",
+      "firstLineInclusive": 84,
+      "lastLineInclusive": 107,
+      "ruleId": "sequential-read-bracket",
+      "sourceRole": "measurement",
+      "sourceSha256": "4F4797BEF30046FD7889257FE63FFBB51CABF8E7B3E534EE07CD246D6D40C22B",
+      "spanSha256": "8AEDF79BFCA4B6B3F085F957BC5C30A38224AC308CCD36B010598B9C683D62E1",
+      "staticSourceNotOutcomeProof": true
+    },
+    {
+      "description": "Before-arm read precedes arm; generation/frame are associated retroactively after positive native arm/completion. Second bracket follows native completion before page reads; not an atomic join.",
+      "firstLineInclusive": 250,
+      "lastLineInclusive": 284,
+      "ruleId": "capture-association",
+      "sourceRole": "measurement",
+      "sourceSha256": "4F4797BEF30046FD7889257FE63FFBB51CABF8E7B3E534EE07CD246D6D40C22B",
+      "spanSha256": "D059EBEBD4961FD9B1C7164F76C2F3F0346E29E11CC5184A0DC78DB01F8644A1",
+      "staticSourceNotOutcomeProof": true
+    },
+    {
+      "description": "Actual Boolean captureReadBrackets baseline-only opt-in; fixed-AE existing-state admission retained, not added setters or simulation freeze.",
+      "firstLineInclusive": 5,
+      "lastLineInclusive": 27,
+      "ruleId": "baseline-opt-in",
+      "sourceRole": "measurement",
+      "sourceSha256": "4F4797BEF30046FD7889257FE63FFBB51CABF8E7B3E534EE07CD246D6D40C22B",
+      "spanSha256": "8017D2C949A49453FD8D53740868A206C9ECC14A3FBAFC333AEBD46C63CD7BF1",
+      "staticSourceNotOutcomeProof": true
+    }
+  ],
+  "schema": "engine-map.pinned-read-bracket-source.1",
+  "sourceAdmissionBeforeLiveLaunch": true,
+  "sourceCommit": "981e01d6297bcdf9541135ce6d09f31014ef7a7e",
+  "sourceQualificationAttributedNotReplayed": true
+}
