@@ -1,0 +1,469 @@
+{
+  "contributorExecutionHere": false,
+  "numericOwnerProjections": [
+    {
+      "accepted": true,
+      "currentParsedType": "System.Int64",
+      "derivedTypeGuardRefuses": false,
+      "exactDecimalEqual": true,
+      "exactDecimalEqualityIndependentlyRecomputedFromOwnerIdentities": true,
+      "liveRawDocumentNotReadHere": true,
+      "ownerObservedOutcome": true,
+      "path": "driver_null.loadPriority",
+      "profileParsedType": "System.Int64"
+    },
+    {
+      "accepted": true,
+      "currentParsedType": "System.Int64",
+      "derivedTypeGuardRefuses": false,
+      "exactDecimalEqual": true,
+      "exactDecimalEqualityIndependentlyRecomputedFromOwnerIdentities": true,
+      "liveRawDocumentNotReadHere": true,
+      "ownerObservedOutcome": true,
+      "path": "driver_null.windowX",
+      "profileParsedType": "System.Int64"
+    },
+    {
+      "accepted": true,
+      "currentParsedType": "System.Int64",
+      "derivedTypeGuardRefuses": false,
+      "exactDecimalEqual": true,
+      "exactDecimalEqualityIndependentlyRecomputedFromOwnerIdentities": true,
+      "liveRawDocumentNotReadHere": true,
+      "ownerObservedOutcome": true,
+      "path": "driver_null.windowY",
+      "profileParsedType": "System.Int64"
+    },
+    {
+      "accepted": true,
+      "currentParsedType": "System.Int64",
+      "derivedTypeGuardRefuses": false,
+      "exactDecimalEqual": true,
+      "exactDecimalEqualityIndependentlyRecomputedFromOwnerIdentities": true,
+      "liveRawDocumentNotReadHere": true,
+      "ownerObservedOutcome": true,
+      "path": "driver_null.windowWidth",
+      "profileParsedType": "System.Int64"
+    },
+    {
+      "accepted": true,
+      "currentParsedType": "System.Int64",
+      "derivedTypeGuardRefuses": false,
+      "exactDecimalEqual": true,
+      "exactDecimalEqualityIndependentlyRecomputedFromOwnerIdentities": true,
+      "liveRawDocumentNotReadHere": true,
+      "ownerObservedOutcome": true,
+      "path": "driver_null.windowHeight",
+      "profileParsedType": "System.Int64"
+    },
+    {
+      "accepted": true,
+      "currentParsedType": "System.Int64",
+      "derivedTypeGuardRefuses": false,
+      "exactDecimalEqual": true,
+      "exactDecimalEqualityIndependentlyRecomputedFromOwnerIdentities": true,
+      "liveRawDocumentNotReadHere": true,
+      "ownerObservedOutcome": true,
+      "path": "driver_null.renderWidth",
+      "profileParsedType": "System.Int64"
+    },
+    {
+      "accepted": true,
+      "currentParsedType": "System.Int64",
+      "derivedTypeGuardRefuses": false,
+      "exactDecimalEqual": true,
+      "exactDecimalEqualityIndependentlyRecomputedFromOwnerIdentities": true,
+      "liveRawDocumentNotReadHere": true,
+      "ownerObservedOutcome": true,
+      "path": "driver_null.renderHeight",
+      "profileParsedType": "System.Int64"
+    },
+    {
+      "accepted": true,
+      "currentParsedType": "System.Double",
+      "derivedTypeGuardRefuses": false,
+      "exactDecimalEqual": true,
+      "exactDecimalEqualityIndependentlyRecomputedFromOwnerIdentities": true,
+      "liveRawDocumentNotReadHere": true,
+      "ownerObservedOutcome": true,
+      "path": "driver_null.secondsFromVsyncToPhotons",
+      "profileParsedType": "System.Double"
+    },
+    {
+      "accepted": false,
+      "currentParsedType": "System.Int64",
+      "derivedTypeGuardRefuses": true,
+      "exactDecimalEqual": true,
+      "exactDecimalEqualityIndependentlyRecomputedFromOwnerIdentities": true,
+      "liveRawDocumentNotReadHere": true,
+      "ownerObservedOutcome": true,
+      "path": "driver_null.displayFrequency",
+      "profileParsedType": "System.Double"
+    },
+    {
+      "accepted": false,
+      "currentParsedType": "System.Int64",
+      "derivedTypeGuardRefuses": true,
+      "exactDecimalEqual": true,
+      "exactDecimalEqualityIndependentlyRecomputedFromOwnerIdentities": true,
+      "liveRawDocumentNotReadHere": true,
+      "ownerObservedOutcome": true,
+      "path": "driver_codex_head_pose.positionX",
+      "profileParsedType": "System.Double"
+    },
+    {
+      "accepted": true,
+      "currentParsedType": "System.Double",
+      "derivedTypeGuardRefuses": false,
+      "exactDecimalEqual": false,
+      "exactDecimalEqualityIndependentlyRecomputedFromOwnerIdentities": false,
+      "liveRawDocumentNotReadHere": true,
+      "ownerObservedOutcome": true,
+      "path": "driver_codex_head_pose.eyeHeightMeters",
+      "profileParsedType": "System.Double"
+    },
+    {
+      "accepted": false,
+      "currentParsedType": "System.Int64",
+      "derivedTypeGuardRefuses": true,
+      "exactDecimalEqual": true,
+      "exactDecimalEqualityIndependentlyRecomputedFromOwnerIdentities": true,
+      "liveRawDocumentNotReadHere": true,
+      "ownerObservedOutcome": true,
+      "path": "driver_codex_head_pose.positionZ",
+      "profileParsedType": "System.Double"
+    },
+    {
+      "accepted": false,
+      "currentParsedType": "System.Int64",
+      "derivedTypeGuardRefuses": true,
+      "exactDecimalEqual": true,
+      "exactDecimalEqualityIndependentlyRecomputedFromOwnerIdentities": true,
+      "liveRawDocumentNotReadHere": true,
+      "ownerObservedOutcome": true,
+      "path": "driver_codex_head_pose.yawDegrees",
+      "profileParsedType": "System.Double"
+    },
+    {
+      "accepted": false,
+      "currentParsedType": "System.Int64",
+      "derivedTypeGuardRefuses": true,
+      "exactDecimalEqual": true,
+      "exactDecimalEqualityIndependentlyRecomputedFromOwnerIdentities": true,
+      "liveRawDocumentNotReadHere": true,
+      "ownerObservedOutcome": true,
+      "path": "driver_codex_head_pose.pitchDegrees",
+      "profileParsedType": "System.Double"
+    },
+    {
+      "accepted": false,
+      "currentParsedType": "System.Int64",
+      "derivedTypeGuardRefuses": true,
+      "exactDecimalEqual": true,
+      "exactDecimalEqualityIndependentlyRecomputedFromOwnerIdentities": true,
+      "liveRawDocumentNotReadHere": true,
+      "ownerObservedOutcome": true,
+      "path": "driver_codex_head_pose.rollDegrees",
+      "profileParsedType": "System.Double"
+    },
+    {
+      "accepted": true,
+      "currentParsedType": "System.Int64",
+      "derivedTypeGuardRefuses": false,
+      "exactDecimalEqual": true,
+      "exactDecimalEqualityIndependentlyRecomputedFromOwnerIdentities": true,
+      "liveRawDocumentNotReadHere": true,
+      "ownerObservedOutcome": true,
+      "path": "power.turnOffControllersTimeout",
+      "profileParsedType": "System.Int64"
+    }
+  ],
+  "rules": [
+    {
+      "description": "Case-insensitive duplicate-key HashSet rejects aliases before PowerShell ordered-dictionary projection; changed from prior ordinal comparison.",
+      "firstLineInclusive": 41,
+      "lastLineInclusive": 54,
+      "ruleId": "case-alias-preparse-refusal",
+      "sourceRole": "helper",
+      "sourceSha256": "E7C9E747200E6EEF1D6036DB81BB06F10FDAFFFF4C16CB1EEA089ABE932A4594",
+      "spanSha256": "FC6CD083236504B0AB7783ADA7322C1DCB6345C6D2F093D3D52556431B8F380C"
+    },
+    {
+      "description": "If either parsed value is Double, both must be finite Double with identical binary64 bits; exact-decimal equality cannot bypass this type guard.",
+      "firstLineInclusive": 101,
+      "lastLineInclusive": 108,
+      "ruleId": "controlled-double-type-and-bits",
+      "sourceRole": "helper",
+      "sourceSha256": "E7C9E747200E6EEF1D6036DB81BB06F10FDAFFFF4C16CB1EEA089ABE932A4594",
+      "spanSha256": "82269D97E8D7156C223B52A74D2C24173A2D9E81AE36AF41961F28E1E6952A76"
+    },
+    {
+      "description": "After same-Double-type/bits guard, exact decimal identity or invariant G17 canonical spelling is accepted. Otherwise parsed and exact trees must both match; no generic tolerance.",
+      "firstLineInclusive": 109,
+      "lastLineInclusive": 115,
+      "ruleId": "controlled-exact-or-g17",
+      "sourceRole": "helper",
+      "sourceSha256": "E7C9E747200E6EEF1D6036DB81BB06F10FDAFFFF4C16CB1EEA089ABE932A4594",
+      "spanSha256": "40D65D088F6713DDFB62011CC35601E26579FD5F64B25A7BD47EB72DCC6D6E2C"
+    },
+    {
+      "description": "Actual profile path is reread into parsed and raw-exact trees and must match original apply profile hash before all controlled leaves are compared.",
+      "firstLineInclusive": 184,
+      "lastLineInclusive": 200,
+      "ruleId": "profile-byte-rebinding",
+      "sourceRole": "helper",
+      "sourceSha256": "E7C9E747200E6EEF1D6036DB81BB06F10FDAFFFF4C16CB1EEA089ABE932A4594",
+      "spanSha256": "D9AB0DDA92EE8BB61ABEDE17A2C3E9EE8D7218F0E1D59B54CA28F685AD450641"
+    },
+    {
+      "description": "Controlled power timeout independently requires integer parsed kind, nonnegative and Int32-range; not a general floating-leaf relaxation.",
+      "firstLineInclusive": 202,
+      "lastLineInclusive": 205,
+      "ruleId": "power-integral-range",
+      "sourceRole": "helper",
+      "sourceSha256": "E7C9E747200E6EEF1D6036DB81BB06F10FDAFFFF4C16CB1EEA089ABE932A4594",
+      "spanSha256": "A436BFCEA1E75DF71398E44E2619A04761C9160F09345D61431E78C27946553A"
+    },
+    {
+      "description": "Only already-admitted controlled leaves are replaced within in-memory current exact tree before whole-document comparison. Containing sections, aliases, additional keys and unowned exact values remain compared; no live numeric rewrite.",
+      "firstLineInclusive": 207,
+      "lastLineInclusive": 218,
+      "ruleId": "admitted-owned-leaf-projection",
+      "sourceRole": "helper",
+      "sourceSha256": "E7C9E747200E6EEF1D6036DB81BB06F10FDAFFFF4C16CB1EEA089ABE932A4594",
+      "spanSha256": "C196220D928F1FB30355680972D795AFA198740C742EE072E760DE1E53A971C7"
+    },
+    {
+      "description": "Source public-entry fixture constructs G17 eye-height spelling, checks identical bits, and expects preservation preview with exact pinned preimage and no target/evidence writes.",
+      "firstLineInclusive": 71,
+      "lastLineInclusive": 87,
+      "ruleId": "realistic-eyeheight-public-fixture",
+      "sourceRole": "test",
+      "sourceSha256": "89E152DE558FAFCD961C6F99C39B562F176F5DE9DAF665EF0805563CB24D1079",
+      "spanSha256": "ED8F581265C73B758AADDA180A0005493C25B0CCB542CFA1E29F181645677422"
+    },
+    {
+      "description": "Five declared refusal cases cover changed bits, noncanonical precision, signed zero, unowned G17 reserialization, and explicitly displayFrequency90.0-to90 floating-to-integer type change.",
+      "firstLineInclusive": 118,
+      "lastLineInclusive": 126,
+      "ruleId": "explicit-numeric-type-refusal-fixtures",
+      "sourceRole": "test",
+      "sourceSha256": "89E152DE558FAFCD961C6F99C39B562F176F5DE9DAF665EF0805563CB24D1079",
+      "spanSha256": "05227D6CB031FEF1235159315E7D8AE92778B19ABB4D209DEEE0FBCDCCA087DD"
+    },
+    {
+      "description": "Expected-null reconstruction now returns profilePath for receipt-bound raw-exact profile reread.",
+      "firstLineInclusive": 582,
+      "lastLineInclusive": 586,
+      "ruleId": "profile-path-source-return",
+      "sourceRole": "controller",
+      "sourceSha256": "90FF20FF9E4181A03B8734C60DD4088E95E34FC8567C93004BDDF89B19A44E5A",
+      "spanSha256": "B54ED8D448E0641108DAA7EBFDCD3BC713CA48217A34F9B5DF426930D8FAE576"
+    },
+    {
+      "description": "Documentation describes finite Double identical-bit exact-or-G17 admission for owned floating leaves and explicitly refuses type changes, signed-zero changes and arbitrary precision; unowned structural/raw comparison retained.",
+      "firstLineInclusive": 297,
+      "lastLineInclusive": 311,
+      "ruleId": "documented-type-sensitive-policy",
+      "sourceRole": "readme",
+      "sourceSha256": "A893D2F00D1298FFC39C4B832170B22ED430EA6D52A870C01BBA86D539C9CF61",
+      "spanSha256": "9C04A8AC3BDD3A46A930F1CD27165B5A31AC79F0AF98A6897559E364EED44EB9"
+    }
+  ],
+  "schema": "engine-map.pinned-source-rules.1",
+  "sourceCommit": "fcd6796466a49802c943f1b923e9326716c891a9",
+  "staticRefusalCases": [
+    {
+      "firstLineInclusive": 91,
+      "name": "missing leaf",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "89E152DE558FAFCD961C6F99C39B562F176F5DE9DAF665EF0805563CB24D1079",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 92,
+      "name": "absent section",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "89E152DE558FAFCD961C6F99C39B562F176F5DE9DAF665EF0805563CB24D1079",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 93,
+      "name": "wrong root casing",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "89E152DE558FAFCD961C6F99C39B562F176F5DE9DAF665EF0805563CB24D1079",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 94,
+      "name": "wrong leaf casing",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "89E152DE558FAFCD961C6F99C39B562F176F5DE9DAF665EF0805563CB24D1079",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 95,
+      "name": "numeric leaf",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "89E152DE558FAFCD961C6F99C39B562F176F5DE9DAF665EF0805563CB24D1079",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 96,
+      "name": "null leaf",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "89E152DE558FAFCD961C6F99C39B562F176F5DE9DAF665EF0805563CB24D1079",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 97,
+      "name": "array leaf",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "89E152DE558FAFCD961C6F99C39B562F176F5DE9DAF665EF0805563CB24D1079",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 98,
+      "name": "nonobject section",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "89E152DE558FAFCD961C6F99C39B562F176F5DE9DAF665EF0805563CB24D1079",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 99,
+      "name": "other UI drift",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "89E152DE558FAFCD961C6F99C39B562F176F5DE9DAF665EF0805563CB24D1079",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 100,
+      "name": "literal dotted root",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "89E152DE558FAFCD961C6F99C39B562F176F5DE9DAF665EF0805563CB24D1079",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 101,
+      "name": "literal dotted child",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "89E152DE558FAFCD961C6F99C39B562F176F5DE9DAF665EF0805563CB24D1079",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 102,
+      "name": "controlled Boolean numeric alias",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "89E152DE558FAFCD961C6F99C39B562F176F5DE9DAF665EF0805563CB24D1079",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 103,
+      "name": "controlled value drift",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "89E152DE558FAFCD961C6F99C39B562F176F5DE9DAF665EF0805563CB24D1079",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 104,
+      "name": "controlled case alias alongside owned leaf",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "89E152DE558FAFCD961C6F99C39B562F176F5DE9DAF665EF0805563CB24D1079",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 105,
+      "name": "controlled dotted alias alongside owned leaf",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "89E152DE558FAFCD961C6F99C39B562F176F5DE9DAF665EF0805563CB24D1079",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 106,
+      "name": "other Boolean numeric alias",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "89E152DE558FAFCD961C6F99C39B562F176F5DE9DAF665EF0805563CB24D1079",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 107,
+      "name": "large integer drift",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "89E152DE558FAFCD961C6F99C39B562F176F5DE9DAF665EF0805563CB24D1079",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 108,
+      "name": "power numeric kind",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "89E152DE558FAFCD961C6F99C39B562F176F5DE9DAF665EF0805563CB24D1079",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 109,
+      "name": "history nonstring",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "89E152DE558FAFCD961C6F99C39B562F176F5DE9DAF665EF0805563CB24D1079",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 119,
+      "name": "changed controlled binary64 bits",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "89E152DE558FAFCD961C6F99C39B562F176F5DE9DAF665EF0805563CB24D1079",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 120,
+      "name": "noncanonical controlled decimal hidden by Double parsing",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "89E152DE558FAFCD961C6F99C39B562F176F5DE9DAF665EF0805563CB24D1079",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 121,
+      "name": "controlled signed-zero bit change",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "89E152DE558FAFCD961C6F99C39B562F176F5DE9DAF665EF0805563CB24D1079",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 122,
+      "name": "unowned canonical binary64 reserialization",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "89E152DE558FAFCD961C6F99C39B562F176F5DE9DAF665EF0805563CB24D1079",
+      "staticDeclarationOnly": true
+    },
+    {
+      "firstLineInclusive": 123,
+      "name": "controlled floating leaf changed to integer type",
+      "replayedHere": false,
+      "sourceRole": "test",
+      "sourceSha256": "89E152DE558FAFCD961C6F99C39B562F176F5DE9DAF665EF0805563CB24D1079",
+      "staticDeclarationOnly": true
+    }
+  ]
+}

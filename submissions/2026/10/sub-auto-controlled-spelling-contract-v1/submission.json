@@ -1,0 +1,48 @@
+{
+  "content": {
+    "fileCount": 5,
+    "root": "content",
+    "totalBytes": 223736,
+    "treeSha256": "74E7889E66CA58E7723F3C4D614DA7A6E62F3481F2CEE3D9180DCA9CC8245FF5"
+  },
+  "contributor": {
+    "displayName": "Treatid2",
+    "github": "Treatid2",
+    "standing": "ordinary-contributor"
+  },
+  "createdAt": "2026-10-06T04:14:00.386917+00:00",
+  "licensing": {
+    "content": "CC-BY-SA-4.0",
+    "dcoAcknowledged": true,
+    "schemas": "CC0-1.0"
+  },
+  "namespace": "skyrim-vr-automation",
+  "notes": "Later cutoff, source-policy and owner-goal mismatch, no completed restore or source fix. Original PR45 unchanged; PR43 inconclusive and PR44 preparation-only.",
+  "provenance": {
+    "importedAt": "2026-10-06T04:14:00.386917+00:00",
+    "relatedUrls": [
+      "https://github.com/Treatid2/skyrim-render-map/pull/45"
+    ],
+    "sourceCommit": "fcd6796466a49802c943f1b923e9326716c891a9",
+    "sourceContentTreeSha256": "9DE759F3E3A5405E65ECAE3D4E0991D136E6B6A4BBF15340701BA3B47A3F46A6",
+    "sourceDirty": false,
+    "sourceParentCommit": "d778a4ccb0fbdb98f68823541f79df61608b6341",
+    "sourcePubliclyReachable": true,
+    "sourceRef": null,
+    "sourceRepository": "https://github.com/Treatid2/skyrim-vr-automation",
+    "sourceState": "committed-local-preservation",
+    "transformations": [
+      "165 source members/664 owner phase identities checked; canonical LF distinct from physical CRLF; source ranges not executed.",
+      "All16 numeric rows and24 static refusal cases projected; source explicit type guard separated from owner desired numeric equality and correction request.",
+      "10 prior receipts and6 physical/committed files rechecked; policy/history preserved; sensitive configured values/paths/identity payloads omitted; no live reads/replay."
+    ]
+  },
+  "schema": {
+    "major": 1,
+    "minor": 0,
+    "name": "skyrim-render-map.submission"
+  },
+  "status": "candidate-unreviewed",
+  "submissionClass": "assertion",
+  "submissionId": "sub-auto-controlled-spelling-contract-v1"
+}
