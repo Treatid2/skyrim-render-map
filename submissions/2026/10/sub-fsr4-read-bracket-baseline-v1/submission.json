@@ -1,0 +1,52 @@
+{
+  "content": {
+    "fileCount": 5,
+    "root": "content",
+    "totalBytes": 8996426,
+    "treeSha256": "55793522FB44F948CC364B30EF87D70E719AACF37372338AABAA2D67A70739B0"
+  },
+  "contributor": {
+    "displayName": "Treatid2",
+    "github": "Treatid2",
+    "standing": "ordinary-contributor"
+  },
+  "createdAt": "2026-10-06T07:58:12.191661+00:00",
+  "licensing": {
+    "content": "CC-BY-SA-4.0",
+    "dcoAcknowledged": true,
+    "schemas": "CC0-1.0"
+  },
+  "namespace": "community-shaders",
+  "notes": "Completed engineering read-bracket fixed-AE baseline, all ten unchanged0.25% full-range gates fail. Sequential native camera/scene/light observations are not atomic frame joins or continuous freeze. Eleven light variations are descriptive, not colour causation. Corrected whole-vector summaries only; prior defect retained. Original1280file gate failed;1320post-run preservation-only revision explicit. No AE/HDR/jitter cause, OS HDR/performance/vendor convergence/statistical significance/full-resource equality. Owner operations and fixtures attributed not replayed. Unknown applicability not wildcard; historicalPR47/48/49 immutable.",
+  "provenance": {
+    "importedAt": "2026-10-06T07:58:12.191661+00:00",
+    "relatedUrls": [
+      "https://github.com/Treatid2/skyrim-render-map/pull/47",
+      "https://github.com/Treatid2/skyrim-render-map/pull/48",
+      "https://github.com/Treatid2/skyrim-render-map/pull/49"
+    ],
+    "sourceCommit": "981e01d6297bcdf9541135ce6d09f31014ef7a7e",
+    "sourceContentTreeSha256": "6DCB0574E8D22EA9AEDCED4CF62AD2F620F0C0DB422B779880F8D9D8B1ADD4B4",
+    "sourceDirty": false,
+    "sourceParentCommit": "ce8afdce705afd0aa6cdad576ded8f54701149e6",
+    "sourcePubliclyReachable": true,
+    "sourceRef": null,
+    "sourceRepository": "https://github.com/Treatid2/skyrim-vr-automation",
+    "sourceState": "committed-retained-excursion14-cutoff",
+    "transformations": [
+      "160originalnativepages/46240rawsamples independently decoded;10comparisons/10contexts/110strata/32sparseidentities recomputed.",
+      "32brackets/96originalnative camera-scene-light replies and all40semanticlightidentities whole-property verified, corrected vectors retained without flattening.",
+      "1320originalrawfile hashes and permanentarchivephysical pins verified; no archive-member replay. Explicit postrun count amendment, original gate failed.",
+      "170sourcephysicalmembers/8canonicalGit files and owner697+53 qualification checks pinned without contributor execution.",
+      "1294tracking/calibration/custody checked; historical47/48/49 unchanged; no colour cause, atomicframejoin, continuousfreeze or earlier13causefix."
+    ]
+  },
+  "schema": {
+    "major": 1,
+    "minor": 0,
+    "name": "skyrim-render-map.submission"
+  },
+  "status": "candidate-unreviewed",
+  "submissionClass": "assertion",
+  "submissionId": "sub-fsr4-read-bracket-baseline-v1"
+}
