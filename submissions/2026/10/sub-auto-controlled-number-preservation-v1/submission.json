@@ -1,0 +1,50 @@
+{
+  "content": {
+    "fileCount": 5,
+    "root": "content",
+    "totalBytes": 372039,
+    "treeSha256": "74EB18AF5AE3BBFB078AD37D8FD992E18EC164368A433103732152FF50ECC3E3"
+  },
+  "contributor": {
+    "displayName": "Treatid2",
+    "github": "Treatid2",
+    "standing": "ordinary-contributor"
+  },
+  "createdAt": "2026-10-06T04:01:03.700093+00:00",
+  "licensing": {
+    "content": "CC-BY-SA-4.0",
+    "dcoAcknowledged": true,
+    "schemas": "CC0-1.0"
+  },
+  "namespace": "skyrim-vr-automation",
+  "notes": "Separate source/operational controlled-number checkpoint07, no new game observations or fix; original refusal/policy/PR43/44 unchanged. Same binary64 but distinct exact decimals; source comparison inconsistency, not evidence of safe wider drift acceptance.",
+  "provenance": {
+    "importedAt": "2026-10-06T04:01:03.700093+00:00",
+    "relatedUrls": [
+      "https://github.com/Treatid2/skyrim-render-map/pull/43",
+      "https://github.com/Treatid2/skyrim-render-map/pull/44"
+    ],
+    "sourceCommit": "99042cc107d51b2f427cd1d64597d7c2cf4a10ba",
+    "sourceContentTreeSha256": "29503A150AEE69E240CDE8E90F419539CCECF6CEF12847124C8750B603934FC5",
+    "sourceDirty": false,
+    "sourceParentCommit": "6597a1ff2916de35948b67b04d5ff67e1789b65d",
+    "sourcePubliclyReachable": true,
+    "sourceRef": null,
+    "sourceRepository": "https://github.com/Treatid2/skyrim-vr-automation",
+    "sourceState": "committed-local-preservation",
+    "transformations": [
+      "165 retained source members and declared source/publication/qualification hashes checked; canonical LF and physical CRLF kept distinct.",
+      "Independent binary64 and exact-decimal pair plus built-in PowerShell literal-only serialization; no contributor helper/controller/tests executed or active settings read.",
+      "Pinned preservation/type/case/lineage/preimage/rollback contracts,29 receipt-profile ownership leaves and17 refusal-case source declarations mapped; owner fixture648passes not terminal wrapper success or game acceptance.",
+      "Private paths/IDs/settings/driver identity values omitted; sole whole-document mismatch/no-mutation/custody observations retain owner attribution; prior PR43/44 and policy immutable."
+    ]
+  },
+  "schema": {
+    "major": 1,
+    "minor": 0,
+    "name": "skyrim-render-map.submission"
+  },
+  "status": "candidate-unreviewed",
+  "submissionClass": "assertion",
+  "submissionId": "sub-auto-controlled-number-preservation-v1"
+}

@@ -1,0 +1,2787 @@
+{
+  "availability": "Retained private content-addressed roles; raw settings, profile payloads, executable bytes, absolute paths, command lines, workspace/owner/session/driver identity values omitted. Public source commit is pinned separately.",
+  "configurationInventories": {
+    "preserved": [
+      {
+        "bytes": 5507,
+        "relativePath": "Overrides\\README.md",
+        "sha256": "1A2445F38AA8521A3A62AE939A03AF3AAA86B541564BBA73754EDAF98A0CD6E5"
+      },
+      {
+        "bytes": 24318,
+        "relativePath": "SettingsDefault.json",
+        "sha256": "DA501FED8A36B985E10EAB6DFFA004D7048A63CA796CB25D03A501014BAD0617"
+      },
+      {
+        "bytes": 27148,
+        "relativePath": "SettingsUser.json",
+        "sha256": "7839ECEBA294F6BEE285700889ACC5E1FC0E71D186C6FD4D2EB5070EDD2E3DF2"
+      },
+      {
+        "bytes": 4064,
+        "relativePath": "Themes\\Default.json",
+        "sha256": "CA0ED05E6E4A618A23BF29B0E0B5E132213C6FC0AC249A68E6948D9BC151FFCD"
+      },
+      {
+        "bytes": 4741,
+        "relativePath": "Themes\\DragonBlood.json",
+        "sha256": "E662E8F20CE721EAA0FF333D9B8C585A407347E3A6ADB9C504339095BE8D2490"
+      },
+      {
+        "bytes": 105950,
+        "relativePath": "Themes\\DragonBlood\\discord.png",
+        "sha256": "CB8ABD52C653C37B62E7A1BB8C7EF1466E007974FA6459F522C76AAC3A0432A1"
+      },
+      {
+        "bytes": 4836,
+        "relativePath": "Themes\\DwemerBronze.json",
+        "sha256": "1FDBA3A5DE060D97523BAC00B1CCA388950DD45D9EDA4D5A37B42DDBB57B6F40"
+      },
+      {
+        "bytes": 407478,
+        "relativePath": "Themes\\DwemerBronze\\discord.png",
+        "sha256": "18139986FA70DD3999BB7931923C48E4FE6E73453A769ED92DF680A8DED94142"
+      },
+      {
+        "bytes": 4616,
+        "relativePath": "Themes\\HighContrast.json",
+        "sha256": "FED3785CE8A990D20A788E61127FB8FA17EA0D6B62D1F6066975A9F9250E03B0"
+      },
+      {
+        "bytes": 73661,
+        "relativePath": "Themes\\HighContrast\\discord.png",
+        "sha256": "776E2FA9E066A3F6A0261BB422FD40BC1C13594D69A352257EDF2278BA932250"
+      },
+      {
+        "bytes": 5047,
+        "relativePath": "Themes\\Light.json",
+        "sha256": "04D752A86D00F95661F361D91F18DED538F7AAE73647D6D2D2E29A219EF45422"
+      },
+      {
+        "bytes": 2182,
+        "relativePath": "Themes\\Light\\clear-cache.png",
+        "sha256": "91B0226A2CFD0E6E703A62F236899C96AE18837F66D4E1D96D03FE717FAD7C37"
+      },
+      {
+        "bytes": 25838,
+        "relativePath": "Themes\\Light\\cs-logo.png",
+        "sha256": "3C718B964C4AC057A091A71064D58141FA1A31A7C19AD9782E9A50B5094FD495"
+      },
+      {
+        "bytes": 73661,
+        "relativePath": "Themes\\Light\\discord.png",
+        "sha256": "776E2FA9E066A3F6A0261BB422FD40BC1C13594D69A352257EDF2278BA932250"
+      },
+      {
+        "bytes": 3451,
+        "relativePath": "Themes\\Light\\load-settings.png",
+        "sha256": "24E21853FCE47580B51D4946A0E990E9D0CE7DC0F1BF308766C503332BDBFC23"
+      },
+      {
+        "bytes": 3026,
+        "relativePath": "Themes\\Light\\restore-settings.png",
+        "sha256": "70C63CE9A93A0B2CB4E1F6999CD602B38C53A2630CAE564451FE557227EE5250"
+      },
+      {
+        "bytes": 2184,
+        "relativePath": "Themes\\Light\\save-settings.png",
+        "sha256": "8214FE90326124BD3EB93B9C24FA8780E02C95ADE2AAE75375B1C761E7D1CDDC"
+      },
+      {
+        "bytes": 4739,
+        "relativePath": "Themes\\NordicFrost.json",
+        "sha256": "067C33723C79DD91ECF9FC883B3A73D5E22FCBAE1C1A80A75933DAFCE667A795"
+      },
+      {
+        "bytes": 121874,
+        "relativePath": "Themes\\NordicFrost\\discord.png",
+        "sha256": "59A17CE17436F9E9BFAAE8524F310347E12CD46866FEA3E505494CD1F1FD3080"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\0WHMiniBearQuestWorld_cache.wc",
+        "sha256": "058FA8D73B0480F054C4BA2D11D764C2BBF2C01545F8FDE9A31A2435F8317F95"
+      },
+      {
+        "bytes": 2560,
+        "relativePath": "UnifiedWaterCache\\3DNPCGabaniasWorld_cache.wc",
+        "sha256": "33C5FB582DAC03225863D5D93C354DE3CB55C7FB49CC0532B0C230CA94A74E5A"
+      },
+      {
+        "bytes": 1536,
+        "relativePath": "UnifiedWaterCache\\aaaLucOblivionRealm_cache.wc",
+        "sha256": "573FBAA34091BD3B335F6E32F3517CFF34E68FD4D21FBC57560A1ABB6A333EF2"
+      },
+      {
+        "bytes": 256,
+        "relativePath": "UnifiedWaterCache\\AlftandWorld_cache.wc",
+        "sha256": "CDA0766B1360389F54D11E9F686A1867324E54ED5D9B711E353DF3BEFF38BCF0"
+      },
+      {
+        "bytes": 2144,
+        "relativePath": "UnifiedWaterCache\\ArcheryTestRange_cache.wc",
+        "sha256": "623038625EEB5D83440E7FD4D748847BFCEBB172F950DAA0BB6528CC63BF1BE3"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\AutotestWorld_cache.wc",
+        "sha256": "278A1EF9F3DE1F99C37A2FF329FADE0B7A671BBF36E75FA9F8C7B9A37479CD8F"
+      },
+      {
+        "bytes": 3008,
+        "relativePath": "UnifiedWaterCache\\Blackreach_cache.wc",
+        "sha256": "EA5B4407F540FED15594767105BB60BB15ECBEAF9BA11C8B651B90CED900BB98"
+      },
+      {
+        "bytes": 288,
+        "relativePath": "UnifiedWaterCache\\BlindCliffCaveWorld_cache.wc",
+        "sha256": "76243DF5C758B4F0DF86F130F6C8C02465DB1F70592A22279C205BFC9D7F3B8C"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\BloatedMansGrottoWorld_cache.wc",
+        "sha256": "ED1D2F1AFDB6993CF58A39A8D8CB2A008437C6B9C6AC80E73F5180C94C629282"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\BluePalaceWingWorld_cache.wc",
+        "sha256": "E7321A1DB65ABE081F2C5EC3BBFD4D999B8C694D91B458857C447E2013121541"
+      },
+      {
+        "bytes": 1664,
+        "relativePath": "UnifiedWaterCache\\BrinewaterGrottoWorld_cache.wc",
+        "sha256": "A65A931BADF3E605AC8D0E64A6D52E408192816D3DEE3485E2D786531E8C9EBD"
+      },
+      {
+        "bytes": 1792,
+        "relativePath": "UnifiedWaterCache\\CWSiegeTestWorld_cache.wc",
+        "sha256": "F5EF0C7937355B721500BA25D799880D9DB252FB4E800737E878814DF7B2DE43"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\CWTestHold_cache.wc",
+        "sha256": "58C2E6DF3BEF5A64B8B842678B3AE170361047588F2E6F36F65F2B3C46CFB447"
+      },
+      {
+        "bytes": 928,
+        "relativePath": "UnifiedWaterCache\\DarkwaterWorld_cache.wc",
+        "sha256": "0C228086D39336BFBEDB65FD3E195C6336EB2EFA65228466E77F71BF79CDD166"
+      },
+      {
+        "bytes": 800,
+        "relativePath": "UnifiedWaterCache\\DeepwoodRedoubtWorld_cache.wc",
+        "sha256": "943A2950F68970FB50478D233E9B9C26D5CD98B1B4F4BE2E56E3D20F8128DCC0"
+      },
+      {
+        "bytes": 480,
+        "relativePath": "UnifiedWaterCache\\Dimfrost_cache.wc",
+        "sha256": "E3521E1ABC5B3E29AC4DB016665A57F2D6E509AF32813D3C9227DB50A9FF851D"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\DLC01Boneyard_cache.wc",
+        "sha256": "3A8FB3361FA329DA670BB603980764526178BC20B949E1C2969DDB9DE00D0A16"
+      },
+      {
+        "bytes": 19200,
+        "relativePath": "UnifiedWaterCache\\DLC01FalmerValley_cache.wc",
+        "sha256": "C771971B67D9689CD84950F0ED5CD7CD7016373EDC7704C312D9A76D7AD9F2F8"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\DLC01SoulCairn_cache.wc",
+        "sha256": "E488CA78EA4429915FE520DE95C33A763F091E1BF64EE4F633309F1FC00D948A"
+      },
+      {
+        "bytes": 288,
+        "relativePath": "UnifiedWaterCache\\DLC1AncestorsGladeWorld_cache.wc",
+        "sha256": "C4D8E3608A1598FB25255F141E537A767DE101EC6D481830168474F4FF781E30"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\DLC1DarkfallPassageWorld_cache.wc",
+        "sha256": "CF0E56ACE7749F7B412F53A5FE7B1F0091C1CC5E6CD7AB35FE50CB482A49F205"
+      },
+      {
+        "bytes": 2208,
+        "relativePath": "UnifiedWaterCache\\DLC1ForebearsHoldout_cache.wc",
+        "sha256": "1FCFE35C2313CA14CB9F4592658B006B3496F0001AF69FAC718172C1D6154EC2"
+      },
+      {
+        "bytes": 416,
+        "relativePath": "UnifiedWaterCache\\DLC1HunterHQWorld_cache.wc",
+        "sha256": "F4148206B0D6F4464EB480C24CBB293AD7963534527905832AB3CE2AAD55C155"
+      },
+      {
+        "bytes": 6656,
+        "relativePath": "UnifiedWaterCache\\DLC2ApocryphaWorld_cache.wc",
+        "sha256": "53AAEE2280F7E61FA999DB25CA16E551CC762AD13464BA35695030586C18FD15"
+      },
+      {
+        "bytes": 1045056,
+        "relativePath": "UnifiedWaterCache\\DLC2SolstheimWorld_cache.wc",
+        "sha256": "8918B32008F0CDF98A724BDA4BC54402D9B5DE3056B88A8C4B046DA92C5D0645"
+      },
+      {
+        "bytes": 1696,
+        "relativePath": "UnifiedWaterCache\\EastEmpireWarehouse_cache.wc",
+        "sha256": "E53FA741662F0254D3970390E12CCF28F2B7B974AC1266180136CCC4929F1BD4"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\EldergleamSanctuaryWorld_cache.wc",
+        "sha256": "F47212C534E99ABA09734AF201A9177CF7D0ECE58FAEB7A2597D8544229005BD"
+      },
+      {
+        "bytes": 160,
+        "relativePath": "UnifiedWaterCache\\FallowstoneCaveWorldEnd_cache.wc",
+        "sha256": "6C0DE7FBB63F7C18CA00C9E801F6E27A015767B3EC3AD249FA1A9B1DBD828308"
+      },
+      {
+        "bytes": 768,
+        "relativePath": "UnifiedWaterCache\\FallowstoneCaveWorldStart_cache.wc",
+        "sha256": "91BD72C385AA65899B0B0BC08FFF3C18C701D874CE40C5E748F56AFD3E1635D5"
+      },
+      {
+        "bytes": 672,
+        "relativePath": "UnifiedWaterCache\\FrostmereCryptWorld_cache.wc",
+        "sha256": "1C1A8FC638AA96FE71284C80F321D1F58AAEA86605034E4AAE89C09336E6057B"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\FXLightWorldSpace_cache.wc",
+        "sha256": "84F46ED6A97D12DA14248895A477460F61223CED8E347223C6BEF8B1D6C9C7DA"
+      },
+      {
+        "bytes": 9024,
+        "relativePath": "UnifiedWaterCache\\JaphetsFollyWorld_cache.wc",
+        "sha256": "95B5E53A49E7ECFB10F23046DEF31B24161F99CE6DE2ADDC11B46B282E3ECED0"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\KatariahWorld_cache.wc",
+        "sha256": "48B3738127DECDF29653CD7FCF35DE6065017AC0381767F7AD290760335BFDB4"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\LabyrinthianMazeWorld_cache.wc",
+        "sha256": "03DE813A24F155B6EF80FCDF020D3F563D26BBEA9579FC5EA00EE558BCEE2011"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\LabyrinthianWorld_cache.wc",
+        "sha256": "FB8E4461D36681E9F54524045D19A4D1F98741CFB4E7EBE5A4149803D66E4F29"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\LabyrinthianWorld03_cache.wc",
+        "sha256": "75FDEECF41FB7DF005409D86E0F3B4D948B42F8ADE263C625BDAD59599AC75D3"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\LabyrinthianWorld04_cache.wc",
+        "sha256": "0EAFE20DC3DBA0366517A9959687A857B50D524DD9829C10C29B8CDD61D5BC94"
+      },
+      {
+        "bytes": 544,
+        "relativePath": "UnifiedWaterCache\\MarkarthWorld_cache.wc",
+        "sha256": "B4CC974BCA48FE0601EF21C23BB283EC2D3F1ADCFB090BA937BA3A6FA3AC15E2"
+      },
+      {
+        "bytes": 288,
+        "relativePath": "UnifiedWaterCache\\MossMotherCavernWorld_cache.wc",
+        "sha256": "A0474EDCD09B9ED40FD9942CA407972AECAF5339F9C9F676F60CEB46B0057274"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\OCRCampsiteHotSprings_cache.wc",
+        "sha256": "0C65DABDB89DE059B623F2AC954276B1096393977B3DEDCF4EEBA16C5AC880E8"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\OCRCampsiteWhiterun_cache.wc",
+        "sha256": "0EEDECD4C68E29225309196C2494201AAF27AED8B6AD28A459408216938C1E9A"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\PalePass_cache.wc",
+        "sha256": "DFE210EECBBB441603F6626F238FE4E0A33B5AFEE0C241AA12CE8EBC0F65AA1D"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\RedEagleRedoubtWorld_cache.wc",
+        "sha256": "634351914235E1337B0E56AE8DCC913BC32F22CA9CFDA09AB64F83A808F6E7E3"
+      },
+      {
+        "bytes": 576,
+        "relativePath": "UnifiedWaterCache\\RiftenWorld_cache.wc",
+        "sha256": "18C1B5CC2E82F22A32D8433FD447EB8A3E6F8B2F7B5D0FDBB04523019D90AFF7"
+      },
+      {
+        "bytes": 1952,
+        "relativePath": "UnifiedWaterCache\\SancreTorWorld_cache.wc",
+        "sha256": "1B85EC8FD1D7CB16BFF6C7A28B3BA5678C9A7F9B7D836BE0C3D99791122BDAA2"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\ShadowgreenCavernWorld_cache.wc",
+        "sha256": "73260EECA21C88560B864022888B321FDF824E77EF3A7223B75FDCBEEEF61D83"
+      },
+      {
+        "bytes": 14144,
+        "relativePath": "UnifiedWaterCache\\SkuldafnWorld_cache.wc",
+        "sha256": "5076343AD4EB76D82F1B503B8C98EC93AFF0BB925DD5E74DCA071C4E17CD85D0"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\SouthfringeWorld_cache.wc",
+        "sha256": "BF19FFB02B60F2E3DA7CED58FFCD7095B7474FF3E3D19C2C01C86BC43A08B024"
+      },
+      {
+        "bytes": 84544,
+        "relativePath": "UnifiedWaterCache\\Sovngarde_cache.wc",
+        "sha256": "15F5AEDAB57FC5773EBCD98EC28C093633514E6E51E851A842EC7C9534573FA1"
+      },
+      {
+        "bytes": 772640,
+        "relativePath": "UnifiedWaterCache\\Tamriel_cache.wc",
+        "sha256": "D55482D4554351201F708EBDE2AB607892F45A33AC8DFAFE9208F366AF4D38B6"
+      },
+      {
+        "bytes": 296480,
+        "relativePath": "UnifiedWaterCache\\Tamriel_precache.wpc",
+        "sha256": "8EB2DA4DD71A95086A6924299B18BEA337ADBE27ADE92D7AD2B9346A750BFDF5"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\TestMeganWorld_cache.wc",
+        "sha256": "8168E2DFBAC46FBFABA629350EFD8CE605B4388444C51B21D7D9A4894BD515E3"
+      },
+      {
+        "bytes": 928,
+        "relativePath": "UnifiedWaterCache\\TestSnow_cache.wc",
+        "sha256": "069963397296866B8DF28C3052E3E1B680646F92CF842A6E6606F43E4E35A61A"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\VRPlayroom_cache.wc",
+        "sha256": "F47212C534E99ABA09734AF201A9177CF7D0ECE58FAEB7A2597D8544229005BD"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\WindPassWorld_cache.wc",
+        "sha256": "CFAFF025F68426045BC15AD4A28E48A2EB1F3990CFD700C4A5B721B96892B073"
+      },
+      {
+        "bytes": 47776,
+        "relativePath": "UnifiedWaterCache\\WyrmstoothWorld_cache.wc",
+        "sha256": "E6E63851C4F5164259AD4EB63EE8340AB14D6692ACE116AF014CC04D55DC1BA9"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\zAoMVigilantWorld_cache.wc",
+        "sha256": "83EBADD1188EEEC3C57D67FD04AC91CAE4B9496046DC7843CF0CE73FD7259219"
+      },
+      {
+        "bytes": 5600,
+        "relativePath": "UnifiedWaterCache\\zAoMWitchWorld_cache.wc",
+        "sha256": "3C618E4CF6E0190C8557B340EB0750F279AE4C2CE907095392702D6F7693074B"
+      },
+      {
+        "bytes": 800,
+        "relativePath": "UnifiedWaterCache\\zBMLamaeWorld_cache.wc",
+        "sha256": "7B2CD0DCDFAE07DBB6EB287F65225304CDBADD28270F7DC3D07AFF99ADCF0E04"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\zCHColosseumWorld_cache.wc",
+        "sha256": "B995C5BE163686B2F3BA45F2531BDF3F6C146EC14636F1339508AB79BEFBAD07"
+      },
+      {
+        "bytes": 22336,
+        "relativePath": "UnifiedWaterCache\\zCHMolagWorld_cache.wc",
+        "sha256": "850377C46AEF179FC4AF03919B92F87D0B50C796FC537E6AE64790F57E7B746A"
+      },
+      {
+        "bytes": 4576,
+        "relativePath": "UnifiedWaterCache\\zCHOldForestWorld_cache.wc",
+        "sha256": "2DC866166B866A721A51BE033A52EC164F69774D7CE595DCEFAA181C1BFD0AC1"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\zCHTrueEndWorld_cache.wc",
+        "sha256": "DCF437B6B70CCE3F45AB9BB2D3BBEA9F13B2E49F210C9A9A650E74F0A2D5261B"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\zCHWasteland_cache.wc",
+        "sha256": "78EC98469883C5718B83EDF0110A7F112087CAA25E0CDB92A1E36FCB2B62597B"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\zCHWhaleGraceyardWorld_cache.wc",
+        "sha256": "863B5980A4A66CC7E3C1BA59F646DA77CF24DEB345CB49BC86475E05BFE743CA"
+      },
+      {
+        "bytes": 160,
+        "relativePath": "UnifiedWaterCache\\zCOBruiantWorld_cache.wc",
+        "sha256": "FAC5ED04C43455BD662582BEE1FB633974D615217D51EAB997B2F7AC16B2D2EF"
+      },
+      {
+        "bytes": 5248,
+        "relativePath": "UnifiedWaterCache\\zCOCursedWorld_cache.wc",
+        "sha256": "78AAA052F8F89CF3C82D19BC6D1918DA6EE660A0FE537AB59F56BCAFB864D0BA"
+      },
+      {
+        "bytes": 8,
+        "relativePath": "UWLoadOrder.hash",
+        "sha256": "2AB84E0D11C2F1AB9606FED011524FEC0F235CFBB4FE2CB95F63BC51120404E2"
+      }
+    ],
+    "restored-baseline": [
+      {
+        "bytes": 24318,
+        "relativePath": "SettingsDefault.json",
+        "sha256": "DA501FED8A36B985E10EAB6DFFA004D7048A63CA796CB25D03A501014BAD0617"
+      },
+      {
+        "bytes": 27148,
+        "relativePath": "SettingsUser.json",
+        "sha256": "A8B9955CB5006370F72C2BD7FDE603AA4F6D5A215BCF507B91257B6BC0F7E9ED"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\0WHMiniBearQuestWorld_cache.wc",
+        "sha256": "058FA8D73B0480F054C4BA2D11D764C2BBF2C01545F8FDE9A31A2435F8317F95"
+      },
+      {
+        "bytes": 2560,
+        "relativePath": "UnifiedWaterCache\\3DNPCGabaniasWorld_cache.wc",
+        "sha256": "33C5FB582DAC03225863D5D93C354DE3CB55C7FB49CC0532B0C230CA94A74E5A"
+      },
+      {
+        "bytes": 1536,
+        "relativePath": "UnifiedWaterCache\\aaaLucOblivionRealm_cache.wc",
+        "sha256": "573FBAA34091BD3B335F6E32F3517CFF34E68FD4D21FBC57560A1ABB6A333EF2"
+      },
+      {
+        "bytes": 256,
+        "relativePath": "UnifiedWaterCache\\AlftandWorld_cache.wc",
+        "sha256": "CDA0766B1360389F54D11E9F686A1867324E54ED5D9B711E353DF3BEFF38BCF0"
+      },
+      {
+        "bytes": 2144,
+        "relativePath": "UnifiedWaterCache\\ArcheryTestRange_cache.wc",
+        "sha256": "623038625EEB5D83440E7FD4D748847BFCEBB172F950DAA0BB6528CC63BF1BE3"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\AutotestWorld_cache.wc",
+        "sha256": "278A1EF9F3DE1F99C37A2FF329FADE0B7A671BBF36E75FA9F8C7B9A37479CD8F"
+      },
+      {
+        "bytes": 3008,
+        "relativePath": "UnifiedWaterCache\\Blackreach_cache.wc",
+        "sha256": "EA5B4407F540FED15594767105BB60BB15ECBEAF9BA11C8B651B90CED900BB98"
+      },
+      {
+        "bytes": 288,
+        "relativePath": "UnifiedWaterCache\\BlindCliffCaveWorld_cache.wc",
+        "sha256": "76243DF5C758B4F0DF86F130F6C8C02465DB1F70592A22279C205BFC9D7F3B8C"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\BloatedMansGrottoWorld_cache.wc",
+        "sha256": "ED1D2F1AFDB6993CF58A39A8D8CB2A008437C6B9C6AC80E73F5180C94C629282"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\BluePalaceWingWorld_cache.wc",
+        "sha256": "E7321A1DB65ABE081F2C5EC3BBFD4D999B8C694D91B458857C447E2013121541"
+      },
+      {
+        "bytes": 1664,
+        "relativePath": "UnifiedWaterCache\\BrinewaterGrottoWorld_cache.wc",
+        "sha256": "A65A931BADF3E605AC8D0E64A6D52E408192816D3DEE3485E2D786531E8C9EBD"
+      },
+      {
+        "bytes": 1792,
+        "relativePath": "UnifiedWaterCache\\CWSiegeTestWorld_cache.wc",
+        "sha256": "F5EF0C7937355B721500BA25D799880D9DB252FB4E800737E878814DF7B2DE43"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\CWTestHold_cache.wc",
+        "sha256": "58C2E6DF3BEF5A64B8B842678B3AE170361047588F2E6F36F65F2B3C46CFB447"
+      },
+      {
+        "bytes": 928,
+        "relativePath": "UnifiedWaterCache\\DarkwaterWorld_cache.wc",
+        "sha256": "0C228086D39336BFBEDB65FD3E195C6336EB2EFA65228466E77F71BF79CDD166"
+      },
+      {
+        "bytes": 800,
+        "relativePath": "UnifiedWaterCache\\DeepwoodRedoubtWorld_cache.wc",
+        "sha256": "943A2950F68970FB50478D233E9B9C26D5CD98B1B4F4BE2E56E3D20F8128DCC0"
+      },
+      {
+        "bytes": 480,
+        "relativePath": "UnifiedWaterCache\\Dimfrost_cache.wc",
+        "sha256": "E3521E1ABC5B3E29AC4DB016665A57F2D6E509AF32813D3C9227DB50A9FF851D"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\DLC01Boneyard_cache.wc",
+        "sha256": "3A8FB3361FA329DA670BB603980764526178BC20B949E1C2969DDB9DE00D0A16"
+      },
+      {
+        "bytes": 19200,
+        "relativePath": "UnifiedWaterCache\\DLC01FalmerValley_cache.wc",
+        "sha256": "C771971B67D9689CD84950F0ED5CD7CD7016373EDC7704C312D9A76D7AD9F2F8"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\DLC01SoulCairn_cache.wc",
+        "sha256": "E488CA78EA4429915FE520DE95C33A763F091E1BF64EE4F633309F1FC00D948A"
+      },
+      {
+        "bytes": 288,
+        "relativePath": "UnifiedWaterCache\\DLC1AncestorsGladeWorld_cache.wc",
+        "sha256": "C4D8E3608A1598FB25255F141E537A767DE101EC6D481830168474F4FF781E30"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\DLC1DarkfallPassageWorld_cache.wc",
+        "sha256": "CF0E56ACE7749F7B412F53A5FE7B1F0091C1CC5E6CD7AB35FE50CB482A49F205"
+      },
+      {
+        "bytes": 2208,
+        "relativePath": "UnifiedWaterCache\\DLC1ForebearsHoldout_cache.wc",
+        "sha256": "1FCFE35C2313CA14CB9F4592658B006B3496F0001AF69FAC718172C1D6154EC2"
+      },
+      {
+        "bytes": 416,
+        "relativePath": "UnifiedWaterCache\\DLC1HunterHQWorld_cache.wc",
+        "sha256": "F4148206B0D6F4464EB480C24CBB293AD7963534527905832AB3CE2AAD55C155"
+      },
+      {
+        "bytes": 6656,
+        "relativePath": "UnifiedWaterCache\\DLC2ApocryphaWorld_cache.wc",
+        "sha256": "53AAEE2280F7E61FA999DB25CA16E551CC762AD13464BA35695030586C18FD15"
+      },
+      {
+        "bytes": 1045056,
+        "relativePath": "UnifiedWaterCache\\DLC2SolstheimWorld_cache.wc",
+        "sha256": "8918B32008F0CDF98A724BDA4BC54402D9B5DE3056B88A8C4B046DA92C5D0645"
+      },
+      {
+        "bytes": 1696,
+        "relativePath": "UnifiedWaterCache\\EastEmpireWarehouse_cache.wc",
+        "sha256": "E53FA741662F0254D3970390E12CCF28F2B7B974AC1266180136CCC4929F1BD4"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\EldergleamSanctuaryWorld_cache.wc",
+        "sha256": "F47212C534E99ABA09734AF201A9177CF7D0ECE58FAEB7A2597D8544229005BD"
+      },
+      {
+        "bytes": 160,
+        "relativePath": "UnifiedWaterCache\\FallowstoneCaveWorldEnd_cache.wc",
+        "sha256": "6C0DE7FBB63F7C18CA00C9E801F6E27A015767B3EC3AD249FA1A9B1DBD828308"
+      },
+      {
+        "bytes": 768,
+        "relativePath": "UnifiedWaterCache\\FallowstoneCaveWorldStart_cache.wc",
+        "sha256": "91BD72C385AA65899B0B0BC08FFF3C18C701D874CE40C5E748F56AFD3E1635D5"
+      },
+      {
+        "bytes": 672,
+        "relativePath": "UnifiedWaterCache\\FrostmereCryptWorld_cache.wc",
+        "sha256": "1C1A8FC638AA96FE71284C80F321D1F58AAEA86605034E4AAE89C09336E6057B"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\FXLightWorldSpace_cache.wc",
+        "sha256": "84F46ED6A97D12DA14248895A477460F61223CED8E347223C6BEF8B1D6C9C7DA"
+      },
+      {
+        "bytes": 9024,
+        "relativePath": "UnifiedWaterCache\\JaphetsFollyWorld_cache.wc",
+        "sha256": "95B5E53A49E7ECFB10F23046DEF31B24161F99CE6DE2ADDC11B46B282E3ECED0"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\KatariahWorld_cache.wc",
+        "sha256": "48B3738127DECDF29653CD7FCF35DE6065017AC0381767F7AD290760335BFDB4"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\LabyrinthianMazeWorld_cache.wc",
+        "sha256": "03DE813A24F155B6EF80FCDF020D3F563D26BBEA9579FC5EA00EE558BCEE2011"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\LabyrinthianWorld_cache.wc",
+        "sha256": "FB8E4461D36681E9F54524045D19A4D1F98741CFB4E7EBE5A4149803D66E4F29"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\LabyrinthianWorld03_cache.wc",
+        "sha256": "75FDEECF41FB7DF005409D86E0F3B4D948B42F8ADE263C625BDAD59599AC75D3"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\LabyrinthianWorld04_cache.wc",
+        "sha256": "0EAFE20DC3DBA0366517A9959687A857B50D524DD9829C10C29B8CDD61D5BC94"
+      },
+      {
+        "bytes": 544,
+        "relativePath": "UnifiedWaterCache\\MarkarthWorld_cache.wc",
+        "sha256": "B4CC974BCA48FE0601EF21C23BB283EC2D3F1ADCFB090BA937BA3A6FA3AC15E2"
+      },
+      {
+        "bytes": 288,
+        "relativePath": "UnifiedWaterCache\\MossMotherCavernWorld_cache.wc",
+        "sha256": "A0474EDCD09B9ED40FD9942CA407972AECAF5339F9C9F676F60CEB46B0057274"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\OCRCampsiteHotSprings_cache.wc",
+        "sha256": "0C65DABDB89DE059B623F2AC954276B1096393977B3DEDCF4EEBA16C5AC880E8"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\OCRCampsiteWhiterun_cache.wc",
+        "sha256": "0EEDECD4C68E29225309196C2494201AAF27AED8B6AD28A459408216938C1E9A"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\PalePass_cache.wc",
+        "sha256": "DFE210EECBBB441603F6626F238FE4E0A33B5AFEE0C241AA12CE8EBC0F65AA1D"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\RedEagleRedoubtWorld_cache.wc",
+        "sha256": "634351914235E1337B0E56AE8DCC913BC32F22CA9CFDA09AB64F83A808F6E7E3"
+      },
+      {
+        "bytes": 576,
+        "relativePath": "UnifiedWaterCache\\RiftenWorld_cache.wc",
+        "sha256": "18C1B5CC2E82F22A32D8433FD447EB8A3E6F8B2F7B5D0FDBB04523019D90AFF7"
+      },
+      {
+        "bytes": 1952,
+        "relativePath": "UnifiedWaterCache\\SancreTorWorld_cache.wc",
+        "sha256": "1B85EC8FD1D7CB16BFF6C7A28B3BA5678C9A7F9B7D836BE0C3D99791122BDAA2"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\ShadowgreenCavernWorld_cache.wc",
+        "sha256": "73260EECA21C88560B864022888B321FDF824E77EF3A7223B75FDCBEEEF61D83"
+      },
+      {
+        "bytes": 14144,
+        "relativePath": "UnifiedWaterCache\\SkuldafnWorld_cache.wc",
+        "sha256": "5076343AD4EB76D82F1B503B8C98EC93AFF0BB925DD5E74DCA071C4E17CD85D0"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\SouthfringeWorld_cache.wc",
+        "sha256": "BF19FFB02B60F2E3DA7CED58FFCD7095B7474FF3E3D19C2C01C86BC43A08B024"
+      },
+      {
+        "bytes": 84544,
+        "relativePath": "UnifiedWaterCache\\Sovngarde_cache.wc",
+        "sha256": "15F5AEDAB57FC5773EBCD98EC28C093633514E6E51E851A842EC7C9534573FA1"
+      },
+      {
+        "bytes": 772640,
+        "relativePath": "UnifiedWaterCache\\Tamriel_cache.wc",
+        "sha256": "D55482D4554351201F708EBDE2AB607892F45A33AC8DFAFE9208F366AF4D38B6"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\TestMeganWorld_cache.wc",
+        "sha256": "8168E2DFBAC46FBFABA629350EFD8CE605B4388444C51B21D7D9A4894BD515E3"
+      },
+      {
+        "bytes": 928,
+        "relativePath": "UnifiedWaterCache\\TestSnow_cache.wc",
+        "sha256": "069963397296866B8DF28C3052E3E1B680646F92CF842A6E6606F43E4E35A61A"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\VRPlayroom_cache.wc",
+        "sha256": "F47212C534E99ABA09734AF201A9177CF7D0ECE58FAEB7A2597D8544229005BD"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\WindPassWorld_cache.wc",
+        "sha256": "CFAFF025F68426045BC15AD4A28E48A2EB1F3990CFD700C4A5B721B96892B073"
+      },
+      {
+        "bytes": 47776,
+        "relativePath": "UnifiedWaterCache\\WyrmstoothWorld_cache.wc",
+        "sha256": "E6E63851C4F5164259AD4EB63EE8340AB14D6692ACE116AF014CC04D55DC1BA9"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\zAoMVigilantWorld_cache.wc",
+        "sha256": "83EBADD1188EEEC3C57D67FD04AC91CAE4B9496046DC7843CF0CE73FD7259219"
+      },
+      {
+        "bytes": 5600,
+        "relativePath": "UnifiedWaterCache\\zAoMWitchWorld_cache.wc",
+        "sha256": "3C618E4CF6E0190C8557B340EB0750F279AE4C2CE907095392702D6F7693074B"
+      },
+      {
+        "bytes": 800,
+        "relativePath": "UnifiedWaterCache\\zBMLamaeWorld_cache.wc",
+        "sha256": "7B2CD0DCDFAE07DBB6EB287F65225304CDBADD28270F7DC3D07AFF99ADCF0E04"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\zCHColosseumWorld_cache.wc",
+        "sha256": "B995C5BE163686B2F3BA45F2531BDF3F6C146EC14636F1339508AB79BEFBAD07"
+      },
+      {
+        "bytes": 22336,
+        "relativePath": "UnifiedWaterCache\\zCHMolagWorld_cache.wc",
+        "sha256": "850377C46AEF179FC4AF03919B92F87D0B50C796FC537E6AE64790F57E7B746A"
+      },
+      {
+        "bytes": 4576,
+        "relativePath": "UnifiedWaterCache\\zCHOldForestWorld_cache.wc",
+        "sha256": "2DC866166B866A721A51BE033A52EC164F69774D7CE595DCEFAA181C1BFD0AC1"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\zCHTrueEndWorld_cache.wc",
+        "sha256": "DCF437B6B70CCE3F45AB9BB2D3BBEA9F13B2E49F210C9A9A650E74F0A2D5261B"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\zCHWasteland_cache.wc",
+        "sha256": "78EC98469883C5718B83EDF0110A7F112087CAA25E0CDB92A1E36FCB2B62597B"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\zCHWhaleGraceyardWorld_cache.wc",
+        "sha256": "863B5980A4A66CC7E3C1BA59F646DA77CF24DEB345CB49BC86475E05BFE743CA"
+      },
+      {
+        "bytes": 160,
+        "relativePath": "UnifiedWaterCache\\zCOBruiantWorld_cache.wc",
+        "sha256": "FAC5ED04C43455BD662582BEE1FB633974D615217D51EAB997B2F7AC16B2D2EF"
+      },
+      {
+        "bytes": 5248,
+        "relativePath": "UnifiedWaterCache\\zCOCursedWorld_cache.wc",
+        "sha256": "78AAA052F8F89CF3C82D19BC6D1918DA6EE660A0FE537AB59F56BCAFB864D0BA"
+      },
+      {
+        "bytes": 8,
+        "relativePath": "UWLoadOrder.hash",
+        "sha256": "2AB84E0D11C2F1AB9606FED011524FEC0F235CFBB4FE2CB95F63BC51120404E2"
+      }
+    ],
+    "staged": [
+      {
+        "bytes": 5507,
+        "relativePath": "Overrides\\README.md",
+        "sha256": "1A2445F38AA8521A3A62AE939A03AF3AAA86B541564BBA73754EDAF98A0CD6E5"
+      },
+      {
+        "bytes": 24318,
+        "relativePath": "SettingsDefault.json",
+        "sha256": "DA501FED8A36B985E10EAB6DFFA004D7048A63CA796CB25D03A501014BAD0617"
+      },
+      {
+        "bytes": 27148,
+        "relativePath": "SettingsUser.json",
+        "sha256": "7839ECEBA294F6BEE285700889ACC5E1FC0E71D186C6FD4D2EB5070EDD2E3DF2"
+      },
+      {
+        "bytes": 4064,
+        "relativePath": "Themes\\Default.json",
+        "sha256": "CA0ED05E6E4A618A23BF29B0E0B5E132213C6FC0AC249A68E6948D9BC151FFCD"
+      },
+      {
+        "bytes": 4741,
+        "relativePath": "Themes\\DragonBlood.json",
+        "sha256": "E662E8F20CE721EAA0FF333D9B8C585A407347E3A6ADB9C504339095BE8D2490"
+      },
+      {
+        "bytes": 105950,
+        "relativePath": "Themes\\DragonBlood\\discord.png",
+        "sha256": "CB8ABD52C653C37B62E7A1BB8C7EF1466E007974FA6459F522C76AAC3A0432A1"
+      },
+      {
+        "bytes": 4836,
+        "relativePath": "Themes\\DwemerBronze.json",
+        "sha256": "1FDBA3A5DE060D97523BAC00B1CCA388950DD45D9EDA4D5A37B42DDBB57B6F40"
+      },
+      {
+        "bytes": 407478,
+        "relativePath": "Themes\\DwemerBronze\\discord.png",
+        "sha256": "18139986FA70DD3999BB7931923C48E4FE6E73453A769ED92DF680A8DED94142"
+      },
+      {
+        "bytes": 4616,
+        "relativePath": "Themes\\HighContrast.json",
+        "sha256": "FED3785CE8A990D20A788E61127FB8FA17EA0D6B62D1F6066975A9F9250E03B0"
+      },
+      {
+        "bytes": 73661,
+        "relativePath": "Themes\\HighContrast\\discord.png",
+        "sha256": "776E2FA9E066A3F6A0261BB422FD40BC1C13594D69A352257EDF2278BA932250"
+      },
+      {
+        "bytes": 5047,
+        "relativePath": "Themes\\Light.json",
+        "sha256": "04D752A86D00F95661F361D91F18DED538F7AAE73647D6D2D2E29A219EF45422"
+      },
+      {
+        "bytes": 2182,
+        "relativePath": "Themes\\Light\\clear-cache.png",
+        "sha256": "91B0226A2CFD0E6E703A62F236899C96AE18837F66D4E1D96D03FE717FAD7C37"
+      },
+      {
+        "bytes": 25838,
+        "relativePath": "Themes\\Light\\cs-logo.png",
+        "sha256": "3C718B964C4AC057A091A71064D58141FA1A31A7C19AD9782E9A50B5094FD495"
+      },
+      {
+        "bytes": 73661,
+        "relativePath": "Themes\\Light\\discord.png",
+        "sha256": "776E2FA9E066A3F6A0261BB422FD40BC1C13594D69A352257EDF2278BA932250"
+      },
+      {
+        "bytes": 3451,
+        "relativePath": "Themes\\Light\\load-settings.png",
+        "sha256": "24E21853FCE47580B51D4946A0E990E9D0CE7DC0F1BF308766C503332BDBFC23"
+      },
+      {
+        "bytes": 3026,
+        "relativePath": "Themes\\Light\\restore-settings.png",
+        "sha256": "70C63CE9A93A0B2CB4E1F6999CD602B38C53A2630CAE564451FE557227EE5250"
+      },
+      {
+        "bytes": 2184,
+        "relativePath": "Themes\\Light\\save-settings.png",
+        "sha256": "8214FE90326124BD3EB93B9C24FA8780E02C95ADE2AAE75375B1C761E7D1CDDC"
+      },
+      {
+        "bytes": 4739,
+        "relativePath": "Themes\\NordicFrost.json",
+        "sha256": "067C33723C79DD91ECF9FC883B3A73D5E22FCBAE1C1A80A75933DAFCE667A795"
+      },
+      {
+        "bytes": 121874,
+        "relativePath": "Themes\\NordicFrost\\discord.png",
+        "sha256": "59A17CE17436F9E9BFAAE8524F310347E12CD46866FEA3E505494CD1F1FD3080"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\0WHMiniBearQuestWorld_cache.wc",
+        "sha256": "058FA8D73B0480F054C4BA2D11D764C2BBF2C01545F8FDE9A31A2435F8317F95"
+      },
+      {
+        "bytes": 2560,
+        "relativePath": "UnifiedWaterCache\\3DNPCGabaniasWorld_cache.wc",
+        "sha256": "33C5FB582DAC03225863D5D93C354DE3CB55C7FB49CC0532B0C230CA94A74E5A"
+      },
+      {
+        "bytes": 1536,
+        "relativePath": "UnifiedWaterCache\\aaaLucOblivionRealm_cache.wc",
+        "sha256": "573FBAA34091BD3B335F6E32F3517CFF34E68FD4D21FBC57560A1ABB6A333EF2"
+      },
+      {
+        "bytes": 256,
+        "relativePath": "UnifiedWaterCache\\AlftandWorld_cache.wc",
+        "sha256": "CDA0766B1360389F54D11E9F686A1867324E54ED5D9B711E353DF3BEFF38BCF0"
+      },
+      {
+        "bytes": 2144,
+        "relativePath": "UnifiedWaterCache\\ArcheryTestRange_cache.wc",
+        "sha256": "623038625EEB5D83440E7FD4D748847BFCEBB172F950DAA0BB6528CC63BF1BE3"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\AutotestWorld_cache.wc",
+        "sha256": "278A1EF9F3DE1F99C37A2FF329FADE0B7A671BBF36E75FA9F8C7B9A37479CD8F"
+      },
+      {
+        "bytes": 3008,
+        "relativePath": "UnifiedWaterCache\\Blackreach_cache.wc",
+        "sha256": "EA5B4407F540FED15594767105BB60BB15ECBEAF9BA11C8B651B90CED900BB98"
+      },
+      {
+        "bytes": 288,
+        "relativePath": "UnifiedWaterCache\\BlindCliffCaveWorld_cache.wc",
+        "sha256": "76243DF5C758B4F0DF86F130F6C8C02465DB1F70592A22279C205BFC9D7F3B8C"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\BloatedMansGrottoWorld_cache.wc",
+        "sha256": "ED1D2F1AFDB6993CF58A39A8D8CB2A008437C6B9C6AC80E73F5180C94C629282"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\BluePalaceWingWorld_cache.wc",
+        "sha256": "E7321A1DB65ABE081F2C5EC3BBFD4D999B8C694D91B458857C447E2013121541"
+      },
+      {
+        "bytes": 1664,
+        "relativePath": "UnifiedWaterCache\\BrinewaterGrottoWorld_cache.wc",
+        "sha256": "A65A931BADF3E605AC8D0E64A6D52E408192816D3DEE3485E2D786531E8C9EBD"
+      },
+      {
+        "bytes": 1792,
+        "relativePath": "UnifiedWaterCache\\CWSiegeTestWorld_cache.wc",
+        "sha256": "F5EF0C7937355B721500BA25D799880D9DB252FB4E800737E878814DF7B2DE43"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\CWTestHold_cache.wc",
+        "sha256": "58C2E6DF3BEF5A64B8B842678B3AE170361047588F2E6F36F65F2B3C46CFB447"
+      },
+      {
+        "bytes": 928,
+        "relativePath": "UnifiedWaterCache\\DarkwaterWorld_cache.wc",
+        "sha256": "0C228086D39336BFBEDB65FD3E195C6336EB2EFA65228466E77F71BF79CDD166"
+      },
+      {
+        "bytes": 800,
+        "relativePath": "UnifiedWaterCache\\DeepwoodRedoubtWorld_cache.wc",
+        "sha256": "943A2950F68970FB50478D233E9B9C26D5CD98B1B4F4BE2E56E3D20F8128DCC0"
+      },
+      {
+        "bytes": 480,
+        "relativePath": "UnifiedWaterCache\\Dimfrost_cache.wc",
+        "sha256": "E3521E1ABC5B3E29AC4DB016665A57F2D6E509AF32813D3C9227DB50A9FF851D"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\DLC01Boneyard_cache.wc",
+        "sha256": "3A8FB3361FA329DA670BB603980764526178BC20B949E1C2969DDB9DE00D0A16"
+      },
+      {
+        "bytes": 19200,
+        "relativePath": "UnifiedWaterCache\\DLC01FalmerValley_cache.wc",
+        "sha256": "C771971B67D9689CD84950F0ED5CD7CD7016373EDC7704C312D9A76D7AD9F2F8"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\DLC01SoulCairn_cache.wc",
+        "sha256": "E488CA78EA4429915FE520DE95C33A763F091E1BF64EE4F633309F1FC00D948A"
+      },
+      {
+        "bytes": 288,
+        "relativePath": "UnifiedWaterCache\\DLC1AncestorsGladeWorld_cache.wc",
+        "sha256": "C4D8E3608A1598FB25255F141E537A767DE101EC6D481830168474F4FF781E30"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\DLC1DarkfallPassageWorld_cache.wc",
+        "sha256": "CF0E56ACE7749F7B412F53A5FE7B1F0091C1CC5E6CD7AB35FE50CB482A49F205"
+      },
+      {
+        "bytes": 2208,
+        "relativePath": "UnifiedWaterCache\\DLC1ForebearsHoldout_cache.wc",
+        "sha256": "1FCFE35C2313CA14CB9F4592658B006B3496F0001AF69FAC718172C1D6154EC2"
+      },
+      {
+        "bytes": 416,
+        "relativePath": "UnifiedWaterCache\\DLC1HunterHQWorld_cache.wc",
+        "sha256": "F4148206B0D6F4464EB480C24CBB293AD7963534527905832AB3CE2AAD55C155"
+      },
+      {
+        "bytes": 6656,
+        "relativePath": "UnifiedWaterCache\\DLC2ApocryphaWorld_cache.wc",
+        "sha256": "53AAEE2280F7E61FA999DB25CA16E551CC762AD13464BA35695030586C18FD15"
+      },
+      {
+        "bytes": 1045056,
+        "relativePath": "UnifiedWaterCache\\DLC2SolstheimWorld_cache.wc",
+        "sha256": "8918B32008F0CDF98A724BDA4BC54402D9B5DE3056B88A8C4B046DA92C5D0645"
+      },
+      {
+        "bytes": 1696,
+        "relativePath": "UnifiedWaterCache\\EastEmpireWarehouse_cache.wc",
+        "sha256": "E53FA741662F0254D3970390E12CCF28F2B7B974AC1266180136CCC4929F1BD4"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\EldergleamSanctuaryWorld_cache.wc",
+        "sha256": "F47212C534E99ABA09734AF201A9177CF7D0ECE58FAEB7A2597D8544229005BD"
+      },
+      {
+        "bytes": 160,
+        "relativePath": "UnifiedWaterCache\\FallowstoneCaveWorldEnd_cache.wc",
+        "sha256": "6C0DE7FBB63F7C18CA00C9E801F6E27A015767B3EC3AD249FA1A9B1DBD828308"
+      },
+      {
+        "bytes": 768,
+        "relativePath": "UnifiedWaterCache\\FallowstoneCaveWorldStart_cache.wc",
+        "sha256": "91BD72C385AA65899B0B0BC08FFF3C18C701D874CE40C5E748F56AFD3E1635D5"
+      },
+      {
+        "bytes": 672,
+        "relativePath": "UnifiedWaterCache\\FrostmereCryptWorld_cache.wc",
+        "sha256": "1C1A8FC638AA96FE71284C80F321D1F58AAEA86605034E4AAE89C09336E6057B"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\FXLightWorldSpace_cache.wc",
+        "sha256": "84F46ED6A97D12DA14248895A477460F61223CED8E347223C6BEF8B1D6C9C7DA"
+      },
+      {
+        "bytes": 9024,
+        "relativePath": "UnifiedWaterCache\\JaphetsFollyWorld_cache.wc",
+        "sha256": "95B5E53A49E7ECFB10F23046DEF31B24161F99CE6DE2ADDC11B46B282E3ECED0"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\KatariahWorld_cache.wc",
+        "sha256": "48B3738127DECDF29653CD7FCF35DE6065017AC0381767F7AD290760335BFDB4"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\LabyrinthianMazeWorld_cache.wc",
+        "sha256": "03DE813A24F155B6EF80FCDF020D3F563D26BBEA9579FC5EA00EE558BCEE2011"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\LabyrinthianWorld_cache.wc",
+        "sha256": "FB8E4461D36681E9F54524045D19A4D1F98741CFB4E7EBE5A4149803D66E4F29"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\LabyrinthianWorld03_cache.wc",
+        "sha256": "75FDEECF41FB7DF005409D86E0F3B4D948B42F8ADE263C625BDAD59599AC75D3"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\LabyrinthianWorld04_cache.wc",
+        "sha256": "0EAFE20DC3DBA0366517A9959687A857B50D524DD9829C10C29B8CDD61D5BC94"
+      },
+      {
+        "bytes": 544,
+        "relativePath": "UnifiedWaterCache\\MarkarthWorld_cache.wc",
+        "sha256": "B4CC974BCA48FE0601EF21C23BB283EC2D3F1ADCFB090BA937BA3A6FA3AC15E2"
+      },
+      {
+        "bytes": 288,
+        "relativePath": "UnifiedWaterCache\\MossMotherCavernWorld_cache.wc",
+        "sha256": "A0474EDCD09B9ED40FD9942CA407972AECAF5339F9C9F676F60CEB46B0057274"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\OCRCampsiteHotSprings_cache.wc",
+        "sha256": "0C65DABDB89DE059B623F2AC954276B1096393977B3DEDCF4EEBA16C5AC880E8"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\OCRCampsiteWhiterun_cache.wc",
+        "sha256": "0EEDECD4C68E29225309196C2494201AAF27AED8B6AD28A459408216938C1E9A"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\PalePass_cache.wc",
+        "sha256": "DFE210EECBBB441603F6626F238FE4E0A33B5AFEE0C241AA12CE8EBC0F65AA1D"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\RedEagleRedoubtWorld_cache.wc",
+        "sha256": "634351914235E1337B0E56AE8DCC913BC32F22CA9CFDA09AB64F83A808F6E7E3"
+      },
+      {
+        "bytes": 576,
+        "relativePath": "UnifiedWaterCache\\RiftenWorld_cache.wc",
+        "sha256": "18C1B5CC2E82F22A32D8433FD447EB8A3E6F8B2F7B5D0FDBB04523019D90AFF7"
+      },
+      {
+        "bytes": 1952,
+        "relativePath": "UnifiedWaterCache\\SancreTorWorld_cache.wc",
+        "sha256": "1B85EC8FD1D7CB16BFF6C7A28B3BA5678C9A7F9B7D836BE0C3D99791122BDAA2"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\ShadowgreenCavernWorld_cache.wc",
+        "sha256": "73260EECA21C88560B864022888B321FDF824E77EF3A7223B75FDCBEEEF61D83"
+      },
+      {
+        "bytes": 14144,
+        "relativePath": "UnifiedWaterCache\\SkuldafnWorld_cache.wc",
+        "sha256": "5076343AD4EB76D82F1B503B8C98EC93AFF0BB925DD5E74DCA071C4E17CD85D0"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\SouthfringeWorld_cache.wc",
+        "sha256": "BF19FFB02B60F2E3DA7CED58FFCD7095B7474FF3E3D19C2C01C86BC43A08B024"
+      },
+      {
+        "bytes": 84544,
+        "relativePath": "UnifiedWaterCache\\Sovngarde_cache.wc",
+        "sha256": "15F5AEDAB57FC5773EBCD98EC28C093633514E6E51E851A842EC7C9534573FA1"
+      },
+      {
+        "bytes": 772640,
+        "relativePath": "UnifiedWaterCache\\Tamriel_cache.wc",
+        "sha256": "D55482D4554351201F708EBDE2AB607892F45A33AC8DFAFE9208F366AF4D38B6"
+      },
+      {
+        "bytes": 296480,
+        "relativePath": "UnifiedWaterCache\\Tamriel_precache.wpc",
+        "sha256": "8EB2DA4DD71A95086A6924299B18BEA337ADBE27ADE92D7AD2B9346A750BFDF5"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\TestMeganWorld_cache.wc",
+        "sha256": "8168E2DFBAC46FBFABA629350EFD8CE605B4388444C51B21D7D9A4894BD515E3"
+      },
+      {
+        "bytes": 928,
+        "relativePath": "UnifiedWaterCache\\TestSnow_cache.wc",
+        "sha256": "069963397296866B8DF28C3052E3E1B680646F92CF842A6E6606F43E4E35A61A"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\VRPlayroom_cache.wc",
+        "sha256": "F47212C534E99ABA09734AF201A9177CF7D0ECE58FAEB7A2597D8544229005BD"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\WindPassWorld_cache.wc",
+        "sha256": "CFAFF025F68426045BC15AD4A28E48A2EB1F3990CFD700C4A5B721B96892B073"
+      },
+      {
+        "bytes": 47776,
+        "relativePath": "UnifiedWaterCache\\WyrmstoothWorld_cache.wc",
+        "sha256": "E6E63851C4F5164259AD4EB63EE8340AB14D6692ACE116AF014CC04D55DC1BA9"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\zAoMVigilantWorld_cache.wc",
+        "sha256": "83EBADD1188EEEC3C57D67FD04AC91CAE4B9496046DC7843CF0CE73FD7259219"
+      },
+      {
+        "bytes": 5600,
+        "relativePath": "UnifiedWaterCache\\zAoMWitchWorld_cache.wc",
+        "sha256": "3C618E4CF6E0190C8557B340EB0750F279AE4C2CE907095392702D6F7693074B"
+      },
+      {
+        "bytes": 800,
+        "relativePath": "UnifiedWaterCache\\zBMLamaeWorld_cache.wc",
+        "sha256": "7B2CD0DCDFAE07DBB6EB287F65225304CDBADD28270F7DC3D07AFF99ADCF0E04"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\zCHColosseumWorld_cache.wc",
+        "sha256": "B995C5BE163686B2F3BA45F2531BDF3F6C146EC14636F1339508AB79BEFBAD07"
+      },
+      {
+        "bytes": 22336,
+        "relativePath": "UnifiedWaterCache\\zCHMolagWorld_cache.wc",
+        "sha256": "850377C46AEF179FC4AF03919B92F87D0B50C796FC537E6AE64790F57E7B746A"
+      },
+      {
+        "bytes": 4576,
+        "relativePath": "UnifiedWaterCache\\zCHOldForestWorld_cache.wc",
+        "sha256": "2DC866166B866A721A51BE033A52EC164F69774D7CE595DCEFAA181C1BFD0AC1"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\zCHTrueEndWorld_cache.wc",
+        "sha256": "DCF437B6B70CCE3F45AB9BB2D3BBEA9F13B2E49F210C9A9A650E74F0A2D5261B"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\zCHWasteland_cache.wc",
+        "sha256": "78EC98469883C5718B83EDF0110A7F112087CAA25E0CDB92A1E36FCB2B62597B"
+      },
+      {
+        "bytes": 32,
+        "relativePath": "UnifiedWaterCache\\zCHWhaleGraceyardWorld_cache.wc",
+        "sha256": "863B5980A4A66CC7E3C1BA59F646DA77CF24DEB345CB49BC86475E05BFE743CA"
+      },
+      {
+        "bytes": 160,
+        "relativePath": "UnifiedWaterCache\\zCOBruiantWorld_cache.wc",
+        "sha256": "FAC5ED04C43455BD662582BEE1FB633974D615217D51EAB997B2F7AC16B2D2EF"
+      },
+      {
+        "bytes": 5248,
+        "relativePath": "UnifiedWaterCache\\zCOCursedWorld_cache.wc",
+        "sha256": "78AAA052F8F89CF3C82D19BC6D1918DA6EE660A0FE537AB59F56BCAFB864D0BA"
+      },
+      {
+        "bytes": 8,
+        "relativePath": "UWLoadOrder.hash",
+        "sha256": "2AB84E0D11C2F1AB9606FED011524FEC0F235CFBB4FE2CB95F63BC51120404E2"
+      }
+    ]
+  },
+  "currentSettingsBoundary": "Active settings not read here; current literal, hash and sole whole-document mismatch remain owner-observed. Retained profile literal and its original hash independently checked.",
+  "cutoffUtc": "2026-10-06T03:51:12.1414861+00:00",
+  "inputs": {
+    "canonical-attributes": {
+      "availability": "public-pinned-git-source",
+      "bytes": 275,
+      "repositoryRelativePath": ".gitattributes",
+      "revision": "99042cc107d51b2f427cd1d64597d7c2cf4a10ba",
+      "sha256": "9F218F600D85FD641DB712AFFC0E805740834FCCC0C80083C4B8087C5440028A"
+    },
+    "canonical-git-0": {
+      "availability": "public-pinned-git-source",
+      "bytes": 177484,
+      "gitBlob": "db3a605de21ea181e95b9e0cf2a5a26a879361e0",
+      "repositoryRelativePath": "tools/steamvr-null-control/Invoke-SteamVRNullControl.ps1",
+      "representation": "canonical LF Git bytes; physical CRLF hash separate",
+      "revision": "99042cc107d51b2f427cd1d64597d7c2cf4a10ba",
+      "sha256": "FB3A41CB550A34A293C42F199B440B86B2883F21D3E86B6BAC308614CF49E357"
+    },
+    "canonical-git-1": {
+      "availability": "public-pinned-git-source",
+      "bytes": 13451,
+      "gitBlob": "f0a6e9ad36e3d2464405e49f9278b89ccd07934f",
+      "repositoryRelativePath": "tools/steamvr-null-control/DesktopUIRestore.ps1",
+      "representation": "canonical LF Git bytes; physical CRLF hash separate",
+      "revision": "99042cc107d51b2f427cd1d64597d7c2cf4a10ba",
+      "sha256": "A368D78AF9FD7008466DFD249F30674D4AC0E0A1D395B124B1242048A90C800C"
+    },
+    "canonical-git-2": {
+      "availability": "public-pinned-git-source",
+      "bytes": 22477,
+      "gitBlob": "00ef9bad84dde6fb08c11ae0c0448d6ebb34c0d0",
+      "repositoryRelativePath": "tools/steamvr-null-control/README.md",
+      "representation": "canonical LF Git bytes; physical CRLF hash separate",
+      "revision": "99042cc107d51b2f427cd1d64597d7c2cf4a10ba",
+      "sha256": "643276D25041A8CF7FCC201687EE20981DA8F1D9B31FD93B805F7D18EF80CADC"
+    },
+    "canonical-test": {
+      "availability": "public-pinned-git-source",
+      "bytes": 13523,
+      "gitBlob": "e602804f1207c0aceba9a6e76e6d756a056d0ea4",
+      "repositoryRelativePath": "tools/steamvr-null-control/Test-DesktopUIRestore.ps1",
+      "representation": "canonical LF, no test execution",
+      "revision": "99042cc107d51b2f427cd1d64597d7c2cf4a10ba",
+      "sha256": "E817FA215405C72EF2C043BC52032C3EF05FE6EC64740FBA72826373E21AE3FE"
+    },
+    "feedback-evidence-ACCESS-RELEASE.json": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2106,
+      "sha256": "E7BD56FA56D7651BD71ED27F243E9217811C7EF2477700FBE19CA385A33C829E",
+      "sourceChangedDuringRead": false
+    },
+    "feedback-evidence-DESKTOPUI-CONTROLLED-NUMBER-REGRESSION.json": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1463,
+      "sha256": "6EBD67E520083071DEAD9486860A33880E1E9AF2A95C1650344568286B1BD5D3",
+      "sourceChangedDuringRead": false
+    },
+    "feedback-evidence-DESKTOPUI-PRECISION-DIAGNOSTIC.json": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2259,
+      "sha256": "0A25C3C40AA54CE2B066B7419954216375968BC5C044EF82C0DA2783D7D31AD6",
+      "sourceChangedDuringRead": false
+    },
+    "feedback-evidence-NULL-PRESERVATION-PREVIEW.json": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1325,
+      "sha256": "8DCBA2BA9320A237AB8A3BBF49A55C0CA7CA89BF4E9D0B3A3C07780EB2880D25",
+      "sourceChangedDuringRead": false
+    },
+    "human-preservation-decision": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1518,
+      "sha256": "976CB55AF76F3EDD9568E211E562F941A1770B8D15EF5A72E32DBAEF3D995235",
+      "sourceChangedDuringRead": false
+    },
+    "numeric-feedback": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 3442,
+      "sha256": "1B7D1F05FBAAE9BA71ED37F441AB0933030144727BA5DBC95471450A473243FB",
+      "sourceChangedDuringRead": false
+    },
+    "operational-ACCESS-RELEASE.json": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2106,
+      "sha256": "E7BD56FA56D7651BD71ED27F243E9217811C7EF2477700FBE19CA385A33C829E",
+      "sourceChangedDuringRead": false
+    },
+    "operational-ADMISSION-VERIFIER-CORRECTION.json": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1144,
+      "sha256": "0E7EF3005751D5F67A3BE4A020DB41E5BC095BDB8799A0AE0792EC004CD6FF5A",
+      "sourceChangedDuringRead": false
+    },
+    "operational-CACHE-COMPLETION.json": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1352,
+      "sha256": "BE7F810550431E55989F49348A8976E84BFB67533BFC826F91D9459C15B95E9A",
+      "sourceChangedDuringRead": false
+    },
+    "operational-CLOSED-BEFORE-COMPLETION.json": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 23232,
+      "sha256": "D971CF6956F6AD910EE724B999C96BAD09EE8469A8A4D8AFF551235F9C113D67",
+      "sourceChangedDuringRead": false
+    },
+    "operational-CONFIG-BIND.json": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1955,
+      "sha256": "91CC0D0C0FA36EE8A9A0DB0E67E8F97870A80A9B2D6A9ACBEA4D099A2F90E534",
+      "sourceChangedDuringRead": false
+    },
+    "operational-CONFIG-COMPLETION.json": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 26321,
+      "sha256": "6E2079B5DA8661AFDE120B556D6801977C8778C8E337DD7DCE0FE618B296A787",
+      "sourceChangedDuringRead": false
+    },
+    "operational-CONFIG-STAGE.json": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 15532,
+      "sha256": "3D677DEB5A93756B037EE1760D5637849F796C6539A7876F660725CEA4AF482B",
+      "sourceChangedDuringRead": false
+    },
+    "operational-EFFECTIVE-LOOSE-SHADER-SOURCES.json": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 56656,
+      "sha256": "40BD3A3F774AA360175DC3936EB10D6DC0ABB3DEFEB36BDF2505555B03CAD691",
+      "sourceChangedDuringRead": false
+    },
+    "operational-FINAL-CACHE-PREPARE.json": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 6718,
+      "sha256": "5B9C853D5EAD95819DCED30229AD4094E3130BACF086F942007654DC0C92741B",
+      "sourceChangedDuringRead": false
+    },
+    "operational-HANDOFF.json": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1346,
+      "sha256": "C8B435B12A5CE05F1E6CBD14EFD0F8F3A60C723693DFDFB1B9E08C6A779037DF",
+      "sourceChangedDuringRead": false
+    },
+    "operational-NULL-BEFORE.json": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 9069,
+      "sha256": "BD98E15D28D3EBC0E26A966666DFF3801278EF1722F24D665E2B8B78E650E4AC",
+      "sourceChangedDuringRead": false
+    },
+    "operational-NULL-CLOSED-BEFORE-TRANSITION.json": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 191,
+      "sha256": "B4781C044962DFA9E13FC87276818FFFA868F77FEEC79B34C93D2C96753ED799",
+      "sourceChangedDuringRead": false
+    },
+    "operational-ORIGINAL-NULL-IDENTITIES-BEFORE.json": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1052,
+      "sha256": "AB9D17E1416F527E3EDD6A0607203D13A98B833F5DE79B7AD03781FCADC17584",
+      "sourceChangedDuringRead": false
+    },
+    "operational-OUTPUT-COMPLETION.json": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2771,
+      "sha256": "3A96316CF738E336E98F6121E6C5A650636F1EA0C193879A28D8490624F34BC4",
+      "sourceChangedDuringRead": false
+    },
+    "operational-PRESERVATION-DELIVERY-ADMISSION.json": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 36387,
+      "sha256": "D5D5FDA4DFA825804BED54150773D40E7693D7F715750425B2B5C77073A7491D",
+      "sourceChangedDuringRead": false
+    },
+    "operational-RETAINED-WORKSPACE-UNLAUNCHED.json": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 223246,
+      "sha256": "F2280A6F06E7FD22AD0DAD371683B029D6555E9FE3BDB035F58496449DDA2BE3",
+      "sourceChangedDuringRead": false
+    },
+    "operational-WORKSPACE-RESUME.json": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 189481,
+      "sha256": "FD89B12A83F9A259CBE6FD71D3E69E3BB994DF36D07AA3D87934CE288A72C344",
+      "sourceChangedDuringRead": false
+    },
+    "original-null-0": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 3366,
+      "sha256": "896B93652466EA1A320648218BD1ACF550F48707E3A78A5540E71EADFA562F8F",
+      "sourceChangedDuringRead": false
+    },
+    "original-null-1": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2645,
+      "sha256": "988C9EEAE6B76212CADDCC0D517B892B16AC1D09D1C73427664AE2431DA77D88",
+      "sourceChangedDuringRead": false
+    },
+    "original-null-2": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2361,
+      "sha256": "ED9EBB7D631268EEF11537DD605D2A1A5FEEF43A019E0A1AB8C36466EF7BD61A",
+      "sourceChangedDuringRead": false
+    },
+    "primary-built-in-numeric-check": {
+      "access": "Two literal values and standard PowerShell/.NET APIs only; no contributor helper, settings read or controller invocation",
+      "availability": "primary-generated-public-literal-measurement",
+      "bytes": 266,
+      "sha256": "843BC6D7F8311D0D5B759572794253CC96B047B58CBD9DB9BBDFDC183457199E"
+    },
+    "primary-owned-helper": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 40419,
+      "sha256": "B09F0305154B309491CF2756308A5C09D7B5EB9EE33AE987856F4DCBCCC44F4A",
+      "sourceChangedDuringRead": false
+    },
+    "prior-adapter-manifest": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 33925,
+      "sha256": "86A672F64FA4B199A84C1F576B315EE0600E31421FFD3A8EEA2D016F1B31F26B",
+      "sourceChangedDuringRead": false
+    },
+    "prior-desktopui-drift": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1178,
+      "sha256": "C7CB61CDFC724454602AEF7E5FF6A47E74C7C68CA4757F38B43D61DD70D8588D",
+      "sourceChangedDuringRead": false
+    },
+    "public-branch-lookup": {
+      "availability": "public-branch-metadata",
+      "bytes": 2,
+      "commit": "99042cc107d51b2f427cd1d64597d7c2cf4a10ba",
+      "sha256": "4F53CDA18C2BAA0C0354BB5F9A3ECBE5ED12AB4D8E11BA873C2F11161202B945"
+    },
+    "public-commit-lookup": {
+      "availability": "public-commit-lookup",
+      "bytes": 41,
+      "commit": "99042cc107d51b2f427cd1d64597d7c2cf4a10ba",
+      "sha256": "0731DDFF37061F3F55474770B2C135B52D6170FE0A8DA51707AF3A10C5EEA17F"
+    },
+    "publication-log-0": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1757,
+      "sha256": "EF0C64C33774F2E8F08F8ED3607FD7C36137EB4EE8E6CBB40BC84300C7F7CD4B",
+      "sourceChangedDuringRead": false
+    },
+    "publication-log-1": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2323,
+      "sha256": "0271FFEB4A1B3E34C28A5538680430B1884878E781C8ABA797CA11AF53E49DE6",
+      "sourceChangedDuringRead": false
+    },
+    "publication-log-2": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "sourceChangedDuringRead": false
+    },
+    "qualification-log-0": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2323,
+      "sha256": "0271FFEB4A1B3E34C28A5538680430B1884878E781C8ABA797CA11AF53E49DE6",
+      "sourceChangedDuringRead": false
+    },
+    "qualification-log-1": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "sourceChangedDuringRead": false
+    },
+    "qualification-log-2": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 26462,
+      "sha256": "F4482105ED34D3EC51394214F65F4F69B1907F899B4E758D059E522E7B94B115",
+      "sourceChangedDuringRead": false
+    },
+    "qualification-log-3": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "sourceChangedDuringRead": false
+    },
+    "qualification-log-4": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2323,
+      "sha256": "0271FFEB4A1B3E34C28A5538680430B1884878E781C8ABA797CA11AF53E49DE6",
+      "sourceChangedDuringRead": false
+    },
+    "qualification-log-5": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "sourceChangedDuringRead": false
+    },
+    "qualification-log-6": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 26462,
+      "sha256": "F4482105ED34D3EC51394214F65F4F69B1907F899B4E758D059E522E7B94B115",
+      "sourceChangedDuringRead": false
+    },
+    "qualification-log-7": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "sourceChangedDuringRead": false
+    },
+    "qualification-outer-receipt": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2791,
+      "sha256": "D2B73B85F5A8578404CDA994686061679A70530DAF56A8AA20C0131E8AE024CA",
+      "sourceChangedDuringRead": false
+    },
+    "qualification-phase-0": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1691,
+      "sha256": "1770F7DC3159522F052243D38E4F3C3B3E945AFA9801D6F54C4AB54146369EE2",
+      "sourceChangedDuringRead": false
+    },
+    "qualification-phase-1": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1843,
+      "sha256": "3D16B11BE7A91544E395E820D8E0F6F3BADB24A2A53FDBF98976E54BA783D467",
+      "sourceChangedDuringRead": false
+    },
+    "qualification-phase-2": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1730,
+      "sha256": "F41884518B670482D8CDB49AC1B097B7D7F72932A384823CF484413F9489D140",
+      "sourceChangedDuringRead": false
+    },
+    "qualification-phase-3": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1882,
+      "sha256": "ECF4F0FFF74C5466049A1F07D603704241D6C6A815511181CFC4D88CF169DF97",
+      "sourceChangedDuringRead": false
+    },
+    "source-manifest": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 45592,
+      "sha256": "A4284CC333839DB1666C430742335DB9B4B2217459DBBAD1097A9D953DE2114E",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-000": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 9725,
+      "sha256": "F01966CFC17C54AC1EF5B87F5864F950294E3B7FFB8DDC7EC3597D0BC7CD076A",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-001": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 117248,
+      "sha256": "0234E02C83EA857D76D5CF9E241736234A5D8ACB02B59983B896954C02BAA034",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-002": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2868,
+      "sha256": "5CBFA62C34E018024F0BD8B0F6E6777A00A354A4B01EF32AE44C62F7C04F6E9D",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-003": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 102,
+      "sha256": "690A5F6A3D5B764BE4E277321D5C27B235C9960A510CF072D73A6F504197CA68",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-004": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1488,
+      "sha256": "F56FF606104D4EF18E617921A75C73AD73B5A1A1D70C69590C29DE16919E04AD",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-005": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1237,
+      "sha256": "871B58FBC79FE0A4B1D1C4740257B3CF9C9FA401D95795B9C4DC01F234DD0241",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-006": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1066,
+      "sha256": "5050276F73BBB2D86C3D361C2B88F69BB5F75FD5F6360B6C5E10161336A65373",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-007": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 913,
+      "sha256": "BE888317B4E2F4A3650D31D43CF240471E46AB68BD1BC2093CC51E942BA847D9",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-008": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 324,
+      "sha256": "3ED6D79EF9F1C415BF839A3C8D5CC3B9449ACA5936E74B89A921827D18300630",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-009": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 74240,
+      "sha256": "6529B27C71CD965542C37F98C6D3D32CA0DB75A70FCBE55776AAC5E7142BE6FE",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-010": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 837272,
+      "sha256": "BAB8AC6EF64E68A9CA53315B0014D131088584B2EFDFA6DB511D67EC03CFCB4A",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-011": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 35560,
+      "sha256": "4D3E484B968368A852C26842B8F57F3C757C96DE01194119603EC9B591D2C8D7",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-012": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2361,
+      "sha256": "ED9EBB7D631268EEF11537DD605D2A1A5FEEF43A019E0A1AB8C36466EF7BD61A",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-013": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 3534,
+      "sha256": "EF2AC95BD1BDF0934106B5DA48E00431516E456242B7760D0C3A4B0E1832EE62",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-014": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 13712,
+      "sha256": "AD3D710298111F7323DADEDC44FCCB19DD79F59D122474336FD8323BAE254029",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-015": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 8085,
+      "sha256": "1F99E79A7B6C07A4DCC174AE8F674DD63383967155775B9D4E8508F9540C07D3",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-016": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2342,
+      "sha256": "9992375CD78D1DAF356487FC41BA99F2FC87A2A338A8F876A6AADE5C306A4A6F",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-017": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 10969,
+      "sha256": "A4073FD46C240FD0CE055FA79BA85BAADCC16740826432C4FD73A0BD1E4341FA",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-018": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 53509,
+      "sha256": "BBA1230D29AD1E49FE4221756E30A4B9321044ED1AFBBFF7229825D8ED204823",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-019": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 7805,
+      "sha256": "57B1D6D0AC4A5D44DB34F10FBD29948F82DE1FB7D4B371FCF3C410D86EC56028",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-020": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 54718,
+      "sha256": "CF24C01AC758029ACC6C4671DC62C0BABF773F642FF2E8E1E5232E8AC52E4A11",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-021": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 18650,
+      "sha256": "1DA5CD4F7360A46E1592913FA88CC8CD2F8F6CAB32C8B58E8AE6C3905F768601",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-022": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 4564,
+      "sha256": "6F90C45FB3CDAC10AE5CE3BD0FB037CD7E330CE3CCD1A2A95F591BE30104504D",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-023": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 14576,
+      "sha256": "5EE39C9575EC6A3B0318E3B72AC8F7A2461750EBA67ED05AF0CD35D2A73801AE",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-024": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 6007,
+      "sha256": "9C7BA49B48C352AA75390FAFB1A470D9CFD1387CC78E1AD3C007BF38515F4674",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-025": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 39628,
+      "sha256": "CB135A610AB7B80336A691F6D2C1C6B280D721B5118DBCDDBFA6B338CAA5A17D",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-026": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1517,
+      "sha256": "D076DD3263850683E6A2C83C60B17845038ACA5F8CA7DE1D7EDF730ACDB49C36",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-027": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2906,
+      "sha256": "CA7B1D1FE8B0FE68D4A3A181E3AE7689E3619C0819BC484B5067C6F420D4FB35",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-028": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 153091,
+      "sha256": "A65C9FD4B8BDA8A51FAA8F39A1D36BE3D67EA5399C908AB1B2EE0108BDF30519",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-029": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 3183,
+      "sha256": "6F626465F0BA1D0382B29F958CB13031E060CCCBB2EE542A0B8187CA31F1B591",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-030": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 8940,
+      "sha256": "CB904FEB3CAD88804721DC9F3556B53AAF0C7C1E1A1A130315C503891E232D32",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-031": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 3180,
+      "sha256": "7899922AF12A5BFF7C3FE7CC11E29BB664F005050C91673D8E5235B0F237D3FD",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-032": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1204,
+      "sha256": "522E395AA7307BC48303089411A8D95B4D41FF304456920264F219F6247196F8",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-033": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1085,
+      "sha256": "2FE40C6201DD9B7D3C97F49EF0CE6994F7A18AC45EC5A1E467BAD50E37282C14",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-034": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 3347,
+      "sha256": "B282EA00E2A4AF4AD20EFCACE8BE4D3ABE7EE71B97AFA7318655FD8396C032C6",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-035": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2754,
+      "sha256": "4CBC36617737451B86BF43D762167D4BB6AC63E60FE3E66C0A428BC862EA7BD2",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-036": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 9042,
+      "sha256": "0ABF4783A469DD936C9F92DAEE85056690C23AA73AA24C2FE54E66D64CBD3828",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-037": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 9433,
+      "sha256": "179FD37999F9F3DD0A782038EA3F818D49D1C20BF8587166A0B4F3302A724B02",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-038": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 3881,
+      "sha256": "E4CFEBCF4EEDCBA76022009CD9D25B2BD71CBB5A69E18D203DBDAB3863CFC8D4",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-039": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 614,
+      "sha256": "A1E6F6D779BD8E8C3B55A6CD0CF718C1426C89F51D103FFE911D63DC6520B95D",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-040": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 4742,
+      "sha256": "7D7DA7DB47FE1783DFB468E32EDF0B15CF8288A2B6296EA65947621C6D97C03C",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-041": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 6976,
+      "sha256": "353A32A887E548AB2B11E12F357F44A2BB7BA81B2B99DAB62C08475B0143F70A",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-042": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 6377,
+      "sha256": "C0A6F32BF5027D252B308B32B6E1AF337374156D2FDAE6A82045CA173BBDF95B",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-043": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1054,
+      "sha256": "C6FEB148B1AF61983BE87E79E1BEDA992CE940BA519C0B18D88E535FD101F024",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-044": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 6955,
+      "sha256": "7F7239A664AD99AAC382AFCD23F6A3A7363D4B2B2D4075EFEFE27825F57297C2",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-045": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 938,
+      "sha256": "EBB1206B50F1E5251EA976407B5A003A5AE1B60F7C76D155344B7427388FE589",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-046": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2893,
+      "sha256": "7576BD5D1468E09E9341956EAB0CA169333CEA7F67E4F69FED11E8D54479BEFA",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-047": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 138056,
+      "sha256": "4B668D10DFD67AAB8F8A3E17ED9528937341C6D94400EB54DBDDCBAEF6D3915F",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-048": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 23075,
+      "sha256": "7D38A8E9299B356A1B446FD25590271E0E9BB68B3D4CAD3A5CF0E1AC3EB45967",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-049": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 23571,
+      "sha256": "221734D0DB8568C51F6D5CA89AE115FE3A288080558A9D7BEA35A1ECDBD92B28",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-050": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 11356,
+      "sha256": "CF91EA14CED12C478BB2BE91E711FF69C491712D4D50E791AC58F4D3DE2BD789",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-051": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 50258,
+      "sha256": "82E1F909B95B9D7AA6296A30F0227F1DD706612AFD9F14DFA876A63E1146FBED",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-052": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2270,
+      "sha256": "D613845C46401C2F21543557106E5BD871A5B50D1EA19FB7CC2D911F3CA0440F",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-053": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 15596,
+      "sha256": "09843AAA0C1E6B58D12173465178CE1567D591FBB6C6E05CAE19CF75A6791EA0",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-054": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 5803,
+      "sha256": "963E9F3044FEC0D68674F66A03765079C89E48EB2F1E2B706FA874526E8A9B15",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-055": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 14252,
+      "sha256": "4DC86E8962B6F7C1290EB51E61F09B9EDFDE4A6E2BF39916AEB5C6117421A854",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-056": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 41247,
+      "sha256": "E31B4B241A26D09365EEBDD3FE0037B0A9D3AF451C90618D1A96383EE79761DA",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-057": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 13261,
+      "sha256": "3697CD2FD82670031D768965DB3E6FEABAF5637769ADC905CEEFB27023088DD7",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-058": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2914,
+      "sha256": "60E97A3E4A42A0783E7EA6E1209450DDC74928AA98188D56BDF1CB79708D63B8",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-059": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 17089,
+      "sha256": "A745301663056D18E5F61DF572F32F71005BE791840CF748150FDA2BA1BBF2EE",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-060": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 7145,
+      "sha256": "D1DE7D525C4DD7C179F159C80A0516FDA2D03265862ACC8E88CC410ED253A60C",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-061": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 4329,
+      "sha256": "D527115160297F63CEF100B59017F3B57BC27232D1C90AC3E51584B860D40ECB",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-062": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 16389,
+      "sha256": "4B4C1E9298861D0C8481BE08A13216D8B8FA5A2DB36BE96643E2A9AE4AFA779C",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-063": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2308,
+      "sha256": "D7C85F7DCE537F46119C4F79A4558B3C3722F59DD42D8EE030ED49691436C546",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-064": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 8282,
+      "sha256": "9FFE29980A9CF8388F8BA516340B14CA9F67D773D4765A2032462D194F3EE91B",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-065": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 15254,
+      "sha256": "B099CEF4A4A5E71F0E98F157A58920AE5F3CC8D2C3658E54C3A5F5D2E27018CB",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-066": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 18173,
+      "sha256": "B92FD2D8E40C0CA5DE6D775FE60C371706D8E48B60636F2B18062A3F9C4AD9FB",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-067": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2833,
+      "sha256": "E4421DFEE7ED3DA664CC14AE692AEA1EE83B74C467D380E1BC13232597A58685",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-068": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 163428,
+      "sha256": "7BF6C531C136D3003131CE039E4486DF1C847352E2B6491E904BF0E7A16B54FD",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-069": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 8223,
+      "sha256": "3D6ED8587F29CB4F1A46859DD7025BB7A005C8120CF97FD28FF25F2DAB6A4AFF",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-070": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 8901,
+      "sha256": "F5443EAFD715F958F222015154A383DBC3F6D8305230F9D79E78A42353B138C4",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-071": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 7205,
+      "sha256": "D2F5121B5BE4C8A6CD58660D6E34327628FFBDA1E62DB25AB300F69DC791D1D7",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-072": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 13060,
+      "sha256": "991FDCD101C26C19475AD9A015A6615C22866356109231E82600AB085011D6C3",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-073": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 6773,
+      "sha256": "4D766F4429E73B4FACCF3B69C2C1317A7E9F66150F40434D3265118DD15A3A32",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-074": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 4049,
+      "sha256": "3A48B9F5FA2BACB04A45B0A6344100FC0012C7AD08A6F6E85B2C00EDF36CD73B",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-075": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 11431,
+      "sha256": "E663997E32C133D831F06B5B2810838D7EA1DFE71EA25031ECAD66D0398DDA9A",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-076": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 20465,
+      "sha256": "A85FB0F8E79181F4AC96C3366DD70448A05EA13F198384A7E0EE665E764B8105",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-077": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 7521,
+      "sha256": "41F4F6EE22906FF60905E661735AA23276524094B22E7CB5B099DA2B4CED2C25",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-078": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 13370,
+      "sha256": "73A3C6A642450318738625C107E925BF0B3BC5B867707492A1D5BEB69CD8CFA4",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-079": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 24989,
+      "sha256": "4B74C466217EB9815EF21655F789A95128FAEDE4B8ECBB0385FF6C6F54C1755C",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-080": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 23379,
+      "sha256": "E72F63DD3ACF30E63CE5E5AA886A098F416FF0C82F412E3974BA75A450F5CB14",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-081": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 4906,
+      "sha256": "D0E3CEA87B7984F465461A9F416554D2C9DE9F5987009ACC6C64542A3B7A98FE",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-082": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 863,
+      "sha256": "9189DF2CB758B3EA2D287C48AF61955807DF2FF3FF8A297228D31844FC768C9C",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-083": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 3600,
+      "sha256": "0C31A9D81A02923E7A5D2D606FDB22A246EC3732C2E43D3C0A05A26455905B3A",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-084": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1658,
+      "sha256": "0FDDDE4242799CF13D04AF936E27412BC4FDF4A283FF6F775C547F42CBAE3C03",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-085": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 6535,
+      "sha256": "304C39614EF8274F7EBE5F5796B01C62706B82CF5BC70BAA01C84935741EFE9B",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-086": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 7961,
+      "sha256": "436C8752F4B2B4EFBD3F48DE04E31E45FF90F2FCC0494B8A92A5E70B6DC26639",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-087": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 13873,
+      "sha256": "41D669D63ABD82594ED341350325BA84DD7A9CF5DF7C7645E3241EE3B46FA409",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-088": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 30851,
+      "sha256": "9F81B1B8D4B621FF81BBF1711800587756696CC85A8FA45EDBF95A9B8697EC6B",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-089": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 449992,
+      "sha256": "A8ACA995107F41D19D4B5CC0B9DA3C41355750ED75AC4A2C79FCCFD91CD9A218",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-090": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 32425,
+      "sha256": "9C79B964CFD8E5C487199F7F4CD5C3A3136676CBC8E116DFF9F163CE856058A2",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-091": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1145,
+      "sha256": "55294B4351F1F62E9AA1DA8F98B8CA64BB25BCFCB3506DD2714144624AD521D6",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-092": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 179244,
+      "sha256": "BCD434BA52B3068E43F404EF4576D9F45CC586DD75745D0F22CC733C4ECD6040",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-093": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 21758,
+      "sha256": "6C6551489229D6F984A3EACF8743F03E05CE424D78ADC90AC036A8F786654813",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-094": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 13068,
+      "sha256": "B8DE33BFD6EFFFA1614BF9ECFF225C96E8594CD85D6FB610DD1D8084FA667677",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-095": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 15170,
+      "sha256": "DB4180E8FA0CCD084D4854114D0B18B9BF794761FDC51767F411252E07C772DD",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-096": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 6638,
+      "sha256": "C2365F62335C0180E731F9B5486340515370FEC85974DD51BD74ACE448FD5930",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-097": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 63562,
+      "sha256": "C2899583583EA3451E353B3A5DAD5C67A911510665893A84716CE2C1043FB03F",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-098": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 7405,
+      "sha256": "3C747363F998D322400B59D42BDB2A14E32C64A811D8ED76F88CE8ED94738B45",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-099": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 8505,
+      "sha256": "7BEC0D12C2EA73CDC2A7C6E68AEF7D2560D614004292DC504B95E0212D7B8D73",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-100": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 25953,
+      "sha256": "350FBC50BD393BADA62F0DC063BE3434E1C1400277E0121513947F464CFC1B62",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-101": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 291565,
+      "sha256": "2481C7A34E863AE15A53D6F01FEC1C320825588F4988A2CC2A95F68A6D469262",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-102": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 969,
+      "sha256": "723FA4DC872E2D95A3D72283923DD96C39CB0B61B8BE596DF92795CBD04FE0D0",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-103": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 30157,
+      "sha256": "19B4DF6FC320BC1587B3494DEBC9506B5ED080244FC3C732A049602968FA09CF",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-104": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 661,
+      "sha256": "C8372421631DE4445F5BED6261A98346809DE30DB803C78BFB14465A5818C9C5",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-105": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 6107,
+      "sha256": "6310EE0C9EBE22BE59C82D06888EFBB80701EFA098315D1D77C57BD62010224E",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-106": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 14020,
+      "sha256": "8E0DE1386F80553AA00EC63841377E38A2CD8EE11745FEDEB822E9FF0E664DD6",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-107": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 6208,
+      "sha256": "FFE04DC4E3CC763DF002D2291A1188464C2AF99EA08E6B808A9701CFD0982E3B",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-108": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 135784,
+      "sha256": "8F600EBC63D6A4F578E179B07907EDDC69C15A35BF46A824611E1C3EDBCF098D",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-109": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 21416,
+      "sha256": "F7B8EF02A466462214165C98987C8524C217C27E4385DBC3508067186D8DF666",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-110": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 12370,
+      "sha256": "5DFB9A2642656139BDA4AB4DE9A8AF174EE6553C17AF9D994ED0A184D0B88D32",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-111": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 7046,
+      "sha256": "0440660875039681DE59941AEE2B072943B7DFFC16B5BD3731C45A1C7B312328",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-112": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 12426,
+      "sha256": "DF6BAAF3B3E62724FBDAD95A5AF3DD120AC789507B76B81E621B6192C874F644",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-113": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 9349,
+      "sha256": "BE43BFDCDD8729FEFE04E107B08F26D0CEA54E7ACD6F2F59FFAE08BF03251BFB",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-114": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 23547,
+      "sha256": "F9B07F5F118DE96981498799EAF644BB25615D3046987E6BE995408ED1D6D290",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-115": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 5905,
+      "sha256": "C6CF0838E48A2F5BF9597308F832CB0AE05FB2ED5E7AEAD65309C3DBBDE8794B",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-116": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 22889,
+      "sha256": "8112ECA906D84EB6F4E1AD861BB6A8A868C7091A89792ACA9A4972D1F3F3756E",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-117": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 11941,
+      "sha256": "B3644A90312CCEB3BEF7E8E7E1FAAE169B1FEA0BC628E20222519C774947604B",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-118": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1596,
+      "sha256": "F0B25E94A60F74EC5EE1DE5445542D7383FFBB7528D773628C7B5363D99C8C6C",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-119": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 9096,
+      "sha256": "F461D3E1921C31771B73A37750DAF8F3A78B6A4DF0032948E757D7B2D0A5E666",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-120": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 33040,
+      "sha256": "175DAD3697CE25B3CD57D2A5C519419A2BBAE9E0C3F781A480FB101E75010F4C",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-121": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 15563,
+      "sha256": "E6ECFAB39E29F8AFB72C007D128BD56F6AF6196B7EA128544745879D06F839C6",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-122": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2058,
+      "sha256": "E562EC45CE43C311E9085024991AAE5BC6961F0E495CEDC1FD79613BB77ED3E4",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-123": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 7003,
+      "sha256": "592BF8870ACA0F175E1BD754448E3922C0DC4874203D5D3C27F17B63C5F4FF4F",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-124": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 100698,
+      "sha256": "42AFFAF7BDA4F8C335C95FFA458C35332EE9A260C601A13016FCF4954FFE42DA",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-125": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 44589,
+      "sha256": "7087BC8ADC93C280492E2B648726D894EC57BDDE2B2156E6BF9B63D500018D1C",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-126": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 17561,
+      "sha256": "F104375624F9DC1C623E868643D7E5682B94CC3DFF22CAE779011BF83CD99019",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-127": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 4710,
+      "sha256": "1CDA9CBC3BDB5D98B2F133BD2539D849C0F2AAD6E7EBB1A60EB7D36C303AD9CE",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-128": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 82485,
+      "sha256": "DBA285AABEFFF99BCADFE4DD08B20F2E19A0F0B8962B69F70727B43B177965B7",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-129": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 23736,
+      "sha256": "E12BDA79991DDE19EA46F8FA60D0E3437555FCA9EF33E3ACD258C8874CD735E6",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-130": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 15802,
+      "sha256": "232F67F0F1AE83681394EDF1A3FEA10CCC3FEDC0010A129BCDFE74475C2ACAEF",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-131": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 9988,
+      "sha256": "270B6A48DB18F052E59BC942540C29AD5170787108DCCD437F3CA8CAD4F64393",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-132": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 7597,
+      "sha256": "9FD1A6F599483991AAFCD943A4C3ED4A55047F77DF466C3A743E602164CC6295",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-133": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 3317,
+      "sha256": "E6DE7D525C1F63EFB0AB8B2CB228A17055E8B702BD27C8AB9A6C2F88409B99BE",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-134": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 13943,
+      "sha256": "F90B1A9702C8B338569E2CEF616D04701E12DC3448136752C8028DCECF327711",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-135": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 14150,
+      "sha256": "80B84D63281D3C7D3CAA3ACEEBDD84D0D3801D02421E02748518B4C4448ACACA",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-136": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 53874,
+      "sha256": "915A1D546D187837E26EA896E90C74D4A3CACCB64E70D340DAD9DA37B6A0FF0C",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-137": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 9248,
+      "sha256": "1793892315877FE3B0EF8AB574475D5D5C4CBB111715D299A92A9D324B0DB0BA",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-138": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 14932,
+      "sha256": "D0213108DDA853329CA8EDDBC07C6F5A40526D6F9AD51F523662F262E1530722",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-139": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 3508,
+      "sha256": "8524C123440DD635FA6554F2CAC5314237DB32A744027E7FF52F34EA004383F5",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-140": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 11164,
+      "sha256": "2213AA22F3BAAADD00981D7F13B188E70FD588F6E3B5763F4298B63E4754C202",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-141": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 14867,
+      "sha256": "50C3BC6659A2E4055F8A65C9AA051DE9B7CD536D44C34769FA094E5EBC71F3C2",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-142": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 20376,
+      "sha256": "BD47965727F5B2AF72BBC0B9626A5A75EC0B5583E40C78C96D1CAD6BED0B34FE",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-143": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 13672,
+      "sha256": "66C79075EEE25A73546133D18B97D1433D172F4DB252553BD4F10E75B13CAA5C",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-144": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 12456,
+      "sha256": "9DCDC30D25C91B48C8B1F40C107172FFA7B8A2517D33C9D678C743AD866A69BC",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-145": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 21635,
+      "sha256": "659230EAC22DB48E3BC3FBEA6D34A7F0A7456C3AB75E24926D490079C7830FFE",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-146": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 11602,
+      "sha256": "EBE53C2998B0AC1A24EACE3656748A60CEAB20CC6C5051C2464CD4F8B2070B48",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-147": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 3795,
+      "sha256": "1FCECBABACAEEB5288A1DF1D7DE36AC1AA6A7D9E3BAE65479972C8C276C7BC0A",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-148": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 180172,
+      "sha256": "A11D3EF93382459BCA4506B4A24F3950D15FF0B6DF769CE05D1BC27DF4CD001E",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-149": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 22477,
+      "sha256": "643276D25041A8CF7FCC201687EE20981DA8F1D9B31FD93B805F7D18EF80CADC",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-150": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 9829,
+      "sha256": "52F35B91CDA4BF036976CBA692EE515C2666CC3EB988A1B714309DEA70C4DAC0",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-151": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 13695,
+      "sha256": "AC54F28434D22DA2BD8CBCF4920BC3918E4ADC5F2CF577B440C4465E306B7FA6",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-152": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 16735,
+      "sha256": "A60CEA1D56201F97E882CE159147E8198A73F6A31A4927482CB7B4AC67E799B8",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-153": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 10349,
+      "sha256": "9D1A71D937EA8880C83A627D1E40F6F0CE46762BA89D5B58AF4B64BC36F8CEC3",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-154": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 131510,
+      "sha256": "C0D074A3C1354F7A1BCE070B72861B2A52E2AB1FDE4B9076A8110E86EB369CA2",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-155": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 154,
+      "sha256": "456ABBE15C010B2D633A5A9497A4E77E73F52D7F4FA76543F9160C6D9DB94D1C",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-156": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 635,
+      "sha256": "55F1FB745AFFA6AE9A799A8AC9055B4526A21373BB417365821825F52D03E88B",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-157": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 7750,
+      "sha256": "1AA6782E3B7F2394F381CC40806ECFDBF35E90483CCDABFEB066F423366202D9",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-158": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 813,
+      "sha256": "29FF7AA55E1AFD7FE72EEF6A3E1B0F2D6FD11987EEBAE47548858C7B3E3C2931",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-159": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 3490,
+      "sha256": "04E239CDF9CAB49CE90612A3752A6993B1681E6BEFD3A1C995CBA0FB6B3083E7",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-160": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 10431,
+      "sha256": "F05F6B23997A3EF3121EA911D0424E328362487A485C6CBFE26F3B30487C7771",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-161": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 5265,
+      "sha256": "8124A8817AE536143355EF08311BF45A88FCA04808AC3C2C9DDF115EB878604A",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-162": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 4709,
+      "sha256": "0FFF1B2E11D5FB4A043BB4F2034AAFF94668D78CC716062DD2DD1F78FF0E00B3",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-163": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 8905,
+      "sha256": "1C0620D3C476DF6DBDCC5D6A369D325ED5CBC6A763C6B22744ED322C1944573F",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-164": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 3557,
+      "sha256": "A58DE66062614120CC81A00DB53A88A6CE6E167C19E5DFC4F93CBDAF9AC17764",
+      "sourceChangedDuringRead": false
+    },
+    "source-publication": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1753,
+      "sha256": "0AB456DEA8019DD92066B677573090DAC0A44A9D7ADCEF9D6ABEA33484239A99",
+      "sourceChangedDuringRead": false
+    },
+    "source-qualification": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 7135,
+      "sha256": "93072AF78A52A8814C7EE98E1A4E126A648E94F36BE2CDC25F86C9ED445F9B71",
+      "sourceChangedDuringRead": false
+    }
+  },
+  "inventoryDigest": "29503A150AEE69E240CDE8E90F419539CCECF6CEF12847124C8750B603934FC5",
+  "lineage": "Owner preserved checkpoint, source delivery and fixture phases; independent mapper bytes/source arithmetic are not another live trial.",
+  "physicalCanonicalSourceComparison": "Three declared canonical Git inputs and test source compared to physical bytes after CRLF-to-LF transformation; both representation hashes indexed, committed attributes independently checked.",
+  "schema": "engine-map.private-index-projection.1",
+  "transformations": "Allowlisted projections, pure primary Decimal/IEEE754 arithmetic and built-in PowerShell literal parse/serialize; no contributor helper or tests executed, no live controller/read/replay."
+}
