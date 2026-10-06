@@ -1,0 +1,354 @@
+{
+  "access": {
+    "currentProcessesNotCheckedHere": true,
+    "gameProcessCount": 0,
+    "liveStateRetained": false,
+    "lockRemoved": true,
+    "mo2ProcessCount": 0,
+    "runtimeProcessNames": [
+      "VirtualDesktop.Streamer"
+    ],
+    "state": "access-released",
+    "timestampUtc": "2026-10-06T03:47:12.5530048Z",
+    "workspaceRetainedOwnerAttributed": true
+  },
+  "admission-representation-correction": {
+    "cause": "Initial verifier used git hash-object --no-filters against Windows checkout bytes; the declared controller/helper text paths use eol=crlf, while committed Git objects use canonical LF",
+    "classification": "Primary verifier representation error, not an owner source or fixture failure",
+    "correction": "Use explicit tracked-path Git canonicalization for the three source object checks; keep all independently verified physical publication size/SHA256 identities unchanged",
+    "initialFailure": "Committed source mismatch at line 33 after all 165 physical bundle hashes and four successful phase receipts verified",
+    "initialRunExitCode": 1,
+    "mo2AccessAcquired": false,
+    "nativeOrOwnerTestsReplayed": false,
+    "settingsMutated": false
+  },
+  "cache": {
+    "action": "use-current-no-match",
+    "before": {
+      "bytes": 997276,
+      "files": 9,
+      "treeSha256": "17A4C9E99FC0FCB4E3FB2C674D35F1458C1ADD518FA8482D1684B622BE90A23D"
+    },
+    "eligibleCount": 0,
+    "excludedCount": 11,
+    "materializedFiles": 0,
+    "prepared": {
+      "bytes": 182927417,
+      "files": 3621,
+      "treeSha256": "F776DD13B154A2C18202AEE4329BCF2C8A3EB7BD7E31E45F274E85F28FFC5258"
+    },
+    "promoted": null,
+    "providerShadow": {
+      "alreadyPresentFiles": 5,
+      "copiedFiles": 3612,
+      "requiredLowerProviderFiles": 3617,
+      "state": "materialized"
+    },
+    "reportedPreparationCompletionBindingsMatch": true,
+    "restoredTreeSha256": "17A4C9E99FC0FCB4E3FB2C674D35F1458C1ADD518FA8482D1684B622BE90A23D",
+    "seeded": false,
+    "semanticCompatibilityOrCompilerHealthEstablished": false,
+    "status": "unverified",
+    "unchangedPreparedFailure": true,
+    "working": {
+      "bytes": 182927417,
+      "files": 3621,
+      "treeSha256": "F776DD13B154A2C18202AEE4329BCF2C8A3EB7BD7E31E45F274E85F28FFC5258"
+    }
+  },
+  "cache-request": {
+    "buildId": "c080d3f4a1b84d57b12ce31c1e2542bcb860a7f31ad6891affc27749ca7285c0",
+    "bytecodeCompatibilityClass": "skyrimvr-d3d11",
+    "featureSetSha256": null,
+    "gameRuntime": "SkyrimVR-1.4.15",
+    "presetSha256": "7839ECEBA294F6BEE285700889ACC5E1FC0E71D186C6FD4D2EB5070EDD2E3DF2",
+    "renderFamily": "vr-steamvr",
+    "renderPath": "vr-steamvr-null",
+    "shaderCacheAbi": "c375dd96d5566516401cc2091195701f8d4656a209b80169267f1700e297cc54",
+    "shaderSourceSha256": "5A5A15C13C0EBD5FC8ECAA16B6E33C91C6EEFF27F50461940AFCC6F288348848",
+    "tags": []
+  },
+  "configuration": {
+    "boundAndPreserved": {
+      "bytes": 3265449,
+      "files": 87,
+      "treeSha256": "B2DA2FD6E00F383D1513688A4AF3A67546CB56FBD3B7CD76E669C208F2FB2F14"
+    },
+    "physicalPresetOrDTransactionTreesNotReadHere": true,
+    "presetSha256": "7839ECEBA294F6BEE285700889ACC5E1FC0E71D186C6FD4D2EB5070EDD2E3DF2",
+    "restoredBaseline": {
+      "bytes": 2116114,
+      "files": 69,
+      "treeSha256": "31667EC127BB039A3E9BBE10935A7CD12F0778D6FECE86C2B4ACBC1792EC8A69"
+    },
+    "scope": "Owner-recorded physical configuration custody, not effective live settings",
+    "staged": {
+      "bytes": 3265449,
+      "files": 87,
+      "treeSha256": "B2DA2FD6E00F383D1513688A4AF3A67546CB56FBD3B7CD76E669C208F2FB2F14"
+    }
+  },
+  "decimal-controls": [
+    {
+      "expectedEqual": true,
+      "left": "90.0",
+      "leftIdentity": "9@1",
+      "right": "90",
+      "rightIdentity": "9@1"
+    },
+    {
+      "expectedEqual": true,
+      "left": "0.0",
+      "leftIdentity": "0@0",
+      "right": "0",
+      "rightIdentity": "0@0"
+    },
+    {
+      "expectedEqual": true,
+      "left": "1.68e0",
+      "leftIdentity": "168@-2",
+      "right": "168e-2",
+      "rightIdentity": "168@-2"
+    },
+    {
+      "expectedEqual": false,
+      "left": "9007199254740992",
+      "leftIdentity": "9007199254740992@0",
+      "right": "9007199254740993",
+      "rightIdentity": "9007199254740993@0"
+    },
+    {
+      "expectedEqual": false,
+      "left": "7",
+      "leftIdentity": "7@0",
+      "right": "7.00000000000000000001",
+      "rightIdentity": "700000000000000000001@-20"
+    }
+  ],
+  "diagnostic": {
+    "capturedUtc": "2026-10-06T03:50:10.6978296+00:00",
+    "conclusion": "not established; inspect differences",
+    "controlledExactMatch": false,
+    "controlledPathCount": 29,
+    "differences": [
+      {
+        "currentExact": "16799999999999999@-16",
+        "kind": "numeric-identity",
+        "pointer": "/driver_codex_head_pose/eyeHeightMeters",
+        "roundedExpectation": "168@-2"
+      }
+    ],
+    "helperSha256": "66C79075EEE25A73546133D18B97D1433D172F4DB252553BD4F10E75B13CAA5C",
+    "limitations": "Mirrors finite source merge and calls published pure exact comparator; does not replay restore, modify settings, prove runtime restoration or game validity. Whitelisted historical telemetry omitted by source projection.",
+    "powerShellRoundtripMergedProjectionMatchesCurrent": false,
+    "rawExactMergedProjectionMatchesCurrent": false,
+    "roundedExpectationDifferenceCount": 1,
+    "sourceChangedDuringCapture": false,
+    "sourceCommit": "99042cc107d51b2f427cd1d64597d7c2cf4a10ba"
+  },
+  "diagnostic-attribution": {
+    "diagnosticExactControlledMatchFalseIsDifferentFromSourceParsedControlledCheckTrue": true,
+    "noNewUnownedSettingsDriftEstablished": true,
+    "runtimeActorUnproven": true,
+    "sameCurrentHashAsPriorOwnerInspection": "8169195344FADD476AD460BA0318E854557695F000BD62108F7609819766DD75",
+    "soleProjectedDifferenceOwnerAttributed": true,
+    "unchangedHashDoesNotIdentifyWriterOrProveRuntimeAcceptance": true,
+    "wholeCurrentDocumentNotAvailableAsRetainedRawBytesHere": true
+  },
+  "feedback": {
+    "area": "null-hmd",
+    "blocked": true,
+    "expected": "A restore selection must consistently apply the documented profile-owned numeric contract without granting wider unowned drift exceptions; preserve both exact DesktopUI strings and fail closed on other genuine drift.",
+    "kind": "defect",
+    "newDuplicateOrLifecycleMutationHere": false,
+    "observed": "99042cc restore -PreserveDesktopUIWindowState -WhatIf refused before writes. Live settings hash unchanged from prior inspection. Only projected mismatch: profile eyeHeightMeters 1.68 versus current 1.6799999999999999. Both parse to the same binary64 value; published controlled check accepts, subsequent raw exact-decimal projection rejects. Raw-exact baseline/profile merge also differs, so this is not proven unowned baseline roundtrip rounding. No new game captures or launch; transactions completed and access released.",
+    "ok": true,
+    "receipt": "AUTO-20261006-035114057-00E8A1DE",
+    "severity": "high",
+    "state": "recorded",
+    "suggestion": "Owner should reproduce through the public entry with realistic receipt-bound profile/runtime decimal spellings, reconcile controlled comparison with whole-document comparison, retain strict types/aliases/unowned precision drift refusal, and deliver qualified immutable integration source. Do not add a generic ignore-drift bypass.",
+    "summary": "DesktopUI preservation rejects profile-owned eye-height spelling accepted by its controlled check"
+  },
+  "handoff": {
+    "nextOwnerPlan": "Request Auto owner correction for inconsistent controlled numeric comparison; admit new qualified delivery before a fresh lease. Do not replay failed preview or widen human policy.",
+    "notLaterCorrectionOrRuntimeQualification": true,
+    "phase": "unlaunched-released-controlled-number-preservation-regression-owner-fix-needed",
+    "sourceCorrectionPendingAtCutoff": true,
+    "updatedUtc": "2026-10-06T03:51:14.2084270+00:00"
+  },
+  "human-policy": {
+    "actorEstablished": false,
+    "constraints": [
+      "Preserve the original apply receipt, retained profile and backup unchanged",
+      "Use an owner-provided supported transactional path, not raw settings edits",
+      "Pin the exact live preimage and selected strings at operation admission",
+      "Retain selected-result hashes and rollback/recovery evidence in a new receipt",
+      "Do not call backup-plus-preserved-leaves the original whole-file restoration",
+      "Refuse every other unclassified drift and all controlled-key changes",
+      "No blanket DesktopUI whitelist or generic ignore-drift bypass"
+    ],
+    "originalDecisionPredatesSourceDeliveryAndDoesNotProveImplementationSuccess": true,
+    "policyDoesNotAuthorizeOtherDriftOrDirectSettingsWrites": true,
+    "selectedLeaves": [
+      "DesktopUI.pairing",
+      "DesktopUI.settings_desktop"
+    ],
+    "selectedPolicy": "Preserve exactly the current actual string-valued DesktopUI.pairing and DesktopUI.settings_desktop leaves while restoring the receipt-bound baseline for everything else",
+    "significanceEstablished": false
+  },
+  "numeric-pair": {
+    "binary64Bits": [
+      "3FFAE147AE147AE1",
+      "3FFAE147AE147AE1"
+    ],
+    "controlledParsedSerializationAcceptsDerived": true,
+    "currentLiteralOwnerObserved": "1.6799999999999999",
+    "exactDecimalIdentities": [
+      "168@-2",
+      "16799999999999999@-16"
+    ],
+    "noGeneralPermissionToRoundUnownedValues": true,
+    "pointer": "/driver_codex_head_pose/eyeHeightMeters",
+    "profileLiteral": "1.68",
+    "profileMinusCurrentExactDecimal": "0.0000000000000001",
+    "sameBinary64": true,
+    "sameExactDecimal": false,
+    "standardPowerShellOnlyCheck": {
+      "powerShellVersion": "7.6.6",
+      "rows": [
+        {
+          "binary64Bits": "3FFAE147AE147AE1",
+          "literal": "1.68",
+          "parsedType": "System.Double",
+          "powerShellJson": "1.68"
+        },
+        {
+          "binary64Bits": "3FFAE147AE147AE1",
+          "literal": "1.6799999999999999",
+          "parsedType": "System.Double",
+          "powerShellJson": "1.68"
+        }
+      ]
+    },
+    "subsequentRawExactProjectionRejectsDerived": true
+  },
+  "original-null-lineage": {
+    "applyReceiptSha256": "896B93652466EA1A320648218BD1ACF550F48707E3A78A5540E71EADFA562F8F",
+    "backupSha256": "988C9EEAE6B76212CADDCC0D517B892B16AC1D09D1C73427664AE2431DA77D88",
+    "originalActualApplyObservationNotReplayed": true,
+    "profileControlledLeafCount": 29,
+    "profileSha256": "ED9EBB7D631268EEF11537DD605D2A1A5FEEF43A019E0A1AB8C36466EF7BD61A",
+    "retainedOriginalBytesRehashed": true
+  },
+  "output": {
+    "completedUtc": "2026-10-06T03:47:11.4664722Z",
+    "notNativeCalendarAEProbeRestoration": true,
+    "restoredTreeSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "samePrivateWorkspaceAndOwnerBindingsVerified": true,
+    "state": "complete",
+    "workingTree": {
+      "bytes": 0,
+      "files": 0,
+      "treeSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    }
+  },
+  "refusal": {
+    "errors": [
+      "DesktopUI restore refuses other unclassified drift (including dotted-key or case aliases)."
+    ],
+    "noAcceptedPreservationPlanOrResultHashInReply": true,
+    "noForwardRestoreOrGameLaunchOwnerAttributed": true,
+    "ok": false,
+    "state": "blocked",
+    "timestampUtc": "2026-10-06T03:45:02.7623377Z"
+  },
+  "scope": {
+    "classification": "controlled-number-source-inconsistency-and-unlaunched-operational-checkpoint",
+    "contributorCodeExecutedHere": false,
+    "cutoffUtc": "2026-10-06T03:51:12.1414861+00:00",
+    "liveSettingsReadHere": false,
+    "newCaptures": 0,
+    "newGameLaunches": 0,
+    "newGameTimingSamples": 0,
+    "originalPolicyAndPR43PR44Unchanged": true,
+    "sourceCorrectionNotImplementedOrTestedHere": true
+  },
+  "shader-source": {
+    "currentPhysicalWinnerFilesNotRereadHere": true,
+    "files": 228,
+    "preparedRequestIdentitiesMatch": true,
+    "presetSha256": "7839ECEBA294F6BEE285700889ACC5E1FC0E71D186C6FD4D2EB5070EDD2E3DF2",
+    "profileSha256": "CC6DCD7BFA76BA9FEE4CB19A3D399CD3D8286DE93017399283603DDC227C4248",
+    "scope": "Enabled loose shader-source winner proof only; runtime/compiler/image admission pending",
+    "sourceTreeSha256": "5A5A15C13C0EBD5FC8ECAA16B6E33C91C6EEFF27F50461940AFCC6F288348848"
+  },
+  "source-coverage-gap": {
+    "literalPairExplicitlyConstructedInPreservationTest": false,
+    "note": "Absence of this literal in one pinned preservation test source is not proof of absence from every test, nor a replayed failure.",
+    "staticRefusalCases": 17
+  },
+  "source-delivery": {
+    "canonicalGitInputsRechecked": 4,
+    "canonicalVsPhysicalLineEndingsDistinct": true,
+    "fixtureOrStageChecksReplayedHere": false,
+    "installedCacheRotated": false,
+    "liveRuntimeQualified": false,
+    "mainMergeOrReviewPassClaimed": false,
+    "originalWrapperOutcome": "NONZERO_EXIT at whole-skill parity assertion after all four fixture phases passed; not called terminal wrapper success",
+    "parent": "6597a1ff2916de35948b67b04d5ff67e1789b65d",
+    "phases": [
+      {
+        "durationMilliseconds": 6766,
+        "failed": 0,
+        "name": "root-Test-DesktopUIRestore",
+        "passed": 38,
+        "receiptSha256": "1770F7DC3159522F052243D38E4F3C3B3E945AFA9801D6F54C4AB54146369EE2"
+      },
+      {
+        "durationMilliseconds": 104146,
+        "failed": 0,
+        "name": "root-Test-SteamVRNullControl",
+        "passed": 286,
+        "receiptSha256": "3D16B11BE7A91544E395E820D8E0F6F3BADB24A2A53FDBF98976E54BA783D467"
+      },
+      {
+        "durationMilliseconds": 6921,
+        "failed": 0,
+        "name": "plugin-Test-DesktopUIRestore",
+        "passed": 38,
+        "receiptSha256": "F41884518B670482D8CDB49AC1B097B7D7F72932A384823CF484413F9489D140"
+      },
+      {
+        "durationMilliseconds": 104087,
+        "failed": 0,
+        "name": "plugin-Test-SteamVRNullControl",
+        "passed": 286,
+        "receiptSha256": "ECF4F0FFF74C5466049A1F07D603704241D6C6A815511181CFC4D88CF169DF97"
+      }
+    ],
+    "physicalBytes": 4838879,
+    "physicalMembersRehashed": 165,
+    "publicBranchAtCheck": null,
+    "publicCommitReachable": true,
+    "publicationStagedChecksOwnerReported": 38,
+    "qualifiedIntegratedChecksOwnerReported": 648,
+    "sourceCommit": "99042cc107d51b2f427cd1d64597d7c2cf4a10ba",
+    "sourceTree": "df93b95ba79be9ca1a747e132af4131be2144ef0"
+  },
+  "source-delta": {
+    "changedOrAddedCount": 9,
+    "changedOrAddedPathsVersusPrior": [
+      "skills/steamvr-null-hmd/SKILL.md",
+      "tools/devbench-control/PR46-PR51-BOUNDED-EVIDENCE.md",
+      "tools/devbench-control/ScreenshotSequenceEvidence.psm1",
+      "tools/devbench-control/Test-ColourWindowEntryPoint.ps1",
+      "tools/devbench-control/Test-ScreenshotSequenceEvidence.ps1",
+      "tools/steamvr-null-control/DesktopUIRestore.ps1",
+      "tools/steamvr-null-control/Invoke-SteamVRNullControl.ps1",
+      "tools/steamvr-null-control/README.md",
+      "tools/steamvr-null-control/Test-DesktopUIRestore.ps1"
+    ],
+    "priorPathsRemoved": 0,
+    "samePathFileHashesOnlyNotBehaviorEquivalence": true
+  }
+}

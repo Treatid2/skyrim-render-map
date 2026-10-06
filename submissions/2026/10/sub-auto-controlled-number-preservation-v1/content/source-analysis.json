@@ -1,0 +1,656 @@
+{
+  "controlledProfileLeaves": [
+    {
+      "actualPointerSha256": "8D268DEC8B83AEAA23FEF812B439A20A3376816BFFBC457A0E728E0906A43D99",
+      "identityRedacted": false,
+      "jsonKind": "boolean",
+      "leaf": "activateMultipleDrivers",
+      "ownership": "Declared receipt-bound profile leaf; current runtime value not requalified",
+      "profileSha256": "ED9EBB7D631268EEF11537DD605D2A1A5FEEF43A019E0A1AB8C36466EF7BD61A",
+      "section": "steamvr"
+    },
+    {
+      "actualPointerSha256": "11D7297A00D4E245E719BB42EE21CE94434756A5DE2B95D1A3BDDA9423DFC323",
+      "identityRedacted": false,
+      "jsonKind": "boolean",
+      "leaf": "enableHomeApp",
+      "ownership": "Declared receipt-bound profile leaf; current runtime value not requalified",
+      "profileSha256": "ED9EBB7D631268EEF11537DD605D2A1A5FEEF43A019E0A1AB8C36466EF7BD61A",
+      "section": "steamvr"
+    },
+    {
+      "actualPointerSha256": "B1DB6552EEEECD7A2578184FD18C260FC0F852C9FF1B38B9C94D01BD69EAF31D",
+      "identityRedacted": false,
+      "jsonKind": "string",
+      "leaf": "forcedDriver",
+      "ownership": "Declared receipt-bound profile leaf; current runtime value not requalified",
+      "profileSha256": "ED9EBB7D631268EEF11537DD605D2A1A5FEEF43A019E0A1AB8C36466EF7BD61A",
+      "section": "steamvr"
+    },
+    {
+      "actualPointerSha256": "DAD7851B48BB2ED781446CA2C7A96A151BECBC3E1BADDAB671B56EF5ADD60E3D",
+      "identityRedacted": false,
+      "jsonKind": "boolean",
+      "leaf": "requireHmd",
+      "ownership": "Declared receipt-bound profile leaf; current runtime value not requalified",
+      "profileSha256": "ED9EBB7D631268EEF11537DD605D2A1A5FEEF43A019E0A1AB8C36466EF7BD61A",
+      "section": "steamvr"
+    },
+    {
+      "actualPointerSha256": "42FAFCA2C94ECA5D013C473B72CB7EB17147B69556F636F2FDDB0428CC7B2FEA",
+      "identityRedacted": false,
+      "jsonKind": "boolean",
+      "leaf": "enableDashboard",
+      "ownership": "Declared receipt-bound profile leaf; current runtime value not requalified",
+      "profileSha256": "ED9EBB7D631268EEF11537DD605D2A1A5FEEF43A019E0A1AB8C36466EF7BD61A",
+      "section": "dashboard"
+    },
+    {
+      "actualPointerSha256": "2F09B32705D966AA9889907155E30820650510BCA3236FCC252E568E1A51A748",
+      "identityRedacted": false,
+      "jsonKind": "number",
+      "leaf": "displayFrequency",
+      "ownership": "Declared receipt-bound profile leaf; current runtime value not requalified",
+      "profileSha256": "ED9EBB7D631268EEF11537DD605D2A1A5FEEF43A019E0A1AB8C36466EF7BD61A",
+      "section": "driver_null"
+    },
+    {
+      "actualPointerSha256": "273BCDE20C6489C1836D3E3A26C61532C0F5AE91EEEF88D1CAA423B80B4512CC",
+      "identityRedacted": false,
+      "jsonKind": "boolean",
+      "leaf": "enable",
+      "ownership": "Declared receipt-bound profile leaf; current runtime value not requalified",
+      "profileSha256": "ED9EBB7D631268EEF11537DD605D2A1A5FEEF43A019E0A1AB8C36466EF7BD61A",
+      "section": "driver_null"
+    },
+    {
+      "actualPointerSha256": "481EB2632B36C2154E3C05ED0C27E41D79F9C27A8CD41BF00DF9260979E1AA49",
+      "identityRedacted": false,
+      "jsonKind": "number",
+      "leaf": "loadPriority",
+      "ownership": "Declared receipt-bound profile leaf; current runtime value not requalified",
+      "profileSha256": "ED9EBB7D631268EEF11537DD605D2A1A5FEEF43A019E0A1AB8C36466EF7BD61A",
+      "section": "driver_null"
+    },
+    {
+      "actualPointerSha256": "48356FE221D53790CF030A02780CDB4AD2D68FA08B0003A3487DB8F083E456BA",
+      "identityRedacted": false,
+      "jsonKind": "string",
+      "leaf": "modelNumber",
+      "ownership": "Declared receipt-bound profile leaf; current runtime value not requalified",
+      "profileSha256": "ED9EBB7D631268EEF11537DD605D2A1A5FEEF43A019E0A1AB8C36466EF7BD61A",
+      "section": "driver_null"
+    },
+    {
+      "actualPointerSha256": "30E4CDF93CD216D9F2C1532F5AD73C1AF9F93CCB0B828CAF6E1328959423105E",
+      "identityRedacted": false,
+      "jsonKind": "number",
+      "leaf": "renderHeight",
+      "ownership": "Declared receipt-bound profile leaf; current runtime value not requalified",
+      "profileSha256": "ED9EBB7D631268EEF11537DD605D2A1A5FEEF43A019E0A1AB8C36466EF7BD61A",
+      "section": "driver_null"
+    },
+    {
+      "actualPointerSha256": "3A82E1B74BC1F7965DC6BF7E1A432067C13BC938E931D93BCAA524C741B0AD46",
+      "identityRedacted": false,
+      "jsonKind": "number",
+      "leaf": "renderWidth",
+      "ownership": "Declared receipt-bound profile leaf; current runtime value not requalified",
+      "profileSha256": "ED9EBB7D631268EEF11537DD605D2A1A5FEEF43A019E0A1AB8C36466EF7BD61A",
+      "section": "driver_null"
+    },
+    {
+      "actualPointerSha256": "03498303050A64382944354D4915D27BB45D41A77B9DAF874B3FBDD856A7F94D",
+      "identityRedacted": false,
+      "jsonKind": "number",
+      "leaf": "secondsFromVsyncToPhotons",
+      "ownership": "Declared receipt-bound profile leaf; current runtime value not requalified",
+      "profileSha256": "ED9EBB7D631268EEF11537DD605D2A1A5FEEF43A019E0A1AB8C36466EF7BD61A",
+      "section": "driver_null"
+    },
+    {
+      "actualPointerSha256": "489E2B6B7E9A8B7D443E742CD5F65D5870977507A15D8214F267BF105CE00C64",
+      "identityRedacted": false,
+      "jsonKind": "string",
+      "leaf": "serialNumber",
+      "ownership": "Declared receipt-bound profile leaf; current runtime value not requalified",
+      "profileSha256": "ED9EBB7D631268EEF11537DD605D2A1A5FEEF43A019E0A1AB8C36466EF7BD61A",
+      "section": "driver_null"
+    },
+    {
+      "actualPointerSha256": "25EECE07B189CB73F5C7A6B28CE7150F4AD8A5494DDF72C58D000B4A02C7B4FC",
+      "identityRedacted": false,
+      "jsonKind": "number",
+      "leaf": "windowHeight",
+      "ownership": "Declared receipt-bound profile leaf; current runtime value not requalified",
+      "profileSha256": "ED9EBB7D631268EEF11537DD605D2A1A5FEEF43A019E0A1AB8C36466EF7BD61A",
+      "section": "driver_null"
+    },
+    {
+      "actualPointerSha256": "74C35CBFCD9BB7651EF1B120C5DADFD38E245AAC34552D808AA22304D2A77134",
+      "identityRedacted": false,
+      "jsonKind": "number",
+      "leaf": "windowWidth",
+      "ownership": "Declared receipt-bound profile leaf; current runtime value not requalified",
+      "profileSha256": "ED9EBB7D631268EEF11537DD605D2A1A5FEEF43A019E0A1AB8C36466EF7BD61A",
+      "section": "driver_null"
+    },
+    {
+      "actualPointerSha256": "A0E9FC1958F040651FB70F89EC4310718250C3FBE404083733F7D903A5DAAD88",
+      "identityRedacted": false,
+      "jsonKind": "number",
+      "leaf": "windowX",
+      "ownership": "Declared receipt-bound profile leaf; current runtime value not requalified",
+      "profileSha256": "ED9EBB7D631268EEF11537DD605D2A1A5FEEF43A019E0A1AB8C36466EF7BD61A",
+      "section": "driver_null"
+    },
+    {
+      "actualPointerSha256": "65CD1088F870B2F1A7A81CEB9499AA6570AEFED6067A50F3F8128F534B9400CC",
+      "identityRedacted": false,
+      "jsonKind": "number",
+      "leaf": "windowY",
+      "ownership": "Declared receipt-bound profile leaf; current runtime value not requalified",
+      "profileSha256": "ED9EBB7D631268EEF11537DD605D2A1A5FEEF43A019E0A1AB8C36466EF7BD61A",
+      "section": "driver_null"
+    },
+    {
+      "actualPointerSha256": "7422F1E8675132BCA85A8836405E8E67BF138D520A68451F1747260F920E4F6F",
+      "identityRedacted": false,
+      "jsonKind": "boolean",
+      "leaf": "enable",
+      "ownership": "Declared receipt-bound profile leaf; current runtime value not requalified",
+      "profileSha256": "ED9EBB7D631268EEF11537DD605D2A1A5FEEF43A019E0A1AB8C36466EF7BD61A",
+      "section": "driver_codex_head_pose"
+    },
+    {
+      "actualPointerSha256": "638FD3CD946B9C43DD621387594AA1B43A0BF0A18DFCD86F1A3C9C0872A3F44D",
+      "identityRedacted": false,
+      "jsonKind": "boolean",
+      "leaf": "enableControllers",
+      "ownership": "Declared receipt-bound profile leaf; current runtime value not requalified",
+      "profileSha256": "ED9EBB7D631268EEF11537DD605D2A1A5FEEF43A019E0A1AB8C36466EF7BD61A",
+      "section": "driver_codex_head_pose"
+    },
+    {
+      "actualPointerSha256": "5BC7FD93AD3DB32FA444DB5E1B89884E0BF2951E9262DD58B532B486A5B22673",
+      "identityRedacted": false,
+      "jsonKind": "number",
+      "leaf": "eyeHeightMeters",
+      "ownership": "Declared receipt-bound profile leaf; current runtime value not requalified",
+      "profileSha256": "ED9EBB7D631268EEF11537DD605D2A1A5FEEF43A019E0A1AB8C36466EF7BD61A",
+      "section": "driver_codex_head_pose"
+    },
+    {
+      "actualPointerSha256": "C48E6AA8F31250EC6199D3BFA2BBFF27752327D82179488C64FF4A8C22BCA068",
+      "identityRedacted": false,
+      "jsonKind": "string",
+      "leaf": "modelNumber",
+      "ownership": "Declared receipt-bound profile leaf; current runtime value not requalified",
+      "profileSha256": "ED9EBB7D631268EEF11537DD605D2A1A5FEEF43A019E0A1AB8C36466EF7BD61A",
+      "section": "driver_codex_head_pose"
+    },
+    {
+      "actualPointerSha256": "5D0B37D9DABE071F656D206D3FD078D3AB0F9A8E06B7003DA1628F48E9D964D0",
+      "identityRedacted": false,
+      "jsonKind": "number",
+      "leaf": "pitchDegrees",
+      "ownership": "Declared receipt-bound profile leaf; current runtime value not requalified",
+      "profileSha256": "ED9EBB7D631268EEF11537DD605D2A1A5FEEF43A019E0A1AB8C36466EF7BD61A",
+      "section": "driver_codex_head_pose"
+    },
+    {
+      "actualPointerSha256": "1C849178E683DD7EF3B7B98D7D2D6A1E584074F7FC19BB1C9E77097408A030F0",
+      "identityRedacted": false,
+      "jsonKind": "number",
+      "leaf": "positionX",
+      "ownership": "Declared receipt-bound profile leaf; current runtime value not requalified",
+      "profileSha256": "ED9EBB7D631268EEF11537DD605D2A1A5FEEF43A019E0A1AB8C36466EF7BD61A",
+      "section": "driver_codex_head_pose"
+    },
+    {
+      "actualPointerSha256": "856BC98A8F7A97630635FACAD75B1A6FBBF8FDA063D9CD9817F3B5990D2DB924",
+      "identityRedacted": false,
+      "jsonKind": "number",
+      "leaf": "positionZ",
+      "ownership": "Declared receipt-bound profile leaf; current runtime value not requalified",
+      "profileSha256": "ED9EBB7D631268EEF11537DD605D2A1A5FEEF43A019E0A1AB8C36466EF7BD61A",
+      "section": "driver_codex_head_pose"
+    },
+    {
+      "actualPointerSha256": "E36E89C977950EB0F496AC97467BA44BCE9E8DBE7B988E09497B768AEDEA3939",
+      "identityRedacted": false,
+      "jsonKind": "number",
+      "leaf": "rollDegrees",
+      "ownership": "Declared receipt-bound profile leaf; current runtime value not requalified",
+      "profileSha256": "ED9EBB7D631268EEF11537DD605D2A1A5FEEF43A019E0A1AB8C36466EF7BD61A",
+      "section": "driver_codex_head_pose"
+    },
+    {
+      "actualPointerSha256": "9197E2586EB97BD45CCC1556BE325D0AE38F3CAFD219D15F7762CB29120FBFC4",
+      "identityRedacted": false,
+      "jsonKind": "string",
+      "leaf": "serialNumber",
+      "ownership": "Declared receipt-bound profile leaf; current runtime value not requalified",
+      "profileSha256": "ED9EBB7D631268EEF11537DD605D2A1A5FEEF43A019E0A1AB8C36466EF7BD61A",
+      "section": "driver_codex_head_pose"
+    },
+    {
+      "actualPointerSha256": "F73B240439EAA7A2D49A0CB8122FA0AFB172957CC757EB3A14624D7EF87A1F24",
+      "identityRedacted": false,
+      "jsonKind": "number",
+      "leaf": "yawDegrees",
+      "ownership": "Declared receipt-bound profile leaf; current runtime value not requalified",
+      "profileSha256": "ED9EBB7D631268EEF11537DD605D2A1A5FEEF43A019E0A1AB8C36466EF7BD61A",
+      "section": "driver_codex_head_pose"
+    },
+    {
+      "actualPointerSha256": "19535460ECDE463079FC873C3781F833DF6FF3ABF673D921C41174DD4842D441",
+      "identityRedacted": true,
+      "jsonKind": "string",
+      "leaf": "override-1",
+      "ownership": "Declared receipt-bound profile leaf; current runtime value not requalified",
+      "profileSha256": "ED9EBB7D631268EEF11537DD605D2A1A5FEEF43A019E0A1AB8C36466EF7BD61A",
+      "section": "TrackingOverrides"
+    },
+    {
+      "actualPointerSha256": "5FB719C7D9B5CC760BA832ADDA7FFCAA9702A5F90321C0015873CBCB31E664EE",
+      "identityRedacted": false,
+      "jsonKind": "number",
+      "leaf": "turnOffControllersTimeout",
+      "ownership": "Declared receipt-bound profile leaf; current runtime value not requalified",
+      "profileSha256": "ED9EBB7D631268EEF11537DD605D2A1A5FEEF43A019E0A1AB8C36466EF7BD61A",
+      "section": "power"
+    }
+  ],
+  "noCodeExecuted": true,
+  "rules": [
+    {
+      "boundary": "Pinned source rule only; not successful live application or game-restoration acceptance.",
+      "description": "Scalar numbers already parsed by PowerShell are reserialized with ConvertTo-Json before decimal coefficient/exponent normalization; strings and Booleans retain distinct typed comparison; exact numeric wrapper objects compare numericIdentity.",
+      "firstLineInclusive": 3,
+      "lastLineInclusive": 38,
+      "rangeHashRepresentation": "Canonical UTF-8 decoded lines joined with LF and final LF; raw physical file hash separate",
+      "rangeSha256": "470116448852050837AE13B00B1E14A977DB107EC74520FDFD42CA3495409D3A",
+      "ruleId": "parsed-scalar-comparison",
+      "sourceRole": "canonical-git-1",
+      "sourceSha256": "A368D78AF9FD7008466DFD249F30674D4AC0E0A1D395B124B1242048A90C800C"
+    },
+    {
+      "boundary": "Pinned source rule only; not successful live application or game-restoration acceptance.",
+      "description": "Recursive JsonElement validation uses ordinal string HashSet to reject duplicate exact JSON keys before other selection logic.",
+      "firstLineInclusive": 41,
+      "lastLineInclusive": 52,
+      "rangeHashRepresentation": "Canonical UTF-8 decoded lines joined with LF and final LF; raw physical file hash separate",
+      "rangeSha256": "7AF1F76B68DB6878B5E1D8B2F1339337A02C608BD02C2FACD4A9146447496F7D",
+      "ruleId": "duplicate-json-keys",
+      "sourceRole": "canonical-git-1",
+      "sourceSha256": "A368D78AF9FD7008466DFD249F30674D4AC0E0A1D395B124B1242048A90C800C"
+    },
+    {
+      "boundary": "Pinned source rule only; not successful live application or game-restoration acceptance.",
+      "description": "Exact tree conversion reads JsonElement.GetRawText for numbers and normalizes sign/coefficient/exponent without Double rounding; JSON kinds and array/object structure retained.",
+      "firstLineInclusive": 54,
+      "lastLineInclusive": 78,
+      "rangeHashRepresentation": "Canonical UTF-8 decoded lines joined with LF and final LF; raw physical file hash separate",
+      "rangeSha256": "CBEBFE2D357714CC615FB643C2A5CBE7622857036BCA3DE51E29EEE7005F48D4",
+      "ruleId": "raw-numeric-identities",
+      "sourceRole": "canonical-git-1",
+      "sourceSha256": "A368D78AF9FD7008466DFD249F30674D4AC0E0A1D395B124B1242048A90C800C"
+    },
+    {
+      "boundary": "Pinned source rule only; not successful live application or game-restoration acceptance.",
+      "description": "Reader caps input at1MiB, requires strict UTF-8 and object root, validates duplicate keys, and returns both PowerShell-parsed value and raw exactValue plus actual byte hash.",
+      "firstLineInclusive": 80,
+      "lastLineInclusive": 97,
+      "rangeHashRepresentation": "Canonical UTF-8 decoded lines joined with LF and final LF; raw physical file hash separate",
+      "rangeSha256": "65E6BE255D231FEB03CBFA8BFE7E476F8ED86869C4ECD8077945BEA396B1C41D",
+      "ruleId": "bounded-dual-reader",
+      "sourceRole": "canonical-git-1",
+      "sourceSha256": "A368D78AF9FD7008466DFD249F30674D4AC0E0A1D395B124B1242048A90C800C"
+    },
+    {
+      "boundary": "Pinned source rule only; not successful live application or game-restoration acceptance.",
+      "description": "Only an actual exact-case DesktopUI dictionary and present exact-case pairing/settings_desktop string leaves satisfy the two-leaf selector; content significance is not interpreted.",
+      "firstLineInclusive": 99,
+      "lastLineInclusive": 111,
+      "rangeHashRepresentation": "Canonical UTF-8 decoded lines joined with LF and final LF; raw physical file hash separate",
+      "rangeSha256": "6652BFB94A4F0AC3AFAFF5E1F0F0185480B47F5EB4B21AF0B21102624E115D28",
+      "ruleId": "actual-exact-case-two-strings",
+      "sourceRole": "canonical-git-1",
+      "sourceSha256": "A368D78AF9FD7008466DFD249F30674D4AC0E0A1D395B124B1242048A90C800C"
+    },
+    {
+      "boundary": "Pinned source rule only; not successful live application or game-restoration acceptance.",
+      "description": "Projection omits exact-case top-level GpuSpeed/LastKnown, only two actual DesktopUI leaves, and typed string dashboard history. Other UI leaves and literal dotted/case aliases remain compared.",
+      "firstLineInclusive": 113,
+      "lastLineInclusive": 137,
+      "rangeHashRepresentation": "Canonical UTF-8 decoded lines joined with LF and final LF; raw physical file hash separate",
+      "rangeSha256": "39E3EAFF7C4205036244CCD9F07DFE0080CBD60882D5A2F381909A5288D1CCC5",
+      "ruleId": "narrow-structural-projection",
+      "sourceRole": "canonical-git-1",
+      "sourceSha256": "A368D78AF9FD7008466DFD249F30674D4AC0E0A1D395B124B1242048A90C800C"
+    },
+    {
+      "boundary": "Pinned source rule only; not successful live application or game-restoration acceptance.",
+      "description": "Selected-result writer copies baseline raw JSON outside the two selected strings to avoid PowerShell number roundtrip loss; it does not claim byte-identical whole-file baseline restoration.",
+      "firstLineInclusive": 139,
+      "lastLineInclusive": 163,
+      "rangeHashRepresentation": "Canonical UTF-8 decoded lines joined with LF and final LF; raw physical file hash separate",
+      "rangeSha256": "282CBC92BFED5BEA479DD135D64AE34B2D6D415B23D072D2C944AF598F7FD4E1",
+      "ruleId": "raw-baseline-result-writer",
+      "sourceRole": "canonical-git-1",
+      "sourceSha256": "A368D78AF9FD7008466DFD249F30674D4AC0E0A1D395B124B1242048A90C800C"
+    },
+    {
+      "boundary": "Pinned source rule only; not successful live application or game-restoration acceptance.",
+      "description": "Plan checks exact baseline hash, reconstructs receipt-bound profile expectations, obtains selected strings, and validates all profile-owned leaves before whole-document projection; controlled power timeout additionally requires nonnegative Int32-range integer kind.",
+      "firstLineInclusive": 165,
+      "lastLineInclusive": 185,
+      "rangeHashRepresentation": "Canonical UTF-8 decoded lines joined with LF and final LF; raw physical file hash separate",
+      "rangeSha256": "2291BED6A1F02D629C28C6F326C39B8BAC23E85DFBDE3D471C4BE1279D74BC0A",
+      "ruleId": "controlled-profile-gate",
+      "sourceRole": "canonical-git-1",
+      "sourceSha256": "A368D78AF9FD7008466DFD249F30674D4AC0E0A1D395B124B1242048A90C800C"
+    },
+    {
+      "boundary": "Pinned source rule only; not successful live application or game-restoration acceptance.",
+      "description": "Plan serializes the PowerShell-parsed expected document, converts it to exact number wrappers, compares that projection against current raw exactValue, and throws the recorded unclassified-drift message on inequality.",
+      "firstLineInclusive": 186,
+      "lastLineInclusive": 192,
+      "rangeHashRepresentation": "Canonical UTF-8 decoded lines joined with LF and final LF; raw physical file hash separate",
+      "rangeSha256": "5423AC0B01A68C47C4065BB5F2DF9F14636C0C08C240C31FFFF3D7D3F2D7235B",
+      "ruleId": "whole-document-exact-gate",
+      "sourceRole": "canonical-git-1",
+      "sourceSha256": "A368D78AF9FD7008466DFD249F30674D4AC0E0A1D395B124B1242048A90C800C"
+    },
+    {
+      "boundary": "Pinned source rule only; not successful live application or game-restoration acceptance.",
+      "description": "Admitted plan would bind baseline, actual current preimage, exact selected strings and result hash with policy baseline-plus-exact-desktopui-strings; this failed preview did not produce an accepted plan.",
+      "firstLineInclusive": 193,
+      "lastLineInclusive": 207,
+      "rangeHashRepresentation": "Canonical UTF-8 decoded lines joined with LF and final LF; raw physical file hash separate",
+      "rangeSha256": "DD1E0D6FE018264BA30B87627E05BB05144E6852F4E686F137E2D12C97A4B1D7",
+      "ruleId": "selected-lineage-contract",
+      "sourceRole": "canonical-git-1",
+      "sourceSha256": "A368D78AF9FD7008466DFD249F30674D4AC0E0A1D395B124B1242048A90C800C"
+    },
+    {
+      "boundary": "Pinned source rule only; not successful live application or game-restoration acceptance.",
+      "description": "Restart validator requires schema/policy/apply lineage, recomputes plan from exact baseline/preimage, rechecks all three hashes and strings, and requires retained selected-result bytes to match.",
+      "firstLineInclusive": 210,
+      "lastLineInclusive": 221,
+      "rangeHashRepresentation": "Canonical UTF-8 decoded lines joined with LF and final LF; raw physical file hash separate",
+      "rangeSha256": "C2FB5896F49DAB5C683F14FAE6E41B9AC298C8FCDE14BCDDE275210A62DE6ADF",
+      "ruleId": "committed-selection-reconstruction",
+      "sourceRole": "canonical-git-1",
+      "sourceSha256": "A368D78AF9FD7008466DFD249F30674D4AC0E0A1D395B124B1242048A90C800C"
+    },
+    {
+      "boundary": "Pinned source rule only; not successful live application or game-restoration acceptance.",
+      "description": "Expected null state is rebuilt from exact backup and hash-matching retained or supplied profile, overwriting only six declared profile sections; controlled paths come from actual profile keys.",
+      "firstLineInclusive": 559,
+      "lastLineInclusive": 586,
+      "rangeHashRepresentation": "Canonical UTF-8 decoded lines joined with LF and final LF; raw physical file hash separate",
+      "rangeSha256": "3C4EEC20AA7C8659EB257E9B43410C1C252D82D3A124E78F98EF4E04BAB61D4B",
+      "ruleId": "receipt-bound-expectation-merge",
+      "sourceRole": "canonical-git-0",
+      "sourceSha256": "FB3A41CB550A34A293C42F199B440B86B2883F21D3E86B6BAC308614CF49E357"
+    },
+    {
+      "boundary": "Pinned source rule only; not successful live application or game-restoration acceptance.",
+      "description": "Opt-in public restore invokes the preservation plan before accepting its validation, requires admitted preimage hash on non-preview commit, rejects changed live preimage and distinguishes exact-backup default selection.",
+      "firstLineInclusive": 2401,
+      "lastLineInclusive": 2428,
+      "rangeHashRepresentation": "Canonical UTF-8 decoded lines joined with LF and final LF; raw physical file hash separate",
+      "rangeSha256": "3D9F1FE6411CFEDF509C08290F5F6390D3681D4124A294DB3B2ED3712E41AA1F",
+      "ruleId": "public-restore-selector",
+      "sourceRole": "canonical-git-0",
+      "sourceSha256": "FB3A41CB550A34A293C42F199B440B86B2883F21D3E86B6BAC308614CF49E357"
+    },
+    {
+      "boundary": "Pinned source rule only; not successful live application or game-restoration acceptance.",
+      "description": "Successful WhatIf result is reached only after preservation validation. The recorded refusal occurs earlier; this is not an accepted dry-run or selected-result dispatch.",
+      "firstLineInclusive": 2452,
+      "lastLineInclusive": 2468,
+      "rangeHashRepresentation": "Canonical UTF-8 decoded lines joined with LF and final LF; raw physical file hash separate",
+      "rangeSha256": "D0C31BEE2A11CB15AEA6F105A9793DE68DA076B5C24D8C7C553F91CA36295A99",
+      "ruleId": "preview-before-forward-writes",
+      "sourceRole": "canonical-git-0",
+      "sourceSha256": "FB3A41CB550A34A293C42F199B440B86B2883F21D3E86B6BAC308614CF49E357"
+    },
+    {
+      "boundary": "Pinned source rule only; not successful live application or game-restoration acceptance.",
+      "description": "Forward source path retains exact current preimage, recomputes selected result, rechecks settings/baseline/apply/result hashes before write-ahead journal dispatch; not executed in this checkpoint.",
+      "firstLineInclusive": 2469,
+      "lastLineInclusive": 2500,
+      "rangeHashRepresentation": "Canonical UTF-8 decoded lines joined with LF and final LF; raw physical file hash separate",
+      "rangeSha256": "32D326C05C2FB58038C0EAC8977525E3E806926A140F9540A98B5D583416BA16",
+      "ruleId": "staging-dispatch-preimage-guard",
+      "sourceRole": "canonical-git-0",
+      "sourceSha256": "FB3A41CB550A34A293C42F199B440B86B2883F21D3E86B6BAC308614CF49E357"
+    },
+    {
+      "boundary": "Pinned source rule only; not successful live application or game-restoration acceptance.",
+      "description": "Forward commit uses selected-result hash and separate selected-result receipt, verifies restoration against that result, and retains selection/validation and apply lineage. Source capability is not observed runtime success.",
+      "firstLineInclusive": 2501,
+      "lastLineInclusive": 2528,
+      "rangeHashRepresentation": "Canonical UTF-8 decoded lines joined with LF and final LF; raw physical file hash separate",
+      "rangeSha256": "5E28296DE7FA9356AC4FC3AD2899418359E444250B56483E462310B9E063ED65",
+      "ruleId": "selected-result-commit-receipt",
+      "sourceRole": "canonical-git-0",
+      "sourceSha256": "FB3A41CB550A34A293C42F199B440B86B2883F21D3E86B6BAC308614CF49E357"
+    },
+    {
+      "boundary": "Pinned source rule only; not successful live application or game-restoration acceptance.",
+      "description": "Documentation limits opt-in restore to two exact string leaves, requires preview/preimage hash, distinguishes selected baseline-plus-strings from whole-file backup restoration, and retains strict unrelated-drift refusal.",
+      "firstLineInclusive": 264,
+      "lastLineInclusive": 313,
+      "rangeHashRepresentation": "Canonical UTF-8 decoded lines joined with LF and final LF; raw physical file hash separate",
+      "rangeSha256": "3FA7EA1EE2046429D14E27C38C74E0455CB7CACB3B44F288DC96ABF759742E35",
+      "ruleId": "documented-two-leaf-policy",
+      "sourceRole": "canonical-git-2",
+      "sourceSha256": "643276D25041A8CF7FCC201687EE20981DA8F1D9B31FD93B805F7D18EF80CADC"
+    },
+    {
+      "boundary": "Pinned source rule only; not successful live application or game-restoration acceptance.",
+      "description": "Fixture invokes the public controller entry point with temporary arguments; refusal helper verifies settings and journal hashes unchanged, not merely a false result.",
+      "firstLineInclusive": 16,
+      "lastLineInclusive": 24,
+      "rangeHashRepresentation": "Canonical UTF-8 decoded lines joined with LF and final LF; raw physical file hash separate",
+      "rangeSha256": "9D8A5CEFE0E5720A24DE885FFA8E87A06EC180F36B856E928BCAFD4D332BA8EC",
+      "ruleId": "public-entry-test-isolation",
+      "sourceRole": "canonical-test",
+      "sourceSha256": "E817FA215405C72EF2C043BC52032C3EF05FE6EC64740FBA72826373E21AE3FE"
+    },
+    {
+      "boundary": "Pinned source rule only; not successful live application or game-restoration acceptance.",
+      "description": "Source contains unrelated and controlled decimal-drift, duplicate-key and malformed-JSON refusal cases; no exact live eye-height raw-spelling pair is explicitly constructed.",
+      "firstLineInclusive": 103,
+      "lastLineInclusive": 114,
+      "rangeHashRepresentation": "Canonical UTF-8 decoded lines joined with LF and final LF; raw physical file hash separate",
+      "rangeSha256": "834233F5D7CA0FDB248814F94A428C729D44571483E6C404CFA7ED1D946B07EB",
+      "ruleId": "precision-and-malformed-fixtures",
+      "sourceRole": "canonical-test",
+      "sourceSha256": "E817FA215405C72EF2C043BC52032C3EF05FE6EC64740FBA72826373E21AE3FE"
+    },
+    {
+      "boundary": "Pinned source rule only; not successful live application or game-restoration acceptance.",
+      "description": "Source exercises staged preimage drift, post-settings rollback and next public-command recovery using temporary fixtures; owner-reported passes are separate from actual stopped live session.",
+      "firstLineInclusive": 115,
+      "lastLineInclusive": 129,
+      "rangeHashRepresentation": "Canonical UTF-8 decoded lines joined with LF and final LF; raw physical file hash separate",
+      "rangeSha256": "5BCDFCD5866420ADC7B80B80B17A64C4297FF5610579F612AA3D374C4334305C",
+      "ruleId": "dispatch-rollback-recovery-fixtures",
+      "sourceRole": "canonical-test",
+      "sourceSha256": "E817FA215405C72EF2C043BC52032C3EF05FE6EC64740FBA72826373E21AE3FE"
+    },
+    {
+      "boundary": "Pinned source rule only; not successful live application or game-restoration acceptance.",
+      "description": "Source checks raw baseline precision, baseline-except-two-leaves result, new receipt lineage, fresh-process restart recognition and forged/missing selected-result evidence refusal.",
+      "firstLineInclusive": 130,
+      "lastLineInclusive": 159,
+      "rangeHashRepresentation": "Canonical UTF-8 decoded lines joined with LF and final LF; raw physical file hash separate",
+      "rangeSha256": "181B63D0B4F7C6A7DF2D6C7BFD7A3F7504CABC689E7BCB6342D9633A7325392F",
+      "ruleId": "selected-result-restart-fixtures",
+      "sourceRole": "canonical-test",
+      "sourceSha256": "E817FA215405C72EF2C043BC52032C3EF05FE6EC64740FBA72826373E21AE3FE"
+    }
+  ],
+  "schema": "engine-map.pinned-source-rules.1",
+  "sourceCommit": "99042cc107d51b2f427cd1d64597d7c2cf4a10ba",
+  "staticRefusalCases": [
+    {
+      "classification": "static-public-entry-refusal-case",
+      "executionHere": false,
+      "firstLineInclusive": 79,
+      "name": "missing leaf",
+      "ownerPhasePassNotIndependentReproduction": true,
+      "sourceRole": "canonical-test",
+      "sourceSha256": "E817FA215405C72EF2C043BC52032C3EF05FE6EC64740FBA72826373E21AE3FE"
+    },
+    {
+      "classification": "static-public-entry-refusal-case",
+      "executionHere": false,
+      "firstLineInclusive": 80,
+      "name": "absent section",
+      "ownerPhasePassNotIndependentReproduction": true,
+      "sourceRole": "canonical-test",
+      "sourceSha256": "E817FA215405C72EF2C043BC52032C3EF05FE6EC64740FBA72826373E21AE3FE"
+    },
+    {
+      "classification": "static-public-entry-refusal-case",
+      "executionHere": false,
+      "firstLineInclusive": 81,
+      "name": "wrong root casing",
+      "ownerPhasePassNotIndependentReproduction": true,
+      "sourceRole": "canonical-test",
+      "sourceSha256": "E817FA215405C72EF2C043BC52032C3EF05FE6EC64740FBA72826373E21AE3FE"
+    },
+    {
+      "classification": "static-public-entry-refusal-case",
+      "executionHere": false,
+      "firstLineInclusive": 82,
+      "name": "wrong leaf casing",
+      "ownerPhasePassNotIndependentReproduction": true,
+      "sourceRole": "canonical-test",
+      "sourceSha256": "E817FA215405C72EF2C043BC52032C3EF05FE6EC64740FBA72826373E21AE3FE"
+    },
+    {
+      "classification": "static-public-entry-refusal-case",
+      "executionHere": false,
+      "firstLineInclusive": 83,
+      "name": "numeric leaf",
+      "ownerPhasePassNotIndependentReproduction": true,
+      "sourceRole": "canonical-test",
+      "sourceSha256": "E817FA215405C72EF2C043BC52032C3EF05FE6EC64740FBA72826373E21AE3FE"
+    },
+    {
+      "classification": "static-public-entry-refusal-case",
+      "executionHere": false,
+      "firstLineInclusive": 84,
+      "name": "null leaf",
+      "ownerPhasePassNotIndependentReproduction": true,
+      "sourceRole": "canonical-test",
+      "sourceSha256": "E817FA215405C72EF2C043BC52032C3EF05FE6EC64740FBA72826373E21AE3FE"
+    },
+    {
+      "classification": "static-public-entry-refusal-case",
+      "executionHere": false,
+      "firstLineInclusive": 85,
+      "name": "array leaf",
+      "ownerPhasePassNotIndependentReproduction": true,
+      "sourceRole": "canonical-test",
+      "sourceSha256": "E817FA215405C72EF2C043BC52032C3EF05FE6EC64740FBA72826373E21AE3FE"
+    },
+    {
+      "classification": "static-public-entry-refusal-case",
+      "executionHere": false,
+      "firstLineInclusive": 86,
+      "name": "nonobject section",
+      "ownerPhasePassNotIndependentReproduction": true,
+      "sourceRole": "canonical-test",
+      "sourceSha256": "E817FA215405C72EF2C043BC52032C3EF05FE6EC64740FBA72826373E21AE3FE"
+    },
+    {
+      "classification": "static-public-entry-refusal-case",
+      "executionHere": false,
+      "firstLineInclusive": 87,
+      "name": "other UI drift",
+      "ownerPhasePassNotIndependentReproduction": true,
+      "sourceRole": "canonical-test",
+      "sourceSha256": "E817FA215405C72EF2C043BC52032C3EF05FE6EC64740FBA72826373E21AE3FE"
+    },
+    {
+      "classification": "static-public-entry-refusal-case",
+      "executionHere": false,
+      "firstLineInclusive": 88,
+      "name": "literal dotted root",
+      "ownerPhasePassNotIndependentReproduction": true,
+      "sourceRole": "canonical-test",
+      "sourceSha256": "E817FA215405C72EF2C043BC52032C3EF05FE6EC64740FBA72826373E21AE3FE"
+    },
+    {
+      "classification": "static-public-entry-refusal-case",
+      "executionHere": false,
+      "firstLineInclusive": 89,
+      "name": "literal dotted child",
+      "ownerPhasePassNotIndependentReproduction": true,
+      "sourceRole": "canonical-test",
+      "sourceSha256": "E817FA215405C72EF2C043BC52032C3EF05FE6EC64740FBA72826373E21AE3FE"
+    },
+    {
+      "classification": "static-public-entry-refusal-case",
+      "executionHere": false,
+      "firstLineInclusive": 90,
+      "name": "controlled Boolean numeric alias",
+      "ownerPhasePassNotIndependentReproduction": true,
+      "sourceRole": "canonical-test",
+      "sourceSha256": "E817FA215405C72EF2C043BC52032C3EF05FE6EC64740FBA72826373E21AE3FE"
+    },
+    {
+      "classification": "static-public-entry-refusal-case",
+      "executionHere": false,
+      "firstLineInclusive": 91,
+      "name": "controlled value drift",
+      "ownerPhasePassNotIndependentReproduction": true,
+      "sourceRole": "canonical-test",
+      "sourceSha256": "E817FA215405C72EF2C043BC52032C3EF05FE6EC64740FBA72826373E21AE3FE"
+    },
+    {
+      "classification": "static-public-entry-refusal-case",
+      "executionHere": false,
+      "firstLineInclusive": 92,
+      "name": "other Boolean numeric alias",
+      "ownerPhasePassNotIndependentReproduction": true,
+      "sourceRole": "canonical-test",
+      "sourceSha256": "E817FA215405C72EF2C043BC52032C3EF05FE6EC64740FBA72826373E21AE3FE"
+    },
+    {
+      "classification": "static-public-entry-refusal-case",
+      "executionHere": false,
+      "firstLineInclusive": 93,
+      "name": "large integer drift",
+      "ownerPhasePassNotIndependentReproduction": true,
+      "sourceRole": "canonical-test",
+      "sourceSha256": "E817FA215405C72EF2C043BC52032C3EF05FE6EC64740FBA72826373E21AE3FE"
+    },
+    {
+      "classification": "static-public-entry-refusal-case",
+      "executionHere": false,
+      "firstLineInclusive": 94,
+      "name": "power numeric kind",
+      "ownerPhasePassNotIndependentReproduction": true,
+      "sourceRole": "canonical-test",
+      "sourceSha256": "E817FA215405C72EF2C043BC52032C3EF05FE6EC64740FBA72826373E21AE3FE"
+    },
+    {
+      "classification": "static-public-entry-refusal-case",
+      "executionHere": false,
+      "firstLineInclusive": 95,
+      "name": "history nonstring",
+      "ownerPhasePassNotIndependentReproduction": true,
+      "sourceRole": "canonical-test",
+      "sourceSha256": "E817FA215405C72EF2C043BC52032C3EF05FE6EC64740FBA72826373E21AE3FE"
+    }
+  ]
+}
