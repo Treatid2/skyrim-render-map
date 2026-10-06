@@ -1,0 +1,52 @@
+{
+  "content": {
+    "fileCount": 5,
+    "root": "content",
+    "totalBytes": 2057114,
+    "treeSha256": "1913FA9DA6C439BB801BE372E563128FD9485E12C97F9A152483A0B0EF84FA1F"
+  },
+  "contributor": {
+    "displayName": "Treatid2",
+    "github": "Treatid2",
+    "standing": "ordinary-contributor"
+  },
+  "createdAt": "2026-10-06T05:04:57.995483+00:00",
+  "licensing": {
+    "content": "CC-BY-SA-4.0",
+    "dcoAcknowledged": true,
+    "schemas": "CC0-1.0"
+  },
+  "namespace": "community-shaders",
+  "notes": "Submission-scoped completed engineering assay, failed precision gate; no causal AE result, engine HDR/OS AutoHDR/performance/vendor convergence/full-resource equality. Actual native observations, independent byte/arithmetic checks and owner outcomes distinguished. Unknown applicability not wildcard; prior cutoffs immutable.",
+  "provenance": {
+    "importedAt": "2026-10-06T05:04:57.995483+00:00",
+    "relatedUrls": [
+      "https://github.com/Treatid2/skyrim-render-map/pull/43",
+      "https://github.com/Treatid2/skyrim-render-map/pull/44",
+      "https://github.com/Treatid2/skyrim-render-map/pull/45",
+      "https://github.com/Treatid2/skyrim-render-map/pull/46"
+    ],
+    "sourceCommit": "4d0a9fd654e42048d4ad946a32b4ccdba7e9b073",
+    "sourceContentTreeSha256": "018772188217B296CF6AAD2E9EB9D72750685A30CA058F24FC3D9C89269C41E9",
+    "sourceDirty": false,
+    "sourceParentCommit": "fcd6796466a49802c943f1b923e9326716c891a9",
+    "sourcePubliclyReachable": true,
+    "sourceRef": null,
+    "sourceRepository": "https://github.com/Treatid2/skyrim-vr-automation",
+    "sourceState": "committed-local-preservation",
+    "transformations": [
+      "120original native pages/34680raw samples independently decoded;10 comparisons/30 jitter strata/24 sparse equality pairs recomputed.",
+      "All declared4355ZIPmembers independently hashed without extraction; tracking and calibration scoped separately.",
+      "165source members and4canonical Git sources checked without execution; owner670qualificationchecks not replayed.",
+      "Actual SDK inputs/resources, requested/effective state, context generations and failed precision gate projected; private identities removed; historical cutoffs preserved."
+    ]
+  },
+  "schema": {
+    "major": 1,
+    "minor": 0,
+    "name": "skyrim-render-map.submission"
+  },
+  "status": "candidate-unreviewed",
+  "submissionClass": "assertion",
+  "submissionId": "sub-fsr4-completed-colour-assay-v1"
+}
