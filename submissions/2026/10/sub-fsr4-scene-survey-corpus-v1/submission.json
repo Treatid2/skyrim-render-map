@@ -1,0 +1,49 @@
+{
+  "content": {
+    "fileCount": 5,
+    "root": "content",
+    "totalBytes": 5428779,
+    "treeSha256": "0ADEDB2AFFACD2409DE7108E91EC6AE55366B9230BC28956DFA784CF94B3EE54"
+  },
+  "contributor": {
+    "displayName": "Treatid2",
+    "github": "Treatid2",
+    "standing": "ordinary-contributor"
+  },
+  "createdAt": "2026-10-06T17:16:15.928172+00:00",
+  "licensing": {
+    "content": "CC-BY-SA-4.0",
+    "dcoAcknowledged": true,
+    "schemas": "CC0-1.0"
+  },
+  "namespace": "community-shaders",
+  "notes": "Survey16 provisional scene corpus, not quiet precision qualification or causal comparison. Eight surveyed views, uncontrolled inter-view hour/weather,16 mountain captures all ten025percent gates fail. Sequential native metadata/cache endpoints not atomic or continuous scene/exposure proof; SDK inputs not performance. Native summaries recomputed, no independent raw GPU-format redecoding. Cache unverified/unpromoted, no DC1a/depth switch. Owner visual/operational claims attributed; historical PR47/48/49/50 unchanged.",
+  "provenance": {
+    "importedAt": "2026-10-06T17:16:15.928172+00:00",
+    "relatedUrls": [
+      "https://github.com/Treatid2/skyrim-render-map/pull/50"
+    ],
+    "sourceCommit": "4362c3c8b4706006f4904646d9d1e2eb892563ca",
+    "sourceContentTreeSha256": "37A313DCF6DC15CD0AE062478406ECE0871BC59F9A86CE54B11BDC922F1D87B0",
+    "sourceDirty": null,
+    "sourceParentCommit": null,
+    "sourcePubliclyReachable": false,
+    "sourceRef": null,
+    "sourceRepository": "https://github.com/Treatid2/skyrim-vr-automation",
+    "sourceState": "retained-survey16-offline-evidence",
+    "transformations": [
+      "All1351lossless retained archive member bytes/hashes verified without extraction or released scratch.",
+      "Eight provisional views matched to native scene/camera receipts; all160native scene observations/32brackets/96originalread payloads verified.",
+      "Native decoded sparse means/range/SD/CV independently recomputed; not raw GPU-format decode or full-image statistic.",
+      "Owner visual/lifecycle/source-adapter claims scoped and attributed, native unknown cache age/internal exposure preserved; no contributor execution/native replay."
+    ]
+  },
+  "schema": {
+    "major": 1,
+    "minor": 0,
+    "name": "skyrim-render-map.submission"
+  },
+  "status": "candidate-unreviewed",
+  "submissionClass": "assertion",
+  "submissionId": "sub-fsr4-scene-survey-corpus-v1"
+}
