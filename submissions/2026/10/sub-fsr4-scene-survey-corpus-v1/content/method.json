@@ -1,0 +1,23 @@
+{
+  "independentChecks": {
+    "allRangeGatesFailed": true,
+    "maximumMatrixRotationResidual": 2.220446049250313e-16,
+    "maximumSummaryArithmeticResidual": 6.661338147750939e-16,
+    "members": 1351,
+    "nativeReplies": 96,
+    "statsGroups": 10,
+    "views": 8
+  },
+  "inputBoundaries": {
+    "brackets": 32,
+    "members": 1351,
+    "nativeReads": 96,
+    "pages": 160,
+    "sparseSamples": 46240,
+    "uncompressedBytes": 296925390,
+    "views": 8
+  },
+  "method": "Stream each retained ZIP member, compare declared exact bytes/SHA256/CRC, parse native retained replies, match bracket payloads and selected views to native receipts. Recompute Rec709-weighted means from native decodedRgba summaries and cross-capture range/sampleSD/CV; no raw GPU-format decoding or transfer conversion. Validate unit quaternions and session-standing matrices without converting engine-camera conventions. Whole-property native sceneObservation retained, no vector component flattening. No contributor scripts executed or images embedded in Git.",
+  "schema": "render-mapping.survey16.method.1",
+  "scope": "Survey16 provisional scene corpus, not quiet precision qualification or causal comparison. Eight surveyed views, uncontrolled inter-view hour/weather,16 mountain captures all ten025percent gates fail. Sequential native metadata/cache endpoints not atomic or continuous scene/exposure proof; SDK inputs not performance. Native summaries recomputed, no independent raw GPU-format redecoding. Cache unverified/unpromoted, no DC1a/depth switch. Owner visual/operational claims attributed; historical PR47/48/49/50 unchanged."
+}
