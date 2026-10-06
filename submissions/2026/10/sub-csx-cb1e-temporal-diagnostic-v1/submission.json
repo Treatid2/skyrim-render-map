@@ -1,0 +1,51 @@
+{
+  "content": {
+    "fileCount": 9,
+    "root": "content",
+    "totalBytes": 9113067,
+    "treeSha256": "462C506D1B95982BACBEF56150AB976F35F9BC5982E9322400DFD4A025B6D4EB"
+  },
+  "contributor": {
+    "displayName": "Treatid2",
+    "github": "Treatid2",
+    "standing": "ordinary-contributor"
+  },
+  "createdAt": "2026-10-06T00:19:04.859799+00:00",
+  "licensing": {
+    "content": "CC-BY-SA-4.0",
+    "dcoAcknowledged": true,
+    "schemas": "CC0-1.0"
+  },
+  "namespace": "csx",
+  "notes": "Separate excursion05 cb1e partial timed colour diagnostic; actual submitted input telemetry but no return-on/restoration/isolated effect. Prior03/04 preserved.",
+  "provenance": {
+    "importedAt": "2026-10-06T00:19:04.859799+00:00",
+    "relatedUrls": [
+      "https://github.com/Treatid2/skyrim-render-map/pull/41",
+      "https://github.com/Treatid2/skyrim-render-map/pull/42"
+    ],
+    "sourceCommit": "cb1e44e9aecc6ba0309bb44bdb5d57daa1811e69",
+    "sourceContentTreeSha256": "6ea2cd0a7fd234d058f9f813b87d3bf89e81e65f00c77c1af512b437fcb870d1",
+    "sourceDirty": false,
+    "sourceParentCommit": "f3e429ceb7d8554bc71060621bb527e96c2b8081",
+    "sourcePubliclyReachable": false,
+    "sourceRef": null,
+    "sourceRepository": "https://github.com/Treatid2/skyrim-community-shaders",
+    "sourceState": "committed-local-preservation",
+    "transformations": [
+      "Finite retained native journals and all raw sample/comparison/archive/package/controller identities independently checked, no live replay.",
+      "Sanitized original native page/RPC/tracking projections with parsed canonical hashes; three failedattempts have no inventednative replies.",
+      "Actualschema1reset/jitter/frame-time inputs retained, separate from convergence; eightnativecompleted/sevencollected captures and unresolvedrestoration kept distinct.",
+      "Prior03/04 originals unchanged; owner offline702checks and finalclosure attributed, not executed here.",
+      "Exact cb1e local Git bytes verified; GitHub commit lookup in declared source repository returned HTTP422 No commit found. Source classified committed-local-preservation, not publicly reachable; no remote availability or publication inferred from prior f4."
+    ]
+  },
+  "schema": {
+    "major": 1,
+    "minor": 0,
+    "name": "skyrim-render-map.submission"
+  },
+  "status": "candidate-unreviewed",
+  "submissionClass": "assertion",
+  "submissionId": "sub-csx-cb1e-temporal-diagnostic-v1"
+}

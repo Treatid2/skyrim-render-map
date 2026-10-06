@@ -1,0 +1,304 @@
+{
+  "findings": [
+    {
+      "id": "submitted-input-snapshot",
+      "interpretation": "Schema1 retains actual SDK reset/jitter/frame-time inputs; finite-input availability is not freshness.",
+      "source": {
+        "excerpt": "namespace FSRDispatchInputTelemetry\n{\n\tinline constexpr std::uint32_t kSchemaVersion = 1;\n\n\t/** Retain submitted SDK inputs; availability does not establish freshness. */\n\tstruct Snapshot\n\t{\n\t\tbool available = false;\n\t\tbool reset = false;\n\t\tfloat jitterOffsetX = 0.0f;\n\t\tfloat jitterOffsetY = 0.0f;\n\t\tfloat frameTimeDeltaMilliseconds = 0.0f;\n\t};\n\n\t/** Reject nonfinite input evidence without changing the SDK dispatch. */\n\tinline Snapshot Capture(bool a_reset, float a_jitterX, float a_jitterY,\n\t\tfloat a_frameTimeDeltaMilliseconds) noexcept\n\t{\n\t\tif (!std::isfinite(a_jitterX) || !std::isfinite(a_jitterY) ||\n\t\t\t!std::isfinite(a_frameTimeDeltaMilliseconds) || a_frameTimeDeltaMilliseconds < 0.0f)\n\t\t\treturn {};\n\t\treturn { true, a_reset, a_jitterX, a_jitterY, a_frameTimeDeltaMilliseconds };\n\t}",
+        "excerptCanonicalSha256": "4e68dd620658b6c9292d776895d69d972c13531e0d9c1e2f9dd50a7c8e10f612",
+        "fileIdentity": {
+          "bytes": 1723,
+          "gitBlobSha1": "1d4e40930f1043f78c0f3cd226f4a2771ad2b7a8",
+          "repositoryPath": "src/Features/Upscaling/FSRDispatchInputTelemetry.h",
+          "sha256": "b3801fbb5afc8fbf057a06b1dc7fde53906dccdbfb7d2c757d84ebe104b4e51d"
+        },
+        "inclusiveLineRange": [
+          8,
+          30
+        ],
+        "repositoryPath": "src/Features/Upscaling/FSRDispatchInputTelemetry.h",
+        "sourceCommit": "cb1e44e9aecc6ba0309bb44bdb5d57daa1811e69"
+      }
+    },
+    {
+      "id": "nullable-successful-serialization",
+      "interpretation": "Qualified successful evidence and finite inputs gate availability; unavailable values are null, not zero or false measurements.",
+      "source": {
+        "excerpt": "\t/** Emit a versioned nullable contract only for qualified successful evidence. */\n\tinline nlohmann::json ToJson(const Snapshot& a_snapshot, bool a_qualified)\n\t{\n\t\tusing json = nlohmann::json;\n\t\tconst bool available = a_qualified && a_snapshot.available &&\n\t\t                       Capture(a_snapshot.reset, a_snapshot.jitterOffsetX, a_snapshot.jitterOffsetY,\n\t\t\t\t\t\t\t\t   a_snapshot.frameTimeDeltaMilliseconds)\n\t\t                           .available;\n\t\treturn {\n\t\t\t{ \"schemaVersion\", kSchemaVersion },\n\t\t\t{ \"available\", available },\n\t\t\t{ \"reset\", available ? json(a_snapshot.reset) : json(nullptr) },\n\t\t\t{ \"jitterOffsetPixels\", available ? json::array({ a_snapshot.jitterOffsetX, a_snapshot.jitterOffsetY }) : json(nullptr) },\n\t\t\t{ \"frameTimeDeltaMilliseconds\", available ? json(a_snapshot.frameTimeDeltaMilliseconds) : json(nullptr) },\n\t\t};\n\t}",
+        "excerptCanonicalSha256": "ea32002c28b17448f004fb17d187792486d9778c9784be9e976a19b434c09d9e",
+        "fileIdentity": {
+          "bytes": 1723,
+          "gitBlobSha1": "1d4e40930f1043f78c0f3cd226f4a2771ad2b7a8",
+          "repositoryPath": "src/Features/Upscaling/FSRDispatchInputTelemetry.h",
+          "sha256": "b3801fbb5afc8fbf057a06b1dc7fde53906dccdbfb7d2c757d84ebe104b4e51d"
+        },
+        "inclusiveLineRange": [
+          32,
+          47
+        ],
+        "repositoryPath": "src/Features/Upscaling/FSRDispatchInputTelemetry.h",
+        "sourceCommit": "cb1e44e9aecc6ba0309bb44bdb5d57daa1811e69"
+      }
+    },
+    {
+      "id": "runtime-submitted-input-capture",
+      "interpretation": "Runtime capture takes actual submitted reset/jitter/frameTimeDelta before SDK call; literal preExposure1 is not internal exposure.",
+      "source": {
+        "excerpt": "\t\t\tLogFSRSharpeningDispatch(sharpening, \"runtime\");\n\t\t\tdispatchParameters.frameTimeDelta = temporal.frameTimeMilliseconds;\n\t\t\tdispatchParameters.preExposure = 1.0f;\n\t\t\tdispatchParameters.reset = upscaling.ShouldResetHistoryThisFrame() || regionIndex < resumeResetCount;\n\t\t\tdispatchParameters.cameraNear = temporal.cameraNear;\n\t\t\tdispatchParameters.cameraFar = temporal.cameraFar;\n\t\t\tdispatchParameters.cameraFovAngleVertical = temporal.verticalFov;\n\t\t\tdispatchParameters.viewSpaceToMetersFactor = 0.01428222656f;\n\t\t\tdispatchParameters.flags = 0;\n\n#ifdef DEVBENCH_BRIDGE_ENABLED\n\t\t\tobservedDispatches[contextIndex].configuredSharpness = region.sharpness;\n\t\t\tobservedDispatches[contextIndex].effectiveSharpness = dispatchParameters.sharpness;\n\t\t\tobservedDispatches[contextIndex].sharpeningEnabled = dispatchParameters.enableSharpening;\n\t\t\tobservedDispatches[contextIndex].dispatchQpc = DispatchQpc();\n\t\t\tobservedDispatches[contextIndex].submittedInputs = FSRDispatchInputTelemetry::Capture(\n\t\t\t\tdispatchParameters.reset, dispatchParameters.jitterOffset.x,\n\t\t\t\tdispatchParameters.jitterOffset.y, dispatchParameters.frameTimeDelta);\n#endif\n\t\t\tbool dispatchCrashed = false;\n\t\t\tconst auto dispatchResult = DispatchRuntimeUpscalerProtected(\n\t\t\t\t&runtimeUpscalerContexts[contextIndex],\n\t\t\t\t&dispatchParameters.header,",
+        "excerptCanonicalSha256": "a79ae8af0855707f213c0c3eada7b4fc8e5ffe96a9e6b2f8f8344edd6c486dc3",
+        "fileIdentity": {
+          "bytes": 194640,
+          "gitBlobSha1": "6ba2ec44af1352d058c6769655da0bae5c472a06",
+          "repositoryPath": "src/Features/Upscaling/FidelityFX.cpp",
+          "sha256": "9a0ce1551f311ee15db2bfaca1c83eb13499d09aaf84f46c90ba0423dbb5c874"
+        },
+        "inclusiveLineRange": [
+          4212,
+          4234
+        ],
+        "repositoryPath": "src/Features/Upscaling/FidelityFX.cpp",
+        "sourceCommit": "cb1e44e9aecc6ba0309bb44bdb5d57daa1811e69"
+      }
+    },
+    {
+      "id": "host-submitted-input-capture",
+      "interpretation": "Host lane records successful dispatch inputs and invalidates evidence on failure; host source is not an observed host-path trial here.",
+      "source": {
+        "excerpt": "\tdispatchParameters.viewSpaceToMetersFactor = 0.01428222656f;\n\tconst bool runtimeFallbackReset = runtimePlan.runtimeRequested && runtimeFallbackResetDispatchesRemaining > 0;\n\tif (runtimeFallbackReset)\n\t\truntimeFallbackResetDispatchesRemaining--;\n\tdispatchParameters.reset = upscaling.ShouldResetHistoryThisFrame() || runtimeFallbackReset;\n\tdispatchParameters.preExposure = 1.0f;\n\tdispatchParameters.flags = 0;\n\n#ifdef DEVBENCH_BRIDGE_ENABLED\n\tconst auto dispatchQpc = DispatchQpc();\n\tconst auto submittedInputs = FSRDispatchInputTelemetry::Capture(dispatchParameters.reset,\n\t\tdispatchParameters.jitterOffset.x, dispatchParameters.jitterOffset.y,\n\t\tdispatchParameters.frameTimeDelta);\n#endif\n\tbool hostDispatchCrashed = false;\n\tconst bool dispatchOK = DispatchHostFsr3UpscaleProtected(fsrContext[a_contextIndex], dispatchParameters, hostDispatchCrashed);\n#ifdef DEVBENCH_BRIDGE_ENABLED\n\tif (dispatchOK)\n\t\tRecordDevBenchSuccessfulDispatch(\n\t\t\tfallbackFramePath,\n\t\t\ta_contextIndex,\n\t\t\ta_renderWidth,\n\t\t\ta_renderHeight,\n\t\t\ta_displayWidth,\n\t\t\ta_displayHeight,\n\t\t\ta_sharpness, dispatchParameters.sharpness,\n\t\t\tdispatchParameters.enableSharpening, dispatchQpc, submittedInputs);\n\telse\n\t\tInvalidateDevBenchSuccessfulDispatch(a_contextIndex);\n#endif",
+        "excerptCanonicalSha256": "606c138914b7162d0c64e99b021eeb39684cd78c56d42f39f8ea0c5d2e361d3f",
+        "fileIdentity": {
+          "bytes": 194640,
+          "gitBlobSha1": "6ba2ec44af1352d058c6769655da0bae5c472a06",
+          "repositoryPath": "src/Features/Upscaling/FidelityFX.cpp",
+          "sha256": "9a0ce1551f311ee15db2bfaca1c83eb13499d09aaf84f46c90ba0423dbb5c874"
+        },
+        "inclusiveLineRange": [
+          4495,
+          4524
+        ],
+        "repositoryPath": "src/Features/Upscaling/FidelityFX.cpp",
+        "sourceCommit": "cb1e44e9aecc6ba0309bb44bdb5d57daa1811e69"
+      }
+    },
+    {
+      "id": "colour-page-input-serialization",
+      "interpretation": "Probe page serializes submittedInputs with dispatch-serial qualification; availability alone is not hidden history/convergence.",
+      "source": {
+        "excerpt": "\t\t\t\t{ \"requestedHighDynamicRangeInput\", a_dispatch.requestedHighDynamicRangeInput },\n\t\t\t\t{ \"requestedAutoExposure\", a_dispatch.requestedAutoExposure },\n\t\t\t\t{ \"effectiveHighDynamicRangeInput\", a_dispatch.dispatchSerial ? json(a_dispatch.effectiveHighDynamicRangeInput) : json(nullptr) },\n\t\t\t\t{ \"effectiveAutoExposure\", a_dispatch.dispatchSerial ? json(a_dispatch.effectiveAutoExposure) : json(nullptr) },\n\t\t\t\t{ \"exposureResourceBound\", a_dispatch.dispatchSerial ? json(a_dispatch.exposureResourceBound) : json(nullptr) },\n\t\t\t\t{ \"preExposure\", a_dispatch.dispatchSerial ? json(a_dispatch.preExposure) : json(nullptr) },\n\t\t\t\t{ \"configuredSharpnessAtDispatch\", a_dispatch.dispatchSerial && std::isfinite(a_dispatch.configuredSharpness) ? json(a_dispatch.configuredSharpness) : json(nullptr) },\n\t\t\t\t{ \"effectiveSharpness\", a_dispatch.dispatchSerial ? json(a_dispatch.effectiveSharpness) : json(nullptr) },\n\t\t\t\t{ \"sharpeningEnabled\", a_dispatch.dispatchSerial ? json(a_dispatch.sharpeningEnabled) : json(nullptr) },\n\t\t\t\t{ \"dispatchQpc\", a_dispatch.dispatchQpc ? json(a_dispatch.dispatchQpc) : json(nullptr) },\n\t\t\t\t{ \"submittedInputs\", FSRDispatchInputTelemetry::ToJson(a_dispatch.submittedInputs, a_dispatch.dispatchSerial != 0) },\n\t\t\t\t{ \"attribution\", a_dispatch.dispatchSerial ? \"observed-successful-dispatch\" : \"pending-successful-dispatch\" },\n\t\t\t};",
+        "excerptCanonicalSha256": "aea0e9801b9c2d9701cdabbbd5c3a3add02671db7b59dce3b6c8578df04080e1",
+        "fileIdentity": {
+          "bytes": 44448,
+          "gitBlobSha1": "cff9c0a40eed467408f3f6d5d2f81ed2ef356263",
+          "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+          "sha256": "01fb8054f828fe0cfc316d1f338464a761e81950dd7bf40b772a372921105348"
+        },
+        "inclusiveLineRange": [
+          695,
+          707
+        ],
+        "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+        "sourceCommit": "cb1e44e9aecc6ba0309bb44bdb5d57daa1811e69"
+      }
+    },
+    {
+      "id": "crop-local-map-grid",
+      "interpretation": "Mapped staging grid is crop-local; activeRectangle source origin must not be added to byte offset.",
+      "source": {
+        "excerpt": "\t\t\tstd::uint32_t finiteSamples = 0;\n\t\t\tfor (std::uint32_t gridY = 0; gridY < kGridSize; ++gridY) {\n\t\t\t\tconst std::uint32_t y = kGridSize == 1 ? 0 : static_cast<std::uint32_t>((static_cast<std::uint64_t>(a_slot.height - 1) * gridY) / (kGridSize - 1));\n\t\t\t\tfor (std::uint32_t gridX = 0; gridX < kGridSize; ++gridX) {\n\t\t\t\t\tconst std::uint32_t x = kGridSize == 1 ? 0 : static_cast<std::uint32_t>((static_cast<std::uint64_t>(a_slot.width - 1) * gridX) / (kGridSize - 1));\n\t\t\t\t\tconst auto* pixel = static_cast<const std::uint8_t*>(mapped.pData) + static_cast<std::size_t>(y) * mapped.RowPitch + static_cast<std::size_t>(x) * bytesPerPixel;\n\t\t\t\t\tstd::array<float, 4> decoded{};\n\t\t\t\t\tconst bool decodedOk = DecodePixel(decodeFormat, pixel, decoded);\n\t\t\t\t\tjson value = nullptr;\n\t\t\t\t\tif (decodedOk && std::ranges::all_of(decoded, [](float a_channel) { return std::isfinite(a_channel); })) {\n\t\t\t\t\t\tvalue = decoded;\n\t\t\t\t\t\tfor (std::size_t channel = 0; channel < decoded.size(); ++channel)\n\t\t\t\t\t\t\tsums[channel] += decoded[channel];\n\t\t\t\t\t\tconst double luma = 0.2126 * decoded[0] + 0.7152 * decoded[1] + 0.0722 * decoded[2];\n\t\t\t\t\t\tlumaSum += luma;\n\t\t\t\t\t\tminimumLuma = std::min(minimumLuma, luma);\n\t\t\t\t\t\tmaximumLuma = std::max(maximumLuma, luma);\n\t\t\t\t\t\t++finiteSamples;\n\t\t\t\t\t}\n\t\t\t\t\tsamples.push_back({\n\t\t\t\t\t\t{ \"grid\", { gridX, gridY } },\n\t\t\t\t\t\t{ \"sourcePixel\", { x, y } },\n\t\t\t\t\t\t{ \"rawLittleEndianHex\", Hex(pixel, bytesPerPixel) },\n\t\t\t\t\t\t{ \"decodedRgba\", std::move(value) },\n\t\t\t\t\t});\n\t\t\t\t}",
+        "excerptCanonicalSha256": "b78654b15a5175980d60fcd2d5a7c186e3f4e57b3484cd3d85b006c14fc21780",
+        "fileIdentity": {
+          "bytes": 44448,
+          "gitBlobSha1": "cff9c0a40eed467408f3f6d5d2f81ed2ef356263",
+          "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+          "sha256": "01fb8054f828fe0cfc316d1f338464a761e81950dd7bf40b772a372921105348"
+        },
+        "inclusiveLineRange": [
+          605,
+          630
+        ],
+        "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+        "sourceCommit": "cb1e44e9aecc6ba0309bb44bdb5d57daa1811e69"
+      }
+    },
+    {
+      "id": "native-status-input-serialization",
+      "interpretation": "Native status reports actual last-success submitted inputs, distinct from frame freshness.",
+      "source": {
+        "excerpt": "\t\t\t{ \"displayWidth\", dispatch.displayWidth },\n\t\t\t{ \"displayHeight\", dispatch.displayHeight },\n\t\t\t{ \"highDynamicRangeInput\", dispatch.highDynamicRangeInput },\n\t\t\t{ \"autoExposure\", dispatch.autoExposure },\n\t\t\t{ \"exposureResourceBound\", dispatch.exposureResourceBound },\n\t\t\t{ \"preExposure\", dispatch.preExposure },\n\n\t\t\t{ \"configuredSharpnessAtDispatch\", dispatch.valid && std::isfinite(dispatch.configuredSharpness) ? json(dispatch.configuredSharpness) : json(nullptr) },\n\t\t\t{ \"effectiveSharpness\", dispatch.valid ? json(dispatch.effectiveSharpness) : json(nullptr) },\n\t\t\t{ \"sharpeningEnabled\", dispatch.valid ? json(dispatch.sharpeningEnabled) : json(nullptr) },\n\t\t\t{ \"dispatchQpc\", dispatch.valid && dispatch.dispatchQpc ? json(dispatch.dispatchQpc) : json(nullptr) },\n\t\t\t{ \"submittedInputs\", FSRDispatchInputTelemetry::ToJson(dispatch.submittedInputs, dispatch.valid) },\n\t\t};\n\t}",
+        "excerptCanonicalSha256": "bd57030678cbaa45335f26cc7e1485064df1b85a735d3ad3afbc12f8adc2f6fa",
+        "fileIdentity": {
+          "bytes": 8111,
+          "gitBlobSha1": "262ba223e575b10c6eba72ed56fa4ebff229a228",
+          "repositoryPath": "src/Features/Upscaling/FSRColorContractDevBenchBridge.cpp",
+          "sha256": "1a0f79954dbb087f7fe9fc84a39f1e80db510af43b4471b441b857a4d2d233ed"
+        },
+        "inclusiveLineRange": [
+          35,
+          48
+        ],
+        "repositoryPath": "src/Features/Upscaling/FSRColorContractDevBenchBridge.cpp",
+        "sourceCommit": "cb1e44e9aecc6ba0309bb44bdb5d57daa1811e69"
+      }
+    },
+    {
+      "id": "native-interface-observability-limit",
+      "interpretation": "Interface explicitly separates last-success availability from freshness/internal exposure-history convergence; no DLSS/source-transfer/persistence/resolution change inferred.",
+      "source": {
+        "excerpt": "\tif (!devBench)\n\t\treturn;\n\tstatic const std::string descriptor = json{\n\t\t{ \"description\", \"Inspect or set DevBench-only FSR processing flags without changing the compositor source-colour contract. The production default remains HDR-input plus auto-exposure. set uses expectedRevision compare-and-set, invalidates prior dispatch evidence, and causes host/runtime FSR contexts to be recreated at their existing render-thread safe points. status reports requested flags, effective context flags and generations, plus synchronized successful per-eye dispatch identity, dimensions, configured sharpness at dispatch, effective sharpening value/enabled state and QPC timing. submittedInputs schema 1 adds actual submitted reset, X/Y jitterOffsetPixels and frameTimeDeltaMilliseconds with explicit availability and nullable values. Last-success availability is not frame freshness or internal exposure/history convergence. Failed SDK calls invalidate affected diagnostic dispatch evidence. Invalid dispatch sharpness/timing evidence is null; no sharpness setter is added. This tool does not alter DLSS/DLAA, source transfer, provider selection, persistence, or resolution.\" },\n\t\t{ \"inputSchema\", {\n\t\t\t\t\t\t\t { \"type\", \"object\" },\n\t\t\t\t\t\t\t { \"additionalProperties\", false },\n\t\t\t\t\t\t\t { \"properties\", {\n\t\t\t\t\t\t\t\t\t\t\t\t { \"action\", { { \"type\", \"string\" }, { \"enum\", { \"status\", \"set\" } }, { \"default\", \"status\" }, { \"description\", \"Status retains last-success inputs under submittedInputs schema 1; qualify frame/serial/context freshness independently. Unavailable inputs are null; this is not vendor convergence telemetry.\" } } },",
+        "excerptCanonicalSha256": "26402bdc9f2739ea67e19134041e8fb08e71e5a712a340b632b4462783119659",
+        "fileIdentity": {
+          "bytes": 8111,
+          "gitBlobSha1": "262ba223e575b10c6eba72ed56fa4ebff229a228",
+          "repositoryPath": "src/Features/Upscaling/FSRColorContractDevBenchBridge.cpp",
+          "sha256": "1a0f79954dbb087f7fe9fc84a39f1e80db510af43b4471b441b857a4d2d233ed"
+        },
+        "inclusiveLineRange": [
+          160,
+          168
+        ],
+        "repositoryPath": "src/Features/Upscaling/FSRColorContractDevBenchBridge.cpp",
+        "sourceCommit": "cb1e44e9aecc6ba0309bb44bdb5d57daa1811e69"
+      }
+    },
+    {
+      "id": "adapter-strict-input-types",
+      "interpretation": "Controller independently qualifies schema1 exact fields/integer version/Boolean reset/two finite jitter numbers/nonnegative finite milliseconds; optional absent legacy evidence is not available.",
+      "source": {
+        "excerpt": null,
+        "excerptCanonicalSha256": "63fd17ab4327bf219c264b93c478da8b168f65052c9b68d921f7760684226414",
+        "fileIdentity": {
+          "bytes": 23075,
+          "gitBlobSha1": "18019d6caedfdb6c784ee9fe2801ebe0cc1f690d",
+          "repositoryPath": "tools/devbench-control/NativeReadContracts.ps1",
+          "sha256": "7d38a8e9299b356a1b446fd25590271e0e9bb68b3d4cad3a5cf0e1ac3eb45967"
+        },
+        "inclusiveLineRange": [
+          3,
+          31
+        ],
+        "repositoryPath": "tools/devbench-control/NativeReadContracts.ps1",
+        "sourceCommit": "adaa52ded5e0a4d19dd2667b73bfc555cd32f4c1"
+      }
+    },
+    {
+      "id": "adapter-burnin-counting",
+      "interpretation": "Burn-in counts baseline plus distinct fresh both-eye observations and sampled CPU-frame-ID advance; successful eye-frame count remains null, no vendor convergence.",
+      "source": {
+        "excerpt": null,
+        "excerptCanonicalSha256": "8b307ddfc94a2af4dcc58811d04adfcbf9a7918bda0684371201092433e48444",
+        "fileIdentity": {
+          "bytes": 39628,
+          "gitBlobSha1": "3a2b98dc606558e0a3825d0bdefacbc907bb73f4",
+          "repositoryPath": "tools/devbench-control/ColourMeasurementWindow.psm1",
+          "sha256": "cb135a610ab7b80336a691f6d2c1c6b280d721b5118dbcddbfa6b338caa5a17d"
+        },
+        "inclusiveLineRange": [
+          168,
+          199
+        ],
+        "repositoryPath": "tools/devbench-control/ColourMeasurementWindow.psm1",
+        "sourceCommit": "adaa52ded5e0a4d19dd2667b73bfc555cd32f4c1"
+      }
+    },
+    {
+      "id": "runtime-success-or-invalidated",
+      "interpretation": "Runtime batch records observed successful per-eye inputs only on successful completion; failures invalidate evidence, not missing values filled from defaults.",
+      "source": {
+        "excerpt": "\tif (dispatchOk) {\n#ifdef DEVBENCH_BRIDGE_ENABLED\n\t\tfor (const auto& region : a_regions) {\n\t\t\tconst auto& observed = observedDispatches[region.contextIndex];\n\t\t\tRecordDevBenchSuccessfulDispatch(a_path, region.contextIndex,\n\t\t\t\tregion.renderWidth, region.renderHeight, region.displayWidth, region.displayHeight,\n\t\t\t\tobserved.configuredSharpness, observed.effectiveSharpness,\n\t\t\t\tobserved.sharpeningEnabled, observed.dispatchQpc, observed.submittedInputs);\n\t\t}\n#endif\n\t\treturn LifecycleResult::Ready;\n\t}\n#ifdef DEVBENCH_BRIDGE_ENABLED\n\tfor (const auto& region : a_regions)\n\t\tInvalidateDevBenchSuccessfulDispatch(region.contextIndex);",
+        "excerptCanonicalSha256": "37ebcba54318bd192c4dd40a288322d921bea684371ea69facb32edb4dd2aeb2",
+        "fileIdentity": {
+          "bytes": 194640,
+          "gitBlobSha1": "6ba2ec44af1352d058c6769655da0bae5c472a06",
+          "repositoryPath": "src/Features/Upscaling/FidelityFX.cpp",
+          "sha256": "9a0ce1551f311ee15db2bfaca1c83eb13499d09aaf84f46c90ba0423dbb5c874"
+        },
+        "inclusiveLineRange": [
+          4302,
+          4316
+        ],
+        "repositoryPath": "src/Features/Upscaling/FidelityFX.cpp",
+        "sourceCommit": "cb1e44e9aecc6ba0309bb44bdb5d57daa1811e69"
+      }
+    },
+    {
+      "id": "zero-origin-staging-copy",
+      "interpretation": "Crop-sized staging texture receives source box at destination zero; source origins stored separately, corroborating crop-local sampling.",
+      "source": {
+        "excerpt": "\t\t\tD3D11_TEXTURE2D_DESC stagingDesc = sourceDesc;\n\t\t\tstagingDesc.Width = a_width;\n\t\t\tstagingDesc.Height = a_height;\n\t\t\tstagingDesc.MipLevels = 1;\n\t\t\tstagingDesc.ArraySize = 1;\n\t\t\tstagingDesc.Usage = D3D11_USAGE_STAGING;\n\t\t\tstagingDesc.BindFlags = 0;\n\t\t\tstagingDesc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;\n\t\t\tstagingDesc.MiscFlags = 0;\n\t\t\twinrt::com_ptr<ID3D11Device> device;\n\t\t\ta_texture->GetDevice(device.put());\n\t\t\tif (!device || FAILED(device->CreateTexture2D(&stagingDesc, nullptr, slot.staging.put()))) {\n\t\t\t\tFailLocked(\"failed to create a colour-pipeline staging texture\");\n\t\t\t\treturn false;\n\t\t\t}\n\t\t\tUtil::SetResourceName(slot.staging.get(), \"ColourPipelineProbe::%sEye%u\", StageName(a_stage), a_eye);\n\t\t\tslot.sourceOwner.copy_from(a_texture);\n\t\t\tg_state.stagingPayloadBytes += std::uint64_t{ a_width } * a_height * bytesPerPixel;\n\t\t\tconst D3D11_BOX box{ a_x, a_y, 0, a_x + a_width, a_y + a_height, 1 };\n\t\t\t{\n\t\t\t\tCS_GPU_PASS(\"ColourPipelineProbe::Copy\");\n\t\t\t\ta_context->CopySubresourceRegion(slot.staging.get(), 0, 0, 0, 0, a_texture, a_subresource, &box);\n\t\t\t}\n\n\t\t\tslot.queued = true;\n\t\t\tslot.stage = a_stage;\n\t\t\tslot.eye = a_eye;\n\t\t\tslot.sourceSubresource = a_subresource;\n\t\t\tslot.sourceX = a_x;\n\t\t\tslot.sourceY = a_y;\n\t\t\tslot.width = a_width;\n\t\t\tslot.height = a_height;\n\t\t\tslot.queuedQpc = QueryQpc();",
+        "excerptCanonicalSha256": "c8a4a645522c439c779b3905174fb9e793e29e483be31ffd4f0fa1ec09eeb22b",
+        "fileIdentity": {
+          "bytes": 44448,
+          "gitBlobSha1": "cff9c0a40eed467408f3f6d5d2f81ed2ef356263",
+          "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+          "sha256": "01fb8054f828fe0cfc316d1f338464a761e81950dd7bf40b772a372921105348"
+        },
+        "inclusiveLineRange": [
+          442,
+          474
+        ],
+        "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+        "sourceCommit": "cb1e44e9aecc6ba0309bb44bdb5d57daa1811e69"
+      }
+    },
+    {
+      "id": "monotonic-loop-assessment",
+      "interpretation": "Elapsed burn-in is assessed on the loop after reply processing, not exactly last-reply timestamp minus baseline; last reply interval and subsequent assessment gap retained separately.",
+      "source": {
+        "excerpt": null,
+        "excerptCanonicalSha256": "972bee622612ced53640fd37c34b61040e6ac1b2b2b4f59adea9d16f08d03fcc",
+        "fileIdentity": {
+          "bytes": 39628,
+          "gitBlobSha1": "3a2b98dc606558e0a3825d0bdefacbc907bb73f4",
+          "repositoryPath": "tools/devbench-control/ColourMeasurementWindow.psm1",
+          "sha256": "cb135a610ab7b80336a691f6d2c1c6b280d721b5118dbcddbfa6b338caa5a17d"
+        },
+        "inclusiveLineRange": [
+          168,
+          185
+        ],
+        "repositoryPath": "tools/devbench-control/ColourMeasurementWindow.psm1",
+        "sourceCommit": "adaa52ded5e0a4d19dd2667b73bfc555cd32f4c1"
+      }
+    }
+  ],
+  "sourceCommit": "cb1e44e9aecc6ba0309bb44bdb5d57daa1811e69",
+  "sourceExecuted": false,
+  "sourceFiles": {
+    "src/Features/Upscaling/ColourPipelineProbe.cpp": {
+      "bytes": 44448,
+      "gitBlobSha1": "cff9c0a40eed467408f3f6d5d2f81ed2ef356263",
+      "repositoryPath": "src/Features/Upscaling/ColourPipelineProbe.cpp",
+      "sha256": "01fb8054f828fe0cfc316d1f338464a761e81950dd7bf40b772a372921105348"
+    },
+    "src/Features/Upscaling/FSRColorContractDevBenchBridge.cpp": {
+      "bytes": 8111,
+      "gitBlobSha1": "262ba223e575b10c6eba72ed56fa4ebff229a228",
+      "repositoryPath": "src/Features/Upscaling/FSRColorContractDevBenchBridge.cpp",
+      "sha256": "1a0f79954dbb087f7fe9fc84a39f1e80db510af43b4471b441b857a4d2d233ed"
+    },
+    "src/Features/Upscaling/FSRDispatchInputTelemetry.h": {
+      "bytes": 1723,
+      "gitBlobSha1": "1d4e40930f1043f78c0f3cd226f4a2771ad2b7a8",
+      "repositoryPath": "src/Features/Upscaling/FSRDispatchInputTelemetry.h",
+      "sha256": "b3801fbb5afc8fbf057a06b1dc7fde53906dccdbfb7d2c757d84ebe104b4e51d"
+    },
+    "src/Features/Upscaling/FidelityFX.cpp": {
+      "bytes": 194640,
+      "gitBlobSha1": "6ba2ec44af1352d058c6769655da0bae5c472a06",
+      "repositoryPath": "src/Features/Upscaling/FidelityFX.cpp",
+      "sha256": "9a0ce1551f311ee15db2bfaca1c83eb13499d09aaf84f46c90ba0423dbb5c874"
+    },
+    "tools/devbench-control/ColourMeasurementWindow.psm1": {
+      "bytes": 39628,
+      "gitBlobSha1": "3a2b98dc606558e0a3825d0bdefacbc907bb73f4",
+      "repositoryPath": "tools/devbench-control/ColourMeasurementWindow.psm1",
+      "sha256": "cb135a610ab7b80336a691f6d2c1c6b280d721b5118dbcddbfa6b338caa5a17d"
+    },
+    "tools/devbench-control/NativeReadContracts.ps1": {
+      "bytes": 23075,
+      "gitBlobSha1": "18019d6caedfdb6c784ee9fe2801ebe0cc1f690d",
+      "repositoryPath": "tools/devbench-control/NativeReadContracts.ps1",
+      "sha256": "7d38a8e9299b356a1b446fd25590271e0e9bb68b3d4cad3a5cf0e1ac3eb45967"
+    }
+  }
+}
