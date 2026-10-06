@@ -1,0 +1,1707 @@
+{
+  "availability": "Private roles retain size/hash, not absolute paths or settings/profile/executable/driver/session/owner/workspace payloads. Public source pinned separately.",
+  "classification": "Exact retained bytes, canonical-source ranges and Decimal identities independently checked; helper sweep/current source/settings/process outcomes owner-attributed, no contributor execution here.",
+  "currentDocument": "Full current raw settings not read/retained here; whole29 sweep implementation is pinned as owner evidence, diagnostic retains only16 numeric rows and6 refusal rows.",
+  "cutoffUtc": "2026-10-06T04:06:35.3485286+00:00",
+  "inputs": {
+    "PR45-file-0": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 150344,
+      "sha256": "51B3D156F7F121F7AACC1ED3F31F164F2900351E7340B162D567BF2BF0E84F34",
+      "sourceChangedDuringRead": false
+    },
+    "PR45-file-1": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 59410,
+      "sha256": "BF60E761FB674B74DF56396DE4DA04EB39B47E4443BE21BA8896287C5F85C6D2",
+      "sourceChangedDuringRead": false
+    },
+    "PR45-file-2": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 15179,
+      "sha256": "FE71A9CE63B62FD5D65196229EA1E708E1229AEEF960E65F1BDB63B1C8193F4C",
+      "sourceChangedDuringRead": false
+    },
+    "PR45-file-3": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 111823,
+      "sha256": "E74B95DBEE879D155FA6B5B7E6047C2593833640B02C250D9C0E57617F46CA6D",
+      "sourceChangedDuringRead": false
+    },
+    "PR45-file-4": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 35283,
+      "sha256": "F81537169849E103B40954BC0D7C81180625D2E6B362A18DD10B242D9592B8CC",
+      "sourceChangedDuringRead": false
+    },
+    "PR45-file-5": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2445,
+      "sha256": "1FC46E38DD1148FBFB48D6AB82753C62D334DA4734A485701ED8F4CC514C8520",
+      "sourceChangedDuringRead": false
+    },
+    "PR45-owner-acknowledgement": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 4168,
+      "sha256": "8C7E0B4E06B384770D51B58A2E6D72E6F526496ABC70E81EC59D83A9644DD06D",
+      "sourceChangedDuringRead": false
+    },
+    "PR45-publication": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 8245,
+      "sha256": "52D22251A981C3C24E2F6C75C7F8FB4B3A012E312613126B4F1F603E882F287C",
+      "sourceChangedDuringRead": false
+    },
+    "PR45-receipt-0": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1463,
+      "sha256": "6EBD67E520083071DEAD9486860A33880E1E9AF2A95C1650344568286B1BD5D3",
+      "sourceChangedDuringRead": false
+    },
+    "PR45-receipt-1": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2259,
+      "sha256": "0A25C3C40AA54CE2B066B7419954216375968BC5C044EF82C0DA2783D7D31AD6",
+      "sourceChangedDuringRead": false
+    },
+    "PR45-receipt-2": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1325,
+      "sha256": "8DCBA2BA9320A237AB8A3BBF49A55C0CA7CA89BF4E9D0B3A3C07780EB2880D25",
+      "sourceChangedDuringRead": false
+    },
+    "PR45-receipt-3": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 3442,
+      "sha256": "1B7D1F05FBAAE9BA71ED37F441AB0933030144727BA5DBC95471450A473243FB",
+      "sourceChangedDuringRead": false
+    },
+    "PR45-receipt-4": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 36387,
+      "sha256": "D5D5FDA4DFA825804BED54150773D40E7693D7F715750425B2B5C77073A7491D",
+      "sourceChangedDuringRead": false
+    },
+    "PR45-receipt-5": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1144,
+      "sha256": "0E7EF3005751D5F67A3BE4A020DB41E5BC095BDB8799A0AE0792EC004CD6FF5A",
+      "sourceChangedDuringRead": false
+    },
+    "PR45-receipt-6": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 108464,
+      "sha256": "010502B0D1BE55420897903F14F3381DF9A32373CA2053526350717D1A0AEBBF",
+      "sourceChangedDuringRead": false
+    },
+    "PR45-receipt-7": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 4056,
+      "sha256": "3F8DEE2EB72AAF6ACEA1CF4681F11A03A927A0BB9F91982D622A243E3AFC65D6",
+      "sourceChangedDuringRead": false
+    },
+    "PR45-receipt-8": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 966365,
+      "sha256": "53B8C1C5820252DF78C1D635EC7DA4B0DF8DF8BA82C60162E488113D66021CEF",
+      "sourceChangedDuringRead": false
+    },
+    "PR45-receipt-9": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1678,
+      "sha256": "5E9EAE7A7BDB63B16432D17EB15E813B24948AFDE91E60E925195E9E8DDE5738",
+      "sourceChangedDuringRead": false
+    },
+    "controller": {
+      "availability": "public-pinned-source",
+      "bytes": 177512,
+      "gitBlob": "5781055718f79d765ca025a87ede0dca216b65b0",
+      "repositoryRelativePath": "tools/steamvr-null-control/Invoke-SteamVRNullControl.ps1",
+      "representation": "canonical LF; physical hash separate",
+      "revision": "fcd6796466a49802c943f1b923e9326716c891a9",
+      "sha256": "90FF20FF9E4181A03B8734C60DD4088E95E34FC8567C93004BDDF89B19A44E5A"
+    },
+    "custody-ACCESS-RELEASE.json": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2133,
+      "sha256": "02737651C035A8F2E81AD8B87F1FB2DB2DAEA7D7775CEAF969CF5D17FD8B04F7",
+      "sourceChangedDuringRead": false
+    },
+    "custody-CACHE-COMPLETION.json": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1352,
+      "sha256": "77B3C476D82B2AF668BB4CCE83ADA213B74D8AA517E4E4BF30DDD869E00D9748",
+      "sourceChangedDuringRead": false
+    },
+    "custody-CONFIG-BIND.json": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1982,
+      "sha256": "BEBF947B546369D3B6C0A8B70E405A2A10BF84C094A32F7706181C21D7FEFB9D",
+      "sourceChangedDuringRead": false
+    },
+    "custody-CONFIG-COMPLETION.json": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 26348,
+      "sha256": "ED89D24B4E02E6AE37D90A90D30C99A75AFA69D786ACF7DCBC6E60A2F87735B6",
+      "sourceChangedDuringRead": false
+    },
+    "custody-CONFIG-STAGE.json": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 15559,
+      "sha256": "44CA8E10B936BCC0DFCE524F2300CCDE352D2C96CA5A3FC087A4770DFA44513E",
+      "sourceChangedDuringRead": false
+    },
+    "custody-EFFECTIVE-LOOSE-SHADER-SOURCES.json": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 56656,
+      "sha256": "86DA82FA4739135C80DAEDC05309EF6C5B2025E15934E39F58FD6FD25177D327",
+      "sourceChangedDuringRead": false
+    },
+    "custody-FINAL-CACHE-PREPARE.json": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 6718,
+      "sha256": "5E3D91B328B3F5063C54AFE58443C468796817DB12B9652CA6E889E9F6D030FD",
+      "sourceChangedDuringRead": false
+    },
+    "custody-NULL-BEFORE.json": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 9078,
+      "sha256": "7C1F2CDA0FD519F290547BCB51A600529B21403159E8ACB530BDAF585C80C34E",
+      "sourceChangedDuringRead": false
+    },
+    "custody-ORIGINAL-NULL-IDENTITIES-BEFORE.json": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1052,
+      "sha256": "3988DBE5E0583CC2039F9A5BF526207EAB4E76997FDBE48AAB53F231B4FD2EBA",
+      "sourceChangedDuringRead": false
+    },
+    "custody-OUTPUT-COMPLETION.json": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2771,
+      "sha256": "E50666E0224E20602DD14E7618A6943FB0F57417EE72BECC84AFEA6EF884E492",
+      "sourceChangedDuringRead": false
+    },
+    "custody-RETAINED-WORKSPACE-UNLAUNCHED.json": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 231820,
+      "sha256": "E5B72AB116EDAE946EC484B3658B49F739D36F5C02C6396A04A886FE607AB781",
+      "sourceChangedDuringRead": false
+    },
+    "custody-WORKSPACE-RESUME.json": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 196669,
+      "sha256": "DFACD7519F0BB735E2A29EBE19216ABB016B1A5CA6D5E809A0EBD6B5293F94F7",
+      "sourceChangedDuringRead": false
+    },
+    "feedback-amendment": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 16025,
+      "sha256": "19298EC17DD8905AF31B9D04558A0C62A85233DB3DB47431D51B35DD98357FEF",
+      "sourceChangedDuringRead": false
+    },
+    "feedback-evidence-0": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1463,
+      "sha256": "6EBD67E520083071DEAD9486860A33880E1E9AF2A95C1650344568286B1BD5D3",
+      "sourceChangedDuringRead": false
+    },
+    "feedback-evidence-1": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2259,
+      "sha256": "0A25C3C40AA54CE2B066B7419954216375968BC5C044EF82C0DA2783D7D31AD6",
+      "sourceChangedDuringRead": false
+    },
+    "feedback-evidence-10": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 34388,
+      "sha256": "4120F564D3554A78B27088AD63BDCF8170C62616BE0AAF8744FD900CAFEC7C8D",
+      "sourceChangedDuringRead": false
+    },
+    "feedback-evidence-2": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1325,
+      "sha256": "8DCBA2BA9320A237AB8A3BBF49A55C0CA7CA89BF4E9D0B3A3C07780EB2880D25",
+      "sourceChangedDuringRead": false
+    },
+    "feedback-evidence-3": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2106,
+      "sha256": "E7BD56FA56D7651BD71ED27F243E9217811C7EF2477700FBE19CA385A33C829E",
+      "sourceChangedDuringRead": false
+    },
+    "feedback-evidence-5": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 8901,
+      "sha256": "38ABB047F97BB771A2CBBD99F08730620A8D2E109746471836711F663DCC8612",
+      "sourceChangedDuringRead": false
+    },
+    "feedback-evidence-6": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1789,
+      "sha256": "906A98BEF8B82341CD6DDFBF8C0361C59C19E5AB0EE9BE2DFC177D238057E188",
+      "sourceChangedDuringRead": false
+    },
+    "feedback-evidence-7": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 7064,
+      "sha256": "7CF009EEF71F8808A3D6E2AE78F4F11BC52972224ACF33486B98AC01CF7BC576",
+      "sourceChangedDuringRead": false
+    },
+    "feedback-evidence-8": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1320,
+      "sha256": "8B91530F12523CF48A46E6A168DCEB8FAE73FE3AE00FBF0166197B62BC65FD2C",
+      "sourceChangedDuringRead": false
+    },
+    "feedback-evidence-9": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2133,
+      "sha256": "02737651C035A8F2E81AD8B87F1FB2DB2DAEA7D7775CEAF969CF5D17FD8B04F7",
+      "sourceChangedDuringRead": false
+    },
+    "helper": {
+      "availability": "public-pinned-source",
+      "bytes": 15577,
+      "gitBlob": "4f6681234d692a7141fff1cc8aea57c9f679bedd",
+      "repositoryRelativePath": "tools/steamvr-null-control/DesktopUIRestore.ps1",
+      "representation": "canonical LF; physical hash separate",
+      "revision": "fcd6796466a49802c943f1b923e9326716c891a9",
+      "sha256": "E7C9E747200E6EEF1D6036DB81BB06F10FDAFFFF4C16CB1EEA089ABE932A4594"
+    },
+    "numeric-diagnostic": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 7064,
+      "sha256": "7CF009EEF71F8808A3D6E2AE78F4F11BC52972224ACF33486B98AC01CF7BC576",
+      "sourceChangedDuringRead": false
+    },
+    "original-null-0": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 3366,
+      "sha256": "896B93652466EA1A320648218BD1ACF550F48707E3A78A5540E71EADFA562F8F",
+      "sourceChangedDuringRead": false
+    },
+    "original-null-1": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2645,
+      "sha256": "988C9EEAE6B76212CADDCC0D517B892B16AC1D09D1C73427664AE2431DA77D88",
+      "sourceChangedDuringRead": false
+    },
+    "original-null-2": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2361,
+      "sha256": "ED9EBB7D631268EEF11537DD605D2A1A5FEEF43A019E0A1AB8C36466EF7BD61A",
+      "sourceChangedDuringRead": false
+    },
+    "owner-handoff": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2054,
+      "sha256": "828C0E695303DB250B5EDBDBBDCBED5136DDEDC48EBE5A750BF7D82D0ED06717",
+      "sourceChangedDuringRead": false
+    },
+    "owner-qualification": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 8901,
+      "sha256": "38ABB047F97BB771A2CBBD99F08730620A8D2E109746471836711F663DCC8612",
+      "sourceChangedDuringRead": false
+    },
+    "owner-sweep-implementation": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2719,
+      "sha256": "59DEC31656FCCCE6BFAD1116AC6E669EF83BC411A303C7F22F888F485334D3CD",
+      "sourceChangedDuringRead": false
+    },
+    "phase-plugin-Test-DesktopUIRestore": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1730,
+      "sha256": "33522F0062C9BAD91CCD1BAE1A2FEBD11BBCF3D44ECF63DE46A6E20EF5D57221",
+      "sourceChangedDuringRead": false
+    },
+    "phase-plugin-Test-SteamVRNullControl": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1882,
+      "sha256": "6AE44CF02BE852B41ABA2172DF1A02047EB3F485FFF0547FA689C6707EA85AF5",
+      "sourceChangedDuringRead": false
+    },
+    "phase-root-Test-DesktopUIRestore": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1691,
+      "sha256": "10CEB54346FC71D99F55BE77AC36D35ADC7A05E508E9AA3C1FEF076AAD4610DE",
+      "sourceChangedDuringRead": false
+    },
+    "phase-root-Test-SteamVRNullControl": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1843,
+      "sha256": "836217A9D8988CA1B090E45AE10C728D929B776FA633E4F085EB1FAAAB52EDB2",
+      "sourceChangedDuringRead": false
+    },
+    "prior-source-manifest": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 45592,
+      "sha256": "A4284CC333839DB1666C430742335DB9B4B2217459DBBAD1097A9D953DE2114E",
+      "sourceChangedDuringRead": false
+    },
+    "qualification-retained-0": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1691,
+      "sha256": "10CEB54346FC71D99F55BE77AC36D35ADC7A05E508E9AA3C1FEF076AAD4610DE",
+      "sourceChangedDuringRead": false
+    },
+    "qualification-retained-1": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2826,
+      "sha256": "7222C07467FE073D1DAF38D4C5ADF5A0D601CB3A13BD8D33CFB9636AE29E641A",
+      "sourceChangedDuringRead": false
+    },
+    "qualification-retained-10": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 26462,
+      "sha256": "F4482105ED34D3EC51394214F65F4F69B1907F899B4E758D059E522E7B94B115",
+      "sourceChangedDuringRead": false
+    },
+    "qualification-retained-11": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "sourceChangedDuringRead": false
+    },
+    "qualification-retained-12": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1757,
+      "sha256": "869EDC7AAA96658255FEB92E0ED192C34B710D139E97B0B368D357E304B50D9A",
+      "sourceChangedDuringRead": false
+    },
+    "qualification-retained-13": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2826,
+      "sha256": "7222C07467FE073D1DAF38D4C5ADF5A0D601CB3A13BD8D33CFB9636AE29E641A",
+      "sourceChangedDuringRead": false
+    },
+    "qualification-retained-14": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "sourceChangedDuringRead": false
+    },
+    "qualification-retained-2": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "sourceChangedDuringRead": false
+    },
+    "qualification-retained-3": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1843,
+      "sha256": "836217A9D8988CA1B090E45AE10C728D929B776FA633E4F085EB1FAAAB52EDB2",
+      "sourceChangedDuringRead": false
+    },
+    "qualification-retained-4": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 26462,
+      "sha256": "F4482105ED34D3EC51394214F65F4F69B1907F899B4E758D059E522E7B94B115",
+      "sourceChangedDuringRead": false
+    },
+    "qualification-retained-5": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "sourceChangedDuringRead": false
+    },
+    "qualification-retained-6": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1730,
+      "sha256": "33522F0062C9BAD91CCD1BAE1A2FEBD11BBCF3D44ECF63DE46A6E20EF5D57221",
+      "sourceChangedDuringRead": false
+    },
+    "qualification-retained-7": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2826,
+      "sha256": "7222C07467FE073D1DAF38D4C5ADF5A0D601CB3A13BD8D33CFB9636AE29E641A",
+      "sourceChangedDuringRead": false
+    },
+    "qualification-retained-8": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 0,
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "sourceChangedDuringRead": false
+    },
+    "qualification-retained-9": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1882,
+      "sha256": "6AE44CF02BE852B41ABA2172DF1A02047EB3F485FFF0547FA689C6707EA85AF5",
+      "sourceChangedDuringRead": false
+    },
+    "readme": {
+      "availability": "public-pinned-source",
+      "bytes": 23189,
+      "gitBlob": "d06562f8f9b32329729d6228a3c906cda771e702",
+      "repositoryRelativePath": "tools/steamvr-null-control/README.md",
+      "representation": "canonical LF; physical hash separate",
+      "revision": "fcd6796466a49802c943f1b923e9326716c891a9",
+      "sha256": "A893D2F00D1298FFC39C4B832170B22ED430EA6D52A870C01BBA86D539C9CF61"
+    },
+    "restore-preview": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1320,
+      "sha256": "8B91530F12523CF48A46E6A168DCEB8FAE73FE3AE00FBF0166197B62BC65FD2C",
+      "sourceChangedDuringRead": false
+    },
+    "source-manifest": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 46048,
+      "sha256": "09E3F07B3652A5CF22B0D2CA07B7F7D332B0A01CC0C18AD27B6033FDEBABED6F",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-0": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 9725,
+      "sha256": "F01966CFC17C54AC1EF5B87F5864F950294E3B7FFB8DDC7EC3597D0BC7CD076A",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-1": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 117248,
+      "sha256": "0234E02C83EA857D76D5CF9E241736234A5D8ACB02B59983B896954C02BAA034",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-10": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 837272,
+      "sha256": "BAB8AC6EF64E68A9CA53315B0014D131088584B2EFDFA6DB511D67EC03CFCB4A",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-100": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 25953,
+      "sha256": "350FBC50BD393BADA62F0DC063BE3434E1C1400277E0121513947F464CFC1B62",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-101": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 291565,
+      "sha256": "2481C7A34E863AE15A53D6F01FEC1C320825588F4988A2CC2A95F68A6D469262",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-102": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 969,
+      "sha256": "723FA4DC872E2D95A3D72283923DD96C39CB0B61B8BE596DF92795CBD04FE0D0",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-103": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 30157,
+      "sha256": "19B4DF6FC320BC1587B3494DEBC9506B5ED080244FC3C732A049602968FA09CF",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-104": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 661,
+      "sha256": "C8372421631DE4445F5BED6261A98346809DE30DB803C78BFB14465A5818C9C5",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-105": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 6107,
+      "sha256": "6310EE0C9EBE22BE59C82D06888EFBB80701EFA098315D1D77C57BD62010224E",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-106": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 14020,
+      "sha256": "8E0DE1386F80553AA00EC63841377E38A2CD8EE11745FEDEB822E9FF0E664DD6",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-107": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 6208,
+      "sha256": "FFE04DC4E3CC763DF002D2291A1188464C2AF99EA08E6B808A9701CFD0982E3B",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-108": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 135784,
+      "sha256": "8F600EBC63D6A4F578E179B07907EDDC69C15A35BF46A824611E1C3EDBCF098D",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-109": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 21416,
+      "sha256": "F7B8EF02A466462214165C98987C8524C217C27E4385DBC3508067186D8DF666",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-11": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 35560,
+      "sha256": "4D3E484B968368A852C26842B8F57F3C757C96DE01194119603EC9B591D2C8D7",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-110": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 12370,
+      "sha256": "5DFB9A2642656139BDA4AB4DE9A8AF174EE6553C17AF9D994ED0A184D0B88D32",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-111": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 7046,
+      "sha256": "0440660875039681DE59941AEE2B072943B7DFFC16B5BD3731C45A1C7B312328",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-112": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 12426,
+      "sha256": "DF6BAAF3B3E62724FBDAD95A5AF3DD120AC789507B76B81E621B6192C874F644",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-113": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 9349,
+      "sha256": "BE43BFDCDD8729FEFE04E107B08F26D0CEA54E7ACD6F2F59FFAE08BF03251BFB",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-114": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 23547,
+      "sha256": "F9B07F5F118DE96981498799EAF644BB25615D3046987E6BE995408ED1D6D290",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-115": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 5905,
+      "sha256": "C6CF0838E48A2F5BF9597308F832CB0AE05FB2ED5E7AEAD65309C3DBBDE8794B",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-116": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 22889,
+      "sha256": "8112ECA906D84EB6F4E1AD861BB6A8A868C7091A89792ACA9A4972D1F3F3756E",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-117": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 11941,
+      "sha256": "B3644A90312CCEB3BEF7E8E7E1FAAE169B1FEA0BC628E20222519C774947604B",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-118": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1596,
+      "sha256": "F0B25E94A60F74EC5EE1DE5445542D7383FFBB7528D773628C7B5363D99C8C6C",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-119": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 9096,
+      "sha256": "F461D3E1921C31771B73A37750DAF8F3A78B6A4DF0032948E757D7B2D0A5E666",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-12": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2361,
+      "sha256": "ED9EBB7D631268EEF11537DD605D2A1A5FEEF43A019E0A1AB8C36466EF7BD61A",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-120": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 33040,
+      "sha256": "175DAD3697CE25B3CD57D2A5C519419A2BBAE9E0C3F781A480FB101E75010F4C",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-121": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 15563,
+      "sha256": "E6ECFAB39E29F8AFB72C007D128BD56F6AF6196B7EA128544745879D06F839C6",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-122": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2058,
+      "sha256": "E562EC45CE43C311E9085024991AAE5BC6961F0E495CEDC1FD79613BB77ED3E4",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-123": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 7003,
+      "sha256": "592BF8870ACA0F175E1BD754448E3922C0DC4874203D5D3C27F17B63C5F4FF4F",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-124": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 100698,
+      "sha256": "42AFFAF7BDA4F8C335C95FFA458C35332EE9A260C601A13016FCF4954FFE42DA",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-125": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 44589,
+      "sha256": "7087BC8ADC93C280492E2B648726D894EC57BDDE2B2156E6BF9B63D500018D1C",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-126": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 17561,
+      "sha256": "F104375624F9DC1C623E868643D7E5682B94CC3DFF22CAE779011BF83CD99019",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-127": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 4710,
+      "sha256": "1CDA9CBC3BDB5D98B2F133BD2539D849C0F2AAD6E7EBB1A60EB7D36C303AD9CE",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-128": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 82485,
+      "sha256": "DBA285AABEFFF99BCADFE4DD08B20F2E19A0F0B8962B69F70727B43B177965B7",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-129": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 23736,
+      "sha256": "E12BDA79991DDE19EA46F8FA60D0E3437555FCA9EF33E3ACD258C8874CD735E6",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-13": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 3534,
+      "sha256": "EF2AC95BD1BDF0934106B5DA48E00431516E456242B7760D0C3A4B0E1832EE62",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-130": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 15802,
+      "sha256": "232F67F0F1AE83681394EDF1A3FEA10CCC3FEDC0010A129BCDFE74475C2ACAEF",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-131": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 9988,
+      "sha256": "270B6A48DB18F052E59BC942540C29AD5170787108DCCD437F3CA8CAD4F64393",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-132": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 7597,
+      "sha256": "9FD1A6F599483991AAFCD943A4C3ED4A55047F77DF466C3A743E602164CC6295",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-133": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 3317,
+      "sha256": "E6DE7D525C1F63EFB0AB8B2CB228A17055E8B702BD27C8AB9A6C2F88409B99BE",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-134": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 13943,
+      "sha256": "F90B1A9702C8B338569E2CEF616D04701E12DC3448136752C8028DCECF327711",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-135": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 14150,
+      "sha256": "80B84D63281D3C7D3CAA3ACEEBDD84D0D3801D02421E02748518B4C4448ACACA",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-136": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 53874,
+      "sha256": "915A1D546D187837E26EA896E90C74D4A3CACCB64E70D340DAD9DA37B6A0FF0C",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-137": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 9248,
+      "sha256": "1793892315877FE3B0EF8AB574475D5D5C4CBB111715D299A92A9D324B0DB0BA",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-138": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 14932,
+      "sha256": "D0213108DDA853329CA8EDDBC07C6F5A40526D6F9AD51F523662F262E1530722",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-139": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 3508,
+      "sha256": "8524C123440DD635FA6554F2CAC5314237DB32A744027E7FF52F34EA004383F5",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-14": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 13712,
+      "sha256": "AD3D710298111F7323DADEDC44FCCB19DD79F59D122474336FD8323BAE254029",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-140": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 11164,
+      "sha256": "2213AA22F3BAAADD00981D7F13B188E70FD588F6E3B5763F4298B63E4754C202",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-141": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 14867,
+      "sha256": "50C3BC6659A2E4055F8A65C9AA051DE9B7CD536D44C34769FA094E5EBC71F3C2",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-142": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 20376,
+      "sha256": "BD47965727F5B2AF72BBC0B9626A5A75EC0B5583E40C78C96D1CAD6BED0B34FE",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-143": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 15826,
+      "sha256": "98314441C159AB336F7A72602E09EDDA8531D97A4565E596ECA42B66A0BEE130",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-144": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 12456,
+      "sha256": "9DCDC30D25C91B48C8B1F40C107172FFA7B8A2517D33C9D678C743AD866A69BC",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-145": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 21635,
+      "sha256": "659230EAC22DB48E3BC3FBEA6D34A7F0A7456C3AB75E24926D490079C7830FFE",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-146": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 11602,
+      "sha256": "EBE53C2998B0AC1A24EACE3656748A60CEAB20CC6C5051C2464CD4F8B2070B48",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-147": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 3795,
+      "sha256": "1FCECBABACAEEB5288A1DF1D7DE36AC1AA6A7D9E3BAE65479972C8C276C7BC0A",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-148": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 180200,
+      "sha256": "9D95E0DA30CD77CEC9F4278C4F5248D1A09DE7AE682D9C158B47818677527582",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-149": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 23189,
+      "sha256": "A893D2F00D1298FFC39C4B832170B22ED430EA6D52A870C01BBA86D539C9CF61",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-15": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 8085,
+      "sha256": "1F99E79A7B6C07A4DCC174AE8F674DD63383967155775B9D4E8508F9540C07D3",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-150": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 9829,
+      "sha256": "52F35B91CDA4BF036976CBA692EE515C2666CC3EB988A1B714309DEA70C4DAC0",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-151": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 15870,
+      "sha256": "AC13CD8DC2A0B001CFD6B6F2F33FEAF29436BFB9796752FFFDB92BA9595670DA",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-152": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 16735,
+      "sha256": "A60CEA1D56201F97E882CE159147E8198A73F6A31A4927482CB7B4AC67E799B8",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-153": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 10349,
+      "sha256": "9D1A71D937EA8880C83A627D1E40F6F0CE46762BA89D5B58AF4B64BC36F8CEC3",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-154": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 131510,
+      "sha256": "C0D074A3C1354F7A1BCE070B72861B2A52E2AB1FDE4B9076A8110E86EB369CA2",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-155": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 154,
+      "sha256": "456ABBE15C010B2D633A5A9497A4E77E73F52D7F4FA76543F9160C6D9DB94D1C",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-156": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 635,
+      "sha256": "55F1FB745AFFA6AE9A799A8AC9055B4526A21373BB417365821825F52D03E88B",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-157": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 7750,
+      "sha256": "1AA6782E3B7F2394F381CC40806ECFDBF35E90483CCDABFEB066F423366202D9",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-158": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 813,
+      "sha256": "29FF7AA55E1AFD7FE72EEF6A3E1B0F2D6FD11987EEBAE47548858C7B3E3C2931",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-159": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 3490,
+      "sha256": "04E239CDF9CAB49CE90612A3752A6993B1681E6BEFD3A1C995CBA0FB6B3083E7",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-16": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2342,
+      "sha256": "9992375CD78D1DAF356487FC41BA99F2FC87A2A338A8F876A6AADE5C306A4A6F",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-160": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 10431,
+      "sha256": "F05F6B23997A3EF3121EA911D0424E328362487A485C6CBFE26F3B30487C7771",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-161": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 5265,
+      "sha256": "8124A8817AE536143355EF08311BF45A88FCA04808AC3C2C9DDF115EB878604A",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-162": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 4709,
+      "sha256": "0FFF1B2E11D5FB4A043BB4F2034AAFF94668D78CC716062DD2DD1F78FF0E00B3",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-163": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 8905,
+      "sha256": "1C0620D3C476DF6DBDCC5D6A369D325ED5CBC6A763C6B22744ED322C1944573F",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-164": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 3557,
+      "sha256": "A58DE66062614120CC81A00DB53A88A6CE6E167C19E5DFC4F93CBDAF9AC17764",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-17": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 10969,
+      "sha256": "A4073FD46C240FD0CE055FA79BA85BAADCC16740826432C4FD73A0BD1E4341FA",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-18": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 53509,
+      "sha256": "BBA1230D29AD1E49FE4221756E30A4B9321044ED1AFBBFF7229825D8ED204823",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-19": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 7805,
+      "sha256": "57B1D6D0AC4A5D44DB34F10FBD29948F82DE1FB7D4B371FCF3C410D86EC56028",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-2": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2868,
+      "sha256": "5CBFA62C34E018024F0BD8B0F6E6777A00A354A4B01EF32AE44C62F7C04F6E9D",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-20": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 54718,
+      "sha256": "CF24C01AC758029ACC6C4671DC62C0BABF773F642FF2E8E1E5232E8AC52E4A11",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-21": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 18650,
+      "sha256": "1DA5CD4F7360A46E1592913FA88CC8CD2F8F6CAB32C8B58E8AE6C3905F768601",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-22": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 4564,
+      "sha256": "6F90C45FB3CDAC10AE5CE3BD0FB037CD7E330CE3CCD1A2A95F591BE30104504D",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-23": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 14576,
+      "sha256": "5EE39C9575EC6A3B0318E3B72AC8F7A2461750EBA67ED05AF0CD35D2A73801AE",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-24": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 6007,
+      "sha256": "9C7BA49B48C352AA75390FAFB1A470D9CFD1387CC78E1AD3C007BF38515F4674",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-25": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 39628,
+      "sha256": "CB135A610AB7B80336A691F6D2C1C6B280D721B5118DBCDDBFA6B338CAA5A17D",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-26": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1517,
+      "sha256": "D076DD3263850683E6A2C83C60B17845038ACA5F8CA7DE1D7EDF730ACDB49C36",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-27": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2906,
+      "sha256": "CA7B1D1FE8B0FE68D4A3A181E3AE7689E3619C0819BC484B5067C6F420D4FB35",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-28": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 153091,
+      "sha256": "A65C9FD4B8BDA8A51FAA8F39A1D36BE3D67EA5399C908AB1B2EE0108BDF30519",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-29": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 3183,
+      "sha256": "6F626465F0BA1D0382B29F958CB13031E060CCCBB2EE542A0B8187CA31F1B591",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-3": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 102,
+      "sha256": "690A5F6A3D5B764BE4E277321D5C27B235C9960A510CF072D73A6F504197CA68",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-30": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 8940,
+      "sha256": "CB904FEB3CAD88804721DC9F3556B53AAF0C7C1E1A1A130315C503891E232D32",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-31": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 3180,
+      "sha256": "7899922AF12A5BFF7C3FE7CC11E29BB664F005050C91673D8E5235B0F237D3FD",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-32": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1204,
+      "sha256": "522E395AA7307BC48303089411A8D95B4D41FF304456920264F219F6247196F8",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-33": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1085,
+      "sha256": "2FE40C6201DD9B7D3C97F49EF0CE6994F7A18AC45EC5A1E467BAD50E37282C14",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-34": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 3347,
+      "sha256": "B282EA00E2A4AF4AD20EFCACE8BE4D3ABE7EE71B97AFA7318655FD8396C032C6",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-35": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2754,
+      "sha256": "4CBC36617737451B86BF43D762167D4BB6AC63E60FE3E66C0A428BC862EA7BD2",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-36": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 9042,
+      "sha256": "0ABF4783A469DD936C9F92DAEE85056690C23AA73AA24C2FE54E66D64CBD3828",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-37": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 9433,
+      "sha256": "179FD37999F9F3DD0A782038EA3F818D49D1C20BF8587166A0B4F3302A724B02",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-38": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 3881,
+      "sha256": "E4CFEBCF4EEDCBA76022009CD9D25B2BD71CBB5A69E18D203DBDAB3863CFC8D4",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-39": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 614,
+      "sha256": "A1E6F6D779BD8E8C3B55A6CD0CF718C1426C89F51D103FFE911D63DC6520B95D",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-4": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1488,
+      "sha256": "F56FF606104D4EF18E617921A75C73AD73B5A1A1D70C69590C29DE16919E04AD",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-40": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 4742,
+      "sha256": "7D7DA7DB47FE1783DFB468E32EDF0B15CF8288A2B6296EA65947621C6D97C03C",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-41": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 6976,
+      "sha256": "353A32A887E548AB2B11E12F357F44A2BB7BA81B2B99DAB62C08475B0143F70A",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-42": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 6377,
+      "sha256": "C0A6F32BF5027D252B308B32B6E1AF337374156D2FDAE6A82045CA173BBDF95B",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-43": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1054,
+      "sha256": "C6FEB148B1AF61983BE87E79E1BEDA992CE940BA519C0B18D88E535FD101F024",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-44": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 6955,
+      "sha256": "7F7239A664AD99AAC382AFCD23F6A3A7363D4B2B2D4075EFEFE27825F57297C2",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-45": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 938,
+      "sha256": "EBB1206B50F1E5251EA976407B5A003A5AE1B60F7C76D155344B7427388FE589",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-46": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2893,
+      "sha256": "7576BD5D1468E09E9341956EAB0CA169333CEA7F67E4F69FED11E8D54479BEFA",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-47": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 138056,
+      "sha256": "4B668D10DFD67AAB8F8A3E17ED9528937341C6D94400EB54DBDDCBAEF6D3915F",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-48": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 23075,
+      "sha256": "7D38A8E9299B356A1B446FD25590271E0E9BB68B3D4CAD3A5CF0E1AC3EB45967",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-49": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 23571,
+      "sha256": "221734D0DB8568C51F6D5CA89AE115FE3A288080558A9D7BEA35A1ECDBD92B28",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-5": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1237,
+      "sha256": "871B58FBC79FE0A4B1D1C4740257B3CF9C9FA401D95795B9C4DC01F234DD0241",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-50": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 11356,
+      "sha256": "CF91EA14CED12C478BB2BE91E711FF69C491712D4D50E791AC58F4D3DE2BD789",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-51": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 50258,
+      "sha256": "82E1F909B95B9D7AA6296A30F0227F1DD706612AFD9F14DFA876A63E1146FBED",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-52": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2270,
+      "sha256": "D613845C46401C2F21543557106E5BD871A5B50D1EA19FB7CC2D911F3CA0440F",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-53": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 15596,
+      "sha256": "09843AAA0C1E6B58D12173465178CE1567D591FBB6C6E05CAE19CF75A6791EA0",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-54": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 5803,
+      "sha256": "963E9F3044FEC0D68674F66A03765079C89E48EB2F1E2B706FA874526E8A9B15",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-55": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 14252,
+      "sha256": "4DC86E8962B6F7C1290EB51E61F09B9EDFDE4A6E2BF39916AEB5C6117421A854",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-56": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 41247,
+      "sha256": "E31B4B241A26D09365EEBDD3FE0037B0A9D3AF451C90618D1A96383EE79761DA",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-57": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 13261,
+      "sha256": "3697CD2FD82670031D768965DB3E6FEABAF5637769ADC905CEEFB27023088DD7",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-58": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2914,
+      "sha256": "60E97A3E4A42A0783E7EA6E1209450DDC74928AA98188D56BDF1CB79708D63B8",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-59": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 17089,
+      "sha256": "A745301663056D18E5F61DF572F32F71005BE791840CF748150FDA2BA1BBF2EE",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-6": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1066,
+      "sha256": "5050276F73BBB2D86C3D361C2B88F69BB5F75FD5F6360B6C5E10161336A65373",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-60": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 7145,
+      "sha256": "D1DE7D525C4DD7C179F159C80A0516FDA2D03265862ACC8E88CC410ED253A60C",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-61": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 4329,
+      "sha256": "D527115160297F63CEF100B59017F3B57BC27232D1C90AC3E51584B860D40ECB",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-62": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 16389,
+      "sha256": "4B4C1E9298861D0C8481BE08A13216D8B8FA5A2DB36BE96643E2A9AE4AFA779C",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-63": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2308,
+      "sha256": "D7C85F7DCE537F46119C4F79A4558B3C3722F59DD42D8EE030ED49691436C546",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-64": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 8282,
+      "sha256": "9FFE29980A9CF8388F8BA516340B14CA9F67D773D4765A2032462D194F3EE91B",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-65": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 15254,
+      "sha256": "B099CEF4A4A5E71F0E98F157A58920AE5F3CC8D2C3658E54C3A5F5D2E27018CB",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-66": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 18173,
+      "sha256": "B92FD2D8E40C0CA5DE6D775FE60C371706D8E48B60636F2B18062A3F9C4AD9FB",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-67": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 2833,
+      "sha256": "E4421DFEE7ED3DA664CC14AE692AEA1EE83B74C467D380E1BC13232597A58685",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-68": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 163428,
+      "sha256": "7BF6C531C136D3003131CE039E4486DF1C847352E2B6491E904BF0E7A16B54FD",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-69": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 8223,
+      "sha256": "3D6ED8587F29CB4F1A46859DD7025BB7A005C8120CF97FD28FF25F2DAB6A4AFF",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-7": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 913,
+      "sha256": "BE888317B4E2F4A3650D31D43CF240471E46AB68BD1BC2093CC51E942BA847D9",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-70": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 8901,
+      "sha256": "F5443EAFD715F958F222015154A383DBC3F6D8305230F9D79E78A42353B138C4",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-71": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 7205,
+      "sha256": "D2F5121B5BE4C8A6CD58660D6E34327628FFBDA1E62DB25AB300F69DC791D1D7",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-72": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 13060,
+      "sha256": "991FDCD101C26C19475AD9A015A6615C22866356109231E82600AB085011D6C3",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-73": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 6773,
+      "sha256": "4D766F4429E73B4FACCF3B69C2C1317A7E9F66150F40434D3265118DD15A3A32",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-74": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 4049,
+      "sha256": "3A48B9F5FA2BACB04A45B0A6344100FC0012C7AD08A6F6E85B2C00EDF36CD73B",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-75": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 11431,
+      "sha256": "E663997E32C133D831F06B5B2810838D7EA1DFE71EA25031ECAD66D0398DDA9A",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-76": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 20465,
+      "sha256": "A85FB0F8E79181F4AC96C3366DD70448A05EA13F198384A7E0EE665E764B8105",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-77": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 7521,
+      "sha256": "41F4F6EE22906FF60905E661735AA23276524094B22E7CB5B099DA2B4CED2C25",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-78": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 13370,
+      "sha256": "73A3C6A642450318738625C107E925BF0B3BC5B867707492A1D5BEB69CD8CFA4",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-79": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 24989,
+      "sha256": "4B74C466217EB9815EF21655F789A95128FAEDE4B8ECBB0385FF6C6F54C1755C",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-8": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 324,
+      "sha256": "3ED6D79EF9F1C415BF839A3C8D5CC3B9449ACA5936E74B89A921827D18300630",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-80": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 23379,
+      "sha256": "E72F63DD3ACF30E63CE5E5AA886A098F416FF0C82F412E3974BA75A450F5CB14",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-81": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 4906,
+      "sha256": "D0E3CEA87B7984F465461A9F416554D2C9DE9F5987009ACC6C64542A3B7A98FE",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-82": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 863,
+      "sha256": "9189DF2CB758B3EA2D287C48AF61955807DF2FF3FF8A297228D31844FC768C9C",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-83": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 3600,
+      "sha256": "0C31A9D81A02923E7A5D2D606FDB22A246EC3732C2E43D3C0A05A26455905B3A",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-84": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1658,
+      "sha256": "0FDDDE4242799CF13D04AF936E27412BC4FDF4A283FF6F775C547F42CBAE3C03",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-85": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 6535,
+      "sha256": "304C39614EF8274F7EBE5F5796B01C62706B82CF5BC70BAA01C84935741EFE9B",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-86": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 7961,
+      "sha256": "436C8752F4B2B4EFBD3F48DE04E31E45FF90F2FCC0494B8A92A5E70B6DC26639",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-87": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 13873,
+      "sha256": "41D669D63ABD82594ED341350325BA84DD7A9CF5DF7C7645E3241EE3B46FA409",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-88": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 30851,
+      "sha256": "9F81B1B8D4B621FF81BBF1711800587756696CC85A8FA45EDBF95A9B8697EC6B",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-89": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 449992,
+      "sha256": "A8ACA995107F41D19D4B5CC0B9DA3C41355750ED75AC4A2C79FCCFD91CD9A218",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-9": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 74240,
+      "sha256": "6529B27C71CD965542C37F98C6D3D32CA0DB75A70FCBE55776AAC5E7142BE6FE",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-90": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 32425,
+      "sha256": "9C79B964CFD8E5C487199F7F4CD5C3A3136676CBC8E116DFF9F163CE856058A2",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-91": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1145,
+      "sha256": "55294B4351F1F62E9AA1DA8F98B8CA64BB25BCFCB3506DD2714144624AD521D6",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-92": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 179244,
+      "sha256": "BCD434BA52B3068E43F404EF4576D9F45CC586DD75745D0F22CC733C4ECD6040",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-93": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 21758,
+      "sha256": "6C6551489229D6F984A3EACF8743F03E05CE424D78ADC90AC036A8F786654813",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-94": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 13068,
+      "sha256": "B8DE33BFD6EFFFA1614BF9ECFF225C96E8594CD85D6FB610DD1D8084FA667677",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-95": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 15170,
+      "sha256": "DB4180E8FA0CCD084D4854114D0B18B9BF794761FDC51767F411252E07C772DD",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-96": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 6638,
+      "sha256": "C2365F62335C0180E731F9B5486340515370FEC85974DD51BD74ACE448FD5930",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-97": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 63562,
+      "sha256": "C2899583583EA3451E353B3A5DAD5C67A911510665893A84716CE2C1043FB03F",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-98": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 7405,
+      "sha256": "3C747363F998D322400B59D42BDB2A14E32C64A811D8ED76F88CE8ED94738B45",
+      "sourceChangedDuringRead": false
+    },
+    "source-member-99": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 8505,
+      "sha256": "7BEC0D12C2EA73CDC2A7C6E68AEF7D2560D614004292DC504B95E0212D7B8D73",
+      "sourceChangedDuringRead": false
+    },
+    "source-owner-admission": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 34388,
+      "sha256": "4120F564D3554A78B27088AD63BDCF8170C62616BE0AAF8744FD900CAFEC7C8D",
+      "sourceChangedDuringRead": false
+    },
+    "source-publication": {
+      "access": "read-only retained file",
+      "availability": "private-retained-content-addressed",
+      "bytes": 1789,
+      "sha256": "906A98BEF8B82341CD6DDFBF8C0361C59C19E5AB0EE9BE2DFC177D238057E188",
+      "sourceChangedDuringRead": false
+    },
+    "test": {
+      "availability": "public-pinned-source",
+      "bytes": 15674,
+      "gitBlob": "639da43d06117f1917864596946c09e36c4027ea",
+      "repositoryRelativePath": "tools/steamvr-null-control/Test-DesktopUIRestore.ps1",
+      "representation": "canonical LF; physical hash separate",
+      "revision": "fcd6796466a49802c943f1b923e9326716c891a9",
+      "sha256": "89E152DE558FAFCD961C6F99C39B562F176F5DE9DAF665EF0805563CB24D1079"
+    }
+  },
+  "inventoryDigest": "9DE759F3E3A5405E65ECAE3D4E0991D136E6B6A4BBF15340701BA3B47A3F46A6",
+  "priorEvidence": "PR45 publication,10 receipts and6 Git/physical files verified; historical source cutoff immutable, no compiler interpretation replay.",
+  "projection": "Only per-numeric-leaf path/type/outcome/equality; other raw numeric configured values and driver identities omitted. Source-policy disagreement is explicit rather than silently resolved.",
+  "schema": "engine-map.private-index-projection.1"
+}
